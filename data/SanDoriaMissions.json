@@ -1,0 +1,29 @@
+{
+    ["2-1: The Crystal Line"] = {
+      steps = {
+        {
+          text  = "Step 1: Receive the mission from any Bastok Gate Guard."
+        },
+        {
+            text = "Step 2: Show the Rajas Ring to the guard.",
+            images = {
+              { file="MapBastokMines.png", width=512, height=512 },
+              { file="rajasring.png", width=400, height=150 },
+            }
+        },
+        {
+          text  = "Step 3: Travel to North Gustaberg and locate the hut at (L-8)."
+        },
+        {
+          text  = "Step 4: Return to Savae E Paleade to complete the mission."
+        }
+      },
+      reward = {
+        text   = "Dat Bling! 3000 gil + Rajas Ring",
+        images = {
+            { file="MapBastokMines.png", width=512, height=512 },
+            { file="rajasring.png", width=400, height=150 },
+          }
+      }
+    }
+  }
