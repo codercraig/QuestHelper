@@ -1,6 +1,6 @@
 # QuestHelper Addon
 
-QuestHelper is an Ashita addon designed to help players track quests, missions, and guides within Final Fantasy XI. It features an intuitive UI and support for JSON-based quest configuration, enabling easy creation and customization of guides.
+QuestHelper is an Ashita addon designed to help players track quests, missions, and guides within Final Fantasy XI. It features an intuitive UI and support for JSON-based quest configuration, enabling easy creation and customization of guides. HD maps taken form Remapster project for the HD map creation.
 
 ---
 
@@ -8,7 +8,7 @@ QuestHelper is an Ashita addon designed to help players track quests, missions, 
 
 - **Quest and Mission Tracking**: Organize quests by category and missions by steps.
 - **Step Completion**: Track individual steps and mark them as completed.
-- **Image Support**: Attach maps or other images with highlights to each step.
+- **Image Support**: Attach maps or other images with highlights to each step - remapster rpoject
 - **Highlighting on Maps**: Visual markers (e.g., green boxes) to guide players.
 - **Multiple Steps and Images**: Add multiple steps and images for a mission.
 - **Customization**: Offset highlights for precise positioning.
