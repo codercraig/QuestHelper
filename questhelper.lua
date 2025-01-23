@@ -275,15 +275,16 @@ end
 
 local function display_mission_text(text)
     for line in text:gmatch("[^\r\n]+") do
-        if line:match("^%*%*.-%*%*") then
-            imgui.TextColored({0.8, 0.8, 0, 1}, line)  -- Highlight titles in yellow
-        elseif line:match("^  %-") then
-            imgui.Text("    " .. line)  -- Indent bullets
-        else
-            imgui.Text(line)
+        imgui.Text(line)
+
+        -- Add extra spacing after headers and key sections
+        if line:match("=====") or line:match("^%*") or line == "" then
+            imgui.Spacing()
+            imgui.Spacing()
         end
     end
 end
+
 
 --------------------------------------------------------------------------------
 -- Main Rendering
@@ -292,6 +293,12 @@ ashita.events.register('d3d_present', 'present_callback', function()
     if not is_open then return end
 
     local is_open_ref = { is_open }
+    imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})  -- Dark grey with 50% transparency
+    imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})  -- Light grey checkmark for better visibility
+    imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})  -- Lighter frame background
+    imgui.PushStyleColor(ImGuiCol_FrameBgHovered, {0.5, 0.5, 0.5, 0.8})  -- Lighter when hovered
+    imgui.PushStyleColor(ImGuiCol_FrameBgActive, {0.7, 0.7, 0.7, 1.0})  -- Brighter when active
+
     imgui.SetNextWindowSizeConstraints({ 300, 200 }, { 600, 800 })
     local window_open = imgui.Begin('Quest Helper', is_open_ref, ImGuiWindowFlags_AlwaysAutoResize)
 
@@ -420,6 +427,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 string.rep(' ', 20 - math.floor(pct / 5)) ..
                 '] ' .. pct_text
             )
+
             imgui.Separator()
 
             -- Steps
@@ -496,6 +504,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
     end
 
     imgui.End()
+    -- Restore previous style
+    imgui.PopStyleColor()
     is_open = is_open_ref[1]
 
     ----------------------------------------------------------------------------

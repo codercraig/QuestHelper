@@ -273,43 +273,122 @@ return {
 
     ["2-1: The Crystal Line"] = {
         steps = {
-            "Step 1: Receive the mission from any of the Bastokan Gate Guards.",
             {
-                text = "Step 2: Talk to Savae E Paleade at (K-7) in Port Bastok.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n \n",
+                images = {
+                      {
+                          file     = "maps/bastok_mines.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "H-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/bastok_markets.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "D-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/port_bastok.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "L-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 2: Talk to Cid in the Metalworks (H-8). \n \n",
                 images = {
                     {
-                        file     = "maps/port_bastok.png",
+                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 3: Travel to North Gustaberg and locate the hut at (L-8).",
+                text = "Step 3: Trade any crystal (these drop from any monster with Signet/Sanction or Sigil on ) to the Telepoints: \n" ..
+                       "-{!Recommended!} Crag of Dem(I-6) \n" ..
+                       "- Crag of Holla(K-8) \n" ..
+                       "- Crag of Mea(I-6) \n \n" ..
+                       "It will then become a Faded Crystal, check your inventory and it should update visually to be a white crystal.\n" ..
+                       "Remember to click on the tele-crystal, this will give you {KI:Dem Gate Crystal} allowing you to Teleport-Dem to that location later. \n \n" ..
+                       "You can warp back to Bastok-Metalworks. \n \n",
                 images = {
+                    {
+                        file     = "maps/south_gustaberg.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                     {
                         file     = "maps/north_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "L-8", offsetX = 16, offsetY = 16 },
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/konschtat_highlands.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "items/faded_crystal.png",
+                        width    = 457,
+                        height   = 70,
+                        state    = 3,
+                    },
+
+                },
+            },
+            {
+                text = "Step 4: Return and Trade Cid the Faded Crystal in the Metalworks(H-8).\n" ..
+                       "Optional: Talk to Naji(J-8) \n \n",
+                images = {
+                    {
+                        file     = "maps/metalworks.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: Return to Savae E Paleade to complete the mission.",
+                text = "Step 5: Talk to Ayame inside the Cannonry in the Metalworks(K-7). \n \n",
                 images = {
                     {
-                        file     = "maps/port_bastok.png",
+                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
-                        state    = 4,
+                        state    = 5,
                         highlights = {
                             { position = "K-7", offsetX = 16, offsetY = 16 },
                         },
@@ -317,36 +396,101 @@ return {
                 },
             },
         },
+        reward = "Rank Points!"
     },
-
     ["2-2: Wading Beasts"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
             {
-                text = "Step 2: Talk to Nbu Latteh at (J-9) in Bastok Markets.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n" ..
+                       "This Mission can be skipped if you trade Crystals to the gate guards to boost your Rank Points, see 'Status -> 'Profile' \n \n",
+                images = {
+                      {
+                          file     = "maps/bastok_mines.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "H-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/bastok_markets.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "D-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/port_bastok.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "L-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 2: Obtain a Lizard Egg! \n\n" ..
+                       "===== Purchase from Guild Merchants =====\n \n" ..
+                       "*Note: Merchants operate during specific in-game hours*\n" ..
+
+                       "- Chomo Jinjahl (Windurst Waters(North), E-8)\n \n" ..
+                       "===== Buy from Auction House =====\n \n" ..
+                       "- Check 'Food' > 'Ingredients' section for listings.\n \n" ..
+                       "===== Obtain from Lizard Family =====\n \n" ..
+                       "- Travel through South Gustaberg(D-9) to Dangruf Wadi.\n" ..
+                       "- Inside Dangruf Wadi Look for 'Steam Lizards'(G-11) - evel 16-20.\n" ..
+                       "",
                 images = {
                     {
-                        file     = "maps/bastok_markets.png",
+                        file     = "maps/windurst_waters_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "items/lizard_egg.png",
+                        width    = 453,
+                        height   = 66,
+                        state    = 2,
+                    },
+                    {
+                        file     = "maps/south_gustaberg.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "D-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/dangruf_wadi.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "G-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            "Step 3: Travel to Dangruf Wadi and obtain three Dhalmel Saliva from Dhalmel.",
             {
-                text = "Step 4: Return to Nbu Latteh to complete the mission.",
+                text = "Step 3: Go to Metalworks(J-8) in Bastok and trade Alois a Lizard Egg to complete the mission",
                 images = {
                     {
-                        file     = "maps/bastok_markets.png",
+                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
-                        state    = 4,
+                        state    = 3,
                         highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },

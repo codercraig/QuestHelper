@@ -2,24 +2,19 @@ return {
     ["Leaping Lizzy"] = {
         steps = {
             {
-                text = [[
-Leaping Lizzy is a notorious monster that spawns in South Gustaberg (E-8 to F-8).
-It is a lottery spawn from the Rock Lizards in the area.
-
-===== Spawn Details =====
-• Placeholder: Rock Lizards in the central area at (F-8).
-• Spawn Timer: 5-15 minutes after the placeholder is defeated.
-• Spawn Chance: Approximately 9.4 percent per placeholder.
-• Use Wide Scan to locate her more easily; she typically appears in the first group of Rock Lizards.
-
-===== Battle Strategy =====
-• Leaping Lizzy can be easily soloed around level 10-15.
-• Suggested jobs: THF/RNG/BST/WAR; any with ranged or movement speed bonuses for quick tagging on populated servers.
-• Useful information: BSTs can use the ability 'Charm' and utilize Wide Scan.
-
-===== Drops =====
-• Bounding Boots (6.7 percent)
-                ]],
+                text = "===== Spawn Details =====\n" ..
+                       "Leaping Lizzy is a notorious monster that spawns in South Gustaberg (E-8 to F-8).\n" ..
+                       "It is a lottery spawn from the Rock Lizards in the area.\n \n" ..
+                       "- Placeholder: Rock Lizards in the central area at (F-8).\n" ..
+                       "- Spawn Timer: 5-15 minutes after the placeholder is defeated.\n" ..
+                       "- Spawn Chance: Approximately 9.4 percent per placeholder.\n" ..
+                       "- Use Wide Scan to locate her more easily; she typically appears in the first group of Rock Lizards.\n\n" ..
+                       "===== Battle Strategy =====\n" ..
+                       "- Leaping Lizzy can be easily soloed around level 15-18.\n" ..
+                       "- Suggested jobs: THF/RNG/BST/WAR; any with ranged or movement speed bonuses for quick tagging on populated servers.\n \n" ..
+                       "- Useful information: BSTs can use the ability 'Charm' and utilize Wide Scan.\n \n" ..
+                       "===== Drops =====\n" ..
+                       "- Bounding Boots (6.7 percent)",
                 images = {
                     {
                         file = "maps/south_gustaberg.png",
@@ -38,12 +33,11 @@ It is a lottery spawn from the Rock Lizards in the area.
             },
         },
         reward = {
-            text = "Possible rewards include:",
             images = {
                 {
                     file = "equipment/bounding_boots.png",
-                    width = 512,
-                    height = 125,
+                    width = 455,
+                    height = 107,
                 },
             },
         }
@@ -51,38 +45,33 @@ It is a lottery spawn from the Rock Lizards in the area.
     ["Bubbly Bernie"] = {
         steps = {
             {
-                text = [[
-    Step 1: Acquire a Quus (Required to spawn Bubbly Bernie)
+                text = "Step 1: Acquire a Quus (To Spawn Bubbly Bernie)\n \n" ..
+                       "===== Purchase from Guild Merchants =====\n \n" ..
+                       "*Note: Merchants operate during specific in-game hours*\n" ..
 
-    ===== Purchase from Guild Merchants =====
-    • Babubu (Port Windurst, C-8)
-    • Graegham & Mendoline (Selbina, H-9)
-    • Rajmonda (Ship to Mhaura)
-    • Jidwahn (Nashmau - Al Zahbi Ferry)
-    • Wahnid (Aht Urhgan Whitegate, H-11)
-    *Note: Merchants operate during specific in-game hours and may not always have Quus in stock.*
-
-    ===== Obtain via Fishing (Skill Level: 19) =====
-    • Locations:
-      - Port Bastok
-      - Port Windurst
-      - South Gustaberg
-      - Selbina
-      - Ship routes between Mhaura and Selbina
-    • Bait: Lugworm, Sabiki Rig, Fly Lure
-    • Rods: Halcyon Rod, Composite Rod, Carbon Rod
-    *Ensure your fishing skill is at the appropriate level to successfully catch Quus.*
-
-    ===== Buy from Auction House =====
-    • Check "Food" > "Fish" section for listings.
-
-    ===== Mog Garden =====
-    • Use the Coastal Fishing Net.
-
-    ===== Monster Drops =====
-    • Certain Sahagin enemies in Sea Serpent Grotto drop Quus.
-                ]],
+                       "- Babubu (Port Windurst, C-8)\n" ..
+                       "- Graegham & Mendoline (Selbina, H-9)\n" ..
+                       "- Rajmonda (Ship to Mhaura)\n" ..
+                       "- Jidwahn (Nashmau - Al Zahbi Ferry)\n" ..
+                       "- Wahnid (Aht Urhgan Whitegate, H-11)\n \n" ..
+                       "===== Obtain via Fishing (Skill Level: 19) =====\n \n" ..
+                       "- Locations:\n" ..
+                       "  - Port Bastok\n" ..
+                       "  - Port Windurst\n" ..
+                       "  - South Gustaberg\n" ..
+                       "  - Selbina\n" ..
+                       "  - Ship routes between Mhaura and Selbina\n" ..
+                       "- Bait: Lugworm, Sabiki Rig, Fly Lure\n" ..
+                       "- Rods: Halcyon Rod, Composite Rod, Carbon Rod\n \n" ..
+                       "===== Buy from Auction House =====\n \n" ..
+                       "- Check 'Food' > 'Fish' section for listings.\n \n" ..
+                       "\n \n",
                 images = {
+                    {
+                        file = "items/quus.png",
+                        width = 366,
+                        height = 55,
+                    },
                     {
                         file = "maps/port_windurst.png",
                         width = 512,
@@ -107,30 +96,21 @@ It is a lottery spawn from the Rock Lizards in the area.
                             { position = "H-11", offsetX = 16, offsetY = 16 }
                         },
                     },
-                    {
-                        file = "items/quus.png",
-                        width = 512,
-                        height = 125,
-                    },
                 }
             },
             {
-                text = [[
-    Step 2: Spawn and Defeat Bubbly Bernie
-
-    ===== Spawn Details =====
-    • Location: Near Morhen Lighthouse (M-10).
-    • Spawn Method: Trade a Quus to the ??? at the spawn location.
-
-    ===== Battle Strategy =====
-    • Bubbly Bernie is a level 9-10 Crab.
-    • Can be soloed at level 10-15.
-    • Be cautious of its 'Bubble Shower' ability, which deals area-of-effect damage.
-
-    ===== Useful Information =====
-    • Melee classes should keep Shell and defensive abilities ready.
-    • Mages should maintain distance to avoid AoE damage.
-                ]],
+                text = "Step 2: Spawn and Defeat Bubbly Bernie\n \n" ..
+                       "===== Spawn Details =====\n \n" ..
+                        "- Location: Near Morhen Lighthouse (M-10).\n" ..
+                        "- Spawn Method: Trade a Quus to the ??? at the spawn location.\n \n" ..
+                        "===== Battle Strategy =====\n \n" ..
+                        "- Bubbly Bernie is a level 9-10 Crab.\n" ..
+                        "- Can be soloed at level 10-15.\n" ..
+                        "- Be cautious of its 'Bubble Shower' ability, which deals area-of-effect damage.\n\n" ..
+                        "===== Useful Information =====\n \n" ..
+                        "- Melee classes should keep Shell and defensive abilities ready.\n" ..
+                        "- Mages should maintain distance to avoid AoE damage." ..
+                        "\n \n",
                 images = {
                     {
                         file = "maps/south_gustaberg.png",
@@ -149,12 +129,12 @@ It is a lottery spawn from the Rock Lizards in the area.
             },
         },
         reward = {
-            text = "Possible rewards include:",
+            text = "Steam Clock",
             images = {
                 {
                     file = "items/steam_clock.png",
-                    width = 512,
-                    height = 150,
+                    width = 455,
+                    height = 67,
                 },
             },
         }
@@ -162,23 +142,18 @@ It is a lottery spawn from the Rock Lizards in the area.
     ["Carnero"] = {
         steps = {
             {
-                text = [[
-    Carnero is a notorious monster that spawns in South Gustaberg around (I-8) to (J-8).
-    It is a lottery spawn from the Tremor Sheep in the area.
-
-    ===== Spawn Details =====
-    • Placeholder: Sheep in the vicinity of (I-8) to (J-8).
-    • Spawn Timer: Approximately 2 hours after the placeholder is defeated.
-    • Spawn Chance: Low; patience is required.
-
-    ===== Battle Strategy =====
-    • Carnero is a level 11-12 Sheep.
-    • Can be challenging due to high attack power; recommended for players level 15 and above.
-    • Be cautious of its 'Sheep Song' ability, which can put players to sleep and it can link with other nearby Sheep.
-
-    ===== Drops =====
-    • Katayama Ichimonji
-                ]],
+                text = "===== Spawn Details =====\n \n" ..
+                       "Carnero is a notorious monster that spawns in South Gustaberg around (I-8) to (J-8).\n" ..
+                       "It is a lottery spawn from the Tremor Sheep in the area.\n \n" ..
+                       "- Placeholder: Sheep in the vicinity of (I-8) to (J-8).\n" ..
+                       "- Spawn Timer: Approximately 2 hours after the placeholder is defeated.\n" ..
+                       "- Spawn Chance: Low; patience is required.\n \n" ..
+                       "===== Battle Strategy =====\n \n" ..
+                       "- Carnero is a level 11-12 Sheep.\n" ..
+                       "- Can be challenging due to high attack power; recommended for players level 15 and above.\n" ..
+                       "- Be cautious of its 'Sheep Song' ability, which can put players to sleep and it can link with other nearby Sheep.\n \n" ..
+                       "===== Drops =====\n \n" ..
+                       "- Katayama Ichimonji\n \n",
                 images = {
                     {
                         file = "maps/south_gustaberg.png",
@@ -198,12 +173,11 @@ It is a lottery spawn from the Rock Lizards in the area.
             },
         },
         reward = {
-            text = "Possible rewards include:",
             images = {
                 {
                     file = "equipment/katayama_ichimonji.png",
-                    width = 500,
-                    height = 125,
+                    width = 453,
+                    height = 87,
                 },
             },
         }
@@ -211,22 +185,17 @@ It is a lottery spawn from the Rock Lizards in the area.
     ["Tococo"] = {
         steps = {
             {
-                text = [[
-Tococo is a notorious monster that spawns in South Gustaberg around (G-7) to (H-7).
-It is a timed spawn NM.
-
-===== Spawn Details =====
-• Location: Around (G-7) to (H-7).
-• Spawn Timer: Approximately every 60-70 minutes.
-
-===== Battle Strategy =====
-• Tococo is a level 4-5 Lesser Bird.
-• Can be soloed by players around level 5-10.
-• Be cautious of its 'Pecking Flurry' ability, which can deal multiple hits.
-
-===== Drops =====
-• Armiger's Lace
-                ]],
+                text = "===== Spawn Details =====\n \n" ..
+                       "Tococo is a notorious monster that spawns in South Gustaberg around (G-7) to (H-7).\n" ..
+                       "It is a timed spawn NM.\n \n" ..
+                       "- Location: Around (G-7) to (H-7).\n" ..
+                       "- Spawn Timer: Approximately every 60-70 minutes.\n \n" ..
+                       "===== Battle Strategy =====\n \n" ..
+                       "- Tococo is a level 4-5 Lesser Bird.\n" ..
+                       "- Can be soloed by players around level 5-10.\n" ..
+                       "- Be cautious of its 'Pecking Flurry' ability, which can deal multiple hits.\n \n" ..
+                       "===== Drops =====\n \n" ..
+                       "- Armiger's Lace\n \n",
                 images = {
                     {
                         file = "maps/south_gustaberg.png",
@@ -247,12 +216,11 @@ It is a timed spawn NM.
             },
         },
         reward = {
-            text = "Possible rewards include:",
             images = {
                 {
                     file = "equipment/armigers_lace.png",
-                    width = 400,
-                    height = 125,
+                    width = 452,
+                    height = 107,
                 },
             },
         }
