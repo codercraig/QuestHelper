@@ -323,11 +323,35 @@ return {
                 {
                     text = "Step 4: Obtain Yagudo Glue (if you haven't already).\n \n" ..
                            "- Yagudo Glue drops from Bard-type Yagudo in the past (e.g., Yagudo Pipers).\n \n" ..
-                           "- Low-level Yagudo Pipers spawn outside Giddeus in West Sarutabaruta (S). Higher-level ones are in Castle Oztroja (S).\n \n" ..
+                           "- Low-level Yagudo Pipers spawn outside Giddeus in West Sarutabaruta (S). Higher-level ones are in Castle Oztroja throughout (S) - Yagudo Chanters aswell.\n \n" ..
                            "- You do NOT need to be on Dancer job for the glue to drop.\n \n" ..
                            "- Make sure to switch back to Dancer to complete the remainder of the quest.\n \n",
                     images = {
-                        -- (Optional) Map for West Sarutabaruta (S) or Castle Oztroja (S)
+                        {
+                            file = "items/yagudo_glue.png",
+                            width = 482,
+                            height = 67,
+                            state = 4,
+                        },
+                        {
+                            file = "maps/west_sarutabaruta_s.png",
+                            width = 512,
+                            height = 512,
+                            state = 4,
+                            highlights = {
+                                { position = "F-7", offsetX = 16, offsetY = 16 },
+                                { position = "F-8", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file = "maps/castle_oztroja_1.png",
+                            width = 512,
+                            height = 512,
+                            state = 4,
+                            highlights = {
+                                { position = "H-8", offsetX = 16, offsetY = 16 },
+                            },
+                        },
                     },
                 },
                 {
@@ -567,6 +591,204 @@ return {
                 height = 127,
             },
         },
+        },
+    },
+    ["6.Dancer AF Head - Matthias Craft"] = {
+        steps = {
+            {
+                text = "Step 1: You must be Lv.50+ Dancer and have completed the quest 'The Road to Divadom.'\n \n" ..
+                       "- Talk to Olgald (G-7) to activate the quest.\n \n" ..
+                       "- He will mention a tailor named Matthias, if aquainted already skip this step.\n \n",
+                images = {
+                    {
+                        file = "maps/upper_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Speak with Matthias (J-9).\n \n" ..
+                       "- He is a tailor in Bastok Markets.\n \n" ..
+                       "- He will tell you the items needed - again can be aquired from the Auction House or crafted:\n \n" ..
+                       "  - Square of Imperial Silk Cloth\n" ..
+                       "  - Square of Wolf Felt\n" ..
+                       "  - Square of Silver Brocade\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png",
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "items/imperial_silk_cloth.png",
+                        width = 488,
+                        height = 66,
+                        state = 2,
+                    },
+                    {
+                        file = "items/wolf_felt.png",
+                        width = 484,
+                        height = 87,
+                        state = 2,
+                    },
+                    {
+                        file = "items/silver_brocade.png",
+                        width = 482,
+                        height = 92,
+                        state = 2,
+                    },
+                },
+            },
+            {
+                text = "Step 3: Change zones and wait until the next Vana'diel day.\n \n" ..
+                       "- Placing the order is a separate step from trading the materials.\n" ..
+                       "- If you order the item without having the materials, you still have to wait again once you do finally trade them.\n \n" ..
+                       "- You can only have Matthias craft one item at a time.\n \n" ..
+                       "- You can also order Dancer's Bangles or Dancer's Shoes after obtaining this part.\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png",
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: Once all items are traded and the waiting period has passed:\n \n" ..
+                       "- Return to Matthias (J-9) to receive your Dancer's Tiara.\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png",
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Dancer's Tiara\n \n",
+            images = {
+                {
+                    file = "equipment/dancers_tiara.png",
+                    width = 455,
+                    height = 107,
+                },
+            },
+        },
+    },
+    ["7.Dancer AF Feet - Matthias Craft"] = {
+        steps = {
+            {
+                text = "Step 1: Must be Lv.50 Dancer and have completed the quest 'The Road to Divadom.'\n \n" ..
+                       "- Talk to Olgald (G-7) to activate the quest.\n \n" ..
+                       "- He will mention a tailor named Matthias, skip this step if already completed previous Matthias quest.\n \n",
+                images = {
+                    {
+                        file = "maps/upper_jeuno.png", -- Adjust map if desired
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Speak with Matthias (J-9) in Bastok Markets.\n \n" ..
+                       "- He requires these items for your order - All able to be aquired on Auction House:\n \n" ..
+                       "  - Square of Wamoura Cloth\n" ..
+                       "  - Square of Moblinweave\n" ..
+                       "  - Square of Gold Brocade\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png", -- Adjust map file if needed
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "items/wamoura_cloth.png", -- Adjust map file if needed
+                        width = 450,
+                        height = 71,
+                        state = 2,
+                    },
+                    {
+                        file = "items/moblinweave.png", -- Adjust map file if needed
+                        width = 448,
+                        height = 68,
+                        state = 2,
+                    },
+                    {
+                        file = "items/gold_brocade.png", -- Adjust map file if needed
+                        width = 448,
+                        height = 87,
+                        state = 2,
+                    },
+                },
+            },
+            {
+                text = "Step 3: Change zones and wait until the next Vana'diel day.\n \n" ..
+                       "- Once you place the order, you must still wait again after trading if you didn't have all items beforehand.\n" ..
+                       "- You can only have Matthias craft one item at a time.\n" ..
+                       "- You can also order Dancer's Bangles or Dancer's Tiara after obtaining Dancer's Shoes.\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png",
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: After the wait period and trading all items:\n \n" ..
+                       "- Return to Matthias (J-9) to receive your Dancer's Shoes.\n \n",
+                images = {
+                    {
+                        file = "maps/bastok_markets.png",
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Dancer's Shoes\n \n",
+            images = {
+                {
+                    file = "equipment/dancers_toe_shoes.png",
+                    width = 483,
+                    height = 107,
+                },
+            },
         },
     },
 }
