@@ -367,7 +367,7 @@ return {
             },
             {
                 text = "Step 4: Return and Trade Cid the Faded Crystal in the Metalworks(H-8).\n" ..
-                       "Optional: Talk to Naji(J-8) \n \n",
+                       "Optional: Talk to Naji(J-8) for some cheesy dialogue. \n \n",
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -498,42 +498,323 @@ return {
         },
     },
 
-    ["2-3: The Emissary"] = {
+    ["2-3: The Emissary - Introduction"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from Naji at (J-8) in the Metalworks.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n" ..
+                       "This mission has a fight capped originally at 25, non-era versions will be uncapped - check with your respective server!' \n \n",
                 images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 1,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                      {
+                          file     = "maps/bastok_mines.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "H-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/bastok_markets.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "D-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/port_bastok.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "L-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
             },
-            "Step 2: Choose to go to either San d'Oria or Windurst first.",
-            "Step 3: Deliver the letter to the respective consulate in the chosen nation.",
-            "Step 4: Complete the assigned task from the consulate.",
-            "Step 5: Repeat steps 3 and 4 for the other nation.",
             {
-                text = "Step 6: Return to Naji in the Metalworks to complete the mission.",
+                text = "Step 2: Talk to Naji in Metalworks (J-8), just outside the Presidents Office. \n" ..
+                       "After the cutscene you will have to travel to San d'Oria and Windhurst \n" ..
+                       "Please note you can choose San d'Oria -> Windurst or Windurst -> San d'Oria. Questhelper will split this into two missions. \n" ..
+                       "Which order will affect the tasks, titles and cutscenes so this section will be split into two. \n \n",
                 images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 6,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                      {
+                          file     = "maps/metalworks.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 2,
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
             },
         },
-        reward = "Rank 3, Adventurer's Certificate, 3000g, access to Chateau d'Oraguille"
+        reward = "Nothing. . ."
+    },
+    ["2-3: The Emissary - San d'Oria -> Windurst"] = {
+        steps = {
+            {
+                text = "Step 1: Talk to Baraka and then Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "K-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 2: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I/J-6). \n",
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 2,
+                          highlights = {
+                              { position = "I-6", offsetX = 16, offsetY = 16 },
+                              { position = "J-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 3: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
+                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Halver. \n \n",
+                images = {
+                      {
+                          file     = "maps/chateau_doraguille.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 3,
+                          highlights = {
+                              { position = "I-9", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 4: Travel to Ghelsba Outpost which can be reached from West Ronfaure (E-4). \n",
+                images = {
+                      {
+                          file     = "maps/west_ronfaure.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "E-4", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 5: Defeat the NM Warchief Vatgit in Ghlesba Outpost (H-7). \n \n" ..
+                       "===== Warchief Vatgit ===== \n" ..
+                       "Family: Orc \n" ..
+                       "Level: 16 \n" ..
+                       "Job: Warrior \n \n" ..
+                       "===== Bloody Vrukwuk ===== \n" ..
+                       "Family: Orc \n" ..
+                       "Level: 14 \n" ..
+                       "Job: Paladin \n \n" ..
+                       "===== Fogweaver Mozzfuzz ===== \n" ..
+                       "Family: Orc \n" ..
+                       "Level: 14 \n" ..
+                       "Job: Black Mage \n \n" ..
+                       "Recommended: Soloable at level 20 comfortably.\n" ..
+                       "Notes: Warchief Vatgit is sometimes followed by Bloody Vrukwuk or Fogweaver Mozzfuzz. Try and one-shot these monsters build tp on surrounding monsters! \n \n",
+                images = {
+                      {
+                          file     = "maps/ghelsba_outpost_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 5,
+                          highlights = {
+                              { position = "H-7", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                        file     = "monsters/warchief_vatgit.png",
+                        width    = 325,
+                        height   = 467,
+                        state    = 5,
+                      },
+                      {
+                        file     = "monsters/bloody_vrukwuk.png",
+                        width    = 325,
+                        height   = 467,
+                        state    = 5,
+                      },
+                      {
+                        file     = "monsters/fogweaver_mozzfuzz.png",
+                        width    = 325,
+                        height   = 467,
+                        state    = 5,
+                      },
+                  },
+            },
+            {
+                text = "Step 6: Return back to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 6,
+                          highlights = {
+                              { position = "K-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 7: Travel to Windurst!\n " ..
+                       "If you have the teleport crystal from Crag of Mea you can get a White Mage to teleport you, or Outpost Warp to Kolshushu \n \n" ..
+                       "Otherwise time get some virtual cardio in: A suggested route is: \n" ..
+                       "West Ronfaure (F-12)      ->\n" ..
+                       "La Thiene Plateau (I-13)  ->\n" ..
+                       "Valkrum Dunes (G-9)       ->\n" ..
+                       "Selbina[BOAT] (H-10)      ->\n" ..
+                       "Mhaura (H-5)              ->\n" ..
+                       "Buburimu Peninsula (D-7)  ->\n" ..
+                       "Tahrongi Canyon (H-13)    ->\n" ..
+                       "East Sarutabaruta (G-11)  ->\n" ..
+                       "Windurst(thank f***!!)    ->\n \n" ..
+                       "You made it!! Now stretch your real life legs! \n",
+                images = {
+                      {
+                          file     = "maps/west_ronfaure.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 7,
+                          highlights = {
+                              { position = "F-12", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                        file     = "maps/la_theine_plateau.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "I-13", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/valkurm_dunes.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/selbina.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/mhaura.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-5", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/buburimu_peninsula.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "D-7", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/tahrongi_canyon.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-13", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/east_sarutabaruta.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "G-11", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                  },
+            },
+            {
+                text = "Step 8: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 8,
+                          highlights = {
+                              { position = "F-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 9: Talk to Kupipi in Heavens Tower on the first floor north side (no map/position available), she will give you a KI:Dark Key. \n \n" ..
+                       "Suggested Route: \n" ..
+                       "Port Windurst (N-5) ->\n" ..
+                       "Windurst Woods (F-5) ->\n" ..
+                       "Windurst Walls (H-7) ->\n" ..
+                       "Heavens Tower",
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 9,
+                          highlights = {
+                              { position = "N-5", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 9,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 9,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                  },
+            },
+        },
+        reward = "Trust: Halver, 5000g, and RANK3!"
     },
 
     ["3-1: The Four Musketeers"] = {

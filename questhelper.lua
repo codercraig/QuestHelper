@@ -1,23 +1,22 @@
 require('common')
 addon.author   = 'Oxos'
 addon.name     = 'QuestHelper'
-addon.version  = '3.0'
+addon.version  = '1.0'
 
 local imgui        = require('imgui')
 local settings     = require('settings')
 local image_loader = require('images')
 local ffi          = require('ffi')
+local bit          = require('bit') -- For bit.bor if needed
 
 --------------------------------------------------------------------------------
 -- Constants / Settings
 --------------------------------------------------------------------------------
 
--- Use an ALIAS for the settings file, so it doesn't conflict with other addons
 local QUESTHELPER_ALIAS = 'QuestHelper_settings'
 
--- Default settings structure: storing whether steps are completed or not
 local default_settings = T{
-    step_states = T{ }
+    step_states = T{}
 }
 
 -- Load settings from disk
@@ -32,17 +31,27 @@ local current_mission    = nil   -- e.g. "1-1: The Zeruhn Report"
 local is_open            = false -- Whether the UI window is open
 local showImagesDrawer   = true  -- Toggle for the side image drawer
 
+-- We’ll track last-known main window coords/sizes so we can “attach” the images drawer properly:
+local lastMainX, lastMainY = 300, 200
+local lastMainW, lastMainH = 400, 600
+
+--------------------------------------------------------------------------------
+-- Search Feature: We store the query and results
+--------------------------------------------------------------------------------
+local search_query   = ""  -- The user’s search string
+local search_results = T{} -- Matches (lowest-level missions/quests only)
+
 --------------------------------------------------------------------------------
 -- Data from subfolders
 --------------------------------------------------------------------------------
-local quest_data = T{ }
+local quest_data = T{}
 
 --------------------------------------------------------------------------------
--- (Optional) JSON decoding function if you still use .json anywhere
+-- Optional JSON decode (if needed)
 --------------------------------------------------------------------------------
 local function decode_json(json_str)
     local status, result = pcall(function()
-        return load("return " .. json_str)()  -- interpret as Lua
+        return load("return " .. json_str)()  -- interpret as Lua code
     end)
     if status then
         return result
@@ -57,13 +66,10 @@ end
 --------------------------------------------------------------------------------
 local function load_quest_data()
     local baseFolder = string.format('%saddons/%s/data/', AshitaCore:GetInstallPath(), addon.name)
-    -- The top-level categories (subfolders):
-    local directories = { 'Missions', 'Quests', 'Crafting', 'Fishing', 'NMs' }
+    local directories = { 'Missions', 'Quests', 'Jobs' , 'Crafting', 'Fishing', 'NMs', 'Custom' }
 
     for _, subdir in ipairs(directories) do
         local folderPath = baseFolder .. subdir .. '/'
-
-        -- If the subdir doesn't exist or is empty, no big deal:
         local dirCmd = 'dir "' .. folderPath .. '" /b'
         local p = io.popen(dirCmd)
         if p then
@@ -86,7 +92,6 @@ local function load_quest_data()
                         print(string.format('Error loading Lua file: %s -> %s', filepath, err))
                     end
                 elseif file_name:match('%.json$') then
-                    -- Optionally handle .json the same way if you want:
                     local filepath = folderPath .. file_name
                     local f = io.open(filepath, 'r')
                     if f then
@@ -122,7 +127,6 @@ local function get_sorted_keys(tbl)
     return keys
 end
 
--- Ensure nested keys exist in quest_settings
 local function ensure_key_path(t, ...)
     local keys = {...}
     local current = t
@@ -136,11 +140,11 @@ local function ensure_key_path(t, ...)
 end
 
 --------------------------------------------------------------------------------
--- Text Wrapping (Optional Utility)
+-- Text Wrapping (Optional)
 --------------------------------------------------------------------------------
 local function wrap_text(text, max_length)
     local wrapped_text = {}
-    for line in text:gmatch("[^\r\n]+") do  -- Split text by manual line breaks
+    for line in text:gmatch("[^\r\n]+") do
         local start = 1
         while start <= #line do
             local next_break = start + max_length - 1
@@ -155,6 +159,7 @@ local function wrap_text(text, max_length)
     end
     return table.concat(wrapped_text, "\n")
 end
+
 --------------------------------------------------------------------------------
 -- Step Completion: Get / Set
 --------------------------------------------------------------------------------
@@ -171,7 +176,7 @@ local function set_step_state(topCat, subfile, mission, step, state)
 end
 
 --------------------------------------------------------------------------------
--- Identify "Current Step" (the next uncompleted step)
+-- Identify "Current Step" (next uncompleted)
 --------------------------------------------------------------------------------
 local function get_current_step(topCat, subfile, mission)
     local mdata = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
@@ -205,13 +210,10 @@ local function is_subfile_complete(topCat, subfile)
 end
 
 local function is_mission_complete(topCat, subfile, mission)
-    local mission_data = quest_data[topCat]
-        and quest_data[topCat][subfile]
-        and quest_data[topCat][subfile][mission]
+    local mission_data = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
     if not mission_data then
         return false
     end
-
     local steps = mission_data.steps or {}
     for i = 1, #steps do
         if not get_step_state(topCat, subfile, mission, i) then
@@ -242,7 +244,7 @@ local function calculate_progress(topCat, subfile, mission)
 end
 
 --------------------------------------------------------------------------------
--- Return all images for the "current" step of a mission
+-- Return images for the "current" step
 --------------------------------------------------------------------------------
 local function get_images_for_step(topCat, subfile, mission, stepIndex)
     local mdata = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
@@ -252,7 +254,6 @@ local function get_images_for_step(topCat, subfile, mission, stepIndex)
 
     local step_data = mdata.steps[stepIndex]
     if type(step_data) == 'table' and step_data.images then
-        -- If we only want images exactly matching stepIndex => if image_info.state == stepIndex
         local matched = {}
         for _, image_info in ipairs(step_data.images) do
             if (image_info.state == stepIndex) or (image_info.state == nil) then
@@ -266,326 +267,408 @@ local function get_images_for_step(topCat, subfile, mission, stepIndex)
 end
 
 --------------------------------------------------------------------------------
--- H-7 style coordinate helper (for drawing highlights)
+-- Search the lowest-level mission/quest names
 --------------------------------------------------------------------------------
-local function letter_to_col(letter)
-    letter = letter:upper() -- 'H' -> ASCII 72
-    return (letter:byte() - 65) + 1
-end
+local function perform_search()
+    search_results = T{}
 
-local function display_mission_text(text)
-    for line in text:gmatch("[^\r\n]+") do
-        imgui.Text(line)
+    local query = (search_query or ""):lower()
+    if query == "" then
+        return
+    end
 
-        -- Add extra spacing after headers and key sections
-        if line:match("=====") or line:match("^%*") or line == "" then
-            imgui.Spacing()
-            imgui.Spacing()
+    for topCategory, subfiles in pairs(quest_data) do
+        for subfile, missions in pairs(subfiles) do
+            for mission_name, _ in pairs(missions) do
+                if mission_name:lower():find(query, 1, true) then
+                    table.insert(search_results, {
+                        topCategory = topCategory,
+                        subfile     = subfile,
+                        mission     = mission_name
+                    })
+                end
+            end
         end
     end
 end
-
 
 --------------------------------------------------------------------------------
 -- Main Rendering
 --------------------------------------------------------------------------------
 ashita.events.register('d3d_present', 'present_callback', function()
-    if not is_open then return end
+    -- If the main window is not open, do nothing (including images)
+    if not is_open then
+        return
+    end
 
-    local is_open_ref = { is_open }
-    imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})  -- Dark grey with 50% transparency
-    imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})  -- Light grey checkmark for better visibility
-    imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})  -- Lighter frame background
-    imgui.PushStyleColor(ImGuiCol_FrameBgHovered, {0.5, 0.5, 0.5, 0.8})  -- Lighter when hovered
-    imgui.PushStyleColor(ImGuiCol_FrameBgActive, {0.7, 0.7, 0.7, 1.0})  -- Brighter when active
+    -- Push style
+    imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})
+    imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})
+    imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})
+    imgui.PushStyleColor(ImGuiCol_FrameBgHovered, {0.5, 0.5, 0.5, 0.8})
+    imgui.PushStyleColor(ImGuiCol_FrameBgActive, {0.7, 0.7, 0.7, 1.0})
 
-    imgui.SetNextWindowSizeConstraints({ 300, 200 }, { 600, 800 })
-    local window_open = imgui.Begin('Quest Helper', is_open_ref, ImGuiWindowFlags_AlwaysAutoResize)
+    -- Main "Quest Helper" window
+    -- NOTE: We use AlwaysAutoResize or constraints as you prefer:
+    -- Instead of constraints, force a 400x600, no user resize
+    imgui.SetNextWindowSize({600, 600}, ImGuiCond_Always)
 
-    local mainX, mainY = imgui.GetWindowPos()
-    local mainW, mainH = imgui.GetWindowSize()
+    local mainFlags = bit.bor(
+        ImGuiWindowFlags_NoResize,
+        ImGuiWindowFlags_NoCollapse,
+        ImGuiWindowFlags_NoTitleBar
+    )
+
+    local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
+
+    local mainX, mainY = 0, 0
+    local mainW, mainH = 0, 0
 
     if window_open then
-        -- TOP LEVEL: If no top category is selected, list them: "Missions", "Quests", etc.
-        if not currentTopCategory then
-            imgui.Text('Select a top category:')
-            for category, _ in pairs(quest_data) do
-                if imgui.Button(category) then
-                    currentTopCategory = category
+        -- Track main window position & size for drawer attachment
+        mainX, mainY = imgui.GetWindowPos()
+        mainW, mainH = imgui.GetWindowSize()
 
-                    -- Directly load content for NMs and similar categories
-                    if category == "NMs" or category == "Crafting" or category == "Fishing" then
-                        current_category = category
-                    end
-                end
-            end
+        -- Save them so we can re-attach if the user toggles images or something
+        if mainW > 0 and mainH > 0 then
+            lastMainX = mainX
+            lastMainY = mainY
+            lastMainW = mainW
+            lastMainH = mainH
+        end
 
-        -- SECOND LEVEL: Show subfiles in that category
-        elseif not currentSubfile then
-            imgui.Text('Category: ' .. currentTopCategory)
-            imgui.Separator()
-            imgui.Text('Select a Subfile:')
+        ----------------------------------------------------------------------
+        -- SEARCH BAR (Always on top)
+        ----------------------------------------------------------------------
+        imgui.Text("Search Missions/Quests (lowest-level):")
+        local input_buf = { search_query }
+        if imgui.InputText("##SearchQuest", input_buf, 256) then
+            search_query = input_buf[1]
+            perform_search()
+        end
+        imgui.Separator()
 
-            if not quest_data[currentTopCategory] then
-                imgui.TextColored({1,0,0,1}, 'No subfiles found in ' .. currentTopCategory)
+        ----------------------------------------------------------------------
+        -- If searching => Show results
+        ----------------------------------------------------------------------
+        if search_query ~= "" then
+            if #search_results == 0 then
+                imgui.TextColored({1,0,0,1}, "No matches found.")
             else
-                local subKeys = get_sorted_keys(quest_data[currentTopCategory])
-                for _, sfName in ipairs(subKeys) do
-                    local complete = is_subfile_complete(currentTopCategory, sfName)
-                    if complete then
-                        imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5})
+                imgui.TextColored({0,1,0,1}, "Search Results:")
+                for _, result in ipairs(search_results) do
+                    local topCat  = result.topCategory
+                    local subfile = result.subfile
+                    local mission = result.mission
+
+                    -- Check completion:
+                    local isComplete = is_mission_complete(topCat, subfile, mission)
+
+                    -- Button label:
+                    local label = string.format("[%s] %s -> %s", topCat, subfile, mission)
+
+                    -- Push style colors for the button background and text:
+                    if isComplete then
+                        -- Green background, white text
+                        imgui.PushStyleColor(ImGuiCol_Button,        {0, 1, 0, 0.5})
+                        imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 1, 0, 0.7})
+                        imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 1, 0, 0.9})
+                        imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                    else
+                        -- Red background, white text
+                        imgui.PushStyleColor(ImGuiCol_Button,        {1, 0, 0, 0.5})
+                        imgui.PushStyleColor(ImGuiCol_ButtonHovered, {1, 0, 0, 0.7})
+                        imgui.PushStyleColor(ImGuiCol_ButtonActive,  {1, 0, 0, 0.9})
+                        imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
                     end
 
-                    local label = sfName
-                    if complete then
-                        label = label .. " (Complete!)"
-                    end
-
+                    -- Create the button
                     if imgui.Button(label) then
-                        currentSubfile = sfName
+                        currentTopCategory = topCat
+                        currentSubfile     = subfile
+                        current_mission    = mission
+                        search_query       = ""
+                        search_results     = T{}
                     end
 
-                    if complete then
-                        imgui.PopStyleColor()
-                    end
+                    -- Pop all style colors (4 pushes above)
+                    imgui.PopStyleColor(4)
                 end
             end
-
-            if imgui.Button("Back to Top-Level") then
-                currentTopCategory = nil
-            end
-
-        -- THIRD LEVEL: We have a category & subfile, but no mission selected
-        elseif not current_mission then
-            imgui.Text('Category: ' .. currentTopCategory)
-            imgui.Text('Subfile:  ' .. currentSubfile)
             imgui.Separator()
-
-            local subData = quest_data[currentTopCategory][currentSubfile]
-            if not subData then
-                imgui.TextColored({1,0,0,1}, 'No missions found in ' .. currentSubfile)
-            else
-                imgui.Text('Select a mission:')
-                local missionKeys = get_sorted_keys(subData)
-                for _, mname in ipairs(missionKeys) do
-                    local complete = is_mission_complete(currentTopCategory, currentSubfile, mname)
-                    if complete then
-                        imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5})
-                    end
-
-                    local label = mname
-                    if complete then
-                        label = label .. " (Complete!)"
-                    end
-
-                    if imgui.Button(label) then
-                        current_mission = mname
-                    end
-
-                    if complete then
-                        imgui.PopStyleColor()
-                    end
-                end
-            end
-
-            if imgui.Button("Back to Subfiles") then
-                currentSubfile = nil
-            end
-
-        -- FOURTH LEVEL: Show steps & reward for the selected mission
         else
-            -- Drawer toggle
-            if showImagesDrawer then
-                if imgui.Button("<##drawerToggle") then
-                    showImagesDrawer = false
+            ------------------------------------------------------------------
+            -- Normal Navigation (Categories → Subfiles → Missions)
+            ------------------------------------------------------------------
+            if not currentTopCategory then
+                imgui.Text('Select a top category:')
+                for category, _ in pairs(quest_data) do
+                    if imgui.Button(category) then
+                        currentTopCategory = category
+                    end
                 end
-                imgui.SameLine()
-                imgui.Text("Hide Images")
-            else
-                if imgui.Button(">##drawerToggle") then
-                    showImagesDrawer = true
-                end
-                imgui.SameLine()
-                imgui.Text("Show Images")
-            end
-            imgui.Separator()
 
-            imgui.Text('Top Category: ' .. currentTopCategory)
-            imgui.Text('Subfile: ' .. currentSubfile)
-            imgui.Text('Mission: ' .. current_mission)
-            imgui.Separator()
-
-            local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-            local steps = missionData.steps or {}
-            local reward = missionData.reward
-
-            -- Show progress
-            local pct, done, tot = calculate_progress(currentTopCategory, currentSubfile, current_mission)
-            local pct_text = string.format("%.2f%% (%d/%d steps)", pct, done, tot)
-            imgui.Text('[' ..
-                string.rep('|', math.floor(pct / 5)) ..
-                string.rep(' ', 20 - math.floor(pct / 5)) ..
-                '] ' .. pct_text
-            )
-
-            imgui.Separator()
-
-            -- Steps
-            for i = 1, #steps do
-                local step_data = steps[i]
-                local text = (type(step_data) == 'table' and step_data.text) and step_data.text or tostring(step_data)
-
-                local st = get_step_state(currentTopCategory, currentSubfile, current_mission, i)
-                local cbLabel = string.format("##step_%d", i)
-                local ref = { st }
-                if imgui.Checkbox(cbLabel, ref) then
-                    set_step_state(currentTopCategory, currentSubfile, current_mission, i, ref[1])
-                end
-                imgui.SameLine()
-
-                if ref[1] then
-                    imgui.TextColored({0,1,0,1}, wrap_text(text, 60))
+            elseif not currentSubfile then
+                imgui.Text('Category: ' .. currentTopCategory)
+                imgui.Separator()
+                imgui.Text('Select a Subfile:')
+                if not quest_data[currentTopCategory] then
+                    imgui.TextColored({1,0,0,1}, 'No subfiles found in ' .. currentTopCategory)
                 else
-                    imgui.Text(wrap_text(text, 60))
-                end
-            end
+                    local subKeys = get_sorted_keys(quest_data[currentTopCategory])
+                    for _, sfName in ipairs(subKeys) do
+                        local complete = is_subfile_complete(currentTopCategory, sfName)
+                        if complete then
+                            imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5})
+                        end
 
-            imgui.Separator()
+                        local label = sfName
+                        if complete then
+                            label = label .. " (Complete!)"
+                        end
 
-            -- Reward display
-            if reward then
-                if type(reward) == 'string' then
-                    imgui.TextColored({0.8, 0.8, 0, 1}, "Reward: " .. reward)
-                elseif type(reward) == 'table' then
-                    local rtxt = reward.text or "None"
-                    imgui.TextColored({0.8, 0.8, 0, 1}, "Reward: " .. rtxt)
+                        if imgui.Button(label) then
+                            currentSubfile = sfName
+                        end
 
-                    -- If there's an images array, display them
-                    if reward.images then
-                        for _, image_info in ipairs(reward.images) do
-                            local tex_ptr = image_loader.GetTexture(image_info.file)
-                            if tex_ptr then
-                                local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
-                                local w = image_info.width or 200
-                                local h = image_info.height or 100
-
-                                imgui.Image(tex_id, { w, h })
-
-                                -- If you want highlights for the reward image:
-                                if image_info.highlights then
-                                    local imageX, imageY = imgui.GetCursorScreenPos()
-                                    local drawList = imgui.GetWindowDrawList()
-
-                                    -- Example highlight code:
-                                    for _, highlight in ipairs(image_info.highlights) do
-                                        local letter, numStr = highlight.position:match("([A-Za-z])%-(%d+)")
-                                        if letter and numStr then
-                                            -- Convert letter -> column
-                                            -- Then do the same highlight box logic
-                                        end
-                                    end
-                                end
-
-                                imgui.Spacing()
-                            else
-                                imgui.TextColored({1, 0, 0, 1}, "(Missing image: " .. tostring(image_info.file) .. ")")
-                            end
+                        if complete then
+                            imgui.PopStyleColor()
                         end
                     end
                 end
-            else
-                imgui.TextColored({0.8,0.8,0,1}, "Reward: None")
-            end
 
-            if imgui.Button("Back to Missions") then
-                current_mission = nil
+                if imgui.Button("Back to Categories") then
+                    currentTopCategory = nil
+                end
+
+            elseif not current_mission then
+                imgui.Text('Category: ' .. currentTopCategory)
+                imgui.Text('Subfile:  ' .. currentSubfile)
+                imgui.Separator()
+
+                local subData = quest_data[currentTopCategory][currentSubfile]
+                if not subData then
+                    imgui.TextColored({1,0,0,1}, 'No missions found in ' .. currentSubfile)
+                else
+                    imgui.Text('Select a mission:')
+                    local missionKeys = get_sorted_keys(subData)
+                    for _, mname in ipairs(missionKeys) do
+                        local complete = is_mission_complete(currentTopCategory, currentSubfile, mname)
+                        if complete then
+                            imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5})
+                        end
+
+                        local label = mname
+                        if complete then
+                            label = label .. " (Complete!)"
+                        end
+
+                        if imgui.Button(label) then
+                            current_mission = mname
+                        end
+
+                        if complete then
+                            imgui.PopStyleColor()
+                        end
+                    end
+                end
+
+                if imgui.Button("Back to Subfiles") then
+                    currentSubfile = nil
+                end
+
+            else
+                --------------------------------------------------------------
+                -- Images drawer toggle (showImagesDrawer)
+                --------------------------------------------------------------
+                if showImagesDrawer then
+                    if imgui.Button("<##drawerToggle") then
+                        showImagesDrawer = false
+                    end
+                    imgui.SameLine()
+                    imgui.Text("Hide Images")
+                else
+                    if imgui.Button(">##drawerToggle") then
+                        showImagesDrawer = true
+                    end
+                    imgui.SameLine()
+                    imgui.Text("Show Images")
+                end
+                imgui.Separator()
+
+                imgui.Text('Top Category: ' .. currentTopCategory)
+                imgui.Text('Subfile: ' .. currentSubfile)
+                imgui.Text('Mission: ' .. current_mission)
+                imgui.Separator()
+
+                local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+                local steps  = missionData.steps or {}
+                local reward = missionData.reward
+
+                -- Show a simple progress readout
+                local pct, done, tot = calculate_progress(currentTopCategory, currentSubfile, current_mission)
+                local barCount = 0
+                if tot > 0 then
+                    barCount = math.floor((pct / 100) * 20)
+                    if barCount > 20 then barCount = 20 end
+                end
+                imgui.Text('[' ..
+                    string.rep('|', barCount) ..
+                    string.rep(' ', 20 - barCount) ..
+                    '] ' .. string.format("%.2f%% (%d/%d steps)", pct, done, tot)
+                )
+                imgui.Separator()
+
+                -- Steps
+                for i = 1, #steps do
+                    local step_data = steps[i]
+                    local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
+
+                    local st = get_step_state(currentTopCategory, currentSubfile, current_mission, i)
+                    local cbLabel = string.format("##step_%d", i)
+                    local ref = { st }
+                    if imgui.Checkbox(cbLabel, ref) then
+                        set_step_state(currentTopCategory, currentSubfile, current_mission, i, ref[1])
+                    end
+                    imgui.SameLine()
+
+                    if ref[1] then
+                        imgui.TextColored({0,1,0,1}, wrap_text(text, 60))
+                    else
+                        imgui.Text(wrap_text(text, 60))
+                    end
+                end
+
+                imgui.Separator()
+
+                -- Reward
+                if reward then
+                    if type(reward) == 'string' then
+                        imgui.TextColored({0.8,0.8,0,1}, "Reward: " .. reward)
+                    elseif type(reward) == 'table' then
+                        local rtxt = reward.text or "None"
+                        imgui.TextColored({0.8,0.8,0,1}, "Reward: " .. rtxt)
+                        if reward.images then
+                            for _, image_info in ipairs(reward.images) do
+                                local tex_ptr = image_loader.GetTexture(image_info.file)
+                                if tex_ptr then
+                                    local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
+                                    local w = image_info.width or 200
+                                    local h = image_info.height or 100
+                                    imgui.Image(tex_id, { w, h })
+                                    imgui.Spacing()
+                                else
+                                    imgui.TextColored({1,0,0,1}, "(Missing image: " .. tostring(image_info.file) .. ")")
+                                end
+                            end
+                        end
+                    end
+                else
+                    imgui.TextColored({0.8,0.8,0,1}, "Reward: None")
+                end
+
+                if imgui.Button("Back to Missions") then
+                    current_mission = nil
+                end
             end
         end
     end
 
     imgui.End()
-    -- Restore previous style
-    imgui.PopStyleColor()
-    is_open = is_open_ref[1]
+    imgui.PopStyleColor(5)
 
     ----------------------------------------------------------------------------
-    -- Images Drawer (Only if we want the "current step" images shown)
+    -- IMAGE DRAWER (Attaches to the right of main window)
     ----------------------------------------------------------------------------
-    if showImagesDrawer and currentTopCategory and currentSubfile and current_mission then
-        local cs = get_current_step(currentTopCategory, currentSubfile, current_mission)
-        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-        local totalSteps = (missionData and missionData.steps) and #missionData.steps or 0
+    -- If the main window was fully closed/collapsed, we do NOT draw the images.
+    if not window_open then
+        -- Force it hidden when main window is collapsed/closed:
+        showImagesDrawer = false
+        return
+    end
 
-        if cs <= totalSteps then
-            local images_for_step = get_images_for_step(currentTopCategory, currentSubfile, current_mission, cs)
-            if #images_for_step > 0 then
-                local attachX = mainX + mainW + 5
-                local attachY = mainY
+    -- If user has toggled showImagesDrawer off, skip
+    if not showImagesDrawer then
+        return
+    end
 
-                imgui.SetNextWindowPos({attachX, attachY}, ImGuiCond_Always)
-                imgui.SetNextWindowSizeConstraints({200,100}, {800,800})
+    -- We only draw images if a mission is selected:
+    if currentTopCategory and currentSubfile and current_mission then
 
-                local drawerFlags = bit.bor(
-                    ImGuiWindowFlags_NoTitleBar,
-                    ImGuiWindowFlags_NoResize,
-                    ImGuiWindowFlags_NoMove,
-                    ImGuiWindowFlags_NoCollapse,
-                    ImGuiWindowFlags_AlwaysAutoResize
-                )
+        -- Position to the right side of the main window
+        local attachX = lastMainX - lastMainW + 50
+        local attachY = lastMainY
 
-                if imgui.Begin("ImagesDrawer", nil, drawerFlags) then
-                    for _, img_data in ipairs(images_for_step) do
-                        local tex_ptr = image_loader.GetTexture(img_data.file)
-                        if tex_ptr then
-                            local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
-                            local w = img_data.width or 200
-                            local h = img_data.height or 100
+        imgui.SetNextWindowPos({attachX, attachY}, ImGuiCond_Always)
+        imgui.SetNextWindowSizeConstraints({200, 100}, {800, 600})
 
-                            local imageX, imageY = imgui.GetCursorScreenPos()
-                            imgui.Image(tex_id, { w, h })
+        -- Use flags to remove the title bar, resize, decorations, etc.
+        local drawerFlags = bit.bor(
+            ImGuiWindowFlags_NoTitleBar,
+            ImGuiWindowFlags_NoResize,
+            ImGuiWindowFlags_NoMove,
+            ImGuiWindowFlags_NoCollapse,
+            --ImGuiWindowFlags_NoScrollbar,
+            --ImGuiWindowFlags_NoScrollWithMouse,
+            ImGuiWindowFlags_NoBackground,
+            ImGuiWindowFlags_NoDecoration,     -- If your ImGui version supports it
+            ImGuiWindowFlags_AlwaysAutoResize
+        )
 
-                            if img_data.highlights then
-                                local drawList = imgui.GetWindowDrawList()
-                                for _, highlight in ipairs(img_data.highlights) do
-                                    local letter, numStr = highlight.position:match("([A-Za-z])%-(%d+)")
-                                    if letter and numStr then
-                                        local colIndex = (letter:byte() - 65) + 1
-                                        local rowIndex = tonumber(numStr)
-                                        local cellCountX = 16
-                                        local cellCountY = 16
-                                        local cellW = w / cellCountX
-                                        local cellH = h / cellCountY
+        if imgui.Begin("##ImagesDrawer", true, drawerFlags ) then
+            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            local step_imgs = get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx)
 
-                                        local offsetX = highlight.offsetX or 0
-                                        local offsetY = highlight.offsetY or 0
-                                        local centerX = imageX + (colIndex - 0.5) * cellW + offsetX
-                                        local centerY = imageY + (rowIndex - 0.5) * cellH + offsetY
+            for _, img_data in ipairs(step_imgs) do
+                local tex_ptr = image_loader.GetTexture(img_data.file)
+                if tex_ptr then
+                    local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
+                    local w = img_data.width or 200
+                    local h = img_data.height or 100
 
-                                        local boxSize   = 32
-                                        local halfBox   = boxSize * 0.5
-                                        local x1        = centerX - halfBox
-                                        local y1        = centerY - halfBox
-                                        local x2        = centerX + halfBox
-                                        local y2        = centerY + halfBox
+                    local imageX, imageY = imgui.GetCursorScreenPos()
+                    imgui.Image(tex_id, {w, h})
 
-                                        local colorFill    = 0x5500FF00  -- translucent green
-                                        local colorOutline = 0xFFFFFFFF  -- white
+                    -- If highlight boxes exist, draw them:
+                    if img_data.highlights then
+                        local drawList = imgui.GetWindowDrawList()
+                        for _, highlight in ipairs(img_data.highlights) do
+                            local letter, numStr = highlight.position:match("([A-Za-z])%-(%d+)")
+                            if letter and numStr then
+                                local colIndex = (letter:byte() - 65) + 1
+                                local rowIndex = tonumber(numStr)
+                                local cellCountX = 16
+                                local cellCountY = 16
+                                local cellW = w / cellCountX
+                                local cellH = h / cellCountY
 
-                                        drawList:AddRectFilled({x1, y1}, {x2, y2}, colorFill)
-                                        drawList:AddRect({x1, y1}, {x2, y2}, colorOutline)
-                                    end
-                                end
+                                local offsetX = highlight.offsetX or 0
+                                local offsetY = highlight.offsetY or 0
+                                local centerX = imageX + (colIndex - 0.5) * cellW + offsetX
+                                local centerY = imageY + (rowIndex - 0.5) * cellH + offsetY
+
+                                local boxSize = 32
+                                local halfBox = boxSize * 0.5
+                                local x1 = centerX - halfBox
+                                local y1 = centerY - halfBox
+                                local x2 = centerX + halfBox
+                                local y2 = centerY + halfBox
+
+                                local colorFill    = 0x5500FF00 -- translucent green
+                                local colorOutline = 0xFFFFFFFF -- white
+
+                                drawList:AddRectFilled({x1, y1}, {x2, y2}, colorFill)
+                                drawList:AddRect({x1, y1}, {x2, y2}, colorOutline)
                             end
-
-                            imgui.Spacing()
-                        else
-                            imgui.TextColored({1,0,0,1}, "(Missing image: " .. tostring(img_data.file) .. ")")
                         end
                     end
+                    imgui.Spacing()
+                else
+                    imgui.TextColored({1,0,0,1}, "(Missing image: " .. tostring(img_data.file) .. ")")
                 end
-                imgui.End()
             end
         end
+        imgui.End()
     end
 end)
 
@@ -602,7 +685,7 @@ ashita.events.register('command', 'command_callback', function(e)
         return
     end
 
-    -- Toggle the UI on/off
+    -- Toggle the main Quest Helper window
     is_open = not is_open
     e.blocked = true
 end)

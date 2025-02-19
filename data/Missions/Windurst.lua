@@ -1,76 +1,138 @@
 return {
-    ["1-1: The Zeruhn Report"] = {
+    ["1-1: The Horutoto Ruins Experiment"] = {
         steps = {
           {
-            text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+            text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n" ..
+                   "They can be found at the entrance gates to the city. \n \n",
             images = {
                 {
-                    file     = "maps/bastok_mines.png",
+                    file     = "maps/windurst_waters_1.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
                     highlights = {
-                        { position = "H-10", offsetX = 16, offsetY = 16 },
+                        { position = "F-5", offsetX = 16, offsetY = 16 },
                     },
                 },
                 {
-                    file     = "maps/bastok_markets.png",
+                    file     = "maps/port_windurst.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
                     highlights = {
-                        { position = "D-11", offsetX = 16, offsetY = 16 },
+                        { position = "B-5", offsetX = 16, offsetY = 16 },
                     },
                 },
                 {
-                    file     = "maps/port_bastok.png",
+                    file     = "maps/windurst_woods.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
                     highlights = {
-                        { position = "L-6", offsetX = 16, offsetY = 16 },
+                        { position = "K-10", offsetX = 16, offsetY = 16 },
+                    },
+                },
+                {
+                    file     = "maps/windurst_walls.png",
+                    width    = 512,
+                    height   = 512,
+                    state    = 1,
+                    highlights = {
+                        { position = "H-7", offsetX = 16, offsetY = 16 },
                     },
                 },
             },
           },
           {
-            text = "Step 2: Go to Bastok Mines (D-7) and enter Zeruhn Mines. The entrance to Zeruhn Mines is located in the southwest corner of Bastok Mines.",
+            text = "Step 2: Go to Orastery in Port Windurst (E-7) and speak to Hakkura-Rinkuru.\n \n",
             images = {
                 {
-                    file     = "maps/bastok_mines.png",
+                    file     = "maps/port_windurst.png",
                     width    = 512,
                     height   = 512,
                     state    = 2,
                     highlights = {
-                        { position = "D-7", offsetX = 16, offsetY = 16 },
+                        { position = "E-7", offsetX = 16, offsetY = 16 },
                     },
                 },
             },
           },
           {
-            text = "Step 3: Talk to Makarim at (H-11) in Zeruhn Mines to receive the Zeruhn Report. He is located all the way to the south within Zeruhn Mines. Although there are creatures here in the level 75-80 range, they are not aggressive and do not aggro by sound.",
+            text = "Step 3: Go to East Sarutabaruta (J-7) and look out for a large stone tower.\n" ..
+                   "There's a survival guide teleport if you have unlocked it for the Inner Horutoto Ruins!\n" ..
+                   "(Optional): Speak to Sama Gohjima at the entrance of the tower for extra dialogue.\n \n",
+
             images = {
                 {
-                    file     = "maps/zeruhn_mines.png",
+                    file     = "maps/east_sarutabaruta.png",
                     width    = 512,
                     height   = 512,
                     state    = 3,
                     highlights = {
-                        { position = "H-11", offsetX = 16, offsetY = 16 },
+                        { position = "J-7", offsetX = 16, offsetY = 16 },
                     },
                 },
             },
           },
           {
-            text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
+            text = "Step 4: Inside the Inner Horutoto Ruins go down the stairs towards to the main room and look for the Cracked Wall located roughly around (H-9). \n \n",
+
             images = {
                 {
-                    file     = "maps/metalworks.png",
+                    file     = "maps/inner_horutoto_ruins_1.png",
                     width    = 512,
                     height   = 512,
                     state    = 4,
                     highlights = {
-                        { position = "J-8", offsetX = 16, offsetY = 16 },
+                        { position = "H-9", offsetX = 16, offsetY = 16 },
+                    },
+                },
+            },
+          },
+          {
+            text = "Step 5: Pass through and turn left check the Magical Gizmo (I-9) \n \n",
+            images = {
+                {
+                    file     = "maps/inner_horutoto_ruins_1.png",
+                    width    = 512,
+                    height   = 512,
+                    state    = 5,
+                    highlights = {
+                        { position = "I-9", offsetX = 16, offsetY = 16 },
+                    },
+                },
+            },
+          },
+          {
+            text = "Step 6: Head back out and check the six different Ancient Magical Gizmos. \n" ..
+                   "You will recieve the KI:Cracked Mana Orb which will be at a random Gizmo.\n \n",
+            images = {
+                {
+                    file     = "maps/inner_horutoto_ruins_1.png",
+                    width    = 512,
+                    height   = 512,
+                    state    = 6,
+                    highlights = {
+                        { position = "G-8", offsetX = 16, offsetY = 16 },
+                        { position = "G-9", offsetX = 16, offsetY = 16 },
+                        { position = "H-8", offsetX = 16, offsetY = 16 },
+                        { position = "H-9", offsetX = 16, offsetY = 16 },
+                        { position = "I-8", offsetX = 16, offsetY = 16 },
+                        { position = "I-9", offsetX = 16, offsetY = 16 },
+                    },
+                },
+            },
+          },
+          {
+            text = "Step 7: Head back to Hakkuru-Rinkuru (E-7) to complete the first mission! \n \n",
+            images = {
+                {
+                    file     = "maps/port_windurst.png",
+                    width    = 512,
+                    height   = 512,
+                    state    = 7,
+                    highlights = {
+                        { position = "E-7", offsetX = 16, offsetY = 16 },
                     },
                 },
             },
@@ -93,92 +155,130 @@ return {
         }
     },
 
-    ["1-2: A Geological Survey"] = {
+    ["1-2: The Heart of the Matter"] = {
         steps = {
             {
-              text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
-              images = {
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n" ..
+                       "They can be found at the entrance gates to the city. \n \n",
+                images = {
                     {
-                        file     = "maps/bastok_mines.png",
+                        file     = "maps/windurst_waters_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
                         highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
+                        file     = "maps/port_windurst.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
                         highlights = {
-                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        file     = "maps/port_bastok.png",
+                        file     = "maps/windurst_woods.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
                         highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
+                text = "Step 2: Go to Windurst Woods and talk to Apururu (H-9) - (Home Point #3).\n" ..
+                       "She will give you 6 Dark Mana Orbs, with a destination of Outer Hurototo Ruins. \n \n",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/windurst_woods.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 3: Proceed to South Gustaberg (D-9) and enter Dangruf Wadi.",
+                text = "Step 3: Proceed to East Sarutabaruta and talk to Pore-Ohre (J-11).\n" ..
+                       "He will give you a KI:Southeastern Star Charm.\n" ..
+                       "Head down the tower and zone into the Outer Horutoto Ruins.\n \n",
                 images = {
                     {
-                        file     = "maps/south_gustaberg.png",
+                        file     = "maps/east_sarutabaruta.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "D-9", offsetX = 16, offsetY = 16 },
+                            { position = "J-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: In Dangruf Wadi, go to the geyser at (I-8) and stand on it to be propelled to the ledge, changing the Blue Acidity Tester to Red Acidity Tester. Check your Key Items to make sure it has changed!",
+                text = "Step 4: In Outer Horutoto Ruins run South, and then West \n"..
+                       "You will have to click the 6 Gizmos at each corner of the sqaure\n" ..
+                       "And there's 2 Gizmos in the North and South secret rooms. \n \n",
                 images = {
                     {
-                        file     = "maps/dangruf_wadi.png",
+                        file     = "maps/outer_horutoto_ruins_3.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
                     },
                 },
             },
             {
-                text = "Step 5: Return to Cid in the Metalworks(H-8) to complete the mission.",
+                text = "Step 5: Once all the orbs have been placed, head to the crack on the east outer wall!\n" ..
+                       "Examine the 'Gate: Magical Gizmo'\n" ..
+                       "Your orbs should now be energised with MAGIC! \n \n",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/outer_horutoto_ruins_3.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
+                    },
+                },
+            },
+            {
+                text = "Step 6: Recollect all the Orbs now.\n" ..
+                       "Should now be KI:GLOWING Mana Orbs'\n" ..
+                       "If you zone out you will get an extra cutscene with the Cardinals. \n \n",
+                images = {
+                    {
+                        file     = "maps/outer_horutoto_ruins_3.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                    },
+                },
+            },
+            {
+                text = "Step 7: Speak to Apururu (H-9) in Windurst Woods(Home Point#3) inside the Manustery.\n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -187,211 +287,638 @@ return {
         reward = "Rank Points"
     },
 
-    ["1-3: Fetichism"] = {
+    ["1-3: The Price of Peace"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
-                images = {
-                      {
-                          file     = "maps/bastok_mines.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "H-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                          file     = "maps/bastok_markets.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "D-11", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                          file     = "maps/port_bastok.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "L-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
-            },
-            {
-                text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made]",
-                images = {
-                      {
-                          file     = "maps/north_gustaberg.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          highlights = {
-                              { position = "K-3", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
-            },
-            {
-                text = "Step 3: Return to the Bastok Gate Guard and trade the Head, Torso, Arms, and Legs fetiches to complete the mission!",
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n" ..
+                       "They can be found at the entrance gates to the city. \n \n",
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "D-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                  },
-            },
-        },
-        reward = "Rank 2, 1000g"
-    },
-
-    ["2-1: The Crystal Line"] = {
-        steps = {
-            "Step 1: Receive the mission from any of the Bastokan Gate Guards.",
-            {
-                text = "Step 2: Talk to Savae E Paleade at (K-7) in Port Bastok.",
-                images = {
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to North Gustaberg and locate the hut at (L-8).",
-                images = {
-                    {
-                        file     = "maps/north_gustaberg.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Savae E Paleade to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["2-2: Wading Beasts"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Nbu Latteh at (J-9) in Bastok Markets.",
-                images = {
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 3: Travel to Dangruf Wadi and obtain three Dhalmel Saliva from Dhalmel.",
-            {
-                text = "Step 4: Return to Nbu Latteh to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["2-3: The Emissary"] = {
-        steps = {
-            {
-                text = "Step 1: Receive the mission from Naji at (J-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/windurst_waters_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_windurst.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            "Step 2: Choose to go to either San d'Oria or Windurst first.",
-            "Step 3: Deliver the letter to the respective consulate in the chosen nation.",
-            "Step 4: Complete the assigned task from the consulate.",
-            "Step 5: Repeat steps 3 and 4 for the other nation.",
             {
-                text = "Step 6: Return to Naji in the Metalworks to complete the mission.",
+                text = "Step 2: Go to Windurst Waters(South) - (Home Point#3), and talk to Leepe-Hoppe (J-9) on the roof of the Rhinostery. \n" ..
+                       "He will give you the KI:Food/Drink Offering. \n" ..
+                       "Optional: Talk with Ohbiru-Dohbiru. \n \n",
+                images = {
+                      {
+                          file     = "maps/windurst_waters_2.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 2,
+                          highlights = {
+                              { position = "J-9", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 3: Travel through West Sarutabaruta (F-7) and Enter Giddeus. \n" ..
+                       "Notes: Nearby Outpost (H-6). \n \n",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/west_sarutabaruta.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                  },
+            },
+            {
+                text = "Step 4: Whilst in Giddeus follow the path and at ALL intersections take the left hand choice until (H-7). \n" ..
+                       "Talk to the Yagudo NPC Laa Mozi to give the KI:Food Offering. \n \n",
+                images = {
+                    {
+                        file     = "maps/giddeus_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                  },
+            },
+            {
+                text = "Step 5: Turn back and continue to take the left hand choice until (G-7). \n" ..
+                       "Talk to the other Yagudo NPC Ghoo Pakya to give the KI:Drink Offering. \n \n",
+                images = {
+                    {
+                        file     = "maps/giddeus_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                  },
+            },
+            {
+                text = "Step 6: Return to Windurst Waters and talk to Leepe-Hoppe (J-9). \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_2.png",
                         width    = 512,
                         height   = 512,
                         state    = 6,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                  },
+            },
+            {
+                text = "Step 7: Complete the mission by talking to any Windurstian Gate Guard.\n" ..
+                       "They can be found at the entrance gates to the city. \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_windurst.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
         },
-        reward = "Rank 3, Adventurer's Certificate, 3000g, access to Chateau d'Oraguille"
+        reward = "Rank 2, 1000g!"
     },
 
+    ["2-1: Lost for Words"] = {
+        steps = {
+            {
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n" ..
+                       "They can be found at the entrance gates to the city. \n" ..
+                       "Trade 1 of any crystal to unlock this mission, or trade 7 for a full progress bar. \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_windurst.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Go to Windurst Waters(North) - (Home Point#1), and talk to Tosuka-Porika (G-8) in the Optistery. \n" ..
+                       "He is in the East Wing of the Optistery. \n" ..
+                       "Notes: May have to talk to him twice to progress in this Mission! \n \n",
+                images = {
+                      {
+                          file     = "maps/windurst_waters_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 2,
+                          highlights = {
+                              { position = "G-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 3: Travel to Windurst Woods and talk to Nanaa Mihgo (J-3). \n" ..
+                       "Notes: You will obtain a KI:Lapis Monocle. \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "J-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: Travel to Maze of Shakhrami. \n \n" ..
+                       "Travel: \n" ..
+                       "East Sarutabaruta (J-4) -> Tahrongi Canyon \n" ..
+                       "Tahrongi Canyon   (K-5) -> Maze of Shakhrami \n \n",
+                images = {
+                    {
+                        file     = "maps/east_sarutabaruta.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "J-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/tahrongi_canyon.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "K-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 5: Inside go to (G-6) and go through tunnel marked 'D' on map. \n" ..
+                       "Continue down and you will be on a new map... \n" ..
+                       "Go to (H-5) and examine a 'Fossil Rock' obtain KI:Lapis Coral. - and if unlucky continue onto - (I-7)/(I-8)/(F-8) throughout the zone. \n \n" ..
+                       "Notes: If you are below level 35 it is reccomended to bring Sneak and Invisible for Goblins! \n" ..
+                       "This can get tedious - if you have been unlucky you will have to look through both maps for 'Fossil Rocks' which exist in nearly every room! \n" ..
+                       "Warp out once you have attained the KI:Lapis Coral. \n \n",
+                images = {
+                    {
+                        file     = "maps/maze_of_shakhrami_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/maze_of_shakhrami_2.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 6: Return back to Windurst Woods and speak to Nanaa Mihgo (J-3). \n" ..
+                       "Notes: You will obtain the KI:Hideout Key ! \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "J-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 7: Travel to Horutoto Ruins. \n" ..
+                       "Travel: \n" ..
+                       "East Sarutabaruta (J-7) -> Lily Tower. \n \n",
+                images = {
+                    {
+                        file     = "maps/east_sarutabaruta.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 8: Once inside, go to (G-9) the section noted as 'B' on the map. \n" ..
+                       "You will end up in Bettle's Burrow Map, and should continue on to the Mohogany Door (G-8) \n" ..
+                       "Click on the door for a cutscene. \n \n",
+                images = {
+                    {
+                        file     = "maps/inner_horutoto_ruins_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/inner_horutoto_ruins_2.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 9: Warp and go back to Windurst Walls (G-3) finding the 'House of the Hero'. \n" ..
+                       "Click on the door for a cutscene. \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 9,
+                        highlights = {
+                            { position = "G-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 10: Zone into Windurst Waters(North) - (Home Point#1). \n" ..
+                       "Speak with Tosuka-Porika (G-8) at the Optistery to complete the quest! \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 10,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+    },
+
+    ["2-2: Testing Time"] = {
+        steps = {
+            {
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n \n" ..
+                       "Note: This mission is skippable! \n" ..
+                       "Mission available only after trading crystals to the guards with initials in their names 'W.W' for example. \n \n",
+                       images = {
+                        {
+                            file     = "maps/windurst_waters_1.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "F-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/port_windurst.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "B-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_woods.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "K-10", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_walls.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "H-7", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                    },
+            },
+            {
+                text = "Step 2: Talk to Moreno-Toeno (L-6) inside the Aurastery at Windurst Waters (North). \n" ..
+                       "He will give you a KI:Creature Counter magic doll! \n \n" ..
+                       "Notes: You MAY have to speak to him twice to activate the cutscene needed for this mission!! \n \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 3: Travel to Tahrongi Canyon. \n" ..
+                       "Notes: Before setting off grab a Warp Scroll and make sure your Home Point is in Windurst. \n \n",
+                images = {
+                    {
+                        file     = "maps/east_sarutabaruta.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "J-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: Once in Tahrongi Canyon start killing monsters - you need ATLEAST 30 Kills!! \n \n" ..
+                       "Notes: You have 1hour to achieve this and return to Moreno-Toeno. \n " ..
+                       "Pet kills do NOT count \n" ..
+                       "Trust kills DO count \n" ..
+                       "Players in party DO count also towards the 30 total! \n \n",
+                images = {
+                    {
+                        file     = "maps/tahrongi_canyon.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                    },
+                },
+            },
+            {
+                text = "Step 5: Return back to Moreno-Toeno (L-6) inside the Aurastery at Windurst Waters (North). \n",
+                images = {
+                    {
+                        file     = "maps/windurst_waters_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+    },
+    ["2-3: The Three Kingdoms - Introduction"] = {
+        steps = {
+            {
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard.\n \n" ..
+                       "Mission available only after trading crystals to the guards with initials in their names 'W.W' for example. \n \n" ..
+                       "Notes: This contains multiple paths San d'Oria <-> Bastok the guide will split up so choose which Nation you go to first. \n \n",
+                       images = {
+                        {
+                            file     = "maps/windurst_waters_1.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "F-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/port_windurst.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "B-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_woods.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "K-10", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_walls.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "H-7", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                    },
+            },
+            {
+                text = "Step 2: The guard will inform you to go to Heavens Tower by Windurst Walls (H-6)/(H-7).",
+                images = {
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 3: Once inside Heavens Tower(no map) look for the Door:Clerical Chamber and talk to Kupipi behind the desk.\n \n" ..
+                       "Notes: She will hand you a KI:Letter to the Consuls. \n " ..
+                       "Depending on the nation you pick, choose the appropriate guide!! \n \n",
+            },
+        },
+        --reward = "Rank 3, Adventurer's Certificate, 3000g, access to Chateau d'Oraguille"
+    },
+    ["2-3: The Three Kingdoms - San d'Oria -> Bastok"] = {
+        steps = {
+            {
+                text = "Step 1: Travel to San d'Oria.\n \n" ..
+                       "Mission available only after trading crystals to the guards with initials in their names 'W.W' for example. \n \n" ..
+                       "Notes: This contains multiple paths San d'Oria <-> Bastok the guide will split up so choose which Nation you go to first. \n \n",
+                       images = {
+                        {
+                            file     = "maps/windurst_waters_1.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "F-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/port_windurst.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "B-5", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_woods.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "K-10", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                        {
+                            file     = "maps/windurst_walls.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 1,
+                            highlights = {
+                                { position = "H-7", offsetX = 16, offsetY = 16 },
+                            },
+                        },
+                    },
+            },
+            {
+                text = "Step 2: The guard will inform you to go to Heavens Tower by Windurst Walls (H-6)/(H-7).",
+                images = {
+                    {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 3: Once inside Heavens Tower(no map) look for the Door:Clerical Chamber and talk to Kupipi behind the desk.\n \n" ..
+                       "Notes: She will hand you a KI:Letter to the Consuls. \n " ..
+                       "Depending on the nation you pick, choose the appropriate guide!! \n \n",
+            },
+        },
+        --reward = "Rank 3, Adventurer's Certificate, 3000g, access to Chateau d'Oraguille"
+    },
     ["3-1: The Four Musketeers"] = {
         steps = {
             "Step 1: Receive the mission from any Bastok Gate Guard.",

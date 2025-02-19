@@ -23,51 +23,10 @@ QuestHelper is an Ashita addon designed to help players track quests, missions, 
 
 ---
 
-## JSON Format for Quests
+## LUA Format for Quests
 
-The JSON files in the `data/` directory define quests, missions, steps, and associated images. Below is the structure:
+The LUA files in the `data/` directory define quests, missions, steps, and associated images. Below is the structure:
 
 ### General Format
 
-```json
-{
-    "Category Name": {
-        "steps": [
-            {
-                "text": "Step 1: Your step description here.",
-                "images": [
-                    {
-                        "file": "MapExample.png",
-                        "width": 512,
-                        "height": 512,
-                        "highlights": [
-                            { "position": "H-7", "offsetX": 16, "offsetY": 16 },
-                            { "position": "O-10", "offsetX": 16, "offsetY": 16 }
-                        ]
-                    },
-                    {
-                        "file": "AnotherMap.png",
-                        "width": 512,
-                        "height": 512,
-                        "highlights": [
-                            { "position": "A-2", "offsetX": 16, "offsetY": 16 }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Step 2: Another step description.",
-                "images": [
-                    {
-                        "file": "ThirdMap.png",
-                        "width": 512,
-                        "height": 512,
-                        "highlights": [
-                            { "position": "G-5", "offsetX": 16, "offsetY": 16 }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-}
+Will create a player LUA format to add your own guides.
