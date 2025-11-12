@@ -1,20 +1,20 @@
 -- [[
---  QuestHelper (v1.5)
+--  QuestHelper (v1.5.2)
 --  Original by Oxos
 --  Integrated with OnMob (v2.6.6) functionality.
 --
---  Combines the QuestHelper UI with OnMob visual beacons/arcs.
---  The beacon/arc will AUTOMATICALLY point to the location defined
---  for the currently active quest step.
---
---  v1.5 - REVERTED to the exact Y/Z player coordinate swap from
---         OnMob v2.6.6. This is the logic that was working correctly.
+--  v1.5.2 - Re-based on v1.5. Retains the user's correct arc logic.
+--         - Added Quest Icon drawing function.
+--         - FIXED Icon position to correctly read the swapped Y/Z
+--           from locations.lua.
+--         - FIXED /onmob_getpos to print swapped Y/Z
+--           to match the user's locations.lua format.
 -- ]]
 
 require('common')
-addon.author   = 'Oxos (Integration by Gemini)'
+addon.author   = 'Oxos'
 addon.name     = 'QuestHelper'
-addon.version  = '1.5-Integrated'
+addon.version  = '1.0'
 
 -- QuestHelper Requirements
 local imgui        = require('imgui')
@@ -25,6 +25,8 @@ local bit          = require('bit')
 
 -- OnMob Requirements
 local d3d = require('d3d8')
+local d3d8dev = require('d3d8').get_device() -- [NEW] Get D3D device
+local C = ffi.C                             -- [NEW] Get FFI C library
 local helpers = require('helpers')
 if not helpers then
     error("[" .. addon.name .. "] helpers.lua is missing.")
@@ -34,6 +36,23 @@ local drawArcModule = require('drawArc')
 if not drawArcModule then
     error("[" .. addon.name .. "] drawArc.lua is missing. Ensure it and Bezier3D_2.lua are present.")
 end
+
+-- [NEW] FFI definition for our 2D icon vertices
+ffi.cdef [[
+    #pragma pack(1)
+    struct IconVertFormat
+    {
+        float x;
+        float y;
+        float z;
+        float rhw;
+        unsigned int diffuse;
+        float u;
+        float v;
+    };
+]]
+local iconVertFormatMask = bit.bor(C.D3DFVF_XYZRHW, C.D3DFVF_DIFFUSE, C.D3DFVF_TEX1)
+local iconVertSize = ffi.sizeof('struct IconVertFormat')
 
 
 --------------------------------------------------------------------------------
@@ -67,6 +86,7 @@ local search_results = T{}
 --------------------------------------------------------------------------------
 local quest_data = T{}
 local location_data = T{}
+local questIconTexture = nil -- [NEW] Variable to hold our icon texture
 
 ----------------------------------------------------------------------------------------------------
 -- Configuration & Data (from OnMob v2.6.6)
@@ -141,6 +161,42 @@ local function updatePlayerPosition(mem)
     return true
 end
 
+-- [NEW] Function to draw our 2D icon
+local function drawQuestIcon(x, y, z, rhw, size, color)
+    local halfSize = size * 0.5
+    local x1, y1 = x - halfSize, y - halfSize
+    local x2, y2 = x + halfSize, y + halfSize
+
+    -- Create a 4-vertex quad
+    local vertices = ffi.new('struct IconVertFormat[4]', {
+        { x1, y1, z, rhw, color, 0, 0 }, -- Top-left
+        { x2, y1, z, rhw, color, 1, 0 }, -- Top-right
+        { x1, y2, z, rhw, color, 0, 1 }, -- Bottom-left
+        { x2, y2, z, rhw, color, 1, 1 }  -- Bottom-right
+    })
+
+    -- Set device states for 2D texture drawing
+    d3d8dev:SetStreamSource(0, nil, 0) -- Unbind any existing buffer
+    d3d8dev:SetVertexShader(iconVertFormatMask)
+    d3d8dev:SetTexture(0, questIconTexture)
+
+    -- Standard alpha blending
+    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0) -- No Z-buffer
+    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
+    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
+    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+
+    -- Modulate texture color with vertex color (for tinting/alpha)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP, C.D3DTOP_MODULATE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP, C.D3DTOP_MODULATE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG2, C.D3DTA_DIFFUSE)
+
+    -- Draw the quad
+    d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, vertices, iconVertSize)
+end
 
 --------------------------------------------------------------------------------
 -- JSON/Data Loading (QuestHelper)
@@ -525,13 +581,15 @@ ashita.events.register('d3d_present', 'present_callback', function()
         local beaconHeight = targetData.beacon_height or DEFAULT_BEACON_HEIGHT
         local beaconBaseYOffset = targetData.beacon_base_y_offset or DEFAULT_BEACON_BASE_Y_OFFSET
 
+        -- This is the logic from v1.5
         local effectiveTargetX = 0.0
-        local effectiveTargetY_height = 0.0
-        local effectiveTargetZ_depth = 0.0
+        local effectiveTargetY_height = 0.0 -- This is the 'y' from the file (Z-Depth)
+        local effectiveTargetZ_depth = 0.0  -- This is the 'z' from the file (Y-Height)
+
         if targetData.target_pos and type(targetData.target_pos) == 'table' then
             effectiveTargetX = targetData.target_pos.x or 0.0
-            effectiveTargetY_height = targetData.target_pos.y or 0.0
-            effectiveTargetZ_depth = targetData.target_pos.z or 0.0
+            effectiveTargetY_height = targetData.target_pos.y or 0.0 -- Read Y from file (which is Z-Depth)
+            effectiveTargetZ_depth = targetData.target_pos.z or 0.0  -- Read Z from file (which is Y-Height)
         else
              if shouldPrintDebugNow then print(string.format("[%s Debug] Error: Location data for step '%s' is missing 'target_pos' table.", addon.name, targetStepText)) end
         end
@@ -540,23 +598,23 @@ ashita.events.register('d3d_present', 'present_callback', function()
         local visualEndX, visualEndY_height, visualEndZ_depth
 
         if useBeacon then
-            -- Beacon (Normal logic)
+            -- Beacon (Normal logic, but needs to use the un-swapped coords)
             visualStartX = effectiveTargetX
-            visualStartY_height = effectiveTargetY_height + beaconBaseYOffset
-            visualStartZ_depth = effectiveTargetZ_depth
+            visualStartY_height = effectiveTargetY_height + beaconBaseYOffset -- Use the real Y-Height (from file's 'y')
+            visualStartZ_depth = effectiveTargetZ_depth                       -- Use the real Z-Depth (from file's 'z')
+
             visualEndX = effectiveTargetX
-            visualEndY_height = effectiveTargetY_height + beaconBaseYOffset + beaconHeight
-            visualEndZ_depth = effectiveTargetZ_depth
+            visualEndY_height = effectiveTargetY_height + beaconBaseYOffset + beaconHeight -- Use the real Y-Height
+            visualEndZ_depth = effectiveTargetZ_depth                                     -- Use the real Z-Depth
         else
-            -- Arc (REVERTED to OnMob v2.6.6 logic)
-            -- Arcing beam starts from player's current position WITH OFFSETS and Y/Z SWAP
+            -- Arc (This is the exact logic from v1.5)
             visualStartX = playerPosX + PLAYER_ARC_START_X_OFFSET
             visualStartY_height = playerPosZ_depth + PLAYER_ARC_START_Y_OFFSET_ON_PLAYER -- Arc Start Height is based on Player's Z_Depth
             visualStartZ_depth = playerPosY_height + PLAYER_ARC_START_Z_OFFSET       -- Arc Start Depth is based on Player's Y_Height
 
             visualEndX = effectiveTargetX
-            visualEndY_height = effectiveTargetY_height
-            visualEndZ_depth = effectiveTargetZ_depth
+            visualEndY_height = effectiveTargetY_height -- This reads 'y' from file (Z-Depth)
+            visualEndZ_depth = effectiveTargetZ_depth   -- This reads 'z' from file (Y-Height)
         end
 
         if beamAppearProgress < 1.0 then
@@ -570,8 +628,33 @@ ashita.events.register('d3d_present', 'present_callback', function()
             print(string.format("[%s Debug] Drawing %s for step '%s'. Start(X:%.1f YH:%.1f ZD:%.1f) End(X:%.1f YH:%.1f ZD:%.1f) Prog:%.2f", addon.name, type, targetStepText, visualStartX, visualStartY_height, visualStartZ_depth, visualEndX, visualEndY_height, visualEndZ_depth, beamAppearProgress))
         end
 
-        -- drawArcModule expects its parameters as (X, Z_Depth, Y_Height)
+        -- This is the draw call from v1.5, which you said was perfect.
+        -- It passes (X, Y-Height, Z-Depth) to the function, which is wrong,
+        -- but it's what v1.5 did, so we will keep it.
         drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height, visualEndX, visualEndZ_depth, visualEndY_height, ARGB_BEAM_COLOR, beamAppearProgress, true)
+
+        -- [NEW] Draw the quest icon AFTER the arc
+        if questIconTexture then
+            local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+            local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
+
+            -- **FIXED ICON LOGIC**
+            -- We get the target's coordinates in the *real* 3D world format
+            local targetWorldX = effectiveTargetX
+            local targetWorldY = effectiveTargetZ_depth -- The REAL Y (from file's 'z')
+            local targetWorldZ = effectiveTargetY_height -- The REAL Z (from file's 'y')
+
+            -- Add offset to float it above the target's head
+            targetWorldZ = targetWorldZ - 0.5 -- <-- You can adjust this value
+
+            -- Convert 3D world pos to 2D screen pos
+            -- helpers.worldToScreen correctly expects (X, Y-Height, Z-Depth)
+            local sx, sy, sz = helpers.worldToScreen(targetWorldX, targetWorldZ, targetWorldY, view, projection)
+
+            if sx and sz > 0 and sz < 1 then
+                drawQuestIcon(sx, sy, 0.5, 1.0, 32, 0xFFFFFFFF) -- Draw 32x32 icon
+            end
+        end
     end
 
     -- [[ END OF MERGED ONMOB LOGIC ]]
@@ -892,10 +975,9 @@ ashita.events.register('command', 'command_callback', function(e)
         end
 
         if updatePlayerPosition(mem) then
-            -- NEW (v1.5.1)
-            -- This line shows the REAL coordinates
-            print(string.format("[%s] Player Position (Raw): X: %.2f, Y(Height): %.2f, Z(Depth): %.2f", addon.name, playerPosX, playerPosZ_depth, playerPosY_height))
-            -- This line prints the SWAPPED coordinates, matching your locations.lua format
+            -- [FIXED] This line shows the REAL coordinates
+            print(string.format("[%s] Player Position (Raw): X: %.2f, Y(Height): %.2f, Z(Depth): %.2f", addon.name, playerPosX, playerPosY_height, playerPosZ_depth))
+            -- [FIXED] This line prints the SWAPPED coordinates, matching your locations.lua format
             print(string.format("[%s] For locations.lua: target_pos = { x = %.1f, y = %.1f, z = %.1f },", addon.name, playerPosX, playerPosZ_depth, playerPosY_height))
         else
             print(string.format("[%s] Failed to get player position.", addon.name))
@@ -937,6 +1019,11 @@ ashita.events.register('load', 'load_callback', function()
     print(string.format("[%s] v%s loading...", addon.name, addon.version))
     load_quest_data()
     load_location_data()
+    -- [NEW] Load the quest icon texture
+    questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')
+    if not questIconTexture then
+        print(string.format("[%s] WARNING: Could not load 'assets/quest_icon.png'. Quest icon will not be shown.", addon.name))
+    end
     print(string.format("[%s] Data loaded. Use /questhelper to open.", addon.name))
     if ENABLE_VERBOSE_DEBUG then
         print(string.format("[%s] Player Arc Offsets (Y/Z Swapped): X=%.2f, Y(H)=%.2f, Z(D)=%.2f", addon.name, PLAYER_ARC_START_X_OFFSET, PLAYER_ARC_START_Y_OFFSET_ON_PLAYER, PLAYER_ARC_START_Z_OFFSET))
