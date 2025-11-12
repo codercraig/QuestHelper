@@ -63,6 +63,7 @@ return {
           },
           {
             text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
+            onmob_target = "Naji",
             images = {
                 {
                     file     = "maps/metalworks.png",

@@ -12,9 +12,7 @@ return {
                        "===== Battle Strategy =====\n" ..
                        "- Leaping Lizzy can be easily soloed around level 15-18.\n" ..
                        "- Suggested jobs: THF/RNG/BST/WAR; any with ranged or movement speed bonuses for quick tagging on populated servers.\n \n" ..
-                       "- Useful information: BSTs can use the ability 'Charm' and utilize Wide Scan.\n \n" ..
-                       "===== Drops =====\n" ..
-                       "- Bounding Boots (6.7 percent)",
+                       "- Useful information: BSTs can use the ability 'Charm' and utilize Wide Scan.\n \n",
                 images = {
                     {
                         file = "maps/south_gustaberg.png",
@@ -33,13 +31,28 @@ return {
             },
         },
         reward = {
-            images = {
+            text = "Notable Drops:", -- lowercase 'text'
+            items = {
                 {
-                    file = "equipment/bounding_boots.png",
-                    width = 455,
-                    height = 107,
-                },
-            },
+                    name = "Bounding Boots",
+                    type = "FEET",
+                    races = "All Races",
+                    stats = { "DEF:+3", "DEX:+3", "AGI:+3" },
+                    level = "7",
+                    jobs = "WAR/RDM/THF/PLD/DRK/BST/BRD/RNG/SAM/NIN/DRG/BLU/COR/DNC",
+                    note = "Drop Rate: ~6.7%"
+                }
+                --,
+                -- {
+                --     name = "Lizard Hide",
+                --     type = "MATERIAL",
+                --     --races = "", -- Can be empty string if not applicable
+                --     --stats = {}, -- Can be empty table
+                --     --level = 0,  -- Or some other indicator for N/A if you prefer
+                --     --jobs = "All Jobs",
+                --     note = "Common drop"
+                -- }
+            }
         }
     },
     ["Bubbly Bernie"] = {
@@ -129,14 +142,36 @@ return {
             },
         },
         reward = {
-            text = "Steam Clock",
-            images = {
+            items = {
                 {
-                    file = "items/steam_clock.png",
-                    width = 455,
-                    height = 67,
-                },
-            },
+                    name = "Steam Clock",
+                    type = "ITEM",
+                    --races = "All Races",
+                    --stats = { "DEF:+3", "DEX:+3", "AGI:+3" },
+                    --level = "7",
+                    --jobs = "WAR/RDM/THF/PLD/DRK/BST/BRD/RNG/SAM/NIN/DRG/BLU/COR/DNC",
+                    note = "Drop Rate: ~100%"
+                }
+                --,
+                -- {
+                --     name = "Lizard Hide",
+                --     type = "MATERIAL",
+                --     --races = "", -- Can be empty string if not applicable
+                --     --stats = {}, -- Can be empty table
+                --     --level = 0,  -- Or some other indicator for N/A if you prefer
+                --     --jobs = "All Jobs",
+                --     note = "Common drop"
+                -- }
+            }
+            -- text = "Steam Clock",
+            -- images = {
+            --     {
+            --         file = "items/steam_clock.png",
+            --         width = 455,
+            --         height = 67,
+            --     },
+            -- },
+
         }
     },
     ["Carnero"] = {
