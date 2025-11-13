@@ -86,6 +86,7 @@ local search_results = T{}
 --------------------------------------------------------------------------------
 local quest_data = T{}
 local location_data = T{}
+local zone_data = T{}
 local questIconTexture = nil -- [NEW] Variable to hold our icon texture
 
 ----------------------------------------------------------------------------------------------------
@@ -114,6 +115,7 @@ local ARGB_BEAM_COLOR
 
 -- Player position (updated each frame)
 local playerPosX, playerPosY_height, playerPosZ_depth = 0,0,0
+local playerZoneId = 0
 
 -- Runtime state for tracking the *current* NPC trigger
 local currentQuestTriggerNPC = nil
@@ -138,6 +140,7 @@ local function updatePlayerPosition(mem)
     local party = mem:GetParty()
     local entityMgr = mem:GetEntity()
     if not party or not entityMgr then return false end
+    playerZoneId = party:GetMemberZone(0)
     local playerIndex = party:GetMemberTargetIndex(0)
     local pActorPointer = 0
     if playerIndex == 0xFFFF or playerIndex == nil then
@@ -205,6 +208,22 @@ local function decode_json(json_str)
     else
         print('Failed to parse data file:', result)
         return nil
+    end
+end
+
+local function load_zone_data()
+    local filepath = string.format('%saddons/%s/data/zones.lua', AshitaCore:GetInstallPath(), addon.name)
+    local chunk, err = loadfile(filepath)
+    if chunk then
+        local ok, result = pcall(chunk)
+        if ok and type(result) == 'table' then
+            zone_data = T(result)
+            print(string.format("[%s] Loaded %d zones from data/zones.lua.", addon.name, table.count(zone_data)))
+        else
+            print(string.format('Error running file: %s -> %s', filepath, err or "unknown"))
+        end
+    else
+        print(string.format('Warning: Could not load data/zones.lua. Zone checks will not work. Error: %s', err or "file not found"))
     end
 end
 
@@ -533,6 +552,13 @@ ashita.events.register('d3d_present', 'present_callback', function()
     for _, targetData in ipairs(targetsToDraw) do
         local drawActive = false
         if targetData then
+            -- Zone Check
+            if targetData.zone and zone_data[targetData.zone] then
+                if playerZoneId ~= zone_data[targetData.zone] then
+                    goto continue_loop
+                end
+            end
+
             local npcNameToActuallyFindInGame = targetData.trigger_npc
 
             if not npcNameToActuallyFindInGame or npcNameToActuallyFindInGame == "" then
@@ -610,6 +636,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 end
             end
         end
+        ::continue_loop::
     end
 
     -- [[ END OF MERGED ONMOB LOGIC ]]
@@ -904,6 +931,18 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_zone_id' then
+        local mem = AshitaCore:GetMemoryManager()
+        if mem and mem:GetParty() then
+            local zone_id = mem:GetParty():GetMemberZone(0)
+            print(string.format("[%s] Current Zone ID: %d", addon.name, zone_id))
+        else
+            print(string.format("[%s] Could not retrieve zone ID.", addon.name))
+        end
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'onmob_target' or command_base == 'onmob_list' then
         print(string.format("[%s] Info: This command is disabled. Beams are now automatic based on your active quest step and data/locations.lua.", addon.name))
         e.blocked = true
@@ -961,6 +1000,7 @@ ashita.events.register('load', 'load_callback', function()
     print(string.format("[%s] v%s loading...", addon.name, addon.version))
     load_quest_data()
     load_location_data()
+    load_zone_data()
     -- [NEW] Load the quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')
     if not questIconTexture then

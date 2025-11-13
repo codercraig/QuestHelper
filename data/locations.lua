@@ -12,16 +12,25 @@ return {
         target_pos = { x = -8.5, y = -3.0, z = -123.6 },
         trigger_npc = "Rashid",
         visual_mode = "arc",
+        zone = "Bastok Mines",
     },
     ["Cleades"] = {
         target_pos = { x = -362.0, y = -12.0, z = -169.0 },
         trigger_npc = "Cleades",
         visual_mode = "arc",
+        zone = "Bastok Markets",
     },
     ["Argus"] = {
         target_pos = { x = 132.0, y = 6.5, z = -2.1 },
         trigger_npc = "Argus",
         visual_mode = "arc",
+        zone = "Port Bastok",
+    },
+    ["Cid"] = {
+        target_pos = { x = -12.6, y = -13.0, z = 2.5 },
+        trigger_npc = "Cid",
+        visual_mode = "arc",
+        zone = "Metalworks",
     },
     ["Conrad"] = {
         target_pos = { x = 132.0, y = 6.5, z = -2.1 },

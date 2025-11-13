@@ -121,6 +121,8 @@ return {
             },
             {
                 text = "Step 2: Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
+                onmob_target = {"Cid"},
+                trigger_on_talk = {"Cid"},
                 images = {
                     {
                         file     = "maps/metalworks.png",
