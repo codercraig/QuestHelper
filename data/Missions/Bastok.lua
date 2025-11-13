@@ -64,6 +64,7 @@ return {
           {
             text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
             onmob_target = "Naji",
+            trigger_on_talk = "Naji",
             images = {
                 {
                     file     = "maps/metalworks.png",
@@ -79,18 +80,6 @@ return {
         },
         reward = {
             text = "Rank Points!",
-            -- images = {
-            --     {
-            --         file   = "equipment/rajasring.png",
-            --         width  = 300,
-            --         height = 100,
-            --     },
-            --     {
-            --         file   = "equipment/rajasring.png",
-            --         width  = 300,
-            --         height = 100,
-            --     },
-            -- },
         }
     },
 
@@ -98,6 +87,8 @@ return {
         steps = {
             {
               text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+              onmob_target = {"Rashid", "Cleades", "Argus"},
+              trigger_on_talk = {"Rashid", "Cleades", "Argus"},
               images = {
                     {
                         file     = "maps/bastok_mines.png",
@@ -129,7 +120,7 @@ return {
                 },
             },
             {
-                text = "Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
+                text = "Step 2: Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -185,7 +176,9 @@ return {
                 },
             },
         },
-        reward = "Rank Points"
+        reward = {
+            text = "Rank Points"
+        }
     },
 
     ["1-3: Fetichism"] = {
@@ -269,7 +262,9 @@ return {
                   },
             },
         },
-        reward = "Rank 2, 1000g"
+        reward = {
+            text = "Rank 2, 1000g"
+        }
     },
 
     ["2-1: The Crystal Line"] = {
@@ -397,7 +392,9 @@ return {
                 },
             },
         },
-        reward = "Rank Points!"
+        reward = {
+            text = "Rank Points!"
+        }
     },
     ["2-2: Wading Beasts"] = {
         steps = {
@@ -497,6 +494,9 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["2-3: The Emissary - Introduction"] = {
@@ -552,7 +552,9 @@ return {
                   },
             },
         },
-        reward = "Nothing. . ."
+        reward = {
+            text = "Nothing. . ."
+        }
     },
     ["2-3: The Emissary - San d'Oria -> Windurst"] = {
         steps = {
@@ -815,12 +817,14 @@ return {
                   },
             },
         },
-        reward = "Trust: Halver, 5000g, and RANK3!"
+        reward = {
+            text = "Trust: Halver, 5000g, and RANK3!"
+        }
     },
 
     ["3-1: The Four Musketeers"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
                 images = {
@@ -864,11 +868,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["3-2: To the Forsaken Mines"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
@@ -912,11 +919,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["3-3: Jeuno"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Travel to Jeuno and speak with Savae E Paleade at (G-8) in Lower Jeuno.",
                 images = {
@@ -931,15 +941,17 @@ return {
                     },
                 },
             },
-            "Step 3: Complete the assigned task from Savae E Paleade.",
-            "Step 4: Return to the Bastok Gate Guard to complete the mission.",
+            { text = "Step 3: Complete the assigned task from Savae E Paleade." },
+            { text = "Step 4: Return to the Bastok Gate Guard to complete the mission." },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["4-1: Magicite"] = {
         steps = {
-            -- Initiating the Mission
-            "Step 1: Ensure your Rank Points are nearly or completely full by trading crystals to a Conquest Overseer.",
+            { text = "Step 1: Ensure your Rank Points are nearly or completely full by trading crystals to a Conquest Overseer." },
             {
                 text = "Step 2: Speak with Goggehn at the Bastokan Embassy in Ru'Lude Gardens to begin the mission.",
                 images = {
@@ -949,7 +961,6 @@ return {
                         height = 512,
                         state = 2,
                         highlights = {
-                            -- e.g., if Goggehn is at H-10, use:
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
                     },
@@ -969,7 +980,7 @@ return {
                     },
                 },
             },
-            "Step 4: Proceed to the Audience Chamber at (H-6) in Ru'Lude Gardens and examine the door for a cutscene, receiving the Key Item: Letter to Aldo.",
+            { text = "Step 4: Proceed to the Audience Chamber at (H-6) in Ru'Lude Gardens and examine the door for a cutscene, receiving the Key Item: Letter to Aldo." },
             {
                 text = "Step 5: In Lower Jeuno, enter Neptune's Spire and speak with Aldo at (J-8) to receive the Key Item: Silver Bell.",
                 images = {
@@ -984,8 +995,6 @@ return {
                     },
                 },
             },
-
-            -- Obtaining the Yagudo Torch
             {
                 text = "Step 6: Speak to Paya-Sabya at (I-8) in Upper Jeuno.",
                 images = {
@@ -1014,8 +1023,6 @@ return {
                     },
                 },
             },
-
-            -- Obtaining the Crest of Davoi
             {
                 text = "Step 8: Speak with Baudin at (G-8) in Upper Jeuno; he will request a slice of Coeurl Meat.",
                 images = {
@@ -1030,10 +1037,8 @@ return {
                     },
                 },
             },
-            "Step 9: Acquire Coeurl Meat by defeating Coeurls in areas like Meriphataud Mountains or by purchasing from the Auction House.",
-            "Step 10: Trade the Coeurl Meat to Baudin to receive the Key Item: Crest of Davoi.",
-
-            -- Obtaining the Coruscant Rosary and Black Matinee Necklace
+            { text = "Step 9: Acquire Coeurl Meat by defeating Coeurls in areas like Meriphataud Mountains or by purchasing from the Auction House." },
+            { text = "Step 10: Trade the Coeurl Meat to Baudin to receive the Key Item: Crest of Davoi." },
             {
                 text = "Step 11: Speak to Sattal-Mansal at (J-8) in Lower Jeuno, outside Aldo's room in Neptune's Spire, to initiate the quests 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'.",
                 images = {
@@ -1048,7 +1053,7 @@ return {
                     },
                 },
             },
-            "Step 12: Travel to Beadeaux; ensure you have Sneak active to avoid sound-aggro from Quadavs.",
+            { text = "Step 12: Travel to Beadeaux; ensure you have Sneak active to avoid sound-aggro from Quadavs." },
             {
                 text = "Step 13: Enter Map 2 via exit A at (H-7) and examine 'The Mute' at (G-7) to receive Silence, allowing safe passage past 'The Afflictor' without being Cursed.",
                 images = {
@@ -1063,7 +1068,7 @@ return {
                     },
                 },
             },
-            "Step 14: Proceed to Map 1 via exit B at (F-8) and use the ramp at (E-10) to reach the upper level.",
+            { text = "Step 14: Proceed to Map 1 via exit B at (F-8) and use the ramp at (E-10) to reach the upper level." },
             {
                 text = "Step 15: Defeat De'Vyu Headhunter at (I-9) to obtain a Quadav Charm.",
                 images = {
@@ -1092,10 +1097,8 @@ return {
                     },
                 },
             },
-            "Step 17: Return to Sattal-Mansal in Lower Jeuno and trade the Quadav Charm to receive the Key Item: Coruscant Rosary.",
-            "Step 18: Trade the Quadav Augury Shell to Sattal-Mansal to receive the Key Item: Black Matinee Necklace.",
-
-            -- Acquiring the Magicite: Optistone in Davoi
+            { text = "Step 17: Return to Sattal-Mansal in Lower Jeuno and trade the Quadav Charm to receive the Key Item: Coruscant Rosary." },
+            { text = "Step 18: Trade the Quadav Augury Shell to Sattal-Mansal to receive the Key Item: Black Matinee Necklace." },
             {
                 text = "Step 19: Travel to Davoi; use Invisible to avoid sight-aggro from Orcs.",
                 images = {
@@ -1110,16 +1113,12 @@ return {
                     },
                 },
             },
-            "Step 20: Disable the 'Wall of Dark Arts' at (G-7) to access Monastic Cavern.",
-            "Step 21: Navigate through Monastic Cavern to the Magicite room and examine the Magicite to receive the Key Item: Magicite: Optistone.",
-
-            -- Acquiring the Magicite: Aurastone in Beadeaux
-            "Step 22: Return to Beadeaux; use Sneak to avoid sound-aggro from Quadavs.",
-            "Step 23: Enter Map 2 via exit A at (H-7) and proceed to Qulun Dome at (I-7).",
-            "Step 24: Open the door in Qulun Dome; if prompted with 'The Silver Bell, Coruscant Rosary, Black Matinee Necklace, glow faintly.', move closer and try again.",
-            "Step 25: Inside Qulun Dome, examine the Magicite to receive the Key Item: Magicite: Aurastone.",
-
-            -- Acquiring the Magicite: Orastone in Castle Oztroja
+            { text = "Step 20: Disable the 'Wall of Dark Arts' at (G-7) to access Monastic Cavern." },
+            { text = "Step 21: Navigate through Monastic Cavern to the Magicite room and examine the Magicite to receive the Key Item: Magicite: Optistone." },
+            { text = "Step 22: Return to Beadeaux; use Sneak to avoid sound-aggro from Quadavs." },
+            { text = "Step 23: Enter Map 2 via exit A at (H-7) and proceed to Qulun Dome at (I-7)." },
+            { text = "Step 24: Open the door in Qulun Dome; if prompted with 'The Silver Bell, Coruscant Rosary, Black Matinee Necklace, glow faintly.', move closer and try again." },
+            { text = "Step 25: Inside Qulun Dome, examine the Magicite to receive the Key Item: Magicite: Aurastone." },
             {
                 text = "Step 26: Travel to Castle Oztroja; use Invisible to avoid sight-aggro from Yagudo and Sneak for bats.",
                 images = {
@@ -1134,21 +1133,22 @@ return {
                     },
                 },
             },
-            "Step 27: Navigate to the door at (I-8) on Map 1; operate the correct lever to avoid the trapdoor and proceed to Map 3.",
-            "Step 28: From Map 3, enter Map 7 via exit F at (G-7), then proceed to Map 2 via exit I at (I-7).",
-            "Step 29: Light the Yagudo Torch at (H-9/10) to open the Brass Door at (G-10).",
-            "Step 30: Enter the Altar Room and examine the Magicite to receive the Key Item: Magicite: Orastone.",
-
-            -- Completing the Mission
-            "Step 31: After obtaining all three Magicites, return to the Audience Chamber at (H-6) in Ru'Lude Gardens for a cutscene.",
-            "Step 32: You will receive an Airship Pass; if you already possess one, you'll receive 20,000 gil instead.",
-            "Step 33: Return to Goggehn at the Bastokan Embassy to complete the mission, earning Rank 5, the Key Item: Message to Jeuno, and 10,000 gil."
+            { text = "Step 27: Navigate to the door at (I-8) on Map 1; operate the correct lever to avoid the trapdoor and proceed to Map 3." },
+            { text = "Step 28: From Map 3, enter Map 7 via exit F at (G-7), then proceed to Map 2 via exit I at (I-7)." },
+            { text = "Step 29: Light the Yagudo Torch at (H-9/10) to open the Brass Door at (G-10)." },
+            { text = "Step 30: Enter the Altar Room and examine the Magicite to receive the Key Item: Magicite: Orastone." },
+            { text = "Step 31: After obtaining all three Magicites, return to the Audience Chamber at (H-6) in Ru'Lude Gardens for a cutscene." },
+            { text = "Step 32: You will receive an Airship Pass; if you already possess one, you'll receive 20,000 gil instead." },
+            { text = "Step 33: Return to Goggehn at the Bastokan Embassy to complete the mission, earning Rank 5, the Key Item: Message to Jeuno, and 10,000 gil." }
+        },
+        reward = {
+            text = "Rank 5, Airship Pass, 10,000 gil"
         }
     },
 
     ["5-1: Darkness Rising"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
                 images = {
@@ -1192,11 +1192,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["5-2: Xarcabard, Land of Truths"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Travel to Xarcabard and locate the target point at (J-9).",
                 images = {
@@ -1211,13 +1214,16 @@ return {
                     },
                 },
             },
-            "Step 3: Return to the Bastok Gate Guard to complete the mission."
+            { text = "Step 3: Return to the Bastok Gate Guard to complete the mission." }
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["6-1: Return of the Talekeeper"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Medicine Eagle at (H-7) in Bastok Mines.",
                 images = {
@@ -1261,11 +1267,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["6-2: The Pirate's Cove"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
@@ -1309,11 +1318,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["6-2: The Chains That Bind Us"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
@@ -1342,7 +1354,7 @@ return {
                     },
                 },
             },
-            "Step 4: Defeat the required NM to proceed.",
+            { text = "Step 4: Defeat the required NM to proceed." },
             {
                 text = "Step 5: Return to Cid to complete the mission.",
                 images = {
@@ -1358,11 +1370,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["7-1: The Final Image"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
                 images = {
@@ -1406,11 +1421,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["7-2: On My Way"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Travel to Ifrit's Cauldron and locate the target point at (H-6).",
                 images = {
@@ -1425,14 +1443,17 @@ return {
                     },
                 },
             },
-            "Step 3: Defeat the required NM to proceed.",
-            "Step 4: Return to the Bastok Gate Guard to complete the mission."
+            { text = "Step 3: Defeat the required NM to proceed." },
+            { text = "Step 4: Return to the Bastok Gate Guard to complete the mission." }
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["8-1: The Chains That Bind Us"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
@@ -1461,7 +1482,7 @@ return {
                     },
                 },
             },
-            "Step 4: Defeat the required NM to proceed.",
+            { text = "Step 4: Defeat the required NM to proceed." },
             {
                 text = "Step 5: Return to Cid to complete the mission.",
                 images = {
@@ -1477,11 +1498,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["8-2: Enter the Talekeeper"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Speak to Medicine Eagle at (H-7) in Bastok Mines.",
                 images = {
@@ -1510,7 +1534,7 @@ return {
                     },
                 },
             },
-            "Step 4: Defeat the required NM to proceed.",
+            { text = "Step 4: Defeat the required NM to proceed." },
             {
                 text = "Step 5: Return to Medicine Eagle at (H-7) in Bastok Mines to complete the mission.",
                 images = {
@@ -1526,11 +1550,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["9-1: The Salt of the Earth"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Speak to Raibaht at (J-8) in the Metalworks.",
                 images = {
@@ -1559,7 +1586,7 @@ return {
                     },
                 },
             },
-            "Step 4: Collect the required key item from the location.",
+            { text = "Step 4: Collect the required key item from the location." },
             {
                 text = "Step 5: Return to Raibaht to complete the mission.",
                 images = {
@@ -1575,11 +1602,14 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank Points!"
+        }
     },
 
     ["9-2: Where Two Paths Converge"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
+            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
                 text = "Step 2: Speak to Lucius at (K-7) in the Metalworks.",
                 images = {
@@ -1608,7 +1638,7 @@ return {
                     },
                 },
             },
-            "Step 4: Defeat the Shadow Lord in the final battle.",
+            { text = "Step 4: Defeat the Shadow Lord in the final battle." },
             {
                 text = "Step 5: Return to Lucius to complete the mission.",
                 images = {
@@ -1624,5 +1654,8 @@ return {
                 },
             },
         },
+        reward = {
+            text = "Rank 10 and Airship pass to Kazham"
+        }
     },
 }

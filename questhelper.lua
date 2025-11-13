@@ -91,11 +91,6 @@ local questIconTexture = nil -- [NEW] Variable to hold our icon texture
 ----------------------------------------------------------------------------------------------------
 -- Configuration & Data (from OnMob v2.6.6)
 ----------------------------------------------------------------------------------------------------
--- Global Default Settings
-local DEFAULT_USE_VERTICAL_BEACON = false
-local DEFAULT_BEACON_HEIGHT = 15.0
-local DEFAULT_BEACON_BASE_Y_OFFSET = 0.0
-
 -- Player Arc Start Offsets (from OnMob v2.6.6)
 local PLAYER_ARC_START_X_OFFSET = 0
 local PLAYER_ARC_START_Y_OFFSET_ON_PLAYER = -2
@@ -495,7 +490,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         if shouldPrintDebugNow then print("["..addon.name.."] MemoryManager not ready.") end
     end
 
-    local targetData = nil
+    local targetsToDraw = {}
     local targetStepText = nil
 
     if currentTopCategory and currentSubfile and current_mission then
@@ -509,14 +504,23 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     targetStepText = step_data.text or ("Step " .. step_idx)
                     local target_ref = step_data.onmob_target
 
-                    if type(target_ref) == 'table' then
-                        targetData = target_ref
-                    elseif type(target_ref) == 'string' then
-                        if location_data[target_ref] then
-                            targetData = location_data[target_ref]
+                    local potential_targets = {}
+                    if type(target_ref) == 'string' then
+                        table.insert(potential_targets, target_ref)
+                    elseif type(target_ref) == 'table' then
+                        if target_ref[1] and type(target_ref[1]) == 'string' then -- List of strings
+                            potential_targets = target_ref
+                        else -- Inline definition
+                            table.insert(targetsToDraw, target_ref)
+                        end
+                    end
+
+                    for _, name in ipairs(potential_targets) do
+                        if location_data[name] then
+                            table.insert(targetsToDraw, location_data[name])
                         else
-                            if shouldPrintDebugNow then
-                                print(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, target_ref))
+                             if shouldPrintDebugNow then
+                                print(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
                             end
                         end
                     end
@@ -525,134 +529,85 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
-    local drawActive = false
+    -- Loop through all resolved targets and draw them
+    for _, targetData in ipairs(targetsToDraw) do
+        local drawActive = false
+        if targetData then
+            local npcNameToActuallyFindInGame = targetData.trigger_npc
 
-    if targetData then
-        local npcNameToActuallyFindInGame = targetData.trigger_npc
-
-        if not npcNameToActuallyFindInGame or npcNameToActuallyFindInGame == "" then
-            drawActive = true
-            if currentQuestTriggerNPC ~= "__NO_NPC_TRIGGER__" then
-                if shouldPrintDebugNow then print(string.format("[%s Debug] Step target has no NPC trigger. Activating. Resetting animation.", addon.name)) end
-                currentQuestTriggerNPC = "__NO_NPC_TRIGGER__"
-                beamAppearProgress = 0.0
-            end
-        else
-            local npcFoundThisFrame = false
-            local foundNpcObjectName = nil
-
-            if memManager then
-                for i = 0, 1023 do
-                    local entity = GetEntity(i)
-                    if entity and entity.Name and entity.Name == npcNameToActuallyFindInGame then
-                        npcFoundThisFrame = true
-                        foundNpcObjectName = entity.Name
-                        break
+            if not npcNameToActuallyFindInGame or npcNameToActuallyFindInGame == "" then
+                drawActive = true
+            else
+                local npcFoundThisFrame = false
+                if memManager then
+                    for i = 0, 1023 do
+                        local entity = GetEntity(i)
+                        if entity and entity.Name and entity.Name == npcNameToActuallyFindInGame then
+                            npcFoundThisFrame = true
+                            break
+                        end
                     end
                 end
-            end
-
-            if npcFoundThisFrame then
-                drawActive = true
-                if currentQuestTriggerNPC ~= foundNpcObjectName then
-                    if shouldPrintDebugNow then print(string.format("[%s Debug] Game NPC '%s' for step acquired. Resetting animation.", addon.name, foundNpcObjectName)) end
-                    currentQuestTriggerNPC = foundNpcObjectName
-                    beamAppearProgress = 0.0
+                if npcFoundThisFrame then
+                    drawActive = true
                 end
-                if shouldPrintDebugNow then print(string.format("[%s Debug] Game NPC Trigger Found: %s for Step: %s", addon.name, foundNpcObjectName, targetStepText)) end
+            end
+        end
+
+        if drawActive then
+            -- This is the logic from v1.5
+            local effectiveTargetX = 0.0
+            local effectiveTargetY_height = 0.0
+            local effectiveTargetZ_depth = 0.0
+
+            if targetData.target_pos and type(targetData.target_pos) == 'table' then
+                effectiveTargetX = targetData.target_pos.x or 0.0
+                effectiveTargetY_height = targetData.target_pos.y or 0.0
+                effectiveTargetZ_depth = targetData.target_pos.z or 0.0
             else
-                if currentQuestTriggerNPC == npcNameToActuallyFindInGame then
-                     if shouldPrintDebugNow then print(string.format("[%s Debug] Previously tracked game NPC '%s' for step lost.", addon.name, npcNameToActuallyFindInGame)) end
-                end
-                currentQuestTriggerNPC = nil
+                 if shouldPrintDebugNow then print(string.format("[%s Debug] Error: Location data for target is missing 'target_pos' table.", addon.name)) end
             end
-        end
-    else
-        currentQuestTriggerNPC = nil
-    end
 
-    if drawActive then
+            local visualStartX, visualStartY_height, visualStartZ_depth
+            local visualEndX, visualEndY_height, visualEndZ_depth
 
-        local useBeacon = (targetData.visual_mode == "beacon")
-        if targetData.visual_mode == nil then
-            useBeacon = DEFAULT_USE_VERTICAL_BEACON
-        end
-
-        local beaconHeight = targetData.beacon_height or DEFAULT_BEACON_HEIGHT
-        local beaconBaseYOffset = targetData.beacon_base_y_offset or DEFAULT_BEACON_BASE_Y_OFFSET
-
-        -- This is the logic from v1.5
-        local effectiveTargetX = 0.0
-        local effectiveTargetY_height = 0.0 -- This is the 'y' from the file (Z-Depth)
-        local effectiveTargetZ_depth = 0.0  -- This is the 'z' from the file (Y-Height)
-
-        if targetData.target_pos and type(targetData.target_pos) == 'table' then
-            effectiveTargetX = targetData.target_pos.x or 0.0
-            effectiveTargetY_height = targetData.target_pos.y or 0.0 -- Read Y from file (which is Z-Depth)
-            effectiveTargetZ_depth = targetData.target_pos.z or 0.0  -- Read Z from file (which is Y-Height)
-        else
-             if shouldPrintDebugNow then print(string.format("[%s Debug] Error: Location data for step '%s' is missing 'target_pos' table.", addon.name, targetStepText)) end
-        end
-
-        local visualStartX, visualStartY_height, visualStartZ_depth
-        local visualEndX, visualEndY_height, visualEndZ_depth
-
-        if useBeacon then
-            -- Beacon (Normal logic, but needs to use the un-swapped coords)
-            visualStartX = effectiveTargetX
-            visualStartY_height = effectiveTargetY_height + beaconBaseYOffset -- Use the real Y-Height (from file's 'y')
-            visualStartZ_depth = effectiveTargetZ_depth                       -- Use the real Z-Depth (from file's 'z')
-
-            visualEndX = effectiveTargetX
-            visualEndY_height = effectiveTargetY_height + beaconBaseYOffset + beaconHeight -- Use the real Y-Height
-            visualEndZ_depth = effectiveTargetZ_depth                                     -- Use the real Z-Depth
-        else
-            -- Arc (This is the exact logic from v1.5)
             visualStartX = playerPosX + PLAYER_ARC_START_X_OFFSET
-            visualStartY_height = playerPosZ_depth + PLAYER_ARC_START_Y_OFFSET_ON_PLAYER -- Arc Start Height is based on Player's Z_Depth
-            visualStartZ_depth = playerPosY_height + PLAYER_ARC_START_Z_OFFSET       -- Arc Start Depth is based on Player's Y_Height
+            visualStartY_height = playerPosZ_depth + PLAYER_ARC_START_Y_OFFSET_ON_PLAYER
+            visualStartZ_depth = playerPosY_height + PLAYER_ARC_START_Z_OFFSET
 
             visualEndX = effectiveTargetX
-            visualEndY_height = effectiveTargetY_height -- This reads 'y' from file (Z-Depth)
-            visualEndZ_depth = effectiveTargetZ_depth   -- This reads 'z' from file (Y-Height)
-        end
+            visualEndY_height = effectiveTargetY_height
+            visualEndZ_depth = effectiveTargetZ_depth
 
-        if beamAppearProgress < 1.0 then
-            beamAppearProgress = beamAppearProgress + (deltaTime / BEAM_APPEAR_DURATION)
-            if beamAppearProgress > 1.0 then beamAppearProgress = 1.0 end
-        end
-        calculateDynamicColor()
+            if beamAppearProgress < 1.0 then
+                beamAppearProgress = beamAppearProgress + (deltaTime / BEAM_APPEAR_DURATION)
+                if beamAppearProgress > 1.0 then beamAppearProgress = 1.0 end
+            end
+            calculateDynamicColor()
 
-        if shouldPrintDebugNow then
-            local type = useBeacon and "Beacon" or "Arc"
-            print(string.format("[%s Debug] Drawing %s for step '%s'. Start(X:%.1f YH:%.1f ZD:%.1f) End(X:%.1f YH:%.1f ZD:%.1f) Prog:%.2f", addon.name, type, targetStepText, visualStartX, visualStartY_height, visualStartZ_depth, visualEndX, visualEndY_height, visualEndZ_depth, beamAppearProgress))
-        end
+            if shouldPrintDebugNow then
+                local npc_name_for_print = "Position"
+                if targetData and targetData.trigger_npc then npc_name_for_print = targetData.trigger_npc end
+                print(string.format("[%s Debug] Drawing Arc for step '%s'. Target: %s", addon.name, targetStepText, npc_name_for_print))
+            end
 
-        -- This is the draw call from v1.5, which you said was perfect.
-        -- It passes (X, Y-Height, Z-Depth) to the function, which is wrong,
-        -- but it's what v1.5 did, so we will keep it.
-        drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height, visualEndX, visualEndZ_depth, visualEndY_height, ARGB_BEAM_COLOR, beamAppearProgress, true)
+            drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height, visualEndX, visualEndZ_depth, visualEndY_height, ARGB_BEAM_COLOR, beamAppearProgress, true)
 
-        -- [NEW] Draw the quest icon AFTER the arc
-        if questIconTexture then
-            local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
-            local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
+            if questIconTexture then
+                local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+                local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
 
-            -- **FIXED ICON LOGIC**
-            -- We get the target's coordinates in the *real* 3D world format
-            local targetWorldX = effectiveTargetX
-            local targetWorldY = effectiveTargetZ_depth -- The REAL Y (from file's 'z')
-            local targetWorldZ = effectiveTargetY_height -- The REAL Z (from file's 'y')
+                local targetWorldX = effectiveTargetX
+                local targetWorldY = effectiveTargetZ_depth
+                local targetWorldZ = effectiveTargetY_height
 
-            -- Add offset to float it above the target's head
-            targetWorldZ = targetWorldZ - 0.5 -- <-- You can adjust this value
+                targetWorldZ = targetWorldZ - 0.5
 
-            -- Convert 3D world pos to 2D screen pos
-            -- helpers.worldToScreen correctly expects (X, Y-Height, Z-Depth)
-            local sx, sy, sz = helpers.worldToScreen(targetWorldX, targetWorldZ, targetWorldY, view, projection)
+                local sx, sy, sz = helpers.worldToScreen(targetWorldX, targetWorldZ, targetWorldY, view, projection)
 
-            if sx and sz > 0 and sz < 1 then
-                drawQuestIcon(sx, sy, 0.5, 1.0, 32, 0xFFFFFFFF) -- Draw 32x32 icon
+                if sx and sz > 0 and sz < 1 then
+                    drawQuestIcon(sx, sy, 0.5, 1.0, 32, 0xFFFFFFFF)
+                end
             end
         end
     end
@@ -954,19 +909,6 @@ ashita.events.register('command', 'command_callback', function(e)
         e.blocked = true
         return true
 
-    elseif command_base == 'onmob_mode' then
-        if args[2] and args[2]:lower() == "beacon" then
-            DEFAULT_USE_VERTICAL_BEACON = true
-        elseif args[2] and args[2]:lower() == "arc" then
-            DEFAULT_USE_VERTICAL_BEACON = false
-        else
-            DEFAULT_USE_VERTICAL_BEACON = not DEFAULT_USE_VERTICAL_BEACON
-        end
-        print(string.format("[%s] Global Default visual mode set to: %s.", addon.name, DEFAULT_USE_VERTICAL_BEACON and "Vertical Beacon" or "Arcing Beam"))
-        beamAppearProgress = 0.0
-        e.blocked = true
-        return true
-
     elseif command_base == 'onmob_getpos' then
         local mem = AshitaCore:GetMemoryManager()
         if not mem then
@@ -1031,6 +973,47 @@ ashita.events.register('load', 'load_callback', function()
 end)
 
 ashita.events.register('unload', 'unload_callback', function()
+
     settings.save(QUESTHELPER_ALIAS, quest_settings)
+
     print(string.format("[%s] Settings saved. Unloaded.", addon.name))
+
+end)
+
+
+
+ashita.events.register('text_in', 'text_in_callback', function(e)
+    -- This event fires for any incoming chat text.
+    -- We check if the text corresponds to an NPC we are waiting to talk to for the current quest step.
+    if currentTopCategory and currentSubfile and current_mission then
+        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+        if missionData and missionData.steps then
+            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            if missionData.steps[step_idx] then
+                local step_data = missionData.steps[step_idx]
+                if type(step_data) == 'table' then
+                    local trigger_npcs = step_data.trigger_on_talk
+
+                    -- Check if the current step is waiting for a specific NPC to talk.
+                    if trigger_npcs and e.message_modified then
+                        local triggers = {}
+                        if type(trigger_npcs) == 'string' then
+                            table.insert(triggers, trigger_npcs)
+                        elseif type(trigger_npcs) == 'table' then
+                            triggers = trigger_npcs
+                        end
+
+                        for _, npc_name in ipairs(triggers) do
+                            if type(npc_name) == 'string' and npc_name ~= "" then
+                                if e.message_modified:contains(npc_name) then
+                                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                    break -- Exit after finding one match
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
 end)

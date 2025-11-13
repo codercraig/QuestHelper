@@ -8,8 +8,23 @@
 --
 
 return {
+    ["Rashid"] = {
+        target_pos = { x = -8.5, y = -3.0, z = -123.6 },
+        trigger_npc = "Rashid",
+        visual_mode = "arc",
+    },
+    ["Cleades"] = {
+        target_pos = { x = -362.0, y = -12.0, z = -169.0 },
+        trigger_npc = "Cleades",
+        visual_mode = "arc",
+    },
+    ["Argus"] = {
+        target_pos = { x = 132.0, y = 6.5, z = -2.1 },
+        trigger_npc = "Argus",
+        visual_mode = "arc",
+    },
     ["Conrad"] = {
-        target_pos = { x = 94.0, y = -16.0, z = -66.0 },
+        target_pos = { x = 132.0, y = 6.5, z = -2.1 },
         trigger_npc = "Conrad",
         visual_mode = "beacon",
         beacon_height = 15.0,
