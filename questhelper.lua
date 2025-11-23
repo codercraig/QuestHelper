@@ -37,6 +37,11 @@ if not drawArcModule then
     error("[" .. addon.name .. "] drawArc.lua is missing. Ensure it and Bezier3D_2.lua are present.")
 end
 
+local drawingModule = require('drawing')
+if not drawingModule then
+    error("[" .. addon.name .. "] drawing.lua is missing.")
+end
+
 -- [NEW] FFI definition for our 2D icon vertices
 ffi.cdef [[
     #pragma pack(1)
@@ -119,6 +124,8 @@ local playerZoneId = 0
 
 -- Runtime state for tracking the *current* NPC trigger
 local currentQuestTriggerNPC = nil
+local playerName = ""
+
 
 
 ----------------------------------------------------------------------------------------------------
@@ -147,6 +154,9 @@ local function updatePlayerPosition(mem)
         local player = mem:GetPlayer()
         if player and player:GetActorPointer() ~= 0 then
              pActorPointer = player:GetActorPointer()
+             if player.Name then
+                playerName = player.Name
+             end
         else return false
         end
     else
@@ -479,6 +489,16 @@ local function perform_search()
     end
 end
 
+local function distToSegmentSquared(p, v, w)
+    local l2 = (v.x - w.x)^2 + (v.z - w.z)^2
+    if l2 == 0 then return (p.x - v.x)^2 + (p.z - v.z)^2 end
+    local t = ((p.x - v.x) * (w.x - v.x) + (p.z - v.z) * (w.z - v.z)) / l2
+    t = math.max(0, math.min(1, t))
+    local projX = v.x + t * (w.x - v.x)
+    local projZ = v.z + t * (w.z - v.z)
+    return (p.x - projX)^2 + (p.z - projZ)^2
+end
+
 --------------------------------------------------------------------------------
 -- Main Rendering - MERGED
 --------------------------------------------------------------------------------
@@ -519,6 +539,28 @@ ashita.events.register('d3d_present', 'present_callback', function()
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
 
+                -- Handle trigger zones before drawing logic
+                if type(step_data) == 'table' and step_data.trigger_zones then
+                    for _, zone in ipairs(step_data.trigger_zones) do
+                        if zone.type == 'square' and playerPosX and playerPosZ_depth and zone.center and zone.size then
+                            local half_size = zone.size / 2
+                            if  math.abs(playerPosX - zone.center.x) < half_size and
+                                math.abs(playerPosZ_depth - zone.center.z) < half_size then
+                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                return
+                            end
+                        elseif zone.type == 'line' and playerPosX and playerPosZ_depth and zone.start and zone.stop then
+                            local player_pos = { x = playerPosX, z = playerPosZ_depth }
+                            local distSq = distToSegmentSquared(player_pos, zone.start, zone.stop)
+                            local width = zone.width or 2
+                            if distSq < (width * width) then
+                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                return
+                            end
+                        end
+                    end
+                end
+
                 if type(step_data) == 'table' then
                     targetStepText = step_data.text or ("Step " .. step_idx)
                     local target_ref = step_data.onmob_target
@@ -541,6 +583,38 @@ ashita.events.register('d3d_present', 'present_callback', function()
                              if shouldPrintDebugNow then
                                 print(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
                             end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- New drawing logic for trigger_zone and draw_type
+    if currentTopCategory and currentSubfile and current_mission then
+        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+        if missionData and missionData.steps then
+            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            if missionData.steps[step_idx] then
+                local step_data = missionData.steps[step_idx]
+                if type(step_data) == 'table' then
+                    calculateDynamicColor()
+
+                    if step_data.trigger_zones then
+                        for _, zone in ipairs(step_data.trigger_zones) do
+                            if zone.type == 'square' and zone.center and zone.size then
+                                drawingModule.drawSquare(zone.center, zone.size, ARGB_BEAM_COLOR)
+                            elseif zone.type == 'line' and zone.start and zone.stop then
+                                drawingModule.drawLine(zone.start, zone.stop, ARGB_BEAM_COLOR)
+                            end
+                        end
+                    end
+
+                    if step_data.draw_type then
+                        if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
+                            drawingModule.drawLine(step_data.start_pos, step_data.end_pos, ARGB_BEAM_COLOR)
+                        elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
+                            drawingModule.drawSquare(step_data.center, step_data.size, ARGB_BEAM_COLOR)
                         end
                     end
                 end
@@ -1050,6 +1124,16 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
                                     break -- Exit after finding one match
                                 end
                             end
+                        end
+                    end
+
+                    -- Check for item obtain trigger
+                    local trigger_item = step_data.trigger_on_item_obtain
+                    if trigger_item and playerName ~= "" and e.message_modified then
+                        -- The game formats this message with a newline.
+                        local obtain_message = string.format("%s obtains a\nitem: %s.", playerName, trigger_item)
+                        if e.message_modified:contains(obtain_message) then
+                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
                         end
                     end
                 end

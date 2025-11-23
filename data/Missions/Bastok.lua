@@ -3,6 +3,8 @@ return {
         steps = {
           {
             text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+            onmob_target = {"Rashid", "Cleades", "Argus"},
+            trigger_on_talk = {"Rashid :", "Cleades :", "Argus :"},
             images = {
                 {
                     file     = "maps/bastok_mines.png",
