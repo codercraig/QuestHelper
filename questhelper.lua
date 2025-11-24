@@ -79,6 +79,7 @@ local is_open            = false
 local showImagesDrawer   = true
 local lastMainX, lastMainY = 300, 200
 local lastMainW, lastMainH = 400, 600
+local step_trigger_flags = T{}
 
 --------------------------------------------------------------------------------
 -- Search Feature (QuestHelper)
@@ -144,6 +145,13 @@ end
 
 local function updatePlayerPosition(mem)
     if not mem then return false end
+
+    -- Get Player Name via GetPlayerEntity as requested by user
+    local playerInfo = GetPlayerEntity()
+    if playerInfo and playerInfo.Name then
+        playerName = playerInfo.Name
+    end
+
     local party = mem:GetParty()
     local entityMgr = mem:GetEntity()
     if not party or not entityMgr then return false end
@@ -154,9 +162,6 @@ local function updatePlayerPosition(mem)
         local player = mem:GetPlayer()
         if player and player:GetActorPointer() ~= 0 then
              pActorPointer = player:GetActorPointer()
-             if player.Name then
-                playerName = player.Name
-             end
         else return false
         end
     else
@@ -377,6 +382,11 @@ local function get_step_state(topCat, subfile, mission, step)
 end
 
 local function set_step_state(topCat, subfile, mission, step, state)
+    -- Clear any existing trigger flags for this specific step to ensure a clean state
+    if step_trigger_flags[topCat] and step_trigger_flags[topCat][subfile] and step_trigger_flags[topCat][subfile][mission] then
+        step_trigger_flags[topCat][subfile][mission][step] = nil
+    end
+
     local path = ensure_key_path(quest_settings.step_states, topCat, subfile, mission)
     path[step] = state
     print(string.format("Saving step: %s -> %s -> %s -> Step %d = %s", topCat, subfile, mission, step, tostring(state)))
@@ -1017,6 +1027,58 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_events' then
+        if not current_mission then
+            print(string.format("[%s] No mission selected.", addon.name))
+            e.blocked = true
+            return true
+        end
+        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+        if not missionData or not missionData.steps then
+            print(string.format("[%s] No steps found for current mission.", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        print(string.format("[%s] Available events for %s:", addon.name, current_mission))
+        for i, step_data in ipairs(missionData.steps) do
+            local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
+            print(string.format("  Event ID %d: %s", i, text))
+        end
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_trigger' then
+        if not current_mission then
+            print(string.format("[%s] No mission selected.", addon.name))
+            e.blocked = true
+            return true
+        end
+        local step_to_trigger = tonumber(args[2])
+        if not step_to_trigger then
+            print(string.format("[%s] Usage: /qh_trigger <step_number>", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+        if not missionData or not missionData.steps or step_to_trigger > #missionData.steps or step_to_trigger < 1 then
+            print(string.format("[%s] Invalid step number.", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        print(string.format("[%s] Triggering events up to %d...", addon.name, step_to_trigger))
+        for i = 1, step_to_trigger do
+            if not get_step_state(currentTopCategory, currentSubfile, current_mission, i) then
+                set_step_state(currentTopCategory, currentSubfile, current_mission, i, true)
+            end
+        end
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'onmob_target' or command_base == 'onmob_list' then
         print(string.format("[%s] Info: This command is disabled. Beams are now automatic based on your active quest step and data/locations.lua.", addon.name))
         e.blocked = true
@@ -1096,6 +1158,78 @@ end)
 
 
 
+local function read_uint16(ptr, offset)
+    local p = ffi.cast('uint8_t*', ptr)
+    return p[offset] + (p[offset+1] * 256)
+end
+
+local function read_uint32(ptr, offset)
+    local p = ffi.cast('uint8_t*', ptr)
+    return p[offset] + (p[offset+1] * 256) + (p[offset+2] * 65536) + (p[offset+3] * 16777216)
+end
+
+ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
+    if e.id == 0x034 or e.id == 0x032 then -- Event or Interaction
+        local event_id = read_uint16(e.data, 0x2C)
+        print("QuestHelper Debug: Received Event ID: " .. tostring(event_id))
+        local actor_id = read_uint32(e.data, 0x04)
+
+        if not currentTopCategory or not currentSubfile or not current_mission then
+            return
+        end
+
+        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+        if missionData and missionData.steps then
+            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            if missionData.steps[step_idx] then
+                local step_data = missionData.steps[step_idx]
+                if type(step_data) == 'table' and step_data.trigger_on_event_id then
+                    local trigger = step_data.trigger_on_event_id
+                    local event_match = false
+                    if type(trigger) == 'table' then
+                        for _, id in ipairs(trigger) do
+                            if event_id == id then
+                                event_match = true
+                                break
+                            end
+                        end
+                    else -- It's a number
+                        event_match = (event_id == trigger)
+                    end
+
+                    local npc_match = true -- Assume true if no npc id is specified
+                    if step_data.trigger_on_npc_id then
+                        npc_match = (actor_id == step_data.trigger_on_npc_id)
+                    end
+
+                    if event_match and npc_match then
+                        local has_talk_trigger = false
+                        if step_data.trigger_on_talk then
+                            if type(step_data.trigger_on_talk) == 'string' and step_data.trigger_on_talk ~= '' then
+                                has_talk_trigger = true
+                            elseif type(step_data.trigger_on_talk) == 'table' and #step_data.trigger_on_talk > 0 then
+                                has_talk_trigger = true
+                            end
+                        end
+
+                        if not has_talk_trigger then
+                            -- Case 1: Event trigger ONLY. Complete the step.
+                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                        else
+                            -- Case 2: Event AND Talk triggers. Mark event as done and check if talk is also done.
+                            local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
+                            flags.event_complete = true
+                            if flags.talk_complete then
+                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
 ashita.events.register('text_in', 'text_in_callback', function(e)
     -- This event fires for any incoming chat text.
     -- We check if the text corresponds to an NPC we are waiting to talk to for the current quest step.
@@ -1119,20 +1253,38 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
 
                         for _, npc_name in ipairs(triggers) do
                             if type(npc_name) == 'string' and npc_name ~= "" then
-                                if e.message_modified:contains(npc_name) then
-                                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                    break -- Exit after finding one match
+                                local processed_trigger = npc_name:gsub("{player_name}", playerName)
+                                if e.message_modified:contains(processed_trigger) then
+                                    local has_event_trigger = step_data.trigger_on_event_id ~= nil
+
+                                    if not has_event_trigger then
+                                        -- Case 1: Talk trigger ONLY. Complete the step.
+                                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                    else
+                                        -- Case 2: Talk AND Event triggers. Mark talk as done and check if event is also done.
+                                        local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
+                                        flags.talk_complete = true
+                                        if flags.event_complete then
+                                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                        end
+                                    end
+                                    break
                                 end
                             end
                         end
                     end
 
                     -- Check for item obtain trigger
-                    local trigger_item = step_data.trigger_on_item_obtain
-                    if trigger_item and playerName ~= "" and e.message_modified then
-                        -- The game formats this message with a newline.
-                        local obtain_message = string.format("%s obtains a\nitem: %s.", playerName, trigger_item)
-                        if e.message_modified:contains(obtain_message) then
+                    local Wrapping = step_data.trigger_on_item_obtain
+                    if trigger_item and e.message_modified then
+                        local obtain_message = ""
+                        if playerName ~= "" then
+                            obtain_message = string.format("%s obtains a\nitem: %s.", playerName, trigger_item)
+                        end
+                        local purchase_message = string.format("%s for", trigger_item:lower())
+
+                        if (obtain_message ~= "" and e.message_modified:contains(obtain_message)) or e.message_modified:contains(purchase_message) then
+                            print("QuestHelper Debug: Matched item trigger for: " .. trigger_item)
                             set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
                         end
                     end
