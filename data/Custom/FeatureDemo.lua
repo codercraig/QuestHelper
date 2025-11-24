@@ -27,7 +27,8 @@ return {
             },
             {
                 text = "Now, go obtain a Faded Crystal. You can get one from a 'Tunnel Worm'.",
-                trigger_on_item_obtain = "Flint Stone"
+                trigger_on_item_obtain = "flint stone",
+                trigger_on_talk = "flint stone",
             },
             {
                 text = "Congratulations! You have completed the feature demo."
