@@ -3,8 +3,10 @@ return {
         steps = {
           {
             text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+
             onmob_target = {"Rashid", "Cleades", "Argus"},
-            trigger_on_talk = {"Rashid :", "Cleades :", "Argus :"},
+            trigger_on_event_id = 1001,
+            trigger_on_talk = {"You have accepted the mission"},
             images = {
                 {
                     file     = "maps/bastok_mines.png",
@@ -494,8 +496,8 @@ return {
             },
             {
                 text = "Step 3: Go to Metalworks(J-8) in Bastok and trade Alois a Lizard Egg to complete the mission",
-                --trigger_on_event_id = { 373, 372 },
-                trigger_on_talk = {"lizard egg"},
+                trigger_on_event_id = { 373, 372 },
+                --trigger_on_talk = {"lizard egg"},
                 images = {
                     {
                         file     = "maps/metalworks.png",

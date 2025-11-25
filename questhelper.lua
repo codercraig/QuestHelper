@@ -1156,8 +1156,6 @@ ashita.events.register('unload', 'unload_callback', function()
 
 end)
 
-
-
 local function read_uint16(ptr, offset)
     local p = ffi.cast('uint8_t*', ptr)
     return p[offset] + (p[offset+1] * 256)
@@ -1171,59 +1169,71 @@ end
 ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
     if e.id == 0x034 or e.id == 0x032 then -- Event or Interaction
         local event_id = read_uint16(e.data, 0x2C)
-        print("QuestHelper Debug: Received Event ID: " .. tostring(event_id))
         local actor_id = read_uint32(e.data, 0x04)
+        local param0   = read_uint32(e.data, 0x0C) -- The "Hidden" Message ID
 
-        if not currentTopCategory or not currentSubfile or not current_mission then
-            return
+        -- Debug Print (Keep this enabled while developing!)
+        if event_id > 0 or param0 > 0 then
+            print(string.format("\30\105[QH Debug]\30\01 Event: %d | NPC: %d | Param0: %d", event_id, actor_id, param0))
         end
+
+        if not currentTopCategory or not currentSubfile or not current_mission then return end
 
         local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
         if missionData and missionData.steps then
             local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
-                if type(step_data) == 'table' and step_data.trigger_on_event_id then
-                    local trigger = step_data.trigger_on_event_id
-                    local event_match = false
-                    if type(trigger) == 'table' then
-                        for _, id in ipairs(trigger) do
-                            if event_id == id then
-                                event_match = true
-                                break
-                            end
-                        end
-                    else -- It's a number
-                        event_match = (event_id == trigger)
-                    end
 
-                    local npc_match = true -- Assume true if no npc id is specified
-                    if step_data.trigger_on_npc_id then
-                        npc_match = (actor_id == step_data.trigger_on_npc_id)
-                    end
+                if type(step_data) == 'table' then
 
-                    if event_match and npc_match then
-                        local has_talk_trigger = false
-                        if step_data.trigger_on_talk then
-                            if type(step_data.trigger_on_talk) == 'string' and step_data.trigger_on_talk ~= '' then
-                                has_talk_trigger = true
-                            elseif type(step_data.trigger_on_talk) == 'table' and #step_data.trigger_on_talk > 0 then
-                                has_talk_trigger = true
-                            end
+                    -- 1. UNIVERSAL EVENT CHECKER
+                    -- Checks 'trigger_on_event_id' against BOTH the EventID and Param0
+                    if step_data.trigger_on_event_id then
+                        local trigger = step_data.trigger_on_event_id
+                        local event_match = false
+
+                        -- Helper to check a specific ID against the packet data
+                        local function check_id(target_id)
+                            -- Case A: It's a standard Cutscene (EventID matches)
+                            if event_id == target_id then return true end
+                            -- Case B: It's a Text Interaction (Event=0, Param0 matches)
+                            if event_id == 0 and param0 == target_id then return true end
+                            return false
                         end
 
-                        if not has_talk_trigger then
-                            -- Case 1: Event trigger ONLY. Complete the step.
-                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                        -- Handle Single Number vs List of Numbers
+                        if type(trigger) == 'table' then
+                            for _, id in ipairs(trigger) do
+                                if check_id(id) then event_match = true; break end
+                            end
                         else
-                            -- Case 2: Event AND Talk triggers. Mark event as done and check if talk is also done.
-                            local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
-                            flags.event_complete = true
-                            if flags.talk_complete then
+                            event_match = check_id(trigger)
+                        end
+
+                        -- Check NPC ID (Optional)
+                        local npc_match = true
+                        if step_data.trigger_on_npc_id then
+                            npc_match = (actor_id == step_data.trigger_on_npc_id)
+                        end
+
+                        -- If ID matched (either Event or Param0), proceed
+                        if event_match and npc_match then
+                            local has_talk_trigger = (step_data.trigger_on_talk ~= nil)
+
+                            if not has_talk_trigger then
                                 set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                            else
+                                local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
+                                flags.event_complete = true
+                                if flags.talk_complete then
+                                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                                end
                             end
                         end
                     end
+
+                    -- (We don't need 'trigger_on_message_id' anymore because the logic above handles it!)
                 end
             end
         end
