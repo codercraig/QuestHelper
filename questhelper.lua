@@ -549,6 +549,20 @@ ashita.events.register('d3d_present', 'present_callback', function()
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
 
+                -------------------------------------------------------------------
+                -- [NEW] ZONE ENTRY TRIGGER
+                -------------------------------------------------------------------
+                -- If the step has a 'zone_trigger' (e.g., "Zeruhn Mines")
+                -- Check if player is currently in that zone ID
+                if step_data.zone_trigger and zone_data[step_data.zone_trigger] then
+                    if playerZoneId == zone_data[step_data.zone_trigger] then
+                        -- print(string.format("\30\105[QuestHelper] Zone Match: Entered %s", step_data.zone_trigger))
+                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                        return -- Stop processing this frame since step advanced
+                    end
+                end
+                -------------------------------------------------------------------
+
                 -- Handle trigger zones before drawing logic
                 if type(step_data) == 'table' and step_data.trigger_zones then
                     for _, zone in ipairs(step_data.trigger_zones) do

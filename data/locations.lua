@@ -8,6 +8,7 @@
 --
 
 return {
+    -- Bastok
     ["Rashid"] = {
         target_pos = { x = -8.5, y = -3.0, z = -123.6 },
         trigger_npc = "Rashid",
@@ -69,5 +70,18 @@ return {
         visual_mode = "beacon",
         beacon_height = 5.0,
         beacon_base_y_offset = 0.5,
+    },
+    --Zeruhn Mines
+    ["Makarim"] = {
+        target_pos = { x = -61, y = 7 ,z = -333.3 },
+        trigger_npc = "Makarim",
+        visual_mode = "arc",
+        zone = "Zeruhn Mines",
+    },
+    --Dangruf Wadi
+    ["Geyser1"] = {
+        target_pos = { x = -133, y= 3, z=133.3},
+        visual_mode = "arc",
+        zone = "Dangruf Wadi"
     }
 }

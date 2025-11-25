@@ -39,6 +39,7 @@ return {
           },
           {
             text = "Step 2: Go to Bastok Mines (D-7) and enter Zeruhn Mines. The entrance to Zeruhn Mines is located in the southwest corner of Bastok Mines.",
+            zone_trigger = "Zeruhn Mines",
             images = {
                 {
                     file     = "maps/bastok_mines.png",
@@ -53,6 +54,8 @@ return {
           },
           {
             text = "Step 3: Talk to Makarim at (H-11) in Zeruhn Mines to receive the Zeruhn Report. He is located all the way to the south within Zeruhn Mines. Although there are creatures here in the level 75-80 range, they are not aggressive and do not aggro by sound.",
+            onmob_target = {"Makarim"},
+            trigger_on_event_id = { 121 },
             images = {
                 {
                     file     = "maps/zeruhn_mines.png",
@@ -68,7 +71,7 @@ return {
           {
             text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
             onmob_target = "Naji",
-            trigger_on_talk = "Naji",
+            trigger_on_event_id = { 710 },
             images = {
                 {
                     file     = "maps/metalworks.png",
@@ -94,10 +97,6 @@ return {
               onmob_target = {"Rashid", "Cleades", "Argus"},
               trigger_on_event_id = 1001,
               trigger_on_talk = {"You have accepted the mission"},
-              -- To find the correct NPC ID, interact with the NPC to trigger the event.
-              -- The correct actor_id will be printed in the console.
-              -- Replace 0 with the correct ID.
-              --trigger_on_npc_id = "10EA006",
               images = {
                     {
                         file     = "maps/bastok_mines.png",
@@ -131,7 +130,7 @@ return {
             {
                 text = "Step 2: Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
                 onmob_target = {"Cid"},
-                trigger_on_talk = {"Cid"},
+                trigger_on_event_id = 503,
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -146,6 +145,7 @@ return {
             },
             {
                 text = "Step 3: Proceed to South Gustaberg (D-9) and enter Dangruf Wadi.",
+                zone_trigger = "Dangruf Wadi",
                 images = {
                     {
                         file     = "maps/south_gustaberg.png",
@@ -160,6 +160,13 @@ return {
             },
             {
                 text = "Step 4: In Dangruf Wadi, go to the geyser at (I-8) and stand on it to be propelled to the ledge, changing the Blue Acidity Tester to Red Acidity Tester. Check your Key Items to make sure it has changed!",
+                onmob_target = {"Geyser1"},
+                trigger_on_event_id = { 10,11,12 },
+                draw_type = 'square',
+                center = {x = -133, y= 3, z=133.3},
+                size = 2,
+                zone = "Dangruf Wadi",
+
                 images = {
                     {
                         file     = "maps/dangruf_wadi.png",
@@ -174,6 +181,8 @@ return {
             },
             {
                 text = "Step 5: Return to Cid in the Metalworks(H-8) to complete the mission.",
+                onmob_target = {"Cid"},
+                trigger_on_event_id = { 504 },
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -196,6 +205,8 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
                 images = {
                       {
                           file     = "maps/bastok_mines.png",
@@ -228,6 +239,7 @@ return {
             },
             {
                 text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made]",
+                trigger_on_item_obtain = {"quadav fetich head","pair of quadava fetich arms","quadav fetich torso","pair of quadava fetich legs"},
                 images = {
                       {
                           file     = "maps/north_gustaberg.png",
