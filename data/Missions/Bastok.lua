@@ -455,7 +455,7 @@ return {
                        "- Travel through South Gustaberg(D-9) to Dangruf Wadi.\n" ..
                        "- Inside Dangruf Wadi Look for 'Steam Lizards'(G-11) - evel 16-20.\n" ..
                        "",
-                trigger_on_talk = {"lizard egg","lizard eggs","{player_name} obtains a flint stone."},
+                trigger_on_item_obtain = {"lizard egg"},
                 images = {
                     {
                         file     = "maps/windurst_waters_1.png",
@@ -494,7 +494,7 @@ return {
             },
             {
                 text = "Step 3: Go to Metalworks(J-8) in Bastok and trade Alois a Lizard Egg to complete the mission",
-                trigger_on_event_id = { 373, 372 },
+                --trigger_on_event_id = { 373, 372 },
                 trigger_on_talk = {"lizard egg"},
                 images = {
                     {

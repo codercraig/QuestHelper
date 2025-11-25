@@ -1230,64 +1230,125 @@ ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
     end
 end)
 
+-- [UPDATED] Stronger text cleaner to remove ALL special characters/colors
+local function clean_text(text)
+    if not text then return "" end
+    local cleaned = text
+    -- Strip standard FFXI colors (0x1E/0x1F + byte)
+    cleaned = cleaned:gsub('[\x1E\x1F].', '')
+    -- Strip auto-translate markers (0xEF/0x7F + byte)
+    cleaned = cleaned:gsub('[\xEF\x7F].', '')
+    -- Strip newlines/returns
+    cleaned = cleaned:gsub('[\r\n]+', ' ')
+    -- Trim whitespace
+    return cleaned:match("^%s*(.-)%s*$")
+end
+
+-- Chat Modes to IGNORE (Player generated text)
+local ignored_chat_modes = {
+    [0] = true,  -- Say
+    [1] = true,  -- Shout
+    [3] = true,  -- Tell
+    [4] = true,  -- Party
+    [5] = true,  -- Linkshell
+    [6] = true,  -- Emotes
+    [8] = true,  -- Linkshell 2
+    [26] = true, -- Yell
+    [27] = true, -- Yell
+}
+
 ashita.events.register('text_in', 'text_in_callback', function(e)
-    -- This event fires for any incoming chat text.
-    -- We check if the text corresponds to an NPC we are waiting to talk to for the current quest step.
-    if currentTopCategory and currentSubfile and current_mission then
-        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-        if missionData and missionData.steps then
-            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
-            if missionData.steps[step_idx] then
-                local step_data = missionData.steps[step_idx]
-                if type(step_data) == 'table' then
-                    local trigger_npcs = step_data.trigger_on_talk
+    -- 1. Filter out Player Chat
+    if ignored_chat_modes[e.mode] then return end
 
-                    -- Check if the current step is waiting for a specific NPC to talk.
-                    if trigger_npcs and e.message_modified then
-                        local triggers = {}
-                        if type(trigger_npcs) == 'string' then
-                            table.insert(triggers, trigger_npcs)
-                        elseif type(trigger_npcs) == 'table' then
-                            triggers = trigger_npcs
-                        end
+    -- 2. Validation
+    if not currentTopCategory or not currentSubfile or not current_mission then return end
 
-                        for _, npc_name in ipairs(triggers) do
-                            if type(npc_name) == 'string' and npc_name ~= "" then
-                                local processed_trigger = npc_name:gsub("{player_name}", playerName)
-                                if e.message_modified:contains(processed_trigger) then
-                                    local has_event_trigger = step_data.trigger_on_event_id ~= nil
+    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+    if not missionData or not missionData.steps then return end
 
-                                    if not has_event_trigger then
-                                        -- Case 1: Talk trigger ONLY. Complete the step.
-                                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                    else
-                                        -- Case 2: Talk AND Event triggers. Mark talk as done and check if event is also done.
-                                        local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
-                                        flags.talk_complete = true
-                                        if flags.event_complete then
-                                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                        end
-                                    end
-                                    break
-                                end
+    local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+    local step_data = missionData.steps[step_idx]
+    if not step_data or not e.message_modified then return end
+
+    -- 3. Get Player Name
+    if playerName == "" then
+        local p = GetPlayerEntity()
+        if p then playerName = p.Name end
+    end
+
+    -- 4. Clean the message
+    local incoming_text = clean_text(e.message_modified)
+
+    if type(step_data) == 'table' then
+
+        -- HANDLE: trigger_on_talk (Chat Dialogue)
+        local raw_triggers = step_data.trigger_on_talk
+        if raw_triggers then
+            local triggers_list = {}
+            if type(raw_triggers) == 'string' then table.insert(triggers_list, raw_triggers)
+            elseif type(raw_triggers) == 'table' then triggers_list = raw_triggers end
+
+            for _, raw_text in ipairs(triggers_list) do
+                if type(raw_text) == 'string' and raw_text ~= "" then
+                    local processed_trigger = raw_text
+                    if playerName and playerName ~= "" then
+                        processed_trigger = raw_text:gsub("{player_name}", playerName)
+                    end
+
+                    if incoming_text:find(processed_trigger, 1, true) then
+                        local has_event_requirement = (step_data.trigger_on_event_id ~= nil)
+
+                        if not has_event_requirement then
+                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                        else
+                            local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
+                            flags.talk_complete = true
+                            if flags.event_complete then
+                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
                             end
                         end
+                        break
                     end
+                end
+            end
+        end
 
-                    -- Check for item obtain trigger
-                    local Wrapping = step_data.trigger_on_item_obtain
-                    if trigger_item and e.message_modified then
-                        local obtain_message = ""
-                        if playerName ~= "" then
-                            obtain_message = string.format("%s obtains a\nitem: %s.", playerName, trigger_item)
-                        end
-                        local purchase_message = string.format("%s for", trigger_item:lower())
+        -- HANDLE: trigger_on_item_obtain (Drops OR Purchases - Supports List)
+        local trigger_item_data = step_data.trigger_on_item_obtain
 
-                        if (obtain_message ~= "" and e.message_modified:contains(obtain_message)) or e.message_modified:contains(purchase_message) then
-                            print("QuestHelper Debug: Matched item trigger for: " .. trigger_item)
-                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                        end
-                    end
+        if trigger_item_data then
+            -- 1. Normalize into a list (table) so we can loop
+            local items_to_check = {}
+            if type(trigger_item_data) == 'string' then
+                table.insert(items_to_check, trigger_item_data)
+            elseif type(trigger_item_data) == 'table' then
+                items_to_check = trigger_item_data
+            end
+
+            -- 2. Loop through every item in the list
+            for _, current_item in ipairs(items_to_check) do
+
+                -- Case A: Dropped / Synthesized Items ("Oxos obtains a Flint Stone")
+                local matched_drop = false
+                if playerName ~= "" and
+                   incoming_text:find(playerName, 1, true) and
+                   incoming_text:find(current_item, 1, true) and
+                   incoming_text:find("obtains", 1, true) then
+                    matched_drop = true
+                end
+
+                -- Case B: Purchased Items ("You buy the lizard egg for...")
+                local matched_buy = false
+                if incoming_text:find("You buy", 1, true) and
+                   incoming_text:find(current_item, 1, true) then
+                    matched_buy = true
+                end
+
+                -- If matched, complete the step and break the loop
+                if matched_drop or matched_buy then
+                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                    break
                 end
             end
         end
