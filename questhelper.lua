@@ -94,6 +94,7 @@ local search_results = T{}
 local quest_data = T{}
 local location_data = T{}
 local zone_data = T{}
+local map_db = T{}
 local questIconTexture = nil -- [NEW] Variable to hold our icon texture
 
 ----------------------------------------------------------------------------------------------------
@@ -255,6 +256,19 @@ local function load_location_data()
         end
     else
         print(string.format('Warning: Could not load data/locations.lua. Beams relying on it will not work. Error: %s', err or "file not found"))
+    end
+end
+
+-- [Paste this right after load_location_data function ends]
+local function load_map_data()
+    local filepath = string.format('%saddons/%s/data/maps.lua', AshitaCore:GetInstallPath(), addon.name)
+    local chunk = loadfile(filepath)
+    if chunk then
+        local ok, res = pcall(chunk)
+        if ok then
+            map_db = T(res)
+            print(string.format("[%s] Loaded %d map calibrations.", addon.name, table.count(map_db)))
+        end
     end
 end
 
@@ -1024,6 +1038,36 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     local imageX, imageY = imgui.GetCursorScreenPos()
                     imgui.Image(tex_id, {w, h})
 
+                    local cal = img_data.map_calibration
+                    if not cal and img_data.zone_name and map_db[img_data.zone_name] then
+                        cal = map_db[img_data.zone_name]
+                    end
+
+                    if cal and img_data.zone_name then
+                        if zone_data[img_data.zone_name] and playerZoneId == zone_data[img_data.zone_name] then
+
+                            -- 1. Map X (Left/Right) uses Player X
+                            local relX = (playerPosX - cal.origin_x) * cal.scale_x
+
+                            -- 2. Map Y (Up/Down)
+                            -- We switch to 'playerPosY_height' because that variable currently
+                            -- holds the North/South data in your setup.
+                            local relY = (playerPosY_height - cal.origin_y) * cal.scale_y
+
+                            -- Center the dot if origin is the map center, or leave as is if origin is top-left
+                            -- (Assuming origin_x/y is the top-left world coordinate):
+                            if relX >= 0 and relX <= w and relY >= 0 and relY <= h then
+                                local markerX = imageX + relX
+                                local markerY = imageY + relY
+
+                                local dl = imgui.GetWindowDrawList()
+                                dl:AddCircleFilled({markerX, markerY}, 5, 0xFF0000FF) -- Red Dot
+                                dl:AddCircle({markerX, markerY}, 6, 0xFF000000)       -- Black Border
+                            end
+                        end
+                    end
+
+
                     if img_data.highlights then
                         local drawList = imgui.GetWindowDrawList()
                         for _, highlight in ipairs(img_data.highlights) do
@@ -1191,6 +1235,7 @@ ashita.events.register('load', 'load_callback', function()
     load_quest_data()
     load_location_data()
     load_zone_data()
+    load_map_data()
     -- [NEW] Load the quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')
     if not questIconTexture then

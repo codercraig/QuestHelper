@@ -316,6 +316,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 1,
+                          zone_name = "Bastok Mines",
                           highlights = {
                               { position = "H-10", offsetX = 16, offsetY = 16 },
                           },
@@ -350,6 +351,8 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        -- [NEW] 1. Define the Zone Name (Must match zones.lua)
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
