@@ -64,6 +64,18 @@ return {
         trigger_npc = "Phara",
         visual_mode = "beacon",
     },
+    ["Alois"] = {
+        target_pos = { x = 97.7, y = -22.0, z = 14.6 },
+        trigger_npc = "Alois",
+        visual_mode = "arc",
+        zone = "Metalworks",
+    },
+     ["Ayame"] = {
+        target_pos = { x = 134, y = -20.5, z = 33.3 },
+        trigger_npc = "Ayame",
+        visual_mode = "arc",
+        zone = "Metalworks",
+    },
     ["ZoneExit"] = {
         target_pos = { x = 10.0, y = 0.0, z = 10.0 },
         trigger_npc = "", -- Always active

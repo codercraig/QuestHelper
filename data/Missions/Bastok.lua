@@ -207,6 +207,7 @@ return {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
                 trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
                           file     = "maps/bastok_mines.png",
@@ -239,7 +240,17 @@ return {
             },
             {
                 text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made]",
-                trigger_on_item_obtain = {"quadav fetich head","pair of quadava fetich arms","quadav fetich torso","pair of quadava fetich legs"},
+
+                -- [NEW] This line turns the list below into a mandatory checklist
+                require_all_items = true,
+
+                -- I corrected "quadava" to "quadav" here to ensure it matches the game text
+                trigger_on_item_obtain = {
+                    "Quadav fetich head",
+                    "Quadav fetich arms",
+                    "Quadav fetich torso",
+                    "Quadav fetich legs"
+                },
                 images = {
                       {
                           file     = "maps/north_gustaberg.png",
@@ -254,6 +265,8 @@ return {
             },
             {
                 text = "Step 3: Return to the Bastok Gate Guard and trade the Head, Torso, Arms, and Legs fetiches to complete the mission!",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = {1005,1008},
                 images = {
                     {
                         file     = "maps/bastok_mines.png",
@@ -294,6 +307,9 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n \n",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
                           file     = "maps/bastok_mines.png",
@@ -326,6 +342,8 @@ return {
             },
             {
                 text = "Step 2: Talk to Cid in the Metalworks (H-8). \n \n",
+                onmob_target = {"Cid"},
+                trigger_on_event_id = 505,
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -346,6 +364,7 @@ return {
                        "It will then become a Faded Crystal, check your inventory and it should update visually to be a white crystal.\n" ..
                        "Remember to click on the tele-crystal, this will give you {KI:Dem Gate Crystal} allowing you to Teleport-Dem to that location later. \n \n" ..
                        "You can warp back to Bastok-Metalworks. \n \n",
+                trigger_on_item_obtain = "Faded Crystal",
                 images = {
                     {
                         file     = "maps/south_gustaberg.png",
@@ -387,6 +406,9 @@ return {
             {
                 text = "Step 4: Return and Trade Cid the Faded Crystal in the Metalworks(H-8).\n" ..
                        "Optional: Talk to Naji(J-8) for some cheesy dialogue. \n \n",
+                onmob_target = {"Cid"},
+                trigger_on_event_id = 506,
+
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -402,6 +424,8 @@ return {
             },
             {
                 text = "Step 5: Talk to Ayame inside the Cannonry in the Metalworks(K-7). \n \n",
+                onmob_target = {"Ayame"},
+                trigger_on_event_id = 712,
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -459,15 +483,11 @@ return {
             },
             {
                 text = "Step 2: Obtain a Lizard Egg! \n\n" ..
-                       "===== Purchase from Guild Merchants =====\n \n" ..
-                       "*Note: Merchants operate during specific in-game hours*\n" ..
-
-                       "- Chomo Jinjahl (Windurst Waters(North), E-8)\n \n" ..
                        "===== Buy from Auction House =====\n \n" ..
                        "- Check 'Food' > 'Ingredients' section for listings.\n \n" ..
                        "===== Obtain from Lizard Family =====\n \n" ..
                        "- Travel through South Gustaberg(D-9) to Dangruf Wadi.\n" ..
-                       "- Inside Dangruf Wadi Look for 'Steam Lizards'(G-11) - evel 16-20.\n" ..
+                       "- Inside Dangruf Wadi Look for 'Steam Lizards'(G-11) - level 16-20.\n" ..
                        "",
                 trigger_on_item_obtain = {"lizard egg"},
                 images = {
@@ -508,8 +528,8 @@ return {
             },
             {
                 text = "Step 3: Go to Metalworks(J-8) in Bastok and trade Alois a Lizard Egg to complete the mission",
+                onmob_target = {"Alois"},
                 trigger_on_event_id = { 373, 372 },
-                --trigger_on_talk = {"lizard egg"},
                 images = {
                     {
                         file     = "maps/metalworks.png",

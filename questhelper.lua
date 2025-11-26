@@ -65,7 +65,8 @@ local iconVertSize = ffi.sizeof('struct IconVertFormat')
 --------------------------------------------------------------------------------
 local QUESTHELPER_ALIAS = 'QuestHelper_settings'
 local default_settings = T{
-    step_states = T{}
+    step_states = T{},
+    partial_progress = T{}
 }
 local quest_settings = settings.load(default_settings, QUESTHELPER_ALIAS)
 
@@ -126,7 +127,6 @@ local playerZoneId = 0
 -- Runtime state for tracking the *current* NPC trigger
 local currentQuestTriggerNPC = nil
 local playerName = ""
-
 
 
 ----------------------------------------------------------------------------------------------------
@@ -352,6 +352,25 @@ local function ensure_key_path(t, ...)
     return current
 end
 
+-- [NEW] Partial State Helpers (For checklists)
+local function get_partial_state(cat, sub, mis, step, item_name)
+    local path = ensure_key_path(quest_settings.partial_progress, cat, sub, mis, step)
+    return path[item_name:lower()] or false
+end
+
+local function set_partial_state(cat, sub, mis, step, item_name, state)
+    local path = ensure_key_path(quest_settings.partial_progress, cat, sub, mis, step)
+    path[item_name:lower()] = state
+    print(string.format("\30\105[QuestHelper] Checked item: %s", item_name))
+    settings.save(QUESTHELPER_ALIAS, quest_settings)
+end
+
+local function check_all_items_complete(cat, sub, mis, step, required_list)
+    for _, item in ipairs(required_list) do
+        if not get_partial_state(cat, sub, mis, step, item) then return false end
+    end
+    return true
+end
 --------------------------------------------------------------------------------
 -- Text Wrapping (QuestHelper)
 --------------------------------------------------------------------------------
@@ -911,6 +930,27 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     else
                         imgui.Text(wrap_text(text, 60))
                     end
+
+                    -- [NEW] CHECKLIST UI DISPLAY
+                    -- Only show if step is incomplete AND requires multiple items
+                    if not st and step_data.require_all_items and step_data.trigger_on_item_obtain then
+                        local list = {}
+                        if type(step_data.trigger_on_item_obtain) == 'string' then table.insert(list, step_data.trigger_on_item_obtain)
+                        else list = step_data.trigger_on_item_obtain end
+
+                        for _, item in ipairs(list) do
+                            local gotIt = get_partial_state(currentTopCategory, currentSubfile, current_mission, i, item)
+
+                            imgui.Indent(20) -- Indent for visual hierarchy
+                            if gotIt then
+                                imgui.TextColored({0,1,0,1}, "[x] " .. item) -- Green [x]
+                            else
+                                imgui.TextColored({1,1,0,1}, "[ ] " .. item) -- Yellow [ ]
+                            end
+                            imgui.Unindent(20)
+                        end
+                    end
+
                 end
 
                 -- Rewards
@@ -1370,9 +1410,24 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
                 end
 
                 -- If matched, complete the step and break the loop
+                -- If matched, handle completion logic
                 if matched_drop or matched_buy then
-                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                    break
+
+                    -- [NEW] CHECKLIST LOGIC
+                    if step_data.require_all_items then
+                        -- Mark THIS specific item as collected
+                        set_partial_state(currentTopCategory, currentSubfile, current_mission, step_idx, current_item, true)
+
+                        -- Check if ALL items in the list are now collected
+                        if check_all_items_complete(currentTopCategory, currentSubfile, current_mission, step_idx, items_to_check) then
+                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                        end
+                    else
+                        -- Standard behavior (Any item completes the step)
+                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
+                    end
+
+                    break -- Stop checking other items in the list for this message
                 end
             end
         end
