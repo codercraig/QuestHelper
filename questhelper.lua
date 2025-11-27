@@ -1060,9 +1060,51 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 local markerX = imageX + relX
                                 local markerY = imageY + relY
 
+                                -- Get player heading
+                                local playerEntity = GetPlayerEntity()
+                                local playerHeading = 0
+                                if playerEntity then
+                                    playerHeading = playerEntity.Heading
+                                end
+
+                                -- Helper function to convert polar to cartesian with rotation
+                                local function polarToXY(radius, angle)
+                                    local x = radius * math.cos(angle - math.pi/2)
+                                    local y = radius * math.sin(angle - math.pi/2)
+                                    return x, y
+                                end
+
+                                -- Arrow size and angles
+                                local arrowLength = 12
+                                local arrowWidth = 6
+                                local lookAngle = playerHeading + math.pi/2
+
+                                -- Calculate arrow tip (pointing forward)
+                                local tipX, tipY = polarToXY(arrowLength, lookAngle)
+
+                                -- Calculate base vertices (left and right wings)
+                                local leftX, leftY = polarToXY(arrowWidth, lookAngle + math.pi * 0.6)
+                                local rightX, rightY = polarToXY(arrowWidth, lookAngle - math.pi * 0.6)
+
+                                -- Translate to screen position
                                 local dl = imgui.GetWindowDrawList()
-                                dl:AddCircleFilled({markerX, markerY}, 5, 0xFF0000FF) -- Red Dot
-                                dl:AddCircle({markerX, markerY}, 6, 0xFF000000)       -- Black Border
+
+                                -- Draw filled triangle (red arrow)
+                                dl:AddTriangleFilled(
+                                    {markerX + tipX, markerY + tipY},    -- Tip
+                                    {markerX + leftX, markerY + leftY},  -- Left wing
+                                    {markerX + rightX, markerY + rightY}, -- Right wing
+                                    0xFF0000FF -- Red
+                                )
+
+                                -- Draw black outline
+                                dl:AddTriangle(
+                                    {markerX + tipX, markerY + tipY},
+                                    {markerX + leftX, markerY + leftY},
+                                    {markerX + rightX, markerY + rightY},
+                                    0xFF000000, -- Black
+                                    2.0 -- Line thickness
+                                )
                             end
                         end
                     end
