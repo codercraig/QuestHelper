@@ -1,4 +1,5 @@
 return {
+    --Bastok
     ["Metalworks"] = {
         -- Based on 512x512 map image
         origin_x = -320,  -- World X at Left Edge
@@ -38,12 +39,27 @@ return {
         scale_x  = 0.20,   -- Pixels per Yalm
         scale_y  = -0.20   -- Negative because Screen Y is Down, World Z is Up
     },
-        ["North Gustaberg"] = {
+    ["North Gustaberg"] = {
         -- Adjusted calibration based on debug data
         origin_x = -1310,  -- World X at Left Edge (adjusted from -335)
         origin_y = 1700,   -- World Z at Top Edge
         scale_x  = 0.19,   -- Pixels per Yalm
         scale_y  = -0.19   -- Negative because Screen Y is Down, World Z is Up
     },
+    -- Beadeuax
+    ["Beadeaux"] = {
+    [1] = {
+        origin_x = -200,
+        origin_y = -200,
+        scale_x = 1.0,
+        scale_y = -1.0
+    },
+    [2] = {
+        origin_x = -100,  -- Different calibration for floor 2
+        origin_y = 100,
+        scale_x = 1.0,
+        scale_y = -1.0
+    }
+    }
     -- Add more zones here as you calibrate them!
 }

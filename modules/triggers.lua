@@ -92,7 +92,7 @@ local last_trigger_debug_time = 0
 local TRIGGER_DEBUG_INTERVAL = 10
 
 -- Checks trigger zones (square/line regions player walks through)
-function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx, enable_debug)
+function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx, enable_debug, player_zone_id)
     if type(step_data) == 'table' and step_data.trigger_zones then
         local current_time = os.time()
         local should_debug = enable_debug and (current_time - last_trigger_debug_time) >= TRIGGER_DEBUG_INTERVAL
@@ -112,9 +112,25 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
                 end
 
                 if dx < half_size and dz < half_size then
-                    print(string.format("\30\105[QH]\30\01 Trigger Zone HIT! Completing step %d", step_idx))
-                    quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
-                    return true
+                    -- Check if this zone switches maps
+                    if zone.switch_to_map and player_zone_id then
+                        quest_state.setCurrentMap(player_zone_id, zone.switch_to_map)
+                    end
+
+                    -- Check if we should complete the step (default: true)
+                    local should_complete = zone.complete_step
+                    if should_complete == nil then
+                        should_complete = true
+                    end
+
+                    if should_complete then
+                        print(string.format("\30\105[QH]\30\01 Trigger Zone HIT! Completing step %d", step_idx))
+                        quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
+                        return true
+                    else
+                        -- Just switched maps, don't complete step
+                        return false
+                    end
                 end
             -- Line trigger zone
             elseif zone.type == 'line' and playerPosX and playerPosZ_depth and zone.start and zone.stop then
@@ -122,8 +138,25 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
                 local distSq = distToSegmentSquared(player_pos, zone.start, zone.stop)
                 local width = zone.width or 2
                 if distSq < (width * width) then
-                    quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
-                    return true
+                    -- Check if this zone switches maps
+                    if zone.switch_to_map and player_zone_id then
+                        quest_state.setCurrentMap(player_zone_id, zone.switch_to_map)
+                    end
+
+                    -- Check if we should complete the step (default: true)
+                    local should_complete = zone.complete_step
+                    if should_complete == nil then
+                        should_complete = true
+                    end
+
+                    if should_complete then
+                        print(string.format("\30\105[QH]\30\01 Line Trigger HIT! Completing step %d", step_idx))
+                        quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
+                        return true
+                    else
+                        -- Just switched maps, don't complete step
+                        return false
+                    end
                 end
             end
         end

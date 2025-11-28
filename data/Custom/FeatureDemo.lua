@@ -10,21 +10,56 @@ return {
                     { type = 'square', center = { x = 0,  y = 0, z = -81 }, size = 2 },
                     { type = 'line', start = { x = 50, y = 0, z = -81 }, stop = { x = 50, y = -5, z = -71 } }
                 },
-                zone = "Bastok Mines"
+                zone_name = "Bastok Markets"
             },
             {
                 text = "This is a line. It connects two points.",
+                zone = "Bastok Mines",
                 trigger_zones = {
                     { type = 'line', start = { x = 26, y = 0, z = -81 }, stop =  { x = 36, y = 0, z = -81 } }
                 },
-                zone = "Bastok Mines"
+            },
+            {
+                text = "Map Switch Demo: Walk through the line to switch between map 1 and map 2!",
+                zone = "Bastok Mines",
+                trigger_zones = {
+                    {
+                        type = 'line',
+                        start = { x = -29, y = 13.6, z = 89.5 },
+                        stop = { x = -38, y = 13.6, z = 89.5 },
+                        switch_to_map = 2,  -- Switches to map 2
+                        complete_step = false
+                    }
+                },
+                images = {
+                {
+                    file     = "maps/beadeaux_1.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Beadeaux",
+                    --state    = 3,
+                    highlights = {
+                        { position = "H-10", offsetX = 16, offsetY = 16 },
+                    },
+                },
+                {
+                    file     = "maps/beadeaux_2.png",
+                    width    = 512,
+                    height   = 512,
+                    --zone_name = "Beadeaux",
+                    --state    = 1,
+                    highlights = {
+                        { position = "D-11", offsetX = 16, offsetY = 16 },
+                    },
+                },
+            },
             },
             {
                 text = "This is a square. It is drawn at the specified center.",
                 draw_type = 'square',
                 center = { x = -10, y = -3.0, z = -115 },
                 size = 3,
-                zone = "Bastok Mines"
+                zone = "Dangruf Wadi",
             },
             {
                 text = "Now, go obtain a some stuff. You can get them outside.",

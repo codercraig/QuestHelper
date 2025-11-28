@@ -39,7 +39,17 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                 -- Now draw overlays using the saved position
                 local cal = img_data.map_calibration
                 if not cal and img_data.zone_name and map_db[img_data.zone_name] then
-                    cal = map_db[img_data.zone_name]
+                    local zone_config = map_db[img_data.zone_name]
+
+                    -- Check if this is a multi-floor zone (has numeric indices)
+                    if zone_config[1] then
+                        -- Multi-floor zone: use current_map to select calibration
+                        local current_map_num = quest_state.getCurrentMap(player_module.zoneId)
+                        cal = zone_config[current_map_num] or zone_config[1] -- Fallback to map 1
+                    else
+                        -- Single-floor zone: use calibration directly
+                        cal = zone_config
+                    end
                 end
 
                 -- Draw player arrow on map (only if in matching zone)

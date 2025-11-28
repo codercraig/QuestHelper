@@ -186,7 +186,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 -- NOTE: posY_height is actually the Z coordinate (depth), posZ_depth is actually Y (elevation)
                 if triggers_module.checkTriggerZones(step_data, player_module.posX, player_module.posY_height,
                                                     quest_state, currentTopCategory, currentSubfile,
-                                                    current_mission, step_idx, ENABLE_TRIGGER_DEBUG) then
+                                                    current_mission, step_idx, ENABLE_TRIGGER_DEBUG, player_module.zoneId) then
                     return
                 end
 

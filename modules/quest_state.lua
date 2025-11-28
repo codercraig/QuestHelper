@@ -8,7 +8,8 @@ local QUESTHELPER_ALIAS = 'QuestHelper_settings'
 local default_settings = T{
     step_states = T{},
     partial_progress = T{},
-    kill_counts = T{}
+    kill_counts = T{},
+    current_map = T{}  -- Tracks active map number per zone ID
 }
 
 -- Load settings
@@ -83,6 +84,18 @@ end
 function quest_state.setKillCount(cat, sub, mis, step, count)
     local path = ensure_key_path(quest_state.settings.kill_counts, cat, sub, mis)
     path[step] = count
+    settings.save(QUESTHELPER_ALIAS, quest_state.settings)
+end
+
+-- Gets the active map number for a zone (defaults to 1)
+function quest_state.getCurrentMap(zone_id)
+    return quest_state.settings.current_map[zone_id] or 1
+end
+
+-- Sets the active map number for a zone
+function quest_state.setCurrentMap(zone_id, map_num)
+    quest_state.settings.current_map[zone_id] = map_num
+    print(string.format("\30\106[QH]\30\01 Switched to map %d", map_num))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 
