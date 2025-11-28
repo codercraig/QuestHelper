@@ -326,6 +326,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 1,
+                          zone_name = "Bastok Markets",
                           highlights = {
                               { position = "D-11", offsetX = 16, offsetY = 16 },
                           },
@@ -335,6 +336,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 1,
+                          zone_name = "Port Bastok",
                           highlights = {
                               { position = "L-6", offsetX = 16, offsetY = 16 },
                           },
@@ -345,6 +347,10 @@ return {
                 text = "Step 2: Talk to Cid in the Metalworks (H-8). \n \n",
                 onmob_target = {"Cid"},
                 trigger_on_event_id = 505,
+                -- items_needed: Shows in UI but does NOT auto-complete the step
+                items_needed = {
+                    " Crystal"
+                },
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -374,6 +380,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "South Gustaberg",
                         highlights = {
                             { position = "E-6", offsetX = 16, offsetY = 16 },
                         },
@@ -383,6 +390,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "North Gustaberg",
                         highlights = {
                             { position = "D-6", offsetX = 16, offsetY = 16 },
                             { position = "E-6", offsetX = 16, offsetY = 16 },
@@ -492,6 +500,9 @@ return {
                        "- Travel through South Gustaberg(D-9) to Dangruf Wadi.\n" ..
                        "- Inside Dangruf Wadi Look for 'Steam Lizards'(G-11) - level 16-20.\n" ..
                        "",
+                items_needed = {
+                    "Lizard Egg"
+                },
                 trigger_on_item_obtain = {"lizard egg"},
                 images = {
                     {
@@ -539,6 +550,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },

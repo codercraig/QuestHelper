@@ -1,77 +1,46 @@
 -- [[
---  QuestHelper (v1.5.2)
+--  QuestHelper (v2.0.0 - Refactored)
 --  Original by Oxos
 --  Integrated with OnMob (v2.6.6) functionality.
+--  Refactored into modular architecture
 --
---  v1.5.2 - Re-based on v1.5. Retains the user's correct arc logic.
---         - Added Quest Icon drawing function.
---         - FIXED Icon position to correctly read the swapped Y/Z
---           from locations.lua.
---         - FIXED /onmob_getpos to print swapped Y/Z
---           to match the user's locations.lua format.
+--  v2.0.0 - Complete refactor into separate modules for maintainability
+--         - Same functionality, cleaner code organization
 -- ]]
 
 require('common')
 addon.author   = 'Oxos'
 addon.name     = 'QuestHelper'
-addon.version  = '1.0'
+addon.version  = '2.0.0'
 
--- QuestHelper Requirements
+-- Core Requirements
 local imgui        = require('imgui')
-local settings     = require('settings')
 local image_loader = require('images')
-local ffi          = require('ffi')
-local bit          = require('bit')
+local helpers      = require('helpers')
 
--- OnMob Requirements
-local d3d = require('d3d8')
-local d3d8dev = require('d3d8').get_device() -- [NEW] Get D3D device
-local C = ffi.C                             -- [NEW] Get FFI C library
-local helpers = require('helpers')
-if not helpers then
-    error("[" .. addon.name .. "] helpers.lua is missing.")
-end
-
+-- External drawing modules (existing)
 local drawArcModule = require('drawArc')
-if not drawArcModule then
-    error("[" .. addon.name .. "] drawArc.lua is missing. Ensure it and Bezier3D_2.lua are present.")
-end
-
 local drawingModule = require('drawing')
-if not drawingModule then
-    error("[" .. addon.name .. "] drawing.lua is missing.")
-end
 
--- [NEW] FFI definition for our 2D icon vertices
-ffi.cdef [[
-    #pragma pack(1)
-    struct IconVertFormat
-    {
-        float x;
-        float y;
-        float z;
-        float rhw;
-        unsigned int diffuse;
-        float u;
-        float v;
-    };
-]]
-local iconVertFormatMask = bit.bor(C.D3DFVF_XYZRHW, C.D3DFVF_DIFFUSE, C.D3DFVF_TEX1)
-local iconVertSize = ffi.sizeof('struct IconVertFormat')
+-- New modular architecture
+local player_module    = require('modules.player')
+local quest_data_loader = require('modules.quest_data')
+local quest_state      = require('modules.quest_state')
+local triggers_module  = require('modules.triggers')
+local beam_drawing     = require('modules.beam_drawing')
+local ui_main          = require('modules.ui_main')
+local ui_images        = require('modules.ui_images')
+local map_renderer     = require('modules.map_renderer')
+local utils            = require('modules.utils')
+local inventory_cache  = require('modules.inventory_cache')
 
+-- Validation
+if not helpers then error("[" .. addon.name .. "] helpers.lua is missing.") end
+if not drawArcModule then error("[" .. addon.name .. "] drawArc.lua is missing.") end
+if not drawingModule then error("[" .. addon.name .. "] drawing.lua is missing.") end
 
 --------------------------------------------------------------------------------
--- Constants / Settings (QuestHelper)
---------------------------------------------------------------------------------
-local QUESTHELPER_ALIAS = 'QuestHelper_settings'
-local default_settings = T{
-    step_states = T{},
-    partial_progress = T{}
-}
-local quest_settings = settings.load(default_settings, QUESTHELPER_ALIAS)
-
---------------------------------------------------------------------------------
--- Current UI states (QuestHelper)
+-- UI State Variables
 --------------------------------------------------------------------------------
 local currentTopCategory = nil
 local currentSubfile     = nil
@@ -83,472 +52,29 @@ local lastMainW, lastMainH = 400, 600
 local step_trigger_flags = T{}
 
 --------------------------------------------------------------------------------
--- Search Feature (QuestHelper)
---------------------------------------------------------------------------------
-local search_query   = ""
-local search_results = T{}
-
---------------------------------------------------------------------------------
--- Data from subfolders
+-- Data Storage
 --------------------------------------------------------------------------------
 local quest_data = T{}
 local location_data = T{}
 local zone_data = T{}
 local map_db = T{}
-local questIconTexture = nil -- [NEW] Variable to hold our icon texture
+local questIconTexture = nil
 
-----------------------------------------------------------------------------------------------------
--- Configuration & Data (from OnMob v2.6.6)
-----------------------------------------------------------------------------------------------------
--- Player Arc Start Offsets (from OnMob v2.6.6)
-local PLAYER_ARC_START_X_OFFSET = 0
-local PLAYER_ARC_START_Y_OFFSET_ON_PLAYER = -2
-local PLAYER_ARC_START_Z_OFFSET = 0
-
--- Beam Visuals Configuration
-local BEAM_BASE_COLOR_R, BEAM_BASE_COLOR_G, BEAM_BASE_COLOR_B = 1.0, 1.0, 0.0 -- Yellow base
-local BEAM_MIN_ALPHA = 0.4
-local BEAM_MAX_ALPHA = 0.9
-local BEAM_PULSE_SPEED = 2.0
-local BEAM_APPEAR_DURATION = 3
-
+--------------------------------------------------------------------------------
+-- Debug Settings
+--------------------------------------------------------------------------------
 local ENABLE_VERBOSE_DEBUG = false
 local DEBUG_PRINT_INTERVAL = 10
 local lastDebugPrintTime = 0
-
--- Runtime State (from OnMob)
-local beamAppearProgress = 0.0
 local lastFrameTime = os.clock()
-local ARGB_BEAM_COLOR
-
--- Player position (updated each frame)
-local playerPosX, playerPosY_height, playerPosZ_depth = 0,0,0
-local playerZoneId = 0
-
--- Runtime state for tracking the *current* NPC trigger
-local currentQuestTriggerNPC = nil
-local playerName = ""
-
-
-----------------------------------------------------------------------------------------------------
--- Helper Functions (from OnMob)
-----------------------------------------------------------------------------------------------------
-local function calculateDynamicColor()
-    local time = os.clock()
-    local pulse = (math.sin(time * BEAM_PULSE_SPEED) + 1) / 2
-    local currentAlpha = BEAM_MIN_ALPHA + pulse * (BEAM_MAX_ALPHA - BEAM_MIN_ALPHA)
-    local A_int = math.floor(currentAlpha * 255)
-    local R_int = math.floor(BEAM_BASE_COLOR_R * 255)
-    local G_int = math.floor(BEAM_BASE_COLOR_G * 255)
-    local B_int = math.floor(BEAM_BASE_COLOR_B * 255)
-    ARGB_BEAM_COLOR = bit.bor(bit.lshift(A_int, 24), bit.lshift(R_int, 16), bit.lshift(G_int, 8), B_int)
-end
-
-local function updatePlayerPosition(mem)
-    if not mem then return false end
-
-    -- Get Player Name via GetPlayerEntity as requested by user
-    local playerInfo = GetPlayerEntity()
-    if playerInfo and playerInfo.Name then
-        playerName = playerInfo.Name
-    end
-
-    local party = mem:GetParty()
-    local entityMgr = mem:GetEntity()
-    if not party or not entityMgr then return false end
-    playerZoneId = party:GetMemberZone(0)
-    local playerIndex = party:GetMemberTargetIndex(0)
-    local pActorPointer = 0
-    if playerIndex == 0xFFFF or playerIndex == nil then
-        local player = mem:GetPlayer()
-        if player and player:GetActorPointer() ~= 0 then
-             pActorPointer = player:GetActorPointer()
-        else return false
-        end
-    else
-        pActorPointer = entityMgr:GetActorPointer(playerIndex)
-    end
-    if pActorPointer == 0 then return false end
-    playerPosX = ashita.memory.read_float(pActorPointer + 0x678)
-    playerPosZ_depth = ashita.memory.read_float(pActorPointer + 0x67C) -- Z (Depth)
-    playerPosY_height = ashita.memory.read_float(pActorPointer + 0x680) -- Y (Height)
-    return true
-end
-
--- [NEW] Function to draw our 2D icon
-local function drawQuestIcon(x, y, z, rhw, size, color)
-    local halfSize = size * 0.5
-    local x1, y1 = x - halfSize, y - halfSize
-    local x2, y2 = x + halfSize, y + halfSize
-
-    -- Create a 4-vertex quad
-    local vertices = ffi.new('struct IconVertFormat[4]', {
-        { x1, y1, z, rhw, color, 0, 0 }, -- Top-left
-        { x2, y1, z, rhw, color, 1, 0 }, -- Top-right
-        { x1, y2, z, rhw, color, 0, 1 }, -- Bottom-left
-        { x2, y2, z, rhw, color, 1, 1 }  -- Bottom-right
-    })
-
-    -- Set device states for 2D texture drawing
-    d3d8dev:SetStreamSource(0, nil, 0) -- Unbind any existing buffer
-    d3d8dev:SetVertexShader(iconVertFormatMask)
-    d3d8dev:SetTexture(0, questIconTexture)
-
-    -- Standard alpha blending
-    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0) -- No Z-buffer
-    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
-    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
-    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
-
-    -- Modulate texture color with vertex color (for tinting/alpha)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP, C.D3DTOP_MODULATE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP, C.D3DTOP_MODULATE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG2, C.D3DTA_DIFFUSE)
-
-    -- Draw the quad
-    d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, vertices, iconVertSize)
-end
 
 --------------------------------------------------------------------------------
--- JSON/Data Loading (QuestHelper)
+-- Main Rendering Loop
 --------------------------------------------------------------------------------
-local function decode_json(json_str)
-    local status, result = pcall(function()
-        return load("return " .. json_str)()
-    end)
-    if status then
-        return result
-    else
-        print('Failed to parse data file:', result)
-        return nil
-    end
-end
+local lastInventoryTriggerCheck = 0
+local INVENTORY_TRIGGER_CHECK_INTERVAL = 3.0 -- Check every 3 seconds
 
-local function load_zone_data()
-    local filepath = string.format('%saddons/%s/data/zones.lua', AshitaCore:GetInstallPath(), addon.name)
-    local chunk, err = loadfile(filepath)
-    if chunk then
-        local ok, result = pcall(chunk)
-        if ok and type(result) == 'table' then
-            zone_data = T(result)
-            print(string.format("[%s] Loaded %d zones from data/zones.lua.", addon.name, table.count(zone_data)))
-        else
-            print(string.format('Error running file: %s -> %s', filepath, err or "unknown"))
-        end
-    else
-        print(string.format('Warning: Could not load data/zones.lua. Zone checks will not work. Error: %s', err or "file not found"))
-    end
-end
-
-local function load_location_data()
-    local filepath = string.format('%saddons/%s/data/locations.lua', AshitaCore:GetInstallPath(), addon.name)
-    local chunk, err = loadfile(filepath)
-    if chunk then
-        local ok, result = pcall(chunk)
-        if ok and type(result) == 'table' then
-            location_data = T(result)
-            print(string.format("[%s] Loaded %d locations from data/locations.lua.", addon.name, table.count(location_data)))
-        else
-            print(string.format('Error running file: %s -> %s', filepath, err or "unknown"))
-        end
-    else
-        print(string.format('Warning: Could not load data/locations.lua. Beams relying on it will not work. Error: %s', err or "file not found"))
-    end
-end
-
--- [Paste this right after load_location_data function ends]
-local function load_map_data()
-    local filepath = string.format('%saddons/%s/data/maps.lua', AshitaCore:GetInstallPath(), addon.name)
-    local chunk = loadfile(filepath)
-    if chunk then
-        local ok, res = pcall(chunk)
-        if ok then
-            map_db = T(res)
-            print(string.format("[%s] Loaded %d map calibrations.", addon.name, table.count(map_db)))
-        end
-    end
-end
-
-local function load_quest_data()
-    local baseFolder = string.format('%saddons/%s/data/', AshitaCore:GetInstallPath(), addon.name)
-    local dynamic_directories_list = T{}
-    local dirCmdScanCategories = string.format('dir /b /ad "%s"', baseFolder:gsub('/', '\\'))
-    local pCategories = io.popen(dirCmdScanCategories)
-    if pCategories then
-        for category_name_raw in pCategories:lines() do
-            local category_name = category_name_raw:match("^%s*(.-)%s*$")
-            if category_name and #category_name > 0 and category_name ~= "." and category_name ~= ".." then
-                table.insert(dynamic_directories_list, category_name)
-            end
-        end
-        pCategories:close()
-        if #dynamic_directories_list == 0 then
-            print("QuestHelper: WARNING - No category subdirectories found in " .. baseFolder)
-        else
-            print("QuestHelper: Discovered categories: " .. table.concat(dynamic_directories_list, ", "))
-        end
-    else
-        print("QuestHelper: ERROR - Could not execute 'dir' command to find categories in " .. baseFolder)
-        return
-    end
-
-    for _, subdir in ipairs(dynamic_directories_list) do
-        local folderPath = baseFolder .. subdir .. '/'
-        local dirCmd = 'dir "' .. folderPath .. '" /b'
-        local p = io.popen(dirCmd)
-        if p then
-            for file_name in p:lines() do
-                if file_name:match('%.lua$') then
-                    local filepath = folderPath .. file_name
-                    local chunk, err = loadfile(filepath)
-                    if chunk then
-                        local ok, result = pcall(chunk)
-                        if ok and type(result) == 'table' then
-                            local shortName = file_name:gsub('%.lua$', '')
-                            if not quest_data[subdir] then
-                                quest_data[subdir] = T{}
-                            end
-                            quest_data[subdir][shortName] = T(result)
-                        else
-                            print(string.format('Error running file: %s -> %s', filepath, err or "unknown"))
-                        end
-                    else
-                        print(string.format('Error loading Lua file: %s -> %s', filepath, err or "unknown"))
-                    end
-                elseif file_name:match('%.json$') then
-                    local filepath = folderPath .. file_name
-                    local f = io.open(filepath, 'r')
-                    if f then
-                        local content = f:read('*all')
-                        f:close()
-                        local data = decode_json(content)
-                        if data then
-                            local shortName = file_name:gsub('%.json$', '')
-                            if not quest_data[subdir] then
-                                quest_data[subdir] = T{}
-                            end
-                            quest_data[subdir][shortName] = T(data)
-                        else
-                            print(string.format('Error parsing JSON data: %s', filepath))
-                        end
-                    end
-                end
-            end
-            p:close()
-        end
-    end
-end
-
---------------------------------------------------------------------------------
--- Utility (QuestHelper)
---------------------------------------------------------------------------------
-local function get_sorted_keys(tbl)
-    local keys = {}
-    for k in pairs(tbl) do
-        table.insert(keys, k)
-    end
-    table.sort(keys)
-    return keys
-end
-
-local function ensure_key_path(t, ...)
-    local keys = {...}
-    local current = t
-    for _, key in ipairs(keys) do
-        if not current[key] then
-            current[key] = T{}
-        end
-        current = current[key]
-    end
-    return current
-end
-
--- [NEW] Partial State Helpers (For checklists)
-local function get_partial_state(cat, sub, mis, step, item_name)
-    local path = ensure_key_path(quest_settings.partial_progress, cat, sub, mis, step)
-    return path[item_name:lower()] or false
-end
-
-local function set_partial_state(cat, sub, mis, step, item_name, state)
-    local path = ensure_key_path(quest_settings.partial_progress, cat, sub, mis, step)
-    path[item_name:lower()] = state
-    print(string.format("\30\105[QuestHelper] Checked item: %s", item_name))
-    settings.save(QUESTHELPER_ALIAS, quest_settings)
-end
-
-local function check_all_items_complete(cat, sub, mis, step, required_list)
-    for _, item in ipairs(required_list) do
-        if not get_partial_state(cat, sub, mis, step, item) then return false end
-    end
-    return true
-end
---------------------------------------------------------------------------------
--- Text Wrapping (QuestHelper)
---------------------------------------------------------------------------------
-local function wrap_text(text, max_length)
-    local wrapped_text = {}
-    for line in text:gmatch("[^\r\n]+") do
-        local start = 1
-        while start <= #line do
-            local next_break = start + max_length - 1
-            if next_break >= #line then
-                table.insert(wrapped_text, line:sub(start))
-                break
-            end
-            local space_pos = line:sub(start, next_break):match("^.*() ") or max_length
-            table.insert(wrapped_text, line:sub(start, start + space_pos - 1))
-            start = start + space_pos
-        end
-    end
-    return table.concat(wrapped_text, "\n")
-end
-
---------------------------------------------------------------------------------
--- Step Completion (QuestHelper)
---------------------------------------------------------------------------------
-local function get_step_state(topCat, subfile, mission, step)
-    local path = ensure_key_path(quest_settings.step_states, topCat, subfile, mission)
-    return path[step] or false
-end
-
-local function set_step_state(topCat, subfile, mission, step, state)
-    -- Clear any existing trigger flags for this specific step to ensure a clean state
-    if step_trigger_flags[topCat] and step_trigger_flags[topCat][subfile] and step_trigger_flags[topCat][subfile][mission] then
-        step_trigger_flags[topCat][subfile][mission][step] = nil
-    end
-
-    local path = ensure_key_path(quest_settings.step_states, topCat, subfile, mission)
-    path[step] = state
-    print(string.format("Saving step: %s -> %s -> %s -> Step %d = %s", topCat, subfile, mission, step, tostring(state)))
-    settings.save(QUESTHELPER_ALIAS, quest_settings)
-end
-
---------------------------------------------------------------------------------
--- Identify "Current Step" (QuestHelper)
---------------------------------------------------------------------------------
-local function get_current_step(topCat, subfile, mission)
-    local mdata = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
-    if not mdata or not mdata.steps then
-        return 1
-    end
-    for i = 1, #mdata.steps do
-        if not get_step_state(topCat, subfile, mission, i) then
-            return i
-        end
-    end
-    return #mdata.steps + 1
-end
-
---------------------------------------------------------------------------------
--- Completion Checks (QuestHelper)
---------------------------------------------------------------------------------
-local function is_subfile_complete(topCat, subfile)
-    local fileData = quest_data[topCat] and quest_data[topCat][subfile]
-    if not fileData then return false end
-    for mission_name, mission_data in pairs(fileData) do
-        local steps = mission_data.steps or {}
-        for i = 1, #steps do
-            if not get_step_state(topCat, subfile, mission_name, i) then
-                return false
-            end
-        end
-    end
-    return true
-end
-
-local function is_mission_complete(topCat, subfile, mission)
-    local mission_data = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
-    if not mission_data then return false end
-    local steps = mission_data.steps or {}
-    for i = 1, #steps do
-        if not get_step_state(topCat, subfile, mission, i) then
-            return false
-        end
-    end
-    return true
-end
-
---------------------------------------------------------------------------------
--- Progress (QuestHelper)
---------------------------------------------------------------------------------
-local function calculate_progress(topCat, subfile, mission)
-    local mdata = quest_data[topCat][subfile][mission]
-    local steps = mdata.steps or {}
-    local completed = 0
-    for i = 1, #steps do
-        if get_step_state(topCat, subfile, mission, i) then
-            completed = completed + 1
-        end
-    end
-    local total = #steps
-    local pct   = 0
-    if total > 0 then
-        pct = (completed / total) * 100
-    end
-    return pct, completed, total
-end
-
---------------------------------------------------------------------------------
--- Return images (QuestHelper)
---------------------------------------------------------------------------------
-local function get_images_for_step(topCat, subfile, mission, stepIndex)
-    local mdata = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
-    if not mdata or not mdata.steps then return {} end
-    local step_data = mdata.steps[stepIndex]
-    if type(step_data) == 'table' and step_data.images then
-        local matched = {}
-        for _, image_info in ipairs(step_data.images) do
-            if (image_info.state == stepIndex) or (image_info.state == nil) then
-                table.insert(matched, image_info)
-            end
-        end
-        return matched
-    end
-    return {}
-end
-
---------------------------------------------------------------------------------
--- Search (QuestHelper)
---------------------------------------------------------------------------------
-local function perform_search()
-    search_results = T{}
-    local query = (search_query or ""):lower()
-    if query == "" then return end
-    for topCategory, subfiles in pairs(quest_data) do
-        for subfile, missions in pairs(subfiles) do
-            for mission_name, _ in pairs(missions) do
-                if mission_name:lower():find(query, 1, true) then
-                    table.insert(search_results, {
-                        topCategory = topCategory,
-                        subfile     = subfile,
-                        mission     = mission_name
-                    })
-                end
-            end
-        end
-    end
-end
-
-local function distToSegmentSquared(p, v, w)
-    local l2 = (v.x - w.x)^2 + (v.z - w.z)^2
-    if l2 == 0 then return (p.x - v.x)^2 + (p.z - v.z)^2 end
-    local t = ((p.x - v.x) * (w.x - v.x) + (p.z - v.z) * (w.z - v.z)) / l2
-    t = math.max(0, math.min(1, t))
-    local projX = v.x + t * (w.x - v.x)
-    local projZ = v.z + t * (w.z - v.z)
-    return (p.x - projX)^2 + (p.z - projZ)^2
-end
-
---------------------------------------------------------------------------------
--- Main Rendering - MERGED
---------------------------------------------------------------------------------
 ashita.events.register('d3d_present', 'present_callback', function()
-
-    -- [[ START OF MERGED ONMOB LOGIC ]]
-
     local systemCurrentTime = os.time()
     local frameCurrentTime = os.clock()
     local deltaTime = frameCurrentTime - lastFrameTime
@@ -562,60 +88,104 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
+    -- Update player position
     local memManager = AshitaCore:GetMemoryManager()
-
     if memManager then
-        if not updatePlayerPosition(memManager) then
-            if shouldPrintDebugNow then print("["..addon.name.."] Could not update player position for dynamic arc start.") end
+        if not player_module.updatePosition(memManager) then
+            if shouldPrintDebugNow then
+                print("["..addon.name.."] Could not update player position.")
+            end
         end
     else
-        if shouldPrintDebugNow then print("["..addon.name.."] MemoryManager not ready.") end
+        if shouldPrintDebugNow then
+            print("["..addon.name.."] MemoryManager not ready.")
+        end
     end
 
+    -- Periodic inventory check for trigger_on_item_obtain
+    if currentTopCategory and currentSubfile and current_mission then
+        local timeSinceLastCheck = frameCurrentTime - lastInventoryTriggerCheck
+        if timeSinceLastCheck >= INVENTORY_TRIGGER_CHECK_INTERVAL then
+            lastInventoryTriggerCheck = frameCurrentTime
+
+            local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+            if missionData and missionData.steps then
+                local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+                if missionData.steps[step_idx] then
+                    local step_data = missionData.steps[step_idx]
+
+                    if type(step_data) == 'table' and step_data.trigger_on_item_obtain then
+                        local inventory_module = require('modules.inventory')
+                        local items_to_check = {}
+
+                        -- Normalize to list
+                        if type(step_data.trigger_on_item_obtain) == 'string' then
+                            table.insert(items_to_check, step_data.trigger_on_item_obtain)
+                        elseif type(step_data.trigger_on_item_obtain) == 'table' then
+                            items_to_check = step_data.trigger_on_item_obtain
+                        end
+
+                        -- Check if step requires all items or just one
+                        if step_data.require_all_items then
+                            -- Check if player has ALL items
+                            local hasAll = true
+                            for _, itemName in ipairs(items_to_check) do
+                                -- Search ALL storages (true flag)
+                                local hasItem = inventory_module.hasItem(itemName, true)
+                                if hasItem then
+                                    -- Mark this specific item as obtained in partial progress
+                                    if not quest_state.getPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, itemName) then
+                                        quest_state.setPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, itemName, true)
+                                    end
+                                else
+                                    hasAll = false
+                                end
+                            end
+
+                            -- If all items found, complete the step
+                            if hasAll then
+                                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                            end
+                        else
+                            -- Just need ONE of the items
+                            for _, itemName in ipairs(items_to_check) do
+                                -- Search ALL storages (true flag)
+                                local hasItem = inventory_module.hasItem(itemName, true)
+                                if hasItem then
+                                    quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- Resolve targets to draw beams to
     local targetsToDraw = {}
     local targetStepText = nil
 
     if currentTopCategory and currentSubfile and current_mission then
         local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
         if missionData and missionData.steps then
-            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
 
-                -------------------------------------------------------------------
-                -- [NEW] ZONE ENTRY TRIGGER
-                -------------------------------------------------------------------
-                -- If the step has a 'zone_trigger' (e.g., "Zeruhn Mines")
-                -- Check if player is currently in that zone ID
-                if step_data.zone_trigger and zone_data[step_data.zone_trigger] then
-                    if playerZoneId == zone_data[step_data.zone_trigger] then
-                        -- print(string.format("\30\105[QuestHelper] Zone Match: Entered %s", step_data.zone_trigger))
-                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                        return -- Stop processing this frame since step advanced
-                    end
+                -- Check zone entry trigger
+                if triggers_module.checkZoneTrigger(step_data, player_module.zoneId, zone_data,
+                                                   quest_state, currentTopCategory, currentSubfile,
+                                                   current_mission, step_idx) then
+                    return
                 end
-                -------------------------------------------------------------------
 
-                -- Handle trigger zones before drawing logic
-                if type(step_data) == 'table' and step_data.trigger_zones then
-                    for _, zone in ipairs(step_data.trigger_zones) do
-                        if zone.type == 'square' and playerPosX and playerPosZ_depth and zone.center and zone.size then
-                            local half_size = zone.size / 2
-                            if  math.abs(playerPosX - zone.center.x) < half_size and
-                                math.abs(playerPosZ_depth - zone.center.z) < half_size then
-                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                return
-                            end
-                        elseif zone.type == 'line' and playerPosX and playerPosZ_depth and zone.start and zone.stop then
-                            local player_pos = { x = playerPosX, z = playerPosZ_depth }
-                            local distSq = distToSegmentSquared(player_pos, zone.start, zone.stop)
-                            local width = zone.width or 2
-                            if distSq < (width * width) then
-                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                return
-                            end
-                        end
-                    end
+                -- Check trigger zones (square/line)
+                if triggers_module.checkTriggerZones(step_data, player_module.posX, player_module.posZ_depth,
+                                                    quest_state, currentTopCategory, currentSubfile,
+                                                    current_mission, step_idx) then
+                    return
                 end
 
                 if type(step_data) == 'table' then
@@ -626,9 +196,9 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     if type(target_ref) == 'string' then
                         table.insert(potential_targets, target_ref)
                     elseif type(target_ref) == 'table' then
-                        if target_ref[1] and type(target_ref[1]) == 'string' then -- List of strings
+                        if target_ref[1] and type(target_ref[1]) == 'string' then
                             potential_targets = target_ref
-                        else -- Inline definition
+                        else
                             table.insert(targetsToDraw, target_ref)
                         end
                     end
@@ -637,7 +207,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         if location_data[name] then
                             table.insert(targetsToDraw, location_data[name])
                         else
-                             if shouldPrintDebugNow then
+                            if shouldPrintDebugNow then
                                 print(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
                             end
                         end
@@ -647,31 +217,31 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
-    -- New drawing logic for trigger_zone and draw_type
+    -- Draw trigger zones and draw types
     if currentTopCategory and currentSubfile and current_mission then
         local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
         if missionData and missionData.steps then
-            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
+            local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
                 if type(step_data) == 'table' then
-                    calculateDynamicColor()
+                    beam_drawing.calculateDynamicColor()
 
                     if step_data.trigger_zones then
                         for _, zone in ipairs(step_data.trigger_zones) do
                             if zone.type == 'square' and zone.center and zone.size then
-                                drawingModule.drawSquare(zone.center, zone.size, ARGB_BEAM_COLOR)
+                                drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
                             elseif zone.type == 'line' and zone.start and zone.stop then
-                                drawingModule.drawLine(zone.start, zone.stop, ARGB_BEAM_COLOR)
+                                drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
                             end
                         end
                     end
 
                     if step_data.draw_type then
                         if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
-                            drawingModule.drawLine(step_data.start_pos, step_data.end_pos, ARGB_BEAM_COLOR)
+                            drawingModule.drawLine(step_data.start_pos, step_data.end_pos, beam_drawing.ARGB_BEAM_COLOR)
                         elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
-                            drawingModule.drawSquare(step_data.center, step_data.size, ARGB_BEAM_COLOR)
+                            drawingModule.drawSquare(step_data.center, step_data.size, beam_drawing.ARGB_BEAM_COLOR)
                         end
                     end
                 end
@@ -679,469 +249,62 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
-    -- Loop through all resolved targets and draw them
+    -- Filter targets by zone
+    local filteredTargets = {}
     for _, targetData in ipairs(targetsToDraw) do
-        local drawActive = false
         if targetData then
-            -- Zone Check
             if targetData.zone and zone_data[targetData.zone] then
-                if playerZoneId ~= zone_data[targetData.zone] then
-                    goto continue_loop
+                if player_module.zoneId == zone_data[targetData.zone] then
+                    table.insert(filteredTargets, targetData)
                 end
-            end
-
-            local npcNameToActuallyFindInGame = targetData.trigger_npc
-
-            if not npcNameToActuallyFindInGame or npcNameToActuallyFindInGame == "" then
-                drawActive = true
             else
-                local npcFoundThisFrame = false
-                if memManager then
-                    for i = 0, 1023 do
-                        local entity = GetEntity(i)
-                        if entity and entity.Name and entity.Name == npcNameToActuallyFindInGame then
-                            npcFoundThisFrame = true
-                            break
-                        end
-                    end
-                end
-                if npcFoundThisFrame then
-                    drawActive = true
-                end
-            end
-        end
-
-        if drawActive then
-            -- This is the logic from v1.5
-            local effectiveTargetX = 0.0
-            local effectiveTargetY_height = 0.0
-            local effectiveTargetZ_depth = 0.0
-
-            if targetData.target_pos and type(targetData.target_pos) == 'table' then
-                effectiveTargetX = targetData.target_pos.x or 0.0
-                effectiveTargetY_height = targetData.target_pos.y or 0.0
-                effectiveTargetZ_depth = targetData.target_pos.z or 0.0
-            else
-                 if shouldPrintDebugNow then print(string.format("[%s Debug] Error: Location data for target is missing 'target_pos' table.", addon.name)) end
-            end
-
-            local visualStartX, visualStartY_height, visualStartZ_depth
-            local visualEndX, visualEndY_height, visualEndZ_depth
-
-            visualStartX = playerPosX + PLAYER_ARC_START_X_OFFSET
-            visualStartY_height = playerPosZ_depth + PLAYER_ARC_START_Y_OFFSET_ON_PLAYER
-            visualStartZ_depth = playerPosY_height + PLAYER_ARC_START_Z_OFFSET
-
-            visualEndX = effectiveTargetX
-            visualEndY_height = effectiveTargetY_height
-            visualEndZ_depth = effectiveTargetZ_depth
-
-            if beamAppearProgress < 1.0 then
-                beamAppearProgress = beamAppearProgress + (deltaTime / BEAM_APPEAR_DURATION)
-                if beamAppearProgress > 1.0 then beamAppearProgress = 1.0 end
-            end
-            calculateDynamicColor()
-
-            if shouldPrintDebugNow then
-                local npc_name_for_print = "Position"
-                if targetData and targetData.trigger_npc then npc_name_for_print = targetData.trigger_npc end
-                print(string.format("[%s Debug] Drawing Arc for step '%s'. Target: %s", addon.name, targetStepText, npc_name_for_print))
-            end
-
-            drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height, visualEndX, visualEndZ_depth, visualEndY_height, ARGB_BEAM_COLOR, beamAppearProgress, true)
-
-            if questIconTexture then
-                local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
-                local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
-
-                local targetWorldX = effectiveTargetX
-                local targetWorldY = effectiveTargetZ_depth
-                local targetWorldZ = effectiveTargetY_height
-
-                targetWorldZ = targetWorldZ - 0.5
-
-                local sx, sy, sz = helpers.worldToScreen(targetWorldX, targetWorldZ, targetWorldY, view, projection)
-
-                if sx and sz > 0 and sz < 1 then
-                    drawQuestIcon(sx, sy, 0.5, 1.0, 32, 0xFFFFFFFF)
-                end
-            end
-        end
-        ::continue_loop::
-    end
-
-    -- [[ END OF MERGED ONMOB LOGIC ]]
-
-
-    -- [[ START OF ORIGINAL QUESTHELPER UI LOGIC ]]
-
-    if not is_open then
-        return
-    end
-
-    imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})
-    imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})
-    imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})
-    imgui.PushStyleColor(ImGuiCol_FrameBgHovered, {0.5, 0.5, 0.5, 0.8})
-    imgui.PushStyleColor(ImGuiCol_FrameBgActive, {0.7, 0.7, 0.7, 1.0})
-
-    imgui.SetNextWindowSize({600, 600}, ImGuiCond_Always)
-    local mainFlags = bit.bor(
-        ImGuiWindowFlags_NoResize,
-        ImGuiWindowFlags_NoCollapse,
-        ImGuiWindowFlags_NoTitleBar
-    )
-    local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
-
-    local mainX, mainY = 0, 0
-    local mainW, mainH = 0, 0
-
-    if window_open then
-        mainX, mainY = imgui.GetWindowPos()
-        mainW, mainH = imgui.GetWindowSize()
-        if mainW > 0 and mainH > 0 then
-            lastMainX = mainX
-            lastMainY = mainY
-            lastMainW = mainW
-            lastMainH = mainH
-        end
-
-        -- SEARCH BAR
-        imgui.Text("Search Missions/Quests (lowest-level):")
-        local input_buf = { search_query }
-        if imgui.InputText("##SearchQuest", input_buf, 256) then
-            search_query = input_buf[1]
-            perform_search()
-        end
-        imgui.Separator()
-
-        -- SEARCH RESULTS
-        if search_query ~= "" then
-            if #search_results == 0 then
-                imgui.TextColored({1,0,0,1}, "No matches found.")
-            else
-                imgui.TextColored({0,1,0,1}, "Search Results:")
-                for _, result in ipairs(search_results) do
-                    local topCat  = result.topCategory
-                    local subfile = result.subfile
-                    local mission = result.mission
-                    local isComplete = is_mission_complete(topCat, subfile, mission)
-                    local label = string.format("[%s] %s -> %s", topCat, subfile, mission)
-
-                    if isComplete then
-                        imgui.PushStyleColor(ImGuiCol_Button,        {0, 1, 0, 0.5})
-                        imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 1, 0, 0.7})
-                        imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 1, 0, 0.9})
-                        imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
-                    else
-                        imgui.PushStyleColor(ImGuiCol_Button,        {1, 0, 0, 0.5})
-                        imgui.PushStyleColor(ImGuiCol_ButtonHovered, {1, 0, 0, 0.7})
-                        imgui.PushStyleColor(ImGuiCol_ButtonActive,  {1, 0, 0, 0.9})
-                        imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
-                    end
-
-                    if imgui.Button(label) then
-                        currentTopCategory = topCat
-                        currentSubfile     = subfile
-                        current_mission    = mission
-                        search_query       = ""
-                        search_results     = T{}
-                    end
-                    imgui.PopStyleColor(4)
-                end
-            end
-            imgui.Separator()
-        else
-            -- Normal Navigation
-            if not currentTopCategory then
-                imgui.Text('Select a top category:')
-                for category, _ in pairs(quest_data) do
-                    if imgui.Button(category) then
-                        currentTopCategory = category
-                    end
-                end
-
-            elseif not currentSubfile then
-                imgui.Text('Category: ' .. currentTopCategory)
-                imgui.Separator()
-                imgui.Text('Select a Subfile:')
-                if not quest_data[currentTopCategory] then
-                    imgui.TextColored({1,0,0,1}, 'No subfiles found in ' .. currentTopCategory)
-                else
-                    local subKeys = get_sorted_keys(quest_data[currentTopCategory])
-                    for _, sfName in ipairs(subKeys) do
-                        local complete = is_subfile_complete(currentTopCategory, sfName)
-                        if complete then imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5}) end
-                        local label = sfName
-                        if complete then label = label .. " (Complete!)" end
-                        if imgui.Button(label) then currentSubfile = sfName end
-                        if complete then imgui.PopStyleColor() end
-                    end
-                end
-                if imgui.Button("Back to Categories") then currentTopCategory = nil end
-
-            elseif not current_mission then
-                imgui.Text('Category: ' .. currentTopCategory)
-                imgui.Text('Subfile:  ' .. currentSubfile)
-                imgui.Separator()
-                local subData = quest_data[currentTopCategory][currentSubfile]
-                if not subData then
-                    imgui.TextColored({1,0,0,1}, 'No missions found in ' .. currentSubfile)
-                else
-                    imgui.Text('Select a mission:')
-                    local missionKeys = get_sorted_keys(subData)
-                    for _, mname in ipairs(missionKeys) do
-                        local complete = is_mission_complete(currentTopCategory, currentSubfile, mname)
-                        if complete then imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5}) end
-                        local label = mname
-                        if complete then label = label .. " (Complete!)" end
-                        if imgui.Button(label) then current_mission = mname end
-                        if complete then imgui.PopStyleColor() end
-                    end
-                end
-                if imgui.Button("Back to Subfiles") then currentSubfile = nil end
-
-            else
-                -- Images drawer toggle
-                if showImagesDrawer then
-                    if imgui.Button("<##drawerToggle") then showImagesDrawer = false end
-                    imgui.SameLine(); imgui.Text("Hide Images")
-                else
-                    if imgui.Button(">##drawerToggle") then showImagesDrawer = true end
-                    imgui.SameLine(); imgui.Text("Show Images")
-                end
-                imgui.Separator()
-
-                imgui.Text('Top Category: ' .. currentTopCategory)
-                imgui.Text('Subfile: ' .. currentSubfile)
-                imgui.Text('Mission: ' .. current_mission)
-                imgui.Separator()
-
-                local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-                local steps  = missionData.steps or {}
-                local reward = missionData.reward
-
-                -- Progress readout
-                local pct, done, tot = calculate_progress(currentTopCategory, currentSubfile, current_mission)
-                local barCount = 0
-                if tot > 0 then barCount = math.floor((pct / 100) * 20); if barCount > 20 then barCount = 20 end end
-                imgui.Text('[' .. string.rep('|', barCount) .. string.rep(' ', 20 - barCount) .. '] ' .. string.format("%.2f%% (%d/%d steps)", pct, done, tot))
-                imgui.Separator()
-
-                -- Steps
-                for i = 1, #steps do
-                    local step_data = steps[i]
-                    local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
-                    local st = get_step_state(currentTopCategory, currentSubfile, current_mission, i)
-                    local cbLabel = string.format("##step_%d", i)
-                    local ref = { st }
-                    if imgui.Checkbox(cbLabel, ref) then
-                        set_step_state(currentTopCategory, currentSubfile, current_mission, i, ref[1])
-                    end
-                    imgui.SameLine()
-                    if ref[1] then
-                        imgui.TextColored({0,1,0,1}, wrap_text(text, 60))
-                    else
-                        imgui.Text(wrap_text(text, 60))
-                    end
-
-                    -- [NEW] CHECKLIST UI DISPLAY
-                    -- Only show if step is incomplete AND requires multiple items
-                    if not st and step_data.require_all_items and step_data.trigger_on_item_obtain then
-                        local list = {}
-                        if type(step_data.trigger_on_item_obtain) == 'string' then table.insert(list, step_data.trigger_on_item_obtain)
-                        else list = step_data.trigger_on_item_obtain end
-
-                        for _, item in ipairs(list) do
-                            local gotIt = get_partial_state(currentTopCategory, currentSubfile, current_mission, i, item)
-
-                            imgui.Indent(20) -- Indent for visual hierarchy
-                            if gotIt then
-                                imgui.TextColored({0,1,0,1}, "[x] " .. item) -- Green [x]
-                            else
-                                imgui.TextColored({1,1,0,1}, "[ ] " .. item) -- Yellow [ ]
-                            end
-                            imgui.Unindent(20)
-                        end
-                    end
-
-                end
-
-                -- Rewards
-                if reward then
-                    if type(reward.text) == 'string' and reward.text ~= "" then
-                         imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
-                         imgui.TextWrapped(reward.text)
-                    end
-                    if type(reward.items) == 'table' and #reward.items > 0 then
-                        if not reward.text or reward.text == "" then
-                            imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
-                        end
-                        for i, item_data in ipairs(reward.items) do
-                            imgui.Separator()
-                            if type(item_data) == 'table' and item_data.name then
-                                if imgui.TreeNode(item_data.name .. "##rewarditem" .. i) then
-                                    imgui.TextColored({0.8,0.8,0,1},"  Name: ");  imgui.SameLine(); imgui.TextWrapped(item_data.name)
-                                    if item_data.type then imgui.TextColored({0.8,0.8,0,1},"  Type: "); imgui.SameLine(); imgui.TextWrapped(item_data.type) end
-                                    if item_data.races then imgui.TextColored({0.8,0.8,0,1},"  Race: "); imgui.SameLine(); imgui.TextWrapped(item_data.races) end
-                                    if item_data.stats then imgui.TextColored({0.8,0.8,0,1},"  Stat: "); imgui.SameLine(); imgui.TextWrapped(table.concat(item_data.stats, ", ")) end
-                                    if item_data.level then imgui.TextColored({0.8,0.8,0,1},"  Lvl.: "); imgui.SameLine(); imgui.TextWrapped(item_data.level) end
-                                    if item_data.jobs then imgui.TextColored({0.8,0.8,0,1},"  Jobs: "); imgui.SameLine(); imgui.TextWrapped(item_data.jobs) end
-                                    if item_data.note then imgui.TextColored({0.8,0.8,0,1},"  Note: "); imgui.SameLine(); imgui.TextWrapped(item_data.note) end
-                                    imgui.TreePop()
-                                end
-                            end
-                        end
-                        imgui.Separator()
-                    end
-                end
-                -- End of REWARD section
-
-                if imgui.Button("Back to Missions") then
-                    current_mission = nil
-                end
+                table.insert(filteredTargets, targetData)
             end
         end
     end
 
-    imgui.End()
-    imgui.PopStyleColor(5)
+    -- Draw beams and icons
+    beam_drawing.updateBeamProgress(deltaTime)
+    beam_drawing.drawBeamsToTargets(filteredTargets, player_module.posX, player_module.posZ_depth,
+                                   player_module.posY_height, memManager, drawArcModule,
+                                   questIconTexture, helpers, shouldPrintDebugNow,
+                                   targetStepText, addon.name)
 
-    -- IMAGE DRAWER
+    -- Render UI
+    if not is_open then return end
+
+    local window_open, mainX, mainY, mainW, mainH, newShowDrawer, newTopCat, newSubfile, newMission =
+        ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
+                      quest_data, quest_state, utils, inventory_cache)
+
+    if mainW > 0 and mainH > 0 then
+        lastMainX = mainX
+        lastMainY = mainY
+        lastMainW = mainW
+        lastMainH = mainH
+    end
+
+    showImagesDrawer = newShowDrawer
+    currentTopCategory = newTopCat
+    currentSubfile = newSubfile
+    current_mission = newMission
+
+    -- Render image drawer
     if not window_open then
         showImagesDrawer = false
         return
     end
-    if not showImagesDrawer then return end
 
-    if currentTopCategory and currentSubfile and current_mission then
-        local attachX = lastMainX - lastMainW + 50
-        local attachY = lastMainY
-        imgui.SetNextWindowPos({attachX, attachY}, ImGuiCond_Always)
-        imgui.SetNextWindowSizeConstraints({200, 100}, {800, 600})
-        local drawerFlags = bit.bor(
-            ImGuiWindowFlags_NoTitleBar, ImGuiWindowFlags_NoResize, ImGuiWindowFlags_NoMove,
-            ImGuiWindowFlags_NoCollapse, ImGuiWindowFlags_NoBackground,
-            ImGuiWindowFlags_NoDecoration, ImGuiWindowFlags_AlwaysAutoResize
-        )
-
-        if imgui.Begin("##ImagesDrawer", true, drawerFlags ) then
-            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
-            local step_imgs = get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx)
-
-            for _, img_data in ipairs(step_imgs) do
-                local tex_ptr = image_loader.GetTexture(img_data.file)
-                if tex_ptr then
-                    local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
-                    local w = img_data.width or 200
-                    local h = img_data.height or 100
-                    local imageX, imageY = imgui.GetCursorScreenPos()
-                    imgui.Image(tex_id, {w, h})
-
-                    local cal = img_data.map_calibration
-                    if not cal and img_data.zone_name and map_db[img_data.zone_name] then
-                        cal = map_db[img_data.zone_name]
-                    end
-
-                    if cal and img_data.zone_name then
-                        if zone_data[img_data.zone_name] and playerZoneId == zone_data[img_data.zone_name] then
-
-                            -- 1. Map X (Left/Right) uses Player X
-                            local relX = (playerPosX - cal.origin_x) * cal.scale_x
-
-                            -- 2. Map Y (Up/Down)
-                            -- We switch to 'playerPosY_height' because that variable currently
-                            -- holds the North/South data in your setup.
-                            local relY = (playerPosY_height - cal.origin_y) * cal.scale_y
-
-                            -- Center the dot if origin is the map center, or leave as is if origin is top-left
-                            -- (Assuming origin_x/y is the top-left world coordinate):
-                            if relX >= 0 and relX <= w and relY >= 0 and relY <= h then
-                                local markerX = imageX + relX
-                                local markerY = imageY + relY
-
-                                -- Get player heading
-                                local playerEntity = GetPlayerEntity()
-                                local playerHeading = 0
-                                if playerEntity then
-                                    playerHeading = playerEntity.Heading
-                                end
-
-                                -- Helper function to convert polar to cartesian with rotation
-                                local function polarToXY(radius, angle)
-                                    local x = radius * math.cos(angle - math.pi/2)
-                                    local y = radius * math.sin(angle - math.pi/2)
-                                    return x, y
-                                end
-
-                                -- Arrow size and angles
-                                local arrowLength = 12
-                                local arrowWidth = 6
-                                local lookAngle = playerHeading + math.pi/2
-
-                                -- Calculate arrow tip (pointing forward)
-                                local tipX, tipY = polarToXY(arrowLength, lookAngle)
-
-                                -- Calculate base vertices (left and right wings)
-                                local leftX, leftY = polarToXY(arrowWidth, lookAngle + math.pi * 0.6)
-                                local rightX, rightY = polarToXY(arrowWidth, lookAngle - math.pi * 0.6)
-
-                                -- Translate to screen position
-                                local dl = imgui.GetWindowDrawList()
-
-                                -- Draw filled triangle (red arrow)
-                                dl:AddTriangleFilled(
-                                    {markerX + tipX, markerY + tipY},    -- Tip
-                                    {markerX + leftX, markerY + leftY},  -- Left wing
-                                    {markerX + rightX, markerY + rightY}, -- Right wing
-                                    0xFF0000FF -- Red
-                                )
-
-                                -- Draw black outline
-                                dl:AddTriangle(
-                                    {markerX + tipX, markerY + tipY},
-                                    {markerX + leftX, markerY + leftY},
-                                    {markerX + rightX, markerY + rightY},
-                                    0xFF000000, -- Black
-                                    2.0 -- Line thickness
-                                )
-                            end
-                        end
-                    end
-
-
-                    if img_data.highlights then
-                        local drawList = imgui.GetWindowDrawList()
-                        for _, highlight in ipairs(img_data.highlights) do
-                            local letter, numStr = highlight.position:match("([A-Za-z])%-(%d+)")
-                            if letter and numStr then
-                                local colIndex = (letter:byte() - 65) + 1
-                                local rowIndex = tonumber(numStr)
-                                local cellW, cellH = w / 16, h / 16
-                                local offsetX, offsetY = highlight.offsetX or 0, highlight.offsetY or 0
-                                local centerX = imageX + (colIndex - 0.5) * cellW + offsetX
-                                local centerY = imageY + (rowIndex - 0.5) * cellH + offsetY
-                                local halfBox = 16
-                                local x1, y1 = centerX - halfBox, centerY - halfBox
-                                local x2, y2 = centerX + halfBox, centerY + halfBox
-                                local colorFill, colorOutline = 0x5500FF00, 0xFFFFFFFF
-                                drawList:AddRectFilled({x1, y1}, {x2, y2}, colorFill)
-                                drawList:AddRect({x1, y1}, {x2, y2}, colorOutline)
-                            end
-                        end
-                    end
-                    imgui.Spacing()
-                else
-                    imgui.TextColored({1,0,0,1}, "(Missing image: " .. tostring(img_data.file) .. ")")
-                end
-            end
-        end
-        imgui.End()
+    if showImagesDrawer and currentTopCategory and currentSubfile and current_mission then
+        ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH,
+                        currentTopCategory, currentSubfile, current_mission,
+                        quest_state, quest_data, utils, image_loader, map_renderer,
+                        player_module, zone_data, map_db)
     end
 end)
 
 --------------------------------------------------------------------------------
--- Commands / Events - MERGED
+-- Commands
 --------------------------------------------------------------------------------
 ashita.events.register('command', 'command_callback', function(e)
     local args = e.command:args()
@@ -1211,312 +374,199 @@ ashita.events.register('command', 'command_callback', function(e)
 
         print(string.format("[%s] Triggering events up to %d...", addon.name, step_to_trigger))
         for i = 1, step_to_trigger do
-            if not get_step_state(currentTopCategory, currentSubfile, current_mission, i) then
-                set_step_state(currentTopCategory, currentSubfile, current_mission, i, true)
+            if not quest_state.getStepState(currentTopCategory, currentSubfile, current_mission, i) then
+                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, i, true, step_trigger_flags)
             end
         end
         e.blocked = true
         return true
     end
 
+    if command_base == 'qh_find' then
+        local itemName = table.concat(args, ' ', 2)
+        if not itemName or itemName == "" then
+            print(string.format("[%s] Usage: /qh_find <item name>", addon.name))
+            print(string.format("[%s] Example: /qh_find Dark Crystal", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        local inventory_module = require('modules.inventory')
+        -- Search ALL storages (true flag)
+        local hasItem, count, locations = inventory_module.hasItem(itemName, true)
+
+        print(string.format("[%s] Searching for '%s' in ALL storages...", addon.name, itemName))
+        if hasItem then
+            print(string.format("\30\106[FOUND]\30\01 You have %d x %s", count, itemName))
+            for storageName, storageCount in pairs(locations) do
+                print(string.format("  - %s: %d", storageName, storageCount))
+            end
+        else
+            print(string.format("\30\68[NOT FOUND]\30\01 Item '%s' not found in any storage.", itemName))
+        end
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_dump_inv' then
+        print(string.format("[%s] Dumping first 20 items in Inventory...", addon.name))
+
+        local mem = AshitaCore:GetMemoryManager()
+        if not mem then
+            print("ERROR: MemoryManager not available")
+            e.blocked = true
+            return true
+        end
+
+        local inventory = mem:GetInventory()
+        local resources = AshitaCore:GetResourceManager()
+
+        if not inventory or not resources then
+            print("ERROR: Inventory or Resources not available")
+            e.blocked = true
+            return true
+        end
+
+        local count = 0
+        for j = 0, math.min(inventory:GetContainerCountMax(0), 20) do
+            local itemEntry = inventory:GetContainerItem(0, j)
+
+            if itemEntry and itemEntry.Id ~= 0 and itemEntry.Id ~= 65535 then
+                local item = resources:GetItemById(itemEntry.Id)
+
+                print(string.format("\n[Slot %d] ItemID: %d", j, itemEntry.Id))
+
+                if item then
+                    -- Get the item name (Name[1] is English in Ashita v4)
+                    local itemName = item.Name and item.Name[1] or "Unknown"
+                    local quantity = itemEntry.Count or 1
+
+                    print(string.format("  Name: %s x%d", itemName, quantity))
+
+                    count = count + 1
+                else
+                    print("  ERROR: GetItemById returned nil")
+                end
+            end
+        end
+
+        if count == 0 then
+            print("\nNo items found. API might not be working correctly.")
+        else
+            print(string.format("\nFound %d items.", count))
+        end
+
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'onmob_target' or command_base == 'onmob_list' then
-        print(string.format("[%s] Info: This command is disabled. Beams are now automatic based on your active quest step and data/locations.lua.", addon.name))
+        print(string.format("[%s] Info: This command is disabled. Beams are now automatic based on your active quest step.", addon.name))
         e.blocked = true
         return true
 
     elseif command_base == 'onmob_getpos' then
         local mem = AshitaCore:GetMemoryManager()
         if not mem then
-            print(string.format("[%s] MemoryManager not available for getpos.", addon.name))
-            e.blocked = true; return true
+            print(string.format("[%s] MemoryManager not available.", addon.name))
+            e.blocked = true
+            return true
         end
 
-        if updatePlayerPosition(mem) then
-            -- [FIXED] This line shows the REAL coordinates
-            print(string.format("[%s] Player Position (Raw): X: %.2f, Y(Height): %.2f, Z(Depth): %.2f", addon.name, playerPosX, playerPosY_height, playerPosZ_depth))
-            -- [FIXED] This line prints the SWAPPED coordinates, matching your locations.lua format
-            print(string.format("[%s] For locations.lua: target_pos = { x = %.1f, y = %.1f, z = %.1f },", addon.name, playerPosX, playerPosZ_depth, playerPosY_height))
+        if player_module.updatePosition(mem) then
+            print(string.format("[%s] Player Position (Raw): X: %.2f, Y(Height): %.2f, Z(Depth): %.2f",
+                addon.name, player_module.posX, player_module.posY_height, player_module.posZ_depth))
+            print(string.format("[%s] For locations.lua: target_pos = { x = %.1f, y = %.1f, z = %.1f },",
+                addon.name, player_module.posX, player_module.posZ_depth, player_module.posY_height))
         else
             print(string.format("[%s] Failed to get player position.", addon.name))
         end
         e.blocked = true
         return true
 
-    -- COMMANDS from OnMob v2.6.6
     elseif command_base == 'onmob_offset_x' then
         if args[2] then
-            PLAYER_ARC_START_X_OFFSET = tonumber(args[2]) or PLAYER_ARC_START_X_OFFSET
-            print(string.format("[%s] Player arc start X offset set to: %.2f", addon.name, PLAYER_ARC_START_X_OFFSET))
+            beam_drawing.PLAYER_ARC_START_X_OFFSET = tonumber(args[2]) or beam_drawing.PLAYER_ARC_START_X_OFFSET
+            print(string.format("[%s] Player arc start X offset set to: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_X_OFFSET))
         else
-            print(string.format("[%s] Current player arc start X offset: %.2f. Usage: /onmob_offset_x <value>", addon.name, PLAYER_ARC_START_X_OFFSET))
+            print(string.format("[%s] Current player arc start X offset: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_X_OFFSET))
         end
-        e.blocked = true; return true
+        e.blocked = true
+        return true
+
     elseif command_base == 'onmob_offset_y' then
         if args[2] then
-            PLAYER_ARC_START_Y_OFFSET_ON_PLAYER = tonumber(args[2]) or PLAYER_ARC_START_Y_OFFSET_ON_PLAYER
-            print(string.format("[%s] Player arc start Y (Height component) offset set to: %.2f", addon.name, PLAYER_ARC_START_Y_OFFSET_ON_PLAYER))
+            beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER = tonumber(args[2]) or beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER
+            print(string.format("[%s] Player arc start Y offset set to: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER))
         else
-            print(string.format("[%s] Current player arc start Y (Height component) offset: %.2f. Usage: /onmob_offset_y <value>", addon.name, PLAYER_ARC_START_Y_OFFSET_ON_PLAYER))
+            print(string.format("[%s] Current player arc start Y offset: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER))
         end
-        e.blocked = true; return true
+        e.blocked = true
+        return true
+
     elseif command_base == 'onmob_offset_z' then
         if args[2] then
-            PLAYER_ARC_START_Z_OFFSET = tonumber(args[2]) or PLAYER_ARC_START_Z_OFFSET
-            print(string.format("[%s] Player arc start Z (Depth component) offset set to: %.2f", addon.name, PLAYER_ARC_START_Z_OFFSET))
+            beam_drawing.PLAYER_ARC_START_Z_OFFSET = tonumber(args[2]) or beam_drawing.PLAYER_ARC_START_Z_OFFSET
+            print(string.format("[%s] Player arc start Z offset set to: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_Z_OFFSET))
         else
-            print(string.format("[%s] Current player arc start Z (Depth component) offset: %.2f. Usage: /onmob_offset_z <value>", addon.name, PLAYER_ARC_START_Z_OFFSET))
+            print(string.format("[%s] Current player arc start Z offset: %.2f", addon.name, beam_drawing.PLAYER_ARC_START_Z_OFFSET))
         end
-        e.blocked = true; return true
+        e.blocked = true
+        return true
     end
 
     return false
 end)
 
+--------------------------------------------------------------------------------
+-- Load Event
+--------------------------------------------------------------------------------
 ashita.events.register('load', 'load_callback', function()
     print(string.format("[%s] v%s loading...", addon.name, addon.version))
-    load_quest_data()
-    load_location_data()
-    load_zone_data()
-    load_map_data()
-    -- [NEW] Load the quest icon texture
+
+    -- Load all data
+    quest_data = quest_data_loader.loadQuestData(addon.name)
+    location_data = quest_data_loader.loadLocations(addon.name)
+    zone_data = quest_data_loader.loadZones(addon.name)
+    map_db = quest_data_loader.loadMaps(addon.name)
+
+    -- Load quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')
     if not questIconTexture then
-        print(string.format("[%s] WARNING: Could not load 'assets/quest_icon.png'. Quest icon will not be shown.", addon.name))
+        print(string.format("[%s] WARNING: Could not load 'assets/quest_icon.png'.", addon.name))
     end
+
     print(string.format("[%s] Data loaded. Use /questhelper to open.", addon.name))
+
     if ENABLE_VERBOSE_DEBUG then
-        print(string.format("[%s] Player Arc Offsets (Y/Z Swapped): X=%.2f, Y(H)=%.2f, Z(D)=%.2f", addon.name, PLAYER_ARC_START_X_OFFSET, PLAYER_ARC_START_Y_OFFSET_ON_PLAYER, PLAYER_ARC_START_Z_OFFSET))
+        print(string.format("[%s] Player Arc Offsets: X=%.2f, Y=%.2f, Z=%.2f",
+            addon.name, beam_drawing.PLAYER_ARC_START_X_OFFSET,
+            beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER,
+            beam_drawing.PLAYER_ARC_START_Z_OFFSET))
     end
 end)
 
+--------------------------------------------------------------------------------
+-- Unload Event
+--------------------------------------------------------------------------------
 ashita.events.register('unload', 'unload_callback', function()
-
-    settings.save(QUESTHELPER_ALIAS, quest_settings)
-
+    quest_state.save()
     print(string.format("[%s] Settings saved. Unloaded.", addon.name))
-
 end)
 
-local function read_uint16(ptr, offset)
-    local p = ffi.cast('uint8_t*', ptr)
-    return p[offset] + (p[offset+1] * 256)
-end
-
-local function read_uint32(ptr, offset)
-    local p = ffi.cast('uint8_t*', ptr)
-    return p[offset] + (p[offset+1] * 256) + (p[offset+2] * 65536) + (p[offset+3] * 16777216)
-end
-
+--------------------------------------------------------------------------------
+-- Packet Events
+--------------------------------------------------------------------------------
 ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
-    if e.id == 0x034 or e.id == 0x032 then -- Event or Interaction
-        local event_id = read_uint16(e.data, 0x2C)
-        local actor_id = read_uint32(e.data, 0x04)
-        local param0   = read_uint32(e.data, 0x0C) -- The "Hidden" Message ID
-
-        -- Debug Print (Keep this enabled while developing!)
-        if event_id > 0 or param0 > 0 then
-            print(string.format("\30\105[QH Debug]\30\01 Event: %d | NPC: %d | Param0: %d", event_id, actor_id, param0))
-        end
-
-        if not currentTopCategory or not currentSubfile or not current_mission then return end
-
-        local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-        if missionData and missionData.steps then
-            local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
-            if missionData.steps[step_idx] then
-                local step_data = missionData.steps[step_idx]
-
-                if type(step_data) == 'table' then
-
-                    -- 1. UNIVERSAL EVENT CHECKER
-                    -- Checks 'trigger_on_event_id' against BOTH the EventID and Param0
-                    if step_data.trigger_on_event_id then
-                        local trigger = step_data.trigger_on_event_id
-                        local event_match = false
-
-                        -- Helper to check a specific ID against the packet data
-                        local function check_id(target_id)
-                            -- Case A: It's a standard Cutscene (EventID matches)
-                            if event_id == target_id then return true end
-                            -- Case B: It's a Text Interaction (Event=0, Param0 matches)
-                            if event_id == 0 and param0 == target_id then return true end
-                            return false
-                        end
-
-                        -- Handle Single Number vs List of Numbers
-                        if type(trigger) == 'table' then
-                            for _, id in ipairs(trigger) do
-                                if check_id(id) then event_match = true; break end
-                            end
-                        else
-                            event_match = check_id(trigger)
-                        end
-
-                        -- Check NPC ID (Optional)
-                        local npc_match = true
-                        if step_data.trigger_on_npc_id then
-                            npc_match = (actor_id == step_data.trigger_on_npc_id)
-                        end
-
-                        -- If ID matched (either Event or Param0), proceed
-                        if event_match and npc_match then
-                            local has_talk_trigger = (step_data.trigger_on_talk ~= nil)
-
-                            if not has_talk_trigger then
-                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                            else
-                                local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
-                                flags.event_complete = true
-                                if flags.talk_complete then
-                                    set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                                end
-                            end
-                        end
-                    end
-
-                    -- (We don't need 'trigger_on_message_id' anymore because the logic above handles it!)
-                end
-            end
-        end
-    end
+    triggers_module.handlePacketIn(e, currentTopCategory, currentSubfile, current_mission,
+                                  quest_data, quest_state, step_trigger_flags)
 end)
 
--- [UPDATED] Stronger text cleaner to remove ALL special characters/colors
-local function clean_text(text)
-    if not text then return "" end
-    local cleaned = text
-    -- Strip standard FFXI colors (0x1E/0x1F + byte)
-    cleaned = cleaned:gsub('[\x1E\x1F].', '')
-    -- Strip auto-translate markers (0xEF/0x7F + byte)
-    cleaned = cleaned:gsub('[\xEF\x7F].', '')
-    -- Strip newlines/returns
-    cleaned = cleaned:gsub('[\r\n]+', ' ')
-    -- Trim whitespace
-    return cleaned:match("^%s*(.-)%s*$")
-end
-
--- Chat Modes to IGNORE (Player generated text)
-local ignored_chat_modes = {
-    [0] = true,  -- Say
-    [1] = true,  -- Shout
-    [3] = true,  -- Tell
-    [4] = true,  -- Party
-    [5] = true,  -- Linkshell
-    [6] = true,  -- Emotes
-    [8] = true,  -- Linkshell 2
-    [26] = true, -- Yell
-    [27] = true, -- Yell
-}
-
+--------------------------------------------------------------------------------
+-- Text Events
+--------------------------------------------------------------------------------
 ashita.events.register('text_in', 'text_in_callback', function(e)
-    -- 1. Filter out Player Chat
-    if ignored_chat_modes[e.mode] then return end
-
-    -- 2. Validation
-    if not currentTopCategory or not currentSubfile or not current_mission then return end
-
-    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-    if not missionData or not missionData.steps then return end
-
-    local step_idx = get_current_step(currentTopCategory, currentSubfile, current_mission)
-    local step_data = missionData.steps[step_idx]
-    if not step_data or not e.message_modified then return end
-
-    -- 3. Get Player Name
-    if playerName == "" then
-        local p = GetPlayerEntity()
-        if p then playerName = p.Name end
-    end
-
-    -- 4. Clean the message
-    local incoming_text = clean_text(e.message_modified)
-
-    if type(step_data) == 'table' then
-
-        -- HANDLE: trigger_on_talk (Chat Dialogue)
-        local raw_triggers = step_data.trigger_on_talk
-        if raw_triggers then
-            local triggers_list = {}
-            if type(raw_triggers) == 'string' then table.insert(triggers_list, raw_triggers)
-            elseif type(raw_triggers) == 'table' then triggers_list = raw_triggers end
-
-            for _, raw_text in ipairs(triggers_list) do
-                if type(raw_text) == 'string' and raw_text ~= "" then
-                    local processed_trigger = raw_text
-                    if playerName and playerName ~= "" then
-                        processed_trigger = raw_text:gsub("{player_name}", playerName)
-                    end
-
-                    if incoming_text:find(processed_trigger, 1, true) then
-                        local has_event_requirement = (step_data.trigger_on_event_id ~= nil)
-
-                        if not has_event_requirement then
-                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                        else
-                            local flags = ensure_key_path(step_trigger_flags, currentTopCategory, currentSubfile, current_mission, step_idx)
-                            flags.talk_complete = true
-                            if flags.event_complete then
-                                set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                            end
-                        end
-                        break
-                    end
-                end
-            end
-        end
-
-        -- HANDLE: trigger_on_item_obtain (Drops OR Purchases - Supports List)
-        local trigger_item_data = step_data.trigger_on_item_obtain
-
-        if trigger_item_data then
-            -- 1. Normalize into a list (table) so we can loop
-            local items_to_check = {}
-            if type(trigger_item_data) == 'string' then
-                table.insert(items_to_check, trigger_item_data)
-            elseif type(trigger_item_data) == 'table' then
-                items_to_check = trigger_item_data
-            end
-
-            -- 2. Loop through every item in the list
-            for _, current_item in ipairs(items_to_check) do
-
-                -- Case A: Dropped / Synthesized Items ("Oxos obtains a Flint Stone")
-                local matched_drop = false
-                if playerName ~= "" and
-                   incoming_text:find(playerName, 1, true) and
-                   incoming_text:find(current_item, 1, true) and
-                   incoming_text:find("obtains", 1, true) then
-                    matched_drop = true
-                end
-
-                -- Case B: Purchased Items ("You buy the lizard egg for...")
-                local matched_buy = false
-                if incoming_text:find("You buy", 1, true) and
-                   incoming_text:find(current_item, 1, true) then
-                    matched_buy = true
-                end
-
-                -- If matched, complete the step and break the loop
-                -- If matched, handle completion logic
-                if matched_drop or matched_buy then
-
-                    -- [NEW] CHECKLIST LOGIC
-                    if step_data.require_all_items then
-                        -- Mark THIS specific item as collected
-                        set_partial_state(currentTopCategory, currentSubfile, current_mission, step_idx, current_item, true)
-
-                        -- Check if ALL items in the list are now collected
-                        if check_all_items_complete(currentTopCategory, currentSubfile, current_mission, step_idx, items_to_check) then
-                            set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                        end
-                    else
-                        -- Standard behavior (Any item completes the step)
-                        set_step_state(currentTopCategory, currentSubfile, current_mission, step_idx, true)
-                    end
-
-                    break -- Stop checking other items in the list for this message
-                end
-            end
-        end
-    end
+    player_module.name = triggers_module.handleTextIn(e, currentTopCategory, currentSubfile, current_mission,
+                                                     quest_data, quest_state, step_trigger_flags,
+                                                     player_module.name) or player_module.name
 end)

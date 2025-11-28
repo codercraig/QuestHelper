@@ -15,5 +15,35 @@ return {
         scale_y  = -0.8   -- Negative because Screen Y is Down, World Z is Up
     },
     
+    ["Bastok Markets"] = {
+        -- Adjusted calibration based on debug data
+        origin_x = -530,  -- World X at Left Edge (adjusted from -335)
+        origin_y = 260,   -- World Z at Top Edge
+        scale_x  = 0.8,   -- Pixels per Yalm
+        scale_y  = -0.8   -- Negative because Screen Y is Down, World Z is Up
+    },
+
+    ["Port Bastok"] = {
+        -- Adjusted calibration based on debug data
+        origin_x = -340,  -- World X at Left Edge (adjusted from -335)
+        origin_y = 260,   -- World Z at Top Edge
+        scale_x  = 0.8,   -- Pixels per Yalm
+        scale_y  = -0.8   -- Negative because Screen Y is Down, World Z is Up
+    },
+
+    ["South Gustaberg"] = {
+        -- Adjusted calibration based on debug data
+        origin_x = -1280,  -- World X at Left Edge (adjusted from -335)
+        origin_y = 925,   -- World Z at Top Edge
+        scale_x  = 0.20,   -- Pixels per Yalm
+        scale_y  = -0.20   -- Negative because Screen Y is Down, World Z is Up
+    },
+        ["North Gustaberg"] = {
+        -- Adjusted calibration based on debug data
+        origin_x = -1310,  -- World X at Left Edge (adjusted from -335)
+        origin_y = 1700,   -- World Z at Top Edge
+        scale_x  = 0.19,   -- Pixels per Yalm
+        scale_y  = -0.19   -- Negative because Screen Y is Down, World Z is Up
+    },
     -- Add more zones here as you calibrate them!
 }
