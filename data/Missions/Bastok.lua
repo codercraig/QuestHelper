@@ -239,12 +239,18 @@ return {
                   },
             },
             {
-                text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made]",
+                text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Amber/Greater/Onyx/Veteran/Old/Brass Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made].",
 
-                -- [NEW] This line turns the list below into a mandatory checklist
+                items_needed = {
+                    "Quadav fetich head",
+                    "Quadav fetich arms",
+                    "Quadav fetich torso",
+                    "Quadav fetich legs"
+                },
+
+                -- [NEW] This line turns the list below into a mandatory checklist maybe no logner needed with items needed section
                 require_all_items = true,
 
-                -- I corrected "quadava" to "quadav" here to ensure it matches the game text
                 trigger_on_item_obtain = {
                     "Quadav fetich head",
                     "Quadav fetich arms",
