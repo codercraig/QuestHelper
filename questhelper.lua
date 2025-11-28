@@ -560,6 +560,10 @@ end)
 ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
     triggers_module.handlePacketIn(e, currentTopCategory, currentSubfile, current_mission,
                                   quest_data, quest_state, step_trigger_flags)
+
+    -- Kill tracking (Action packets)
+    triggers_module.handleActionPacket(e, currentTopCategory, currentSubfile, current_mission,
+                                      quest_data, quest_state, player_module.zoneId)
 end)
 
 --------------------------------------------------------------------------------
@@ -569,4 +573,15 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
     player_module.name = triggers_module.handleTextIn(e, currentTopCategory, currentSubfile, current_mission,
                                                      quest_data, quest_state, step_trigger_flags,
                                                      player_module.name) or player_module.name
+
+    -- Kill tracking via text messages
+    if e.message_modified then
+        local incoming_text = e.message_modified
+        -- Remove FFXI color codes
+        incoming_text = incoming_text:gsub('[\x1E\x1F].', '')
+        incoming_text = incoming_text:gsub('[\xEF\x7F].', '')
+
+        triggers_module.handleKillText(e, incoming_text, player_module.name, currentTopCategory, currentSubfile, current_mission,
+                                      quest_data, quest_state, player_module.zoneId)
+    end
 end)

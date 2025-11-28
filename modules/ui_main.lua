@@ -326,26 +326,25 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         imgui.Text(utils.wrap_text(text, 60))
                     end
 
-                    -- CHECKLIST UI DISPLAY
-                    if not st and step_data.require_all_items and step_data.trigger_on_item_obtain then
-                        local list = {}
-                        if type(step_data.trigger_on_item_obtain) == 'string' then
-                            table.insert(list, step_data.trigger_on_item_obtain)
+                    -- KILL COUNTER UI DISPLAY
+                    if not st and step_data.kill_requirement then
+                        local kill_req = step_data.kill_requirement
+                        local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, i) or 0
+                        local required_count = kill_req.count
+
+                        imgui.Indent(20)
+                        if current_count >= required_count then
+                            imgui.TextColored({0,1,0,1}, string.format("[%d/%d] Kills Complete!", current_count, required_count))
                         else
-                            list = step_data.trigger_on_item_obtain
+                            imgui.TextColored({1,1,0,1}, string.format("[%d/%d] Kills Remaining", current_count, required_count))
                         end
 
-                        for _, item in ipairs(list) do
-                            local gotIt = quest_state.getPartialState(currentTopCategory, currentSubfile, current_mission, i, item)
-
-                            imgui.Indent(20)
-                            if gotIt then
-                                imgui.TextColored({0,1,0,1}, "[x] " .. item)
-                            else
-                                imgui.TextColored({1,1,0,1}, "[ ] " .. item)
-                            end
-                            imgui.Unindent(20)
+                        -- Show enemy types if specified
+                        if kill_req.enemies and #kill_req.enemies > 0 then
+                            imgui.SameLine()
+                            imgui.TextColored({0.7,0.7,0.7,1}, "(" .. table.concat(kill_req.enemies, ", ") .. ")")
                         end
+                        imgui.Unindent(20)
                     end
                 end
 

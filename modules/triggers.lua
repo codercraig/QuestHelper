@@ -70,10 +70,19 @@ local ignored_chat_modes = {
 -- Checks zone entry triggers
 function triggers.checkZoneTrigger(step_data, playerZoneId, zone_data, quest_state, topCat, subfile, mission, step_idx)
     if step_data.zone_trigger and zone_data[step_data.zone_trigger] then
-        if playerZoneId == zone_data[step_data.zone_trigger] then
+        local required_zone_id = zone_data[step_data.zone_trigger]
+
+        -- Debug Print
+        --print(string.format("\30\105[QH Debug]\30\01 Zone Trigger: '%s' (ID: %d) | Current Zone ID: %d | Match: %s",
+        --    step_data.zone_trigger, required_zone_id, playerZoneId, tostring(playerZoneId == required_zone_id)))
+
+        if playerZoneId == required_zone_id then
             quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
             return true
         end
+    elseif step_data.zone_trigger then
+        -- Debug: Zone name not found in zones.lua
+        --print(string.format("\30\106[QH Warning]\30\01 Zone trigger '%s' not found in zones.lua", step_data.zone_trigger))
     end
     return false
 end
@@ -282,6 +291,290 @@ function triggers.handleTextIn(e, currentTopCategory, currentSubfile, current_mi
     end
 
     return playerName
+end
+
+-- Handles kill tracking via text messages ("{player} defeats the {enemy}")
+function triggers.handleKillText(e, incoming_text, playerName, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, playerZoneId)
+    if not currentTopCategory or not currentSubfile or not current_mission then return end
+    if not playerName or playerName == "" then return end
+
+    -- CRITICAL: Filter out player-generated chat to prevent fake messages from counting
+    -- Only count system messages (combat log)
+    if ignored_chat_modes[e.mode] then
+        return -- Ignore player chat (say/shout/tell/party/linkshell)
+    end
+
+    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+    if not missionData or not missionData.steps then return end
+
+    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+    if not missionData.steps[step_idx] then return end
+
+    local step_data = missionData.steps[step_idx]
+
+    -- Check if this step has kill requirements
+    if not step_data.kill_requirement then return end
+
+    local kill_req = step_data.kill_requirement
+
+    -- Check zone requirement
+    if kill_req.zone and playerZoneId then
+        local zone_data = require('data.zones')
+        local required_zone_id = zone_data[kill_req.zone]
+        if required_zone_id and playerZoneId ~= required_zone_id then
+            return -- Not in the required zone
+        end
+    end
+
+    -- Build list of valid names to check (player + party members if enabled)
+    local valid_names = {playerName}
+
+    -- If count_party_kills is enabled, add party member names
+    if kill_req.count_party_kills then
+        if AshitaCore then
+            local memManager = AshitaCore:GetMemoryManager()
+            if memManager then
+                local party = memManager:GetParty()
+                if party then
+                    -- Party positions 0-5 (0 = player, 1-5 = party members)
+                    for i = 1, 5 do
+                        local member_id = party:GetMemberServerId(i)
+                        if member_id and member_id ~= 0 then
+                            local member_name = party:GetMemberName(i)
+                            if member_name and member_name ~= "" then
+                                table.insert(valid_names, member_name)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- Look for "{name} defeats the" or "{name} defeats" for any valid name
+    local enemy_name = nil
+    local killer_name = nil
+
+    for _, name in ipairs(valid_names) do
+        local defeat_pattern_1 = name .. " defeats the "
+        local defeat_pattern_2 = name .. " defeats "
+
+        -- Try pattern 1: "Name defeats the Enemy"
+        local start_pos = incoming_text:find(defeat_pattern_1, 1, true)
+        if start_pos then
+            enemy_name = incoming_text:sub(start_pos + #defeat_pattern_1)
+            enemy_name = enemy_name:gsub("%.$", "")
+            killer_name = name
+            break
+        else
+            -- Try pattern 2: "Name defeats Enemy"
+            start_pos = incoming_text:find(defeat_pattern_2, 1, true)
+            if start_pos then
+                enemy_name = incoming_text:sub(start_pos + #defeat_pattern_2)
+                enemy_name = enemy_name:gsub("%.$", "")
+                killer_name = name
+                break
+            end
+        end
+    end
+
+    if enemy_name then
+        local who = killer_name or "Unknown"
+        print(string.format("\30\106[QH Debug]\30\01 Kill detected: %s defeated '%s'", who, enemy_name))
+
+        -- Check if enemy name matches requirements
+        local name_match = false
+        if kill_req.enemies and #kill_req.enemies > 0 then
+            for _, required_enemy in ipairs(kill_req.enemies) do
+                if enemy_name:lower():find(required_enemy:lower(), 1, true) then
+                    name_match = true
+                    break
+                end
+            end
+            if not name_match then
+                print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
+                    enemy_name, table.concat(kill_req.enemies, ", ")))
+            end
+        else
+            -- No specific enemies required, count any kill
+            name_match = true
+        end
+
+        if name_match then
+            -- Increment kill counter
+            local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, step_idx) or 0
+            current_count = current_count + 1
+            quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, current_count)
+
+            -- Success message - show who got the kill if not the player
+            local kill_credit = killer_name ~= playerName and (" by " .. killer_name) or ""
+            print(string.format("\30\106[QH]\30\01 Kill Tracked: %s%s (%d/%d)",
+                enemy_name, kill_credit, current_count, kill_req.count))
+
+            -- Check if requirement met
+            if current_count >= kill_req.count then
+                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                print(string.format("\30\106[QH]\30\01 Kill requirement complete! (%d/%d)",
+                    current_count, kill_req.count))
+            end
+        end
+    end
+end
+
+-- Handles action packets for kill tracking (0x028 - Action Packet)
+function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, playerZoneId)
+    if e.id ~= 0x028 then return end
+
+    if not currentTopCategory or not currentSubfile or not current_mission then return end
+
+    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+    if not missionData or not missionData.steps then return end
+
+    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+    if not missionData.steps[step_idx] then return end
+
+    local step_data = missionData.steps[step_idx]
+
+    -- Check if this step has kill requirements
+    if not step_data.kill_requirement then return end
+
+    local kill_req = step_data.kill_requirement
+
+    -- Debug: Show we're tracking kills
+    local zone_data = require('data.zones')
+    local required_zone_id = kill_req.zone and zone_data[kill_req.zone]
+    print(string.format("\30\105[QH Debug]\30\01 Kill tracking active | Zone: %s (Req: %s, ID: %s) | Current Zone: %s",
+        kill_req.zone or "ANY",
+        required_zone_id or "N/A",
+        tostring(required_zone_id),
+        tostring(playerZoneId)))
+
+    -- Check zone requirement
+    if kill_req.zone and playerZoneId then
+        if required_zone_id and playerZoneId ~= required_zone_id then
+            print(string.format("\30\106[QH Debug]\30\01 Wrong zone! Need %s (ID: %d), in zone ID: %d",
+                kill_req.zone, required_zone_id, playerZoneId))
+            return -- Not in the required zone
+        end
+    end
+
+    -- Parse action packet
+    local actor_id = read_uint32(e.data, 0x04)
+    local target_count = e.data:byte(0x09)
+
+    -- Debug: Show raw packet header bytes
+    local byte_04 = e.data:byte(0x04)
+    local byte_08 = e.data:byte(0x08)
+    local byte_09 = e.data:byte(0x09)
+    local byte_0A = e.data:byte(0x0A)
+
+    print(string.format("\30\105[QH Debug]\30\01 Packet Bytes: [0x04]=%d [0x08]=%d [0x09]=%d [0x0A]=%d",
+        byte_04 or 0, byte_08 or 0, byte_09 or 0, byte_0A or 0))
+
+    -- Get player server ID to check if this is the player's action
+    local player_entity = GetPlayerEntity()
+    local player_id = player_entity and player_entity.ServerId or 0
+
+    print(string.format("\30\105[QH Debug]\30\01 Action Packet: Actor=%d (Player ID=%d) | Targets=%d",
+        actor_id, player_id, target_count))
+
+    -- If no targets, skip
+    if target_count == 0 then
+        print(string.format("\30\106[QH Debug]\30\01 No targets in packet, skipping"))
+        return
+    end
+
+    -- Check if we should count party/trust kills
+    local count_all_party = kill_req.count_party_kills or false
+
+    -- For now, let's not filter by player to see if we can detect ANY kills
+    -- TODO: Re-enable player filtering once we confirm kills are detected
+    -- if not count_all_party and actor_id ~= player_id then
+    --     print(string.format("\30\106[QH Debug]\30\01 Not player's kill (Actor: %d, Player: %d), skipping", actor_id, player_id))
+    --     return
+    -- end
+
+    print(string.format("\30\105[QH Debug]\30\01 Checking %d targets...", target_count))
+
+    -- Check each target in the action packet
+    for i = 0, target_count - 1 do
+        local target_offset = 0x10 + (i * 0x24)
+        local target_id = read_uint32(e.data, target_offset)
+        local action_count = e.data:byte(target_offset + 0x04)
+
+        -- Safety check: action_count can be nil if offset is invalid
+        if not action_count then
+            break
+        end
+
+        -- Check each action on the target
+        for j = 0, action_count - 1 do
+            local action_offset = target_offset + 0x08 + (j * 0x08)
+            local msg_byte1 = e.data:byte(action_offset + 0x05)
+            local msg_byte2 = e.data:byte(action_offset + 0x06)
+
+            -- Safety check: bytes can be nil if offset is invalid
+            if not msg_byte1 or not msg_byte2 then
+                break
+            end
+
+            local message_id = msg_byte1 + (msg_byte2 * 256)
+
+            --print(string.format("\30\105[QH Debug]\30\01 Message ID: %d | Target ID: %d", message_id, target_id))
+
+            -- Message IDs for defeating enemies:
+            -- 6 = defeats target
+            -- 20 = falls to the ground (also defeat)
+            if message_id == 6 or message_id == 20 then
+                -- Get target entity
+                local target = GetEntity(target_id)
+                if target then
+                    local target_name = target.Name
+                    print(string.format("\30\106[QH Debug]\30\01 Defeat detected! Enemy: %s", target_name))
+
+                    -- Check if we need to match specific enemy names
+                    local name_match = false
+                    if kill_req.enemies and #kill_req.enemies > 0 then
+                        for _, enemy_name in ipairs(kill_req.enemies) do
+                            if target_name:lower():find(enemy_name:lower(), 1, true) then
+                                name_match = true
+                                break
+                            end
+                        end
+                        if not name_match then
+                            print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
+                                target_name, table.concat(kill_req.enemies, ", ")))
+                        end
+                    else
+                        -- No specific enemies required, count any kill
+                        name_match = true
+                    end
+
+                    if name_match then
+                        -- Increment kill counter
+                        local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, step_idx) or 0
+                        current_count = current_count + 1
+                        quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, current_count)
+
+                        -- Debug print
+                        print(string.format("\30\106[QH]\30\01 Kill Tracked: %s (%d/%d)",
+                            target_name, current_count, kill_req.count))
+
+                        -- Check if requirement met
+                        if current_count >= kill_req.count then
+                            quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                            print(string.format("\30\106[QH]\30\01 Kill requirement complete! (%d/%d)",
+                                current_count, kill_req.count))
+                        end
+                    else
+                        print(string.format("\30\106[QH Debug]\30\01 Enemy name mismatch, not counting"))
+                    end
+                else
+                    print(string.format("\30\106[QH Debug]\30\01 Could not get entity for target ID: %d", target_id))
+                end
+            end
+        end
+    end
 end
 
 return triggers

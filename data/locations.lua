@@ -49,10 +49,10 @@ return {
         trigger_npc = "Malduc",
         visual_mode = "beacon",
     },
-    ["Presidents_Office"] = {
-        target_pos = { x = 93.0, y = -36.0, z = -0.20 },
+    ["Iron Eater"] = {
+        target_pos = { x = 92.9, y = -22.0, z = 1.8 },
         trigger_npc = "Iron Eater",
-        visual_mode = "beacon",
+        visual_mode = "arc",
     },
     ["Kaela"] = {
         target_pos = { x = 40.5, y = -30.0, z = 16.1 },

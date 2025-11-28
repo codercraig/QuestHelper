@@ -248,15 +248,7 @@ return {
                     "Quadav fetich legs"
                 },
 
-                -- [NEW] This line turns the list below into a mandatory checklist maybe no logner needed with items needed section
                 require_all_items = true,
-
-                trigger_on_item_obtain = {
-                    "Quadav fetich head",
-                    "Quadav fetich arms",
-                    "Quadav fetich torso",
-                    "Quadav fetich legs"
-                },
                 images = {
                       {
                           file     = "maps/north_gustaberg.png",
@@ -509,7 +501,6 @@ return {
                 items_needed = {
                     "Lizard Egg"
                 },
-                trigger_on_item_obtain = {"lizard egg"},
                 images = {
                     {
                         file     = "maps/windurst_waters_1.png",
@@ -609,9 +600,12 @@ return {
                        "After the cutscene you will have to travel to San d'Oria and Windhurst \n" ..
                        "Please note you can choose San d'Oria -> Windurst or Windurst -> San d'Oria. Questhelper will split this into two missions. \n" ..
                        "Which order will affect the tasks, titles and cutscenes so this section will be split into two. \n \n",
+                onmob_target = {"Naji"},
+                trigger_on_event_id = { 714 },
                 images = {
                       {
                           file     = "maps/metalworks.png",
+                          zone_name = "Metalworks",
                           width    = 512,
                           height   = 512,
                           state    = 2,
@@ -623,7 +617,7 @@ return {
             },
         },
         reward = {
-            text = "Nothing. . ."
+            text = "Nothing. . . wamp wamp!"
         }
     },
     ["2-3: The Emissary - San d'Oria -> Windurst"] = {
@@ -850,12 +844,16 @@ return {
                   },
             },
             {
-                text = "Step 9: Talk to Kupipi in Heavens Tower on the first floor north side (no map/position available), she will give you a KI:Dark Key. \n \n" ..
+                text = "Step 9: Talk to Kupipi in Heavens Tower on the first floor north side, she will give you a KI:Dark Key. \n" ..
+                       "All party members need one Dark Key! \n" ..
+                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n \n" ..
                        "Suggested Route: \n" ..
                        "Port Windurst (N-5) ->\n" ..
                        "Windurst Woods (F-5) ->\n" ..
                        "Windurst Walls (H-7) ->\n" ..
                        "Heavens Tower",
+                onmob_target = {"Kupipi"},
+                trigger_on_event_id = {537},
                 images = {
                       {
                           file     = "maps/port_windurst.png",
@@ -886,23 +884,499 @@ return {
                       },
                   },
             },
+            {
+                text = "Step 10: Travel to Balga's Dais in Meriphataud Mountains (L-8) with your party. \n" ..
+                       "This is a BCNM battle! You will face Searcher and Black Dragon. \n" ..
+                       "Recommended: Level 35+ or a party. \n \n" ..
+                       "===== Searcher ===== \n" ..
+                       "Family: Orc \n" ..
+                       "Level: 25 \n \n" ..
+                       "===== Black Dragon ===== \n" ..
+                       "Family: Dragon \n" ..
+                       "Level: 27 \n" ..
+                       "Notes: Uses dragon breath attacks. \n \n" ..
+                       "After winning, you will receive the KI:Kindred Crest and title 'Black Dragon Slayer'.",
+                images = {
+                      {
+                          file     = "maps/meriphataud_mountains.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "L-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 11: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
+                onmob_target = {"Melek"},
+                trigger_on_event_id = {61},
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          highlights = {
+                              { position = "F-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 12: Return to Naji in Metalworks (J-8) to complete the mission!",
+                onmob_target = {"Naji"},
+                trigger_on_event_id = {713},
+                images = {
+                      {
+                          file     = "maps/metalworks.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 12,
+                          zone_name = "Metalworks",
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
         },
         reward = {
-            text = "Trust: Halver, 5000g, and RANK3!"
+            text = "Rank 3, 3000g, Adventurer's Certificate, Trust: Halver & Semih!"
+        }
+    },
+
+    ["2-3: The Emissary - Windurst -> San d'Oria"] = {
+        steps = {
+            {
+                text = "Step 1: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
+                onmob_target = {"Melek"},
+                trigger_on_event_id = {48},
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 1,
+                          highlights = {
+                              { position = "F-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 2: Talk to Kupipi in Heavens Tower on the first floor north side to receive the KI:Sword Offering. \n \n" ..
+                       "Suggested Route: \n" ..
+                       "Port Windurst (N-5) ->\n" ..
+                       "Windurst Woods (F-5) ->\n" ..
+                       "Windurst Walls (H-7) ->\n" ..
+                       "Heavens Tower",
+                onmob_target = {"Kupipi"},
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 2,
+                          highlights = {
+                              { position = "N-5", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                        file     = "maps/windurst_woods.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/windurst_walls.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                  },
+            },
+            {
+                text = "Step 3: Talk to Gold Skull in the Consulate of Bastok in Port Windurst (F-6) to receive a Dull Sword.",
+                onmob_target = {"Gold Skull"},
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 3,
+                          highlights = {
+                              { position = "F-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 4: Travel to Giddeus Map 2 and speak with Uu Zhoumo (F-7) you can drop down either from 'A','E','F' and 'G' on Map1. You need to get an Aspir Knife! \n \n" ..
+                       "===== Obtaining Aspir Knife ===== \n" ..
+                       "The Aspir Knife drops from Eyy Mon the Ironbreaker, a Yagudo NM in Giddeus. \n" ..
+                       "This NM spawns on Map2 (G-7) around this area. Also highlighted! \n" ..
+                       "Each party member needs one Aspir Knife! \n" ..
+                       "Respawn time: approximately 15 minutes. \n \n" ..
+                       "Trade the Aspir Knife to Uu Zhoumo.",
+                items_needed = {
+                    "Aspir Knife"
+                },
+                onmob_target = {"Uu Zhoumo"},
+                images = {
+                       {
+                          file     = "maps/west_sarutabaruta.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/giddeus_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                              { position = "G-8", offsetX = 16, offsetY = 16 },
+                              { position = "I-8", offsetX = 16, offsetY = 16 },
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/giddeus_2.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "F-7", offsetX = 16, offsetY = 16 },
+                              { position = "G-7", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 5: Return to Melek in the Consulate of Bastok in Port Windurst (F-6).",
+                onmob_target = {"Melek"},
+                images = {
+                      {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 5,
+                          highlights = {
+                              { position = "F-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 6: Travel to San d'Oria! \n " ..
+                       "If you have the teleport crystal from Crag of Holla you can get a White Mage to teleport you or use Unity Warp. \n \n" ..
+                       "Otherwise here's a suggested route from Windurst: \n" ..
+                       "East Sarutabaruta (J-4) ->\n" ..
+                       "Tahrongi Canyon (K-8)    ->\n" ..
+                       "Buburimu Peninsula (I-9) ->\n" ..
+                       "Mhaura - get the boat! (H-10) ->\n" ..
+                       "Selbina (H-6)/(I-6)  ->\n" ..
+                       "Valkrum Dunes (K-5)/(L-5)  ->\n" ..
+                       "La Thiene Plateau (D-3)/(E-3)  ->\n" ..
+                       "West Ronfaure (I-5) -> Northern San d'Oria!\n \n",
+                zone_trigger = "Northern San d'Oria",
+                images = {
+                      {
+                          file     = "maps/east_sarutabaruta.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 6,
+                          highlights = {
+                              { position = "J-4", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                        file     = "maps/tahrongi_canyon.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/buburimu_peninsula.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/mhaura.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/selbina.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/valkurm_dunes.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "K-5", offsetX = 16, offsetY = 16 },
+                            { position = "L-5", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/la_theine_plateau.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "D-3", offsetX = 16, offsetY = 16 },
+                            { position = "E-3", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                      {
+                        file     = "maps/west_ronfaure.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
+                        },
+                      },
+                  },
+            },
+            {
+                text = "Step 7: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
+                onmob_target = {"Helaku"},
+                trigger_on_event_id = {542},
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 7,
+                          highlights = {
+                              { position = "K-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 8: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6/J-6). \n",
+                zone_trigger = "Chateau d'Oraguille",
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 8,
+                          highlights = {
+                              { position = "I-6", offsetX = 16, offsetY = 16 },
+                              { position = "J-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 9: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
+                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Halver. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {501},
+                images = {
+                      {
+                          file     = "maps/chateau_doraguille.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 9,
+                          highlights = {
+                              { position = "I-9", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 10: Travel to Horlais Peak in La Theine Plateau (F-5) with your party. \n \n" ..
+
+                       "Notes: Orcs sight-Aggro to players around level 35 unless they are Invisible. Bats will aggro by sound. \n \n" ..
+                       "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
+                       "Ghelsba Outpost: Go to (H-11)-> Yughott Grotto  - exit 1. \n" ..
+                       "Yughott Grotto : Go to (K-5) -> Fort Ghelsba    - exit 3. \n" ..
+                       "Fort Ghelsba   : Go to (J-8) -> Yughott Grotto  - exit 4. \n" ..
+                       "Yughott Grotto : Enter Horlais Peak (J-6). \n \n",
+                zone_trigger = "Horlais Peak",
+                images = {
+                      {
+                          file     = "maps/west_ronfaure.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "E-4", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/ghelsba_outpost_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "H-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/yughott_grotto_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "K-5", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/fort_ghelsba.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/yughott_grotto_2.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 10,
+                          highlights = {
+                              { position = "J-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 11: This is a BCNM battle! You will face Spotter and Dread Dragon. \n \n" ..
+                       "Recommended: Level 35+ or a party. \n \n" ..
+                       "===== Spotter ===== \n" ..
+                       "Family: Orc \n" ..
+                       "Level: 25 \n \n" ..
+                       "===== Dread Dragon ===== \n" ..
+                       "Family: Dragon \n" ..
+                       "Level: 27 \n" ..
+                       "Notes: Sleep/Bind the dragon and kill the Spotter first! \n \n" ..
+                       "After winning, you will receive the KI:Kindred Crest and title 'Dread Dragon Slayer'.",
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 12: Return to Helaku in Northern San d'Oria (K-10) to receive the KI:Kindred Report.",
+                onmob_target = {"Helaku"},
+                trigger_on_event_id = {543},
+                images = {
+                      {
+                          file     = "maps/northern_san_doria.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 12,
+                          highlights = {
+                              { position = "K-10", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 13: Return to Naji in Metalworks (J-8) to complete the mission!",
+                onmob_target = {"Naji"},
+                trigger_on_event_id = {713},
+                images = {
+                      {
+                          file     = "maps/metalworks.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 13,
+                          zone_name = "Metalworks",
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+        },
+        reward = {
+            text = "Rank 3, 3000g, Adventurer's Certificate, Trust: Halver!"
         }
     },
 
     ["3-1: The Four Musketeers"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        file     = "maps/bastok_mines.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/bastok_markets.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_bastok.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You need to speak with him twice.",
+                onmob_target = {"Iron Eater"},
+                trigger_on_event_id = {715, 716},
                 images = {
                     {
                         file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
@@ -910,44 +1384,255 @@ return {
                 },
             },
             {
-                text = "Step 3: Travel to Beadeaux and locate the target point at (H-7).",
+                text = "Step 3: Travel to Beadeaux via Pashhow Marshlands (J-9). \n" ..
+                       "From Konschtat Highlands, you can also travel to (K-3) to enter Pashhow Marshlands. \n" ..
+                       "You may also be transported to the Beadeaux Survival Guide if unlocked.",
+                zone_trigger = "Beadeaux",
                 images = {
                     {
-                        file     = "maps/beadeaux.png",
+                        file     = "maps/konschtat_highlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "Konschtat Highlands",
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "K-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/pashhow_marshlands.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Pashhow Marshlands",
+                        highlights = {
+                            { position = "L-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
+                text = "Step 4: Zone into Beadeaux for a cutscene. \n" ..
+                       "You need to defeat 20 Copper Quadav enemies (levels 22-28) while in Beadeaux. They sound-aggro under level 42. \n" ..
+                       "Party members get credit for kills. The kill counter persists if you zone or logout.",
+                --zone_trigger = "Beadeaux",
+                trigger_on_event_id = 120,
+                kill_requirement = {
+                    count = 20,
+                    enemies = {"Copper Quadav"},
+                    zone = "Beadeaux",
+                    count_party_kills = true
+                },
                 images = {
                     {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/beadeaux_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
+                        --highlights = {
+                         --   { position = "H-7", offsetX = 16, offsetY = 16 },
+                        --},
+                    },
+                },
+            },
+            {
+                text = "Step 5: After defeating 20 Copper Quadav, zone into Pashhow Marshlands to receive the completion cutscene. \n" ..
+                       "Do NOT use Escape or you'll miss the cutscene!",
+                --zone_trigger = "Pashhow Marshlands",
+                trigger_on_event_id = {11},
+                images = {
+                    {
+                        file     = "maps/beadeaux_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "E-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "350 Rank Points!"
         }
     },
 
     ["3-2: To the Forsaken Mines"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        file     = "maps/bastok_mines.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/bastok_markets.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_bastok.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Obtain Hare Meat! \n\n" ..
+                       "===== Buy from Auction House =====\n \n" ..
+                       "- Check 'Food' > 'Ingredients' section for listings.\n \n" ..
+                       "===== Obtain from Rabbit Family =====\n \n" ..
+                       "- Hare Meat drops from rabbits in Dangruf Wadi or Palborough Mines.\n",
+                items_needed = {
+                    "Hare Meat"
+                },
+                images = {
+                    {
+                        file     = "maps/north_gustaberg.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "K-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 3: Travel to Gusgen Mines via Konschtat Highlands (L-7). You can also use a Survival Guide if available. \n" ..
+                       "Recommended: Level 30+ with Sneak, or level 40+ (mobs aggro by hearing and HP).",
+                zone_trigger = "Gusgen Mines",
+                images = {
+                    {
+                        file     = "maps/konschtat_highlands.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: In Gusgen Mines, find the ??? at Map 1 (J-7). Trade your Hare Meat to it to spawn Blind Moby. \n" ..
+                       "Defeat Blind Moby to obtain the Glocolite key item.",
+                onmob_target = {"???"},
+                trigger_on_event_id = {1010},
+                items_needed = {
+                    "Glocolite"
+                },
+                images = {
+                    {
+                        file     = "maps/gusgen_mines.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 5: Return to any Bastok Gate Guard and trade the Glocolite to complete the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = {1006},
+                images = {
+                    {
+                        file     = "maps/bastok_mines.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/bastok_markets.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_bastok.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "400 Rank Points!"
+        }
+    },
+
+    ["3-3: Jeuno"] = {
+        steps = {
+            {
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        file     = "maps/bastok_mines.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/bastok_markets.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_bastok.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 2: Visit Lucius at the Metalworks (I-9) to obtain the KI:Letter to the Ambassador.",
+                onmob_target = {"Lucius"},
+                trigger_on_event_id = 322,
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -955,30 +1640,37 @@ return {
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Gusgen Mines and locate the target point at (I-7).",
+                text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Goggehn at the Embassy of Bastok (H-10).",
+                onmob_target = {"Goggehn"},
+                trigger_on_event_id = {41, 66, 139},
                 images = {
                     {
-                        file     = "maps/gusgen_mines.png",
+                        file     = "maps/ru_lude_gardens.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: Return to Cid to complete the mission.",
+                text = "Step 4: Navigate Delkfutt's Tower in Qufim Island (10 floors). \n" ..
+                       "Recommended: Level 40+ with Sneak and Invisible, or level 50+. \n" ..
+                       "You need to reach Floor 10 and defeat Porphyrion at (H-8) to obtain the Delkfutt Key.",
+                items_needed = {
+                    "Delkfutt Key"
+                },
                 images = {
                     {
-                        file     = "maps/metalworks.png",
+                        file     = "maps/qufim_island.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -988,34 +1680,41 @@ return {
                     },
                 },
             },
-        },
-        reward = {
-            text = "Rank Points!"
-        }
-    },
-
-    ["3-3: Jeuno"] = {
-        steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Travel to Jeuno and speak with Savae E Paleade at (G-8) in Lower Jeuno.",
+                text = "Step 5: Use the Delkfutt Key to access the basement area of the tower. \n" ..
+                       "Trigger a cutscene at the Cermet Door in the basement (L-9).",
+                trigger_on_event_id = 1,
                 images = {
                     {
-                        file     = "maps/lower_jeuno.png",
+                        file     = "maps/delkfutts_tower.png",
                         width    = 512,
                         height   = 512,
-                        state    = 2,
+                        state    = 5,
                         highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                            { position = "L-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 3: Complete the assigned task from Savae E Paleade." },
-            { text = "Step 4: Return to the Bastok Gate Guard to complete the mission." },
+            {
+                text = "Step 6: Return to Goggehn at the Embassy of Bastok in Ru'Lude Gardens (H-10) to complete the mission.",
+                onmob_target = {"Goggehn"},
+                trigger_on_event_id = 38,
+                images = {
+                    {
+                        file     = "maps/ru_lude_gardens.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
         },
         reward = {
-            text = "Rank Points!"
+            text = "Rank 4, 5000g!"
         }
     },
 

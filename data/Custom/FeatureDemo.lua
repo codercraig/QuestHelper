@@ -37,13 +37,30 @@ return {
                 },
             },
             {
+                text = "Kill Counter Demo: Defeat 5 enemies in Bastok Mines! \n" ..
+                       "This will count ANY enemy you defeat. Try killing bees or worms outside the city.",
+                kill_requirement = {
+                    count = 5,
+                    -- No specific enemies specified, so any kill counts
+                    zone = "South Gustaberg"
+                },
+            },
+            {
+                text = "Kill Counter Demo 2: Defeat 3 Stone Eaters! \n" ..
+                       "This will count Stone Eater kills by you, your trusts, and party members.",
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Stone Eater"},  -- Only Stone Eater kills count
+                    zone = "South Gustaberg",
+                    count_party_kills = true  -- Count kills from party members and trusts
+                },
+            },
+            {
                 text = "whaaaat",
                 -- [NEW] This line turns the list below into a mandatory checklist
                 require_all_items = false,
 
                 -- I corrected "quadava" to "quadav" here to ensure it matches the game text
-                trigger_on_item_obtain = {"flint stone"
-                },
                 trigger_on_item_obtain = "flint stone",
             },
             {

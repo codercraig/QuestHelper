@@ -7,7 +7,8 @@ local settings = require('settings')
 local QUESTHELPER_ALIAS = 'QuestHelper_settings'
 local default_settings = T{
     step_states = T{},
-    partial_progress = T{}
+    partial_progress = T{},
+    kill_counts = T{}
 }
 
 -- Load settings
@@ -70,6 +71,19 @@ function quest_state.checkAllItemsComplete(cat, sub, mis, step, required_list)
         end
     end
     return true
+end
+
+-- Gets the kill count for a step
+function quest_state.getKillCount(cat, sub, mis, step)
+    local path = ensure_key_path(quest_state.settings.kill_counts, cat, sub, mis)
+    return path[step] or 0
+end
+
+-- Sets the kill count for a step
+function quest_state.setKillCount(cat, sub, mis, step, count)
+    local path = ensure_key_path(quest_state.settings.kill_counts, cat, sub, mis)
+    path[step] = count
+    settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 
 -- Gets the current (first incomplete) step for a mission

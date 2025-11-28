@@ -105,7 +105,8 @@ function inventory_module.hasItem(itemName, searchAllStorages)
         for j = 0, inventory:GetContainerCountMax(storage.id) do
             local itemEntry = inventory:GetContainerItem(storage.id, j)
 
-            if itemEntry.Id ~= 0 and itemEntry.Id ~= 65535 then
+            -- Safety check: itemEntry can be nil during zoning
+            if itemEntry and itemEntry.Id ~= 0 and itemEntry.Id ~= 65535 then
                 local item = resources:GetItemById(itemEntry.Id)
 
                 if item and matchesItemName(item, itemName) then
