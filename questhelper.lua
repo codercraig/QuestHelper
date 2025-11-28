@@ -64,6 +64,7 @@ local questIconTexture = nil
 -- Debug Settings
 --------------------------------------------------------------------------------
 local ENABLE_VERBOSE_DEBUG = false
+local ENABLE_TRIGGER_DEBUG = false -- Toggle with /qh_debug
 local DEBUG_PRINT_INTERVAL = 10
 local lastDebugPrintTime = 0
 local lastFrameTime = os.clock()
@@ -182,9 +183,10 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 end
 
                 -- Check trigger zones (square/line)
-                if triggers_module.checkTriggerZones(step_data, player_module.posX, player_module.posZ_depth,
+                -- NOTE: posY_height is actually the Z coordinate (depth), posZ_depth is actually Y (elevation)
+                if triggers_module.checkTriggerZones(step_data, player_module.posX, player_module.posY_height,
                                                     quest_state, currentTopCategory, currentSubfile,
-                                                    current_mission, step_idx) then
+                                                    current_mission, step_idx, ENABLE_TRIGGER_DEBUG) then
                     return
                 end
 
@@ -404,6 +406,13 @@ ashita.events.register('command', 'command_callback', function(e)
         else
             print(string.format("\30\68[NOT FOUND]\30\01 Item '%s' not found in any storage.", itemName))
         end
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_debug' then
+        ENABLE_TRIGGER_DEBUG = not ENABLE_TRIGGER_DEBUG
+        print(string.format("[%s] Trigger zone debug: %s", addon.name, ENABLE_TRIGGER_DEBUG and "ENABLED" or "DISABLED"))
         e.blocked = true
         return true
     end

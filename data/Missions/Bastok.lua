@@ -501,6 +501,7 @@ return {
                 items_needed = {
                     "Lizard Egg"
                 },
+                trigger_on_item_obtain = {"Lizard Egg"},
                 images = {
                     {
                         file     = "maps/windurst_waters_1.png",
@@ -1471,6 +1472,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Mines",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1480,6 +1482,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Markets",
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
@@ -1489,6 +1492,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Port Bastok",
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1504,6 +1508,7 @@ return {
                 items_needed = {
                     "Hare Meat"
                 },
+                trigger_on_item_obtain = {"Hare Meat"},
                 images = {
                     {
                         file     = "maps/north_gustaberg.png",
@@ -1513,6 +1518,15 @@ return {
                         highlights = {
                             { position = "K-3", offsetX = 16, offsetY = 16 },
                         },
+                    },
+                    {
+                        file     = "maps/palborough_mines_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        --highlights = {
+                        --    { position = "K-3", offsetX = 16, offsetY = 16 },
+                        --},
                     },
                 },
             },
@@ -1535,14 +1549,19 @@ return {
             {
                 text = "Step 4: In Gusgen Mines, find the ??? at Map 1 (J-7). Trade your Hare Meat to it to spawn Blind Moby. \n" ..
                        "Defeat Blind Moby to obtain the Glocolite key item.",
-                onmob_target = {"???"},
-                trigger_on_event_id = {1010},
-                items_needed = {
-                    "Glocolite"
-                },
+                onmob_target = {"Blind Moby"},
+                draw_type = 'square',
+                center = { x = 210.1, y= -59.2, z=-101.8 },
+                size = 1,
+                zone = "Gusgen Mines",
+                --trigger_on_event_id = {1010},
+                -- items_needed = {
+                --     "Glocolite"
+                -- },
+                trigger_on_item_obtain = {"Glocolite"},
                 images = {
                     {
-                        file     = "maps/gusgen_mines.png",
+                        file     = "maps/gusgen_mines_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -1605,6 +1624,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Mines",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1614,6 +1634,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Markets",
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
@@ -1623,6 +1644,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Port Bastok",
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1639,6 +1661,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                         },

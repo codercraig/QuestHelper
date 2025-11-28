@@ -19,6 +19,8 @@ function player.updatePosition(mem)
         player.name = playerInfo.Name
     end
 
+    -- Position tracking is working via Movement.LocalPosition
+
     local party = mem:GetParty()
     local entityMgr = mem:GetEntity()
     if not party or not entityMgr then return false end
@@ -40,9 +42,23 @@ function player.updatePosition(mem)
 
     if pActorPointer == 0 then return false end
 
-    player.posX = ashita.memory.read_float(pActorPointer + 0x678)
-    player.posZ_depth = ashita.memory.read_float(pActorPointer + 0x67C) -- Z (Depth)
-    player.posY_height = ashita.memory.read_float(pActorPointer + 0x680) -- Y (Height)
+    -- Try using GetPlayerEntity() first (most reliable in Ashita v4)
+    if playerInfo and playerInfo.Movement and playerInfo.Movement.LocalPosition then
+        local pos = playerInfo.Movement.LocalPosition
+        player.posX = pos.X
+        player.posZ_depth = pos.Z
+        player.posY_height = pos.Y
+    elseif playerInfo and playerInfo.X and playerInfo.Z and playerInfo.Y then
+        -- Fallback: Direct fields (if they exist)
+        player.posX = playerInfo.X
+        player.posZ_depth = playerInfo.Z
+        player.posY_height = playerInfo.Y
+    else
+        -- Final fallback: Memory reading
+        player.posX = ashita.memory.read_float(pActorPointer + 0x678)
+        player.posZ_depth = ashita.memory.read_float(pActorPointer + 0x67C)
+        player.posY_height = ashita.memory.read_float(pActorPointer + 0x680)
+    end
 
     return true
 end

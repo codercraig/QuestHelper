@@ -5,7 +5,8 @@ return {
             {
                 text = "Walk into the glowing square to begin the demo.",
                 trigger_zones = {
-                    { type = 'square', center = { x = 26, y = 0, z = -81 }, size = 5 },
+                    { type = 'square', center = { x = 2, y = 0, z = -79 }, size = 2 },
+                     { type = 'square', center = { x = 26, y = 0, z = -81 }, size = 5 },
                     { type = 'square', center = { x = 0,  y = 0, z = -81 }, size = 2 },
                     { type = 'line', start = { x = 50, y = 0, z = -81 }, stop = { x = 50, y = -5, z = -71 } }
                 },
@@ -13,9 +14,9 @@ return {
             },
             {
                 text = "This is a line. It connects two points.",
-                draw_type = 'line',
-                start_pos = { x = 26, y = 0, z = -81 },
-                end_pos = { x = 36, y = 0, z = -81 },
+                trigger_zones = {
+                    { type = 'line', start = { x = 26, y = 0, z = -81 }, stop =  { x = 36, y = 0, z = -81 } }
+                },
                 zone = "Bastok Mines"
             },
             {

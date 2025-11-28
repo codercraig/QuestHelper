@@ -87,15 +87,32 @@ function triggers.checkZoneTrigger(step_data, playerZoneId, zone_data, quest_sta
     return false
 end
 
+-- Throttle debug output (print once every 10 seconds)
+local last_trigger_debug_time = 0
+local TRIGGER_DEBUG_INTERVAL = 10
+
 -- Checks trigger zones (square/line regions player walks through)
-function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx)
+function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx, enable_debug)
     if type(step_data) == 'table' and step_data.trigger_zones then
-        for _, zone in ipairs(step_data.trigger_zones) do
+        local current_time = os.time()
+        local should_debug = enable_debug and (current_time - last_trigger_debug_time) >= TRIGGER_DEBUG_INTERVAL
+
+        for i, zone in ipairs(step_data.trigger_zones) do
             -- Square trigger zone
             if zone.type == 'square' and playerPosX and playerPosZ_depth and zone.center and zone.size then
                 local half_size = zone.size / 2
-                if math.abs(playerPosX - zone.center.x) < half_size and
-                   math.abs(playerPosZ_depth - zone.center.z) < half_size then
+                local dx = math.abs(playerPosX - zone.center.x)
+                local dz = math.abs(playerPosZ_depth - zone.center.z)
+
+                -- Debug: Show when checking zones (throttled)
+                if should_debug then
+                    print(string.format("\30\106[QH Debug]\30\01 Checking step %d, zone %d: Player(%.1f, %.1f) vs Center(%.1f, %.1f) | dx=%.1f<%.1f? dz=%.1f<%.1f?",
+                        step_idx, i, playerPosX, playerPosZ_depth, zone.center.x, zone.center.z, dx, half_size, dz, half_size))
+                    last_trigger_debug_time = current_time
+                end
+
+                if dx < half_size and dz < half_size then
+                    print(string.format("\30\105[QH]\30\01 Trigger Zone HIT! Completing step %d", step_idx))
                     quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
                     return true
                 end

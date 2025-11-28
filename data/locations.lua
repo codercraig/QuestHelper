@@ -95,5 +95,11 @@ return {
         target_pos = { x = -133, y= 3, z=133.3},
         visual_mode = "arc",
         zone = "Dangruf Wadi"
+    },
+    --Gusgen Mines
+    ["Blind Moby"] = {
+        target_pos = { x = 210.1, y= -59.2, z=-101.8},
+        visual_mode = "arc",
+        zone = "Gusgen Mines"
     }
 }
