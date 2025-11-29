@@ -49,14 +49,14 @@ return {
     -- Beadeuax
     ["Beadeaux"] = {
     [1] = {
-        origin_x = -200,
-        origin_y = -200,
+        origin_x = -500,
+        origin_y = 500,
         scale_x = 1.0,
         scale_y = -1.0
     },
     [2] = {
-        origin_x = -100,  -- Different calibration for floor 2
-        origin_y = 100,
+        origin_x = -200,  -- Different calibration for floor 2
+        origin_y = 200,
         scale_x = 1.0,
         scale_y = -1.0
     }

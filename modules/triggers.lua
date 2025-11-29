@@ -92,8 +92,18 @@ local last_trigger_debug_time = 0
 local TRIGGER_DEBUG_INTERVAL = 10
 
 -- Checks trigger zones (square/line regions player walks through)
-function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx, enable_debug, player_zone_id)
+function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, quest_state, topCat, subfile, mission, step_idx, enable_debug, player_zone_id, zone_data)
     if type(step_data) == 'table' and step_data.trigger_zones then
+        -- Check if we're in the correct zone before checking trigger collision
+        local requiredZone = step_data.zone_name or step_data.zone
+        if requiredZone and zone_data and zone_data[requiredZone] then
+            local required_zone_id = zone_data[requiredZone]
+            if player_zone_id ~= required_zone_id then
+                -- Player is in wrong zone, don't check triggers
+                return false
+            end
+        end
+
         local current_time = os.time()
         local should_debug = enable_debug and (current_time - last_trigger_debug_time) >= TRIGGER_DEBUG_INTERVAL
 

@@ -10,7 +10,7 @@ return {
                     { type = 'square', center = { x = 0,  y = 0, z = -81 }, size = 2 },
                     { type = 'line', start = { x = 50, y = 0, z = -81 }, stop = { x = 50, y = -5, z = -71 } }
                 },
-                zone_name = "Bastok Markets"
+                zone_name = "Bastok Mines"
             },
             {
                 text = "This is a line. It connects two points.",
@@ -20,17 +20,10 @@ return {
                 },
             },
             {
-                text = "Map Switch Demo: Walk through the line to switch between map 1 and map 2!",
-                zone = "Bastok Mines",
-                trigger_zones = {
-                    {
-                        type = 'line',
-                        start = { x = -29, y = 13.6, z = 89.5 },
-                        stop = { x = -38, y = 13.6, z = 89.5 },
-                        switch_to_map = 2,  -- Switches to map 2
-                        complete_step = false
-                    }
-                },
+                text = "Auto Map Switch Demo: Go to Beadeaux! \n" ..
+                       "Maps automatically switch every 5 seconds when you change floors. \n" ..
+                       "Try walking between the upper and lower floors - the map will auto-update!",
+                zone = "Beadeaux",
                 images = {
                 {
                     file     = "maps/beadeaux_1.png",
@@ -46,7 +39,7 @@ return {
                     file     = "maps/beadeaux_2.png",
                     width    = 512,
                     height   = 512,
-                    --zone_name = "Beadeaux",
+                    zone_name = "Beadeaux",
                     --state    = 1,
                     highlights = {
                         { position = "D-11", offsetX = 16, offsetY = 16 },

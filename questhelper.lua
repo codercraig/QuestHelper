@@ -59,6 +59,7 @@ local location_data = T{}
 local zone_data = T{}
 local map_db = T{}
 local questIconTexture = nil
+local floor_mappings = T{}  -- Floor ID mappings for multi-floor zones
 
 --------------------------------------------------------------------------------
 -- Debug Settings
@@ -74,6 +75,10 @@ local lastFrameTime = os.clock()
 --------------------------------------------------------------------------------
 local lastInventoryTriggerCheck = 0
 local INVENTORY_TRIGGER_CHECK_INTERVAL = 3.0 -- Check every 3 seconds
+local lastZoneId = 0 -- Track zone changes to reset map
+local lastFloorCheck = 0
+local FLOOR_CHECK_INTERVAL = 5.0 -- Check floor every 5 seconds
+local lastKnownFloor = 0 -- Track floor changes
 
 ashita.events.register('d3d_present', 'present_callback', function()
     local systemCurrentTime = os.time()
@@ -97,9 +102,45 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 print("["..addon.name.."] Could not update player position.")
             end
         end
+
+        -- Detect zone changes and auto-detect floor/map
+        if player_module.zoneId ~= lastZoneId and player_module.zoneId ~= 0 then
+            if lastZoneId ~= 0 then -- Don't print on initial load
+                print(string.format("["..addon.name.."] Zone changed (ID: %d -> %d)", lastZoneId, player_module.zoneId))
+
+                -- Try to auto-detect floor/map using CheckFloorNumber
+                local detectedFloor = player_module.getFloorId()
+                if detectedFloor and detectedFloor > 0 then
+                    quest_state.setCurrentMap(player_module.zoneId, detectedFloor)
+                    print(string.format("["..addon.name.."] Auto-detected floor/map: %d", detectedFloor))
+                else
+                    -- Fallback: reset to map 1
+                    quest_state.setCurrentMap(player_module.zoneId, 1)
+                    print(string.format("["..addon.name.."] Using default map 1 (floor auto-detection unavailable)"))
+                end
+            end
+            lastZoneId = player_module.zoneId
+        end
     else
         if shouldPrintDebugNow then
             print("["..addon.name.."] MemoryManager not ready.")
+        end
+    end
+
+    -- Periodic floor check for multi-map zones (every 5 seconds)
+    local timeSinceLastFloorCheck = frameCurrentTime - lastFloorCheck
+    if timeSinceLastFloorCheck >= FLOOR_CHECK_INTERVAL then
+        lastFloorCheck = frameCurrentTime
+
+        -- Check current floor
+        local currentFloor = player_module.getFloorId(floor_mappings)
+        if currentFloor and currentFloor ~= lastKnownFloor and player_module.zoneId ~= 0 then
+            -- Floor changed!
+            if lastKnownFloor ~= 0 then
+                print(string.format("["..addon.name.."] Floor changed: %d -> %d, updating map", lastKnownFloor, currentFloor))
+                quest_state.setCurrentMap(player_module.zoneId, currentFloor)
+            end
+            lastKnownFloor = currentFloor
         end
     end
 
@@ -186,7 +227,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 -- NOTE: posY_height is actually the Z coordinate (depth), posZ_depth is actually Y (elevation)
                 if triggers_module.checkTriggerZones(step_data, player_module.posX, player_module.posY_height,
                                                     quest_state, currentTopCategory, currentSubfile,
-                                                    current_mission, step_idx, ENABLE_TRIGGER_DEBUG, player_module.zoneId) then
+                                                    current_mission, step_idx, ENABLE_TRIGGER_DEBUG, player_module.zoneId, zone_data) then
                     return
                 end
 
@@ -227,23 +268,50 @@ ashita.events.register('d3d_present', 'present_callback', function()
             if missionData.steps[step_idx] then
                 local step_data = missionData.steps[step_idx]
                 if type(step_data) == 'table' then
-                    beam_drawing.calculateDynamicColor()
+                    -- Check if we should draw based on zone
+                    local shouldDraw = false
+                    local requiredZone = step_data.zone_name or step_data.zone
 
-                    if step_data.trigger_zones then
-                        for _, zone in ipairs(step_data.trigger_zones) do
-                            if zone.type == 'square' and zone.center and zone.size then
-                                drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
-                            elseif zone.type == 'line' and zone.start and zone.stop then
-                                drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                    if requiredZone and zone_data[requiredZone] then
+                        local required_zone_id = zone_data[requiredZone]
+                        if player_module.zoneId == required_zone_id then
+                            shouldDraw = true
+                            if shouldPrintDebugNow then
+                                print(string.format("["..addon.name.."] Zone match: Drawing in %s (ID: %d)", requiredZone, required_zone_id))
                             end
+                        else
+                            if shouldPrintDebugNow then
+                                print(string.format("["..addon.name.."] Zone mismatch: Required %s (ID: %d), Current (ID: %d)",
+                                    requiredZone, required_zone_id, player_module.zoneId))
+                            end
+                        end
+                    else
+                        -- No zone restriction, always draw
+                        shouldDraw = true
+                        if shouldPrintDebugNow and requiredZone then
+                            print(string.format("["..addon.name.."] Warning: Zone '%s' not found in zone_data", requiredZone))
                         end
                     end
 
-                    if step_data.draw_type then
-                        if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
-                            drawingModule.drawLine(step_data.start_pos, step_data.end_pos, beam_drawing.ARGB_BEAM_COLOR)
-                        elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
-                            drawingModule.drawSquare(step_data.center, step_data.size, beam_drawing.ARGB_BEAM_COLOR)
+                    if shouldDraw then
+                        beam_drawing.calculateDynamicColor()
+
+                        if step_data.trigger_zones then
+                            for _, zone in ipairs(step_data.trigger_zones) do
+                                if zone.type == 'square' and zone.center and zone.size then
+                                    drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
+                                elseif zone.type == 'line' and zone.start and zone.stop then
+                                    drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                end
+                            end
+                        end
+
+                        if step_data.draw_type then
+                            if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
+                                drawingModule.drawLine(step_data.start_pos, step_data.end_pos, beam_drawing.ARGB_BEAM_COLOR)
+                            elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
+                                drawingModule.drawSquare(step_data.center, step_data.size, beam_drawing.ARGB_BEAM_COLOR)
+                            end
                         end
                     end
                 end
@@ -417,6 +485,54 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_verbose' then
+        ENABLE_VERBOSE_DEBUG = not ENABLE_VERBOSE_DEBUG
+        print(string.format("[%s] Verbose debug (zone checking): %s", addon.name, ENABLE_VERBOSE_DEBUG and "ENABLED" or "DISABLED"))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_resetmap' then
+        if player_module.zoneId and player_module.zoneId ~= 0 then
+            quest_state.setCurrentMap(player_module.zoneId, 1)
+            print(string.format("[%s] Manually reset map to 1 for current zone (ID: %d)", addon.name, player_module.zoneId))
+        else
+            print(string.format("[%s] Cannot reset map - zone ID not available", addon.name))
+        end
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_checkfloor' then
+        print(string.format("[%s] ========== Floor Detection Test ==========", addon.name))
+        print(string.format("[%s] Zone ID: %d", addon.name, player_module.zoneId or 0))
+        print(string.format("[%s] Position: X=%.2f, Y=%.2f, Z=%.2f", addon.name,
+            player_module.posX, player_module.posY_height, player_module.posZ_depth))
+
+        local floorIdRaw = player_module.getFloorIdRaw()
+        local floorIdMapped = player_module.getFloorId(floor_mappings)
+
+        if floorIdRaw ~= nil then
+            print(string.format("[%s] Floor ID (raw/0-based): %d", addon.name, floorIdRaw))
+            print(string.format("[%s] Floor ID (mapped): %d", addon.name, floorIdMapped or (floorIdRaw + 1)))
+            print(string.format("[%s] Current saved map: %d", addon.name, quest_state.getCurrentMap(player_module.zoneId)))
+
+            -- Check if this zone has a mapping
+            if floor_mappings and floor_mappings[player_module.zoneId] then
+                print(string.format("[%s] Zone has floor mapping configured", addon.name))
+            else
+                print(string.format("[%s] No floor mapping for this zone (using raw+1)", addon.name))
+            end
+
+            print(string.format("[%s] Floor detection: SUCCESS!", addon.name))
+        else
+            print(string.format("[%s] Floor detection: FAILED - could not initialize", addon.name))
+        end
+        print(string.format("[%s] ==========================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'qh_dump_inv' then
         print(string.format("[%s] Dumping first 20 items in Inventory...", addon.name))
 
@@ -538,6 +654,16 @@ ashita.events.register('load', 'load_callback', function()
     location_data = quest_data_loader.loadLocations(addon.name)
     zone_data = quest_data_loader.loadZones(addon.name)
     map_db = quest_data_loader.loadMaps(addon.name)
+
+    -- Load floor mappings for multi-floor zones
+    local floor_mappings_path = string.format('%sdata/floor_mappings.lua', addon.path)
+    local success, loaded_mappings = pcall(loadfile, floor_mappings_path)
+    if success and loaded_mappings then
+        floor_mappings = loaded_mappings() or T{}
+        print(string.format("[%s] Floor mappings loaded.", addon.name))
+    else
+        print(string.format("[%s] Warning: Could not load floor_mappings.lua", addon.name))
+    end
 
     -- Load quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')

@@ -23,7 +23,7 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
         local step_imgs = utils.get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx, quest_data)
 
-        for _, img_data in ipairs(step_imgs) do
+        for img_index, img_data in ipairs(step_imgs) do
             local tex_ptr = image_loader.GetTexture(img_data.file)
             if tex_ptr then
                 local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
@@ -38,13 +38,15 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
 
                 -- Now draw overlays using the saved position
                 local cal = img_data.map_calibration
+                local current_map_num = 1 -- Default to map 1
+
                 if not cal and img_data.zone_name and map_db[img_data.zone_name] then
                     local zone_config = map_db[img_data.zone_name]
 
                     -- Check if this is a multi-floor zone (has numeric indices)
                     if zone_config[1] then
                         -- Multi-floor zone: use current_map to select calibration
-                        local current_map_num = quest_state.getCurrentMap(player_module.zoneId)
+                        current_map_num = quest_state.getCurrentMap(player_module.zoneId)
                         cal = zone_config[current_map_num] or zone_config[1] -- Fallback to map 1
                     else
                         -- Single-floor zone: use calibration directly
@@ -52,13 +54,16 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     end
                 end
 
-                -- Draw player arrow on map (only if in matching zone)
+                -- Draw player arrow on map (only if in matching zone AND matching map number)
                 if cal and img_data.zone_name then
                     if zone_data[img_data.zone_name] and player_module.zoneId == zone_data[img_data.zone_name] then
-                        local playerHeading = player_module.getHeading()
-                        map_renderer.drawPlayerArrow(imageX, imageY, w, h,
-                                                    player_module.posX, player_module.posY_height,
-                                                    playerHeading, cal)
+                        -- For multi-map zones, only draw arrow on the current map's image
+                        if img_index == current_map_num then
+                            local playerHeading = player_module.getHeading()
+                            map_renderer.drawPlayerArrow(imageX, imageY, w, h,
+                                                        player_module.posX, player_module.posY_height,
+                                                        playerHeading, cal)
+                        end
                     end
                 end
 
