@@ -4,6 +4,18 @@ return {
         steps = {
             {
                 text = "Walk into the glowing square to begin the demo.",
+                images = {
+                {
+                    file     = "maps/bastok_mines.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Bastok Mines",
+                    --state    = 3,
+                    highlights = {
+                        { position = "H-10", offsetX = 16, offsetY = 16 },
+                    },
+                },
+                },
                 trigger_zones = {
                     { type = 'square', center = { x = 2, y = 0, z = -79 }, size = 2 },
                      { type = 'square', center = { x = 26, y = 0, z = -81 }, size = 5 },
@@ -29,30 +41,41 @@ return {
                     file     = "maps/beadeaux_1.png",
                     width    = 512,
                     height   = 512,
-                    zone_name = "Beadeaux",
                     --state    = 3,
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Beadeaux",
                 },
                 {
                     file     = "maps/beadeaux_2.png",
                     width    = 512,
                     height   = 512,
-                    zone_name = "Beadeaux",
                     --state    = 1,
                     highlights = {
                         { position = "D-11", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Beadeaux",
                 },
             },
             },
             {
-                text = "This is a square. It is drawn at the specified center.",
+                text = "Auto-Calibration Test: Dangruf Wadi! \n" ..
+                       "This map uses AUTO-CALIBRATION from mapinfo. No manual calibration needed! \n" ..
+                       "The red arrow should appear automatically.",
+                zone = "Dangruf Wadi",
+                images = {
+                    {
+                        file     = "maps/dangruf_wadi.png",
+                        width    = 512,
+                        height   = 512,
+                        zone_name = "Dangruf Wadi",
+                        -- NO map_calibration defined - will use auto-calibration!
+                    },
+                },
                 draw_type = 'square',
                 center = { x = -10, y = -3.0, z = -115 },
                 size = 3,
-                zone = "Dangruf Wadi",
             },
             {
                 text = "Now, go obtain a some stuff. You can get them outside.",

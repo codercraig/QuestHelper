@@ -533,6 +533,184 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_mapinfo' then
+        print(string.format("[%s] ========== Map Info Structure Debugger ==========", addon.name))
+
+        local mapinfo = player_module.getMapInfo()
+
+        if mapinfo then
+            print(string.format("[%s] Successfully read mapinfo_t structure!", addon.name))
+
+            if mapinfo.warning then
+                print(string.format("[%s] WARNING: %s", addon.name, mapinfo.warning))
+            end
+
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+            print(string.format("[%s] Array Index:   %d", addon.name, mapinfo.array_index or -1))
+            print(string.format("[%s] ZoneId:        %d (current zone: %d) %s", addon.name,
+                mapinfo.ZoneId, player_module.zoneId,
+                (mapinfo.ZoneId == player_module.zoneId) and "✓" or "✗ MISMATCH"))
+            print(string.format("[%s] FloorId:       %d", addon.name, mapinfo.FloorId))
+            print(string.format("[%s] FloorIndex:    %d", addon.name, mapinfo.FloorIndex))
+            print(string.format("[%s] Flags:         0x%02X", addon.name, mapinfo.Flags))
+            print(string.format("[%s] Scale:         %d", addon.name, mapinfo.Scale))
+            print(string.format("[%s] KeyItemOffset: %d", addon.name, mapinfo.KeyItemOffset))
+            print(string.format("[%s] Unknown0000:   %d", addon.name, mapinfo.Unknown0000))
+            print(string.format("[%s] MapDatOffset:  %d", addon.name, mapinfo.MapDatOffset))
+            print(string.format("[%s] OffsetX:       %d", addon.name, mapinfo.OffsetX))
+            print(string.format("[%s] OffsetY:       %d", addon.name, mapinfo.OffsetY))
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+
+            -- Calculate derived values
+            local scale_divisor = player_module.getMapScale(mapinfo)
+            if scale_divisor then
+                print(string.format("[%s] Calculated Scale: %.2f (2560.0 / %d)", addon.name, scale_divisor, mapinfo.Scale))
+            end
+
+            -- Calculate calibration
+            local cal = player_module.calculateMapCalibration(mapinfo)
+            if cal then
+                print(string.format("[%s] -----------------------------------------------", addon.name))
+                print(string.format("[%s] maps.lua Format (copy to test):", addon.name))
+                print(string.format("[%s] -----------------------------------------------", addon.name))
+                print(string.format("[%s]     origin_x = %d,", addon.name, cal.origin_x))
+                print(string.format("[%s]     origin_y = %d,", addon.name, cal.origin_y))
+                print(string.format("[%s]     scale_x  = %.2f,", addon.name, cal.scale_x))
+                print(string.format("[%s]     scale_y  = %.2f", addon.name, cal.scale_y))
+                print(string.format("[%s] -----------------------------------------------", addon.name))
+                print(string.format("[%s] Debug Info:", addon.name))
+                print(string.format("[%s]   Raw OffsetX: %d", addon.name, cal.raw_offset_x))
+                print(string.format("[%s]   Raw OffsetY: %d", addon.name, cal.raw_offset_y))
+                print(string.format("[%s]   Raw Scale: %d", addon.name, cal.raw_scale))
+                print(string.format("[%s]   Scale Divisor: %.2f", addon.name, cal.scale_divisor))
+                print(string.format("[%s]   Pixels/Yalm: %.2f", addon.name, cal.scale_x))
+            end
+
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+            print(string.format("[%s] Current Position: X=%.2f, Y=%.2f, Z=%.2f", addon.name,
+                player_module.posX, player_module.posY_height, player_module.posZ_depth))
+
+        else
+            print(string.format("[%s] FAILED to read mapinfo_t structure", addon.name))
+            print(string.format("[%s] Possible reasons:", addon.name))
+            print(string.format("[%s]   - mapinfo array pointer not found (signature mismatch)", addon.name))
+            print(string.format("[%s]   - Floor detection not initialized", addon.name))
+            print(string.format("[%s]   - Player position not available", addon.name))
+        end
+
+        print(string.format("[%s] ==================================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_findzone' then
+        print(string.format("[%s] ========== Searching for Current Zone in Map Array ==========", addon.name))
+
+        local zoneToFind = player_module.zoneId
+        print(string.format("[%s] Searching for Zone ID: %d", addon.name, zoneToFind))
+        print(string.format("[%s] Current Floor Index: %d", addon.name, player_module.getFloorIdRaw() or -1))
+        print(string.format("[%s] -----------------------------------------------", addon.name))
+
+        -- Search up to 1000 entries
+        local maxSearch = 1000
+        local foundEntries = {}
+
+        -- Get array data
+        local arrayData = player_module.debugDumpMapArray(maxSearch)
+        if not arrayData then
+            print(string.format("[%s] FAILED: Could not access mapinfo array", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        print(string.format("[%s] Searching %d entries...", addon.name, maxSearch))
+
+        for i, entry in ipairs(arrayData.entries) do
+            if entry.ZoneId == zoneToFind then
+                table.insert(foundEntries, {
+                    index = i - 1,
+                    entry = entry
+                })
+            end
+        end
+
+        if #foundEntries > 0 then
+            print(string.format("[%s] ✓ Found %d entries for Zone %d:", addon.name, #foundEntries, zoneToFind))
+            for _, found in ipairs(foundEntries) do
+                local entry = found.entry
+                local isFloorMatch = (entry.FloorIndex == (arrayData.current_floor or -1)) and " ← CURRENT FLOOR" or ""
+                print(string.format("[%s]   [%d] Floor=%d/%d Scale=%d OffX=%d OffY=%d Flags=0x%02X%s",
+                    addon.name, found.index,
+                    entry.FloorId, entry.FloorIndex, entry.Scale,
+                    entry.OffsetX, entry.OffsetY, entry.Flags, isFloorMatch))
+            end
+        else
+            print(string.format("[%s] ✗ No entries found for Zone %d in %d entries", addon.name, zoneToFind, maxSearch))
+            print(string.format("[%s] Zone range found: %d - %d", addon.name,
+                arrayData.entries[1].ZoneId,
+                arrayData.entries[#arrayData.entries].ZoneId))
+        end
+
+        print(string.format("[%s] ==================================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_dumpmaparray' then
+        print(string.format("[%s] ========== Map Array Memory Dump ==========", addon.name))
+
+        -- Get the raw mapinfo array data from player module
+        local mapArrayData = player_module.debugDumpMapArray(20)
+
+        if not mapArrayData then
+            print(string.format("[%s] FAILED: Could not access mapinfo array", addon.name))
+            print(string.format("[%s] Check that floor detection is initialized", addon.name))
+        else
+            print(string.format("[%s] Base Pointer: 0x%08X", addon.name, mapArrayData.base_ptr))
+            print(string.format("[%s] Current Zone: %d", addon.name, player_module.zoneId))
+            print(string.format("[%s] Current Floor Index (from CheckFloorNumber): %d", addon.name, mapArrayData.current_floor or -1))
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+            print(string.format("[%s] Dumping first %d entries:", addon.name, #mapArrayData.entries))
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+
+            for i, entry in ipairs(mapArrayData.entries) do
+                local idx = i - 1  -- 0-based index
+                local match_zone = (entry.ZoneId == player_module.zoneId) and " ← ZONE MATCH" or ""
+                local match_floor = (entry.FloorIndex == (mapArrayData.current_floor or -1)) and " ← FLOOR MATCH" or ""
+
+                print(string.format("[%s] [%d] Addr=0x%08X Zone=%d Floor=%d/%d Scale=%d OffX=%d OffY=%d%s%s",
+                    addon.name, idx, entry.address,
+                    entry.ZoneId, entry.FloorId, entry.FloorIndex,
+                    entry.Scale, entry.OffsetX, entry.OffsetY,
+                    match_zone, match_floor))
+            end
+
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+
+            -- Check if we found a matching entry
+            local found_match = false
+            for i, entry in ipairs(mapArrayData.entries) do
+                if entry.ZoneId == player_module.zoneId and entry.FloorIndex == (mapArrayData.current_floor or -1) then
+                    found_match = true
+                    print(string.format("[%s] ✓ Found matching entry at array index %d", addon.name, i - 1))
+                    break
+                end
+            end
+
+            if not found_match then
+                print(string.format("[%s] ✗ No matching entry found in first %d entries", addon.name, #mapArrayData.entries))
+                print(string.format("[%s] This suggests:", addon.name))
+                print(string.format("[%s]   - Array pointer might be wrong", addon.name))
+                print(string.format("[%s]   - Structure size (0x0E) might be incorrect", addon.name))
+                print(string.format("[%s]   - Need to search more entries", addon.name))
+            end
+        end
+
+        print(string.format("[%s] ==================================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'qh_dump_inv' then
         print(string.format("[%s] Dumping first 20 items in Inventory...", addon.name))
 

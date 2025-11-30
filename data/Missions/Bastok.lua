@@ -152,6 +152,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "South Gustaberg",
                         highlights = {
                             { position = "D-9", offsetX = 16, offsetY = 16 },
                         },
@@ -166,7 +167,6 @@ return {
                 center = {x = -133, y= 3, z=133.3},
                 size = 2,
                 zone = "Dangruf Wadi",
-
                 images = {
                     {
                         file     = "maps/dangruf_wadi.png",
@@ -176,6 +176,7 @@ return {
                         highlights = {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Dangruf Wadi",
                     },
                 },
             },

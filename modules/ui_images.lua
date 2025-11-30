@@ -5,9 +5,18 @@ local imgui = require('imgui')
 local ffi = require('ffi')
 local bit = require('bit')
 
+-- Track last zone to reset auto-calibration message
+ui_images.last_zone_id = nil
+
 -- Renders the images drawer window attached to the main window
 function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTopCategory, currentSubfile, current_mission,
                           quest_state, quest_data, utils, image_loader, map_renderer, player_module, zone_data, map_db)
+
+    -- Reset auto-cal message when zone changes
+    if ui_images.last_zone_id ~= player_module.zoneId then
+        ui_images.auto_cal_msg_shown = false
+        ui_images.last_zone_id = player_module.zoneId
+    end
 
     local attachX = lastMainX - lastMainW + 50
     local attachY = lastMainY
@@ -38,7 +47,13 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
 
                 -- Now draw overlays using the saved position
                 local cal = img_data.map_calibration
+                local is_multi_floor = (#step_imgs > 1)
+
+                -- Get current map number for multi-floor zones (regardless of calibration source)
                 local current_map_num = 1 -- Default to map 1
+                if is_multi_floor then
+                    current_map_num = quest_state.getCurrentMap(player_module.zoneId)
+                end
 
                 if not cal and img_data.zone_name and map_db[img_data.zone_name] then
                     local zone_config = map_db[img_data.zone_name]
@@ -46,11 +61,28 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     -- Check if this is a multi-floor zone (has numeric indices)
                     if zone_config[1] then
                         -- Multi-floor zone: use current_map to select calibration
-                        current_map_num = quest_state.getCurrentMap(player_module.zoneId)
                         cal = zone_config[current_map_num] or zone_config[1] -- Fallback to map 1
                     else
                         -- Single-floor zone: use calibration directly
                         cal = zone_config
+                    end
+                end
+
+                -- Final fallback: Try auto-calibration from mapinfo
+                -- For multi-floor zones, only auto-calibrate the image matching current floor
+                if not cal and img_data.width then
+                    local should_auto_cal = not is_multi_floor or (img_index == current_map_num)
+
+                    if should_auto_cal then
+                        cal = player_module.getAutoCalibration(img_data.width)
+                        if cal then
+                            -- Debug message (only shown once per zone load)
+                            if not ui_images.auto_cal_msg_shown then
+                                local floor_info = is_multi_floor and string.format(" (floor %d)", current_map_num) or ""
+                                print(string.format("\30\106[QH]\30\01 Using auto-calibration for %s%s", img_data.zone_name or "unknown zone", floor_info))
+                                ui_images.auto_cal_msg_shown = true
+                            end
+                        end
                     end
                 end
 
