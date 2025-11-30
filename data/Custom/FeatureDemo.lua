@@ -60,6 +60,50 @@ return {
             },
             },
             {
+                text = "Auto-Calibration 6-Floor Test: Aydeewa Subterrane! \n" ..
+                       "This zone has 6 floors - all using AUTO-CALIBRATION! \n" ..
+                       "Walk between floors and watch the arrow switch between all 6 maps automatically!",
+                zone = "Aydeewa Subterrane",
+                images = {
+                {
+                    file     = "maps/aydeewa_subterrane_1.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+                {
+                    file     = "maps/aydeewa_subterrane_2.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+                {
+                    file     = "maps/aydeewa_subterrane_3.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+                {
+                    file     = "maps/aydeewa_subterrane_4.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+                {
+                    file     = "maps/aydeewa_subterrane_5.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+                {
+                    file     = "maps/aydeewa_subterrane_6.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Aydeewa Subterrane",
+                },
+            },
+            },
+            {
                 text = "Auto-Calibration Test: Dangruf Wadi! \n" ..
                        "This map uses AUTO-CALIBRATION from mapinfo. No manual calibration needed! \n" ..
                        "The red arrow should appear automatically.",

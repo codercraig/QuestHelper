@@ -1,5 +1,6 @@
 -- Floor ID to Map Number Mappings
 -- Maps the raw floor IDs returned by CheckFloorNumber to logical map numbers (1, 2, 3, etc.)
+-- Assume that every zone goes up incrementally, however some do not and we need an override here.
 --
 -- To add a new zone:
 -- 1. Go to the zone

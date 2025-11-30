@@ -179,8 +179,10 @@ function player.getFloorId(floor_mappings)
         end
     end
 
-    -- No mapping found, return raw ID + 1 (1-based)
-    player.floorId = rawFloorId + 1
+    -- Default: Assume sequential mapping (raw ID = floor number)
+    -- Most zones are sequential (1=1, 2=2, etc.)
+    -- Only outliers like Beadeaux need manual mappings
+    player.floorId = rawFloorId
     return player.floorId
 end
 
