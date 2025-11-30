@@ -16,6 +16,7 @@ return {
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Bastok Mines",
                 },
                 {
                     file     = "maps/bastok_markets.png",
@@ -25,6 +26,7 @@ return {
                     highlights = {
                         { position = "D-11", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Bastok Markets",
                 },
                 {
                     file     = "maps/port_bastok.png",
@@ -35,6 +37,7 @@ return {
                         { position = "L-6", offsetX = 16, offsetY = 16 },
                     },
                 },
+                zone_name = "Port Bastok",
             },
           },
           {
@@ -49,6 +52,7 @@ return {
                     highlights = {
                         { position = "D-7", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Bastok Mines",
                 },
             },
           },
@@ -65,6 +69,7 @@ return {
                     highlights = {
                         { position = "H-11", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Zeruhn Mines",
                 },
             },
           },
@@ -81,6 +86,7 @@ return {
                     highlights = {
                         { position = "J-8", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Metalworks",
                 },
             },
           },
@@ -106,6 +112,7 @@ return {
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Mines",
                     },
                     {
                         file     = "maps/bastok_markets.png",
@@ -115,6 +122,7 @@ return {
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Markets",
                     },
                     {
                         file     = "maps/port_bastok.png",
@@ -124,6 +132,7 @@ return {
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Port Bastok",
                     },
                 },
             },
@@ -140,6 +149,7 @@ return {
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Metalworks",
                     },
                 },
             },
@@ -156,6 +166,7 @@ return {
                         highlights = {
                             { position = "D-9", offsetX = 16, offsetY = 16 },
                         },
+
                     },
                 },
             },
@@ -218,6 +229,7 @@ return {
                           highlights = {
                               { position = "H-10", offsetX = 16, offsetY = 16 },
                           },
+                          zone_name = "Bastok Mines",
                       },
                       {
                           file     = "maps/bastok_markets.png",
@@ -227,6 +239,7 @@ return {
                           highlights = {
                               { position = "D-11", offsetX = 16, offsetY = 16 },
                           },
+                          zone_name = "Bastok Markets",
                       },
                       {
                           file     = "maps/port_bastok.png",
@@ -236,6 +249,7 @@ return {
                           highlights = {
                               { position = "L-6", offsetX = 16, offsetY = 16 },
                           },
+                          zone_name = "Port Bastok",
                       },
                   },
             },
@@ -259,6 +273,7 @@ return {
                           highlights = {
                               { position = "K-3", offsetX = 16, offsetY = 16 },
                           },
+                          zone_name = "North Gustaberg",
                       },
                   },
             },
@@ -275,6 +290,7 @@ return {
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Mines",
                     },
                     {
                         file     = "maps/bastok_markets.png",
@@ -284,6 +300,7 @@ return {
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Markets",
                     },
                     {
                         file     = "maps/port_bastok.png",
@@ -293,6 +310,7 @@ return {
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Port Bastok",
                     },
                   },
             },
@@ -400,6 +418,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "Konschtat Highlands",
                         highlights = {
                             { position = "I-6", offsetX = 16, offsetY = 16 },
                         },
