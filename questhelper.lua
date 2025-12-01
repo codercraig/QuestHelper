@@ -369,7 +369,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH,
                         currentTopCategory, currentSubfile, current_mission,
                         quest_state, quest_data, utils, image_loader, map_renderer,
-                        player_module, zone_data, map_db)
+                        player_module, zone_data, map_db, floor_mappings)
     end
 end)
 

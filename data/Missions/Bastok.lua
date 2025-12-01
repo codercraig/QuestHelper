@@ -892,6 +892,7 @@ return {
             {
                 text = "Step 9: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
                 trigger_on_event_id = { 64 },
+                onmob_target = {"Melek"},
                 images = {
                       {
                           file     = "maps/port_windurst.png",
@@ -910,7 +911,7 @@ return {
                        "All party members need one Dark Key! \n" ..
                        "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n \n" ..
                        "Suggested Route: \n" ..
-                       "Port Windurst (N-5) ->\n" ..
+                       "Port Windurst (N-5)  ->\n" ..
                        "Windurst Woods (F-5) ->\n" ..
                        "Windurst Walls (H-7) ->\n" ..
                        "Heavens Tower",
@@ -950,8 +951,47 @@ return {
                   },
             },
             {
-                text = "Step 11: Travel to Balga's Dais in Meriphataud Mountains (L-8) with your party. \n" ..
-                       "This is a BCNM battle! You will face Searcher and Black Dragon. \n" ..
+                text = "Step 11: Travel to Giddeus with your party. \n" ..
+                       "Suggested Route: \n" ..
+                       "West Sarutabaruta (F-8)  ->\n" ..
+                       "Giddeus           (F-12) ->\n" ..
+                       "Balga's Dais.              \n",
+                zone_trigger = "Balga's Dais",
+                images = {
+                      {
+                          file     = "maps/west_sarutabaruta.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "West Sarutabaruta",
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/giddeus_1.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Giddeus",
+                          highlights = {
+                              { position = "F-12", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          file     = "maps/giddeus_2.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Giddeus",
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 12: This is a BCNM battle! You will face Searcher and Black Dragon. \n" ..
                        "Recommended: Level 35+ or a party. \n \n" ..
                        "===== Searcher ===== \n" ..
                        "Family: Bigeye thing \n" ..
@@ -963,20 +1003,11 @@ return {
                        "After winning, you will receive the KI:Kindred Crest and title 'Black Dragon Slayer'.",
                 trigger_on_event_id = { 32001 },
                 images = {
-                      {
-                          file     = "maps/meriphataud_mountains.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 11,
-                          zone_name = "Meriphataud Mountains",
-                          highlights = {
-                              { position = "L-8", offsetX = 16, offsetY = 16 },
-                          },
-                      },
+                    --{ state = 12}
                   },
             },
             {
-                text = "Step 12: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
+                text = "Step 13: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
                 onmob_target = {"Melek"},
                 trigger_on_event_id = {66},
                 images = {
@@ -984,7 +1015,7 @@ return {
                           file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
-                          state    = 12,
+                          state    = 13,
                           zone_name = "Port Windurst",
                           highlights = {
                               { position = "F-6", offsetX = 16, offsetY = 16 },
@@ -993,7 +1024,7 @@ return {
                   },
             },
             {
-                text = "Step 13: Return to Naji in Metalworks (J-8) to complete the mission!",
+                text = "Step 14: Return to Naji in Metalworks (J-8) to complete the mission!",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {713},
                 images = {
@@ -1001,7 +1032,7 @@ return {
                           file     = "maps/metalworks.png",
                           width    = 512,
                           height   = 512,
-                          state    = 13,
+                          state    = 14,
                           zone_name = "Metalworks",
                           highlights = {
                               { position = "J-8", offsetX = 16, offsetY = 16 },

@@ -99,6 +99,23 @@ return {
         visual_mode = "arc",
         zone = "Gusgen Mines"
     },
+    --Windurst
+    --Port Windurst
+    ["Melek"] = {
+        target_pos = { x = -78, y= -7, z=156},
+        trigger_npc = "Melek",
+        visual_mode = "arc",
+        zone = "Port Windurst"
+    },
+    --Heavens Tower
+    ["Kupipi"] = {
+        target_pos = { x = 2, y= -1, z=32.1},
+        trigger_npc = "Kupipi",
+        visual_mode = "arc",
+        zone = "Heavens Tower"
+    },
+
+
     --San d'Oria
     --Northern San d'Oria
     ["Baraka"] = {
