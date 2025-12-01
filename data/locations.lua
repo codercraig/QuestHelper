@@ -9,25 +9,29 @@
 
 return {
     -- Bastok
+    -- Bastok Mines
     ["Rashid"] = {
         target_pos = { x = -8.5, y = -3.0, z = -123.6 },
         trigger_npc = "Rashid",
         visual_mode = "arc",
         zone = "Bastok Mines",
     },
+    -- Bastok Markets
     ["Cleades"] = {
         target_pos = { x = -362.0, y = -12.0, z = -169.0 },
         trigger_npc = "Cleades",
         visual_mode = "arc",
         zone = "Bastok Markets",
     },
+    -- Port Bastok
     ["Argus"] = {
         target_pos = { x = 132.0, y = 6.5, z = -2.1 },
         trigger_npc = "Argus",
         visual_mode = "arc",
         zone = "Port Bastok",
     },
-    ["Cid"] = {
+    -- Metalworks
+        ["Cid"] = {
         target_pos = { x = -12.6, y = -13.0, z = 2.5 },
         trigger_npc = "Cid",
         visual_mode = "arc",
@@ -76,13 +80,6 @@ return {
         visual_mode = "arc",
         zone = "Metalworks",
     },
-    ["ZoneExit"] = {
-        target_pos = { x = 10.0, y = 0.0, z = 10.0 },
-        trigger_npc = "", -- Always active
-        visual_mode = "beacon",
-        beacon_height = 5.0,
-        beacon_base_y_offset = 0.5,
-    },
     --Zeruhn Mines
     ["Makarim"] = {
         target_pos = { x = -61, y = 7 ,z = -333.3 },
@@ -101,5 +98,26 @@ return {
         target_pos = { x = 210.1, y= -59.2, z=-101.8},
         visual_mode = "arc",
         zone = "Gusgen Mines"
+    },
+    --San d'Oria
+    --Northern San d'Oria
+    ["Baraka"] = {
+        target_pos = { x = 38.65, y= -3.5, z=-5.75},
+        trigger_npc = "Baraka",
+        visual_mode = "arc",
+        zone = "Northern San d'Oria"
+    },
+    ["Helaku"] = {
+        target_pos = { x = 51.8, y= -3.5, z=-15.6},
+        trigger_npc = "Helaku",
+        visual_mode = "arc",
+        zone = "Northern San d'Oria"
+    },
+    -- Chateau d'Oraguille
+    ["Halver"] = {
+        target_pos = { x = 2.4, y= -2, z=1.9},
+        trigger_npc = "Halver",
+        visual_mode = "arc",
+        zone = "Chateau d'Oraguille"
     }
 }

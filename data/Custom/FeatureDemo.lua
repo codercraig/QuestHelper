@@ -35,27 +35,27 @@ return {
                 text = "Auto Map Switch Demo: Go to Beadeaux! \n" ..
                        "Maps automatically switch every 5 seconds when you change floors. \n" ..
                        "Try walking between the upper and lower floors - the map will auto-update!",
-                zone = "Beadeaux",
+                zone = "Windurst Waters",
                 images = {
                 {
-                    file     = "maps/beadeaux_1.png",
+                    file     = "maps/windurst_waters_1.png",
                     width    = 512,
                     height   = 512,
                     --state    = 3,
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
-                    zone_name = "Beadeaux",
+                    zone_name = "Windurst Waters",
                 },
                 {
-                    file     = "maps/beadeaux_2.png",
+                    file     = "maps/windurst_waters_2.png",
                     width    = 512,
                     height   = 512,
                     --state    = 1,
                     highlights = {
                         { position = "D-11", offsetX = 16, offsetY = 16 },
                     },
-                    zone_name = "Beadeaux",
+                    zone_name = "Windurst Waters",
                 },
             },
             },

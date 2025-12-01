@@ -35,18 +35,19 @@ end
 -- Collects all unique items needed for entire quest with quantities
 -- NOTE: Only collects from items_needed (not trigger_on_item_obtain)
 -- trigger_on_item_obtain items are REWARDS/OUTCOMES, not items you need to bring
--- Returns: { {name = "Item Name", quantity = 2}, ... }
+-- Returns: { {name = "Item Name", quantity = 2, alternatives = {...}}, ... }
 --
 -- Supported formats:
 --   items_needed = "Dark Crystal"  -- qty 1
 --   items_needed = {"Dark Crystal", "Lizard Egg"}  -- qty 1 each
 --   items_needed = {
 --       "Dark Crystal",
---       { item = "Lizard Egg", quantity = 6 }
+--       { item = "Lizard Egg", quantity = 6 },
+--       { display = "Elemental Crystal", alternatives = {"Dark Crystal", "Wind Crystal", "Water Crystal"} }
 --   }
 local function getAllItemsNeeded(missionData)
     local allItems = {}
-    local itemCounts = {}  -- { itemName = count }
+    local itemData = {}  -- { itemName = {quantity, alternatives} }
 
     if not missionData or not missionData.steps then return allItems end
 
@@ -56,25 +57,48 @@ local function getAllItemsNeeded(missionData)
 
             -- Process items_needed (can be string, table of strings, or table with {item=, quantity=})
             if type(items) == 'string' then
-                itemCounts[items] = (itemCounts[items] or 0) + 1
+                if not itemData[items] then
+                    itemData[items] = { quantity = 0, alternatives = nil }
+                end
+                itemData[items].quantity = itemData[items].quantity + 1
             elseif type(items) == 'table' then
                 for _, item in ipairs(items) do
                     if type(item) == 'string' then
                         -- Simple string format
-                        itemCounts[item] = (itemCounts[item] or 0) + 1
-                    elseif type(item) == 'table' and item.item then
-                        -- Object format: { item = "Name", quantity = 6 }
-                        local qty = item.quantity or 1
-                        itemCounts[item.item] = (itemCounts[item.item] or 0) + qty
+                        if not itemData[item] then
+                            itemData[item] = { quantity = 0, alternatives = nil }
+                        end
+                        itemData[item].quantity = itemData[item].quantity + 1
+                    elseif type(item) == 'table' then
+                        if item.display and item.alternatives then
+                            -- Alias format: { display = "Elemental Crystal", alternatives = {"Dark Crystal", ...} }
+                            local displayName = item.display
+                            if not itemData[displayName] then
+                                itemData[displayName] = { quantity = 0, alternatives = item.alternatives }
+                            end
+                            itemData[displayName].quantity = itemData[displayName].quantity + (item.quantity or 1)
+                        elseif item.item then
+                            -- Object format: { item = "Name", quantity = 6 }
+                            local itemName = item.item
+                            if not itemData[itemName] then
+                                itemData[itemName] = { quantity = 0, alternatives = nil }
+                            end
+                            local qty = item.quantity or 1
+                            itemData[itemName].quantity = itemData[itemName].quantity + qty
+                        end
                     end
                 end
             end
         end
     end
 
-    -- Convert to array with quantities
-    for itemName, qty in pairs(itemCounts) do
-        table.insert(allItems, { name = itemName, quantity = qty })
+    -- Convert to array with quantities and alternatives
+    for itemName, data in pairs(itemData) do
+        table.insert(allItems, {
+            name = itemName,
+            quantity = data.quantity,
+            alternatives = data.alternatives
+        })
     end
 
     return allItems
@@ -246,12 +270,42 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         local inventory_module = require('modules.inventory')
                         for _, itemData in ipairs(itemsNeeded) do
                             local itemName = itemData.name
-                            local hasItem, count, locations = inventory_module.hasItem(itemName, true)
-                            results[itemName] = {
-                                hasItem = hasItem,
-                                count = count,
-                                locations = locations  -- Store location info
-                            }
+                            local alternatives = itemData.alternatives
+
+                            -- If alternatives exist, check all of them
+                            if alternatives and type(alternatives) == 'table' then
+                                local totalCount = 0
+                                local combinedLocations = {}
+                                local hasAny = false
+
+                                for _, altName in ipairs(alternatives) do
+                                    local hasItem, count, locations = inventory_module.hasItem(altName, true)
+                                    if hasItem then
+                                        hasAny = true
+                                        totalCount = totalCount + count
+                                        -- Merge locations
+                                        if locations then
+                                            for locName, locCount in pairs(locations) do
+                                                combinedLocations[locName] = (combinedLocations[locName] or 0) + locCount
+                                            end
+                                        end
+                                    end
+                                end
+
+                                results[itemName] = {
+                                    hasItem = hasAny,
+                                    count = totalCount,
+                                    locations = combinedLocations
+                                }
+                            else
+                                -- Normal single item check
+                                local hasItem, count, locations = inventory_module.hasItem(itemName, true)
+                                results[itemName] = {
+                                    hasItem = hasItem,
+                                    count = count,
+                                    locations = locations  -- Store location info
+                                }
+                            end
                         end
                         inventory_results[current_mission] = results
                         last_inventory_check = currentTime

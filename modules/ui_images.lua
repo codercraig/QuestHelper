@@ -47,12 +47,31 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
 
                 -- Now draw overlays using the saved position
                 local cal = img_data.map_calibration
-                local is_multi_floor = (#step_imgs > 1)
 
-                -- Get current map number for multi-floor zones (regardless of calibration source)
-                local current_map_num = 1 -- Default to map 1
-                if is_multi_floor then
-                    current_map_num = quest_state.getCurrentMap(player_module.zoneId)
+                -- Determine if this is a multi-floor zone (same zone, different floors) vs a travel route (different zones)
+                local is_multi_floor = false
+                local is_travel_route = false
+                local current_map_num = 1
+
+                if #step_imgs > 1 then
+                    -- Check if all images have the same zone_name (multi-floor) or different zone_names (travel route)
+                    local first_zone = step_imgs[1].zone_name
+                    local all_same_zone = true
+                    for _, img in ipairs(step_imgs) do
+                        if img.zone_name ~= first_zone then
+                            all_same_zone = false
+                            break
+                        end
+                    end
+
+                    if all_same_zone then
+                        -- Multi-floor zone: same zone, different floor maps
+                        is_multi_floor = true
+                        current_map_num = quest_state.getCurrentMap(player_module.zoneId)
+                    else
+                        -- Travel route: different zones, show arrow on matching zone
+                        is_travel_route = true
+                    end
                 end
 
                 if not cal and img_data.zone_name and map_db[img_data.zone_name] then
@@ -86,11 +105,23 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     end
                 end
 
-                -- Draw player arrow on map (only if in matching zone AND matching map number)
+                -- Draw player arrow on map
                 if cal and img_data.zone_name then
                     if zone_data[img_data.zone_name] and player_module.zoneId == zone_data[img_data.zone_name] then
-                        -- For multi-map zones, only draw arrow on the current map's image
-                        if img_index == current_map_num then
+                        -- For multi-floor zones: only draw arrow on the current floor's image
+                        -- For travel routes: draw arrow on the image matching player's current zone
+                        -- For single images: always draw arrow
+                        local should_draw_arrow = true
+
+                        if is_multi_floor then
+                            -- Multi-floor: only draw on current floor
+                            should_draw_arrow = (img_index == current_map_num)
+                        elseif is_travel_route then
+                            -- Travel route: always draw (zone check above already ensures we're in the right zone)
+                            should_draw_arrow = true
+                        end
+
+                        if should_draw_arrow then
                             local playerHeading = player_module.getHeading()
                             map_renderer.drawPlayerArrow(imageX, imageY, w, h,
                                                         player_module.posX, player_module.posY_height,
