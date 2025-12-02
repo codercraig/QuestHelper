@@ -46,4 +46,47 @@ function images.GetTexture(filename)
     return loaded_textures[filename]
 end
 
+-- Unload a specific texture from memory
+function images.UnloadTexture(filename)
+    if loaded_textures[filename] then
+        -- Release the texture (D3D will handle cleanup via GC)
+        loaded_textures[filename] = nil
+    end
+end
+
+-- Cleanup textures not in the provided list of filenames
+-- Parameters:
+--   keep_list: table/array of filenames to keep loaded
+function images.CleanupUnused(keep_list)
+    -- Build a set of filenames to keep
+    local keep_set = {}
+    if keep_list then
+        for _, filename in ipairs(keep_list) do
+            if filename and filename ~= '' then
+                keep_set[filename] = true
+            end
+        end
+    end
+
+    -- Unload textures not in the keep list
+    local unloaded_count = 0
+    for filename, _ in pairs(loaded_textures) do
+        if not keep_set[filename] then
+            loaded_textures[filename] = nil
+            unloaded_count = unloaded_count + 1
+        end
+    end
+
+    return unloaded_count
+end
+
+-- Get count of currently loaded textures (for debugging)
+function images.GetLoadedCount()
+    local count = 0
+    for _ in pairs(loaded_textures) do
+        count = count + 1
+    end
+    return count
+end
+
 return images

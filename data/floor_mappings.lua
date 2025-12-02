@@ -25,6 +25,10 @@ return {
         [1] = 1,   -- Upper floor
         [15] = 2,  -- Lower floor
     },
+    [142] = {
+        [1] = 1,   -- Upper floor
+        [15] = 2,  -- Lower floor
+    },
 
     -- Add more zones here as you discover them
     -- Example: Delkfutt's Tower

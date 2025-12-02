@@ -1051,13 +1051,14 @@ return {
             {
                 text = "Step 1: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
                 onmob_target = {"Melek"},
-                trigger_on_event_id = {48},
+                trigger_on_event_id = {49},
                 images = {
                       {
                           file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
+                          zone_name = "Port Windurst",
                           highlights = {
                               { position = "F-6", offsetX = 16, offsetY = 16 },
                           },
@@ -1070,7 +1071,8 @@ return {
                        "Port Windurst (N-5) ->\n" ..
                        "Windurst Woods (F-5) ->\n" ..
                        "Windurst Walls (H-7) ->\n" ..
-                       "Heavens Tower",
+                       "Heavens Tower \n \n"..
+                       "Note: If you posses KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n",
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = { 239 },
                 images = {
@@ -1079,6 +1081,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 2,
+                          zone_name = "Port Windurst",
                           highlights = {
                               { position = "N-5", offsetX = 16, offsetY = 16 },
                           },
@@ -1088,6 +1091,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "Windurst Woods",
                         highlights = {
                             { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
@@ -1097,6 +1101,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "Windurst Walls",
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
@@ -1113,6 +1118,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 3,
+                          zone_name = "Port Windurst",
                           highlights = {
                               { position = "F-6", offsetX = 16, offsetY = 16 },
                           },
@@ -1125,19 +1131,29 @@ return {
                        "The Aspir Knife drops from Eyy Mon the Ironbreaker, a Yagudo NM in Giddeus. \n" ..
                        "This NM spawns on Map2 (G-7) around this area. Also highlighted! \n" ..
                        "Each party member needs one Aspir Knife! \n" ..
-                       "Respawn time: approximately 15 minutes. \n \n" ..
-                       "Trade the Aspir Knife to Uu Zhoumo.",
+                       "Respawn time: approximately 15 minutes. \n \n",
                 items_needed = {
                     "Aspir Knife"
                 },
-                onmob_target = {"Uu Zhoumo"},
-                trigger_on_event_id = { 41 },
+                trigger_on_item_obtain = {"Aspir Knife"},
                 images = {
+                        {
+                          file     = "maps/port_windurst.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Port Windurst",
+                          highlights = {
+                              { position = "A-4", offsetX = 16, offsetY = 16 },
+                              { position = "A-5", offsetX = 16, offsetY = 16 },
+                          },
+                       },
                        {
                           file     = "maps/west_sarutabaruta.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
+                          zone_name = "West Sarutabaruta",
                           highlights = {
                               { position = "F-8", offsetX = 16, offsetY = 16 },
                           },
@@ -1147,6 +1163,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 4,
+                          zone_name = "Giddeus",
                           highlights = {
                               { position = "F-8", offsetX = 16, offsetY = 16 },
                               { position = "G-8", offsetX = 16, offsetY = 16 },
@@ -1159,6 +1176,7 @@ return {
                           width    = 512,
                           height   = 512,
                           state    = 4,
+                          zone_name = "Giddeus",
                           highlights = {
                               { position = "F-7", offsetX = 16, offsetY = 16 },
                               { position = "G-7", offsetX = 16, offsetY = 16 },
@@ -1167,7 +1185,24 @@ return {
                   },
             },
             {
-                text = "Step 5: Return to Melek in the Consulate of Bastok in Port Windurst (F-6).",
+                text = "Step 5: Trade the Aspir Knife to Uu Zhoumo (F-7) in Giddeus Map 2.",
+                onmob_target = {"Uu Zhoumo"},
+                trigger_on_event_id = { 41 },
+                images = {
+                      {
+                          file     = "maps/giddeus_2.png",
+                          width    = 512,
+                          height   = 512,
+                          state    = 5,
+                          zone_name = "Giddeus",
+                          highlights = {
+                              { position = "F-7", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            {
+                text = "Step 6: Return to Melek in the Consulate of Bastok in Port Windurst (F-6).",
                 onmob_target = {"Melek"},
                 trigger_on_event_id = { 55 },
                 images = {
@@ -1175,7 +1210,8 @@ return {
                           file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
-                          state    = 5,
+                          state    = 6,
+                          zone_name = "Port Windurst",
                           highlights = {
                               { position = "F-6", offsetX = 16, offsetY = 16 },
                           },
@@ -1183,24 +1219,48 @@ return {
                   },
             },
             {
-                text = "Step 6: Travel to San d'Oria! \n " ..
+                text = "Step 7: Travel to San d'Oria! \n " ..
                        "If you have the teleport crystal from Crag of Holla you can get a White Mage to teleport you or use Unity Warp. \n \n" ..
                        "Otherwise here's a suggested route from Windurst: \n" ..
-                       "East Sarutabaruta (J-4) ->\n" ..
-                       "Tahrongi Canyon (K-8)    ->\n" ..
-                       "Buburimu Peninsula (I-9) ->\n" ..
+                       "Port Windurst  (A-4)/(A-5)    ->\n" ..
+                       "West Sarutabaruta (J-4)       ->\n" ..
+                       "East Sarutabaruta (J-4)       ->\n" ..
+                       "Tahrongi Canyon (K-8)         ->\n" ..
+                       "Buburimu Peninsula (I-9)      ->\n" ..
                        "Mhaura - get the boat! (H-10) ->\n" ..
-                       "Selbina (H-6)/(I-6)  ->\n" ..
-                       "Valkrum Dunes (K-5)/(L-5)  ->\n" ..
-                       "La Thiene Plateau (D-3)/(E-3)  ->\n" ..
+                       "Selbina (H-6)/(I-6)           ->\n" ..
+                       "Valkrum Dunes (K-5)/(L-5)     ->\n" ..
+                       "La Thiene Plateau (D-3)/(E-3) ->\n" ..
                        "West Ronfaure (I-5) -> Northern San d'Oria!\n \n",
                 zone_trigger = "Northern San d'Oria",
                 images = {
                       {
+                            file     = "maps/port_windurst.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 7,
+                            zone_name = "Port Windurst",
+                            highlights = {
+                                { position = "A-4", offsetX = 16, offsetY = 16 },
+                                { position = "A-5", offsetX = 16, offsetY = 16 },
+                            },
+                      },
+                      {
+                            file     = "maps/west_sarutabaruta.png",
+                            width    = 512,
+                            height   = 512,
+                            state    = 7,
+                            zone_name = "West Sarutabaruta",
+                            highlights = {
+                                { position = "K-4", offsetX = 16, offsetY = 16 },
+                            },
+                      },
+                      {
                           file     = "maps/east_sarutabaruta.png",
                           width    = 512,
                           height   = 512,
-                          state    = 6,
+                          state    = 7,
+                          zone_name = "East Sarutabaruta",
                           highlights = {
                               { position = "J-4", offsetX = 16, offsetY = 16 },
                           },
@@ -1209,7 +1269,8 @@ return {
                         file     = "maps/tahrongi_canyon.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "Tahrongi Canyon",
                         highlights = {
                             { position = "K-8", offsetX = 16, offsetY = 16 },
                         },
@@ -1218,7 +1279,8 @@ return {
                         file     = "maps/buburimu_peninsula.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "Buburimu Peninsula",
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                         },
@@ -1227,7 +1289,8 @@ return {
                         file     = "maps/mhaura.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "Mhaura",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1236,7 +1299,8 @@ return {
                         file     = "maps/selbina.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "Selbina",
                         highlights = {
                             { position = "H-6", offsetX = 16, offsetY = 16 },
                             { position = "I-6", offsetX = 16, offsetY = 16 },
@@ -1246,7 +1310,8 @@ return {
                         file     = "maps/valkurm_dunes.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "Valkurm Dunes",
                         highlights = {
                             { position = "K-5", offsetX = 16, offsetY = 16 },
                             { position = "L-5", offsetX = 16, offsetY = 16 },
@@ -1256,7 +1321,8 @@ return {
                         file     = "maps/la_theine_plateau.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "La Theine Plateau",
                         highlights = {
                             { position = "D-3", offsetX = 16, offsetY = 16 },
                             { position = "E-3", offsetX = 16, offsetY = 16 },
@@ -1266,7 +1332,8 @@ return {
                         file     = "maps/west_ronfaure.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        zone_name = "West Ronfaure",
                         highlights = {
                             { position = "I-5", offsetX = 16, offsetY = 16 },
                         },
@@ -1274,14 +1341,16 @@ return {
                   },
             },
             {
-                text = "Step 7: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
+                text = "Step 8: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
                 onmob_target = {"Helaku"},
+                trigger_on_talk = {"Helaku:"},
                 images = {
                       {
                           file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
-                          state    = 7,
+                          state    = 8,
+                          zone_name = "Northern San d'Oria",
                           highlights = {
                               { position = "K-10", offsetX = 16, offsetY = 16 },
                           },
@@ -1289,14 +1358,15 @@ return {
                   },
             },
             {
-                text = "Step 8: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6/J-6). \n",
+                text = "Step 9: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6/J-6). \n",
                 zone_trigger = "Chateau d'Oraguille",
                 images = {
                       {
                           file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
-                          state    = 8,
+                          state    = 9,
+                          zone_name = "Northern San d'Oria",
                           highlights = {
                               { position = "I-6", offsetX = 16, offsetY = 16 },
                               { position = "J-6", offsetX = 16, offsetY = 16 },
@@ -1305,7 +1375,7 @@ return {
                   },
             },
             {
-                text = "Step 9: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
+                text = "Step 10: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
                        "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Halver. \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {503},
@@ -1314,7 +1384,7 @@ return {
                           file     = "maps/chateau_doraguille.png",
                           width    = 512,
                           height   = 512,
-                          state    = 9,
+                          state    = 10,
                           highlights = {
                               { position = "I-9", offsetX = 16, offsetY = 16 },
                           },
@@ -1322,7 +1392,7 @@ return {
                   },
             },
             {
-                text = "Step 10: Travel to Horlais Peak in La Theine Plateau (F-5) with your party. \n \n" ..
+                text = "Step 11: Travel to Horlais Peak in La Theine Plateau (F-5) with your party. \n \n" ..
 
                        "Notes: Orcs sight-Aggro to players around level 35 unless they are Invisible. Bats will aggro by sound. \n \n" ..
                        "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
@@ -1336,7 +1406,8 @@ return {
                           file     = "maps/west_ronfaure.png",
                           width    = 512,
                           height   = 512,
-                          state    = 10,
+                          state    = 11,
+                          zone_name = "West Ronfaure",
                           highlights = {
                               { position = "E-4", offsetX = 16, offsetY = 16 },
                           },
@@ -1345,7 +1416,8 @@ return {
                           file     = "maps/ghelsba_outpost_1.png",
                           width    = 512,
                           height   = 512,
-                          state    = 10,
+                          state    = 11,
+                          zone_name = "Ghelsba Outpost",
                           highlights = {
                               { position = "H-11", offsetX = 16, offsetY = 16 },
                           },
@@ -1354,7 +1426,8 @@ return {
                           file     = "maps/yughott_grotto_1.png",
                           width    = 512,
                           height   = 512,
-                          state    = 10,
+                          state    = 11,
+                          zone_name = "Yughott Grotto",
                           highlights = {
                               { position = "K-5", offsetX = 16, offsetY = 16 },
                           },
@@ -1363,7 +1436,8 @@ return {
                           file     = "maps/fort_ghelsba.png",
                           width    = 512,
                           height   = 512,
-                          state    = 10,
+                          state    = 11,
+                          zone_name = "Fort Ghelsba",
                           highlights = {
                               { position = "J-8", offsetX = 16, offsetY = 16 },
                           },
@@ -1372,7 +1446,8 @@ return {
                           file     = "maps/yughott_grotto_2.png",
                           width    = 512,
                           height   = 512,
-                          state    = 10,
+                          state    = 11,
+                          zone_name = "Yughott Grotto",
                           highlights = {
                               { position = "J-6", offsetX = 16, offsetY = 16 },
                           },
@@ -1380,10 +1455,10 @@ return {
                   },
             },
             {
-                text = "Step 11: This is a BCNM battle! You will face Spotter and Dread Dragon. \n \n" ..
+                text = "Step 12: This is a BCNM battle! You will face Spotter and Dread Dragon. \n \n" ..
                        "Recommended: Level 35+ or a party. \n \n" ..
                        "===== Spotter ===== \n" ..
-                       "Family: Orc \n" ..
+                       "Family: Spotter \n" ..
                        "Level: 25 \n \n" ..
                        "===== Dread Dragon ===== \n" ..
                        "Family: Dragon \n" ..
@@ -1393,7 +1468,7 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 12: Return to Helaku in Northern San d'Oria (K-10) to receive the KI:Kindred Report.",
+                text = "Step 13: Return to Helaku in Northern San d'Oria (K-10) to receive the KI:Kindred Report. Backtrack the route you took to get here. \n",
                 onmob_target = {"Helaku"},
                 trigger_on_event_id = {545},
                 images = {
@@ -1401,7 +1476,8 @@ return {
                           file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
-                          state    = 12,
+                          state    = 13,
+                          zone_name = "Northern San d'Oria",
                           highlights = {
                               { position = "K-10", offsetX = 16, offsetY = 16 },
                           },
@@ -1409,7 +1485,7 @@ return {
                   },
             },
             {
-                text = "Step 13: Return to Naji in Metalworks (J-8) to complete the mission!",
+                text = "Step 14: Return to Bastok and speak with Naji in Metalworks (J-8) to complete the mission!",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {713},
                 images = {
@@ -1417,7 +1493,7 @@ return {
                           file     = "maps/metalworks.png",
                           width    = 512,
                           height   = 512,
-                          state    = 13,
+                          state    = 14,
                           zone_name = "Metalworks",
                           highlights = {
                               { position = "J-8", offsetX = 16, offsetY = 16 },

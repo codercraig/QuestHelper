@@ -107,6 +107,13 @@ return {
         visual_mode = "arc",
         zone = "Port Windurst"
     },
+    ["Gold Skull"] = {
+        target_pos = { x = -76.5, y= -7.5, z=159.3},
+        trigger_npc = "Gold Skull",
+        visual_mode = "arc",
+        zone = "Port Windurst"
+    },
+
     --Heavens Tower
     ["Kupipi"] = {
         target_pos = { x = 2, y= -1, z=32.1},
@@ -114,7 +121,13 @@ return {
         visual_mode = "arc",
         zone = "Heavens Tower"
     },
-
+    -- Giddeus
+    ["Uu Zhoumo"] = {
+        target_pos = { x = -180, y= 15, z=157.4},
+        trigger_npc = "Uu Zhoumo",
+        visual_mode = "arc",
+        zone = "Giddeus"
+    },
 
     --San d'Oria
     --Northern San d'Oria

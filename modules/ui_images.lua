@@ -8,6 +8,9 @@ local bit = require('bit')
 -- Track last zone to reset auto-calibration message
 ui_images.last_zone_id = nil
 
+-- Track last step for texture cleanup
+ui_images.last_step_key = nil
+
 -- Renders the images drawer window attached to the main window
 function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTopCategory, currentSubfile, current_mission,
                           quest_state, quest_data, utils, image_loader, map_renderer, player_module, zone_data, map_db, floor_mappings)
@@ -32,16 +35,46 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
         local step_imgs = utils.get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx, quest_data)
 
+        -- Track current step and cleanup old textures when step changes
+        local current_step_key = string.format("%s|%s|%s|%d",
+            currentTopCategory or "", currentSubfile or "", current_mission or "", step_idx or 0)
+
+        if ui_images.last_step_key ~= current_step_key then
+            -- Step changed, cleanup old textures
+            local keep_files = {}
+            for _, img_data in ipairs(step_imgs) do
+                if img_data.file then
+                    table.insert(keep_files, img_data.file)
+                end
+            end
+
+            local unloaded = image_loader.CleanupUnused(keep_files)
+            if unloaded > 0 then
+                print(string.format("\30\106[QH]\30\01 Cleaned up %d unused texture(s), keeping %d for current step",
+                    unloaded, #keep_files))
+            end
+
+            ui_images.last_step_key = current_step_key
+        end
+
         -- Pre-calculate floor numbers for each image within its zone
-        -- This handles travel routes where the same zone appears multiple times
+        -- Extract floor index from filename (_1, _2, etc.) and map to actual floor IDs
         local zone_occurrence_count = {}
         local img_floor_numbers = {}
 
         for img_index, img_data in ipairs(step_imgs) do
             local zone = img_data.zone_name
             if zone then
-                zone_occurrence_count[zone] = (zone_occurrence_count[zone] or 0) + 1
-                img_floor_numbers[img_index] = zone_occurrence_count[zone]
+                -- Try to extract floor index from filename (e.g., "zonename_2.png" -> index 2)
+                local floor_index = img_data.file and img_data.file:match("_(%d+)%.png$")
+                if floor_index then
+                    -- Use the filename index directly (corresponds to map_db index)
+                    img_floor_numbers[img_index] = tonumber(floor_index)
+                else
+                    -- No floor index in filename, fall back to occurrence counting
+                    zone_occurrence_count[zone] = (zone_occurrence_count[zone] or 0) + 1
+                    img_floor_numbers[img_index] = zone_occurrence_count[zone]
+                end
             else
                 img_floor_numbers[img_index] = 1
             end
@@ -93,8 +126,14 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     local should_auto_cal = true
                     if in_this_zone and has_multiple_floors then
                         -- Only auto-cal if this is the player's current floor
-                        local player_floor = quest_state.getCurrentMap(player_module.zoneId)
-                        should_auto_cal = (this_img_floor == player_floor)
+                        -- Use actual floor from game, not saved preference
+                        local player_floor = player_module.getFloorId(floor_mappings)
+                        if player_floor then
+                            should_auto_cal = (this_img_floor == player_floor)
+                        else
+                            -- Can't determine player floor, allow auto-cal anyway
+                            should_auto_cal = true
+                        end
                     end
 
                     if should_auto_cal then
@@ -125,9 +164,14 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
 
                         if is_this_image_multi_floor then
                             -- This image is from a multi-floor zone, check floor number
-                            -- Compare this image's floor number with player's current floor
-                            local player_floor = quest_state.getCurrentMap(player_module.zoneId)
-                            should_draw_arrow = (this_img_floor == player_floor)
+                            -- Compare this image's floor number with player's ACTUAL current floor
+                            local player_floor = player_module.getFloorId(floor_mappings)
+                            if player_floor then
+                                should_draw_arrow = (this_img_floor == player_floor)
+                            else
+                                -- Can't determine floor, default to not drawing to avoid duplicates
+                                should_draw_arrow = false
+                            end
                         end
                         -- For single-floor images, should_draw_arrow stays true
 

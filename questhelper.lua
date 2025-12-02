@@ -508,22 +508,42 @@ ashita.events.register('command', 'command_callback', function(e)
         print(string.format("[%s] Zone ID: %d", addon.name, player_module.zoneId or 0))
         print(string.format("[%s] Position: X=%.2f, Y=%.2f, Z=%.2f", addon.name,
             player_module.posX, player_module.posY_height, player_module.posZ_depth))
+        print(string.format("[%s] -----------------------------------------------", addon.name))
 
         local floorIdRaw = player_module.getFloorIdRaw()
         local floorIdMapped = player_module.getFloorId(floor_mappings)
+        local mapinfo = player_module.getMapInfo()
 
         if floorIdRaw ~= nil then
-            print(string.format("[%s] Floor ID (raw/0-based): %d", addon.name, floorIdRaw))
-            print(string.format("[%s] Floor ID (mapped): %d", addon.name, floorIdMapped or (floorIdRaw + 1)))
-            print(string.format("[%s] Current saved map: %d", addon.name, quest_state.getCurrentMap(player_module.zoneId)))
+            print(string.format("[%s] CheckFloorNumber (raw):    %d", addon.name, floorIdRaw))
+            print(string.format("[%s] Mapped floor number:       %d", addon.name, floorIdMapped or floorIdRaw))
+
+            -- Show mapinfo FloorId if available
+            if mapinfo and mapinfo.FloorId then
+                print(string.format("[%s] mapinfo_t FloorId:        %d", addon.name, mapinfo.FloorId))
+                if mapinfo.FloorId ~= floorIdRaw then
+                    print(string.format("[%s]   ⚠ FloorId differs from CheckFloorNumber!", addon.name))
+                    print(string.format("[%s]   ⚠ Use FloorId=%d for floor_mappings.lua", addon.name, mapinfo.FloorId))
+                end
+            end
+
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+            print(string.format("[%s] Current saved map:         %d", addon.name, quest_state.getCurrentMap(player_module.zoneId)))
 
             -- Check if this zone has a mapping
             if floor_mappings and floor_mappings[player_module.zoneId] then
-                print(string.format("[%s] Zone has floor mapping configured", addon.name))
+                print(string.format("[%s] Zone has floor mapping configured:", addon.name))
+                for raw_id, map_num in pairs(floor_mappings[player_module.zoneId]) do
+                    local marker = (raw_id == floorIdRaw) and " ← YOU ARE HERE" or ""
+                    local marker2 = (mapinfo and raw_id == mapinfo.FloorId) and " ← mapinfo FloorId" or ""
+                    print(string.format("[%s]   [%d] = %d%s%s", addon.name, raw_id, map_num, marker, marker2))
+                end
             else
-                print(string.format("[%s] No floor mapping for this zone (using raw+1)", addon.name))
+                print(string.format("[%s] No floor mapping for this zone", addon.name))
+                print(string.format("[%s] Assuming incremental (raw ID = floor number)", addon.name))
             end
 
+            print(string.format("[%s] -----------------------------------------------", addon.name))
             print(string.format("[%s] Floor detection: SUCCESS!", addon.name))
         else
             print(string.format("[%s] Floor detection: FAILED - could not initialize", addon.name))
@@ -599,6 +619,20 @@ ashita.events.register('command', 'command_callback', function(e)
         end
 
         print(string.format("[%s] ==================================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_textures' then
+        local loaded_count = image_loader.GetLoadedCount()
+        local avg_size_kb = 443  -- Average map texture size in KB
+        local estimated_mb = (loaded_count * avg_size_kb) / 1024
+
+        print(string.format("[%s] ========== Texture Memory Usage ==========", addon.name))
+        print(string.format("[%s] Loaded textures: %d", addon.name, loaded_count))
+        print(string.format("[%s] Estimated memory: %.2f MB", addon.name, estimated_mb))
+        print(string.format("[%s] (Based on ~%d KB average per texture)", addon.name, avg_size_kb))
+        print(string.format("[%s] ==========================================", addon.name))
         e.blocked = true
         return true
     end
