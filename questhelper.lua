@@ -33,6 +33,7 @@ local ui_images        = require('modules.ui_images')
 local map_renderer     = require('modules.map_renderer')
 local utils            = require('modules.utils')
 local inventory_cache  = require('modules.inventory_cache')
+local keyitem_module   = require('modules.keyitem')
 
 -- Validation
 if not helpers then error("[" .. addon.name .. "] helpers.lua is missing.") end
@@ -60,6 +61,7 @@ local zone_data = T{}
 local map_db = T{}
 local questIconTexture = nil
 local floor_mappings = T{}  -- Floor ID mappings for multi-floor zones
+local keyitems_db = require('data.keyitems')  -- Key items database
 
 --------------------------------------------------------------------------------
 -- Debug Settings
@@ -345,7 +347,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
     local window_open, mainX, mainY, mainW, mainH, newShowDrawer, newTopCat, newSubfile, newMission =
         ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
-                      quest_data, quest_state, utils, inventory_cache)
+                      quest_data, quest_state, utils, inventory_cache, keyitem_module, keyitems_db)
 
     if mainW > 0 and mainH > 0 then
         lastMainX = mainX
@@ -637,6 +639,37 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_keyitems' then
+        print(string.format("[%s] ========== Key Item Tracking Status ==========", addon.name))
+
+        if keyitem_module.isInitialized() then
+            local owned_kis, count = keyitem_module.listOwnedKeyItems()
+            print(string.format("[%s] Total key items tracked: %d", addon.name, count))
+
+            if count > 0 then
+                print(string.format("[%s] -----------------------------------------------", addon.name))
+                print(string.format("[%s] Owned Key Item IDs:", addon.name))
+                local line = ""
+                for i, ki_id in ipairs(owned_kis) do
+                    line = line .. string.format("%d ", ki_id)
+                    if i % 10 == 0 or i == #owned_kis then
+                        print(string.format("[%s]   %s", addon.name, line))
+                        line = ""
+                    end
+                end
+            else
+                print(string.format("[%s] No key items currently owned", addon.name))
+            end
+        else
+            print(string.format("[%s] Key item tracking NOT initialized", addon.name))
+            print(string.format("[%s] Waiting for packet 0x55 from server...", addon.name))
+        end
+
+        print(string.format("[%s] ==========================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'qh_findzone' then
         print(string.format("[%s] ========== Searching for Current Zone in Map Array ==========", addon.name))
 
@@ -905,6 +938,9 @@ end)
 -- Packet Events
 --------------------------------------------------------------------------------
 ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
+    -- Key item tracking (Packet 0x55)
+    keyitem_module.handlePacket(e)
+
     triggers_module.handlePacketIn(e, currentTopCategory, currentSubfile, current_mission,
                                   quest_data, quest_state, step_trigger_flags)
 

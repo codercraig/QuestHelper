@@ -134,7 +134,7 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
                     end
 
                     if should_complete then
-                        print(string.format("\30\105[QH]\30\01 Trigger Zone HIT! Completing step %d", step_idx))
+                        --print(string.format("\30\105[QH]\30\01 Trigger Zone HIT! Completing step %d", step_idx))
                         quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
                         return true
                     else

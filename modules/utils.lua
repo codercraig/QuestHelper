@@ -47,4 +47,63 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
     return {}
 end
 
+-- Collects all unique key items needed for entire quest
+-- Returns: { {id = 1234, name = "Mystical Canteen"}, ... }
+--
+-- Supported formats:
+--   keyitems_needed = {1234}  -- Just key item ID
+--   keyitems_needed = {"Kindred Crest"}  -- Key item name (looked up from database)
+--   keyitems_needed = {{id = 1234, name = "Mystical Canteen"}}  -- Explicit ID+name
+function utils.getAllKeyItemsNeeded(missionData, keyitems_db)
+    local allKeyItems = {}
+    local kiData = {}  -- { ki_id = name }
+
+    if not missionData or not missionData.steps then return allKeyItems end
+
+    for _, step_data in ipairs(missionData.steps) do
+        if type(step_data) == 'table' and step_data.keyitems_needed then
+            local keyitems = step_data.keyitems_needed
+
+            if type(keyitems) == 'table' then
+                for _, ki in ipairs(keyitems) do
+                    if type(ki) == 'number' then
+                        -- Simple ID format
+                        if not kiData[ki] then
+                            -- Try to get name from database
+                            local ki_name = keyitems_db and keyitems_db.getName(ki)
+                            kiData[ki] = ki_name
+                        end
+                    elseif type(ki) == 'string' then
+                        -- Name format - look up ID from database
+                        if keyitems_db then
+                            local ki_id = keyitems_db.getId(ki)
+                            if ki_id and not kiData[ki_id] then
+                                kiData[ki_id] = ki
+                            end
+                        end
+                    elseif type(ki) == 'table' and ki.id then
+                        -- Object format: { id = 1234, name = "Name" }
+                        if not kiData[ki.id] then
+                            kiData[ki.id] = ki.name
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- Convert to array
+    for ki_id, ki_name in pairs(kiData) do
+        table.insert(allKeyItems, {
+            id = ki_id,
+            name = ki_name or string.format("Key Item #%d", ki_id)
+        })
+    end
+
+    -- Sort by ID for consistency
+    table.sort(allKeyItems, function(a, b) return a.id < b.id end)
+
+    return allKeyItems
+end
+
 return utils

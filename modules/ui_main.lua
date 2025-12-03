@@ -106,7 +106,7 @@ end
 
 -- Renders the main QuestHelper window
 function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
-                       quest_data, quest_state, utils, inventory_cache)
+                       quest_data, quest_state, utils, inventory_cache, keyitem_module, keyitems_db)
 
     imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})
     imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})
@@ -358,6 +358,23 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         else
                             -- RED - Don't have it
                             imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
+                        end
+                    end
+                    imgui.Separator()
+                end
+
+                -- Key Items Needed Section
+                local keyItemsNeeded = utils.getAllKeyItemsNeeded(missionData, keyitems_db)
+                if #keyItemsNeeded > 0 and keyitem_module then
+                    imgui.TextColored({0.9, 0.9, 0.9, 1}, "Key Items Needed:")
+                    for _, ki in ipairs(keyItemsNeeded) do
+                        local hasKI = keyitem_module.hasKeyItem(ki.id)
+                        if hasKI then
+                            -- GREEN - Player has it
+                            imgui.TextColored({0, 1, 0, 1}, string.format("  [x] KI: %s", ki.name))
+                        else
+                            -- RED - Don't have it
+                            imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] KI: %s", ki.name))
                         end
                     end
                     imgui.Separator()

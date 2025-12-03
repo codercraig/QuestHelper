@@ -131,6 +131,9 @@ return {
                     "copper ore",
                     "honey"
                 },
+                -- keyitems_needed = {
+                --      "Gustaberg Supplies",  -- Just use the name!
+                --  },
             },
             {
                 text = "Kill Counter Demo: Defeat 5 enemies in Bastok Mines! \n" ..

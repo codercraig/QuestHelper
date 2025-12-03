@@ -1520,6 +1520,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Mines",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1529,6 +1530,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Bastok Markets",
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
@@ -1538,6 +1540,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 1,
+                        zone_name = "Port Bastok",
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1545,9 +1548,9 @@ return {
                 },
             },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You need to speak with him twice.",
+                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You need to speak with him twice!",
                 onmob_target = {"Iron Eater"},
-                trigger_on_event_id = {715, 716},
+                trigger_on_event_id = {715},
                 images = {
                     {
                         file     = "maps/metalworks.png",
@@ -1564,7 +1567,7 @@ return {
             {
                 text = "Step 3: Travel to Beadeaux via Pashhow Marshlands (J-9). \n" ..
                        "From Konschtat Highlands, you can also travel to (K-3) to enter Pashhow Marshlands. \n" ..
-                       "You may also be transported to the Beadeaux Survival Guide if unlocked.",
+                       "You may also transport using the Beadeaux Survival Guide if unlocked.",
                 zone_trigger = "Beadeaux",
                 images = {
                     {
@@ -1590,10 +1593,9 @@ return {
                 },
             },
             {
-                text = "Step 4: Zone into Beadeaux for a cutscene. \n" ..
-                       "You need to defeat 20 Copper Quadav enemies (levels 22-28) while in Beadeaux. They sound-aggro under level 42. \n" ..
+                text = "Step 4: Zone into Beadeaux for a cutscene. \n \n" ..
+                       "You need to defeat 20 Copper Quadav enemies (levels 22-28) while in Beadeaux - they are around the starting area. They sound-aggro under level 42. \n" ..
                        "Party members get credit for kills. The kill counter persists if you zone or logout.",
-                --zone_trigger = "Beadeaux",
                 trigger_on_event_id = 120,
                 kill_requirement = {
                     count = 20,
@@ -1607,6 +1609,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 4,
+                        zone_name = "Beadeaux",
                         --highlights = {
                          --   { position = "H-7", offsetX = 16, offsetY = 16 },
                         --},
@@ -1616,7 +1619,6 @@ return {
             {
                 text = "Step 5: After defeating 20 Copper Quadav, zone into Pashhow Marshlands to receive the completion cutscene. \n" ..
                        "Do NOT use Escape or you'll miss the cutscene!",
-                --zone_trigger = "Pashhow Marshlands",
                 trigger_on_event_id = {11},
                 images = {
                     {
@@ -1624,6 +1626,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 5,
+                        zone_name = "Beadeaux",
                         highlights = {
                             { position = "E-7", offsetX = 16, offsetY = 16 },
                         },
@@ -1632,7 +1635,7 @@ return {
             },
         },
         reward = {
-            text = "350 Rank Points!"
+            text = "Rank Points!"
         }
     },
 
@@ -1681,7 +1684,7 @@ return {
                        "===== Buy from Auction House =====\n \n" ..
                        "- Check 'Food' > 'Ingredients' section for listings.\n \n" ..
                        "===== Obtain from Rabbit Family =====\n \n" ..
-                       "- Hare Meat drops from rabbits in Dangruf Wadi or Palborough Mines.\n",
+                       "- Hare Meat drops from rabbits Palborough Mines[Pit Hare] lowest level rabbits near Bastok. Alt: Dangruf Wadi.\n",
                 items_needed = {
                     "Hare Meat"
                 },
@@ -1701,6 +1704,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "Palborough Mines",
                         --highlights = {
                         --    { position = "K-3", offsetX = 16, offsetY = 16 },
                         --},
@@ -1732,9 +1736,9 @@ return {
                 size = 1,
                 zone = "Gusgen Mines",
                 --trigger_on_event_id = {1010},
-                -- items_needed = {
-                --     "Glocolite"
-                -- },
+                items_needed = {
+                    "Glocolite"
+                },
                 trigger_on_item_obtain = {"Glocolite"},
                 images = {
                     {
@@ -1758,6 +1762,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 5,
+                        zone_name = "Bastok Mines",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1767,6 +1772,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 5,
+                        zone_name = "Bastok Markets",
                         highlights = {
                             { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
@@ -1776,6 +1782,7 @@ return {
                         width    = 512,
                         height   = 512,
                         state    = 5,
+                        zone_name = "Port Bastok",
                         highlights = {
                             { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1784,7 +1791,7 @@ return {
             },
         },
         reward = {
-            text = "400 Rank Points!"
+            text = "Rank Points!"
         }
     },
 
