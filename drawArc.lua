@@ -3,8 +3,6 @@ local ffi            = require('ffi');
 local C              = ffi.C;
 
 local helpers        = require('helpers');
-local rotateVector16 = helpers.rotateVector16;
-local normalize      = helpers.normalize;
 local matrixMultiply = helpers.matrixMultiply;
 local vec4Transform  = helpers.vec4Transform;
 local worldToScreen  = helpers.worldToScreen;
@@ -60,12 +58,8 @@ local function drawArc(x1, y1, z1, x2, y2, z2, color, progress, orb)
     local P0x, P0y, P0z = x1, z1, y1;
     local P2x, P2y, P2z = x2, z2, y2;
 
-    local P1 = rotateVector16(
-        normalize({ P2x - P0x, P2y - P0y, P2z - P0z }),
-        { P1x - P0x, P1y - P0y, P1z - P0z },
-        not orb
-    );
-    P1x, P1y, P1z = P1[1] + P0x, P1[2] + P0y, P1[3] + P0z;
+    -- Keep control point in vertical plane without rotation to prevent arc tilt
+    -- P1x, P1y, P1z are already calculated correctly at the midpoint with vertical offset
 
     local bcurve = Bezier3D_2:new({
         { P0x, P0y, P0z },

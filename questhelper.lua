@@ -202,6 +202,56 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             end
                         end
                     end
+
+                    -- Periodic key item check for trigger_on_keyitem_obtain
+                    if type(step_data) == 'table' and step_data.trigger_on_keyitem_obtain then
+                        local keyitems_to_check = {}
+
+                        -- Normalize to list
+                        if type(step_data.trigger_on_keyitem_obtain) == 'number' then
+                            table.insert(keyitems_to_check, step_data.trigger_on_keyitem_obtain)
+                        elseif type(step_data.trigger_on_keyitem_obtain) == 'table' then
+                            keyitems_to_check = step_data.trigger_on_keyitem_obtain
+                        end
+
+                        -- Check if step requires all key items or just one
+                        if step_data.require_all_keyitems then
+                            -- Check if player has ALL key items
+                            local hasAll = true
+                            for _, ki in ipairs(keyitems_to_check) do
+                                local ki_id = type(ki) == 'number' and ki or (type(ki) == 'table' and ki.id) or nil
+                                if ki_id then
+                                    local hasKI = keyitem_module.hasKeyItem(ki_id)
+                                    if hasKI then
+                                        -- Mark this specific key item as obtained in partial progress
+                                        local ki_key = "ki_" .. ki_id
+                                        if not quest_state.getPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, ki_key) then
+                                            quest_state.setPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, ki_key, true)
+                                        end
+                                    else
+                                        hasAll = false
+                                    end
+                                end
+                            end
+
+                            -- If all key items found, complete the step
+                            if hasAll then
+                                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                            end
+                        else
+                            -- Just need ONE of the key items
+                            for _, ki in ipairs(keyitems_to_check) do
+                                local ki_id = type(ki) == 'number' and ki or (type(ki) == 'table' and ki.id) or nil
+                                if ki_id then
+                                    local hasKI = keyitem_module.hasKeyItem(ki_id)
+                                    if hasKI then
+                                        quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                                        break
+                                    end
+                                end
+                            end
+                        end
+                    end
                 end
             end
         end

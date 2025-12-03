@@ -122,7 +122,7 @@ return {
                 size = 3,
             },
             {
-                text = "Now, go obtain a some stuff. You can get them outside.",
+                text = "Now, go obtain some stuff. You can get them outside.",
                 -- [NEW] This line turns the list below into a mandatory checklist
                 require_all_items = true,
 
@@ -131,9 +131,15 @@ return {
                     "copper ore",
                     "honey"
                 },
-                -- keyitems_needed = {
-                --      "Gustaberg Supplies",  -- Just use the name!
-                --  },
+                -- Key items needed (displayed in UI, not required for step completion)
+                keyitems_needed = {78},  -- Gustaberg Supplies (ID from LSB)
+            },
+            {
+                text = "Key Item Trigger Test: Get the Gustaberg Supplies key item! \n" ..
+                       "You can obtain this from any Bastokan Guard NPC. \n" ..
+                       "This step will auto-complete when you have the key item.",
+                -- Trigger step completion when player gets this key item
+                trigger_on_keyitem_obtain = {78},  -- Gustaberg Supplies (ID from LSB)
             },
             {
                 text = "Kill Counter Demo: Defeat 5 enemies in Bastok Mines! \n" ..
