@@ -74,6 +74,12 @@ return {
         visual_mode = "arc",
         zone = "Metalworks",
     },
+    ["Lucius"] = {
+        target_pos = { x = 60, y = -18.2, z = -42.3 },
+        trigger_npc = "Lucius",
+        visual_mode = "arc",
+        zone = "Metalworks",
+    },
      ["Ayame"] = {
         target_pos = { x = 134, y = -20.5, z = 33.3 },
         trigger_npc = "Ayame",
@@ -149,5 +155,13 @@ return {
         trigger_npc = "Halver",
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
-    }
+    },
+    -- Jueno
+    -- Ru'Lude Gardens
+    ["Goggehn"] = {
+        target_pos = { x = 3, y= 6.7, z=-79.4},
+        trigger_npc = "Goggehn",
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens"
+    },
 }

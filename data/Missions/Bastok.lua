@@ -1853,15 +1853,119 @@ return {
                 },
             },
             {
-                text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Goggehn at the Embassy of Bastok (H-10).",
+                text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Goggehn at the Embassy of Bastok (H-10). \n \n" ..
+                       "The trip is quite long to Jeuno - it can be done via the following route: \n \n" ..
+                       "Metalworks          : Go to (E-7/8) -> Bastok Markets. \n" ..
+                       "Bastok Markets      : Go to (D-11)  -> South Gustaberg. \n" ..
+                       "South Gustaberg     : Go to (E-6)   -> North Gustaberg. \n" ..
+                       "North Gustaberg     : Go to (D/E-6) -> Konschtat Highlands. \n" ..
+                       "Konschtat Highlands : Go to (K-3)   -> Pashhow Marshlands. \n" ..
+                       "Pashhow Marshlands  : Go to (K-4)   -> Rolanberry Fields. \n" ..
+                       "Rolanberry Fields   : Go to (L-3)   -> Lower Jeuno. \n" ..
+                       "Lower Jeuno         : Go to (I-5)   -> Upper Jeuno. \n" ..
+                       "Upper Jeuno         : Go to (J-10)  -> Ru'Lude Gardens. \n \n" ..
+                       "Now go stretch your legs irl and grab the Home Point crystals so you can teleport back! \n \n",
                 onmob_target = {"Goggehn"},
                 trigger_on_event_id = {41, 66, 139},
                 images = {
                     {
-                        file     = "maps/ru_lude_gardens.png",
+                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "Metalworks",
+                        highlights = {
+                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/bastok_markets.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Bastok Markets",
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/south_gustaberg.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "South Gustaberg",
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/north_gustaberg.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "North Gustaberg",
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/konschtat_highlands.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Konschtat Highlands",
+                        highlights = {
+                            { position = "K-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/pashhow_marshlands.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Pashhow Marshlands",
+                        highlights = {
+                            { position = "K-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/rolanberry_fields.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Rolanberry Fields",
+                        highlights = {
+                            { position = "L-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/lower_jeuno.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Lower Jeuno",
+                        highlights = {
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/upper_jeuno.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Upper Jeuno",
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/rulude_gardens.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Ru'Lude Gardens",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -1869,18 +1973,73 @@ return {
                 },
             },
             {
-                text = "Step 4: Navigate Delkfutt's Tower in Qufim Island (10 floors). \n" ..
+                text = "Step 4: Travel to Qufim Island and enter Lower Delkfutts Tower - If walking for first time : \n \n" ..
+                       "Lower Jeuno  : Go to (K-6) -> Port Jeuno. \n" ..
+                       "Port Jeuno   : Go to (F-5) -> Qufim Island. \n" ..
+                       "Qufim Island : Go to (F-5) -> Lower Delkfutts Tower. \n \n" ..
+                       "Alternatively, you can use Unity Warp/Outpost Warp/Home Point to Qufim Island if unlocked for quickness",
+                zone_trigger = "Lower Delkfutt's Tower",
+                images = {
+                    {
+                        file     = "maps/lower_jeuno.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        zone_name = "Lower Jeuno",
+                        highlights = {
+                            { position = "K-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/port_jeuno.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        zone_name = "Port Jeuno",
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/qufim_island.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        zone_name = "Qufim Island",
+                        highlights = {
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 5: Navigate Delkfutt's Tower in Qufim Island (10 floors). \n" ..
                        "Recommended: Level 40+ with Sneak and Invisible, or level 50+. \n" ..
-                       "You need to reach Floor 10 and defeat Porphyrion at (H-8) to obtain the Delkfutt Key.",
+                       "You need to reach Floor 10 and defeat Porphyrion at (H-8) to obtain the Delkfutt Key. \n \n" ..
+                       "Attaining the Delkfutt Key do the following: \n \n" ..
+                       "1st Floor: Go to (E/F-6) Stairs \n" ..
+                       "2nd Floor: (I/J-9) Stairs - Avoid (H-9) blocked \n" ..
+                       "3rd Floor: G-6 Teleporter. \n" ..
+                       "4th Floor: I-6 Stairs - long way around. (G-7, H-9, J-9) - blocked \n" ..
+                       "5th Floor: H-9 \n" ..
+                       "6th Floor: J-10 Teleporter \n" ..
+                       "7th Floor: F-6/7 Stairs (NW) \n" ..
+                       "8th Floor: (1st time): I-6 Stairs \n" ..
+                       "9th Floor: (1st time): J-10 (Do NOT drop at H-10 wioll end up on 8th floor! \n" ..
+                       "8th Floor: (2nd time): F-9/G-10 -> 9th Floor \n" ..
+                       "9th Floor: (2nd time): F-6 -> 10th Floor Teleport marker on the map. \n \n",
+
                 items_needed = {
                     "Delkfutt Key"
                 },
+
                 images = {
                     {
                         file     = "maps/qufim_island.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
+                        zone_name = "Qufim Island",
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
