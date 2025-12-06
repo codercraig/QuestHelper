@@ -16,7 +16,12 @@ local keyitems = {}
 
 -- Key item ID to name mapping
 local id_to_name = {
+    [20] = "Yagudo Torch",
+    [21] = "Crest of Davoi",
+    [46] = "Coruscant Rosary",
+    [47] = "Black Matinee Necklace",
     [78] = "Gustaberg Supplies",
+
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",
 }

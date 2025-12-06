@@ -157,6 +157,13 @@ return {
         zone = "Chateau d'Oraguille"
     },
     -- Jueno
+    -- Lower Jeuno
+    ["Aldo"] = {
+        target_pos = { x = 21, y= 1.9, z=-61.7},
+        trigger_npc = "Aldo",
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
     -- Ru'Lude Gardens
     ["Goggehn"] = {
         target_pos = { x = 3, y= 6.7, z=-79.4},
@@ -166,6 +173,11 @@ return {
     },
     ["Door:Bastokan Embassy"] = {
         target_pos = { x = 18.6, y= 7.3, z=-75.4},
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens"
+    },
+    ["Door: Audience Chamber"] = {
+        target_pos = { x = 0.1, y= -7, z=70.3},
         visual_mode = "arc",
         zone = "Ru'Lude Gardens"
     },

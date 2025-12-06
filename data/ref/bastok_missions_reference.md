@@ -9,7 +9,8 @@
 [2-3] The Emissary - Windurst -> San d'Oria - DONE
 [3-1] The Four Musketeers - DONE
 [3-2] To the Forsaken Mines - DONE
-[3-3] Jueno - STEP 5
+[3-3] Jueno - DONE
+[4-1] Magicite - Step 5
 
 
 

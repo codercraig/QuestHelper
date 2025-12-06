@@ -2247,15 +2247,43 @@ return {
 
     ["4-1: Magicite"] = {
         steps = {
-            { text = "Step 1: Ensure your Rank Points are nearly or completely full by trading crystals to a Conquest Overseer." },
+            -- PREREQUISITES
             {
-                text = "Step 2: Speak with Goggehn at the Bastokan Embassy in Ru'Lude Gardens to begin the mission.",
+                text = "Step 1: This mission requires Rank 4. Ensure your Rank Points are high (nearly or completely full) by completing repeatable missions or trading 4 crystals to a Conquest Overseer. \n \n" ..
+                       "Morlepiche (H-10) in upper Ru'Lude Gardens accepts crystals. \n \n" ..
+                       "Go to Basokan Embassy and speak with Goggehn (H-10) to start the mission. \n \n" ..
+                       "Note: Unlike most missions, this is NOT offered by Gate Guards.",
+                onmob_target = {"Goggehn"},
+                trigger_on_talk = {" pronto!"},
+                trigger_on_event_id = 0,
                 images = {
                     {
-                        file = "maps/ru_lude_gardens.png",
+                        file = "maps/rulude_gardens.png",
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Ru'Lude Gardens",
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+
+            },
+
+            -- MISSION START
+            {
+                text = "Step 2: Next check the Door: Bastokan Embassy at (H-10). \n \n" ..
+                       "You will receive KI:Archducal Audience Permit.",
+                onmob_target = {"Door:Bastokan Embassy"},
+                trigger_on_event_id = {129},
+                images = {
+                    {
+                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 2,
+                        zone_name = "Ru'Lude Gardens",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
@@ -2263,42 +2291,58 @@ return {
                 },
             },
             {
-                text = "Step 3: Examine the Door: Bastokan Embassy at (H-10) in Ru'Lude Gardens to receive the Key Item: Archducal Audience Permit.",
+                text = "Step 3: In Ru'Lude Gardens, check the Audience Chamber door at (H-6). \n \n" ..
+                       "You will receive KI:Letter to Aldo.",
+                onmob_target = {"Door: Audience Chamber"},
+                trigger_on_event_id = {128},
                 images = {
                     {
-                        file = "maps/ru_lude_gardens.png",
+                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 3,
+                        zone_name = "Ru'Lude Gardens",
                         highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 4: Proceed to the Audience Chamber at (H-6) in Ru'Lude Gardens and examine the door for a cutscene, receiving the Key Item: Letter to Aldo." },
             {
-                text = "Step 5: In Lower Jeuno, enter Neptune's Spire and speak with Aldo at (J-8) to receive the Key Item: Silver Bell.",
+                text = "Step 4: Travel to Lower Jeuno and talk to Aldo (J-8) inside Neptune's Spire Inn. \n \n" ..
+                       "You will receive KI:Silver Bell. \n \n" ..
+                       "NOTE: To access Tenshodo HQ, you need KI:Tenshodo Member's Card from the quest 'Tenshodo Membership' OR trade a Tenshodo Invite to Ghebi Damomohe (I-7). \n \n" ..
+                       "You can buy a Tenshodo Invite off the Auction House in the Others > Misc.1 section \n \n" ..
+                       "Once you have a Tenshodo Invite simply trade it to Ghebi Damomohe (I-7) - she is behind the counter at the entrance! \n" ..
+                       "If on CoP mission 'A Vessel Without a Captain', that scene appears first - talk to Aldo twice. \n \n",
+                onmob_target = {"Aldo"},
+                trigger_on_event_id = {152},
                 images = {
                     {
                         file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 4,
+                        zone_name = "Lower Jeuno",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
+            -- YAGUDO TORCH
             {
-                text = "Step 6: Speak to Paya-Sabya at (I-8) in Upper Jeuno.",
+                text = "Step 5: Talk to Paya-Sabya (I-8) in Upper Jeuno. \n \n",
+                onmob_target = {"Paya-Sabya"},
+                trigger_on_event_id = {80},
+                keyitems_needed = {20,21,46,47},
                 images = {
                     {
                         file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 6,
+                        state = 5,
+                        zone_name = "Upper Jeuno",
                         highlights = {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2306,139 +2350,376 @@ return {
                 },
             },
             {
-                text = "Step 7: Then, talk to Muckvix at (H-9) in Lower Jeuno to receive the Key Item: Yagudo Torch.",
+                text = "Step 6: Talk to Muckvix (H-9) in Lower Jeuno inside Muckvix's Junk Shop. \n \n" ..
+                       "You will receive KI:Yagudo Torch. (Event ID: 184)",
+                onmob_target = {"Muckvix"},
+                trigger_on_event_id = {184},
                 images = {
                     {
                         file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 7,
+                        state = 6,
+                        zone_name = "Lower Jeuno",
                         highlights = {
                             { position = "H-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
+
+            -- CREST OF DAVOI
             {
-                text = "Step 8: Speak with Baudin at (G-8) in Upper Jeuno; he will request a slice of Coeurl Meat.",
+                text = "Step 7: Talk to Baudin at (G-7) southwest corner in Upper Jeuno. \n \n" ..
+                       "He will request: Coeurl Meat (Rare/Ex item).",
+                onmob_target = {"Baudin"},
                 images = {
                     {
                         file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 8,
+                        state = 7,
+                        zone_name = "Upper Jeuno",
                         highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 9: Acquire Coeurl Meat by defeating Coeurls in areas like Meriphataud Mountains or by purchasing from the Auction House." },
-            { text = "Step 10: Trade the Coeurl Meat to Baudin to receive the Key Item: Crest of Davoi." },
             {
-                text = "Step 11: Speak to Sattal-Mansal at (J-8) in Lower Jeuno, outside Aldo's room in Neptune's Spire, to initiate the quests 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'.",
+                text = "Step 8: Obtain Coeurl Meat by: \n" ..
+                       "  - Defeating Coeurls (drops from all Coeurls, including in Meriphataud Mountains) \n" ..
+                       "  - Purchasing from Auction House",
+            },
+            {
+                text = "Step 9: Trade Coeurl Meat to Baudin (G-7) in Upper Jeuno. \n \n" ..
+                       "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi')",
+                onmob_target = {"Baudin"},
+                images = {
+                    {
+                        file = "maps/upper_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Upper Jeuno",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+
+            -- BEADEAUX KEY ITEMS
+            {
+                text = "Step 10: Talk to Sattal-Mansal (J-8) in Lower Jeuno (outside Aldo's room in basement of Neptune's Spire). \n \n" ..
+                       "This initiates quests: 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'. \n" ..
+                       "He will request: Quadav Charm (Rare/Ex) and Quadav Augury Shell (Rare).",
+                onmob_target = {"Sattal-Mansal"},
                 images = {
                     {
                         file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 11,
+                        state = 10,
+                        zone_name = "Lower Jeuno",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 12: Travel to Beadeaux; ensure you have Sneak active to avoid sound-aggro from Quadavs." },
             {
-                text = "Step 13: Enter Map 2 via exit A at (H-7) and examine 'The Mute' at (G-7) to receive Silence, allowing safe passage past 'The Afflictor' without being Cursed.",
+                text = "Step 11: Travel to Beadeaux. Quadavs along the path are level 28-39 and hearing-aggro unless you are Sneaked. \n \n" ..
+                       "Fastest route: Unity Warp/Survival Guide to Pashhow Marshlands, go to (L-11). \n \n" ..
+                       "At Beadeaux entrance, enter Map 2 via exit A at (H-7).",
+                zone_trigger = "Beadeaux",
+                images = {
+                    {
+                        file = "maps/beadeaux.png",
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 12: In Beadeaux Map 2, examine 'The Mute' at (G-7) to receive Silence effect. \n \n" ..
+                       "This allows you to pass 'The Afflictor' without being Cursed. \n \n" ..
+                       "Then enter Map 1 via exit B at (F-8).",
+                images = {
+                    {
+                        file = "maps/beadeaux.png",
+                        width = 512,
+                        height = 512,
+                        state = 12,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 13: In Beadeaux Map 1, use ramp at (E-10) to climb to upper level. \n \n" ..
+                       "Check Silence status at The Mute (F-9) if needed. \n \n" ..
+                       "Defeat De'Vyu Headhunter (I-9) to obtain Quadav Charm (drops up to 4). \n" ..
+                       "Defeat Go'Bhu Gascon (F-6) to obtain Quadav Augury Shell (drops up to 4).",
                 images = {
                     {
                         file = "maps/beadeaux.png",
                         width = 512,
                         height = 512,
                         state = 13,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 14: Return to Sattal-Mansal (J-8) in Lower Jeuno. \n \n" ..
+                       "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n" ..
+                       "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II').",
+                onmob_target = {"Sattal-Mansal"},
+                images = {
+                    {
+                        file = "maps/lower_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 14,
+                        zone_name = "Lower Jeuno",
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+
+            -- MAGICITE COLLECTION (Can be done in any order)
+            {
+                text = "=== MAGICITE COLLECTION (Can be obtained in any order) ===\n" ..
+                       "You need THREE Magicite stones: \n" ..
+                       "  1. Magicite: Optistone (Monastic Cavern/Davoi) - Steps 15-16 \n" ..
+                       "  2. Magicite: Aurastone (Qulun Dome/Beadeaux) - Steps 17-18 \n" ..
+                       "  3. Magicite: Orastone (Altar Room/Castle Oztroja) - Steps 19-23 \n \n" ..
+                       "NOTE: If on Windurst (S) Mission 'Howl from the Heavens', touch each Magicite TWICE (once for shard, once for magicite)."
+            },
+
+            -- DAVOI - OPTISTONE
+            {
+                text = "Step 15: Travel to Davoi. Orcs are level 39 (sight-aggro), Wolf Bats are level 25-29 (hearing-aggro). \n \n" ..
+                       "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Survival Guide to Norvallen > Davoi. \n \n" ..
+                       "Navigate to Wall of Dark Arts (G-7) and disable it. You need KI:Crest of Davoi. \n" ..
+                       "Continue into Monastic Cavern.",
+                zone_trigger = "Monastic Cavern",
+                images = {
+                    {
+                        file = "maps/davoi.png",
+                        width = 512,
+                        height = 512,
+                        state = 15,
+                        zone_name = "Davoi",
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 14: Proceed to Map 1 via exit B at (F-8) and use the ramp at (E-10) to reach the upper level." },
             {
-                text = "Step 15: Defeat De'Vyu Headhunter at (I-9) to obtain a Quadav Charm.",
+                text = "Step 16: In Monastic Cavern, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Optistone. (Event ID: 0)",
+                trigger_on_event_id = {0},
                 images = {
                     {
-                        file = "maps/beadeaux.png",
+                        file = "maps/monastic_cavern.png",
                         width = 512,
                         height = 512,
-                        state = 15,
+                        state = 16,
+                        zone_name = "Monastic Cavern",
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
+
+            -- BEADEAUX - AURASTONE
             {
-                text = "Step 16: Defeat Go'Bhu Gascon at (F-6) to obtain a Quadav Augury Shell.",
+                text = "Step 17: Return to Beadeaux Map 2 (enter via exit A at H-7). \n \n" ..
+                       "Navigate to Qulun Dome entrance at (I-7). \n \n" ..
+                       "Open the door - you need: KI:Silver Bell, KI:Coruscant Rosary, KI:Black Matinee Necklace. \n" ..
+                       "If you get message 'glow faintly', move closer and try again.",
+                zone_trigger = "Qulun Dome",
                 images = {
                     {
                         file = "maps/beadeaux.png",
                         width = 512,
                         height = 512,
-                        state = 16,
+                        state = 17,
+                        zone_name = "Beadeaux",
                         highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 17: Return to Sattal-Mansal in Lower Jeuno and trade the Quadav Charm to receive the Key Item: Coruscant Rosary." },
-            { text = "Step 18: Trade the Quadav Augury Shell to Sattal-Mansal to receive the Key Item: Black Matinee Necklace." },
             {
-                text = "Step 19: Travel to Davoi; use Invisible to avoid sight-aggro from Orcs.",
+                text = "Step 18: In Qulun Dome, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Aurastone. (Event ID: 0)",
+                trigger_on_event_id = {0},
                 images = {
                     {
-                        file = "maps/davoi.png",
+                        file = "maps/qulun_dome.png",
                         width = 512,
                         height = 512,
-                        state = 19,
+                        state = 18,
+                        zone_name = "Qulun Dome",
                         highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                            { position = "E-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 20: Disable the 'Wall of Dark Arts' at (G-7) to access Monastic Cavern." },
-            { text = "Step 21: Navigate through Monastic Cavern to the Magicite room and examine the Magicite to receive the Key Item: Magicite: Optistone." },
-            { text = "Step 22: Return to Beadeaux; use Sneak to avoid sound-aggro from Quadavs." },
-            { text = "Step 23: Enter Map 2 via exit A at (H-7) and proceed to Qulun Dome at (I-7)." },
-            { text = "Step 24: Open the door in Qulun Dome; if prompted with 'The Silver Bell, Coruscant Rosary, Black Matinee Necklace, glow faintly.', move closer and try again." },
-            { text = "Step 25: Inside Qulun Dome, examine the Magicite to receive the Key Item: Magicite: Aurastone." },
+
+            -- CASTLE OZTROJA - ORASTONE
             {
-                text = "Step 26: Travel to Castle Oztroja; use Invisible to avoid sight-aggro from Yagudo and Sneak for bats.",
+                text = "Step 19: Travel to Castle Oztroja. Yagudo are level 49 (sight-aggro), Bats (hearing-aggro). \n \n" ..
+                       "Fastest route: Survival Guide to Aragoneu > Castle Oztroja. \n \n" ..
+                       "Navigate to door (I-8) on Map 1 to reach Map 3.",
+                zone_trigger = "Castle Oztroja",
                 images = {
                     {
                         file = "maps/castle_oztroja.png",
                         width = 512,
                         height = 512,
-                        state = 26,
+                        state = 19,
+                        zone_name = "Castle Oztroja",
                         highlights = {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 27: Navigate to the door at (I-8) on Map 1; operate the correct lever to avoid the trapdoor and proceed to Map 3." },
-            { text = "Step 28: From Map 3, enter Map 7 via exit F at (G-7), then proceed to Map 2 via exit I at (I-7)." },
-            { text = "Step 29: Light the Yagudo Torch at (H-9/10) to open the Brass Door at (G-10)." },
-            { text = "Step 30: Enter the Altar Room and examine the Magicite to receive the Key Item: Magicite: Orastone." },
-            { text = "Step 31: After obtaining all three Magicites, return to the Audience Chamber at (H-6) in Ru'Lude Gardens for a cutscene." },
-            { text = "Step 32: You will receive an Airship Pass; if you already possess one, you'll receive 20,000 gil instead." },
-            { text = "Step 33: Return to Goggehn at the Bastokan Embassy to complete the mission, earning Rank 5, the Key Item: Message to Jeuno, and 10,000 gil." }
+            {
+                text = "Step 20: Castle Oztroja Map 1 lever puzzle: \n \n" ..
+                       "One lever opens door, other triggers trapdoor. Correct lever changes each Vana'diel day. \n" ..
+                       "Stand on trapdoor to throw lever. To avoid trap: throw lever and RUN off trapdoor immediately. \n \n" ..
+                       "Navigate through: Map 1 (I-8) -> Map 3 -> Map 7 via exit F (G-7) -> Map 2 via exit I (I-7).",
+                images = {
+                    {
+                        file = "maps/castle_oztroja.png",
+                        width = 512,
+                        height = 512,
+                        state = 20,
+                        zone_name = "Castle Oztroja",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 21: In Castle Oztroja Map 2, light the Yagudo Torch in southwest hallway at (H-9 or H-10). \n \n" ..
+                       "This opens the Brass Door at (G-10). You need KI:Yagudo Torch.",
+                images = {
+                    {
+                        file = "maps/castle_oztroja.png",
+                        width = 512,
+                        height = 512,
+                        state = 21,
+                        zone_name = "Castle Oztroja",
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 22: Open Brass Door (G-10) and enter Altar Room.",
+                zone_trigger = "Altar Room",
+                images = {
+                    {
+                        file = "maps/castle_oztroja.png",
+                        width = 512,
+                        height = 512,
+                        state = 22,
+                        zone_name = "Castle Oztroja",
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 23: In Altar Room, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Orastone. (Event ID: 44 or 10000) \n \n" ..
+                       "NOTE: If you spoke to Paya-Sabya and Muckvix, you get Fickblix cutscene. If repeating mission and skipped them, cutscene is skipped.",
+                trigger_on_event_id = {44, 10000},
+                images = {
+                    {
+                        file = "maps/altar_room.png",
+                        width = 512,
+                        height = 512,
+                        state = 23,
+                        zone_name = "Altar Room",
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+
+            -- MISSION COMPLETION
+            {
+                text = "Step 24: After obtaining all THREE Magicites, return to Ru'Lude Gardens and check the Audience Chamber door (_6r9) at (H-6). \n \n" ..
+                       "You will receive KI:Airship Pass (or 20,000 gil if you already have one). (Event ID: 60) \n" ..
+                       "You will also receive title: 'Have Wings, Will Fly'.",
+                onmob_target = {"_6r9"},
+                trigger_on_event_id = {60},
+                images = {
+                    {
+                        file = "maps/rulude_gardens.png",
+                        width = 512,
+                        height = 512,
+                        state = 24,
+                        zone_name = "Ru'Lude Gardens",
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 25: Talk to Goggehn (H-10) at the Bastokan Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
+                       "Rewards: Rank 5, KI:Message to Jeuno, 10,000 gil. (Event ID: 35) \n \n" ..
+                       "Mission 5-1 'Darkness Rising' begins immediately. You cannot change allegiance until completing or rejecting 5-1.",
+                onmob_target = {"Goggehn"},
+                trigger_on_event_id = {35},
+                images = {
+                    {
+                        file = "maps/rulude_gardens.png",
+                        width = 512,
+                        height = 512,
+                        state = 25,
+                        zone_name = "Ru'Lude Gardens",
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
         },
         reward = {
-            text = "Rank 5, Airship Pass, 10,000 gil"
+            text = "Rank 5, Airship Pass (or 20,000 gil), Message to Jeuno KI, 10,000 gil, Title: Have Wings Will Fly"
         }
     },
 
