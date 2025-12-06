@@ -146,9 +146,10 @@ return {
     ["Altar Room"] = 152,
     ["The Boyahda Tree"] = 153,
     ["Dragon's Aery"] = 154,
-    ["Middle Delkfutt's Tower"] = 155,
-    ["Upper Delkfutt's Tower"] = 156,
-    ["Temple of Uggalepih"] = 157,
+
+    ["Middle Delkfutt's Tower"] = 157,
+    ["Upper Delkfutt's Tower"] = 158,
+    --["Temple of Uggalepih"] = 157,
     ["Den of Rancor"] = 158,
     ["Castle Zvahl Baileys"] = 159,
     ["Castle Zvahl Keep"] = 161,

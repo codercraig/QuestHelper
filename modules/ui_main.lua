@@ -13,6 +13,13 @@ local inventory_results = {} -- Cached results
 local last_inventory_check = 0
 local INVENTORY_CHECK_INTERVAL = 5.0 -- Check every 5 seconds
 
+-- Settings
+ui_main.settings = {
+    auto_scroll_enabled = true,   -- Auto-scroll to current floor/zone
+    map_opacity = 1.0,             -- Map image opacity (0.0 - 1.0)
+}
+local show_settings_window = false
+
 local function perform_search(quest_data)
     search_results = T{}
     local query = (search_query or ""):lower()
@@ -141,6 +148,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             if imgui.Button(">##drawerToggle") then new_showImagesDrawer = true end
             imgui.SameLine(); imgui.Text("Show Images")
         end
+
+        -- Settings button
+        imgui.SameLine()
+        if imgui.SmallButton("\xE2\x9A\x99##Settings") then  -- ⚙ gear icon
+            show_settings_window = not show_settings_window
+        end
+
         imgui.Separator()
 
         -- SEARCH BAR
@@ -457,6 +471,40 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
     imgui.End()
     imgui.PopStyleColor(5)
+
+    -- Settings Window
+    if show_settings_window then
+        imgui.SetNextWindowSize({300, 200}, ImGuiCond_Always)
+        if imgui.Begin("QuestHelper Settings", true, 0) then
+            imgui.Text("Map Display Settings")
+            imgui.Separator()
+
+            -- Auto-scroll toggle
+            local auto_scroll_ref = { ui_main.settings.auto_scroll_enabled }
+            if imgui.Checkbox("Auto-scroll to current floor/zone", auto_scroll_ref) then
+                ui_main.settings.auto_scroll_enabled = auto_scroll_ref[1]
+            end
+
+            -- Map opacity slider
+            imgui.Text("Map Opacity:")
+            local opacity_ref = { ui_main.settings.map_opacity }
+            if imgui.SliderFloat("##MapOpacity", opacity_ref, 0.0, 1.0, "%.2f") then
+                ui_main.settings.map_opacity = opacity_ref[1]
+            end
+            if ui_main.settings.map_opacity == 0.0 then
+                imgui.TextColored({1, 0.5, 0, 1}, "Maps hidden (opacity = 0)")
+            end
+
+            imgui.Separator()
+            if imgui.Button("Close##SettingsClose") then
+                show_settings_window = false
+            end
+
+            imgui.End()
+        else
+            show_settings_window = false
+        end
+    end
 
     return window_open, mainX, mainY, mainW, mainH, new_showImagesDrawer,
            new_currentTopCategory, new_currentSubfile, new_current_mission

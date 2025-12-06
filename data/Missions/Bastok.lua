@@ -2015,31 +2015,141 @@ return {
             {
                 text = "Step 5: Navigate Delkfutt's Tower in Qufim Island (10 floors). \n" ..
                        "Recommended: Level 40+ with Sneak and Invisible, or level 50+. \n" ..
-                       "You need to reach Floor 10 and defeat Porphyrion at (H-8) to obtain the Delkfutt Key. \n \n" ..
-                       "Attaining the Delkfutt Key do the following: \n \n" ..
+                       "You need to reach Floor 10 - Upper Delkfutt's Tower!  \n \n" ..
                        "1st Floor: Go to (E/F-6) Stairs \n" ..
-                       "2nd Floor: (I/J-9) Stairs - Avoid (H-9) blocked \n" ..
-                       "3rd Floor: G-6 Teleporter. \n" ..
-                       "4th Floor: I-6 Stairs - long way around. (G-7, H-9, J-9) - blocked \n" ..
-                       "5th Floor: H-9 \n" ..
-                       "6th Floor: J-10 Teleporter \n" ..
-                       "7th Floor: F-6/7 Stairs (NW) \n" ..
-                       "8th Floor: (1st time): I-6 Stairs \n" ..
-                       "9th Floor: (1st time): J-10 (Do NOT drop at H-10 wioll end up on 8th floor! \n" ..
+                       "2nd Floor: (I/J-9) Stairs - Avoid (H-9). \n" ..
+                       "3rd Floor: (G-6) Teleporter. \n" ..
+                       "4th Floor: (I-6) Stairs - long way around. \n" ..
+                       "5th Floor: (H-9) Stairs  \n" ..
+                       "6th Floor: (J-10) Teleporter \n" ..
+                       "7th Floor: (F-6/7) Stairs (NW) \n" ..
+                       "8th Floor: (1st time): (I-6 Stairs \n" ..
+                       "9th Floor: (1st time): J-10 (Do NOT drop at (H-10). \n" ..
                        "8th Floor: (2nd time): F-9/G-10 -> 9th Floor \n" ..
-                       "9th Floor: (2nd time): F-6 -> 10th Floor Teleport marker on the map. \n \n",
-
+                       "9th Floor: (2nd time): F-6 -> 10th Floor Teleport. \n \n",
+                zone_trigger = "Upper Delkfutt's Tower",
+                images = {
+                    {
+                        file     = "maps/lower_delkfutts_tower_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Lower Delkfutt's Tower",
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/lower_delkfutts_tower_2.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Lower Delkfutt's Tower",
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/lower_delkfutts_tower_3.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Lower Delkfutt's Tower",
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/lower_delkfutts_tower_4.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Lower Delkfutt's Tower",
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_1.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_2.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_3.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_4.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_5.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file     = "maps/middle_delkfutts_tower_6.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        zone_name = "Middle Delkfutt's Tower",
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 6: Kill Porphyrion to obtain a Delkfutt Key! \n" ..
+                       "Notes: It uses Eagle Eye Shot, be careful! Recommended: Level 50+ or a party. \n \n",
                 items_needed = {
                     "Delkfutt Key"
                 },
-
+                trigger_on_item_obtain = {"Delkfutt Key"},
                 images = {
                     {
-                        file     = "maps/qufim_island.png",
+                        file     = "maps/upper_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
-                        state    = 4,
-                        zone_name = "Qufim Island",
+                        state    = 6,
+                        zone_name = "Upper Delkfutt's Tower",
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2047,15 +2157,48 @@ return {
                 },
             },
             {
-                text = "Step 5: Use the Delkfutt Key to access the basement area of the tower. \n" ..
-                       "Trigger a cutscene at the Cermet Door in the basement (L-9).",
-                trigger_on_event_id = 1,
+                text = "Step 7: Trade the Delkfutt Key on the elevator to access the basement area of the tower. \n",
+                trigger_on_event_id = {1,6},
+                onmob_target = {"Elevator"},
+                draw_type = 'square',
+                center = {x = -300, y= -143.6, z=19.9},
+                size = 1,
+                zone = "Upper Delkfutt's Tower",
                 images = {
                     {
-                        file     = "maps/delkfutts_tower.png",
+                        file     = "maps/upper_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
-                        state    = 5,
+                        state    = 7,
+                        zone_name = "Upper Delkfutt's Tower",
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 8: You will now have to run down the tower's stairs and re-enter Lower Delkfutts Tower Basement. \n \n" ..
+                       "Trigger a cutscene at the Cermet Door in the basement (L-9).",
+                trigger_on_event_id = 1,
+                onmob_target = {"Cermet Door"},
+                images = {
+                    {
+                        file     = "maps/upper_delkfutts_tower_5.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        zone_name = "Upper Delkfutt's Tower",
+                        -- highlights = {
+                        --     { position = "L-9", offsetX = 16, offsetY = 16 },
+                        -- },
+                    },
+                    {
+                        file     = "maps/lower_delkfutts_tower_4.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        zone_name = "Lower Delkfutt's Tower",
                         highlights = {
                             { position = "L-9", offsetX = 16, offsetY = 16 },
                         },
@@ -2063,15 +2206,33 @@ return {
                 },
             },
             {
-                text = "Step 6: Return to Goggehn at the Embassy of Bastok in Ru'Lude Gardens (H-10) to complete the mission.",
+                text = "Step 9: Return to Goggehn at the Embassy of Bastok in Ru'Lude Gardens (H-10).",
                 onmob_target = {"Goggehn"},
+                trigger_on_event_id = 139,
+                images = {
+                    {
+                        file     = "maps/rulude_gardens.png",
+                        width    = 512,
+                        height   = 512,
+                        state    = 9,
+                        zone_name = "Ru'Lude Gardens",
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 10: Click on the Door:Bastokan Embassy at (H-10) in Ru'Lude Gardens to complete the mission.",
+                onmob_target = {"Door:Bastokan Embassy"},
                 trigger_on_event_id = 38,
                 images = {
                     {
-                        file     = "maps/ru_lude_gardens.png",
+                        file     = "maps/rulude_gardens.png",
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 10,
+                        zone_name = "Ru'Lude Gardens",
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },

@@ -29,6 +29,17 @@ return {
         [1] = 1,   -- Upper floor
         [15] = 2,  -- Lower floor
     },
+    [157] = {
+        [4] = 1,   -- Upper floor
+        [5] = 2,  -- Lower floor
+        [6] = 3,  -- Lower floor
+        [7] = 4,  -- Lower floor
+        [8] = 5,  -- Lower floor
+        [9] = 6,  -- Lower floor
+    },
+    -- [184] removed - uses auto-increment (sequential floor IDs)
+    -- If floors don't increment properly, run /qh_checkfloor on each floor
+    -- and add the actual raw IDs here
 
     -- Add more zones here as you discover them
     -- Example: Delkfutt's Tower

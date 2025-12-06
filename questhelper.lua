@@ -34,6 +34,7 @@ local map_renderer     = require('modules.map_renderer')
 local utils            = require('modules.utils')
 local inventory_cache  = require('modules.inventory_cache')
 local keyitem_module   = require('modules.keyitem')
+local floor_debug      = require('debug_floor_state')
 
 -- Validation
 if not helpers then error("[" .. addon.name .. "] helpers.lua is missing.") end
@@ -421,7 +422,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH,
                         currentTopCategory, currentSubfile, current_mission,
                         quest_state, quest_data, utils, image_loader, map_renderer,
-                        player_module, zone_data, map_db, floor_mappings)
+                        player_module, zone_data, map_db, floor_mappings, ui_main.settings)
     end
 end)
 
@@ -671,6 +672,28 @@ ashita.events.register('command', 'command_callback', function(e)
         end
 
         print(string.format("[%s] ==================================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_test_floors' then
+        print(string.format("[%s] ========== FLOOR DETECTION STATE TEST ==========", addon.name))
+
+        -- Get current step images
+        local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+        local step_imgs = utils.get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx, quest_data)
+
+        -- Generate floor state report
+        local report = floor_debug.get_state_report(player_module, zone_data, floor_mappings, map_db, step_imgs)
+
+        -- Print each line
+        for _, line in ipairs(report) do
+            print(string.format("[%s] %s", addon.name, line))
+        end
+
+        print(string.format("[%s] ==================================================", addon.name))
+        print(string.format("[%s] TIP: Use /qh_checkfloor for raw floor ID data", addon.name))
+        print(string.format("[%s] TIP: See test_floor_scenarios.md for full test plan", addon.name))
         e.blocked = true
         return true
     end

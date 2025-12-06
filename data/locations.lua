@@ -164,4 +164,22 @@ return {
         visual_mode = "arc",
         zone = "Ru'Lude Gardens"
     },
+    ["Door:Bastokan Embassy"] = {
+        target_pos = { x = 18.6, y= 7.3, z=-75.4},
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens"
+    },
+    -- Qufum Island
+    --Lower Delkfutts Tower
+    ["Cermet Door"] = {
+        target_pos = { x = 601, y= 13.7, z=-19.7},
+        visual_mode = "arc",
+        zone = "Lower Delkfutt's Tower"
+    },
+    -- Upper Delkfutts Tower
+    ["Elevator"] = {
+        target_pos = { x = -300, y= -143.6, z=19.9},
+        visual_mode = "arc",
+        zone = "Upper Delkfutt's Tower"
+    },
 }
