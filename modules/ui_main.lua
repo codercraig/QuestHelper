@@ -13,11 +13,7 @@ local inventory_results = {} -- Cached results
 local last_inventory_check = 0
 local INVENTORY_CHECK_INTERVAL = 5.0 -- Check every 5 seconds
 
--- Settings
-ui_main.settings = {
-    auto_scroll_enabled = true,   -- Auto-scroll to current floor/zone
-    map_opacity = 1.0,             -- Map image opacity (0.0 - 1.0)
-}
+-- Settings window state
 local show_settings_window = false
 
 local function perform_search(quest_data)
@@ -115,15 +111,70 @@ end
 function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
                        quest_data, quest_state, utils, inventory_cache, keyitem_module, keyitems_db)
 
+    local settings = require('settings')
+    local ui_settings = quest_state.settings.ui_settings
+
     imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})
     imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})
     imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})
     imgui.PushStyleColor(ImGuiCol_FrameBgHovered, {0.5, 0.5, 0.5, 0.8})
     imgui.PushStyleColor(ImGuiCol_FrameBgActive, {0.7, 0.7, 0.7, 1.0})
 
-    imgui.SetNextWindowSize({600, 600}, ImGuiCond_Always)
+    -- Dynamic window sizing based on collapsed state
+    local window_height = 600  -- Default height
+    if current_mission and not ui_settings.show_all_steps then
+        -- Collapsed mode: Calculate height based on current step text
+        local missionData = quest_data[currentTopCategory] and quest_data[currentTopCategory][currentSubfile] and quest_data[currentTopCategory][currentSubfile][current_mission]
+        if missionData and missionData.steps then
+            local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+            local steps = missionData.steps
+
+            -- Base height for UI elements (top bar, mission name, separators, etc.)
+            local base_height = 150
+
+            -- Get current step text
+            if current_step_index and current_step_index <= #steps then
+                local step_data = steps[current_step_index]
+                local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
+
+                -- Estimate text height: ~60 chars per line, ~20px per line
+                local text_length = #text
+                local estimated_lines = math.ceil(text_length / 60)
+                local text_height = estimated_lines * 20
+
+                -- Add height for items/key items if present
+                local items_height = 0
+                local itemsNeeded = getAllItemsNeeded(missionData)
+                if #itemsNeeded > 0 then
+                    items_height = (#itemsNeeded * 25) + 40  -- ~25px per item + header
+                end
+
+                local keyItemsNeeded = utils.getAllKeyItemsNeeded(missionData, keyitems_db)
+                if #keyItemsNeeded > 0 then
+                    items_height = items_height + (#keyItemsNeeded * 25) + 40
+                end
+
+                -- Calculate total height
+                window_height = base_height + text_height + items_height
+
+                -- Minimum of 200px
+                if window_height < 200 then
+                    window_height = 200
+                end
+            else
+                window_height = 250  -- Fallback
+            end
+        else
+            window_height = 250  -- Fallback
+        end
+    else
+        -- Expanded mode: Larger window for scrolling
+        window_height = 600
+    end
+
+    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_Always)
+
     local mainFlags = bit.bor(
-        ImGuiWindowFlags_NoResize,
         ImGuiWindowFlags_NoCollapse,
         ImGuiWindowFlags_NoTitleBar
     )
@@ -140,6 +191,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         mainX, mainY = imgui.GetWindowPos()
         mainW, mainH = imgui.GetWindowSize()
 
+        -- STICKY TOP BAR: All control buttons in one line
         -- Images drawer toggle
         if showImagesDrawer then
             if imgui.Button("<##drawerToggle") then new_showImagesDrawer = false end
@@ -155,16 +207,44 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             show_settings_window = not show_settings_window
         end
 
+        -- Collapse/Expand Steps Toggle (only show when viewing a mission)
+        if current_mission then
+            imgui.SameLine()
+            if ui_settings.show_all_steps then
+                if imgui.SmallButton("[-] Collapse##CollapseToggle") then
+                    ui_settings.show_all_steps = false
+                    settings.save('QuestHelper_settings', quest_state.settings)
+                end
+            else
+                if imgui.SmallButton("[+] Expand##CollapseToggle") then
+                    ui_settings.show_all_steps = true
+                    settings.save('QuestHelper_settings', quest_state.settings)
+                end
+            end
+
+            -- Back to Missions button (on same line, right-aligned)
+            imgui.SameLine()
+            if imgui.Button("Back##BackToMissions") then
+                new_current_mission = nil
+            end
+        end
+
         imgui.Separator()
 
-        -- SEARCH BAR
-        imgui.Text("Search Missions/Quests (lowest-level):")
-        local input_buf = { search_query }
-        if imgui.InputText("##SearchQuest", input_buf, 256) then
-            search_query = input_buf[1]
-            perform_search(quest_data)
+        -- Begin scrollable content area (everything below the top bar scrolls)
+        imgui.BeginChild("##ScrollableContent", {0, 0}, false, 0)
+
+        -- SEARCH BAR (hide when viewing mission in collapsed mode to save space)
+        local show_search = not (current_mission and not ui_settings.show_all_steps)
+        if show_search then
+            imgui.Text("Search Missions/Quests (lowest-level):")
+            local input_buf = { search_query }
+            if imgui.InputText("##SearchQuest", input_buf, 256) then
+                search_query = input_buf[1]
+                perform_search(quest_data)
+            end
+            imgui.Separator()
         end
-        imgui.Separator()
 
         -- SEARCH RESULTS
         if search_query ~= "" then
@@ -254,21 +334,28 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
             else
                 -- Display mission details
-                imgui.Text('Top Category: ' .. currentTopCategory)
-                imgui.Text('Subfile: ' .. currentSubfile)
-                imgui.Text('Mission: ' .. current_mission)
-                imgui.Separator()
-
                 local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
                 local steps  = missionData.steps or {}
                 local reward = missionData.reward
 
-                -- Progress readout
-                local pct, done, tot = quest_state.calculateProgress(currentTopCategory, currentSubfile, current_mission, quest_data)
-                local barCount = 0
-                if tot > 0 then barCount = math.floor((pct / 100) * 20); if barCount > 20 then barCount = 20 end end
-                imgui.Text('[' .. string.rep('|', barCount) .. string.rep(' ', 20 - barCount) .. '] ' .. string.format("%.2f%% (%d/%d steps)", pct, done, tot))
-                imgui.Separator()
+                -- Show full header and progress only when NOT collapsed
+                if ui_settings.show_all_steps then
+                    imgui.Text('Top Category: ' .. currentTopCategory)
+                    imgui.Text('Subfile: ' .. currentSubfile)
+                    imgui.Text('Mission: ' .. current_mission)
+                    imgui.Separator()
+
+                    -- Progress readout
+                    local pct, done, tot = quest_state.calculateProgress(currentTopCategory, currentSubfile, current_mission, quest_data)
+                    local barCount = 0
+                    if tot > 0 then barCount = math.floor((pct / 100) * 20); if barCount > 20 then barCount = 20 end end
+                    imgui.Text('[' .. string.rep('|', barCount) .. string.rep(' ', 20 - barCount) .. '] ' .. string.format("%.2f%% (%d/%d steps)", pct, done, tot))
+                    imgui.Separator()
+                else
+                    -- Minimal header when collapsed: just mission name
+                    imgui.Text('Mission: ' .. current_mission)
+                    imgui.Separator()
+                end
 
                 -- Items Needed Section (check inventory every 5 seconds)
                 local itemsNeeded = getAllItemsNeeded(missionData)
@@ -395,7 +482,26 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 end
 
                 -- Steps
-                for i = 1, #steps do
+                -- Determine which steps to display based on show_all_steps setting
+                local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+                local steps_to_show = {}
+
+                if ui_settings.show_all_steps then
+                    -- Show all steps
+                    for i = 1, #steps do
+                        table.insert(steps_to_show, i)
+                    end
+                else
+                    -- Show only current step (first incomplete step)
+                    if current_step_index and current_step_index <= #steps then
+                        table.insert(steps_to_show, current_step_index)
+                    elseif #steps > 0 then
+                        -- If all complete, show last step
+                        table.insert(steps_to_show, #steps)
+                    end
+                end
+
+                for _, i in ipairs(steps_to_show) do
                     local step_data = steps[i]
                     local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
                     local st = quest_state.getStepState(currentTopCategory, currentSubfile, current_mission, i)
@@ -433,8 +539,8 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
-                -- Rewards
-                if reward then
+                -- Rewards (hide when collapsed to save space)
+                if reward and ui_settings.show_all_steps then
                     if type(reward.text) == 'string' and reward.text ~= "" then
                          imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
                          imgui.TextWrapped(reward.text)
@@ -461,12 +567,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         imgui.Separator()
                     end
                 end
-
-                if imgui.Button("Back to Missions") then
-                    new_current_mission = nil
-                end
             end
         end
+
+        -- End scrollable content area
+        imgui.EndChild()
     end
 
     imgui.End()
@@ -474,25 +579,50 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
     -- Settings Window
     if show_settings_window then
-        imgui.SetNextWindowSize({300, 200}, ImGuiCond_Always)
+        imgui.SetNextWindowSize({320, 300}, ImGuiCond_Always)
         if imgui.Begin("QuestHelper Settings", true, 0) then
             imgui.Text("Map Display Settings")
             imgui.Separator()
 
             -- Auto-scroll toggle
-            local auto_scroll_ref = { ui_main.settings.auto_scroll_enabled }
+            local auto_scroll_ref = { ui_settings.auto_scroll_enabled }
             if imgui.Checkbox("Auto-scroll to current floor/zone", auto_scroll_ref) then
-                ui_main.settings.auto_scroll_enabled = auto_scroll_ref[1]
+                ui_settings.auto_scroll_enabled = auto_scroll_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
             end
 
             -- Map opacity slider
             imgui.Text("Map Opacity:")
-            local opacity_ref = { ui_main.settings.map_opacity }
+            local opacity_ref = { ui_settings.map_opacity }
             if imgui.SliderFloat("##MapOpacity", opacity_ref, 0.0, 1.0, "%.2f") then
-                ui_main.settings.map_opacity = opacity_ref[1]
+                ui_settings.map_opacity = opacity_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
             end
-            if ui_main.settings.map_opacity == 0.0 then
+            if ui_settings.map_opacity == 0.0 then
                 imgui.TextColored({1, 0.5, 0, 1}, "Maps hidden (opacity = 0)")
+            end
+
+            -- Reset map position button
+            imgui.Text("Map Window Position:")
+            if imgui.Button("Reset Map Position") then
+                ui_settings.map_pos_x = 100
+                ui_settings.map_pos_y = 100
+                settings.save('QuestHelper_settings', quest_state.settings)
+                print("\30\106[QH]\30\01 Map position reset to (100, 100)")
+            end
+            if imgui.IsItemHovered() then
+                imgui.SetTooltip("Reset map window to default position (100, 100)")
+            end
+
+            imgui.Separator()
+            imgui.Text("Step Display Settings")
+            imgui.Separator()
+
+            -- Show all steps toggle
+            local show_all_ref = { ui_settings.show_all_steps }
+            if imgui.Checkbox("Show all steps (vs current step only)", show_all_ref) then
+                ui_settings.show_all_steps = show_all_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
             end
 
             imgui.Separator()

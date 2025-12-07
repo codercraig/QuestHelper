@@ -9,7 +9,14 @@ local default_settings = T{
     step_states = T{},
     partial_progress = T{},
     kill_counts = T{},
-    current_map = T{}  -- Tracks active map number per zone ID
+    current_map = T{},  -- Tracks active map number per zone ID
+    ui_settings = T{
+        map_opacity = 1.0,         -- Map image opacity (0.0 - 1.0)
+        auto_scroll_enabled = true, -- Auto-scroll to current floor/zone
+        show_all_steps = true,      -- Show all steps vs only current step
+        map_pos_x = nil,            -- Map window X position (nil = centered on first launch)
+        map_pos_y = nil             -- Map window Y position (nil = centered on first launch)
+    }
 }
 
 -- Load settings

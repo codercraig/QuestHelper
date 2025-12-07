@@ -25,15 +25,23 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         ui_images.last_zone_id = player_module.zoneId
     end
 
-    local attachX = lastMainX - lastMainW + 50
-    local attachY = lastMainY
-    imgui.SetNextWindowPos({attachX, attachY}, ImGuiCond_Always)
+    -- Detached draggable window - use saved position or center on first launch
+    if ui_main_settings.map_pos_x and ui_main_settings.map_pos_y then
+        -- Use saved position
+        imgui.SetNextWindowPos({ui_main_settings.map_pos_x, ui_main_settings.map_pos_y}, ImGuiCond_FirstUseEver)
+    else
+        -- Center on screen on first launch
+        imgui.SetNextWindowPos({100, 100}, ImGuiCond_FirstUseEver)
+    end
+
     -- Fixed size for 512x512 maps + scrollbar + padding
     imgui.SetNextWindowSize({540, 530}, ImGuiCond_Always)
+
+    -- Window flags: Draggable (removed NoMove), no title bar, no resize
     local drawerFlags = bit.bor(
-        ImGuiWindowFlags_NoTitleBar, ImGuiWindowFlags_NoResize, ImGuiWindowFlags_NoMove,
+        ImGuiWindowFlags_NoTitleBar, ImGuiWindowFlags_NoResize,
         ImGuiWindowFlags_NoCollapse, ImGuiWindowFlags_NoBackground,
-        ImGuiWindowFlags_NoDecoration, ImGuiWindowFlags_AlwaysAutoResize
+        ImGuiWindowFlags_AlwaysAutoResize
     )
 
     if imgui.Begin("##ImagesDrawer", true, drawerFlags) then
@@ -300,6 +308,16 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         end
 
         imgui.EndChild()  -- End scrollable child window
+
+        -- Save map position when window is moved
+        local current_x, current_y = imgui.GetWindowPos()
+        if ui_main_settings.map_pos_x ~= current_x or ui_main_settings.map_pos_y ~= current_y then
+            ui_main_settings.map_pos_x = current_x
+            ui_main_settings.map_pos_y = current_y
+            -- Save settings (using quest_state's settings object)
+            local settings = require('settings')
+            settings.save('QuestHelper_settings', quest_state.settings)
+        end
     end
     imgui.End()
 end

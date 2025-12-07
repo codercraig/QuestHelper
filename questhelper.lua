@@ -422,7 +422,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH,
                         currentTopCategory, currentSubfile, current_mission,
                         quest_state, quest_data, utils, image_loader, map_renderer,
-                        player_module, zone_data, map_db, floor_mappings, ui_main.settings)
+                        player_module, zone_data, map_db, floor_mappings, quest_state.settings.ui_settings)
     end
 end)
 
@@ -449,6 +449,23 @@ ashita.events.register('command', 'command_callback', function(e)
         else
             print(string.format("[%s] Could not retrieve zone ID.", addon.name))
         end
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_pos' then
+        -- Reset map window position to default or specified coordinates
+        local x = args[2] and tonumber(args[2]) or 100
+        local y = args[3] and tonumber(args[3]) or 100
+
+        quest_state.settings.ui_settings.map_pos_x = x
+        quest_state.settings.ui_settings.map_pos_y = y
+
+        local settings_module = require('settings')
+        settings_module.save('QuestHelper_settings', quest_state.settings)
+
+        print(string.format("\30\106[%s]\30\01 Map position reset to (%d, %d)", addon.name, x, y))
+        print(string.format("\30\106[%s]\30\01 Usage: /qh_pos [x] [y] (defaults to 100, 100)", addon.name))
         e.blocked = true
         return true
     end
