@@ -147,6 +147,9 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
+    -- Periodic key item check (request updates if not initialized)
+    keyitem_module.periodicCheck()
+
     -- Periodic inventory check for trigger_on_item_obtain
     if currentTopCategory and currentSubfile and current_mission then
         local timeSinceLastCheck = frameCurrentTime - lastInventoryTriggerCheck
@@ -249,6 +252,63 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
                                         break
                                     end
+                                end
+                            end
+                        end
+                    end
+
+                    -- Periodic buff check for trigger_on_buff
+                    if type(step_data) == 'table' and step_data.trigger_on_buff then
+                        local buffs_to_check = {}
+
+                        -- Normalize to list
+                        if type(step_data.trigger_on_buff) == 'number' then
+                            table.insert(buffs_to_check, step_data.trigger_on_buff)
+                        elseif type(step_data.trigger_on_buff) == 'table' then
+                            buffs_to_check = step_data.trigger_on_buff
+                        end
+
+                        -- DEBUG: Print what we're checking
+                        if ENABLE_TRIGGER_DEBUG then
+                            print(string.format("[%s] Checking for buffs: %s", addon.name, table.concat(buffs_to_check, ", ")))
+                        end
+
+                        -- Check if step requires all buffs or just one
+                        if step_data.require_all_buffs then
+                            -- Check if player has ALL buffs
+                            local hasAll = true
+                            for _, buffId in ipairs(buffs_to_check) do
+                                local hasBuff = player_module.hasBuff(buffId)
+                                if ENABLE_TRIGGER_DEBUG then
+                                    print(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
+                                end
+                                if hasBuff then
+                                    -- Mark this specific buff as active in partial progress
+                                    local buff_key = "buff_" .. buffId
+                                    if not quest_state.getPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, buff_key) then
+                                        quest_state.setPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, buff_key, true)
+                                    end
+                                else
+                                    hasAll = false
+                                end
+                            end
+
+                            -- If all buffs found, complete the step
+                            if hasAll then
+                                print(string.format("\30\106[%s]\30\01 All required buffs detected! Completing step %d", addon.name, step_idx))
+                                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                            end
+                        else
+                            -- Just need ONE of the buffs
+                            for _, buffId in ipairs(buffs_to_check) do
+                                local hasBuff = player_module.hasBuff(buffId)
+                                if ENABLE_TRIGGER_DEBUG then
+                                    print(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
+                                end
+                                if hasBuff then
+                                    print(string.format("\30\106[%s]\30\01 Buff detected (ID: %d)! Completing step %d", addon.name, buffId, step_idx))
+                                    quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                                    break
                                 end
                             end
                         end
@@ -753,6 +813,65 @@ ashita.events.register('command', 'command_callback', function(e)
         else
             print(string.format("[%s] Key item tracking NOT initialized", addon.name))
             print(string.format("[%s] Waiting for packet 0x55 from server...", addon.name))
+        end
+
+        print(string.format("[%s] ==========================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
+    if command_base == 'qh_buffs' then
+        print(string.format("[%s] ========== Current Player Buffs ==========", addon.name))
+
+        local mem = AshitaCore:GetMemoryManager()
+        if not mem then
+            print(string.format("[%s] ERROR: MemoryManager not available", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        local playerObj = mem:GetPlayer()
+        if not playerObj then
+            print(string.format("[%s] ERROR: Player object not available", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        local buffs = playerObj:GetBuffs()
+        if not buffs then
+            print(string.format("[%s] ERROR: Could not get buffs array", addon.name))
+            e.blocked = true
+            return true
+        end
+
+        local resources = AshitaCore:GetResourceManager()
+        local buffCount = 0
+
+        print(string.format("[%s] Scanning 32 buff slots...", addon.name))
+        print(string.format("[%s] -----------------------------------------------", addon.name))
+
+        for i = 0, 31 do
+            local buffId = buffs[i]
+            if buffId and buffId ~= 0 and buffId ~= 255 then
+                buffCount = buffCount + 1
+                local buffName = "Unknown"
+
+                if resources then
+                    local buffData = resources:GetString("statusnames", buffId)
+                    if buffData and buffData ~= "" then
+                        buffName = buffData
+                    end
+                end
+
+                print(string.format("[%s] [Slot %d] ID: %d - %s", addon.name, i, buffId, buffName))
+            end
+        end
+
+        if buffCount == 0 then
+            print(string.format("[%s] No active buffs/debuffs found", addon.name))
+        else
+            print(string.format("[%s] -----------------------------------------------", addon.name))
+            print(string.format("[%s] Total active effects: %d", addon.name, buffCount))
         end
 
         print(string.format("[%s] ==========================================", addon.name))

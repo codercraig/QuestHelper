@@ -2332,7 +2332,8 @@ return {
             },
             -- YAGUDO TORCH
             {
-                text = "Step 5: Talk to Paya-Sabya (I-8) in Upper Jeuno. \n \n",
+                text = "Step 5: Talk to Paya-Sabya (I-8) in Upper Jeuno. \n" ..
+                "Notes: Home Point#3 closest teleport. \n \n",
                 onmob_target = {"Paya-Sabya"},
                 trigger_on_event_id = {80},
                 keyitems_needed = {20,21,46,47},
@@ -2350,8 +2351,8 @@ return {
                 },
             },
             {
-                text = "Step 6: Talk to Muckvix (H-9) in Lower Jeuno inside Muckvix's Junk Shop. \n \n" ..
-                       "You will receive KI:Yagudo Torch. (Event ID: 184)",
+                text = "Step 6: Talk to Muckvix (H-9) teleport to Home Point#1 in Lower Jeuno and head inside Muckvix's Junk Shop. \n \n" ..
+                       "You will receive KI:Yagudo Torch.",
                 onmob_target = {"Muckvix"},
                 trigger_on_event_id = {184},
                 images = {
@@ -2370,9 +2371,9 @@ return {
 
             -- CREST OF DAVOI
             {
-                text = "Step 7: Talk to Baudin at (G-7) southwest corner in Upper Jeuno. \n \n" ..
-                       "He will request: Coeurl Meat (Rare/Ex item).",
+                text = "Step 7: Talk to Baudin at (G-7) southwest corner in Upper Jeuno. \n \n",
                 onmob_target = {"Baudin"},
+                trigger_on_event_id = {174},
                 images = {
                     {
                         file = "maps/upper_jeuno.png",
@@ -2387,14 +2388,33 @@ return {
                 },
             },
             {
-                text = "Step 8: Obtain Coeurl Meat by: \n" ..
-                       "  - Defeating Coeurls (drops from all Coeurls, including in Meriphataud Mountains) \n" ..
-                       "  - Purchasing from Auction House",
+                text = "Step 8: Obtain Coeurl Meat by: \n \n" ..
+                       "Purchasing from Auction House: Food > Ingredients section! \n \n" ..
+                       "Defeating Coeurls (drops from all Coeurls, including in Sauromugue Champaign/Meriphataud Mountains) \n \n" ..
+                       "Go to Port Jeuno (E-6) - Home Point#1 and zone into Sauromugue Champaign ",
+
+                items_needed = {
+                    "Coeurl Meat"
+                },
+                trigger_on_item_obtain = {"Coeurl Meat"},
+                images = {
+                    {
+                        file = "maps/sauromugue_champaign.png",
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        zone_name = "Sauromugue Champaign",
+                        highlights = {
+                            { position = "J-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
             },
             {
                 text = "Step 9: Trade Coeurl Meat to Baudin (G-7) in Upper Jeuno. \n \n" ..
                        "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi')",
                 onmob_target = {"Baudin"},
+                trigger_on_event_id = {171},
                 images = {
                     {
                         file = "maps/upper_jeuno.png",
@@ -2415,6 +2435,7 @@ return {
                        "This initiates quests: 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'. \n" ..
                        "He will request: Quadav Charm (Rare/Ex) and Quadav Augury Shell (Rare).",
                 onmob_target = {"Sattal-Mansal"},
+                trigger_on_event_id = {89},
                 images = {
                     {
                         file = "maps/lower_jeuno.png",
@@ -2429,13 +2450,12 @@ return {
                 },
             },
             {
-                text = "Step 11: Travel to Beadeaux. Quadavs along the path are level 28-39 and hearing-aggro unless you are Sneaked. \n \n" ..
-                       "Fastest route: Unity Warp/Survival Guide to Pashhow Marshlands, go to (L-11). \n \n" ..
-                       "At Beadeaux entrance, enter Map 2 via exit A at (H-7).",
+                text = "Step 11: Travel to Beadeaux. \n \n" ..
+                       "Fastest route: Survival Guide to Beadeaux directly, or Outpost to Passhow Marshlands. \n \n",
                 zone_trigger = "Beadeaux",
                 images = {
                     {
-                        file = "maps/beadeaux.png",
+                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 11,
@@ -2447,53 +2467,104 @@ return {
                 },
             },
             {
-                text = "Step 12: In Beadeaux Map 2, examine 'The Mute' at (G-7) to receive Silence effect. \n \n" ..
-                       "This allows you to pass 'The Afflictor' without being Cursed. \n \n" ..
-                       "Then enter Map 1 via exit B at (F-8).",
+                text = "Step 12: In Beadeaux Map 1, head to ramp at (H-7) to enter Map 2. \n \n" ..
+                       "In Map 2, examine 'The Mute' at (G-7) to receive Silence effect. \n \n" ..
+                       "This allows you to pass 'The Afflictor' without being Cursed. \n \n",
+                trigger_on_buff = 6,  -- Silence status effect (ID: 6 on this server)
+                zone_name = "Beadeaux",
+                onmob_target = {"The Mute1"},
                 images = {
                     {
-                        file = "maps/beadeaux.png",
+                        file = "maps/beadeaux_1.png",
+                        width = 512,
+                        height = 512,
+                        state = 12,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "maps/beadeaux_2.png",
                         width = 512,
                         height = 512,
                         state = 12,
                         zone_name = "Beadeaux",
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
-                            { position = "F-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 13: In Beadeaux Map 1, use ramp at (E-10) to climb to upper level. \n \n" ..
-                       "Check Silence status at The Mute (F-9) if needed. \n \n" ..
-                       "Defeat De'Vyu Headhunter (I-9) to obtain Quadav Charm (drops up to 4). \n" ..
-                       "Defeat Go'Bhu Gascon (F-6) to obtain Quadav Augury Shell (drops up to 4).",
+                text = "Step 13:Now Silenced, you can walk through 'The Afflictor' and avoid CURSE make your way to (F-10) and back to Map1. \n \n" ..
+                       "head your way to (E-10) and up the ramp to the 2nd Level. \n \n",
+                trigger_zones = {
+                    { type = 'square', center = {  x = -259.9, y = 1, z = -137 }, size = 3  }
+                },
+                onmob_target = {"Ramp 1"},
+                zone = "Beadeaux",
                 images = {
                     {
-                        file = "maps/beadeaux.png",
+                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 13,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+
+                },
+            },
+            {
+                text = "Step 14: Defeat De'Vyu Headhunter (I-9) to obtain Quadav Charm (drops up to 4). \n \n" ..
+                       "Defeat Go'Bhu Gascon (F-6) to obtain Quadav Augury Shell (drops up to 4). \n \n",
+                require_all_items = true,
+                items_needed = {
+                    "Quadav Charm",
+                    "Quadav Augury Shell"
+                },
+                trigger_on_item_obtain = {
+                    "Quadav Charm",
+                    "Quadav Augury Shell"
+                },
+                images = {
+                    {
+                        file = "maps/beadeaux_1.png",
+                        width = 512,
+                        height = 512,
+                        state = 14,
                         zone_name = "Beadeaux",
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                             { position = "F-6", offsetX = 16, offsetY = 16 },
                         },
                     },
+                    {
+                        file = "maps/beadeaux_2.png",
+                        width = 512,
+                        height = 512,
+                        state = 13,
+                        zone_name = "Beadeaux",
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             {
-                text = "Step 14: Return to Sattal-Mansal (J-8) in Lower Jeuno. \n \n" ..
-                       "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n" ..
-                       "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II').",
+                text = "Step 15: Return to Sattal-Mansal (J-8) in Lower Jeuno. \n \n" ..
+                       "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
+                trigger_on_event_id = {91},
                 images = {
                     {
                         file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
-                        state = 14,
+                        state = 15,
                         zone_name = "Lower Jeuno",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
@@ -2501,22 +2572,80 @@ return {
                     },
                 },
             },
-
-            -- MAGICITE COLLECTION (Can be done in any order)
             {
-                text = "=== MAGICITE COLLECTION (Can be obtained in any order) ===\n" ..
-                       "You need THREE Magicite stones: \n" ..
-                       "  1. Magicite: Optistone (Monastic Cavern/Davoi) - Steps 15-16 \n" ..
-                       "  2. Magicite: Aurastone (Qulun Dome/Beadeaux) - Steps 17-18 \n" ..
-                       "  3. Magicite: Orastone (Altar Room/Castle Oztroja) - Steps 19-23 \n \n" ..
-                       "NOTE: If on Windurst (S) Mission 'Howl from the Heavens', touch each Magicite TWICE (once for shard, once for magicite)."
+                text = "Step 16: Return to Sattal-Mansal (J-8) in Lower Jeuno. \n \n" ..
+                        "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II'). \n \n",
+                onmob_target = {"Sattal-Mansal"},
+                trigger_on_event_id = {92},
+                images = {
+                    {
+                        file = "maps/lower_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 16,
+                        zone_name = "Lower Jeuno",
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
             },
-
             -- DAVOI - OPTISTONE
             {
-                text = "Step 15: Travel to Davoi. Orcs are level 39 (sight-aggro), Wolf Bats are level 25-29 (hearing-aggro). \n \n" ..
-                       "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Survival Guide to Norvallen > Davoi. \n \n" ..
-                       "Navigate to Wall of Dark Arts (G-7) and disable it. You need KI:Crest of Davoi. \n" ..
+                text = "Step 17: Travel to Davoi! \n \n" ..
+                       "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Outpost to Norvallen > Davoi. \n \n" ..
+                       "If running and no teleports here's a route from Jeuno: \n \n" ..
+                       "Lower Jeuno    (I-5)  ->\n" ..
+                       "Upper Jeuno    (F-5)  ->\n" ..
+                       "Batallia Downs (F-9)  ->\n" ..
+                       "Jugner Forrest (G-12) ->\n" ..
+                       "Davoi. \n \n",
+                zone_trigger = "Davoi",
+                images = {
+                    {
+                        file = "maps/lower_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 17,
+                        zone_name = "Lower Jeuno",
+                        highlights = {
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "maps/upper_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 17,
+                        zone_name = "Upper Jeuno",
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "maps/batallia_downs.png",
+                        width = 512,
+                        height = 512,
+                        state = 17,
+                        zone_name = "Batallia Downs",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        file = "maps/jugner_forest.png",
+                        width = 512,
+                        height = 512,
+                        state = 17,
+                        zone_name = "Jugner Forest",
+                        highlights = {
+                            { position = "G-12", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 18: Navigate to Wall of Dark Arts (G-7) and disable it. You need KI:Crest of Davoi. \n" ..
                        "Continue into Monastic Cavern.",
                 zone_trigger = "Monastic Cavern",
                 images = {
@@ -2524,7 +2653,7 @@ return {
                         file = "maps/davoi.png",
                         width = 512,
                         height = 512,
-                        state = 15,
+                        state = 18,
                         zone_name = "Davoi",
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
@@ -2533,7 +2662,7 @@ return {
                 },
             },
             {
-                text = "Step 16: In Monastic Cavern, check the Magicite at the end of the hall. \n \n" ..
+                text = "Step 19: In Monastic Cavern, check the Magicite at the end of the hall. \n \n" ..
                        "You will receive KI:Magicite: Optistone. (Event ID: 0)",
                 trigger_on_event_id = {0},
                 images = {
@@ -2541,7 +2670,7 @@ return {
                         file = "maps/monastic_cavern.png",
                         width = 512,
                         height = 512,
-                        state = 16,
+                        state = 19,
                         zone_name = "Monastic Cavern",
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },

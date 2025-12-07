@@ -1,4 +1,5 @@
 -- Player position and heading tracking module
+-- Includes buff/status effect detection
 local player = {}
 local ffi = require("ffi")
 
@@ -105,6 +106,46 @@ function player.getHeading()
         return playerEntity.Heading
     end
     return 0
+end
+
+-- Checks if player has a specific buff/status effect
+-- Parameters:
+--   buffId - Single buff ID (number) or list of buff IDs (table)
+-- Returns: true if player has the buff, false otherwise
+function player.hasBuff(buffId)
+    local mem = AshitaCore:GetMemoryManager()
+    if not mem then return false end
+
+    local playerObj = mem:GetPlayer()
+    if not playerObj then return false end
+
+    local buffs = playerObj:GetBuffs()
+    if not buffs then return false end
+
+    -- Handle single buff ID or list of buff IDs
+    local buffsToCheck = {}
+    if type(buffId) == 'number' then
+        table.insert(buffsToCheck, buffId)
+    elseif type(buffId) == 'table' then
+        buffsToCheck = buffId
+    else
+        return false
+    end
+
+    -- Check all 32 buff slots
+    for i = 0, 31 do
+        local currentBuff = buffs[i]
+        if currentBuff and currentBuff ~= 0 and currentBuff ~= 255 then
+            -- Check if this buff matches any we're looking for
+            for _, targetBuff in ipairs(buffsToCheck) do
+                if currentBuff == targetBuff then
+                    return true
+                end
+            end
+        end
+    end
+
+    return false
 end
 
 -- Initialize floor detection (finds memory signatures)

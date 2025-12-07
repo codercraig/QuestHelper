@@ -105,6 +105,18 @@ return {
         visual_mode = "arc",
         zone = "Gusgen Mines"
     },
+    -- Beaudeaux
+    ["The Mute1"] = {
+        target_pos = { x = -100, y= 21.9, z=102.9},
+        trigger_npc = "The Mute",
+        visual_mode = "arc",
+        zone = "Beadeaux"
+    },
+    ["Ramp 1"] = {
+        target_pos = { x = -259.9, y = 1, z = -137},
+        visual_mode = "arc",
+        zone = "Beadeaux"
+    },
     --Windurst
     --Port Windurst
     ["Melek"] = {
@@ -163,6 +175,56 @@ return {
         trigger_npc = "Aldo",
         visual_mode = "arc",
         zone = "Lower Jeuno"
+    },
+    ["Muckvix"] = {
+        target_pos = { x = -26.8, y= 3.5, z=-137.3},
+        trigger_npc = "Muckvix",
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
+    ["Sattal-Mansal"] = {
+        target_pos = { x = 41.3, y= 3.1, z=-54},
+        trigger_npc = "Sattal-Mansal",
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
+    ["Door: Jeuno Bazaar"] = {
+        target_pos = { x = -1.3, y= 0, z=-64.2},
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
+    ["Door: Mhuufya's Shop"] = {
+        target_pos = { x = -9.5, y= 0, z=-78.3},
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
+    ["Door: Junk Shop"] = {
+        target_pos = { x = -10.5, y= 0, z=-73.4},
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
+    -- Upper Jeuno
+    ["Paya-Sabya"] = {
+        target_pos = { x = 11.85, y= 1.5, z=70.9},
+        trigger_npc = "Paya-Sabya",
+        visual_mode = "arc",
+        zone = "Upper Jeuno"
+    },
+    ["Baudin"] = {
+        target_pos = { x = -76.4, y= -2.2, z=80},
+        trigger_npc = "Baudin",
+        visual_mode = "arc",
+        zone = "Upper Jeuno"
+    },
+    ["Door: Jeuno Auction House"] = {
+        target_pos = { x = 5.1, y= 0, z=45.3},
+        visual_mode = "arc",
+        zone = "Upper Jeuno"
+    },
+    ["Door: Paya-Sabya's Shop"] = {
+        target_pos = { x = 14.3, y= 0, z=75.1},
+        visual_mode = "arc",
+        zone = "Upper Jeuno"
     },
     -- Ru'Lude Gardens
     ["Goggehn"] = {

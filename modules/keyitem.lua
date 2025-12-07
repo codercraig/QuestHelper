@@ -1,7 +1,6 @@
 -- Key Item tracking module
 local keyitem = {}
 
-local ffi = require('ffi')
 local struct = require('struct')
 
 -- Storage for key item states
@@ -9,6 +8,8 @@ keyitem.owned_keyitems = T{}  -- Set of key item IDs the player owns
 
 -- Track if we've done initial scan
 local initialized = false
+local last_memory_check = 0
+local MEMORY_CHECK_INTERVAL = 2.0  -- Check memory every 2 seconds
 
 --- Checks if player has a specific key item
 --- @param ki_id number - Key item ID
@@ -88,6 +89,44 @@ end
 --- Check if key item system has been initialized
 function keyitem.isInitialized()
     return initialized
+end
+
+--- Read key items directly from memory
+--- This runs periodically and doesn't require packet 0x55
+function keyitem.updateFromMemory()
+    local memManager = AshitaCore:GetMemoryManager()
+    if not memManager then return end
+
+    local player = memManager:GetPlayer()
+    if not player then return end
+
+    -- Read all key items (0-4095 possible IDs)
+    local foundAny = false
+    for ki_id = 0, 4095 do
+        local hasKI = player:HasKeyItem(ki_id)
+        if hasKI then
+            keyitem.owned_keyitems[ki_id] = true
+            foundAny = true
+        else
+            keyitem.owned_keyitems[ki_id] = nil
+        end
+    end
+
+    if foundAny then
+        initialized = true
+    end
+end
+
+--- Periodic check - call from prerender or similar
+--- Silently updates key items from memory
+function keyitem.periodicCheck()
+    local current_time = os.clock()
+
+    -- Check memory every 2 seconds
+    if current_time - last_memory_check >= MEMORY_CHECK_INTERVAL then
+        last_memory_check = current_time
+        keyitem.updateFromMemory()
+    end
 end
 
 --- Debug function to list all owned key items

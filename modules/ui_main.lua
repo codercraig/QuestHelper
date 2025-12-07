@@ -4,6 +4,15 @@ local ui_main = {}
 local imgui = require('imgui')
 local bit = require('bit')
 
+-- ImGui Tree Node Flags
+ImGuiTreeNodeFlags_DefaultOpen = 0x20  -- Default node to be open
+
+-- ImGui Condition Flags
+ImGuiCond_FirstUseEver = 2  -- Set the variable only on first use
+
+-- ImGui Window Flags
+ImGuiWindowFlags_AlwaysAutoResize = 0x40  -- Resize every frame based on content
+
 -- Search functionality
 local search_query = ""
 local search_results = T{}
@@ -172,11 +181,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         window_height = 600
     end
 
-    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_Always)
+    -- Set initial size but allow auto-resize based on content
+    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_FirstUseEver)
 
     local mainFlags = bit.bor(
         ImGuiWindowFlags_NoCollapse,
-        ImGuiWindowFlags_NoTitleBar
+        ImGuiWindowFlags_NoTitleBar,
+        ImGuiWindowFlags_AlwaysAutoResize  -- Auto-resize based on content
     )
     local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
 
@@ -412,70 +423,78 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         last_inventory_check = currentTime
                     end
 
-                    -- Display items needed
-                    imgui.TextColored({0.9, 0.9, 0.9, 1}, "Items Needed:")
-                    for _, itemData in ipairs(itemsNeeded) do
-                        local itemName = itemData.name
-                        local qtyNeeded = itemData.quantity
-                        local result = inventory_results[current_mission] and inventory_results[current_mission][itemName]
+                    -- Display items needed (collapsible, open by default)
+                    if imgui.CollapsingHeader("Items Needed:", ImGuiTreeNodeFlags_DefaultOpen) then
+                        for _, itemData in ipairs(itemsNeeded) do
+                            local itemName = itemData.name
+                            local qtyNeeded = itemData.quantity
+                            local result = inventory_results[current_mission] and inventory_results[current_mission][itemName]
 
-                        if result and result.hasItem then
-                            -- Build compact location string
-                            local locationStr = ""
-                            if result.locations then
-                                local locParts = {}
-                                -- Put Inventory first if it exists
-                                if result.locations["Inventory"] then
-                                    table.insert(locParts, string.format("Inventory: %d", result.locations["Inventory"]))
-                                end
-                                -- Then add other locations
-                                for locName, locCount in pairs(result.locations) do
-                                    if locName ~= "Inventory" then
-                                        table.insert(locParts, string.format("%s: %d", locName, locCount))
+                            if result and result.hasItem then
+                                -- Build compact location string
+                                local locationStr = ""
+                                if result.locations then
+                                    local locParts = {}
+                                    -- Put Inventory first if it exists
+                                    if result.locations["Inventory"] then
+                                        table.insert(locParts, string.format("Inventory: %d", result.locations["Inventory"]))
+                                    end
+                                    -- Then add other locations
+                                    for locName, locCount in pairs(result.locations) do
+                                        if locName ~= "Inventory" then
+                                            table.insert(locParts, string.format("%s: %d", locName, locCount))
+                                        end
+                                    end
+                                    if #locParts > 0 then
+                                        locationStr = "    " .. table.concat(locParts, ", ")
                                     end
                                 end
-                                if #locParts > 0 then
-                                    locationStr = "    " .. table.concat(locParts, ", ")
+
+                                -- Color based on location: GREEN if in Inventory, YELLOW if in storage
+                                local inInventory = result.locations and result.locations["Inventory"]
+
+                                -- Display main line
+                                if inInventory then
+                                    -- GREEN - Item in Inventory (ready!)
+                                    imgui.TextColored({0, 1, 0, 1}, string.format("  [x] %s x%d (have %d)", itemName, qtyNeeded, result.count))
+                                else
+                                    -- YELLOW - Item in storage (need to retrieve)
+                                    imgui.TextColored({1, 1, 0, 1}, string.format("  [!] %s x%d (have %d)", itemName, qtyNeeded, result.count))
                                 end
-                            end
 
-                            -- Color based on location: GREEN if in Inventory, YELLOW if in storage
-                            local inInventory = result.locations and result.locations["Inventory"]
-
-                            -- Display main line
-                            if inInventory then
-                                -- GREEN - Item in Inventory (ready!)
-                                imgui.TextColored({0, 1, 0, 1}, string.format("  [x] %s x%d (have %d)", itemName, qtyNeeded, result.count))
+                                -- Display storage locations on one line
+                                if locationStr ~= "" then
+                                    local color = inInventory and {0, 1, 0, 1} or {1, 1, 0, 1}
+                                    imgui.TextColored(color, locationStr)
+                                end
                             else
-                                -- YELLOW - Item in storage (need to retrieve)
-                                imgui.TextColored({1, 1, 0, 1}, string.format("  [!] %s x%d (have %d)", itemName, qtyNeeded, result.count))
+                                -- RED - Don't have it
+                                imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
                             end
-
-                            -- Display storage locations on one line
-                            if locationStr ~= "" then
-                                local color = inInventory and {0, 1, 0, 1} or {1, 1, 0, 1}
-                                imgui.TextColored(color, locationStr)
-                            end
-                        else
-                            -- RED - Don't have it
-                            imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
                         end
                     end
                     imgui.Separator()
                 end
 
-                -- Key Items Needed Section
+                -- Key Items Needed Section (collapsible, open by default)
                 local keyItemsNeeded = utils.getAllKeyItemsNeeded(missionData, keyitems_db)
                 if #keyItemsNeeded > 0 and keyitem_module then
-                    imgui.TextColored({0.9, 0.9, 0.9, 1}, "Key Items Needed:")
-                    for _, ki in ipairs(keyItemsNeeded) do
-                        local hasKI = keyitem_module.hasKeyItem(ki.id)
-                        if hasKI then
-                            -- GREEN - Player has it
-                            imgui.TextColored({0, 1, 0, 1}, string.format("  [x] KI: %s", ki.name))
+                    if imgui.CollapsingHeader("Key Items Needed:", ImGuiTreeNodeFlags_DefaultOpen) then
+                        -- Check if key item tracking is initialized
+                        if not keyitem_module.isInitialized() then
+                            imgui.TextColored({1, 1, 0, 1}, "  [!] Key item tracking not ready yet")
+                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  Open your Key Items menu in-game")
                         else
-                            -- RED - Don't have it
-                            imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] KI: %s", ki.name))
+                            for _, ki in ipairs(keyItemsNeeded) do
+                                local hasKI = keyitem_module.hasKeyItem(ki.id)
+                                if hasKI then
+                                    -- GREEN - Player has it
+                                    imgui.TextColored({0, 1, 0, 1}, string.format("  [x] KI: %s", ki.name))
+                                else
+                                    -- RED - Don't have it
+                                    imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] KI: %s", ki.name))
+                                end
+                            end
                         end
                     end
                     imgui.Separator()
