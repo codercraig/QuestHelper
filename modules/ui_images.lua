@@ -68,18 +68,25 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     table.insert(keep_files, img_data.file)
                 end
 
+                -- Auto-enable DAT loading if zone_name is present (unless explicitly disabled)
+                local use_dat = img_data.use_dat_map
+                if use_dat == nil then
+                    use_dat = (img_data.zone_name ~= nil)
+                end
+
                 -- Keep DAT-loaded textures
-                if img_data.use_dat_map and img_data.zone_id then
-                    table.insert(keep_dat_list, {
-                        zone_id = img_data.zone_id,
-                        floor_id = img_data.floor_id or 0
-                    })
-                elseif img_data.use_dat_map and img_data.zone_name and zone_data[img_data.zone_name] then
-                    -- Derive zone_id from zone_name if not explicit
-                    table.insert(keep_dat_list, {
-                        zone_id = zone_data[img_data.zone_name],
-                        floor_id = img_data.floor_id or 0
-                    })
+                if use_dat then
+                    local zone_id = img_data.zone_id
+                    if not zone_id and img_data.zone_name and zone_data[img_data.zone_name] then
+                        zone_id = zone_data[img_data.zone_name]
+                    end
+
+                    if zone_id then
+                        table.insert(keep_dat_list, {
+                            zone_id = zone_id,
+                            floor_id = img_data.floor_id or 0
+                        })
+                    end
                 end
             end
 
@@ -177,8 +184,12 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
             -- Get floor_id (default to 0 if not specified)
             local floor_id = img_data.floor_id or 0
 
-            -- Check if DAT loading is enabled for this image
-            local use_dat = img_data.use_dat_map or false
+            -- Auto-enable DAT loading if zone_name is present (unless explicitly disabled)
+            -- This makes DAT loading the default when zone_name is specified
+            local use_dat = img_data.use_dat_map
+            if use_dat == nil then
+                use_dat = (img_data.zone_name ~= nil)  -- Default to true if zone_name exists
+            end
 
             -- Load texture (DAT first if enabled, fallback to PNG)
             local tex_ptr = image_loader.GetTexture(

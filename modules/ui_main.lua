@@ -181,13 +181,14 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         window_height = 600
     end
 
-    -- Set initial size but allow auto-resize based on content
-    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_FirstUseEver)
+    -- Set window size with fixed width (600) and dynamic height based on collapsed/expanded mode
+    -- Use ImGuiCond_Always to enforce size constraints every frame
+    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_Always)
 
     local mainFlags = bit.bor(
         ImGuiWindowFlags_NoCollapse,
         ImGuiWindowFlags_NoTitleBar,
-        ImGuiWindowFlags_AlwaysAutoResize  -- Auto-resize based on content
+        ImGuiWindowFlags_NoResize  -- Disable manual resizing
     )
     local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
 
@@ -218,8 +219,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             show_settings_window = not show_settings_window
         end
 
-        -- Collapse/Expand Steps Toggle (only show when viewing a mission)
+        -- Navigation back buttons and toggles
         if current_mission then
+            -- Collapse/Expand Steps Toggle
             imgui.SameLine()
             if ui_settings.show_all_steps then
                 if imgui.SmallButton("[-] Collapse##CollapseToggle") then
@@ -233,10 +235,22 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 end
             end
 
-            -- Back to Missions button (on same line, right-aligned)
+            -- Back to Missions button
             imgui.SameLine()
             if imgui.Button("Back##BackToMissions") then
                 new_current_mission = nil
+            end
+        elseif currentSubfile then
+            -- Back to Subfiles button (when viewing mission list)
+            imgui.SameLine()
+            if imgui.Button("< Back##BackToSubfiles") then
+                new_currentSubfile = nil
+            end
+        elseif currentTopCategory then
+            -- Back to Categories button (when viewing subfile list)
+            imgui.SameLine()
+            if imgui.Button("< Back##BackToCategories") then
+                new_currentTopCategory = nil
             end
         end
 
@@ -320,7 +334,6 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         if complete then imgui.PopStyleColor() end
                     end
                 end
-                if imgui.Button("Back to Categories") then new_currentTopCategory = nil end
 
             elseif not current_mission then
                 imgui.Text('Category: ' .. currentTopCategory)
@@ -341,7 +354,6 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         if complete then imgui.PopStyleColor() end
                     end
                 end
-                if imgui.Button("Back to Subfiles") then new_currentSubfile = nil end
 
             else
                 -- Display mission details

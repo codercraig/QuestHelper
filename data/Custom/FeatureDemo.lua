@@ -8,17 +8,11 @@ return {
                        "No PNG required - saves space and uses your in-game maps!",
                 images = {
                 {
-                    -- DAT loading enabled - loads map from FFXI ROM files
-                    use_dat_map = true,
-                    zone_id  = 234,
-                    floor_id = 0,
-
-                    -- PNG fallback if DAT loading fails
-                    --file     = "maps/bastok_mines.png",
+                    -- DAT loading is automatic when zone_name is present!
+                    -- Map is loaded from FFXI ROM DAT files - no PNG required!
+                    zone_name = "Bastok Mines",
                     width    = 512,
                     height   = 512,
-                    zone_name = "Bastok Mines",
-                    --state    = 3,
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
@@ -62,30 +56,22 @@ return {
                 zone = "Beadeaux",
                 images = {
                 {
-                    --file     = "maps/beadeaux_1.png",
-                    use_dat_map = true,
-                    zone_id  = 147,
+                    zone_name = "Beadeaux",
                     floor_id = 1,
                     width    = 512,
                     height   = 512,
-                    --state    = 3,
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
-                    zone_name = "Beadeaux",
                 },
                 {
-                    --file     = "maps/beadeaux_2.png",
-                    use_dat_map = true,
-                    zone_id  = 147,
+                    zone_name = "Beadeaux",
                     floor_id = 15,
                     width    = 512,
                     height   = 512,
-                    --state    = 1,
                     highlights = {
                         { position = "D-11", offsetX = 16, offsetY = 16 },
                     },
-                    zone_name = "Beadeaux",
                 },
             },
             },
@@ -96,40 +82,45 @@ return {
                 zone = "Aydeewa Subterrane",
                 images = {
                 {
-                    file     = "maps/aydeewa_subterrane_1.png",
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 1,
                 },
                 {
-                    file     = "maps/aydeewa_subterrane_2.png",
+
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 2,
                 },
                 {
-                    file     = "maps/aydeewa_subterrane_3.png",
+
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 3,
                 },
                 {
-                    file     = "maps/aydeewa_subterrane_4.png",
+
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 4,
                 },
                 {
-                    file     = "maps/aydeewa_subterrane_5.png",
+
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 5,
                 },
                 {
-                    file     = "maps/aydeewa_subterrane_6.png",
+
                     width    = 512,
                     height   = 512,
                     zone_name = "Aydeewa Subterrane",
+                    floor_id = 6,
                 },
             },
             },
@@ -144,6 +135,7 @@ return {
                         width    = 512,
                         height   = 512,
                         zone_name = "Dangruf Wadi",
+                        floor_id = 1,
                         -- NO map_calibration defined - will use auto-calibration!
                     },
                 },

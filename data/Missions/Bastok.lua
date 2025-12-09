@@ -9,7 +9,6 @@ return {
             trigger_on_talk = {"You have accepted the mission"},
             images = {
                 {
-                    file     = "maps/bastok_mines.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -19,7 +18,6 @@ return {
                     zone_name = "Bastok Mines",
                 },
                 {
-                    file     = "maps/bastok_markets.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -29,15 +27,14 @@ return {
                     zone_name = "Bastok Markets",
                 },
                 {
-                    file     = "maps/port_bastok.png",
                     width    = 512,
                     height   = 512,
                     state    = 1,
                     highlights = {
                         { position = "L-6", offsetX = 16, offsetY = 16 },
                     },
+                    zone_name = "Port Bastok",
                 },
-                zone_name = "Port Bastok",
             },
           },
           {
@@ -45,7 +42,6 @@ return {
             zone_trigger = "Zeruhn Mines",
             images = {
                 {
-                    file     = "maps/bastok_mines.png",
                     width    = 512,
                     height   = 512,
                     state    = 2,
@@ -53,6 +49,7 @@ return {
                         { position = "D-7", offsetX = 16, offsetY = 16 },
                     },
                     zone_name = "Bastok Mines",
+
                 },
             },
           },
@@ -62,7 +59,6 @@ return {
             trigger_on_event_id = { 121 },
             images = {
                 {
-                    file     = "maps/zeruhn_mines.png",
                     width    = 512,
                     height   = 512,
                     state    = 3,
@@ -70,6 +66,7 @@ return {
                         { position = "H-11", offsetX = 16, offsetY = 16 },
                     },
                     zone_name = "Zeruhn Mines",
+                    floor_id = 0,
                 },
             },
           },
@@ -79,7 +76,6 @@ return {
             trigger_on_event_id = { 710 },
             images = {
                 {
-                    file     = "maps/metalworks.png",
                     width    = 512,
                     height   = 512,
                     state    = 4,
@@ -105,7 +101,6 @@ return {
               trigger_on_talk = {"You have accepted the mission"},
               images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -115,7 +110,6 @@ return {
                         zone_name = "Bastok Mines",
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -125,7 +119,6 @@ return {
                         zone_name = "Bastok Markets",
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -142,7 +135,6 @@ return {
                 trigger_on_event_id = 503,
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -158,7 +150,6 @@ return {
                 zone_trigger = "Dangruf Wadi",
                 images = {
                     {
-                        file     = "maps/south_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -180,7 +171,6 @@ return {
                 zone = "Dangruf Wadi",
                 images = {
                     {
-                        file     = "maps/dangruf_wadi.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -188,6 +178,7 @@ return {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Dangruf Wadi",
+                        floor_id = 1
                     },
                 },
             },
@@ -197,13 +188,13 @@ return {
                 trigger_on_event_id = { 504 },
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Metalworks",
                     },
                 },
             },
@@ -222,7 +213,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
-                          file     = "maps/bastok_mines.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -232,7 +222,6 @@ return {
                           zone_name = "Bastok Mines",
                       },
                       {
-                          file     = "maps/bastok_markets.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -242,7 +231,6 @@ return {
                           zone_name = "Bastok Markets",
                       },
                       {
-                          file     = "maps/port_bastok.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -266,7 +254,6 @@ return {
                 require_all_items = true,
                 images = {
                       {
-                          file     = "maps/north_gustaberg.png",
                           width    = 512,
                           height   = 512,
                           state    = 2,
@@ -283,7 +270,6 @@ return {
                 trigger_on_event_id = {1005,1008},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -293,7 +279,6 @@ return {
                         zone_name = "Bastok Mines",
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -303,7 +288,6 @@ return {
                         zone_name = "Bastok Markets",
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -329,7 +313,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
-                          file     = "maps/bastok_mines.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -339,7 +322,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/bastok_markets.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -349,7 +331,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/port_bastok.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -383,7 +364,6 @@ return {
                 },
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -404,7 +384,6 @@ return {
                 trigger_on_item_obtain = "Faded Crystal",
                 images = {
                     {
-                        file     = "maps/south_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -414,7 +393,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/north_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -425,7 +403,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/konschtat_highlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -443,7 +420,6 @@ return {
                 trigger_on_event_id = 506,
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -460,7 +436,6 @@ return {
                 trigger_on_event_id = 712,
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -486,7 +461,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
-                          file     = "maps/bastok_mines.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -496,7 +470,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/bastok_markets.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -506,7 +479,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/port_bastok.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -531,7 +503,6 @@ return {
                 trigger_on_item_obtain = {"Lizard Egg"},
                 images = {
                     {
-                        file     = "maps/south_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -541,11 +512,11 @@ return {
                         },
                     },
                     {
-                        file     = "maps/dangruf_wadi.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         zone_name = "Dangruf Wadi",
+                        floor_id = 1,
                         highlights = {
                             { position = "G-11", offsetX = 16, offsetY = 16 },
                         },
@@ -558,7 +529,6 @@ return {
                 trigger_on_event_id = { 373, 372 },
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -585,7 +555,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
-                          file     = "maps/bastok_mines.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -595,7 +564,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/bastok_markets.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -605,7 +573,6 @@ return {
                           },
                       },
                       {
-                          file     = "maps/port_bastok.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -625,7 +592,6 @@ return {
                 trigger_on_event_id = { 714 },
                 images = {
                       {
-                          file     = "maps/metalworks.png",
                           zone_name = "Metalworks",
                           width    = 512,
                           height   = 512,
@@ -649,7 +615,6 @@ return {
                 onmob_target = {"Baraka"},
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -666,7 +631,6 @@ return {
                 onmob_target = {"Helaku"},
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 2,
@@ -682,7 +646,6 @@ return {
                 zone_trigger = "Chateau d'Oraguille",
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 3,
@@ -701,7 +664,6 @@ return {
                 onmob_target = {"Halver"},
                 images = {
                       {
-                          file     = "maps/chateau_doraguille.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
@@ -717,7 +679,6 @@ return {
                 zone_trigger = "Ghelsba Outpost",
                 images = {
                       {
-                          file     = "maps/west_ronfaure.png",
                           width    = 512,
                           height   = 512,
                           state    = 5,
@@ -752,11 +713,11 @@ return {
                 },
                 images = {
                       {
-                          file     = "maps/ghelsba_outpost_1.png",
                           width    = 512,
                           height   = 512,
                           state    = 6,
                           zone_name = "Ghelsba Outpost",
+                          floor_id = 1,
                           highlights = {
                               { position = "H-7", offsetX = 16, offsetY = 16 },
                           },
@@ -769,7 +730,6 @@ return {
                 trigger_on_event_id = { 543 },
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 7,
@@ -781,9 +741,9 @@ return {
                   },
             },
             {
-                text = "Step 8: Travel to Windurst- Port Windurst!\n " ..
+                text = "Step 8: Travel to Port Windurst!\n " ..
                        "If you have the teleport crystal from Crag of Mea you can get a White Mage to teleport you, or Outpost Warp to Kolshushu \n \n" ..
-                       "Otherwise time get some virtual cardio in: A suggested route is: \n" ..
+                       "Otherwise time to get some virtual cardio in, a suggested route is: \n" ..
                        "West Ronfaure (F-12)      ->\n" ..
                        "La Thiene Plateau (I-13)  ->\n" ..
                        "Valkrum Dunes (G-9)       ->\n" ..
@@ -797,7 +757,6 @@ return {
                 zone_trigger = "Port Windurst",
                 images = {
                       {
-                          file     = "maps/west_ronfaure.png",
                           width    = 512,
                           height   = 512,
                           state    = 8,
@@ -807,7 +766,6 @@ return {
                           },
                       },
                       {
-                        file     = "maps/la_theine_plateau.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -817,7 +775,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/valkurm_dunes.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -827,7 +784,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/selbina.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -837,7 +793,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/mhaura.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -847,7 +802,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/buburimu_peninsula.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -857,7 +811,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/tahrongi_canyon.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -867,7 +820,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/east_sarutabaruta.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -877,7 +829,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/windurst_woods.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -895,7 +846,6 @@ return {
                 onmob_target = {"Melek"},
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 9,
@@ -919,7 +869,6 @@ return {
                 trigger_on_event_id = {242},
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 10,
@@ -929,7 +878,6 @@ return {
                           },
                       },
                       {
-                        file     = "maps/windurst_woods.png",
                         width    = 512,
                         height   = 512,
                         state    = 10,
@@ -939,7 +887,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/windurst_walls.png",
                         width    = 512,
                         height   = 512,
                         state    = 10,
@@ -959,7 +906,6 @@ return {
                 zone_trigger = "Balga's Dais",
                 images = {
                       {
-                          file     = "maps/west_sarutabaruta.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
@@ -969,21 +915,21 @@ return {
                           },
                       },
                       {
-                          file     = "maps/giddeus_1.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
                           zone_name = "Giddeus",
+                          floor_id = 1,
                           highlights = {
                               { position = "F-12", offsetX = 16, offsetY = 16 },
                           },
                       },
                       {
-                          file     = "maps/giddeus_2.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
                           zone_name = "Giddeus",
+                          floor_id = 15,
                           highlights = {
                               { position = "F-8", offsetX = 16, offsetY = 16 },
                           },
@@ -1012,7 +958,6 @@ return {
                 trigger_on_event_id = {66},
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 13,
@@ -1029,7 +974,6 @@ return {
                 trigger_on_event_id = {713},
                 images = {
                       {
-                          file     = "maps/metalworks.png",
                           width    = 512,
                           height   = 512,
                           state    = 14,
@@ -1054,7 +998,6 @@ return {
                 trigger_on_event_id = {49},
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 1,
@@ -1077,7 +1020,6 @@ return {
                 trigger_on_event_id = { 239 },
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 2,
@@ -1087,7 +1029,6 @@ return {
                           },
                       },
                       {
-                        file     = "maps/windurst_woods.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -1097,7 +1038,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/windurst_walls.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -1114,7 +1054,6 @@ return {
                 trigger_on_event_id = { 53 },
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 3,
@@ -1138,7 +1077,6 @@ return {
                 trigger_on_item_obtain = {"Aspir Knife"},
                 images = {
                         {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
@@ -1149,7 +1087,6 @@ return {
                           },
                        },
                        {
-                          file     = "maps/west_sarutabaruta.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
@@ -1159,11 +1096,11 @@ return {
                           },
                       },
                       {
-                          file     = "maps/giddeus_1.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
                           zone_name = "Giddeus",
+                          floor_id = 1,
                           highlights = {
                               { position = "F-8", offsetX = 16, offsetY = 16 },
                               { position = "G-8", offsetX = 16, offsetY = 16 },
@@ -1172,11 +1109,11 @@ return {
                           },
                       },
                       {
-                          file     = "maps/giddeus_2.png",
                           width    = 512,
                           height   = 512,
                           state    = 4,
                           zone_name = "Giddeus",
+                          floor_id = 15,
                           highlights = {
                               { position = "F-7", offsetX = 16, offsetY = 16 },
                               { position = "G-7", offsetX = 16, offsetY = 16 },
@@ -1190,11 +1127,11 @@ return {
                 trigger_on_event_id = { 41 },
                 images = {
                       {
-                          file     = "maps/giddeus_2.png",
                           width    = 512,
                           height   = 512,
                           state    = 5,
                           zone_name = "Giddeus",
+                          floor_id = 15,
                           highlights = {
                               { position = "F-7", offsetX = 16, offsetY = 16 },
                           },
@@ -1207,7 +1144,6 @@ return {
                 trigger_on_event_id = { 55 },
                 images = {
                       {
-                          file     = "maps/port_windurst.png",
                           width    = 512,
                           height   = 512,
                           state    = 6,
@@ -1235,7 +1171,6 @@ return {
                 zone_trigger = "Northern San d'Oria",
                 images = {
                       {
-                            file     = "maps/port_windurst.png",
                             width    = 512,
                             height   = 512,
                             state    = 7,
@@ -1246,7 +1181,6 @@ return {
                             },
                       },
                       {
-                            file     = "maps/west_sarutabaruta.png",
                             width    = 512,
                             height   = 512,
                             state    = 7,
@@ -1256,7 +1190,6 @@ return {
                             },
                       },
                       {
-                          file     = "maps/east_sarutabaruta.png",
                           width    = 512,
                           height   = 512,
                           state    = 7,
@@ -1266,7 +1199,6 @@ return {
                           },
                       },
                       {
-                        file     = "maps/tahrongi_canyon.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1276,7 +1208,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/buburimu_peninsula.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1286,7 +1217,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/mhaura.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1296,7 +1226,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/selbina.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1307,7 +1236,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/valkurm_dunes.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1318,7 +1246,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/la_theine_plateau.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1329,7 +1256,6 @@ return {
                         },
                       },
                       {
-                        file     = "maps/west_ronfaure.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -1346,7 +1272,6 @@ return {
                 trigger_on_talk = {"Helaku:"},
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 8,
@@ -1362,7 +1287,6 @@ return {
                 zone_trigger = "Chateau d'Oraguille",
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 9,
@@ -1381,10 +1305,10 @@ return {
                 trigger_on_event_id = {503},
                 images = {
                       {
-                          file     = "maps/chateau_doraguille.png",
                           width    = 512,
                           height   = 512,
                           state    = 10,
+                          zone_name = "Chateau d'Oraguille",
                           highlights = {
                               { position = "I-9", offsetX = 16, offsetY = 16 },
                           },
@@ -1403,7 +1327,6 @@ return {
                 zone_trigger = "Horlais Peak",
                 images = {
                       {
-                          file     = "maps/west_ronfaure.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
@@ -1413,27 +1336,26 @@ return {
                           },
                       },
                       {
-                          file     = "maps/ghelsba_outpost_1.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
                           zone_name = "Ghelsba Outpost",
+                          floor_id = 1,
                           highlights = {
                               { position = "H-11", offsetX = 16, offsetY = 16 },
                           },
                       },
                       {
-                          file     = "maps/yughott_grotto_1.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
                           zone_name = "Yughott Grotto",
+                          floor_id = 1,
                           highlights = {
                               { position = "K-5", offsetX = 16, offsetY = 16 },
                           },
                       },
                       {
-                          file     = "maps/fort_ghelsba.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
@@ -1443,11 +1365,11 @@ return {
                           },
                       },
                       {
-                          file     = "maps/yughott_grotto_2.png",
                           width    = 512,
                           height   = 512,
                           state    = 11,
                           zone_name = "Yughott Grotto",
+                          floor_id = 2,
                           highlights = {
                               { position = "J-6", offsetX = 16, offsetY = 16 },
                           },
@@ -1473,7 +1395,6 @@ return {
                 trigger_on_event_id = {545},
                 images = {
                       {
-                          file     = "maps/northern_san_doria.png",
                           width    = 512,
                           height   = 512,
                           state    = 13,
@@ -1490,7 +1411,6 @@ return {
                 trigger_on_event_id = {713},
                 images = {
                       {
-                          file     = "maps/metalworks.png",
                           width    = 512,
                           height   = 512,
                           state    = 14,
@@ -1516,7 +1436,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1526,7 +1445,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1536,7 +1454,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1548,12 +1465,11 @@ return {
                 },
             },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You need to speak with him twice!",
+                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You may need to speak with him twice to receive the cutscene!",
                 onmob_target = {"Iron Eater"},
                 trigger_on_event_id = {715},
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -1566,12 +1482,11 @@ return {
             },
             {
                 text = "Step 3: Travel to Beadeaux via Pashhow Marshlands (J-9). \n" ..
-                       "From Konschtat Highlands, you can also travel to (K-3) to enter Pashhow Marshlands. \n" ..
-                       "You may also transport using the Beadeaux Survival Guide if unlocked.",
+                       "From Konschtat Highlands, you can travel to (K-3) to enter Pashhow Marshlands. \n" ..
+                       "You also can use the Beadeaux Survival Guide if unlocked!",
                 zone_trigger = "Beadeaux",
                 images = {
                     {
-                        file     = "maps/konschtat_highlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1581,7 +1496,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/pashhow_marshlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1605,14 +1519,19 @@ return {
                 },
                 images = {
                     {
-                        file     = "maps/beadeaux_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
                         zone_name = "Beadeaux",
-                        --highlights = {
-                         --   { position = "H-7", offsetX = 16, offsetY = 16 },
-                        --},
+                        floor_id = 1,
+                        highlights = {
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
                     },
                 },
             },
@@ -1622,11 +1541,11 @@ return {
                 trigger_on_event_id = {11},
                 images = {
                     {
-                        file     = "maps/beadeaux_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
                         highlights = {
                             { position = "E-7", offsetX = 16, offsetY = 16 },
                         },
@@ -1642,13 +1561,12 @@ return {
     ["3-2: To the Forsaken Mines"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n \n",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
                 trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1658,7 +1576,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1668,7 +1585,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1684,27 +1600,27 @@ return {
                        "===== Buy from Auction House =====\n \n" ..
                        "- Check 'Food' > 'Ingredients' section for listings.\n \n" ..
                        "===== Obtain from Rabbit Family =====\n \n" ..
-                       "- Hare Meat drops from rabbits Palborough Mines[Pit Hare] lowest level rabbits near Bastok. Alt: Dangruf Wadi.\n",
+                       "- Hare Meat drops from rabbits Palborough Mines[Pit Hare] lowest level rabbits near Bastok. Alt: Dangruf Wadi.\n \n",
                 items_needed = {
                     "Hare Meat"
                 },
                 trigger_on_item_obtain = {"Hare Meat"},
                 images = {
                     {
-                        file     = "maps/north_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
+                        zone_name = "North Gustaberg",
                         highlights = {
                             { position = "K-3", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        file     = "maps/palborough_mines_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         zone_name = "Palborough Mines",
+                        floor_id = 1,
                         --highlights = {
                         --    { position = "K-3", offsetX = 16, offsetY = 16 },
                         --},
@@ -1712,15 +1628,33 @@ return {
                 },
             },
             {
-                text = "Step 3: Travel to Gusgen Mines via Konschtat Highlands (L-7). You can also use a Survival Guide if available. \n" ..
-                       "Recommended: Level 30+ with Sneak, or level 40+ (mobs aggro by hearing and HP).",
+                text = "Step 3: Travel to Gusgen Mines via Konschtat Highlands (L-7). You can also use a Survival Guide or assisted images for directions from Bastok! \n" ..
+                       "Recommended: Level 30+ with Sneak, or level 40+ (mobs aggro by hearing and HP). \n \n",
                 zone_trigger = "Gusgen Mines",
                 images = {
                     {
-                        file     = "maps/konschtat_highlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
+                        zone_name = "South Gustaberg",
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "North Gustaberg",
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        zone_name = "Konschtat Highlands",
                         highlights = {
                             { position = "L-7", offsetX = 16, offsetY = 16 },
                         },
@@ -1728,8 +1662,9 @@ return {
                 },
             },
             {
-                text = "Step 4: In Gusgen Mines, find the ??? at Map 1 (J-7). Trade your Hare Meat to it to spawn Blind Moby. \n" ..
-                       "Defeat Blind Moby to obtain the Glocolite key item.",
+                text = "Step 4: In Gusgen Mines, find the ??? at Map 1 (J-7). \n \n" ..
+                       "Trade your Hare Meat to it to spawn Blind Moby. \n \n" ..
+                       "Defeat Blind Moby to obtain the Glocolite key item. \n \n",
                 onmob_target = {"Blind Moby"},
                 draw_type = 'square',
                 center = { x = 210.1, y= -59.2, z=-101.8 },
@@ -1742,10 +1677,11 @@ return {
                 trigger_on_item_obtain = {"Glocolite"},
                 images = {
                     {
-                        file     = "maps/gusgen_mines_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
+                        zone_name = "Gusgen Mines",
+                        floor_id = 1,
                         highlights = {
                             { position = "J-7", offsetX = 16, offsetY = 16 },
                         },
@@ -1758,7 +1694,6 @@ return {
                 trigger_on_event_id = {1006},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -1768,7 +1703,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -1778,7 +1712,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -1804,7 +1737,6 @@ return {
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1814,7 +1746,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1824,7 +1755,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/port_bastok.png",
                         width    = 512,
                         height   = 512,
                         state    = 1,
@@ -1841,7 +1771,6 @@ return {
                 trigger_on_event_id = 322,
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -1869,7 +1798,6 @@ return {
                 trigger_on_event_id = {41, 66, 139},
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1880,7 +1808,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/bastok_markets.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1890,7 +1817,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/south_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1900,7 +1826,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/north_gustaberg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1911,7 +1836,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/konschtat_highlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1921,7 +1845,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/pashhow_marshlands.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1931,7 +1854,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/rolanberry_fields.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1941,7 +1863,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/lower_jeuno.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1951,7 +1872,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/upper_jeuno.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1961,7 +1881,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/rulude_gardens.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -1981,7 +1900,6 @@ return {
                 zone_trigger = "Lower Delkfutt's Tower",
                 images = {
                     {
-                        file     = "maps/lower_jeuno.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -1991,7 +1909,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/port_jeuno.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -2001,7 +1918,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/qufim_island.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -2030,7 +1946,6 @@ return {
                 zone_trigger = "Upper Delkfutt's Tower",
                 images = {
                     {
-                        file     = "maps/lower_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2041,7 +1956,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/lower_delkfutts_tower_2.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2052,7 +1966,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/lower_delkfutts_tower_3.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2062,7 +1975,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/lower_delkfutts_tower_4.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2072,7 +1984,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2082,7 +1993,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_2.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2092,7 +2002,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_3.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2102,7 +2011,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_4.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2113,7 +2021,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_5.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2124,7 +2031,6 @@ return {
                         },
                     },
                     {
-                        file     = "maps/middle_delkfutts_tower_6.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -2145,7 +2051,6 @@ return {
                 trigger_on_item_obtain = {"Delkfutt Key"},
                 images = {
                     {
-                        file     = "maps/upper_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 6,
@@ -2166,7 +2071,6 @@ return {
                 zone = "Upper Delkfutt's Tower",
                 images = {
                     {
-                        file     = "maps/upper_delkfutts_tower_1.png",
                         width    = 512,
                         height   = 512,
                         state    = 7,
@@ -2184,7 +2088,6 @@ return {
                 onmob_target = {"Cermet Door"},
                 images = {
                     {
-                        file     = "maps/upper_delkfutts_tower_5.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -2194,7 +2097,6 @@ return {
                         -- },
                     },
                     {
-                        file     = "maps/lower_delkfutts_tower_4.png",
                         width    = 512,
                         height   = 512,
                         state    = 8,
@@ -2211,7 +2113,6 @@ return {
                 trigger_on_event_id = 139,
                 images = {
                     {
-                        file     = "maps/rulude_gardens.png",
                         width    = 512,
                         height   = 512,
                         state    = 9,
@@ -2228,7 +2129,6 @@ return {
                 trigger_on_event_id = 38,
                 images = {
                     {
-                        file     = "maps/rulude_gardens.png",
                         width    = 512,
                         height   = 512,
                         state    = 10,
@@ -2258,7 +2158,6 @@ return {
                 trigger_on_event_id = 0,
                 images = {
                     {
-                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -2279,7 +2178,6 @@ return {
                 trigger_on_event_id = {129},
                 images = {
                     {
-                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -2297,7 +2195,6 @@ return {
                 trigger_on_event_id = {128},
                 images = {
                     {
-                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -2319,7 +2216,6 @@ return {
                 trigger_on_event_id = {152},
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -2339,7 +2235,6 @@ return {
                 keyitems_needed = {20,21,46,47},
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 5,
@@ -2357,7 +2252,6 @@ return {
                 trigger_on_event_id = {184},
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 6,
@@ -2376,7 +2270,6 @@ return {
                 trigger_on_event_id = {174},
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 7,
@@ -2399,7 +2292,6 @@ return {
                 trigger_on_item_obtain = {"Coeurl Meat"},
                 images = {
                     {
-                        file = "maps/sauromugue_champaign.png",
                         width = 512,
                         height = 512,
                         state = 8,
@@ -2417,7 +2309,6 @@ return {
                 trigger_on_event_id = {171},
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 9,
@@ -2438,7 +2329,6 @@ return {
                 trigger_on_event_id = {89},
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 10,
@@ -2455,7 +2345,6 @@ return {
                 zone_trigger = "Beadeaux",
                 images = {
                     {
-                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 11,
@@ -2475,7 +2364,6 @@ return {
                 onmob_target = {"The Mute1"},
                 images = {
                     {
-                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 12,
@@ -2485,7 +2373,6 @@ return {
                         },
                     },
                     {
-                        file = "maps/beadeaux_2.png",
                         width = 512,
                         height = 512,
                         state = 12,
@@ -2506,7 +2393,6 @@ return {
                 zone = "Beadeaux",
                 images = {
                     {
-                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 13,
@@ -2532,7 +2418,6 @@ return {
                 },
                 images = {
                     {
-                        file = "maps/beadeaux_1.png",
                         width = 512,
                         height = 512,
                         state = 14,
@@ -2543,7 +2428,6 @@ return {
                         },
                     },
                     {
-                        file = "maps/beadeaux_2.png",
                         width = 512,
                         height = 512,
                         state = 13,
@@ -2561,7 +2445,6 @@ return {
                 trigger_on_event_id = {91},
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 15,
@@ -2579,7 +2462,6 @@ return {
                 trigger_on_event_id = {92},
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 16,
@@ -2603,7 +2485,6 @@ return {
                 zone_trigger = "Davoi",
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 17,
@@ -2613,7 +2494,6 @@ return {
                         },
                     },
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 17,
@@ -2623,7 +2503,6 @@ return {
                         },
                     },
                     {
-                        file = "maps/batallia_downs.png",
                         width = 512,
                         height = 512,
                         state = 17,
@@ -2633,7 +2512,6 @@ return {
                         },
                     },
                     {
-                        file = "maps/jugner_forest.png",
                         width = 512,
                         height = 512,
                         state = 17,
@@ -2650,7 +2528,6 @@ return {
                 zone_trigger = "Monastic Cavern",
                 images = {
                     {
-                        file = "maps/davoi.png",
                         width = 512,
                         height = 512,
                         state = 18,
@@ -2667,7 +2544,6 @@ return {
                 trigger_on_event_id = {0},
                 images = {
                     {
-                        file = "maps/monastic_cavern.png",
                         width = 512,
                         height = 512,
                         state = 19,
@@ -2688,7 +2564,6 @@ return {
                 zone_trigger = "Qulun Dome",
                 images = {
                     {
-                        file = "maps/beadeaux.png",
                         width = 512,
                         height = 512,
                         state = 17,
@@ -2705,7 +2580,6 @@ return {
                 trigger_on_event_id = {0},
                 images = {
                     {
-                        file = "maps/qulun_dome.png",
                         width = 512,
                         height = 512,
                         state = 18,
@@ -2725,7 +2599,6 @@ return {
                 zone_trigger = "Castle Oztroja",
                 images = {
                     {
-                        file = "maps/castle_oztroja.png",
                         width = 512,
                         height = 512,
                         state = 19,
@@ -2743,7 +2616,6 @@ return {
                        "Navigate through: Map 1 (I-8) -> Map 3 -> Map 7 via exit F (G-7) -> Map 2 via exit I (I-7).",
                 images = {
                     {
-                        file = "maps/castle_oztroja.png",
                         width = 512,
                         height = 512,
                         state = 20,
@@ -2760,7 +2632,6 @@ return {
                        "This opens the Brass Door at (G-10). You need KI:Yagudo Torch.",
                 images = {
                     {
-                        file = "maps/castle_oztroja.png",
                         width = 512,
                         height = 512,
                         state = 21,
@@ -2777,7 +2648,6 @@ return {
                 zone_trigger = "Altar Room",
                 images = {
                     {
-                        file = "maps/castle_oztroja.png",
                         width = 512,
                         height = 512,
                         state = 22,
@@ -2795,7 +2665,6 @@ return {
                 trigger_on_event_id = {44, 10000},
                 images = {
                     {
-                        file = "maps/altar_room.png",
                         width = 512,
                         height = 512,
                         state = 23,
@@ -2816,7 +2685,6 @@ return {
                 trigger_on_event_id = {60},
                 images = {
                     {
-                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 24,
@@ -2835,7 +2703,6 @@ return {
                 trigger_on_event_id = {35},
                 images = {
                     {
-                        file = "maps/rulude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 25,
@@ -2859,7 +2726,6 @@ return {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -2873,7 +2739,6 @@ return {
                 text = "Step 3: Travel to Beadeaux and locate the target point at (H-7).",
                 images = {
                     {
-                        file     = "maps/beadeaux.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -2887,7 +2752,6 @@ return {
                 text = "Step 4: Return to Iron Eater to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -2910,7 +2774,6 @@ return {
                 text = "Step 2: Travel to Xarcabard and locate the target point at (J-9).",
                 images = {
                     {
-                        file     = "maps/xarcabard.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -2934,7 +2797,6 @@ return {
                 text = "Step 2: Talk to Medicine Eagle at (H-7) in Bastok Mines.",
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -2948,7 +2810,6 @@ return {
                 text = "Step 3: Travel to Quicksand Caves and locate the target point at (K-7).",
                 images = {
                     {
-                        file     = "maps/quicksand_caves.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -2962,7 +2823,6 @@ return {
                 text = "Step 4: Return to Medicine Eagle to complete the mission.",
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -2985,7 +2845,6 @@ return {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -2999,7 +2858,6 @@ return {
                 text = "Step 3: Travel to Norg and speak with Gilgamesh at (I-8).",
                 images = {
                     {
-                        file     = "maps/norg.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3013,7 +2871,6 @@ return {
                 text = "Step 4: Return to Cid to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -3036,7 +2893,6 @@ return {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3050,7 +2906,6 @@ return {
                 text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
                 images = {
                     {
-                        file     = "maps/gustav_tunnel.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3065,7 +2920,6 @@ return {
                 text = "Step 5: Return to Cid to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -3088,7 +2942,6 @@ return {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3102,7 +2955,6 @@ return {
                 text = "Step 3: Travel to Ro'Maeve and locate the target point at (H-5).",
                 images = {
                     {
-                        file     = "maps/ro_maeve.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3116,7 +2968,6 @@ return {
                 text = "Step 4: Return to Iron Eater to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 4,
@@ -3139,7 +2990,6 @@ return {
                 text = "Step 2: Travel to Ifrit's Cauldron and locate the target point at (H-6).",
                 images = {
                     {
-                        file     = "maps/ifrits_cauldron.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3164,7 +3014,6 @@ return {
                 text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3178,7 +3027,6 @@ return {
                 text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
                 images = {
                     {
-                        file     = "maps/gustav_tunnel.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3193,7 +3041,6 @@ return {
                 text = "Step 5: Return to Cid to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -3216,7 +3063,6 @@ return {
                 text = "Step 2: Speak to Medicine Eagle at (H-7) in Bastok Mines.",
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3230,7 +3076,6 @@ return {
                 text = "Step 3: Travel to the Quicksand Caves and locate the target point at (K-7).",
                 images = {
                     {
-                        file     = "maps/quicksand_caves.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3245,7 +3090,6 @@ return {
                 text = "Step 5: Return to Medicine Eagle at (H-7) in Bastok Mines to complete the mission.",
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -3268,7 +3112,6 @@ return {
                 text = "Step 2: Speak to Raibaht at (J-8) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3282,7 +3125,6 @@ return {
                 text = "Step 3: Travel to Cape Teriggan and locate the target point at (L-6).",
                 images = {
                     {
-                        file     = "maps/cape_teriggan.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3297,7 +3139,6 @@ return {
                 text = "Step 5: Return to Raibaht to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,
@@ -3320,7 +3161,6 @@ return {
                 text = "Step 2: Speak to Lucius at (K-7) in the Metalworks.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 2,
@@ -3334,7 +3174,6 @@ return {
                 text = "Step 3: Travel to Castle Zvahl Baileys and locate the target point at (J-6).",
                 images = {
                     {
-                        file     = "maps/castle_zvahl_baileys.png",
                         width    = 512,
                         height   = 512,
                         state    = 3,
@@ -3349,7 +3188,6 @@ return {
                 text = "Step 5: Return to Lucius to complete the mission.",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
                         width    = 512,
                         height   = 512,
                         state    = 5,

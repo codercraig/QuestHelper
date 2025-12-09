@@ -15,12 +15,12 @@ addon.version  = '2.0.0'
 
 -- Core Requirements
 local imgui        = require('imgui')
-local image_loader = require('images')
-local helpers      = require('helpers')
+local image_loader = require('util.images')
+local helpers      = require('util.helpers')
 
 -- External drawing modules (existing)
-local drawArcModule = require('drawArc')
-local drawingModule = require('drawing')
+local drawArcModule = require('util.drawArc')
+local drawingModule = require('util.drawing')
 
 -- New modular architecture
 local player_module    = require('modules.player')
@@ -34,7 +34,7 @@ local map_renderer     = require('modules.map_renderer')
 local utils            = require('modules.utils')
 local inventory_cache  = require('modules.inventory_cache')
 local keyitem_module   = require('modules.keyitem')
-local floor_debug      = require('debug_floor_state')
+-- local floor_debug      = require('debug_floor_state')  -- Commented out - file doesn't exist
 
 -- Validation
 if not helpers then error("[" .. addon.name .. "] helpers.lua is missing.") end
@@ -780,6 +780,7 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    --[[ Commented out - debug_floor_state.lua doesn't exist
     if command_base == 'qh_test_floors' then
         print(string.format("[%s] ========== FLOOR DETECTION STATE TEST ==========", addon.name))
 
@@ -801,6 +802,7 @@ ashita.events.register('command', 'command_callback', function(e)
         e.blocked = true
         return true
     end
+    --]]
 
     if command_base == 'qh_textures' then
         local loaded_count = image_loader.GetLoadedCount()

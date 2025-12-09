@@ -15,6 +15,16 @@
 -- },
 
 return {
+    [68] = {
+        [1] = 1,
+        [2] = 2,
+        [3] = 3,
+        [4] = 4,
+        [5] = 5,
+        [6] = 6,
+        [7] = 7,
+        [69] = 8,
+    },
     -- Beadeaux
     [147] = {
         [1] = 1,   -- Upper floor
@@ -25,9 +35,17 @@ return {
         [1] = 1,   -- Upper floor
         [15] = 2,  -- Lower floor
     },
+    -- Ghelsba Outpost
+    [140] = {
+        [1] = 1,   -- Upper floor
+    },
     [142] = {
         [1] = 1,   -- Upper floor
         [15] = 2,  -- Lower floor
+    },
+    [145] = {
+        [1] = 1,   -- Upper floor
+        [2] = 2,  -- Lower floor
     },
     [157] = {
         [4] = 1,   -- Upper floor
@@ -37,6 +55,13 @@ return {
         [8] = 5,  -- Lower floor
         [9] = 6,  -- Lower floor
     },
+    [172] = {
+        [0] = 1,
+    },
+    [196] = {
+        [1] = 1,
+        [14] = 2,
+    }
     -- [184] removed - uses auto-increment (sequential floor IDs)
     -- If floors don't increment properly, run /qh_checkfloor on each floor
     -- and add the actual raw IDs here
