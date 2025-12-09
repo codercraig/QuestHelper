@@ -633,6 +633,33 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_datcheck' then
+        local dat_loader = require('modules.dat_loader')
+
+        print(string.format("[%s] ========== DAT Loader Diagnostics ==========", addon.name))
+        print(string.format("[%s] Enabling debug mode and testing DAT loading...", addon.name))
+
+        -- Enable debug mode
+        dat_loader.set_debug_mode(true)
+
+        -- Try to load Bastok Mines map (zone 234)
+        print(string.format("[%s] Testing with Bastok Mines (zone 234, floor 0)", addon.name))
+        local texture, err = dat_loader.load_map_texture(234, 0)
+
+        if texture then
+            print(string.format("\30\106[%s] SUCCESS: DAT loading works!\30\01", addon.name))
+        else
+            print(string.format("\30\68[%s] FAILED: %s\30\01", addon.name, err or "unknown error"))
+        end
+
+        -- Disable debug mode
+        dat_loader.set_debug_mode(false)
+
+        print(string.format("[%s] ============================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'qh_checkfloor' then
         print(string.format("[%s] ========== Floor Detection Test ==========", addon.name))
         print(string.format("[%s] Zone ID: %d", addon.name, player_module.zoneId or 0))

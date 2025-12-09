@@ -3,13 +3,37 @@ return {
     ["Feature Demo"] = {
         steps = {
             {
-                text = "Walk into the glowing square to begin the demo.",
+                text = "Walk into the glowing square to begin the demo.\n" ..
+                       "[DAT LOADING TEST] This map is loaded from FFXI's ROM DAT files!\n" ..
+                       "No PNG required - saves space and uses your in-game maps!",
                 images = {
                 {
-                    file     = "maps/bastok_mines.png",
+                    -- DAT loading enabled - loads map from FFXI ROM files
+                    use_dat_map = true,
+                    zone_id  = 234,
+                    floor_id = 0,
+
+                    -- PNG fallback if DAT loading fails
+                    --file     = "maps/bastok_mines.png",
                     width    = 512,
                     height   = 512,
                     zone_name = "Bastok Mines",
+                    --state    = 3,
+                    highlights = {
+                        { position = "H-10", offsetX = 16, offsetY = 16 },
+                    },
+                },
+                {
+                    -- DAT loading enabled - loads map from FFXI ROM files
+                    -- use_dat_map = true,
+                    -- zone_id  = 235,
+                    -- floor_id = 0,
+
+                    -- PNG fallback if DAT loading fails
+                    file     = "maps/bastok_mines.png",
+                    width    = 512,
+                    height   = 512,
+                    zone_name = "Bastok Markets",
                     --state    = 3,
                     highlights = {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
@@ -38,7 +62,10 @@ return {
                 zone = "Beadeaux",
                 images = {
                 {
-                    file     = "maps/beadeaux_1.png",
+                    --file     = "maps/beadeaux_1.png",
+                    use_dat_map = true,
+                    zone_id  = 147,
+                    floor_id = 1,
                     width    = 512,
                     height   = 512,
                     --state    = 3,
@@ -48,7 +75,10 @@ return {
                     zone_name = "Beadeaux",
                 },
                 {
-                    file     = "maps/beadeaux_2.png",
+                    --file     = "maps/beadeaux_2.png",
+                    use_dat_map = true,
+                    zone_id  = 147,
+                    floor_id = 15,
                     width    = 512,
                     height   = 512,
                     --state    = 1,

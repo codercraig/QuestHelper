@@ -60,16 +60,33 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         if ui_images.last_step_key ~= current_step_key then
             -- Step changed, cleanup old textures
             local keep_files = {}
+            local keep_dat_list = {}
+
             for _, img_data in ipairs(step_imgs) do
+                -- Keep PNG files
                 if img_data.file then
                     table.insert(keep_files, img_data.file)
                 end
+
+                -- Keep DAT-loaded textures
+                if img_data.use_dat_map and img_data.zone_id then
+                    table.insert(keep_dat_list, {
+                        zone_id = img_data.zone_id,
+                        floor_id = img_data.floor_id or 0
+                    })
+                elseif img_data.use_dat_map and img_data.zone_name and zone_data[img_data.zone_name] then
+                    -- Derive zone_id from zone_name if not explicit
+                    table.insert(keep_dat_list, {
+                        zone_id = zone_data[img_data.zone_name],
+                        floor_id = img_data.floor_id or 0
+                    })
+                end
             end
 
-            local unloaded = image_loader.CleanupUnused(keep_files)
-            if unloaded > 0 then
-                print(string.format("\30\106[QH]\30\01 Cleaned up %d unused texture(s), keeping %d for current step",
-                    unloaded, #keep_files))
+            local unloaded_png, unloaded_dat = image_loader.CleanupUnused(keep_files, keep_dat_list)
+            if unloaded_png > 0 or unloaded_dat > 0 then
+                print(string.format("\30\106[QH]\30\01 Cleaned up %d PNG + %d DAT texture(s), keeping %d PNG + %d DAT for current step",
+                    unloaded_png, unloaded_dat, #keep_files, #keep_dat_list))
             end
 
             ui_images.last_step_key = current_step_key
@@ -151,7 +168,25 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         end
 
         for img_index, img_data in ipairs(step_imgs) do
-            local tex_ptr = image_loader.GetTexture(img_data.file)
+            -- Try to get zone_id from zone_name if not explicitly provided
+            local zone_id = img_data.zone_id
+            if not zone_id and img_data.zone_name and zone_data[img_data.zone_name] then
+                zone_id = zone_data[img_data.zone_name]
+            end
+
+            -- Get floor_id (default to 0 if not specified)
+            local floor_id = img_data.floor_id or 0
+
+            -- Check if DAT loading is enabled for this image
+            local use_dat = img_data.use_dat_map or false
+
+            -- Load texture (DAT first if enabled, fallback to PNG)
+            local tex_ptr = image_loader.GetTexture(
+                img_data.file,           -- PNG filename (fallback)
+                use_dat and zone_id or nil,  -- zone_id (only if use_dat enabled)
+                floor_id,                -- floor_id
+                not use_dat              -- force_png if use_dat is false
+            )
             if tex_ptr then
                 local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
                 local w = img_data.width or 200
