@@ -47,6 +47,7 @@ return {
         [1] = 1,   -- Upper floor
         [2] = 2,  -- Lower floor
     },
+    -- Middle Delkfutt's Tower
     [157] = {
         [4] = 1,   -- Upper floor
         [5] = 2,  -- Lower floor
@@ -54,6 +55,10 @@ return {
         [7] = 4,  -- Lower floor
         [8] = 5,  -- Lower floor
         [9] = 6,  -- Lower floor
+    },
+    [158] = {
+        [1] = 1,   -- Upper floor
+        [2] = 2,  -- Lower floor
     },
     [172] = {
         [0] = 1,

@@ -33,12 +33,12 @@ Will create a player LUA format to add your own guides.
 
 ## Credits and Thanks
 
-This addon wouldn't have been possible without the incredible work and support from the FFXI community. Special thanks to:
+This addon wouldn't have been possible without the incredible work and support from the Ashita community. Special thanks to:
 
 ### Core Contributors
 
-- **[Atom0s](https://github.com/atom0s)** - Texture loading code samples and technical guidance via Ashita Discord
-- **[Thorny](https://github.com/ThornyFFXI)** - Floor ID detection, key items packet handling, and Ashita development support
+- **[Atom0s](https://github.com/atom0s)** - Floor ID detectionand Texture loading code samples and technical guidance via Ashita Discord
+- **[Thorny](https://github.com/ThornyFFXI)** - Key items packet handling, and Ashita development support
 - **[Loonsies](https://github.com/loonsies/boussole)** - DAT map loading implementation from [Boussole](https://github.com/loonsies/boussole)
   - Map table memory scanning and signature detection
   - ImageHeader structure and bitmap/DXT parsing
@@ -61,6 +61,8 @@ This addon wouldn't have been possible without the incredible work and support f
 ---
 
 ## License
+
+QuestHelper is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 This project uses code and techniques from various open-source projects in the FFXI community. All original authors are credited above. Please respect their licenses and contributions.
 

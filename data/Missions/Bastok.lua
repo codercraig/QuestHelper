@@ -1950,6 +1950,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 1,
                         highlights = {
                             { position = "E-6", offsetX = 16, offsetY = 16 },
                             { position = "F-6", offsetX = 16, offsetY = 16 },
@@ -1960,6 +1961,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 2,
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                             { position = "J-9", offsetX = 16, offsetY = 16 },
@@ -1970,6 +1972,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 3,
                         highlights = {
                             { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1979,6 +1982,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 15,
                         highlights = {
                             { position = "I-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1988,6 +1992,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 4,
                         highlights = {
                             { position = "I-6", offsetX = 16, offsetY = 16 },
                         },
@@ -1997,6 +2002,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 5,
                         highlights = {
                             { position = "H-9", offsetX = 16, offsetY = 16 },
                         },
@@ -2006,6 +2012,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 6,
                         highlights = {
                             { position = "J-10", offsetX = 16, offsetY = 16 },
                         },
@@ -2015,6 +2022,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 7,
                         highlights = {
                             { position = "F-6", offsetX = 16, offsetY = 16 },
                             { position = "F-7", offsetX = 16, offsetY = 16 },
@@ -2025,6 +2033,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 8,
                         highlights = {
                             { position = "I-6", offsetX = 16, offsetY = 16 },
                             { position = "F-9", offsetX = 16, offsetY = 16 },
@@ -2035,6 +2044,7 @@ return {
                         height   = 512,
                         state    = 5,
                         zone_name = "Middle Delkfutt's Tower",
+                        floor_id = 9,
                         highlights = {
                             { position = "J-10", offsetX = 16, offsetY = 16 },
                             { position = "F-6", offsetX = 16, offsetY = 16 },
@@ -2043,8 +2053,9 @@ return {
                 },
             },
             {
-                text = "Step 6: Kill Porphyrion to obtain a Delkfutt Key! \n" ..
-                       "Notes: It uses Eagle Eye Shot, be careful! Recommended: Level 50+ or a party. \n \n",
+                text = "Step 6: Kill Porphyrion to obtain a Delkfutt Key! \n \n" ..
+                       "Notes: It uses Eagle Eye Shot, be careful! \n \n" ..
+                       "Recommended: Level 50+ or a party. \n \n",
                 items_needed = {
                     "Delkfutt Key"
                 },
@@ -2055,6 +2066,7 @@ return {
                         height   = 512,
                         state    = 6,
                         zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 1,
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2075,6 +2087,7 @@ return {
                         height   = 512,
                         state    = 7,
                         zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 1,
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2092,6 +2105,7 @@ return {
                         height   = 512,
                         state    = 8,
                         zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 5,
                         -- highlights = {
                         --     { position = "L-9", offsetX = 16, offsetY = 16 },
                         -- },
@@ -2101,6 +2115,7 @@ return {
                         height   = 512,
                         state    = 8,
                         zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 15,
                         highlights = {
                             { position = "L-9", offsetX = 16, offsetY = 16 },
                         },
@@ -2247,7 +2262,7 @@ return {
             },
             {
                 text = "Step 6: Talk to Muckvix (H-9) teleport to Home Point#1 in Lower Jeuno and head inside Muckvix's Junk Shop. \n \n" ..
-                       "You will receive KI:Yagudo Torch.",
+                       "You will receive KI:Yagudo Torch. \n \n",
                 onmob_target = {"Muckvix"},
                 trigger_on_event_id = {184},
                 images = {
@@ -2284,7 +2299,7 @@ return {
                 text = "Step 8: Obtain Coeurl Meat by: \n \n" ..
                        "Purchasing from Auction House: Food > Ingredients section! \n \n" ..
                        "Defeating Coeurls (drops from all Coeurls, including in Sauromugue Champaign/Meriphataud Mountains) \n \n" ..
-                       "Go to Port Jeuno (E-6) - Home Point#1 and zone into Sauromugue Champaign ",
+                       "Go to Port Jeuno (E-6) - Home Point#1 and zone into Sauromugue Champaign. \n \n",
 
                 items_needed = {
                     "Coeurl Meat"
@@ -2304,7 +2319,7 @@ return {
             },
             {
                 text = "Step 9: Trade Coeurl Meat to Baudin (G-7) in Upper Jeuno. \n \n" ..
-                       "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi')",
+                       "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi') \n \n",
                 onmob_target = {"Baudin"},
                 trigger_on_event_id = {171},
                 images = {
@@ -2323,8 +2338,8 @@ return {
             -- BEADEAUX KEY ITEMS
             {
                 text = "Step 10: Talk to Sattal-Mansal (J-8) in Lower Jeuno (outside Aldo's room in basement of Neptune's Spire). \n \n" ..
-                       "This initiates quests: 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'. \n" ..
-                       "He will request: Quadav Charm (Rare/Ex) and Quadav Augury Shell (Rare).",
+                       "This initiates quests: 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'. \n \n" ..
+                       "He will request: Quadav Charm (Rare/Ex) and Quadav Augury Shell (Rare). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {89},
                 images = {
@@ -2348,9 +2363,9 @@ return {
                         width = 512,
                         height = 512,
                         state = 11,
-                        zone_name = "Beadeaux",
+                        zone_name = "Pashhow Marshlands",
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -2368,6 +2383,7 @@ return {
                         height = 512,
                         state = 12,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
@@ -2377,6 +2393,7 @@ return {
                         height = 512,
                         state = 12,
                         zone_name = "Beadeaux",
+                        floor_id = 15,
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
@@ -2384,8 +2401,9 @@ return {
                 },
             },
             {
-                text = "Step 13:Now Silenced, you can walk through 'The Afflictor' and avoid CURSE make your way to (F-10) and back to Map1. \n \n" ..
-                       "head your way to (E-10) and up the ramp to the 2nd Level. \n \n",
+                text = "Step 13: Whilst Silenced, you can walk through 'The Afflictor' to avoid being CURSED! \n \n" ..
+                       "Make your way to (F-8) and back to Map 1. \n \n" ..
+                       "Now go to (E-10) and up the ramp to the 2nd Level on Map 1. \n \n",
                 trigger_zones = {
                     { type = 'square', center = {  x = -259.9, y = 1, z = -137 }, size = 3  }
                 },
@@ -2397,16 +2415,27 @@ return {
                         height = 512,
                         state = 13,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
                         highlights = {
                             { position = "E-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 13,
+                        zone_name = "Beadeaux",
+                        floor_id = 15,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             {
                 text = "Step 14: Defeat De'Vyu Headhunter (I-9) to obtain Quadav Charm (drops up to 4). \n \n" ..
-                       "Defeat Go'Bhu Gascon (F-6) to obtain Quadav Augury Shell (drops up to 4). \n \n",
+                       "Defeat Go'Bhu Gascon (F-6) to obtain Quadav Augury Shell (drops up to 4). \n \n" ..
+                       "Notes: Stay on the 2nd level and run around to the shown coordinates. \n \n",
                 require_all_items = true,
                 items_needed = {
                     "Quadav Charm",
@@ -2422,6 +2451,7 @@ return {
                         height = 512,
                         state = 14,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                             { position = "F-6", offsetX = 16, offsetY = 16 },
@@ -2432,6 +2462,7 @@ return {
                         height = 512,
                         state = 13,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
                         highlights = {
                             { position = "F-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2523,9 +2554,12 @@ return {
                 },
             },
             {
-                text = "Step 18: Navigate to Wall of Dark Arts (G-7) and disable it. You need KI:Crest of Davoi. \n" ..
-                       "Continue into Monastic Cavern.",
+                text = "Step 18: Navigate to Wall of Dark Arts (G-7) and click! \n \n" ..
+                       "You will need the KI:Crest of Davoi to get through. \n \n" ..
+                       "Click Yes... Continue into Monastic Cavern. \n \n",
                 zone_trigger = "Monastic Cavern",
+                onmob_target = {"Wall of Dark Arts"},
+                trigger_on_event_id = 54,
                 images = {
                     {
                         width = 512,
@@ -2539,17 +2573,34 @@ return {
                 },
             },
             {
-                text = "Step 19: In Monastic Cavern, check the Magicite at the end of the hall. \n \n" ..
-                       "You will receive KI:Magicite: Optistone. (Event ID: 0)",
-                trigger_on_event_id = {0},
+                text = "Step 19: Continue into Monastic Cavern. \n \n",
+                zone_trigger = "Monastic Cavern",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 19,
+                        zone_name = "Davoi",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 20: In Monastic Cavern, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Optistone. \n \n",
+                keyitems_needed = {14},
+                trigger_on_keyitem_obtain = {14},
+                onmob_target = {"Magicite-Monastic"},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 20,
                         zone_name = "Monastic Cavern",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -2557,7 +2608,7 @@ return {
 
             -- BEADEAUX - AURASTONE
             {
-                text = "Step 17: Return to Beadeaux Map 2 (enter via exit A at H-7). \n \n" ..
+                text = "Step 21: Return to Beadeaux Map 2 (enter via exit A at H-7). \n \n" ..
                        "Navigate to Qulun Dome entrance at (I-7). \n \n" ..
                        "Open the door - you need: KI:Silver Bell, KI:Coruscant Rosary, KI:Black Matinee Necklace. \n" ..
                        "If you get message 'glow faintly', move closer and try again.",
@@ -2566,8 +2617,19 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 17,
+                        state = 21,
                         zone_name = "Beadeaux",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 21,
+                        zone_name = "Beadeaux",
+                        floor_id = 15,
                         highlights = {
                             { position = "I-7", offsetX = 16, offsetY = 16 },
                         },

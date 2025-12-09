@@ -168,6 +168,19 @@ return {
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
     },
+    -- Davoi
+    ["Wall of Dark Arts"] = {
+        target_pos = { x = -23.2, y= -0.6, z=-69.1},
+        visual_mode = "arc",
+        zone = "Davoi"
+    },
+    -- monastic Cavern
+    ["Magicite-Monastic"] = {
+        target_pos = { x = -160.8, y= -9.5, z=7.8},
+        visual_mode = "arc",
+        zone = "Monastic Cavern"
+    },
+
     -- Jueno
     -- Lower Jeuno
     ["Aldo"] = {
