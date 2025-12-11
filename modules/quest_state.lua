@@ -15,7 +15,9 @@ local default_settings = T{
         auto_scroll_enabled = true, -- Auto-scroll to current floor/zone
         show_all_steps = true,      -- Show all steps vs only current step
         map_pos_x = nil,            -- Map window X position (nil = centered on first launch)
-        map_pos_y = nil             -- Map window Y position (nil = centered on first launch)
+        map_pos_y = nil,            -- Map window Y position (nil = centered on first launch)
+        items_section_expanded = true,     -- Items Needed section expanded state
+        keyitems_section_expanded = true   -- Key Items Needed section expanded state
     }
 }
 

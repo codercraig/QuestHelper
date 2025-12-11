@@ -2608,12 +2608,21 @@ return {
 
             -- BEADEAUX - AURASTONE
             {
-                text = "Step 21: Return to Beadeaux Map 2 (enter via exit A at H-7). \n \n" ..
-                       "Navigate to Qulun Dome entrance at (I-7). \n \n" ..
-                       "Open the door - you need: KI:Silver Bell, KI:Coruscant Rosary, KI:Black Matinee Necklace. \n" ..
-                       "If you get message 'glow faintly', move closer and try again.",
+                text = "Step 21: Return to Beadeaux! \n \n" ..
+                       "Use the Survival Guide or Outpost [Derfland] in Pashhow Marshlands to get there! \n \n" ..
+                       "Map 1 go to (H-7). \n \n" ..
+                       "Navigate to Qulun Dome entrance at (I-7). \n \n",
                 zone_trigger = "Qulun Dome",
                 images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 21,
+                        zone_name = "Pashhow Marshlands",
+                        highlights = {
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                     {
                         width = 512,
                         height = 512,
@@ -2621,7 +2630,7 @@ return {
                         zone_name = "Beadeaux",
                         floor_id = 1,
                         highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -2637,14 +2646,36 @@ return {
                 },
             },
             {
-                text = "Step 18: In Qulun Dome, check the Magicite at the end of the hall. \n \n" ..
-                       "You will receive KI:Magicite: Aurastone. (Event ID: 0)",
-                trigger_on_event_id = {0},
+                text = "Step 22: In Qulun Dome, check the Door (G-8). \n \n" ..
+                       "Open the door - you need: KI:Silver Bell, KI:Coruscant Rosary, KI:Black Matinee Necklace. \n \n" ..
+                       "Might have to click it twice, till an option: 'Investigate the door?' -  Click Yes! \n \n",
+                onmob_target = {"Qulun Door 1"},
+                --trigger_on_event_id = {50},
+                trigger_on_talk = {" shine brightly!"},
+                zone = "Qulun Dome",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 18,
+                        state = 22,
+                        zone_name = "Qulun Dome",
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 23: In Qulun Dome, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Aurastone. \n \n",
+                keyitems_needed = {15},
+                trigger_on_keyitem_obtain = {15},
+                onmob_target = {"Magicite-Qulun"},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 23,
                         zone_name = "Qulun Dome",
                         highlights = {
                             { position = "E-7", offsetX = 16, offsetY = 16 },
@@ -2655,65 +2686,136 @@ return {
 
             -- CASTLE OZTROJA - ORASTONE
             {
-                text = "Step 19: Travel to Castle Oztroja. Yagudo are level 49 (sight-aggro), Bats (hearing-aggro). \n \n" ..
-                       "Fastest route: Survival Guide to Aragoneu > Castle Oztroja. \n \n" ..
-                       "Navigate to door (I-8) on Map 1 to reach Map 3.",
+                text = "Step 24: Travel to Castle Oztroja. \n \n"..
+                       "Fastest route: Survival Guide to Aragoneu > Castle Oztroja OR outpost to Meriphataud Mountains! \n \n" ..
+                       "If you like getting some virtual cardio in heres a route from Jeuno: \n \n" ..
+                       "Port Jeuno            : (K-8)  ->\n" ..
+                       "Sauromugue Champaign  : (K-11) ->\n" ..
+                       "Meriphataud Mountains : (L-8)  ->\n" ..
+                       "Castle Oztroja - woo! \n \n",
                 zone_trigger = "Castle Oztroja",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 19,
+                        state = 24,
+                        zone_name = "Port Jeuno",
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 24,
+                        zone_name = "Sauromugue Champaign",
+                        highlights = {
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                            { position = "L-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 24,
+                        zone_name = "Meriphataud Mountains",
+                        highlights = {
+                            { position = "L-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 25: Castle Oztroja Route: \n \n" ..
+                       "Navigate through: \n \n" ..
+                       "Map 1 (I-8)    -> \n" ..
+                       "Map 2 (G-7)    -> \n" ..
+                       "Map 6 (I-7)    -> \n" ..
+                       "Map 7 (H-9/10) -> Yagudo Torch! \n \n" ..
+                       "Notes: One lever opens door, other triggers trapdoor. Correct lever changes each Vana'diel day. \n \n" ..
+                       "Stand on trapdoor to use the lever. To avoid trap: Click lever and then RUN off trapdoor immediately. \n \n" ..
+                       "If you fall follow the map and click the other lever until you get through! \n \n",
+                trigger_on_event_id = {11},
+                zone_name = "Castle Oztroja",
+                visual_zones = {
+                    {
+                        type = 'square',
+                        center = { x = -102.9, y = 24.3, z = -108.4 },
+                        size = 2,
+                        floor_id = 15  -- Optional: only show on floor 1
+                    },
+                    {
+                        type = 'square',
+                        center = { x = -97.3, y = 24.3, z = -108.4 },
+                        size = 2,
+                        floor_id = 15  -- Optional: only show on floor 5
+                    },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 25,
                         zone_name = "Castle Oztroja",
+                        floor_id = 1,
                         highlights = {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
                     },
-                },
-            },
-            {
-                text = "Step 20: Castle Oztroja Map 1 lever puzzle: \n \n" ..
-                       "One lever opens door, other triggers trapdoor. Correct lever changes each Vana'diel day. \n" ..
-                       "Stand on trapdoor to throw lever. To avoid trap: throw lever and RUN off trapdoor immediately. \n \n" ..
-                       "Navigate through: Map 1 (I-8) -> Map 3 -> Map 7 via exit F (G-7) -> Map 2 via exit I (I-7).",
-                images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 20,
+                        state = 25,
                         zone_name = "Castle Oztroja",
+                        floor_id = 2,
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 25,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 5,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 25,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 6,
+                        highlights = {
                             { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
                     },
-                },
-            },
-            {
-                text = "Step 21: In Castle Oztroja Map 2, light the Yagudo Torch in southwest hallway at (H-9 or H-10). \n \n" ..
-                       "This opens the Brass Door at (G-10). You need KI:Yagudo Torch.",
-                images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 21,
+                        state = 25,
                         zone_name = "Castle Oztroja",
+                        floor_id = 15,
                         highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                            { position = "J-11", offsetX = 16, offsetY = 16 },
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 22: Open Brass Door (G-10) and enter Altar Room.",
+                text = "Step 26: Now proceed to the Altar Room! \n \n" ..
+                       "You'll have to go through another Brass Door! \n \n",
                 zone_trigger = "Altar Room",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 22,
+                        state = 26,
                         zone_name = "Castle Oztroja",
+                        floor_id = 15,
                         highlights = {
                             { position = "G-10", offsetX = 16, offsetY = 16 },
                         },
@@ -2721,18 +2823,20 @@ return {
                 },
             },
             {
-                text = "Step 23: In Altar Room, check the Magicite at the end of the hall. \n \n" ..
-                       "You will receive KI:Magicite: Orastone. (Event ID: 44 or 10000) \n \n" ..
-                       "NOTE: If you spoke to Paya-Sabya and Muckvix, you get Fickblix cutscene. If repeating mission and skipped them, cutscene is skipped.",
-                trigger_on_event_id = {44, 10000},
+                text = "Step 27: In Altar Room, check the Magicite at the end of the hall. \n \n" ..
+                       "You will receive KI:Magicite: Orastone. \n \n" ..
+                       "NOTE: If you spoke to Paya-Sabya and Muckvix, you get Fickblix cutscene. If repeating mission and skipped them, cutscene is skipped. \n \n",
+                keyitems_needed = {16},
+                trigger_on_keyitem_obtain = {16},
+                onmob_target = {"Magicite-Altar"},
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 23,
+                        state = 27,
                         zone_name = "Altar Room",
                         highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -2740,17 +2844,18 @@ return {
 
             -- MISSION COMPLETION
             {
-                text = "Step 24: After obtaining all THREE Magicites, return to Ru'Lude Gardens and check the Audience Chamber door (_6r9) at (H-6). \n \n" ..
-                       "You will receive KI:Airship Pass (or 20,000 gil if you already have one). (Event ID: 60) \n" ..
-                       "You will also receive title: 'Have Wings, Will Fly'.",
-                onmob_target = {"_6r9"},
+                text = "Step 28: After obtaining all THREE Magicites, return to Ru'Lude Gardens (Home Point #1) and check the Audience Chamber door at (H-6). \n \n" ..
+                       "You will receive KI:Airship Pass (or 20,000 gil if you already have one). \n \n" ..
+                       "You will also receive title: 'Have Wings, Will Fly'. \n \n",
+                onmob_target = {"Door: Audience Chamber"},
                 trigger_on_event_id = {60},
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 24,
+                        state = 28,
                         zone_name = "Ru'Lude Gardens",
+                        floor_id = 0,
                         highlights = {
                             { position = "H-6", offsetX = 16, offsetY = 16 },
                         },
@@ -2758,17 +2863,18 @@ return {
                 },
             },
             {
-                text = "Step 25: Talk to Goggehn (H-10) at the Bastokan Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
-                       "Rewards: Rank 5, KI:Message to Jeuno, 10,000 gil. (Event ID: 35) \n \n" ..
-                       "Mission 5-1 'Darkness Rising' begins immediately. You cannot change allegiance until completing or rejecting 5-1.",
+                text = "Step 29: Talk to Goggehn (H-10) at the Bastokan Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
+                       "Rewards: Rank 5, KI:Message to Jeuno, 10,000 gil. \n \n" ..
+                       "Mission 5-1 'Darkness Rising' begins immediately. You cannot change allegiance until completing or rejecting 5-1. \n \n",
                 onmob_target = {"Goggehn"},
                 trigger_on_event_id = {35},
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 29,
                         zone_name = "Ru'Lude Gardens",
+                        floor_id = 0,
                         highlights = {
                             { position = "H-10", offsetX = 16, offsetY = 16 },
                         },

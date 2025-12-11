@@ -409,12 +409,59 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     if shouldDraw then
                         beam_drawing.calculateDynamicColor()
 
+                        -- Get player floor for floor filtering
+                        local player_floor = player_module.getFloorId(floor_mappings)
+
+                        -- Draw trigger zones (these also check collision)
                         if step_data.trigger_zones then
                             for _, zone in ipairs(step_data.trigger_zones) do
-                                if zone.type == 'square' and zone.center and zone.size then
-                                    drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
-                                elseif zone.type == 'line' and zone.start and zone.stop then
-                                    drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                -- Check floor_id if specified
+                                local should_draw_zone = true
+                                if zone.floor_id and player_floor then
+                                    -- Convert raw floor_id to mapped floor number
+                                    local zone_floor_number = zone.floor_id
+                                    if requiredZone and zone_data[requiredZone] and floor_mappings then
+                                        local zone_id = zone_data[requiredZone]
+                                        if floor_mappings[zone_id] and floor_mappings[zone_id][zone.floor_id] then
+                                            zone_floor_number = floor_mappings[zone_id][zone.floor_id]
+                                        end
+                                    end
+                                    should_draw_zone = (zone_floor_number == player_floor)
+                                end
+
+                                if should_draw_zone then
+                                    if zone.type == 'square' and zone.center and zone.size then
+                                        drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
+                                    elseif zone.type == 'line' and zone.start and zone.stop then
+                                        drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                    end
+                                end
+                            end
+                        end
+
+                        -- Draw visual zones (visual only, no collision check)
+                        if step_data.visual_zones then
+                            for _, zone in ipairs(step_data.visual_zones) do
+                                -- Check floor_id if specified
+                                local should_draw_zone = true
+                                if zone.floor_id and player_floor then
+                                    -- Convert raw floor_id to mapped floor number
+                                    local zone_floor_number = zone.floor_id
+                                    if requiredZone and zone_data[requiredZone] and floor_mappings then
+                                        local zone_id = zone_data[requiredZone]
+                                        if floor_mappings[zone_id] and floor_mappings[zone_id][zone.floor_id] then
+                                            zone_floor_number = floor_mappings[zone_id][zone.floor_id]
+                                        end
+                                    end
+                                    should_draw_zone = (zone_floor_number == player_floor)
+                                end
+
+                                if should_draw_zone then
+                                    if zone.type == 'square' and zone.center and zone.size then
+                                        drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
+                                    elseif zone.type == 'line' and zone.start and zone.stop then
+                                        drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                    end
                                 end
                             end
                         end

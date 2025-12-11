@@ -37,26 +37,18 @@ This addon wouldn't have been possible without the incredible work and support f
 
 ### Core Contributors
 
-- **[Atom0s](https://github.com/atom0s)** - Floor ID detectionand Texture loading code samples and technical guidance via Ashita Discord
-- **[Thorny](https://github.com/ThornyFFXI)** - Key items packet handling, and Ashita development support
+- **[Atom0s](https://github.com/atom0s)** - Floor ID detection and Texture loading code samples via Ashita Discord
+- **[Thorny](https://github.com/ThornyFFXI)** - Key items packet handling, and Ashita development support via Ashita Discord
 - **[Loonsies](https://github.com/loonsies/boussole)** - DAT map loading implementation from [Boussole](https://github.com/loonsies/boussole)
   - Map table memory scanning and signature detection
   - ImageHeader structure and bitmap/DXT parsing
   - DXT texture decompression support
   - DAT index calculation from map entries
-  - Auto-calibration system for map coordinates
 
 ### Additional References
 
 - **[MalRD](https://github.com/MalRD/)** - Item finding and inventory reference code
-- **[Jyouya/Will](https://github.com/Jyouya/targetlines)** - Target lines and drawing to NPC references
-
-### Technology Stack
-
-- **Ashita v4** - Game framework and addon platform
-- **ImGui** - User interface rendering
-- **FFI/LuaJIT** - Low-level memory access and texture loading
-- **Direct3D 8** - Graphics rendering for map textures
+- **[Jyouya/Will](https://github.com/Jyouya/targetlines)** - Target lines base code references used to draw from player -> NPC.
 
 ---
 
@@ -66,4 +58,4 @@ QuestHelper is licensed under the **MIT License**. See [LICENSE](LICENSE) for de
 
 This project uses code and techniques from various open-source projects in the FFXI community. All original authors are credited above. Please respect their licenses and contributions.
 
-If you use this code, please maintain these credits and consider contributing back to the community!
+If you use this code, please maintain these credits - Thank you! - Oxos

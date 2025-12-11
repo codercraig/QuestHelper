@@ -17,7 +17,7 @@ local keyitems = {}
 -- Key item ID to name mapping
 local id_to_name = {
     [14] = "Magicite Optistone",
-    [15] = "Magicite Autastone",
+    [15] = "Magicite Aurastone",
     [16] = "Magicite Orastone",
     [20] = "Yagudo Torch",
     [21] = "Crest of Davoi",

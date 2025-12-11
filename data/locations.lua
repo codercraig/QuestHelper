@@ -117,6 +117,17 @@ return {
         visual_mode = "arc",
         zone = "Beadeaux"
     },
+    --Qulun Dome
+    ["Qulun Door 1"] = {
+        target_pos = { x = 59.9, y= 22, z=-6.7},
+        visual_mode = "arc",
+        zone = "Qulun Dome"
+    },
+    ["Magicite-Qulun"] = {
+        target_pos = { x = 9.5, y= 23, z=-84},
+        visual_mode = "arc",
+        zone = "Qulun Dome"
+    },
     --Windurst
     --Port Windurst
     ["Melek"] = {
@@ -174,13 +185,18 @@ return {
         visual_mode = "arc",
         zone = "Davoi"
     },
-    -- monastic Cavern
+    -- Monastic Cavern
     ["Magicite-Monastic"] = {
         target_pos = { x = -160.8, y= -9.5, z=7.8},
         visual_mode = "arc",
         zone = "Monastic Cavern"
     },
-
+    -- Altar Room
+    ["Magicite-Altar"] = {
+        target_pos = { x = -347, y= 22.2, z=46.3},
+        visual_mode = "arc",
+        zone = "Altar Room"
+    },
     -- Jueno
     -- Lower Jeuno
     ["Aldo"] = {

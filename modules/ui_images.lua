@@ -111,16 +111,32 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                 -- Count images per zone for multi-floor detection
                 zone_image_counts[zone] = (zone_image_counts[zone] or 0) + 1
 
-                -- Try to extract floor index from filename (e.g., "zonename_2.png" -> index 2)
-                local floor_index = img_data.file and img_data.file:match("_(%d+)%.png$")
-                if floor_index then
-                    -- Use the filename index directly (corresponds to map_db index)
-                    img_floor_numbers[img_index] = tonumber(floor_index)
+                -- Determine floor number for this image (for player arrow drawing logic)
+                local img_floor_number = 1  -- Default
+                if img_data.floor_id then
+                    -- Use explicit floor_id from mission data
+                    -- If zone has floor mappings, convert raw floor_id to mapped floor number
+                    local img_zone_id = zone_data[zone]
+                    if img_zone_id and floor_mappings and floor_mappings[img_zone_id] then
+                        -- Zone has custom floor mappings
+                        img_floor_number = floor_mappings[img_zone_id][img_data.floor_id] or img_data.floor_id
+                    else
+                        -- No custom mapping, use raw floor_id directly
+                        img_floor_number = img_data.floor_id
+                    end
                 else
-                    -- No floor index in filename, fall back to occurrence counting
-                    zone_occurrence_count[zone] = (zone_occurrence_count[zone] or 0) + 1
-                    img_floor_numbers[img_index] = zone_occurrence_count[zone]
+                    -- No floor_id specified, try to extract floor index from filename (e.g., "zonename_2.png" -> index 2)
+                    local floor_index = img_data.file and img_data.file:match("_(%d+)%.png$")
+                    if floor_index then
+                        -- Use the filename index directly (corresponds to map_db index)
+                        img_floor_number = tonumber(floor_index) or 1
+                    else
+                        -- No floor index in filename, fall back to occurrence counting
+                        zone_occurrence_count[zone] = (zone_occurrence_count[zone] or 0) + 1
+                        img_floor_number = zone_occurrence_count[zone]
+                    end
                 end
+                img_floor_numbers[img_index] = img_floor_number
             else
                 img_floor_numbers[img_index] = 1
             end

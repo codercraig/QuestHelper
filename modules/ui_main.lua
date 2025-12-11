@@ -25,6 +25,9 @@ local INVENTORY_CHECK_INTERVAL = 5.0 -- Check every 5 seconds
 -- Settings window state
 local show_settings_window = false
 
+-- Collapsed mode step navigation
+local collapsed_viewed_step = nil  -- Track which step we're viewing in collapsed mode
+
 local function perform_search(quest_data)
     search_results = T{}
     local query = (search_query or ""):lower()
@@ -139,28 +142,62 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             local steps = missionData.steps
 
             -- Base height for UI elements (top bar, mission name, separators, etc.)
+            -- Add extra height for navigation buttons if more than 1 step
             local base_height = 150
+            if #steps > 1 then
+                base_height = base_height + 40  -- Add space for navigation buttons + separator
+            end
 
-            -- Get current step text
-            if current_step_index and current_step_index <= #steps then
-                local step_data = steps[current_step_index]
+            -- Get step text for height calculation
+            -- Use collapsed_viewed_step if set, otherwise use current step
+            if current_step_index and #steps > 0 then
+                -- Use viewed step for height calculation (will be initialized in navigation section)
+                local step_index_to_use = collapsed_viewed_step or math.min(current_step_index, #steps)
+                local step_data = steps[step_index_to_use]
                 local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
 
-                -- Estimate text height: ~60 chars per line, ~20px per line
-                local text_length = #text
-                local estimated_lines = math.ceil(text_length / 60)
-                local text_height = estimated_lines * 20
+                -- Estimate text height: Count newlines + account for line wrapping
+                -- Each line wraps at ~60 chars, each line is ~20px tall
+                local lines = 1  -- Start with 1 line minimum
+                local current_line_length = 0
+
+                for i = 1, #text do
+                    local char = text:sub(i, i)
+                    if char == '\n' then
+                        -- Hit a newline, start a new line
+                        lines = lines + 1
+                        current_line_length = 0
+                    else
+                        current_line_length = current_line_length + 1
+                        -- Check if current line exceeds wrap width
+                        if current_line_length >= 60 then
+                            lines = lines + 1
+                            current_line_length = 0
+                        end
+                    end
+                end
+
+                local text_height = lines * 20
 
                 -- Add height for items/key items if present
+                -- Only add full height if sections are expanded, otherwise just add header height + extra breathing room
                 local items_height = 0
                 local itemsNeeded = getAllItemsNeeded(missionData)
                 if #itemsNeeded > 0 then
-                    items_height = (#itemsNeeded * 25) + 40  -- ~25px per item + header
+                    if ui_settings.items_section_expanded then
+                        items_height = (#itemsNeeded * 25) + 30  -- ~25px per item + header
+                    else
+                        items_height = 30 -- Collapsed header + extra breathing room
+                    end
                 end
 
                 local keyItemsNeeded = utils.getAllKeyItemsNeeded(missionData, keyitems_db)
                 if #keyItemsNeeded > 0 then
-                    items_height = items_height + (#keyItemsNeeded * 25) + 40
+                    if ui_settings.keyitems_section_expanded then
+                        items_height = items_height + (#keyItemsNeeded * 25) + 30
+                    else
+                        items_height = items_height + 30  -- Collapsed header + extra breathing room
+                    end
                 end
 
                 -- Calculate total height
@@ -375,9 +412,49 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     imgui.Text('[' .. string.rep('|', barCount) .. string.rep(' ', 20 - barCount) .. '] ' .. string.format("%.2f%% (%d/%d steps)", pct, done, tot))
                     imgui.Separator()
                 else
-                    -- Minimal header when collapsed: just mission name
+                    -- Minimal header when collapsed: mission name + step progress
                     imgui.Text('Mission: ' .. current_mission)
+
+                    -- Show completed steps and total (matching expanded mode format)
+                    local pct, done, tot = quest_state.calculateProgress(currentTopCategory, currentSubfile, current_mission, quest_data)
+
+                    -- Compact progress bar and step counter
+                    local barCount = 0
+                    if tot > 0 then barCount = math.floor((pct / 100) * 20); if barCount > 20 then barCount = 20 end end
+                    imgui.Text('[' .. string.rep('|', barCount) .. string.rep(' ', 20 - barCount) .. '] ' .. string.format("%.0f%% (%d/%d steps)", pct, done, tot))
                     imgui.Separator()
+
+                    -- Step navigation buttons in collapsed mode (before items/keyitems)
+                    local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+                    if #steps > 1 then
+                        -- Initialize viewed step to current step if not set OR auto-advance if user completed steps
+                        if not collapsed_viewed_step or collapsed_viewed_step < 1 or collapsed_viewed_step > #steps then
+                            collapsed_viewed_step = math.min(current_step_index, #steps)
+                        elseif collapsed_viewed_step < current_step_index then
+                            -- Auto-advance: user completed steps, follow the current step
+                            collapsed_viewed_step = math.min(current_step_index, #steps)
+                        end
+
+                        -- Previous button
+                        if collapsed_viewed_step > 1 then
+                            if imgui.SmallButton("< Prev##CollapsedPrev") then
+                                collapsed_viewed_step = collapsed_viewed_step - 1
+                            end
+                            imgui.SameLine()
+                        end
+
+                        imgui.Text(string.format("Step %d/%d", collapsed_viewed_step, #steps))
+                        imgui.SameLine()
+
+                        -- Next button
+                        if collapsed_viewed_step < #steps then
+                            if imgui.SmallButton("Next >##CollapsedNext") then
+                                collapsed_viewed_step = collapsed_viewed_step + 1
+                            end
+                        end
+
+                        imgui.Separator()
+                    end
                 end
 
                 -- Items Needed Section (check inventory every 5 seconds)
@@ -436,7 +513,16 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
 
                     -- Display items needed (collapsible, open by default)
-                    if imgui.CollapsingHeader("Items Needed:", ImGuiTreeNodeFlags_DefaultOpen) then
+                    -- Track the expanded state for dynamic height calculation
+                    local items_header_expanded = imgui.CollapsingHeader("Items Needed:", ui_settings.items_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
+
+                    -- Update state if it changed
+                    if items_header_expanded ~= ui_settings.items_section_expanded then
+                        ui_settings.items_section_expanded = items_header_expanded
+                        settings.save('QuestHelper_settings', quest_state.settings)
+                    end
+
+                    if items_header_expanded then
                         for _, itemData in ipairs(itemsNeeded) do
                             local itemName = itemData.name
                             local qtyNeeded = itemData.quantity
@@ -491,7 +577,16 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 -- Key Items Needed Section (collapsible, open by default)
                 local keyItemsNeeded = utils.getAllKeyItemsNeeded(missionData, keyitems_db)
                 if #keyItemsNeeded > 0 and keyitem_module then
-                    if imgui.CollapsingHeader("Key Items Needed:", ImGuiTreeNodeFlags_DefaultOpen) then
+                    -- Track the expanded state for dynamic height calculation
+                    local keyitems_header_expanded = imgui.CollapsingHeader("Key Items Needed:", ui_settings.keyitems_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
+
+                    -- Update state if it changed
+                    if keyitems_header_expanded ~= ui_settings.keyitems_section_expanded then
+                        ui_settings.keyitems_section_expanded = keyitems_header_expanded
+                        settings.save('QuestHelper_settings', quest_state.settings)
+                    end
+
+                    if keyitems_header_expanded then
                         -- Check if key item tracking is initialized
                         if not keyitem_module.isInitialized() then
                             imgui.TextColored({1, 1, 0, 1}, "  [!] Key item tracking not ready yet")
@@ -514,7 +609,6 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 -- Steps
                 -- Determine which steps to display based on show_all_steps setting
-                local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
                 local steps_to_show = {}
 
                 if ui_settings.show_all_steps then
@@ -523,12 +617,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         table.insert(steps_to_show, i)
                     end
                 else
-                    -- Show only current step (first incomplete step)
-                    if current_step_index and current_step_index <= #steps then
-                        table.insert(steps_to_show, current_step_index)
-                    elseif #steps > 0 then
-                        -- If all complete, show last step
-                        table.insert(steps_to_show, #steps)
+                    -- Collapsed mode: show the viewed step (navigation buttons are above)
+                    if collapsed_viewed_step and collapsed_viewed_step >= 1 and collapsed_viewed_step <= #steps then
+                        table.insert(steps_to_show, collapsed_viewed_step)
                     end
                 end
 
@@ -665,6 +756,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         else
             show_settings_window = false
         end
+    end
+
+    -- Reset collapsed viewed step if mission changed
+    if new_current_mission ~= current_mission then
+        collapsed_viewed_step = nil
     end
 
     return window_open, mainX, mainY, mainW, mainH, new_showImagesDrawer,
