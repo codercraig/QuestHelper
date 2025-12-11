@@ -69,12 +69,23 @@ return {
         [1] = 1,   -- Upper floor
         [2] = 2,  -- Lower floor
     },
+    [161] = {
+        [1] = 1,
+        [2] = 2,
+        [15] = 3,
+        [16] = 4,
+        [162] = 5,
+    },
     [172] = {
         [0] = 1,
     },
     [196] = {
         [1] = 1,
         [14] = 2,
+    },
+    [204] = {
+        [1] = 1,
+        [15] = 2,
     }
     -- [184] removed - uses auto-increment (sequential floor IDs)
     -- If floors don't increment properly, run /qh_checkfloor on each floor

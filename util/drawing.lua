@@ -74,4 +74,122 @@ function drawingModule.drawLine(p1, p2, color)
     drawLine(p1, p2, color)
 end
 
+function drawingModule.drawArrow(center, size, direction, color)
+    -- direction can be: 'up', 'down', 'left', 'right', 'north', 'south', 'east', 'west'
+    -- and diagonals: 'northeast', 'northwest', 'southeast', 'southwest', 'ne', 'nw', 'se', 'sw'
+    -- Normalize direction to lowercase
+    local dir = string.lower(direction or 'up')
+
+    -- Arrow dimensions
+    local head_length = size * 0.4
+    local head_width = size * 0.5
+
+    -- For diagonals, use sqrt(2) to maintain proper length
+    local diagonal_factor = 0.707  -- 1/sqrt(2)
+
+    local points = {}
+
+    -- Define arrow points based on direction
+    -- Arrow points up (north) by default
+    if dir == 'up' or dir == 'north' then
+        -- Tip of arrow (top/north)
+        points.tip = {x = center.x, y = center.y, z = center.z + size/2}
+        -- Base of shaft (bottom/south)
+        points.base = {x = center.x, y = center.y, z = center.z - size/2}
+        -- Left arrowhead
+        points.left = {x = center.x - head_width/2, y = center.y, z = center.z + size/2 - head_length}
+        -- Right arrowhead
+        points.right = {x = center.x + head_width/2, y = center.y, z = center.z + size/2 - head_length}
+
+    elseif dir == 'down' or dir == 'south' then
+        -- Tip of arrow (bottom/south)
+        points.tip = {x = center.x, y = center.y, z = center.z - size/2}
+        -- Base of shaft (top/north)
+        points.base = {x = center.x, y = center.y, z = center.z + size/2}
+        -- Left arrowhead
+        points.left = {x = center.x - head_width/2, y = center.y, z = center.z - size/2 + head_length}
+        -- Right arrowhead
+        points.right = {x = center.x + head_width/2, y = center.y, z = center.z - size/2 + head_length}
+
+    elseif dir == 'left' or dir == 'west' then
+        -- Tip of arrow (left)
+        points.tip = {x = center.x - size/2, y = center.y, z = center.z}
+        -- Base of shaft (right)
+        points.base = {x = center.x + size/2, y = center.y, z = center.z}
+        -- Top arrowhead
+        points.left = {x = center.x - size/2 + head_length, y = center.y, z = center.z - head_width/2}
+        -- Bottom arrowhead
+        points.right = {x = center.x - size/2 + head_length, y = center.y, z = center.z + head_width/2}
+
+    elseif dir == 'right' or dir == 'east' then
+        -- Tip of arrow (right)
+        points.tip = {x = center.x + size/2, y = center.y, z = center.z}
+        -- Base of shaft (left)
+        points.base = {x = center.x - size/2, y = center.y, z = center.z}
+        -- Top arrowhead
+        points.left = {x = center.x + size/2 - head_length, y = center.y, z = center.z - head_width/2}
+        -- Bottom arrowhead
+        points.right = {x = center.x + size/2 - head_length, y = center.y, z = center.z + head_width/2}
+
+    -- Diagonal directions
+    elseif dir == 'northeast' or dir == 'ne' then
+        -- Tip of arrow (northeast)
+        local offset = size/2 * diagonal_factor
+        points.tip = {x = center.x + offset, y = center.y, z = center.z + offset}
+        points.base = {x = center.x - offset, y = center.y, z = center.z - offset}
+        -- Arrowhead points perpendicular to diagonal
+        local head_offset = head_length * diagonal_factor
+        local head_perp = head_width/2 * diagonal_factor
+        points.left = {x = points.tip.x - head_offset - head_perp, y = center.y, z = points.tip.z - head_offset + head_perp}
+        points.right = {x = points.tip.x - head_offset + head_perp, y = center.y, z = points.tip.z - head_offset - head_perp}
+
+    elseif dir == 'northwest' or dir == 'nw' then
+        -- Tip of arrow (northwest)
+        local offset = size/2 * diagonal_factor
+        points.tip = {x = center.x - offset, y = center.y, z = center.z + offset}
+        points.base = {x = center.x + offset, y = center.y, z = center.z - offset}
+        -- Arrowhead points perpendicular to diagonal
+        local head_offset = head_length * diagonal_factor
+        local head_perp = head_width/2 * diagonal_factor
+        points.left = {x = points.tip.x + head_offset - head_perp, y = center.y, z = points.tip.z - head_offset - head_perp}
+        points.right = {x = points.tip.x + head_offset + head_perp, y = center.y, z = points.tip.z - head_offset + head_perp}
+
+    elseif dir == 'southeast' or dir == 'se' then
+        -- Tip of arrow (southeast)
+        local offset = size/2 * diagonal_factor
+        points.tip = {x = center.x + offset, y = center.y, z = center.z - offset}
+        points.base = {x = center.x - offset, y = center.y, z = center.z + offset}
+        -- Arrowhead points perpendicular to diagonal
+        local head_offset = head_length * diagonal_factor
+        local head_perp = head_width/2 * diagonal_factor
+        points.left = {x = points.tip.x - head_offset + head_perp, y = center.y, z = points.tip.z + head_offset + head_perp}
+        points.right = {x = points.tip.x - head_offset - head_perp, y = center.y, z = points.tip.z + head_offset - head_perp}
+
+    elseif dir == 'southwest' or dir == 'sw' then
+        -- Tip of arrow (southwest)
+        local offset = size/2 * diagonal_factor
+        points.tip = {x = center.x - offset, y = center.y, z = center.z - offset}
+        points.base = {x = center.x + offset, y = center.y, z = center.z + offset}
+        -- Arrowhead points perpendicular to diagonal
+        local head_offset = head_length * diagonal_factor
+        local head_perp = head_width/2 * diagonal_factor
+        points.left = {x = points.tip.x + head_offset + head_perp, y = center.y, z = points.tip.z + head_offset - head_perp}
+        points.right = {x = points.tip.x + head_offset - head_perp, y = center.y, z = points.tip.z + head_offset + head_perp}
+
+    else
+        -- Default to up if invalid direction
+        points.tip = {x = center.x, y = center.y, z = center.z + size/2}
+        points.base = {x = center.x, y = center.y, z = center.z - size/2}
+        points.left = {x = center.x - head_width/2, y = center.y, z = center.z + size/2 - head_length}
+        points.right = {x = center.x + head_width/2, y = center.y, z = center.z + size/2 - head_length}
+    end
+
+    -- Draw the arrow shaft
+    drawLine(points.base, points.tip, color)
+
+    -- Draw the arrowhead (two lines forming a V)
+    drawLine(points.tip, points.left, color)
+    drawLine(points.tip, points.right, color)
+end
+
 return drawingModule

@@ -434,6 +434,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
                                     elseif zone.type == 'line' and zone.start and zone.stop then
                                         drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
+                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, beam_drawing.ARGB_BEAM_COLOR)
                                     end
                                 end
                             end
@@ -461,6 +463,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
                                     elseif zone.type == 'line' and zone.start and zone.stop then
                                         drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
+                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, beam_drawing.ARGB_BEAM_COLOR)
                                     end
                                 end
                             end
@@ -471,6 +475,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 drawingModule.drawLine(step_data.start_pos, step_data.end_pos, beam_drawing.ARGB_BEAM_COLOR)
                             elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
                                 drawingModule.drawSquare(step_data.center, step_data.size, beam_drawing.ARGB_BEAM_COLOR)
+                            elseif step_data.draw_type == 'arrow' and step_data.center and step_data.size and step_data.direction then
+                                drawingModule.drawArrow(step_data.center, step_data.size, step_data.direction, beam_drawing.ARGB_BEAM_COLOR)
                             end
                         end
                     end

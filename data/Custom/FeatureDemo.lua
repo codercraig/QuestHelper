@@ -40,6 +40,19 @@ return {
                     { type = 'square', center = { x = 0,  y = 0, z = -81 }, size = 2 },
                     { type = 'line', start = { x = 50, y = 0, z = -81 }, stop = { x = 50, y = -5, z = -71 } }
                 },
+                visual_zones = {
+                    -- Cardinal directions
+                    { type = 'arrow', center = { x = -10, y = 0, z = -79 }, size = 4, direction = 'up' },      -- North
+                    { type = 'arrow', center = { x = -20, y = 0, z = -79 }, size = 4, direction = 'down' },    -- South
+                    { type = 'arrow', center = { x = -10, y = 0, z = -90 }, size = 4, direction = 'left' },    -- West
+                    { type = 'arrow', center = { x = -20, y = 0, z = -90 }, size = 4, direction = 'right' },   -- East
+
+                    -- Diagonal directions
+                    { type = 'arrow', center = { x = -30, y = 0, z = -79 }, size = 4, direction = 'ne' },      -- Northeast
+                    { type = 'arrow', center = { x = -40, y = 0, z = -79 }, size = 4, direction = 'nw' },      -- Northwest
+                    { type = 'arrow', center = { x = -30, y = 0, z = -90 }, size = 4, direction = 'se' },      -- Southeast
+                    { type = 'arrow', center = { x = -40, y = 0, z = -90 }, size = 4, direction = 'sw' },      -- Southwest
+                },
                 zone_name = "Bastok Mines"
             },
             {

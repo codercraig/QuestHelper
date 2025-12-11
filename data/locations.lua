@@ -58,6 +58,11 @@ return {
         trigger_npc = "Iron Eater",
         visual_mode = "arc",
     },
+    ["Karst"] = {
+        target_pos = { x = 107, y = -21.8, z = 0.18 },
+        trigger_npc = "Karst",
+        visual_mode = "arc",
+    },
     ["Kaela"] = {
         target_pos = { x = 40.5, y = -30.0, z = 16.1 },
         trigger_npc = "Kaela",
@@ -284,5 +289,11 @@ return {
         target_pos = { x = -300, y= -143.6, z=19.9},
         visual_mode = "arc",
         zone = "Upper Delkfutt's Tower"
+    },
+    -- QuiBia Arena
+    ["Qubia-BCNM"] = {
+        target_pos = { x = -214, y= -24.6, z=-20.1},
+        visual_mode = "arc",
+        zone = "Qu'Bia Arena"
     },
 }

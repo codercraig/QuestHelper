@@ -2889,14 +2889,18 @@ return {
 
     ["5-1: Darkness Rising"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
+                text = "Step 1: Talk to Naji at (J-8) in Metalworks outside the President's Office. \n \n" ..
+                       "Accept the mission to receive KI:New Fei'Yin Seal. \n \n" ..
+                       "If you postpone the mission, you will be able to change allegiances.",
+                onmob_target = {"Naji"},
+                trigger_on_event_id = {720},
                 images = {
                     {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2904,25 +2908,93 @@ return {
                 },
             },
             {
-                text = "Step 3: Travel to Beadeaux and locate the target point at (H-7).",
+                text = "Step 2: Zone into Fei'Yin for a cutscene with Zeid. \n \n" ..
+                       "Multiple ways to reach Fei'Yin: \n \n" ..
+                       "Home Point #1 teleport (if unlocked) \n" ..
+                       "Unity Concord warp \n" ..
+                       "Warp to Qu'Bia Arena via Domenic (J-7) in Lower Jeuno (if completed Beyond Infinity), then walk out \n \n" ..
+                       "From San d'Oria: \n" ..
+                       "East Ronfaure (K-4) > \n" ..
+                       "Ranguemont Pass (L-4) > \n" ..
+                       "Beaucedine Glacier (J-4) > \n" ..
+                       "Fei'Yin! \n \n" ..
+                       "Note: If cutscene doesn't trigger, zone out to Beaucedine Glacier and back in. \n \n",
+                --zone_trigger = "Fei'Yin",
+                trigger_on_event_id = {1},
                 images = {
                     {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "East Ronfaure",
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "K-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Ranguemont Pass",
+                        highlights = {
+                            { position = "L-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Beaucedine Glacier",
+                        highlights = {
+                            { position = "J-4", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
+                text = "Step 3: Travel to Qu'Bia Arena entrance at (K-8) in Fei'Yin. \n \n" ..
+                       "Accept the mission to receive KI:New Fei'Yin Seal. \n \n" ..
+                       "If you postpone the mission, you will be able to change allegiances.",
+                zone_trigger = "Qu'Bia Arena",
                 images = {
                     {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Fei'Yin",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: Examine the Burning Circle to enter BCNM 'The Rank 5 Mission'. \n \n" ..
+                       "Requirements: \n \n" ..
+                       "- Party members must be Rank 5+ and have watched Fei'Yin cutscene \n" ..
+                       "- Level cap: 99 \n" ..
+                       "- Time limit: 15 minutes \n" ..
+                       "- Buffs wear upon entry \n \n" ..
+                       "Defeat Archlich Taber'quoan (Black Mage skeleton): \n \n" ..
+                       "- Spawns with 2 Ancient Sorcerers \n" ..
+                       "- Ancient Warriors periodically spawn in pairs \n" ..
+                       "- Uses Sleepga II, Freeze, and Manafont \n" ..
+                       "- Susceptible to Silence and most enfeebles \n" ..
+                       "- Skeletons can be Slept but easier with Bard Lullaby light based spells! \n \n" ..
+                       "Victory: Title 'Archmage Assassin', KI:Burnt Seal",
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 5: Return to Naji at (J-8) in Metalworks to complete the mission.",
+                onmob_target = {"Naji"},
+                trigger_on_event_id = {722},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Metalworks",
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
@@ -2931,30 +3003,242 @@ return {
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "600 Rank Points"
         }
     },
 
     ["5-2: Xarcabard, Land of Truths"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Travel to Xarcabard and locate the target point at (J-9).",
+                text = "Step 1: Complete repeatable missions or trade 2 crystals to a Conquest Overseer to build Rank Bar. \n \n" ..
+                       "Talk to any Bastok Gate Guard and select 'Xarcabard, Land of Truths' to accept the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 2,
+                        state    = 1,
                         highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Travel to Metalworks and speak to President Karst at (K-8) for a cutscene.",
+                onmob_target = {"Karst"},
+                trigger_on_event_id = {602},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Metalworks",
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 3: Return to the Bastok Gate Guard to complete the mission." }
+            {
+                text = "Step 3: Travel to Castle Zvahl Baileys! \n \n" ..
+                       "Outpost: Fauregandi/Valdeaunia if possible. \n \n" ..
+                       "If walking a good route is from San d'Oria: \n" ..
+                       "East Ronfaure      (K-4) > \n" ..
+                       "Ranguemont Pass    (L-4) > \n" ..
+                       "Beaucedine Glacier (F-6) > \n" ..
+                       "Xarcabard          (D-7) > \n" ..
+                       "Castle Zvahl Baileys \n \n" ..
+                       "Notes: In Xarcabard grab the Teleport KI:Vahzl Gate Crystal at Telepoint (H-8), enter Castle Zvahl Baileys at (D-7/D-8) \n \n",
+                zone_trigger = "Castle Zvahl Baileys",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "East Ronfaure",
+                        highlights = {
+                            { position = "K-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Ranguemont Pass",
+                        highlights = {
+                            { position = "L-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Beaucedine Glacier",
+                        highlights = {
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Xarcabard",
+                        highlights = {
+                            { position = "D-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+             {
+                text = "Step 4: Route through Castle Zvahl Baileys -> Castle Zvahl Keep! \n \n" ..
+                       "Map 1: Go to (G-8) staying on the lower level and take a first Right!(North)\n \n" ..
+                       "Follow the arrows on the ground will lead you to (F-8) - Map 2! \n \n" ..
+                       "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
+                       "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
+                       "Map 2: Follow the arrows end goal is (F-8) to Castle Zvhal Keep. \n \n" ..
+                       "Aggro: Tigers/Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70. \n \n",
+                zone_trigger = "Castle Zvahl Keep",
+                visual_zones = {
+                    -- Floor 1
+                    --1
+                    { type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up',floor_id = 1 },
+                    --2
+                    { type = 'arrow', center = { x = 87.9, y = -20.1, z = 100.6 }, size = 4, direction = 'down',floor_id = 1  },
+                    --3
+                    { type = 'arrow', center = { x = 99.8, y = -20.1, z = 72.7 }, size = 4, direction = 'left',floor_id = 1  },
+                    -- Floor 2
+                    --1
+                    { type = 'arrow', center = { x = 31.2, y = -20, z = 59.7 }, size = 4, direction = 'up',floor_id = 2 },
+                    --2
+                    { type = 'arrow', center = { x = 20.8, y = -20, z = 150.2 }, size = 4, direction = 'down',floor_id = 2  },
+                    --3
+                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw',floor_id = 2  },
+                    --4
+                    { type = 'arrow', center = { x = -61, y = -20, z = 110.2 }, size = 4, direction = 'down',floor_id = 2  },
+                    --5
+                    { type = 'arrow', center = { x = -92, y = -20, z = 89.4 }, size = 4, direction = 'down',floor_id = 2  },
+                    --6
+                    { type = 'arrow', center = { x = -91.8, y = -19.5, z = 51.5 }, size = 4, direction = 'right',floor_id = 2  },
+                    --7
+                    { type = 'arrow', center = { x = -76.1, y = -19.5, z = 52.1 }, size = 4, direction = 'down',floor_id = 2  },
+                    --8
+                    { type = 'arrow', center = { x = -77.4, y = -24, z = 20.2 }, size = 4, direction = 'left',floor_id = 2  },
+                    -- Floor 15
+                    --1
+                    { type = 'arrow', center = { x = -6.5, y = 4, z = 126.5 }, size = 4, direction = 'nw',floor_id = 15 },
+                    --2
+                    { type = 'arrow', center = { x = -59.7, y = 4, z = 179.2 }, size = 4, direction = 'down',floor_id = 15  },
+                    --3
+                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw',floor_id = 15  },
+                },
+                zone_name = "Castle Zvahl Baileys",
+                zone_trigger = "Castle Zvahl Keep",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 15,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 4: Examine the door at the end of Throne Room to enter BCNM 'The Shadow Lord Battle'. \n \n" ..
+                       "Requirements: \n" ..
+                       "- Only players on Mission 5-2 for any starting nation (or completed) can enter \n" ..
+                       "- Characters completing for second time get instant defeat cutscene and KI \n" ..
+                       "- Level cap: 99 \n" ..
+                       "- Time limit: 30 minutes \n" ..
+                       "- Buffs wear upon entry \n" ..
+                       "- Trusts can be summoned inside \n \n" ..
+                       "Fight Shadow Lord (2 phases): \n" ..
+                       "Phase 1: Alternates between Magic Stance (physical immunity) and Melee Stance (magic immunity) \n" ..
+                       "- Switches every 5 minutes or after 1000 damage \n" ..
+                       "- Magic Stance: Tier 2 elementals, debuffs, Dark Nova weaponskill before switching \n" ..
+                       "- Melee Stance: Giga Slash, Kick Back, Umbra Smash weaponskills \n" ..
+                       "- Monks: Use Formless Strikes to bypass physical immunity \n \n" ..
+                       "Phase 2 (after cutscene): Spams Implosion \n" ..
+                       "- Lower-level parties should zerg him \n \n" ..
+                       "Victory: Cutscene, teleport to Castle Zvahl Baileys entrance, receive KI:Shadow Fragment",
+                trigger_on_event_id = {6, 32001, 7},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Throne_Room",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 5: Return to President Karst at (K-8) in Metalworks to complete the mission.",
+                onmob_target = {"Karst", "_6ld"},
+                trigger_on_event_id = {603},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Metalworks",
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
         },
         reward = {
-            text = "Rank Points!"
+            text = "Rank 6, 20,000 gil, Zilart Mission 1 'The New Frontier' unlocked"
         }
     },
 
