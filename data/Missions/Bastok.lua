@@ -3190,30 +3190,71 @@ return {
                 },
             },
             {
-                text = "Step 4: Examine the door at the end of Throne Room to enter BCNM 'The Shadow Lord Battle'. \n \n" ..
-                       "Requirements: \n" ..
-                       "- Only players on Mission 5-2 for any starting nation (or completed) can enter \n" ..
-                       "- Characters completing for second time get instant defeat cutscene and KI \n" ..
-                       "- Level cap: 99 \n" ..
-                       "- Time limit: 30 minutes \n" ..
-                       "- Buffs wear upon entry \n" ..
-                       "- Trusts can be summoned inside \n \n" ..
-                       "Fight Shadow Lord (2 phases): \n" ..
-                       "Phase 1: Alternates between Magic Stance (physical immunity) and Melee Stance (magic immunity) \n" ..
-                       "- Switches every 5 minutes or after 1000 damage \n" ..
-                       "- Magic Stance: Tier 2 elementals, debuffs, Dark Nova weaponskill before switching \n" ..
-                       "- Melee Stance: Giga Slash, Kick Back, Umbra Smash weaponskills \n" ..
-                       "- Monks: Use Formless Strikes to bypass physical immunity \n \n" ..
-                       "Phase 2 (after cutscene): Spams Implosion \n" ..
-                       "- Lower-level parties should zerg him \n \n" ..
-                       "Victory: Cutscene, teleport to Castle Zvahl Baileys entrance, receive KI:Shadow Fragment",
-                trigger_on_event_id = {6, 32001, 7},
+                text = "Step 5: Castle Zvahl Keep -> Throne Room of the Shadow Lord! \n \n" ..
+                       "Follow the arrows, there is a lot of door opening here! \n" ..
+                       "Map 1 -> (H-6) \n" ..
+                       "Map 2 -> (E-8) \n" ..
+                       "Map 3 -> Run on the teleporters when a glowing image appears \n" ..
+                       "Keep doing this until you reach Map 4!! \n" ..
+                       "Map 4 -> (G-7) to Throne Room and grab the Home Point! \n \n",
+                visual_zones = {
+                    -- Floor 1
+                    --1
+                    { type = 'arrow', center = { x = -30, y = 0, z = -22.3 }, size = 4, direction = 'up',floor_id = 1 },
+                    { type = 'arrow', center = { x = -32.4, y = 0.6, z = 48.7 }, size = 4, direction = 'right',floor_id = 1 },
+                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 69.4 }, size = 4, direction = 'up',floor_id = 1 },
+                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 90.2 }, size = 4, direction = 'left',floor_id = 1 },
+                    { type = 'arrow', center = { x = -69, y = 0.6, z = 107.8 }, size = 4, direction = 'up',floor_id = 1 },
+                    --2
+                    { type = 'arrow', center = { x = -69.7, y = -15.4, z = 86.4 }, size = 4, direction = 'down',floor_id = 2 },
+                    { type = 'arrow', center = { x = -60.4, y = -15.4, z = 48.5 }, size = 4, direction = 'down',floor_id = 2 },
+
+                    --3
+                    { type = 'square', center = { x = -300, y = -49.1, z = -20 }, size = 4,floor_id = 3 },
+                    { type = 'square', center = { x = -272.6, y = -53.2, z = 4.9 }, size = 4,floor_id = 3 },
+                    { type = 'square', center = { x = -272.9, y = -53.2, z = -44.6 }, size = 4,floor_id = 3 },
+                    { type = 'square', center = { x = -326.5, y = -53.2, z = -45 }, size = 4,floor_id = 3 },
+
+                },
+                zone_name = "Castle Zvahl Keep",
+                zone_trigger = "Throne Room",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
-                        zone_name = "Throne_Room",
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 3,
+                        -- highlights = {
+                        --     { position = "E-8", offsetX = 16, offsetY = 16 },
+                        -- },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 4,
                         highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
@@ -3221,14 +3262,30 @@ return {
                 },
             },
             {
-                text = "Step 5: Return to President Karst at (K-8) in Metalworks to complete the mission.",
-                onmob_target = {"Karst", "_6ld"},
+                text = "Step 6: Examine the door at the end of Throne Room to enter BCNM 'The Shadow Lord Battle'. \n \n" ..
+                       "Shadow Lord (2 phases): \n" ..
+                       "Phase 1: \n" ..
+                       "- Alternates between Magic Stance (physical immunity) and Melee Stance (magic immunity) \n" ..
+                       "- Switches every 5 minutes or after 1000 damage \n" ..
+                       "- Magic Stance: Tier 2 elementals, debuffs, Dark Nova weaponskill before switching \n" ..
+                       "- Melee Stance: Giga Slash, Kick Back, Umbra Smash weaponskills \n" ..
+                       "- Monks: Use Formless Strikes to bypass physical immunity \n" ..
+                       "Phase 2 (after cutscene): Spams Implosion \n" ..
+                       "- Lower-level parties should zerg him so save your 2hours for this phase! \n \n",
+                trigger_on_event_id = {7},
+                -- Key items needed (displayed in UI, not required for step completion)
+                keyitems_needed = {74},
+                trigger_on_keyitem_obtain = {74},
+            },
+            {
+                text = "Step 7: Return to President Karst at (K-8) in Metalworks to complete the mission.",
+                onmob_target = {"Karst"},
                 trigger_on_event_id = {603},
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 7,
                         zone_name = "Metalworks",
                         highlights = {
                             { position = "K-8", offsetX = 16, offsetY = 16 },

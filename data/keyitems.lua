@@ -23,6 +23,7 @@ local id_to_name = {
     [21] = "Crest of Davoi",
     [46] = "Coruscant Rosary",
     [47] = "Black Matinee Necklace",
+    [74] = "Shadow Fragment",
     [78] = "Gustaberg Supplies",
 
     -- Add more key items as needed:

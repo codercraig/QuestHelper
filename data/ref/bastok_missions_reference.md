@@ -12,7 +12,8 @@
 [3-3] Jueno - DONE
 [4-1] Magicite - DONE
 [5-1] Darkness Rising - DONE
-[5-2] Xarcabard Lands of Truth - Step 5
+[5-2] Xarcabard Lands of Truth - DONE
+[6-1] Return of the Talekeeper - Step 1
 
 
 
