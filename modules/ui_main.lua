@@ -219,8 +219,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
     end
 
     -- Set window size with fixed width (600) and dynamic height based on collapsed/expanded mode
+    -- Apply UI scale setting
+    local ui_scale = ui_settings.ui_scale or 1.0
+    local scaled_width = 600 * ui_scale
+    local scaled_height = window_height * ui_scale
+
     -- Use ImGuiCond_Always to enforce size constraints every frame
-    imgui.SetNextWindowSize({600, window_height}, ImGuiCond_Always)
+    imgui.SetNextWindowSize({scaled_width, scaled_height}, ImGuiCond_Always)
 
     local mainFlags = bit.bor(
         ImGuiWindowFlags_NoCollapse,
@@ -228,6 +233,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         ImGuiWindowFlags_NoResize  -- Disable manual resizing
     )
     local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
+
+    -- Apply font scaling for the entire window
+    imgui.SetWindowFontScale(ui_scale)
 
     local mainX, mainY = 0, 0
     local mainW, mainH = 0, 0
@@ -701,8 +709,12 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
     -- Settings Window
     if show_settings_window then
-        imgui.SetNextWindowSize({320, 300}, ImGuiCond_Always)
+        -- Scale settings window to match main UI
+        local settings_ui_scale = ui_settings.ui_scale or 1.0
+        imgui.SetNextWindowSize({320 * settings_ui_scale, 400 * settings_ui_scale}, ImGuiCond_Always)
         if imgui.Begin("QuestHelper Settings", true, 0) then
+            -- Apply font scaling for settings window
+            imgui.SetWindowFontScale(settings_ui_scale)
             imgui.Text("Map Display Settings")
             imgui.Separator()
 
@@ -724,6 +736,17 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 imgui.TextColored({1, 0.5, 0, 1}, "Maps hidden (opacity = 0)")
             end
 
+            -- Map scale slider
+            imgui.Text("Map Size:")
+            if not ui_settings.map_scale then
+                ui_settings.map_scale = 1.0  -- Initialize default
+            end
+            local scale_ref = { ui_settings.map_scale }
+            if imgui.SliderFloat("##MapScale", scale_ref, 0.25, 1.0, "%.2f") then
+                ui_settings.map_scale = scale_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
+            end
+
             -- Reset map position button
             imgui.Text("Map Window Position:")
             if imgui.Button("Reset Map Position") then
@@ -734,6 +757,24 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             end
             if imgui.IsItemHovered() then
                 imgui.SetTooltip("Reset map window to default position (100, 100)")
+            end
+
+            imgui.Separator()
+            imgui.Text("UI Display Settings")
+            imgui.Separator()
+
+            -- UI scale slider
+            imgui.Text("UI Scale (Window & Font Size):")
+            if not ui_settings.ui_scale then
+                ui_settings.ui_scale = 1.0  -- Initialize default
+            end
+            local ui_scale_ref = { ui_settings.ui_scale }
+            if imgui.SliderFloat("##UIScale", ui_scale_ref, 0.6, 1.0, "%.2f") then
+                ui_settings.ui_scale = ui_scale_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
+            end
+            if imgui.IsItemHovered() then
+                imgui.SetTooltip("Scale the main window and font size for smaller screens")
             end
 
             imgui.Separator()

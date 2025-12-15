@@ -16,6 +16,18 @@ return {
         visual_mode = "arc",
         zone = "Bastok Mines",
     },
+    ["Medicine Eagle"] = {
+        target_pos = { x = -39, y = -2, z = 40.8 },
+        trigger_npc = "Medicine Eagle",
+        visual_mode = "arc",
+        zone = "Bastok Mines",
+    },
+    ["Tall Mountain"] = {
+        target_pos = { x = 71.8, y = 5, z = -11.6 },
+        trigger_npc = "Tall Mountain",
+        visual_mode = "arc",
+        zone = "Bastok Mines",
+    },
     -- Bastok Markets
     ["Cleades"] = {
         target_pos = { x = -362.0, y = -12.0, z = -169.0 },
@@ -95,6 +107,12 @@ return {
     ["Makarim"] = {
         target_pos = { x = -61, y = 7 ,z = -333.3 },
         trigger_npc = "Makarim",
+        visual_mode = "arc",
+        zone = "Zeruhn Mines",
+    },
+    ["Drake Fang"] = {
+        target_pos = { x = -77.2, y = -2 ,z = 59.1 },
+        trigger_npc = "Drake Fang",
         visual_mode = "arc",
         zone = "Zeruhn Mines",
     },
@@ -296,4 +314,10 @@ return {
         visual_mode = "arc",
         zone = "Qu'Bia Arena"
     },
+    -- Western Altepa Desert
+    ["6-1-???"] = {
+        target_pos = { x = -328.4, y = 0.1, z = -112.9},
+        visual_mode = "arc",
+        zone = "Western Altepa Desert"
+    }
 }

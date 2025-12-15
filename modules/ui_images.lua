@@ -5,15 +5,25 @@ local imgui = require('imgui')
 local ffi = require('ffi')
 local bit = require('bit')
 
+-- ImGui Condition Flags
+ImGuiCond_FirstUseEver = 2
+ImGuiCond_Always = 1
+
+-- ImGui Color IDs
+ImGuiCol_Button = 21
+
 -- Track last zone to reset auto-calibration message
 ui_images.last_zone_id = nil
 
 -- Track last step for texture cleanup
 ui_images.last_step_key = nil
 
--- Track for auto-scroll feature
-ui_images.last_auto_scroll_zone = nil
-ui_images.last_auto_scroll_floor = nil
+-- Track current map index per step (for pagination)
+ui_images.current_map_indices = {}
+
+-- Track last zone/floor for auto-switching maps
+ui_images.last_auto_switch_zone = nil
+ui_images.last_auto_switch_floor = nil
 
 -- Renders the images drawer window attached to the main window
 function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTopCategory, currentSubfile, current_mission,
@@ -34,8 +44,15 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         imgui.SetNextWindowPos({100, 100}, ImGuiCond_FirstUseEver)
     end
 
-    -- Fixed size for 512x512 maps + scrollbar + padding
-    imgui.SetNextWindowSize({540, 530}, ImGuiCond_Always)
+    -- Scale window size based on map_scale setting
+    -- Base: 512x512 maps + padding for pagination buttons
+    local map_scale = ui_main_settings and ui_main_settings.map_scale or 1.0
+    local base_map_size = 512
+    local width_padding = 20
+    local height_padding = 80  -- Extra space for pagination buttons
+    local window_width = (base_map_size * map_scale) + width_padding
+    local window_height = (base_map_size * map_scale) + height_padding
+    imgui.SetNextWindowSize({window_width, window_height}, ImGuiCond_Always)
 
     -- Window flags: Draggable (removed NoMove), no title bar, no resize
     local drawerFlags = bit.bor(
@@ -45,13 +62,81 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
     )
 
     if imgui.Begin("##ImagesDrawer", true, drawerFlags) then
-        -- Use a scrollable child window for the images
-        -- This allows programmatic scrolling via SetScrollY
-        -- Add NoBackground flag to make child window transparent
-        imgui.BeginChild("##ImagesScrollRegion", {0, 0}, false, ImGuiWindowFlags_NoBackground)
-
         local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
         local step_imgs = utils.get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx, quest_data)
+
+        -- Get or initialize current map index for this step
+        local step_key = string.format("%s|%s|%s|%d",
+            currentTopCategory or "", currentSubfile or "", current_mission or "", step_idx or 0)
+        if not ui_images.current_map_indices[step_key] then
+            ui_images.current_map_indices[step_key] = 1
+        end
+        local current_map_index = ui_images.current_map_indices[step_key]
+
+        -- Validate and clamp current_map_index
+        local total_maps = #step_imgs
+        if total_maps == 0 then
+            imgui.Text("No maps available for this step")
+            imgui.End()
+            return
+        end
+        if current_map_index < 1 then current_map_index = 1 end
+        if current_map_index > total_maps then current_map_index = total_maps end
+        ui_images.current_map_indices[step_key] = current_map_index
+
+        -- Pre-calculate zone occurrence counts to detect multi-floor zones
+        local zone_occurrence_counts = {}
+        for _, img in ipairs(step_imgs) do
+            if img.zone_name then
+                zone_occurrence_counts[img.zone_name] = (zone_occurrence_counts[img.zone_name] or 0) + 1
+            end
+        end
+
+        -- Auto-switch to player's current zone/floor
+        local current_player_floor = player_module.getFloorId(floor_mappings)
+        if ui_images.last_auto_switch_zone ~= player_module.zoneId or
+           ui_images.last_auto_switch_floor ~= current_player_floor then
+            -- Zone or floor changed, find matching map
+            ui_images.last_auto_switch_zone = player_module.zoneId
+            ui_images.last_auto_switch_floor = current_player_floor
+
+            for idx, img in ipairs(step_imgs) do
+                local img_zone_id = img.zone_name and zone_data[img.zone_name]
+                if img_zone_id == player_module.zoneId then
+                    -- Found matching zone, now check floor if multi-floor
+                    -- floor_id in mission data is the RAW floor ID (same as DAT files use)
+                    -- Convert to logical floor number using floor_mappings if available
+                    local raw_floor_id = img.floor_id or 1
+                    local img_floor = raw_floor_id
+                    if img_zone_id and floor_mappings and floor_mappings[img_zone_id] then
+                        img_floor = floor_mappings[img_zone_id][raw_floor_id] or raw_floor_id
+                    end
+
+                    -- Check if this zone has multiple floors
+                    local this_zone_config = map_db[img.zone_name]
+                    local zone_img_count = zone_occurrence_counts[img.zone_name] or 1
+                    local is_multi_floor = (this_zone_config and this_zone_config[1] ~= nil) or
+                                          (floor_mappings and img_zone_id and floor_mappings[img_zone_id] ~= nil) or
+                                          (zone_img_count > 1)  -- Multiple images for same zone in this step
+
+                    if is_multi_floor then
+                        -- Multi-floor: match specific floor
+                        if img_floor == current_player_floor then
+                            ui_images.current_map_indices[step_key] = idx
+                            current_map_index = idx
+                            print(string.format("\30\106[QH]\30\01 Auto-switched to map %d (floor %d)", idx, img_floor))
+                            break
+                        end
+                    else
+                        -- Single-floor: just match zone
+                        ui_images.current_map_indices[step_key] = idx
+                        current_map_index = idx
+                        print(string.format("\30\106[QH]\30\01 Auto-switched to map %d", idx))
+                        break
+                    end
+                end
+            end
+        end
 
         -- Track current step and cleanup old textures when step changes
         local current_step_key = string.format("%s|%s|%s|%d",
@@ -99,98 +184,48 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
             ui_images.last_step_key = current_step_key
         end
 
-        -- Pre-calculate floor numbers for each image within its zone
-        -- Extract floor index from filename (_1, _2, etc.) and map to actual floor IDs
-        local zone_occurrence_count = {}
-        local img_floor_numbers = {}
-        local zone_image_counts = {}  -- Track how many images per zone
+        -- Render pagination buttons
+        imgui.Text(string.format("Map %d/%d:", current_map_index, total_maps))
+        imgui.SameLine()
 
-        for img_index, img_data in ipairs(step_imgs) do
-            local zone = img_data.zone_name
-            if zone then
-                -- Count images per zone for multi-floor detection
-                zone_image_counts[zone] = (zone_image_counts[zone] or 0) + 1
+        -- Previous button
+        if imgui.Button("<##PrevMap") then
+            if current_map_index > 1 then
+                ui_images.current_map_indices[step_key] = current_map_index - 1
+            end
+        end
+        imgui.SameLine()
 
-                -- Determine floor number for this image (for player arrow drawing logic)
-                local img_floor_number = 1  -- Default
-                if img_data.floor_id then
-                    -- Use explicit floor_id from mission data
-                    -- If zone has floor mappings, convert raw floor_id to mapped floor number
-                    local img_zone_id = zone_data[zone]
-                    if img_zone_id and floor_mappings and floor_mappings[img_zone_id] then
-                        -- Zone has custom floor mappings
-                        img_floor_number = floor_mappings[img_zone_id][img_data.floor_id] or img_data.floor_id
-                    else
-                        -- No custom mapping, use raw floor_id directly
-                        img_floor_number = img_data.floor_id
-                    end
-                else
-                    -- No floor_id specified, try to extract floor index from filename (e.g., "zonename_2.png" -> index 2)
-                    local floor_index = img_data.file and img_data.file:match("_(%d+)%.png$")
-                    if floor_index then
-                        -- Use the filename index directly (corresponds to map_db index)
-                        img_floor_number = tonumber(floor_index) or 1
-                    else
-                        -- No floor index in filename, fall back to occurrence counting
-                        zone_occurrence_count[zone] = (zone_occurrence_count[zone] or 0) + 1
-                        img_floor_number = zone_occurrence_count[zone]
-                    end
-                end
-                img_floor_numbers[img_index] = img_floor_number
+        -- Numbered map buttons
+        for i = 1, total_maps do
+            if i == current_map_index then
+                -- Highlight current map button
+                imgui.PushStyleColor(ImGuiCol_Button, {0.2, 0.6, 0.2, 1.0})
+                imgui.Button(tostring(i) .. "##MapBtn" .. i)
+                imgui.PopStyleColor()
             else
-                img_floor_numbers[img_index] = 1
-            end
-        end
-
-        -- Auto-scroll feature: scroll to current zone/floor when changed
-        local current_player_floor = player_module.getFloorId(floor_mappings)
-        local should_auto_scroll = false
-        local target_image_index = nil
-
-        -- Check if zone or floor changed (trigger auto-scroll)
-        -- Only auto-scroll if enabled in settings
-        local auto_scroll_enabled = ui_main_settings and ui_main_settings.auto_scroll_enabled or true
-        if auto_scroll_enabled and (ui_images.last_auto_scroll_zone ~= player_module.zoneId or
-           ui_images.last_auto_scroll_floor ~= current_player_floor) then
-            should_auto_scroll = true
-            ui_images.last_auto_scroll_zone = player_module.zoneId
-            ui_images.last_auto_scroll_floor = current_player_floor
-
-            print(string.format("\30\106[QH-DEBUG]\30\01 Zone/floor changed: ZoneID=%d, Floor=%s",
-                player_module.zoneId or 0, tostring(current_player_floor)))
-
-            -- Find the matching image for current zone/floor
-            for idx, img in ipairs(step_imgs) do
-                local img_zone_id = img.zone_name and zone_data[img.zone_name]
-                if img_zone_id == player_module.zoneId then
-                    local img_floor = img_floor_numbers[idx] or 1
-
-                    -- Check if multi-floor or single-floor zone
-                    local zone_img_count = zone_image_counts[img.zone_name] or 1
-                    if zone_img_count > 1 then
-                        -- Multi-floor: match specific floor
-                        if img_floor == current_player_floor then
-                            target_image_index = idx
-                            print(string.format("\30\106[QH-DEBUG]\30\01 Found target: Image #%d, Floor %d matches player floor %s",
-                                idx, img_floor, tostring(current_player_floor)))
-                            break
-                        end
-                    else
-                        -- Single-floor: just match zone
-                        target_image_index = idx
-                        print(string.format("\30\106[QH-DEBUG]\30\01 Found target: Image #%d (single-floor zone)", idx))
-                        break
-                    end
+                if imgui.Button(tostring(i) .. "##MapBtn" .. i) then
+                    ui_images.current_map_indices[step_key] = i
                 end
             end
+            if i < total_maps then
+                imgui.SameLine()
+            end
+        end
+        imgui.SameLine()
 
-            if not target_image_index then
-                print(string.format("\30\68[QH-DEBUG]\30\01 No matching image found for zone %d, floor %s",
-                    player_module.zoneId or 0, tostring(current_player_floor)))
+        -- Next button
+        if imgui.Button(">##NextMap") then
+            if current_map_index < total_maps then
+                ui_images.current_map_indices[step_key] = current_map_index + 1
             end
         end
 
-        for img_index, img_data in ipairs(step_imgs) do
+        imgui.Separator()
+
+        -- Render only the current map
+        local img_data = step_imgs[current_map_index]
+        if img_data then
             -- Try to get zone_id from zone_name if not explicitly provided
             local zone_id = img_data.zone_id
             if not zone_id and img_data.zone_name and zone_data[img_data.zone_name] then
@@ -216,46 +251,13 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
             )
             if tex_ptr then
                 local tex_id = tonumber(ffi.cast('uintptr_t', tex_ptr))
-                local w = img_data.width or 200
-                local h = img_data.height or 100
+
+                -- Apply map scale setting
+                local w = (img_data.width or 200) * map_scale
+                local h = (img_data.height or 100) * map_scale
 
                 -- Get position BEFORE rendering image
                 local imageX, imageY = imgui.GetCursorScreenPos()
-
-                -- Auto-scroll: Set cursor position BEFORE rendering this image
-                -- This tells ImGui to scroll to make this position visible
-                if should_auto_scroll and img_index == target_image_index then
-                    local current_scroll = imgui.GetScrollY()
-                    local max_scroll = imgui.GetScrollMaxY()
-
-                    -- Determine scroll alignment based on position
-                    local scroll_ratio
-                    local total_images = #step_imgs
-
-                    if img_index == 1 then
-                        -- First image: align near top
-                        scroll_ratio = 0.0
-                    elseif img_index >= total_images - 1 then
-                        -- Last or second-to-last image: scroll to absolute bottom
-                        -- Use a very high value to ensure we scroll as far down as possible
-                        scroll_ratio = 0.0
-                    elseif total_images <= 2 then
-                        -- Only 2 images: scroll to bottom
-                        scroll_ratio = 1.0
-                    else
-                        -- Middle images: center the image more prominently
-                        -- 0.8 scrolls down significantly, centering the target map
-                        scroll_ratio = 0.0
-                    end
-
-                    imgui.SetScrollHereY(scroll_ratio)
-
-                    print(string.format("\30\106[QH]\30\01 Auto-scrolled to %s (floor %d)",
-                        img_data.zone_name or "unknown",
-                        img_floor_numbers[img_index] or 1))
-                    print(string.format("\30\106[QH-DEBUG]\30\01 Scroll: img %d/%d, ratio=%.2f, current=%.0f, max=%.0f",
-                        img_index, total_images, scroll_ratio, current_scroll, max_scroll))
-                end
 
                 -- Apply opacity setting to map images
                 local map_opacity = ui_main_settings and ui_main_settings.map_opacity or 1.0
@@ -266,8 +268,17 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                 -- Now draw overlays using the saved position
                 local cal = img_data.map_calibration
 
-                -- Get this image's floor number within its zone
-                local this_img_floor = img_floor_numbers[img_index] or 1
+                -- Determine floor number for this image
+                -- floor_id in mission data is the RAW floor ID (same as DAT files use)
+                -- Convert to logical floor number using floor_mappings if available
+                local raw_floor_id = img_data.floor_id or 1
+                local this_img_floor = raw_floor_id  -- Default: assume raw = logical
+
+                -- Apply floor mapping if one exists for this zone
+                local img_zone_id = img_data.zone_name and zone_data[img_data.zone_name]
+                if img_zone_id and floor_mappings and floor_mappings[img_zone_id] then
+                    this_img_floor = floor_mappings[img_zone_id][raw_floor_id] or raw_floor_id
+                end
 
                 if not cal and img_data.zone_name and map_db[img_data.zone_name] then
                     local zone_config = map_db[img_data.zone_name]
@@ -289,12 +300,11 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     local in_this_zone = img_data.zone_name and zone_data[img_data.zone_name] and
                                         player_module.zoneId == zone_data[img_data.zone_name]
 
-                    -- Check if this zone has multiple floors (from map_db, floor_mappings, or image count)
+                    -- Check if this zone has multiple floors (from map_db or floor_mappings)
                     local this_zone_id = zone_data[img_data.zone_name]
                     local this_zone_config = map_db[img_data.zone_name]
                     local has_multiple_floors = (this_zone_config and this_zone_config[1] ~= nil) or
-                                               (floor_mappings and this_zone_id and floor_mappings[this_zone_id] ~= nil) or
-                                               (zone_image_counts[img_data.zone_name] and zone_image_counts[img_data.zone_name] > 1)
+                                               (floor_mappings and this_zone_id and floor_mappings[this_zone_id] ~= nil)
 
                     local should_auto_cal = true
                     if in_this_zone and has_multiple_floors then
@@ -329,22 +339,30 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                         local should_draw_arrow = true
 
                         -- Check if THIS specific image's zone has multiple floors
-                        -- First check map_db, then floor_mappings, then count images in current step
                         local this_zone_id = zone_data[img_data.zone_name]
                         local this_zone_config = map_db[img_data.zone_name]
+                        local zone_img_count = zone_occurrence_counts[img_data.zone_name] or 1
                         local is_this_image_multi_floor = (this_zone_config and this_zone_config[1] ~= nil) or
                                                           (floor_mappings and this_zone_id and floor_mappings[this_zone_id] ~= nil) or
-                                                          (zone_image_counts[img_data.zone_name] and zone_image_counts[img_data.zone_name] > 1)
+                                                          (zone_img_count > 1)  -- Multiple images for same zone in this step
 
                         if is_this_image_multi_floor then
                             -- This image is from a multi-floor zone, check floor number
                             -- Compare this image's floor number with player's ACTUAL current floor
                             local player_floor = player_module.getFloorId(floor_mappings)
+                            --print(string.format("\30\106[QH-ARROW]\30\01 Zone:%s ID:%s, img.floor_id=%s, this_img_floor=%d, player_floor=%s",
+                               -- img_data.zone_name, tostring(this_zone_id), tostring(img_data.floor_id), this_img_floor, tostring(player_floor)))
                             if player_floor then
                                 should_draw_arrow = (this_img_floor == player_floor)
+                                if should_draw_arrow then
+                                  --  print(string.format("\30\102[QH-ARROW]\30\01 ✓ MATCH: %d == %d", this_img_floor, player_floor))
+                                else
+                                   -- print(string.format("\30\68[QH-ARROW]\30\01 ✗ NO MATCH: %d != %d", this_img_floor, player_floor))
+                                end
                             else
                                 -- Can't determine floor, default to not drawing to avoid duplicates
                                 should_draw_arrow = false
+                                print("\30\68[QH-ARROW]\30\01 ✗ Can't determine player floor")
                             end
                         end
                         -- For single-floor images, should_draw_arrow stays true
@@ -363,13 +381,12 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                     map_renderer.drawHighlights(imageX, imageY, w, h, img_data.highlights)
                 end
 
-                imgui.Spacing()
             else
                 imgui.TextColored({1,0,0,1}, "(Missing image: " .. tostring(img_data.file) .. ")")
             end
+        else
+            imgui.Text("No map data available")
         end
-
-        imgui.EndChild()  -- End scrollable child window
 
         -- Save map position when window is moved
         local current_x, current_y = imgui.GetWindowPos()

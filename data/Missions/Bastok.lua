@@ -3301,49 +3301,243 @@ return {
 
     ["6-1: Return of the Talekeeper"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Medicine Eagle at (H-7) in Bastok Mines.",
+                text = "Step 1: Receive the mission from any Bastok Gate Guard. This mission requires a certain level of Rank Bar. Trade 4 crystals to a Conquest Overseer.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Go to Bastok Mines and talk to Medicine Eagle at (H-5) for a cutscene.",
+                onmob_target = {"Medicine Eagle"},
+                trigger_on_event_id = 180,
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                        arrows = {
+                            {
+                                from = "H-10",
+                                to = "H-5",
+                                floor_id = 0,
+                                offsetX_from = 16,
+                                offsetY_from = 16,
+                                offsetX_to = 16,
+                                offsetY_to = 16,
+                            },
                         },
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Quicksand Caves and locate the target point at (K-7).",
+                text = "Step 3: Travel to Zeruhn Mines and talk to Drake Fang at (H-6) next to the boat from Palborough Mines. You will see a cutscene where Iron Eater will approve your mission and tell you to go check out Altepa. You don't have to get on the boat to talk to him, just come through Zeruhn.",
+                onmob_target = {"Drake Fang"},
+                trigger_on_event_id = 200,
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
+                            { position = "D-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Mines",
+                        arrows = {
+                            {
+                                from = "H-5",
+                                to = "D-7",
+                                floor_id = 0,
+                                offsetX_from = 16,
+                                offsetY_from = 16,
+                                offsetX_to = 16,
+                                offsetY_to = 16,
+                            },
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Zeruhn Mines",
+                        floor_id = 0,
                     },
                 },
             },
             {
-                text = "Step 4: Return to Medicine Eagle to complete the mission.",
+                text = "Step 4: Go to Western Altepa Desert. Travel to the center of the desert (Revelation Rock). Southwest of the rock is a ??? at (G-8). Examine it to spawn the Western Sphinx and Eastern Sphinx. A quick way to get there is to Unity warp (Level 125 category). \n \n" ..
+                       "If running for first time: \n \n" ..
+                       "Zeruhn Mines          (F-7)    :  -> \n" ..
+                       "Korroloka Tunnel      (A-9/10) :  -> \n" ..
+                       "Eastern Altepa Desert (I-6)    :  -> \n" ..
+                       "Western Altepa Desert! \n \n",
+                zone_trigger = "Western Altepa Desert",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 4,
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Zeruhn Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "A-9", offsetX = 16, offsetY = 16 },
+                            { position = "A-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "B-8", offsetX = 16, offsetY = 16 },
+                            { position = "C-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 2,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Eastern Altepa Desert",
+                    },
+                },
+            },
+             {
+                text = "Step 5: Check the ??? at (G-8) and prepare for battle against Eastern Sphinx(Lvl.62) and Western Sphinx(Lvl.62)! \n \n" ..
+                       "Notes: This fight is soloable with a party/trusts around level 65. \n \n",
+                trigger_on_talk = {"You sense something evil looming above you."},
+                onmob_target = {"6-1-???"},
+                visual_zones = {
+                    {
+                        type = 'square',
+                        center = { x = -328.4, y = 0.1, z = -112.9 },
+                        size = 1,
+                    },
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+            },
+            {
+                text = "Step 6: Kill one or both of the Western Sphinx and Eastern Sphinx. Only one must be killed, but you cannot obtain the key item until the other is either dead or de-aggroed - So best kill both! \n \n",
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Eastern Sphinx", "Western Sphinx"},
+                    zone = "West Altepa Desert",
+                    count_party_kills = true  -- Count kills from party members and trusts
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+            },
+            {
+                text = "Step 7: Check the ??? again once they have been defeated to recieve the KI:'Altepa moonpebble'! \n \n",
+                keyitems_needed = {266},
+                trigger_on_keyitem_obtain = {266},
+                onmob_target = {"6-1-???"},
+                visual_zones = {
+                    {
+                        type = 'square',
+                        center = { x = -328.4, y = 0.1, z = -112.9 },
+                        size = 2,
+                    },
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+            },
+            {
+                text = "Step 8: Return to Bastok Mines and talk to Tall Mountain downstairs at (J-7) on Ore Street by the 'Restricted Section' (next to Bastok Mines Home Point #3) to complete this mission.",
+                onmob_target = "Tall Mountain",
+                trigger_on_event_id = { 182 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "650 Rank Points"
         }
     },
 

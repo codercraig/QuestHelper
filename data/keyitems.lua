@@ -25,6 +25,7 @@ local id_to_name = {
     [47] = "Black Matinee Necklace",
     [74] = "Shadow Fragment",
     [78] = "Gustaberg Supplies",
+    [266] = "Altepa Moonpebble",
 
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",
