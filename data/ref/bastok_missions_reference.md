@@ -13,7 +13,9 @@
 [4-1] Magicite - DONE
 [5-1] Darkness Rising - DONE
 [5-2] Xarcabard Lands of Truth - DONE
-[6-1] Return of the Talekeeper - Step 1
+[6-1] Return of the Talekeeper - DONE
+[6-2] Pirate's Cove - DONE
+[7-1] The Final Image - Step 1
 
 
 

@@ -3540,104 +3540,292 @@ return {
             text = "650 Rank Points"
         }
     },
-
     ["6-2: The Pirate's Cove"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
+                text = "Step 1: This mission requires a certain level of Rank Bar. Trade 4 crystals to a Conquest Overseer, then speak to any Gate Guard and select the mission from the list. \n \n" ..
+                       "NOTE: You must have sufficient rank points built up to receive this mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Naji in Metalworks at (J-8). He is the guard outside the President's Office, where you will be treated to a cutscene.",
+                onmob_target = "Naji",
+                trigger_on_event_id = { 761 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Metalworks",
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Norg and speak with Gilgamesh at (I-8).",
+                text = "Step 3: You will be sent to speak with Gilgamesh (through the Oaken Door at (K-8) in Norg) where you will get another cutscene. \n \n" ..
+                       "NOTE: If you have not started the Rise of the Zilart Missions then the first cutscene you get may be related to the Rise of the Zilart Missions. Talk to Gilgamesh until he tells you to retrieve a Frag Rock from Ifrit's Cauldron." ..
+                       "If you haven't been to Norg already - Rhapsody of Vanadiel gives a free teleport - Look at the Kazham Airship Pass Quest to allow travel to Kazham via airship! \n \n" ..
+                       "From Kazham grab the Survival Guide/Home Point and get on a chocobo and follow this route to Norg: \n" ..
+                       "Kazham            : (F-10)   -> \n" ..
+                       "Yuhtunga Jungle   : (E/F-11) -> \n" ..
+                       "Sea Serpent Grotto: (F-3)    -> \n" ..
+                       "Norg! \n \n",
+                visual_zones = {
+                    -- Floor 1
+                    --1
+                    { type = 'arrow', center = { x = -206.8, y = 0, z = 435.6 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -229.7, y = 0.4, z = 364.3 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -296.8, y = 3.2, z = 182.1 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -262.1, y = 4.5, z = 61.3 }, size = 4, direction = 'left',floor_id = 0 },
+                    { type = 'arrow', center = { x = -294.4, y = 0.9, z = 26.1 }, size = 4, direction = 'right',floor_id = 0 },
+                    { type = 'arrow', center = { x = -271.1, y = 0, z = -17.8 }, size = 4, direction = 'se',floor_id = 0 },
+                    { type = 'arrow', center = { x = -296.9, y = 4.5, z = -99.7 }, size = 4, direction = 'right',floor_id = 0 },
+                    { type = 'arrow', center = { x = -255.7, y = 0.9, z = -105.6 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = -221.6, y = 1.4, z = -135.3 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -219.6, y = 4.6, z = -220.7 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -201.5, y = 0, z = -322.9 }, size = 4, direction = 'sw',floor_id = 0 },
+                    { type = 'square', center = { x = -261.8, y = 0.2, z = -374.2 }, size = 6,floor_id = 0 },
+                    { type = 'arrow', center = { x = -264.3, y = 13.5, z = -376.8 }, size = 4, direction = 'left',floor_id = 0 },
+                    { type = 'arrow', center = { x = -390.2, y = 17, z = -366.3 }, size = 4, direction = 'left',floor_id = 0 },
+                    { type = 'arrow', center = { x = -477.6, y = 16.3, z = -378.9 }, size = 4, direction = 'left',floor_id = 0 },
+
+
+                },
+                zone_name = "Yuhtunga Jungle",
+                onmob_target = "Gilgamesh",
+                trigger_on_event_id = { 98 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "F-10", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Kazham",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "E-11", offsetX = 16, offsetY = 16 },
+                            { position = "F-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yuhtunga Jungle",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "F-3", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Sea Serpent Grotto",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Norg",
                     },
                 },
             },
             {
-                text = "Step 4: Return to Cid to complete the mission.",
+                text = "Step 4: Take a chocobo from Norg and this will take you to Yuhtunga Jungle! \n \n" ..
+                       "Next go to (I-11) which will take you into Yhoator Jungle also DONT FALL DOWN HOLES! \n \n",
+                zone_trigger = "Yhoator Jungle",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -452.3, y = 17.3, z = -345.2 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = -415.3, y = 17, z = -313.4 }, size = 4, direction = 'up',floor_id = 0 },
+                    { type = 'arrow', center = { x = -420.8, y = 0.7, z = -242.9 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = -254.1, y = 0.8, z = -101.3 }, size = 4, direction = 'right',floor_id = 0 },
+                    { type = 'arrow', center = { x = -220.6, y = 1.1, z = -134.7 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -219.8, y = 4.7, z = -221.4 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -200.2, y = 0.6, z = -338.0 }, size = 4, direction = 'down',floor_id = 0 },
+                    { type = 'arrow', center = { x = -172.6, y = 0.5, z = -413.9 }, size = 4, direction = 'se',floor_id = 0 },
+                    { type = 'arrow', center = { x = -29.2, y = 0.8, z = -457.9 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = -15.8, y = 1.3, z = -419.4 }, size = 4, direction = 'right',floor_id = 0 },
+                },
+                zone_name = "Yuhtunga Jungle",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 4,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "I-11", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                },
-            },
-        },
-        reward = {
-            text = "Rank Points!"
-        }
-    },
-
-    ["6-2: The Chains That Bind Us"] = {
-        steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
+                        zone_name = "Yuhtunga Jungle",
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                text = "Step 5: Next go to (I-5) entrance in Yhoator Jungle to Ifrit's Cauldron. \n \n" ..
+                       "Fastest method is to use the Ifrit's Cauldron Home Point and cast Escape. \n \n" ..
+                       "If running from Yhoator Jungle, enter at (I-5) - i'll draw some arrows from (D-9) if running/chocoboing. \n \n" ..
+                       "Notes: There is a Teleport-Yhoat Crystal KI and Outpost warp to pick up at (F-9) we will take the scenic route! \n \n" ..
+                       "If you know the way it is much easier to run from Kazham but for this guide we will pick up the KI's",
+                zone_trigger = "Ifrit's Cauldron",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -461.6, y = 1.4, z = -218.7 }, size = 4, direction = 'up',floor_id = 0 },
+                    { type = 'arrow', center = { x = -460.1, y = 4.5, z = -179.8 }, size = 4, direction = 'up',floor_id = 0 },
+                    { type = 'arrow', center = { x = -456.8, y = 1.1, z = -143.4 }, size = 4, direction = 'right',floor_id = 0 },
+                    { type = 'square', center = { x = -281.2, y = 0.6, z = -144 }, size = 4,floor_id = 0 },
+                    { type = 'arrow', center = { x = -271.2, y = 0.5, z = -144.5 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = -20.4, y = 8.1, z = -95 }, size = 4, direction = 'up',floor_id = 0 },
+                    { type = 'arrow', center = { x = -21.4, y = 0.2, z = -48.8 }, size = 4, direction = 'sw',floor_id = 0 },
+                    { type = 'arrow', center = { x = -40.4, y = -0.5, z = -134.5 }, size = 4, direction = 'se',floor_id = 0 },
+                    { type = 'arrow', center = { x = -16.8, y = -0.2, z = -149.8 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = 12.7, y = -0.1, z = -72.5 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = 142.7, y = 0.1, z = -130 }, size = 4, direction = 'ne',floor_id = 0 },
+                    { type = 'arrow', center = { x = 209.7, y = 0.4, z = -81 }, size = 4, direction = 'right',floor_id = 0 },
+                    { type = 'arrow', center = { x = 243.1, y = 0, z = 31.1 }, size = 4, direction = 'left',floor_id = 0 },
+                    { type = 'arrow', center = { x = 192.6, y = 0.3, z = 90.4 }, size = 4, direction = 'nw',floor_id = 0 },
+                    { type = 'arrow', center = { x = 86.3, y = 0, z = 161.2 }, size = 4, direction = 'up',floor_id = 0 },
                 },
-            },
-            { text = "Step 4: Defeat the required NM to proceed." },
-            {
-                text = "Step 5: Return to Cid to complete the mission.",
+                zone_name = "Yhoator Jungle",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 5,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Yhoator Jungle",
+                    },
+                },
+            },
+            {
+                text = "Step 6: From the entrance, go south at the first fork, then north at the second. At (H-7) there will be a lava puddle with a ??? close by. \n \n" ..
+                       "IMPORTANT: Bees do not aggro, but bats and bombs will!. \n \n" ..
+                       "You will need 1x Adaman Ore to trade to the ???. Adaman Ore can be bought from Auction House or acquired via several other methods. \n \n" ..
+                       "NOTE: Magma drops 6 Rare/Ex Frag Rocks. Each person completing the mission will need one so one Adaman Ore would be enough for 6 people; if more than 6 people need the mission, it will need to be killed more than once. \n \n" ..
+                       "Like all bombs, Magma can use Self-Destruct. \n \n" ..
+                       "STRATEGY: Magma needs to be killed to get the Frag Rock, but the Salamander does not.  \n \n" ..
+                       "Re-Pops after 15 minutes.",
+                items_needed = {
+                    { item = "Adaman Ore", quantity = 1 },
+                },
+                onmob_target = {"ifrit-6-2-???"},
+                trigger_on_talk = {"You have a bad feeling about this place."},
+                visual_zones = {
+                    { type = 'arrow', center = { x = 259.4, y = 16.6, z = -64.6 }, size = 4, direction = 'down',floor_id = 1 },
+                    { type = 'arrow', center = { x = 221.3, y = 16.6, z = -98.7 }, size = 4, direction = 'up',floor_id = 1 },
+                },
+                zone_name = "Ifrit's Cauldron",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Step 7: Kill Magma to obtain the Frag Rock. (The Salamander does not need to be killed, but will likely aggro during the fight). \n \n" ..
+                       "NOTE: Only Magma drops the Frag Rock, so focus on killing it first!",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Magma"},
+                    zone = "Ifrit's Cauldron",
+                    count_party_kills = true
+                },
+                items_needed = "Frag Rock",
+                trigger_on_item_obtain = {"Frag Rock"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Step 8: Once everyone has a Frag Rock, return to Norg and trade your Frag Rock to Gilgamesh at (K-8) for a cutscene.",
+                onmob_target = "Gilgamesh",
+                trigger_on_event_id = { 99 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Norg",
+                    },
+                },
+            },
+            {
+                text = "Step 9: Finally, return to Bastok and talk to Naji at (K-8) in Metalworks for a final cutscene and to complete the mission.",
+                onmob_target = "Naji",
+                trigger_on_event_id = { 762 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 9,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "40,000 Gil + Rank 7"
         }
     },
-
     ["7-1: The Final Image"] = {
         steps = {
             { text = "Step 1: Receive the mission from any Bastok Gate Guard." },

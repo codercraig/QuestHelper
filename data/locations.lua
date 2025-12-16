@@ -37,7 +37,7 @@ return {
     },
     -- Port Bastok
     ["Argus"] = {
-        target_pos = { x = 132.0, y = 6.5, z = -2.1 },
+        target_pos = { x = 132.1, y = 6.8, z = -2.2 },
         trigger_npc = "Argus",
         visual_mode = "arc",
         zone = "Port Bastok",
@@ -319,5 +319,18 @@ return {
         target_pos = { x = -328.4, y = 0.1, z = -112.9},
         visual_mode = "arc",
         zone = "Western Altepa Desert"
-    }
+    },
+    -- Norg
+    ["Gilgamesh"] = {
+        target_pos = { x = 122.5, y = -9.8, z = -12.1},
+        visual_mode = "arc",
+        trigger_npc = "Gilgamesh",
+        zone = "Norg"
+    },
+    -- Ifrit's Caldroun
+    ["ifrit-6-2-???"] = {
+        target_pos = { x = 172.2, y = -0.5, z = -26.9},
+        visual_mode = "arc",
+        zone = "Ifrit's Caldroun"
+    },
 }
