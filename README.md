@@ -50,11 +50,17 @@ This addon wouldn't have been possible without the incredible work and support f
 - **[MalRD](https://github.com/MalRD/)** - Item finding and inventory reference code
 - **[Jyouya/Will](https://github.com/Jyouya/targetlines)** - Target lines base code references used to draw from player -> NPC.
 
+### Content Sources
+
+- **[FFXIclopedia](https://ffxiclopedia.fandom.com/)** - Mission and quest walkthrough content adapted from FFXIclopedia, licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+
 ---
 
 ## License
 
 QuestHelper is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+**Mission Walkthrough Content**: Adapted from [FFXIclopedia](https://ffxiclopedia.fandom.com/) and licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 
 This project uses code and techniques from various open-source projects in the FFXI community. All original authors are credited above. Please respect their licenses and contributions.
 

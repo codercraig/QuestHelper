@@ -43,9 +43,11 @@ return {
         [1] = 1,   -- Upper floor
         [15] = 2,  -- Lower floor
     },
-    [145] = {
+    -- Palboruough Mines
+    [143] = {
         [1] = 1,   -- Upper floor
         [2] = 2,  -- Lower floor
+        [3] = 3,  -- Lower floor
     },
     [151] = {
         [1] = 1,   -- Upper floor
@@ -86,7 +88,18 @@ return {
     [204] = {
         [1] = 1,
         [15] = 2,
-    }
+    },
+    -- Quicksand Caves
+    [208] = {
+        [1] = 1,
+        [2] = 2,
+        [3] = 3,
+        [4] = 4,
+        [5] = 5,
+        [6] = 6,
+        [7] = 7,
+        [8] = 8,
+    },
     -- [184] removed - uses auto-increment (sequential floor IDs)
     -- If floors don't increment properly, run /qh_checkfloor on each floor
     -- and add the actual raw IDs here

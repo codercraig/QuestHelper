@@ -28,6 +28,12 @@ return {
         visual_mode = "arc",
         zone = "Bastok Mines",
     },
+    ["Gumbah"] = {
+        target_pos = { x = 53.5, y = -1.4, z = -37.1 },
+        trigger_npc = "Gumbah",
+        visual_mode = "arc",
+        zone = "Bastok Mines",
+    },
     -- Bastok Markets
     ["Cleades"] = {
         target_pos = { x = -362.0, y = -12.0, z = -169.0 },
@@ -39,6 +45,12 @@ return {
     ["Argus"] = {
         target_pos = { x = 132.1, y = 6.8, z = -2.2 },
         trigger_npc = "Argus",
+        visual_mode = "arc",
+        zone = "Port Bastok",
+    },
+    ["Hilda"] = {
+        target_pos = { x = -161.8, y = -9, z = 10.3 },
+        trigger_npc = "Hilda",
         visual_mode = "arc",
         zone = "Port Bastok",
     },

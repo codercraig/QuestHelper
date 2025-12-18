@@ -3069,8 +3069,7 @@ return {
                        "Ranguemont Pass    (L-4) > \n" ..
                        "Beaucedine Glacier (F-6) > \n" ..
                        "Xarcabard          (D-7) > \n" ..
-                       "Castle Zvahl Baileys \n \n" ..
-                       "Notes: In Xarcabard grab the Teleport KI:Vahzl Gate Crystal at Telepoint (H-8), enter Castle Zvahl Baileys at (D-7/D-8) \n \n",
+                       "Castle Zvahl Baileys \n \n",
                 zone_trigger = "Castle Zvahl Baileys",
                 images = {
                     {
@@ -3828,81 +3827,47 @@ return {
     },
     ["7-1: The Final Image"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
+                text = "Step 1: This mission requires a certain level of Rank Bar. Complete Wading Beasts 1 time or trade 4 single crystals to a Conquest Overseer to open this quest which will put your rank bar at half. You can trade 12 crystals to get Full Rank Bar. \n \n" ..
+                       "Talk to a Bastok Gate Guard to receive the mission. \n \n" ..
+                       "NOTE: You must have sufficient rank points built up to receive this mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 2,
+                        state    = 1,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Mines",
                     },
-                },
-            },
-            {
-                text = "Step 3: Travel to Ro'Maeve and locate the target point at (H-5).",
-                images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 3,
+                        state    = 1,
                         highlights = {
-                            { position = "H-5", offsetX = 16, offsetY = 16 },
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Bastok Markets",
                     },
-                },
-            },
-            {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
-                images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 4,
+                        state    = 1,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Port Bastok",
                     },
                 },
             },
-        },
-        reward = {
-            text = "Rank Points!"
-        }
-    },
-
-    ["7-2: On My Way"] = {
-        steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Travel to Ifrit's Cauldron and locate the target point at (H-6).",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            { text = "Step 3: Defeat the required NM to proceed." },
-            { text = "Step 4: Return to the Bastok Gate Guard to complete the mission." }
-        },
-        reward = {
-            text = "Rank Points!"
-        }
-    },
-
-    ["8-1: The Chains That Bind Us"] = {
-        steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
+                text = "Step 2: Talk to Cid in Metalworks (Home Point #1) at (H-8) for a cutscene.",
+                onmob_target = "Cid",
+                trigger_on_event_id = { 763 },
                 images = {
                     {
                         width    = 512,
@@ -3911,11 +3876,400 @@ return {
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Metalworks",
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
+                text = "Step 3: Travel to Ro'Maeve. Be sure to have Silent Oils, Ninja's Monomi: Ichi (with tools), or Dancer's Spectral Jig. Monsters in Ro'Maeve are aggressive to level 75+ players by Sound and Magic spellcasting. \n \n" ..
+                       "Mounts can now be used in Ro'Maeve, allowing you to move quicker and avoid aggro altogether. If using trusts, pull them out before mounting as there may not be a safe area to dismount near the ???. \n \n" ..
+                       "You can reach Ro'Maeve from multiple locations: \n" ..
+                       "Port Jeuno             : -> \n" ..
+                       "Sauromugue Champaign   : (K-11/L-11) -> \n" ..
+                       "Meriphataud Mountains  : (M-4) -> \n" ..
+                       "The Sanctuary of Zi'Tah: (F-4) -> \n" ..
+                       "Ro'Maeve \n \n" ..
+                       "OR: Use the Ro'Maeve Survival Guide for instant travel!",
+                zone_trigger = "Ro'Maeve",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                            { position = "L-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Sauromugue Champaign",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "M-4", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Meriphataud Mountains",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "F-4", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Sanctuary of Zi'Tah",
+                    },
+                },
+            },
+            {
+                text = "Step 4: Find the ??? in Ro'Maeve. The ??? can be located at one of the following positions: D-10, E-9, E-10, E-11, G-9, I-8/J-8, K-10, K-11, L-10, L-7. \n \n" ..
+                       "NOTE: The ??? at M-8 is not related to this mission. \n \n" ..
+                       "Clear the area around the ???. Very highly recommended to clear the area of nearby enemies prior to popping the NMs. Weapons, bombs, and dolls will aggro level 75s and can easily complicate things for a small group. \n \n" ..
+                       "Jugs and Dolls aggro only magic and only players' magic, they will not aggro magic cast by trusts. If the player only melees and leaves the spell-casting to trusts then only evil weapons need to be cleared. \n \n" ..
+                       "When ready, target the ??? to spawn 2 NM Golems (Mokkurkalfi). Upon doing so, the ??? most likely will disappear and move to a different location. \n \n" ..
+                       "STRATEGY: It is possible to pop the NMs with Sneak active so that they don't aggro, even though Golems normally aggro by Sight. You can then pull them with a ranged attack and fight them one at a time. \n \n" ..
+                       "Both golems are resistant or immune to sleep. Only one Golem has to be defeated. \n \n" ..
+                       "As with other instances of multiple popped NMs, if you claim one and allow the other one to despawn BEFORE defeating the one you claimed, the party will still receive credit for the fight.",
+                trigger_on_talk = {"A chill runs down your spine"},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Mokkurkalfi"},
+                    zone = "Ro'Maeve",
+                    count_party_kills = true
+                },
+                --  visual_zones = {
+                --     { type = 'square', center = { x = 161.6, y = -8, z = 21 }, size = 2 },
+                --     { type = 'arrow', center = { x = 221.3, y = 16.6, z = -98.7 }, size = 4, direction = 'up',floor_id = 1 },
+                -- },
+                -- zone_name = "Ro'Maeve",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "D-10", offsetX = 16, offsetY = 16 },
+                            { position = "E-9", offsetX = 16, offsetY = 16 },
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
+                            { position = "E-11", offsetX = 16, offsetY = 16 },
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                            { position = "L-10", offsetX = 16, offsetY = 16 },
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ro'Maeve",
+                    },
+                },
+            },
+            {
+                text = "Step 5: After a golem or both Golems are defeated, track down the ??? again and get the Reinforced Cermet key item. The ??? will most likely not be in the same position where you spawned the NMs. \n \n" ..
+                       "IMPORTANT: You must not leave the zone after defeating the NMs and before getting the key item. If you do, you will have to defeat the NMs once again upon your return. Logging out is confirmed to not count as leaving. \n \n" ..
+                       "The ??? will not move when someone checks it for key item; it will only move when the NMs are spawned.",
+                keyitems_needed = {289},
+                trigger_on_keyitem_obtain = {289},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "D-10", offsetX = 16, offsetY = 16 },
+                            { position = "E-9", offsetX = 16, offsetY = 16 },
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
+                            { position = "E-11", offsetX = 16, offsetY = 16 },
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                            { position = "L-10", offsetX = 16, offsetY = 16 },
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ro'Maeve",
+                    },
+                },
+            },
+            {
+                text = "Step 6: Go back and talk with Cid at (H-8) in Metalworks to get a cutscene and complete the mission.",
+                onmob_target = "Cid",
+                trigger_on_event_id = { 764 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "700 Rank Points"
+        }
+    },
+
+    ["7-2: On My Way"] = {
+        steps = {
+            {
+                text = "Step 1: If you traded 4 crystals to a Bastok Gate Guard for the prior mission, trade another 5 crystals to get this mission. \n \n" ..
+                       "Talk to a Bastok Gate Guard to receive the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to President Karst in Metalworks at (K-8) for a cutscene.",
+                onmob_target = "Karst",
+                trigger_on_event_id = { 765 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
+                    },
+                },
+            },
+            {
+                text = "Step 3: Talk to Hilda at (E-6) in the 'Steaming Sheep' restaurant in Port Bastok. (Next to Home Point #3)",
+                onmob_target = "Hilda",
+                trigger_on_event_id = { 255 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 4: Go through Palborough Mines and into Waughroon Shrine. \n \n" ..
+                       "Alternative routes: \n" ..
+                       "- If you've beaten Beyond Infinity, you can talk to Domenic inside Neptune's Spire in Lower Jeuno and have him teleport you to the shrine. \n" ..
+                       "- If you've previously activated the Home Point outside the arena, you can go there directly. \n \n" ..
+                       "Full route from Bastok: \n" ..
+                       "Bastok Markets (D-11) -> \n" ..
+                       "South Gustaberg (H-5) -> \n" ..
+                       "North Gustaberg (K-3) -> \n" ..
+                       "Palborough Mines! - wahoo! Find the elevator on Floor 1, and this will take you to Floor 3 and use the map provided(Grab the Home Point!) \n \n",
+                zone_trigger = "Waughroon Shrine",
+                images = {
+                     {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "D-11", offsetX = 16, offsetY = 16 },
+                          },
+                          zone_name = "Bastok Markets",
+                    },
+                    {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "H-5", offsetX = 16, offsetY = 16 },
+                          },
+                          zone_name = "South Gustaberg",
+                    },
+                    {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          highlights = {
+                              { position = "K-3", offsetX = 16, offsetY = 16 },
+                          },
+                          zone_name = "North Gustaberg",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Palborough Mines",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Palborough Mines",
+                        floor_id = 3,
+                    },
+                },
+            },
+            {
+                text = "Step 5: Click on the Burning Circle to enter the battlefield 'On My Way', a 6-person uncapped level BCNM. \n \n" ..
+                       "The fight is against: \n" ..
+                       "- Go'Bha Slaughterer (DRK) \n" ..
+                       "- Ku'Jhu Graniteskin (WAR) \n" ..
+                       "- Da'Shu Knightslayer (RDM) \n" ..
+                       "- Sa'Nha Soulsaver (WHM) \n \n" ..
+                       "This is a mission BCNM, so no exp is lost from K.O. in this fight. \n \n" ..
+                       "STRATEGY: Enemies will all use their respective jobs' One Hour Ability. It is recommended that you kill them in the order listed above. If you use Sleepga and go for the White Mage first, he can use Benediction or Curaga to wake the others. So you should bring Sa'Nha Soulsaver to the entrance and kill it there. \n \n" ..
+                       "Buffs and Trusts wear upon entering, so cast after entering. \n \n" ..
+                       "Only Bastokers who are on mission 7-2 or who have finished this mission for Bastok before (regardless of current Allegiance), can enter the BCNM. \n \n" ..
+                       "After the fight, you will receive the KI:Letter From Werei.",
+                trigger_on_keyitem_obtain = {"Letter From Werei"},
+                keyitems_needed = {"Letter From Werei"},
+            },
+            {
+                text = "Step 6: The next two steps can be completed in either order, but you must do both to complete the mission. \n \n" ..
+                       "Talk to Gumbah at (J-7) inside an upper-level house in Bastok Mines. Gumbah also starts several quests, so be sure the cutscene relates to Werei's letter.",
+                onmob_target = "Gumbah",
+                trigger_on_event_id = { 175,177 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                },
+            },
+            {
+                text = "Step 7: Talk to President Karst in Metalworks at (K-8). At this point you will receive Rank 8 and your reward.",
+                onmob_target = "Karst",
+                trigger_on_event_id = { 766 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "60,000 Gil + Rank 8"
+        }
+    },
+
+    ["8-1: The Chains That Bind Us"] = {
+        prerequisites = {
+            {category = "Quests", subfile = "Eastern_Altepa_Desert", name = "Open Sesame"}
+        },
+        steps = {
+            {
+                text = "Step 1: This mission requires a certain level of Rank Bar. Trade 6 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Iron Eater at (J-8) guarding the Door to the President's Office in Metalworks. \n \n" ..
+                       "Iron Eater is involved in multiple quests and missions. If necessary, keep talking to him until he tells you to investigate the Quicksand Caves.",
+                onmob_target = "Iron Eater",
+                trigger_on_event_id = { 767 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 2,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
+                    },
+                },
+            },
+            {
+                text = "Step 3: Travel to Western Altepa Desert (G-5) and enter Quicksand Caves. \n \n" ..
+                       "Routes: \n" ..
+                       "- Voidwatch warp to Kuftal Tunnel entrance is near this location (Requires starting the Zilart branch of Voidwatch). \n" ..
+                       "- Use the Kuftal Tunnel Survival Guide and exit back into Altepa. \n" ..
+                       "- Unity warping to Western Altepa Desert (Level 125 category). \n \n" ..
+                       "If running from Bastok: \n" ..
+                       "Zeruhn Mines          (F-7)    -> \n" ..
+                       "Korroloka Tunnel      (A-9/10) -> \n" ..
+                       "Eastern Altepa Desert (I-6)    -> \n" ..
+                       "Western Altepa Desert (G-5)    -> \n" ..
+                       "Quicksand Caves",
+                zone_trigger = "Quicksand Caves",
                 images = {
                     {
                         width    = 512,
@@ -3924,61 +4278,305 @@ return {
                         highlights = {
                             { position = "F-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Zeruhn Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "A-9", offsetX = 16, offsetY = 16 },
+                            { position = "A-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "B-8", offsetX = 16, offsetY = 16 },
+                            { position = "C-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 2,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Eastern Altepa Desert",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "G-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
                     },
                 },
             },
-            { text = "Step 4: Defeat the required NM to proceed." },
             {
-                text = "Step 5: Return to Cid to complete the mission.",
+                text = "Step 4: Navigate through Quicksand Caves. Head to (H-8) and pass through the Weight Detection's door [works with 1 Galka, 2 Hume/Elvaan/Mithra, 3 Tarutaru also works with 1 Tarutaru and 1 of any other race, or Key Item: Loadstone]. Trust NPCs do not work!!! \n \n" ..
+                       "Head south into a new room and pass another Weight Detection's door (H-10). The ??? (Galka Statue) you need is just to the south located at (G-11). \n \n" ..
+                       "Clear the room first, then spawn the 3 NMs: \n" ..
+                       "- Triarius IV-XIV (Black Mage) \n" ..
+                       "- Princeps IV-XLV (Paladin) \n" ..
+                       "- Centurio IV-VII (Warrior) \n \n" ..
+                       "It is recommended that you kill them in the order listed above. However, only one needs to be killed if two others are left to despawn before it dies. \n \n" ..
+                       "A group of 12 level ~60 alliance or a party (Trust or not) at level ~73 can handle this with a sleeper. Trivial at Item Level. \n \n" ..
+                       "TIPS: The NMs are about lvl 70~ Antica. Sneak pop does not work, they will aggro once you pop them. However, they can be deaggroed by a SMN using an AoE bloodpact, running away, and releasing. \n \n" ..
+                       "They have high resistance to dark magic, but Repose and Horde Lullaby can sleep them easily. Level 75+ Red Mage can cast Sleep reliably. \n \n" ..
+                       "Triarius IV-XIV may cast Sleepga II in the beginning, please beware. Centurio IV-VII will also use Mighty Strikes.",
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Triarius IV-XIV", "Princeps IV-XLV", "Centurio IV-VII"},
+                    zone = "Quicksand Caves",
+                    count_party_kills = true
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "G-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 5,
+                    },
+                },
+            },
+            {
+                text = "Step 5: After you win, touch the ??? again at (G-11) to get a cutscene.",
+                trigger_on_event_id = { 11 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 5,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "G-11", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 5,
+                    },
+                },
+            },
+            {
+                text = "Step 6: Next go to the Western Altepa Desert (D-12) entrance. The entrance in Western Altepa Desert is accessed through a hidden area on the map, starting at (C-11)/(D-11) in the far Southwest corner. Hug the southern wall in the lower area to climb the broken stairs. \n \n" ..
+                       "Once inside, make sure you cast Sneak and make your way through the caves to (K-8). You will come to a weighted door leading East. Go through that door and continue to follow the caves (both the left and the right path lead to the next door). \n \n" ..
+                       "You will arrive at another weighted door at (G-8) facing East. Again, go through that door into a smaller room with another door. \n \n" ..
+                       "After going through the second weighted door and through the door behind it, you will notice the mural on the wall to your left, and a ??? on a small pedestal, which you will check for another cutscene with Zeid and some interesting storyline.",
+                trigger_on_event_id = { 10 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "D-12", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 7,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 4,
+                    },
+                },
+            },
+            {
+                text = "Step 7: When that is done, head back to Metalworks and talk to Iron Eater at (J-8) for another cutscene to complete the mission.",
+                onmob_target = "Iron Eater",
+                trigger_on_event_id = { 768 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "1133 Rank Points"
         }
     },
 
     ["8-2: Enter the Talekeeper"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Speak to Medicine Eagle at (H-7) in Bastok Mines.",
+                text = "Step 1: This mission requires a certain level of Rank Bar to become available. Trade 6 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Drake Fang at (H-6) in Zeruhn Mines for a cutscene.",
+                onmob_target = "Drake Fang",
+                trigger_on_event_id = { 202 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Zeruhn Mines",
                     },
                 },
             },
             {
-                text = "Step 3: Travel to the Quicksand Caves and locate the target point at (K-7).",
+                text = "Step 3: Head to Kuftal Tunnel. The entrance is at (H-4) from Western Altepa Desert. \n \n" ..
+                       "Routes: \n" ..
+                       "- Fastest teleport option is the Survival Guide in Kuftal Tunnel. \n" ..
+                       "- You can ride from Rabao, use the Voidwatch Zilart teleport, Western Altepa Desert Survival Guide teleport, or Unity teleport (Level 125 category) to get to the Western Altepa Desert exit to Kuftal Tunnel. \n \n" ..
+                       "If running from Bastok: \n" ..
+                       "Zeruhn Mines          (F-7)    -> \n" ..
+                       "Korroloka Tunnel      (A-9/10) -> \n" ..
+                       "Eastern Altepa Desert (I-6)    -> \n" ..
+                       "Western Altepa Desert (H-4)    -> \n" ..
+                       "Kuftal Tunnel",
+                zone_trigger = "Kuftal Tunnel",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Zeruhn Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "A-9", offsetX = 16, offsetY = 16 },
+                            { position = "A-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "B-8", offsetX = 16, offsetY = 16 },
+                            { position = "C-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 2,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Eastern Altepa Desert",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "H-4", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
                     },
                 },
             },
-            { text = "Step 4: Defeat the required NM to proceed." },
             {
-                text = "Step 5: Return to Medicine Eagle at (H-7) in Bastok Mines to complete the mission.",
+                text = "Step 4: Examine the ??? at (H-8) on the top of the cliff near the entrance to Western Altepa Desert. The dialogue should end with it saying the piece of wood fell down. \n \n" ..
+                       "Everyone who needs the mission must check the ???. However, if someone misses it, they can check the ??? at the top after the NM is killed, then check the ??? at the bottom and still get the key item.",
+                trigger_on_event_id = { 12 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Kuftal Tunnel",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Step 5: Clear the lower area of ghosts, then touch the ??? at (H-7) at the bottom of the cliff (in the Cancer pop room) to spawn 3 NM ghosts: \n" ..
+                       "- Dervo's Ghost \n" ..
+                       "- Gizerl's Ghost \n" ..
+                       "- Gordov's Ghost \n \n" ..
+                       "Doable solo with Trust at level 75. Trivial at Item Level. \n \n" ..
+                       "TIPS: It takes at least one minute from pop of the NMs before the cutscene can be triggered. If you kill the ghosts fast you will get the nothing message until the cutscene triggers. \n \n" ..
+                       "It is possible to complete this mission by killing only one of the ghosts. Pull one of the NMs, wait for the other two to despawn, then kill the NM that was pulled. If you do not wait for the other two NMs to despawn first, you will not be able to complete the mission by checking the ??? and will have to fight the mobs again. The wait time for the ??? to be active again is approximately 5 minutes.",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Dervo's Ghost", "Gizerl's Ghost", "Gordov's Ghost"},
+                    zone = "Kuftal Tunnel",
+                    count_party_kills = true
+                },
                 images = {
                     {
                         width    = 512,
@@ -3987,110 +4585,474 @@ return {
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Kuftal Tunnel",
+                    },
+                },
+            },
+            {
+                text = "Step 6: Have everyone check the ??? at the bottom (H-7) until they receive the cutscene and a Key Item: Old Piece of Wood. \n \n" ..
+                       "Checking the ??? will not respawn the NM ghosts no matter how much time has passed (leaving the zone means you will have to re-fight the NMs), so it's okay to raise any members who have died first. \n \n" ..
+                       "A static time limit may exist between killing NMs and ??? triggering cutscene with mission completion. If your group or solo party killed each ghost, continue testing the ??? periodically until it yields the completion cutscene.",
+                trigger_on_event_id = { 13 },
+                trigger_on_item_obtain = {"Old Piece of Wood"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Kuftal Tunnel",
+                    },
+                },
+            },
+            {
+                text = "Step 7: Talk to Drake Fang at (H-6) in Zeruhn Mines again for a long cutscene. You will be teleported to Bastok Mines and the mission will complete.",
+                onmob_target = "Drake Fang",
+                trigger_on_event_id = { 204, 176 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Zeruhn Mines",
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "80,000 Gil + Rank 9"
         }
     },
 
     ["9-1: The Salt of the Earth"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Speak to Raibaht at (J-8) in the Metalworks.",
+                text = "Step 1: This mission requires a certain level of Rank Bar. Repeat missions or trade 10 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Alois in the 'Conference Room' to the left of the President's Office in Metalworks for a cutscene.",
+                onmob_target = "Alois",
+                trigger_on_event_id = { 773 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Metalworks",
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Cape Teriggan and locate the target point at (L-6).",
+                text = "Step 3: Talk to Dancing Wolf at (G-7) in Rabao, near Home Point #2.",
+                onmob_target = "Dancing Wolf",
+                trigger_on_event_id = { 102 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 3,
                         highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Rabao",
                     },
                 },
             },
-            { text = "Step 4: Collect the required key item from the location." },
             {
-                text = "Step 5: Return to Raibaht to complete the mission.",
+                text = "Step 4: Go to Gustav Tunnel and go to (G-6) on the second map. Spawn the NM by clicking on the ???. \n \n" ..
+                       "Routes: \n" ..
+                       "- Survival Guide teleport to Gustav Tunnel. \n" ..
+                       "- Unity warp (Level 128 category) will place you right at the entrance to the second map.",
+                zone_trigger = "Gustav Tunnel",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Gustav Tunnel",
+                    },
+                },
+            },
+            {
+                text = "Step 5: The fight starts off with one Gigaplasm. Once you kill it, it turns into two Macroplasms. Each one of those turns into two Microplasms and each one of those turn into two Nanoplasms. \n \n" ..
+                       "Recommended Fight Order: Gigaplasm -> Macroplasms -> Microplasms -> Nanoplasms \n \n" ..
+                       "Soloable at Lv99 with trusts. \n \n" ..
+                       "TIPS: It is not possible to sneak pop the NM as in previous missions. The Gigaplasm will spawn claimed and immediately begin attacking the person who popped it. \n \n" ..
+                       "The plasms do not build resistance to either sleep or lullaby. As the plasms get smaller, they attack faster and faster. Nanoplasm have a delay of about 150. The smaller plasms' magic defense decreases greatly with each new stage. \n \n" ..
+                       "IMPORTANT: If whoever pops the Gigaplasm dies in a bad spot and is still dead after fight is over, do not Tractor them! You must not zone or get tractored, otherwise you will need to fight the NM again. Should someone d/c after the fight is done, but before earning the key item, you will not have to do the fight again. If someone gets disconnected during the fight, sleep the last slime until they can be re-invited.",
+                kill_requirement = {
+                    count = 15,
+                    enemies = {"Gigaplasm", "Macroplasm", "Microplasm", "Nanoplasm"},
+                    zone = "Gustav Tunnel",
+                    count_party_kills = true
+                },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 5,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Gustav Tunnel",
+                    },
+                },
+            },
+            {
+                text = "Step 6: After you defeat all the Plasms, check the ??? at (G-6) for the Key Item: Miraclesalt.",
+                trigger_on_item_obtain = {477},
+                keyitems_needed = {477},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Gustav Tunnel",
+                    },
+                },
+            },
+            {
+                text = "Step 7: Return to Rabao and talk to Dancing Wolf at (G-7) for a cutscene after obtaining the key item.",
+                onmob_target = "Dancing Wolf",
+                trigger_on_event_id = { 104 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Rabao",
+                    },
+                },
+            },
+            {
+                text = "Step 8: Return to the Conference Room and talk to Alois at (J-7) in Metalworks again to complete the mission.",
+                onmob_target = "Alois",
+                trigger_on_event_id = { 776 },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
                     },
                 },
             },
         },
         reward = {
-            text = "Rank Points!"
+            text = "1500 Rank Points"
         }
     },
 
     ["9-2: Where Two Paths Converge"] = {
         steps = {
-            { text = "Step 1: Receive the mission from any Bastok Gate Guard." },
             {
-                text = "Step 2: Speak to Lucius at (K-7) in the Metalworks.",
+                text = "Step 1: Talk to a Bastok Gate Guard to receive the mission.",
+                onmob_target = {"Rashid", "Cleades", "Argus"},
+                trigger_on_event_id = 1001,
+                trigger_on_talk = {"You have accepted the mission"},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "D-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Bastok Markets",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 1,
+                        highlights = {
+                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Port Bastok",
+                    },
+                },
+            },
+            {
+                text = "Step 2: Talk to Iron Eater at (J-8) in Metalworks for a cutscene.",
+                onmob_target = "Iron Eater",
+                trigger_on_event_id = { 780 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 2,
                         highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Metalworks",
+                    },
+                },
+            },
+            {
+                text = "Step 3: Travel to Castle Zvahl Baileys. \n \n" ..
+                       "Outpost: Fauregandi/Valdeaunia if possible. \n \n" ..
+                       "If walking a good route is from San d'Oria: \n" ..
+                       "East Ronfaure      (K-4) -> \n" ..
+                       "Ranguemont Pass    (L-4) -> \n" ..
+                       "Beaucedine Glacier (F-6) -> \n" ..
+                       "Xarcabard          (D-7) -> \n" ..
+                       "Castle Zvahl Baileys \n \n" ..
+                       "NOTE: In Xarcabard grab the Teleport KI: Vahzl Gate Crystal at Telepoint (H-8), enter Castle Zvahl Baileys at (D-7/D-8).",
+                zone_trigger = "Castle Zvahl Baileys",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "East Ronfaure",
+                        highlights = {
+                            { position = "K-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Ranguemont Pass",
+                        highlights = {
+                            { position = "L-4", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Beaucedine Glacier",
+                        highlights = {
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Xarcabard",
+                        highlights = {
+                            { position = "D-7", offsetX = 16, offsetY = 16 },
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Castle Zvahl Baileys and locate the target point at (J-6).",
+                text = "Step 4: Route through Castle Zvahl Baileys -> Castle Zvahl Keep. \n \n" ..
+                       "Map 1: Go to (G-8) staying on the lower level and take a first Right (North). Follow the arrows on the ground will lead you to (F-8) - Map 2. \n \n" ..
+                       "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
+                       "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
+                       "Map 2: Follow the arrows, end goal is (F-8) to Castle Zvahl Keep. \n \n" ..
+                       "Aggro: Tigers/Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70.",
+                zone_trigger = "Castle Zvahl Keep",
+                visual_zones = {
+                    { type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up', floor_id = 1 },
+                    { type = 'arrow', center = { x = 87.9, y = -20.1, z = 100.6 }, size = 4, direction = 'down', floor_id = 1 },
+                    { type = 'arrow', center = { x = 99.8, y = -20.1, z = 72.7 }, size = 4, direction = 'left', floor_id = 1 },
+                    { type = 'arrow', center = { x = 31.2, y = -20, z = 59.7 }, size = 4, direction = 'up', floor_id = 2 },
+                    { type = 'arrow', center = { x = 20.8, y = -20, z = 150.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 2 },
+                    { type = 'arrow', center = { x = -61, y = -20, z = 110.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'arrow', center = { x = -92, y = -20, z = 89.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'arrow', center = { x = -91.8, y = -19.5, z = 51.5 }, size = 4, direction = 'right', floor_id = 2 },
+                    { type = 'arrow', center = { x = -76.1, y = -19.5, z = 52.1 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'arrow', center = { x = -77.4, y = -24, z = 20.2 }, size = 4, direction = 'left', floor_id = 2 },
+                    { type = 'arrow', center = { x = -6.5, y = 4, z = 126.5 }, size = 4, direction = 'nw', floor_id = 15 },
+                    { type = 'arrow', center = { x = -59.7, y = 4, z = 179.2 }, size = 4, direction = 'down', floor_id = 15 },
+                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 15 },
+                },
+                zone_name = "Castle Zvahl Baileys",
                 images = {
                     {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 1,
                         highlights = {
-                            { position = "J-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 15,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { text = "Step 4: Defeat the Shadow Lord in the final battle." },
             {
-                text = "Step 5: Return to Lucius to complete the mission.",
+                text = "Step 5: Castle Zvahl Keep -> Throne Room. \n \n" ..
+                       "Follow the arrows, there is a lot of door opening here! \n" ..
+                       "Map 1 -> (H-6) \n" ..
+                       "Map 2 -> (E-8) \n" ..
+                       "Map 3 -> Run on the teleporters when a glowing image appears. Keep doing this until you reach Map 4! \n" ..
+                       "Map 4 -> (G-7) to Throne Room and grab the Home Point!",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -30, y = 0, z = -22.3 }, size = 4, direction = 'up', floor_id = 1 },
+                    { type = 'arrow', center = { x = -32.4, y = 0.6, z = 48.7 }, size = 4, direction = 'right', floor_id = 1 },
+                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 69.4 }, size = 4, direction = 'up', floor_id = 1 },
+                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 90.2 }, size = 4, direction = 'left', floor_id = 1 },
+                    { type = 'arrow', center = { x = -69, y = 0.6, z = 107.8 }, size = 4, direction = 'up', floor_id = 1 },
+                    { type = 'arrow', center = { x = -69.7, y = -15.4, z = 86.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'arrow', center = { x = -60.4, y = -15.4, z = 48.5 }, size = 4, direction = 'down', floor_id = 2 },
+                    { type = 'square', center = { x = -300, y = -49.1, z = -20 }, size = 4, floor_id = 3 },
+                    { type = 'square', center = { x = -272.6, y = -53.2, z = 4.9 }, size = 4, floor_id = 3 },
+                    { type = 'square', center = { x = -272.9, y = -53.2, z = -44.6 }, size = 4, floor_id = 3 },
+                    { type = 'square', center = { x = -326.5, y = -53.2, z = -45 }, size = 4, floor_id = 3 },
+                },
+                zone_name = "Castle Zvahl Keep",
+                zone_trigger = "Throne Room",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 3,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 6: Enter the Throne Room BCNM to fight Zeid. 6 characters including you, that are either currently on this part of the mission or have previously completed it, regardless of current allegiance, may enter. \n \n" ..
+                       "PREPARATION: Buffs are removed upon entry. Food effects however, are not. Do not move towards Zeid until everyone is inside/Alter Egos have been summoned. He will not attack until you move close enough, so it is safe to buff up and rest to full as long as you stay far enough away. You CAN call Trust NPCs for this fight. \n \n" ..
+                       "ZEID'S ABILITIES: Zeid is capable of using all Great Sword weapon skills up to Ground Strike, which tends to be his favorite. He casts Absorb spells, but nothing more. The weapon skill Shockwave is an AoE attack and can cause Sleep. If a large portion of your party are melee-type, consider using Poison Potions. This is not necessary for mages, as long as they keep proper distance. \n \n" ..
+                       "Zeid also uses two unique abilities: Abyssal Strike (ranged attack, 5-10 second Stun, purple flash on sword) and Abyssal Drain (Drain move about as powerful as the spell). Zeid may have some form of TP Regain, as he will build TP quickly even if being kited and only attacked by magic. \n \n" ..
+                       "VOLKER PHASE: When Zeid is at about 70% HP, there will be a cutscene featuring Volker, who will join you in the fight. You are given time to rest afterwards as Zeid will not immediately aggro again, but Volker will attack if you wait too long. Volker must be kept alive in order to win and Zeid's Ground Strike can take most, if not all, of his HP in one shot. \n \n" ..
+                       "SHADOW OF RAGE: At some point, two creatures called Shadow of Rage will spawn. They have attacks equal to Zeid's but much less HP. They are highly resistant or immune to all forms of Sleep. A well-timed -ga spell can kill both in one hit. The Shadows can use Great Sword weapon skills at least up to Shockwave and use the same Abyssal moves as Zeid. They gain TP very quickly. Zeid will later recall the Shadows if they are defeated, but not immediately (30-60 seconds). Killing them is highly recommended as they hit nearly as hard as Zeid and can skillchain with him. If Zeid is defeated before the shadows, they will despawn. \n \n" ..
+                       "You won't lose any Experience Points if you are defeated.",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Zeid"},
+                    zone = "Throne Room",
+                    count_party_kills = true
+                },
+            },
+            {
+                text = "Step 7: Return to Iron Eater at (J-8) in Metalworks to complete the mission and receive your rewards.",
+                onmob_target = "Iron Eater",
+                trigger_on_event_id = { 782 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 5,
+                        state    = 7,
+                        zone_name = "Metalworks",
                         highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
         },
         reward = {
-            text = "Rank 10 and Airship pass to Kazham"
+            text = "100,000 Gil + Rank 10 + Title: Hero Among Heroes + Bastokan Flag"
         }
     },
 }

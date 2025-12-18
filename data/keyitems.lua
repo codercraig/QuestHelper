@@ -26,6 +26,9 @@ local id_to_name = {
     [74] = "Shadow Fragment",
     [78] = "Gustaberg Supplies",
     [266] = "Altepa Moonpebble",
+    [289] = "Reinforced Cermet",
+    [290] = "Letter From Werei",
+    [477] = "Miracle Salt",
 
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",

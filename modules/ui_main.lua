@@ -119,6 +119,26 @@ local function getAllItemsNeeded(missionData)
     return allItems
 end
 
+-- Collects all prerequisites for a quest/mission
+-- Returns: { {category = "Missions", subfile = "Bastok", name = "7-1: The Final Image"}, ... }
+local function getAllPrerequisites(missionData)
+    if not missionData or not missionData.prerequisites then
+        return {}
+    end
+
+    -- Prerequisites should be an array of tables with category, subfile, and name
+    local prerequisites = {}
+    if type(missionData.prerequisites) == 'table' then
+        for _, prereq in ipairs(missionData.prerequisites) do
+            if type(prereq) == 'table' and prereq.category and prereq.subfile and prereq.name then
+                table.insert(prerequisites, prereq)
+            end
+        end
+    end
+
+    return prerequisites
+end
+
 -- Renders the main QuestHelper window
 function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
                        quest_data, quest_state, utils, inventory_cache, keyitem_module, keyitems_db)
@@ -179,6 +199,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 local text_height = lines * 20
 
+                -- Cap text height to scroll limit (500px) if it exceeds that
+                if text_height > 500 then
+                    text_height = 500
+                end
+
                 -- Add height for items/key items if present
                 -- Only add full height if sections are expanded, otherwise just add header height + extra breathing room
                 local items_height = 0
@@ -195,6 +220,15 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 if #keyItemsNeeded > 0 then
                     if ui_settings.keyitems_section_expanded then
                         items_height = items_height + (#keyItemsNeeded * 25) + 30
+                    else
+                        items_height = items_height + 30  -- Collapsed header + extra breathing room
+                    end
+                end
+
+                local prerequisites = getAllPrerequisites(missionData)
+                if #prerequisites > 0 then
+                    if ui_settings.prerequisites_section_expanded then
+                        items_height = items_height + (#prerequisites * 25) + 30
                     else
                         items_height = items_height + 30  -- Collapsed header + extra breathing room
                     end
@@ -439,9 +473,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         if not collapsed_viewed_step or collapsed_viewed_step < 1 or collapsed_viewed_step > #steps then
                             collapsed_viewed_step = math.min(current_step_index, #steps)
                         elseif collapsed_viewed_step < current_step_index then
-                            -- Auto-advance: user completed steps, follow the current step
+                            -- Auto-advance: user completed steps, follow the current step forward
                             collapsed_viewed_step = math.min(current_step_index, #steps)
                         end
+                        -- Note: We don't auto-rewind when user unchecks earlier steps
+                        -- This allows manual navigation with prev/next buttons to work properly
 
                         -- Previous button
                         if collapsed_viewed_step > 1 then
@@ -615,6 +651,57 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     imgui.Separator()
                 end
 
+                -- Prerequisites Section (collapsible, open by default)
+                local prerequisites = getAllPrerequisites(missionData)
+                if #prerequisites > 0 then
+                    -- Track the expanded state for dynamic height calculation
+                    local prereq_header_expanded = imgui.CollapsingHeader("Prerequisites:", ui_settings.prerequisites_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
+
+                    -- Update state if it changed
+                    if prereq_header_expanded ~= ui_settings.prerequisites_section_expanded then
+                        ui_settings.prerequisites_section_expanded = prereq_header_expanded
+                        settings.save('QuestHelper_settings', quest_state.settings)
+                    end
+
+                    if prereq_header_expanded then
+                        for idx, prereq in ipairs(prerequisites) do
+                            -- Check if the prerequisite quest/mission is complete
+                            local isComplete = quest_state.isMissionComplete(prereq.category, prereq.subfile, prereq.name, quest_data)
+
+                            -- Set button color based on completion status
+                            if isComplete then
+                                -- GREEN - Completed
+                                imgui.PushStyleColor(ImGuiCol_Button,        {0, 0.5, 0, 0.5})
+                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 0.7, 0, 0.7})
+                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 0.9, 0, 0.9})
+                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                            else
+                                -- RED - Not completed
+                                imgui.PushStyleColor(ImGuiCol_Button,        {0.5, 0, 0, 0.5})
+                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.7, 0, 0, 0.7})
+                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.9, 0, 0, 0.9})
+                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                            end
+
+                            local buttonLabel = string.format("%s %s: %s##prereq_%d",
+                                isComplete and "[x]" or "[ ]",
+                                prereq.category,
+                                prereq.name,
+                                idx)
+
+                            if imgui.Button(buttonLabel) then
+                                -- Navigate to the prerequisite quest/mission
+                                new_currentTopCategory = prereq.category
+                                new_currentSubfile = prereq.subfile
+                                new_current_mission = prereq.name
+                            end
+
+                            imgui.PopStyleColor(4)
+                        end
+                    end
+                    imgui.Separator()
+                end
+
                 -- Steps
                 -- Determine which steps to display based on show_all_steps setting
                 local steps_to_show = {}
@@ -641,10 +728,54 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, i, ref[1], nil)
                     end
                     imgui.SameLine()
+
+                    -- Calculate estimated text height for collapse mode scrolling
+                    local use_scrollable_text = false
+                    local estimated_text_height = 0
+
+                    if not ui_settings.show_all_steps then
+                        -- Estimate text height: Count newlines + account for line wrapping
+                        -- Each line wraps at ~60 chars, each line is ~20px tall
+                        local lines = 1
+                        local current_line_length = 0
+
+                        for j = 1, #text do
+                            local char = text:sub(j, j)
+                            if char == '\n' then
+                                lines = lines + 1
+                                current_line_length = 0
+                            else
+                                current_line_length = current_line_length + 1
+                                if current_line_length >= 60 then
+                                    lines = lines + 1
+                                    current_line_length = 0
+                                end
+                            end
+                        end
+
+                        estimated_text_height = lines * 20
+
+                        -- Use scrollable container if text height exceeds 500px
+                        if estimated_text_height > 500 then
+                            use_scrollable_text = true
+                        end
+                    end
+
+                    -- Begin scrollable container if text is too long in collapse mode
+                    if use_scrollable_text then
+                        imgui.BeginChild("##StepTextScroll", {0, 500}, true, 0)
+                    end
+
+                    -- Render the step text
                     if ref[1] then
                         imgui.TextColored({0,1,0,1}, utils.wrap_text(text, 60))
                     else
                         imgui.Text(utils.wrap_text(text, 60))
+                    end
+
+                    -- End scrollable container if we started one
+                    if use_scrollable_text then
+                        imgui.EndChild()
                     end
 
                     -- KILL COUNTER UI DISPLAY
@@ -660,10 +791,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                             imgui.TextColored({1,1,0,1}, string.format("[%d/%d] Kills Remaining", current_count, required_count))
                         end
 
-                        -- Show enemy types if specified
+                        -- Show enemy types if specified (one per line to prevent text overflow)
                         if kill_req.enemies and #kill_req.enemies > 0 then
-                            imgui.SameLine()
-                            imgui.TextColored({0.7,0.7,0.7,1}, "(" .. table.concat(kill_req.enemies, ", ") .. ")")
+                            for _, enemy_name in ipairs(kill_req.enemies) do
+                                imgui.TextColored({0.7,0.7,0.7,1}, "  - " .. enemy_name)
+                            end
                         end
                         imgui.Unindent(20)
                     end
