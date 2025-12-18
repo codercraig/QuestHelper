@@ -74,9 +74,10 @@ function drawingModule.drawLine(p1, p2, color)
     drawLine(p1, p2, color)
 end
 
-function drawingModule.drawArrow(center, size, direction, color)
+function drawingModule.drawArrow(center, size, direction, color, outline)
     -- direction can be: 'up', 'down', 'left', 'right', 'north', 'south', 'east', 'west'
     -- and diagonals: 'northeast', 'northwest', 'southeast', 'southwest', 'ne', 'nw', 'se', 'sw'
+    -- outline: optional boolean, if true draws a black outline for better visibility
     -- Normalize direction to lowercase
     local dir = string.lower(direction or 'up')
 
@@ -182,6 +183,25 @@ function drawingModule.drawArrow(center, size, direction, color)
         points.base = {x = center.x, y = center.y, z = center.z - size/2}
         points.left = {x = center.x - head_width/2, y = center.y, z = center.z + size/2 - head_length}
         points.right = {x = center.x + head_width/2, y = center.y, z = center.z + size/2 - head_length}
+    end
+
+    -- Draw thick outline if requested (black border for visibility)
+    if outline then
+        local black_color = 0xFF000000  -- Solid black
+        local outline_thickness = 0.08  -- Thickness of outline in world units
+
+        -- Draw multiple offset lines to create thick outline effect
+        for offset_y = -outline_thickness, outline_thickness, outline_thickness/2 do
+            -- Offset points in Y direction (up/down in world space)
+            local base_offset = {x = points.base.x, y = points.base.y + offset_y, z = points.base.z}
+            local tip_offset = {x = points.tip.x, y = points.tip.y + offset_y, z = points.tip.z}
+            local left_offset = {x = points.left.x, y = points.left.y + offset_y, z = points.left.z}
+            local right_offset = {x = points.right.x, y = points.right.y + offset_y, z = points.right.z}
+
+            drawLine(base_offset, tip_offset, black_color)
+            drawLine(tip_offset, left_offset, black_color)
+            drawLine(tip_offset, right_offset, black_color)
+        end
     end
 
     -- Draw the arrow shaft

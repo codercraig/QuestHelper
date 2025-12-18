@@ -3,9 +3,11 @@ return {
         steps = {
             {
                 text = "Step 1: Speak to Lokpix at the Altepa telepoint in Eastern Altepa Desert (G-10) and answer yes to both questions. \n \n" ..
-                       "This step does not need to be done first, but must be completed before trading items to him.",
+                       "This step does not need to be done first, but must be completed before trading items to him. \n \n" ..
+                       "If you are a GALKA no need to do this quest you are heavy enough to trigger the door mechanism! :D \n \n",
                 onmob_target = "Lokpix",
-                trigger_on_talk = {"Open Sesame"},
+                --trigger_on_event_id = 20,
+                trigger_on_talk = " Dat's why.",
                 images = {
                     {
                         width = 512,
@@ -13,7 +15,7 @@ return {
                         state = 1,
                         zone_name = "Eastern Altepa Desert",
                         highlights = {
-                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -24,17 +26,7 @@ return {
                        "Quick route: If you have Summoner level 20+, use the Mini Tuning Fork of Earth from the 'Trial Size Trial by Earth' quest to warp instantly. \n \n" ..
                        "Alternative: Use Quicksand Caves Home Point #2, or Unity warp to Quicksand Caves (Level 125 category).",
                 trigger_on_item_obtain = "Tremorstone",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Cloister of Tremors",
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                items_needed = {"Tremorstone"},
             },
             {
                 text = "Step 3: Obtain ONE of the following items (your choice): \n \n" ..
@@ -42,8 +34,19 @@ return {
                        "Option 2: Soil Gem - Craft via mid-level Goldsmithing, or buy from Auction House. \n \n" ..
                        "Option 3: Twelve Soil Geodes - Dropped by high level monsters on Earthday or in earth weather, or buy from Auction House.",
                 items_needed = {
-                    { display = "Meteorite OR Soil Gem OR 12x Soil Geodes", alternatives = {"Meteorite", "Soil Gem", "Soil Geodes"} }
+                    { display = "Meteorite OR Soil Gem OR 12x Soil Geodes", alternatives = {
+                        { item = "Meteorite", quantity = 1 },
+                        { item = "Soil Gem", quantity = 1 },
+                        { item = "Soil Geodes", quantity = 12 },
+
+                    }}
                 },
+                trigger_on_item_obtain = {
+                    { item = "Meteorite", quantity = 1 },
+                    { item = "Soil Gem", quantity = 1 },
+                    { item = "Soil Geodes", quantity = 12 },
+                },
+                require_all_items = false,  -- Only need ONE of the items above
                 images = {
                     {
                         width = 512,
@@ -59,7 +62,8 @@ return {
             {
                 text = "Step 4: Trade the Tremorstone and your chosen item(s) to Lokpix at Eastern Altepa Desert (G-10) to receive the Key Item: Loadstone.",
                 onmob_target = "Lokpix",
-                trigger_on_keyitem_obtain = "Loadstone",
+                trigger_on_keyitem_obtain = {2051},
+                keyitems_needed = {2051},
                 images = {
                     {
                         width = 512,
@@ -67,7 +71,7 @@ return {
                         state = 4,
                         zone_name = "Eastern Altepa Desert",
                         highlights = {
-                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },

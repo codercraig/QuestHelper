@@ -330,7 +330,15 @@ return {
     ["6-1-???"] = {
         target_pos = { x = -328.4, y = 0.1, z = -112.9},
         visual_mode = "arc",
+
         zone = "Western Altepa Desert"
+    },
+    -- Eastern Altepa Desert
+    ["Lokpix"] = {
+        target_pos = { x = -55.3, y = 2.9, z = 223.9},
+        visual_mode = "arc",
+        trigger_npc = "Lokpix",
+        zone = "Eastern Altepa Desert"
     },
     -- Norg
     ["Gilgamesh"] = {
@@ -344,5 +352,16 @@ return {
         target_pos = { x = 172.2, y = -0.5, z = -26.9},
         visual_mode = "arc",
         zone = "Ifrit's Caldroun"
+    },
+    -- Quicksand Caves
+    ["quicksand-8-1-???"] = {
+        target_pos = { x = -469.4, y = -1.4, z = 620},
+        visual_mode = "arc",
+        zone = "Quicksand Caves"
+    },
+    ["quicksand2-8-1-???"] = {
+        target_pos = { x = -533.1, y = -0.9, z = -415},
+        visual_mode = "arc",
+        zone = "Quicksand Caves"
     },
 }

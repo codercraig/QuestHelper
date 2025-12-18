@@ -87,6 +87,10 @@ local function getAllItemsNeeded(missionData)
                     elseif type(item) == 'table' then
                         if item.display and item.alternatives then
                             -- Alias format: { display = "Elemental Crystal", alternatives = {"Dark Crystal", ...} }
+                            -- alternatives can be:
+                            --   1. Array of strings: {"Dark Crystal", "Wind Crystal"}
+                            --   2. Array of tables: {{"Meteorite", 1}, {"Soil Geodes", 12}}
+                            --   3. Array of tables: {{item="Meteorite", quantity=1}, {item="Soil Geodes", quantity=12}}
                             local displayName = item.display
                             if not itemData[displayName] then
                                 itemData[displayName] = { quantity = 0, alternatives = item.alternatives }
@@ -177,9 +181,10 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 local text = (type(step_data) == 'table' and step_data.text) or tostring(step_data)
 
                 -- Estimate text height: Count newlines + account for line wrapping
-                -- Each line wraps at ~60 chars, each line is ~20px tall
+                -- Each line wraps at ~55 chars (to account for scrollbar), each line is ~20px tall
                 local lines = 1  -- Start with 1 line minimum
                 local current_line_length = 0
+                local wrap_chars = 55  -- Use 55 to match scrollable text rendering
 
                 for i = 1, #text do
                     local char = text:sub(i, i)
@@ -190,7 +195,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     else
                         current_line_length = current_line_length + 1
                         -- Check if current line exceeds wrap width
-                        if current_line_length >= 60 then
+                        if current_line_length >= wrap_chars then
                             lines = lines + 1
                             current_line_length = 0
                         end
@@ -199,9 +204,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 local text_height = lines * 20
 
-                -- Cap text height to scroll limit (500px) if it exceeds that
-                if text_height > 500 then
-                    text_height = 500
+                -- Cap text height to scroll limit (350px) if it exceeds that
+                if text_height > 350 then
+                    text_height = 350
                 end
 
                 -- Add height for items/key items if present
@@ -519,19 +524,42 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                             -- If alternatives exist, check all of them
                             if alternatives and type(alternatives) == 'table' then
-                                local totalCount = 0
-                                local combinedLocations = {}
+                                local bestCount = 0
+                                local bestLocations = {}
                                 local hasAny = false
+                                local bestMatch = nil
 
-                                for _, altName in ipairs(alternatives) do
-                                    local hasItem, count, locations = inventory_module.hasItem(altName, true)
-                                    if hasItem then
-                                        hasAny = true
-                                        totalCount = totalCount + count
-                                        -- Merge locations
-                                        if locations then
-                                            for locName, locCount in pairs(locations) do
-                                                combinedLocations[locName] = (combinedLocations[locName] or 0) + locCount
+                                for _, alt in ipairs(alternatives) do
+                                    local altName, altQty
+
+                                    -- Parse alternative format
+                                    if type(alt) == 'string' then
+                                        -- Simple string: "Meteorite"
+                                        altName = alt
+                                        altQty = 1
+                                    elseif type(alt) == 'table' then
+                                        if alt.item then
+                                            -- {item = "Meteorite", quantity = 1}
+                                            altName = alt.item
+                                            altQty = alt.quantity or 1
+                                        elseif alt[1] then
+                                            -- {"Meteorite", 1}
+                                            altName = alt[1]
+                                            altQty = alt[2] or 1
+                                        end
+                                    end
+
+                                    if altName then
+                                        local hasItem, count, locations = inventory_module.hasItem(altName, true)
+                                        if hasItem then
+                                            -- Calculate progress: how many "sets" of this alternative we have
+                                            local progress = math.floor(count / altQty)
+                                            -- If this alternative is better, use it
+                                            if progress > math.floor(bestCount / (bestMatch and bestMatch.qty or 1)) then
+                                                hasAny = true
+                                                bestCount = count
+                                                bestLocations = locations or {}
+                                                bestMatch = { name = altName, qty = altQty }
                                             end
                                         end
                                     end
@@ -539,8 +567,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                                 results[itemName] = {
                                     hasItem = hasAny,
-                                    count = totalCount,
-                                    locations = combinedLocations
+                                    count = bestCount,
+                                    locations = bestLocations,
+                                    alternative_match = bestMatch  -- Store which alternative matched
                                 }
                             else
                                 -- Normal single item check
@@ -573,6 +602,14 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                             local result = inventory_results[current_mission] and inventory_results[current_mission][itemName]
 
                             if result and result.hasItem then
+                                -- If this is an alternative match, show which one we found
+                                local displayName = itemName
+                                local displayQty = qtyNeeded
+                                if result.alternative_match then
+                                    displayName = result.alternative_match.name
+                                    displayQty = result.alternative_match.qty
+                                end
+
                                 -- Build compact location string
                                 local locationStr = ""
                                 if result.locations then
@@ -595,23 +632,36 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                 -- Color based on location: GREEN if in Inventory, YELLOW if in storage
                                 local inInventory = result.locations and result.locations["Inventory"]
 
+                                -- Check if we have enough
+                                local hasEnough = result.count >= displayQty
+
                                 -- Display main line
-                                if inInventory then
-                                    -- GREEN - Item in Inventory (ready!)
-                                    imgui.TextColored({0, 1, 0, 1}, string.format("  [x] %s x%d (have %d)", itemName, qtyNeeded, result.count))
+                                if hasEnough then
+                                    if inInventory then
+                                        -- GREEN - Item in Inventory (ready!)
+                                        imgui.TextColored({0, 1, 0, 1}, string.format("  [x] %s x%d (have %d)", displayName, displayQty, result.count))
+                                    else
+                                        -- YELLOW - Item in storage (need to retrieve)
+                                        imgui.TextColored({1, 1, 0, 1}, string.format("  [!] %s x%d (have %d)", displayName, displayQty, result.count))
+                                    end
                                 else
-                                    -- YELLOW - Item in storage (need to retrieve)
-                                    imgui.TextColored({1, 1, 0, 1}, string.format("  [!] %s x%d (have %d)", itemName, qtyNeeded, result.count))
+                                    -- ORANGE - Have some but not enough
+                                    imgui.TextColored({1, 0.5, 0, 1}, string.format("  [~] %s x%d (have %d)", displayName, displayQty, result.count))
                                 end
 
                                 -- Display storage locations on one line
                                 if locationStr ~= "" then
-                                    local color = inInventory and {0, 1, 0, 1} or {1, 1, 0, 1}
+                                    local color = hasEnough and (inInventory and {0, 1, 0, 1} or {1, 1, 0, 1}) or {1, 0.5, 0, 1}
                                     imgui.TextColored(color, locationStr)
                                 end
                             else
                                 -- RED - Don't have it
-                                imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
+                                -- If this has alternatives, the display name already includes quantity info
+                                if itemData.alternatives then
+                                    imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s", itemName))
+                                else
+                                    imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
+                                end
                             end
                         end
                     end
@@ -735,9 +785,10 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                     if not ui_settings.show_all_steps then
                         -- Estimate text height: Count newlines + account for line wrapping
-                        -- Each line wraps at ~60 chars, each line is ~20px tall
+                        -- Each line wraps at ~55 chars (to account for scrollbar), each line is ~20px tall
                         local lines = 1
                         local current_line_length = 0
+                        local wrap_chars = 55  -- Use 55 to match rendering with scrollbar
 
                         for j = 1, #text do
                             local char = text:sub(j, j)
@@ -746,7 +797,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                 current_line_length = 0
                             else
                                 current_line_length = current_line_length + 1
-                                if current_line_length >= 60 then
+                                if current_line_length >= wrap_chars then
                                     lines = lines + 1
                                     current_line_length = 0
                                 end
@@ -755,22 +806,24 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                         estimated_text_height = lines * 20
 
-                        -- Use scrollable container if text height exceeds 500px
-                        if estimated_text_height > 500 then
+                        -- Use scrollable container if text height exceeds 350px
+                        if estimated_text_height > 350 then
                             use_scrollable_text = true
                         end
                     end
 
                     -- Begin scrollable container if text is too long in collapse mode
                     if use_scrollable_text then
-                        imgui.BeginChild("##StepTextScroll", {0, 500}, true, 0)
+                        imgui.BeginChild("##StepTextScroll", {-1, 350}, true, 0)
                     end
 
                     -- Render the step text
+                    -- Use narrower wrap width when scrollbar is present to prevent text cutoff
+                    local wrap_width = use_scrollable_text and 55 or 60
                     if ref[1] then
-                        imgui.TextColored({0,1,0,1}, utils.wrap_text(text, 60))
+                        imgui.TextColored({0,1,0,1}, utils.wrap_text(text, wrap_width))
                     else
-                        imgui.Text(utils.wrap_text(text, 60))
+                        imgui.Text(utils.wrap_text(text, wrap_width))
                     end
 
                     -- End scrollable container if we started one

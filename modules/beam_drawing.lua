@@ -54,6 +54,33 @@ function beam_drawing.calculateDynamicColor()
     beam_drawing.ARGB_BEAM_COLOR = bit.bor(bit.lshift(A_int, 24), bit.lshift(R_int, 16), bit.lshift(G_int, 8), B_int)
 end
 
+-- Converts color name to ARGB format
+function beam_drawing.colorNameToARGB(color_name, alpha)
+    alpha = alpha or 0.7  -- Default alpha
+    local A_int = math.floor(alpha * 255)
+
+    -- Color name mapping (R, G, B as 0-1 values)
+    local colors = {
+        yellow = {1.0, 1.0, 0.0},
+        green = {0.0, 1.0, 0.0},
+        red = {1.0, 0.0, 0.0},
+        blue = {0.0, 0.0, 1.0},
+        white = {1.0, 1.0, 1.0},
+        cyan = {0.0, 1.0, 1.0},
+        magenta = {1.0, 0.0, 1.0},
+        orange = {1.0, 0.5, 0.0},
+        purple = {0.5, 0.0, 1.0},
+        pink = {1.0, 0.5, 0.5},
+    }
+
+    local color = colors[string.lower(color_name or "")] or colors.yellow
+    local R_int = math.floor(color[1] * 255)
+    local G_int = math.floor(color[2] * 255)
+    local B_int = math.floor(color[3] * 255)
+
+    return bit.bor(bit.lshift(A_int, 24), bit.lshift(R_int, 16), bit.lshift(G_int, 8), B_int)
+end
+
 -- Updates beam appear progress animation
 function beam_drawing.updateBeamProgress(deltaTime)
     if beam_drawing.beamAppearProgress < 1.0 then

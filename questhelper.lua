@@ -166,21 +166,37 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         local inventory_module = require('modules.inventory')
                         local items_to_check = {}
 
-                        -- Normalize to list
-                        if type(step_data.trigger_on_item_obtain) == 'string' then
-                            table.insert(items_to_check, step_data.trigger_on_item_obtain)
+                        -- Normalize to list with quantities
+                        -- Supports: "Meteorite", {"Meteorite", "Soil Gem"}, {{"Meteorite", 1}, {"Soil Geodes", 12}}, {{item="Meteorite", quantity=1}}
+                        if type(step_data.trigger_on_item_obtain) == 'string' or type(step_data.trigger_on_item_obtain) == 'number' then
+                            table.insert(items_to_check, {name = step_data.trigger_on_item_obtain, quantity = 1})
                         elseif type(step_data.trigger_on_item_obtain) == 'table' then
-                            items_to_check = step_data.trigger_on_item_obtain
+                            for _, item in ipairs(step_data.trigger_on_item_obtain) do
+                                if type(item) == 'string' or type(item) == 'number' then
+                                    -- Simple format: "Meteorite" or key item ID
+                                    table.insert(items_to_check, {name = item, quantity = 1})
+                                elseif type(item) == 'table' then
+                                    if item.item then
+                                        -- {item = "Meteorite", quantity = 1}
+                                        table.insert(items_to_check, {name = item.item, quantity = item.quantity or 1})
+                                    elseif item[1] then
+                                        -- {"Meteorite", 1}
+                                        table.insert(items_to_check, {name = item[1], quantity = item[2] or 1})
+                                    end
+                                end
+                            end
                         end
 
                         -- Check if step requires all items or just one
                         if step_data.require_all_items then
-                            -- Check if player has ALL items
+                            -- Check if player has ALL items with required quantities
                             local hasAll = true
-                            for _, itemName in ipairs(items_to_check) do
+                            for _, itemInfo in ipairs(items_to_check) do
+                                local itemName = itemInfo.name
+                                local qtyNeeded = itemInfo.quantity
                                 -- Search ALL storages (true flag)
-                                local hasItem = inventory_module.hasItem(itemName, true)
-                                if hasItem then
+                                local hasItem, count = inventory_module.hasItem(itemName, true)
+                                if hasItem and count >= qtyNeeded then
                                     -- Mark this specific item as obtained in partial progress
                                     if not quest_state.getPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, itemName) then
                                         quest_state.setPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, itemName, true)
@@ -195,11 +211,13 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
                             end
                         else
-                            -- Just need ONE of the items
-                            for _, itemName in ipairs(items_to_check) do
+                            -- Just need ONE of the items (with required quantity)
+                            for _, itemInfo in ipairs(items_to_check) do
+                                local itemName = itemInfo.name
+                                local qtyNeeded = itemInfo.quantity
                                 -- Search ALL storages (true flag)
-                                local hasItem = inventory_module.hasItem(itemName, true)
-                                if hasItem then
+                                local hasItem, count = inventory_module.hasItem(itemName, true)
+                                if hasItem and count >= qtyNeeded then
                                     quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
                                     break
                                 end
@@ -430,12 +448,15 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 end
 
                                 if should_draw_zone then
+                                    -- Determine color: use zone.colour if specified, otherwise default
+                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
+
                                     if zone.type == 'square' and zone.center and zone.size then
-                                        drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawSquare(zone.center, zone.size, color)
                                     elseif zone.type == 'line' and zone.start and zone.stop then
-                                        drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawLine(zone.start, zone.stop, color)
                                     elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
-                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
                                     end
                                 end
                             end
@@ -459,24 +480,30 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 end
 
                                 if should_draw_zone then
+                                    -- Determine color: use zone.colour if specified, otherwise default
+                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
+
                                     if zone.type == 'square' and zone.center and zone.size then
-                                        drawingModule.drawSquare(zone.center, zone.size, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawSquare(zone.center, zone.size, color)
                                     elseif zone.type == 'line' and zone.start and zone.stop then
-                                        drawingModule.drawLine(zone.start, zone.stop, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawLine(zone.start, zone.stop, color)
                                     elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
-                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, beam_drawing.ARGB_BEAM_COLOR)
+                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
                                     end
                                 end
                             end
                         end
 
                         if step_data.draw_type then
+                            -- Determine color: use step_data.colour if specified, otherwise default
+                            local color = step_data.colour and beam_drawing.colorNameToARGB(step_data.colour) or beam_drawing.ARGB_BEAM_COLOR
+
                             if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
-                                drawingModule.drawLine(step_data.start_pos, step_data.end_pos, beam_drawing.ARGB_BEAM_COLOR)
+                                drawingModule.drawLine(step_data.start_pos, step_data.end_pos, color)
                             elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
-                                drawingModule.drawSquare(step_data.center, step_data.size, beam_drawing.ARGB_BEAM_COLOR)
+                                drawingModule.drawSquare(step_data.center, step_data.size, color)
                             elseif step_data.draw_type == 'arrow' and step_data.center and step_data.size and step_data.direction then
-                                drawingModule.drawArrow(step_data.center, step_data.size, step_data.direction, beam_drawing.ARGB_BEAM_COLOR)
+                                drawingModule.drawArrow(step_data.center, step_data.size, step_data.direction, color, step_data.outline)
                             end
                         end
                     end

@@ -29,6 +29,7 @@ local id_to_name = {
     [289] = "Reinforced Cermet",
     [290] = "Letter From Werei",
     [477] = "Miracle Salt",
+    [2051] = "Loadstone",
 
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",

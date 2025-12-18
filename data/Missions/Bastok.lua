@@ -4202,7 +4202,7 @@ return {
 
     ["8-1: The Chains That Bind Us"] = {
         prerequisites = {
-            {category = "Quests", subfile = "Eastern_Altepa_Desert", name = "Open Sesame"}
+            {category = "Quests", subfile = "Eastern Altepa Desert", name = "Open Sesame"},
         },
         steps = {
             {
@@ -4270,6 +4270,11 @@ return {
                        "Western Altepa Desert (G-5)    -> \n" ..
                        "Quicksand Caves",
                 zone_trigger = "Quicksand Caves",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -280.8, y = 0.8, z = 263.8 }, size = 4, direction = 'left',floor_id = 0 },
+                    { type = 'arrow', center = { x = -339.9, y = 10.2, z = 300.2 }, size = 4, direction = 'right',floor_id = 0 },
+                 },
+                 zone_name = "Western Altepa Desert",
                 images = {
                     {
                         width    = 512,
@@ -4334,12 +4339,12 @@ return {
                        "TIPS: The NMs are about lvl 70~ Antica. Sneak pop does not work, they will aggro once you pop them. However, they can be deaggroed by a SMN using an AoE bloodpact, running away, and releasing. \n \n" ..
                        "They have high resistance to dark magic, but Repose and Horde Lullaby can sleep them easily. Level 75+ Red Mage can cast Sleep reliably. \n \n" ..
                        "Triarius IV-XIV may cast Sleepga II in the beginning, please beware. Centurio IV-VII will also use Mighty Strikes.",
-                kill_requirement = {
-                    count = 3,
-                    enemies = {"Triarius IV-XIV", "Princeps IV-XLV", "Centurio IV-VII"},
-                    zone = "Quicksand Caves",
-                    count_party_kills = true
-                },
+                visual_zones = {
+                    { type = 'square', center = { x = -419.9, y = -0.4, z = 740.4 }, size = 6,floor_id = 5 },
+                    { type = 'square', center = { x = -400.0, y = -0.4, z = 671.7 }, size = 6,floor_id = 5 },
+                 },
+                onmob_target = "quicksand-8-1-???",
+                trigger_on_talk = "You sense something evil.",
                 images = {
                     {
                         width    = 512,
@@ -4354,8 +4359,16 @@ return {
                 },
             },
             {
-                text = "Step 5: After you win, touch the ??? again at (G-11) to get a cutscene.",
-                trigger_on_event_id = { 11 },
+                text = "Step 5: Now kill the 3 NMs: \n" ..
+                       "- Triarius IV-XIV (Black Mage) \n" ..
+                       "- Princeps IV-XLV (Paladin) \n" ..
+                       "- Centurio IV-VII (Warrior) \n \n",
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Triarius IV-XIV", "Princeps IV-XLV", "Centurio IV-VII"},
+                    zone = "Quicksand Caves",
+                    count_party_kills = true
+                },
                 images = {
                     {
                         width    = 512,
@@ -4370,52 +4383,103 @@ return {
                 },
             },
             {
-                text = "Step 6: Next go to the Western Altepa Desert (D-12) entrance. The entrance in Western Altepa Desert is accessed through a hidden area on the map, starting at (C-11)/(D-11) in the far Southwest corner. Hug the southern wall in the lower area to climb the broken stairs. \n \n" ..
-                       "Once inside, make sure you cast Sneak and make your way through the caves to (K-8). You will come to a weighted door leading East. Go through that door and continue to follow the caves (both the left and the right path lead to the next door). \n \n" ..
-                       "You will arrive at another weighted door at (G-8) facing East. Again, go through that door into a smaller room with another door. \n \n" ..
-                       "After going through the second weighted door and through the door behind it, you will notice the mural on the wall to your left, and a ??? on a small pedestal, which you will check for another cutscene with Zeid and some interesting storyline.",
-                trigger_on_event_id = { 10 },
+                text = "Step 6: After you win, touch the ??? again at (G-11) to get a cutscene.",
+                trigger_on_event_id = { 11 },
+                onmob_target = "quicksand-8-1-???",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 6,
                         highlights = {
-                            { position = "D-12", offsetX = 16, offsetY = 16 },
+                            { position = "G-11", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Western Altepa Desert",
+                        zone_name = "Quicksand Caves",
+                        floor_id = 5,
+                    },
+                },
+            },
+            {
+                text = "Step 7: Next go to the Western Altepa Desert (D-12) entrance. \n \n" ..
+                       "The entrance in Western Altepa Desert is accessed through a hidden area on the map, starting at (C-11)/(D-11) in the far Southwest corner. Hug the southern wall in the lower area to climb the broken stairs. \n \n",
+                zone_trigger = "Quicksand Caves",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -833.6, y = -8.8, z = -605.8 }, size = 4, direction = 'se', floor_id = 0 },
+                    { type = 'arrow', center = { x = -802, y = -19.1, z = -698.6 }, size = 4, direction = 'up', floor_id = 0 },
+                    { type = 'arrow', center = { x = -779.9, y = -16.6, z = -616.3 }, size = 4, direction = 'down', floor_id = 0 },
+                    { type = 'arrow', center = { x = -774, y = -8.4, z = -702.5 }, size = 4, direction = 'right', floor_id = 0 },
+                    -- --Quicksand
+                    -- { type = 'square', center = { x = -700.1, y = -0.4, z = -380.1 }, size =5, floor_id = 7 }
+
+                },
+                zone_name = "Western Altepa Desert",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 5,
                     },
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
+                        highlights = {
+                            { position = "D-12", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+            },
+            {
+                text = "Step 8: Once inside, make sure you cast Sneak and make your way through the caves to (K-8). You will come to a weighted door leading East. Go through that door and continue to follow the caves (both the left and the right path lead to the next door). \n \n" ..
+                       "You will arrive at another weighted door at (G-8) facing East. Again, go through that door into a smaller room with another door. \n \n" ..
+                       "After going through the second weighted door and through the door behind it, you will notice the mural on the wall to your left, and a ??? on a small pedestal, which you will check for another cutscene with Zeid and some interesting storyline.",
+                trigger_on_event_id = { 10 },
+                onmob_target = "quicksand2-8-1-???",
+                visual_zones = {
+                    --Quicksand
+                    { type = 'square', center = { x = -700.0, y = -0.4, z = -420.2 }, size =5, floor_id = 4 },
+                    { type = 'square', center = { x = -580.1, y = -0.4, z = -420.1 }, size =5, floor_id = 7 }
+
+                },
+                zone_name = "Quicksand Caves",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 4,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 8,
                         highlights = {
                             { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Quicksand Caves",
                         floor_id = 7,
                     },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 6,
-                        highlights = {
-                            { position = "D-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Quicksand Caves",
-                        floor_id = 4,
-                    },
                 },
             },
             {
-                text = "Step 7: When that is done, head back to Metalworks and talk to Iron Eater at (J-8) for another cutscene to complete the mission.",
+                text = "Step 9: When that is done, head back to Metalworks in Bastok and talk to Iron Eater at (J-8) for another cutscene to complete the mission.",
                 onmob_target = "Iron Eater",
                 trigger_on_event_id = { 768 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 7,
+                        state    = 9,
                         highlights = {
                             { position = "J-8", offsetX = 16, offsetY = 16 },
                         },
