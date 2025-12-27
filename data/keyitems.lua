@@ -28,6 +28,7 @@ local id_to_name = {
     [266] = "Altepa Moonpebble",
     [289] = "Reinforced Cermet",
     [290] = "Letter From Werei",
+    [293] = "Old Piece of Wood",
     [477] = "Miracle Salt",
     [2051] = "Loadstone",
 

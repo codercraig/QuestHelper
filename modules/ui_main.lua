@@ -150,6 +150,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
     local settings = require('settings')
     local ui_settings = quest_state.settings.ui_settings
 
+    -- Get UI scale setting early so it can be used for window sizing
+    local ui_scale = ui_settings.ui_scale or 1.0
+
     imgui.PushStyleColor(ImGuiCol_WindowBg, {0.1, 0.1, 0.1, 0.73})
     imgui.PushStyleColor(ImGuiCol_CheckMark, {0.8, 0.8, 0.8, 1.0})
     imgui.PushStyleColor(ImGuiCol_FrameBg, {0.3, 0.3, 0.3, 0.8})
@@ -205,8 +208,10 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 local text_height = lines * 20
 
                 -- Cap text height to scroll limit (350px) if it exceeds that
-                if text_height > 350 then
-                    text_height = 350
+                -- Scale the scroll limit with UI scale
+                local scroll_limit = 350 * ui_scale
+                if text_height > scroll_limit then
+                    text_height = scroll_limit
                 end
 
                 -- Add height for items/key items if present
@@ -258,8 +263,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
     end
 
     -- Set window size with fixed width (600) and dynamic height based on collapsed/expanded mode
-    -- Apply UI scale setting
-    local ui_scale = ui_settings.ui_scale or 1.0
+    -- Apply UI scale setting (ui_scale already defined at top of function)
     local scaled_width = 600 * ui_scale
     local scaled_height = window_height * ui_scale
 
@@ -807,14 +811,20 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         estimated_text_height = lines * 20
 
                         -- Use scrollable container if text height exceeds 350px
-                        if estimated_text_height > 350 then
+                        -- Scale the threshold with UI scale
+                        local scroll_threshold = 350 * ui_scale
+                        if estimated_text_height > scroll_threshold then
                             use_scrollable_text = true
                         end
                     end
 
                     -- Begin scrollable container if text is too long in collapse mode
                     if use_scrollable_text then
-                        imgui.BeginChild("##StepTextScroll", {-1, 350}, true, 0)
+                        -- Scale container height with UI scale
+                        local container_height = 350 * ui_scale
+                        imgui.BeginChild("##StepTextScroll", {-1, container_height}, true, 0)
+                        -- Apply font scaling to child window
+                        imgui.SetWindowFontScale(ui_scale)
                     end
 
                     -- Render the step text

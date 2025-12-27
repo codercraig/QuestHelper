@@ -4614,6 +4614,10 @@ return {
                 text = "Step 4: Examine the ??? at (H-8) on the top of the cliff near the entrance to Western Altepa Desert. The dialogue should end with it saying the piece of wood fell down. \n \n" ..
                        "Everyone who needs the mission must check the ???. However, if someone misses it, they can check the ??? at the top after the NM is killed, then check the ??? at the bottom and still get the key item.",
                 trigger_on_event_id = { 12 },
+                onmob_target = "kuftal1-8-2-???",
+                visual_zones = {
+                    { type = 'square', center = { x = -29.1, y = -22.1, z = -183.8 }, size = 1, floor_id = 1 },
+                },
                 images = {
                     {
                         width    = 512,
@@ -4635,11 +4639,10 @@ return {
                        "Doable solo with Trust at level 75. Trivial at Item Level. \n \n" ..
                        "TIPS: It takes at least one minute from pop of the NMs before the cutscene can be triggered. If you kill the ghosts fast you will get the nothing message until the cutscene triggers. \n \n" ..
                        "It is possible to complete this mission by killing only one of the ghosts. Pull one of the NMs, wait for the other two to despawn, then kill the NM that was pulled. If you do not wait for the other two NMs to despawn first, you will not be able to complete the mission by checking the ??? and will have to fight the mobs again. The wait time for the ??? to be active again is approximately 5 minutes.",
-                kill_requirement = {
-                    count = 1,
-                    enemies = {"Dervo's Ghost", "Gizerl's Ghost", "Gordov's Ghost"},
-                    zone = "Kuftal Tunnel",
-                    count_party_kills = true
+                trigger_on_talk = "You sense an evil presence...",
+                onmob_target = "kuftal2-8-2-???",
+                visual_zones = {
+                    { type = 'square', center = {  x = -27.8, y = -10.4, z = -185.8 }, size = 1, floor_id = 1 },
                 },
                 images = {
                     {
@@ -4650,15 +4653,21 @@ return {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Kuftal Tunnel",
+                        floor_id = 1,
                     },
                 },
             },
             {
-                text = "Step 6: Have everyone check the ??? at the bottom (H-7) until they receive the cutscene and a Key Item: Old Piece of Wood. \n \n" ..
-                       "Checking the ??? will not respawn the NM ghosts no matter how much time has passed (leaving the zone means you will have to re-fight the NMs), so it's okay to raise any members who have died first. \n \n" ..
-                       "A static time limit may exist between killing NMs and ??? triggering cutscene with mission completion. If your group or solo party killed each ghost, continue testing the ??? periodically until it yields the completion cutscene.",
-                trigger_on_event_id = { 13 },
-                trigger_on_item_obtain = {"Old Piece of Wood"},
+                text = "Step 6: Kill the 3 NM ghosts: \n" ..
+                       "- Dervo's Ghost \n" ..
+                       "- Gizerl's Ghost \n" ..
+                       "- Gordov's Ghost \n \n",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Dervo's Ghost", "Gizerl's Ghost", "Gordov's Ghost"},
+                    zone = "Kuftal Tunnel",
+                    count_party_kills = true
+                },
                 images = {
                     {
                         width    = 512,
@@ -4668,18 +4677,43 @@ return {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Kuftal Tunnel",
+                        floor_id = 1,
                     },
                 },
             },
             {
-                text = "Step 7: Talk to Drake Fang at (H-6) in Zeruhn Mines again for a long cutscene. You will be teleported to Bastok Mines and the mission will complete.",
+                text = "Step 7: Have everyone check the ??? at the bottom (H-7) until they receive the cutscene and a Key Item: Old Piece of Wood. \n \n" ..
+                       "Checking the ??? will not respawn the NM ghosts no matter how much time has passed (leaving the zone means you will have to re-fight the NMs), so it's okay to raise any members who have died first. \n \n" ..
+                       "A static time limit may exist between killing NMs and ??? triggering cutscene with mission completion. If your group or solo party killed each ghost, continue testing the ??? periodically until it yields the completion cutscene.",
+                --trigger_on_event_id = { 13 },
+                trigger_on_keyitem_obtain = {293},
+                keyitems_needed = {293},
+                onmob_target = "kuftal2-8-2-???",
+                visual_zones = {
+                    { type = 'square', center = {  x = -27.8, y = -10.4, z = -185.8 }, size = 1, floor_id = 1 },
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Kuftal Tunnel",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Step 8: Talk to Drake Fang at (H-6) in Zeruhn Mines again for a long cutscene. You will be teleported to Bastok Mines and the mission will complete.",
                 onmob_target = "Drake Fang",
                 trigger_on_event_id = { 204, 176 },
                 images = {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 7,
+                        state    = 8,
                         highlights = {
                             { position = "H-6", offsetX = 16, offsetY = 16 },
                         },

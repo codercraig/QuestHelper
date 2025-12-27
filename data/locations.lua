@@ -364,4 +364,15 @@ return {
         visual_mode = "arc",
         zone = "Quicksand Caves"
     },
+    --Kuftal Tunnel
+    ["kuftal1-8-2-???"] = {
+        target_pos = { x = -29.1, y = -22.1, z = -183.8},
+        visual_mode = "arc",
+        zone = "Kuftal Tunnel"
+    },
+    ["kuftal2-8-2-???"] = {
+        target_pos = { x = -27.8, y = -10.4, z = -185.8},
+        visual_mode = "arc",
+        zone = "Kuftal Tunnel"
+    },
 }
