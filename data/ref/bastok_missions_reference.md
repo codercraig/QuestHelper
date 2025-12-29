@@ -19,9 +19,9 @@
 [7-2] On My Way - DONE
 [8-1] Chain That Binds Us - DONE
 [8-2] Enter The Talekeeper - DONE
-[9-1] The Salt Of The Earth - need to run through it
-[9-2] Where Two Paths Converge - need to run through it
-DONE!
+[9-1] The Salt Of The Earth - DONE
+[9-2] Where Two Paths Converge - DONE
+DONE whew!
 
 
 

@@ -375,4 +375,16 @@ return {
         visual_mode = "arc",
         zone = "Kuftal Tunnel"
     },
+    --Rabao
+    ["Dancing Wolf"] = {
+        target_pos = { x = 7.6, y = 6.0, z = 81.3},
+        visual_mode = "arc",
+        zone = "Rabao"
+    },
+    -- Gustav Tunnel
+    ["gustav1-9-1-???"] = {
+        target_pos = { x = -130.7, y = 1.2, z = 252.6},
+        visual_mode = "arc",
+        zone = "Gustav Tunnel"
+    },
 }

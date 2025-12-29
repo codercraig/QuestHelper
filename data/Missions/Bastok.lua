@@ -4781,10 +4781,59 @@ return {
                 },
             },
             {
-                text = "Step 3: Talk to Dancing Wolf at (G-7) in Rabao, near Home Point #2.",
+                text = "Step 3: Talk to Dancing Wolf at (G-7) in Rabao, near Home Point #2 - Same route as previous missions(Use the maps if need a route from Bastok or OP Warp to Kuzotz!)",
                 onmob_target = "Dancing Wolf",
                 trigger_on_event_id = { 102 },
                 images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Zeruhn Mines",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "A-9", offsetX = 16, offsetY = 16 },
+                            { position = "A-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "B-8", offsetX = 16, offsetY = 16 },
+                            { position = "C-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Korroloka Tunnel",
+                        floor_id = 2,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Eastern Altepa Desert",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "L-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
                     {
                         width    = 512,
                         height   = 512,
@@ -4797,37 +4846,77 @@ return {
                 },
             },
             {
-                text = "Step 4: Go to Gustav Tunnel and go to (G-6) on the second map. Spawn the NM by clicking on the ???. \n \n" ..
+                text = "Step 4: Go to Gustav Tunnel. \n \n" ..
                        "Routes: \n" ..
                        "- Survival Guide teleport to Gustav Tunnel. \n" ..
-                       "- Unity warp (Level 128 category) will place you right at the entrance to the second map.",
+                       "- Unity warp (Level 128 category) will place you right at the entrance to the second map. \n" ..
+                       "- Outpost Warp to Zulkheim which will take you to Valkurm Dunes and travel to (B-8)! \n" ..
+                       "- Route from Bastok Markets if you are running without any teleports(Use the maps!)",
                 zone_trigger = "Gustav Tunnel",
                 images = {
                     {
                         width    = 512,
                         height   = 512,
                         state    = 4,
+                        zone_name = "South Gustaberg",
                         highlights = {
-                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Gustav Tunnel",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        zone_name = "North Gustaberg",
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "E-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        zone_name = "Konschtat Highlands",
+                        highlights = {
+                            { position = "G-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "B-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Valkurm Dunes",
                     },
                 },
             },
             {
-                text = "Step 5: The fight starts off with one Gigaplasm. Once you kill it, it turns into two Macroplasms. Each one of those turns into two Microplasms and each one of those turn into two Nanoplasms. \n \n" ..
+                text = "Step 5: Click the ??? which is located at (G-6). The fight starts off with one Gigaplasm. Once you kill it, it turns into two Macroplasms. Each one of those turns into two Microplasms and each one of those turn into two Nanoplasms. \n \n" ..
                        "Recommended Fight Order: Gigaplasm -> Macroplasms -> Microplasms -> Nanoplasms \n \n" ..
                        "Soloable at Lv99 with trusts. \n \n" ..
                        "TIPS: It is not possible to sneak pop the NM as in previous missions. The Gigaplasm will spawn claimed and immediately begin attacking the person who popped it. \n \n" ..
                        "The plasms do not build resistance to either sleep or lullaby. As the plasms get smaller, they attack faster and faster. Nanoplasm have a delay of about 150. The smaller plasms' magic defense decreases greatly with each new stage. \n \n" ..
                        "IMPORTANT: If whoever pops the Gigaplasm dies in a bad spot and is still dead after fight is over, do not Tractor them! You must not zone or get tractored, otherwise you will need to fight the NM again. Should someone d/c after the fight is done, but before earning the key item, you will not have to do the fight again. If someone gets disconnected during the fight, sleep the last slime until they can be re-invited.",
-                kill_requirement = {
-                    count = 15,
-                    enemies = {"Gigaplasm", "Macroplasm", "Microplasm", "Nanoplasm"},
-                    zone = "Gustav Tunnel",
-                    count_party_kills = true
+                trigger_on_talk = "You have a bad feeling about this place.",
+                onmob_target = "gustav1-9-1-???",
+                visual_zones = {
+                    { type = 'square', center = { x = -130.7, y = 1.2, z = 252.6 }, size = 1, floor_id = 2 },
                 },
+                zone_name = "Gustav Tunnel",
                 images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Gustav Tunnel",
+                        floor_id = 1,
+                    },
                     {
                         width    = 512,
                         height   = 512,
@@ -4836,12 +4925,18 @@ return {
                             { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Gustav Tunnel",
+                        floor_id = 2,
                     },
                 },
             },
             {
                 text = "Step 6: After you defeat all the Plasms, check the ??? at (G-6) for the Key Item: Miraclesalt.",
-                trigger_on_item_obtain = {477},
+                onmob_target = "gustav1-9-1-???",
+                visual_zones = {
+                    { type = 'square', center = { x = -130.7, y = 1.2, z = 252.6 }, size = 1, floor_id = 2 },
+                },
+                zone_name = "Gustav Tunnel",
+                trigger_on_keyitem_obtain = {477},
                 keyitems_needed = {477},
                 images = {
                     {
@@ -4852,6 +4947,7 @@ return {
                             { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Gustav Tunnel",
+                        floor_id = 2,
                     },
                 },
             },
@@ -4931,7 +5027,7 @@ return {
                 },
             },
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in Metalworks for a cutscene.",
+                text = "Step 2: Talk to Iron Eater at (J-8) in Metalworks for a cutscene. May require you talking to him multiple times to get the correct cutscene.",
                 onmob_target = "Iron Eater",
                 trigger_on_event_id = { 780 },
                 images = {
@@ -4948,14 +5044,14 @@ return {
             },
             {
                 text = "Step 3: Travel to Castle Zvahl Baileys. \n \n" ..
-                       "Outpost: Fauregandi/Valdeaunia if possible. \n \n" ..
+                       "Outpost: Fauregandi/Valdeaunia if possible or use Castle Baileys HP#1 teleport.\n \n" ..
                        "If walking a good route is from San d'Oria: \n" ..
                        "East Ronfaure      (K-4) -> \n" ..
                        "Ranguemont Pass    (L-4) -> \n" ..
                        "Beaucedine Glacier (F-6) -> \n" ..
                        "Xarcabard          (D-7) -> \n" ..
                        "Castle Zvahl Baileys \n \n" ..
-                       "NOTE: In Xarcabard grab the Teleport KI: Vahzl Gate Crystal at Telepoint (H-8), enter Castle Zvahl Baileys at (D-7/D-8).",
+                       "NOTE: In Xarcabard enter Castle Zvahl Baileys at (D-7/D-8).",
                 zone_trigger = "Castle Zvahl Baileys",
                 images = {
                     {
@@ -4992,7 +5088,6 @@ return {
                         zone_name = "Xarcabard",
                         highlights = {
                             { position = "D-7", offsetX = 16, offsetY = 16 },
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -5003,7 +5098,7 @@ return {
                        "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
                        "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
                        "Map 2: Follow the arrows, end goal is (F-8) to Castle Zvahl Keep. \n \n" ..
-                       "Aggro: Tigers/Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70.",
+                       "Aggro: Demons/Beastmen (sight), Ahriman (sight+sound), use Sneak/Invis if below Lv70.",
                 zone_trigger = "Castle Zvahl Keep",
                 visual_zones = {
                     { type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up', floor_id = 1 },
@@ -5122,13 +5217,13 @@ return {
                        "PREPARATION: Buffs are removed upon entry. Food effects however, are not. Do not move towards Zeid until everyone is inside/Alter Egos have been summoned. He will not attack until you move close enough, so it is safe to buff up and rest to full as long as you stay far enough away. You CAN call Trust NPCs for this fight. \n \n" ..
                        "ZEID'S ABILITIES: Zeid is capable of using all Great Sword weapon skills up to Ground Strike, which tends to be his favorite. He casts Absorb spells, but nothing more. The weapon skill Shockwave is an AoE attack and can cause Sleep. If a large portion of your party are melee-type, consider using Poison Potions. This is not necessary for mages, as long as they keep proper distance. \n \n" ..
                        "Zeid also uses two unique abilities: Abyssal Strike (ranged attack, 5-10 second Stun, purple flash on sword) and Abyssal Drain (Drain move about as powerful as the spell). Zeid may have some form of TP Regain, as he will build TP quickly even if being kited and only attacked by magic. \n \n" ..
-                       "VOLKER PHASE: When Zeid is at about 70% HP, there will be a cutscene featuring Volker, who will join you in the fight. You are given time to rest afterwards as Zeid will not immediately aggro again, but Volker will attack if you wait too long. Volker must be kept alive in order to win and Zeid's Ground Strike can take most, if not all, of his HP in one shot. \n \n" ..
+                       "VOLKER PHASE: When Zeid is at about 70 percent HP, there will be a cutscene featuring Volker, who will join you in the fight. You are given time to rest afterwards as Zeid will not immediately aggro again, but Volker will attack if you wait too long. Volker must be kept alive in order to win and Zeid's Ground Strike can take most, if not all, of his HP in one shot. \n \n" ..
                        "SHADOW OF RAGE: At some point, two creatures called Shadow of Rage will spawn. They have attacks equal to Zeid's but much less HP. They are highly resistant or immune to all forms of Sleep. A well-timed -ga spell can kill both in one hit. The Shadows can use Great Sword weapon skills at least up to Shockwave and use the same Abyssal moves as Zeid. They gain TP very quickly. Zeid will later recall the Shadows if they are defeated, but not immediately (30-60 seconds). Killing them is highly recommended as they hit nearly as hard as Zeid and can skillchain with him. If Zeid is defeated before the shadows, they will despawn. \n \n" ..
                        "You won't lose any Experience Points if you are defeated.",
                 kill_requirement = {
                     count = 1,
                     enemies = {"Zeid"},
-                    zone = "Throne Room",
+                    --zone = "Throne Room",
                     count_party_kills = true
                 },
             },
