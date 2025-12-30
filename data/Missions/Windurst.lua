@@ -6,7 +6,8 @@ return {
                    "They can be found at the entrance gates to the city. \n \n",
             images = {
                 {
-                    file     = "maps/windurst_waters_1.png",
+                    zone_name = "Windurst Waters",
+                    floor_id = 1,
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -15,7 +16,7 @@ return {
                     },
                 },
                 {
-                    file     = "maps/port_windurst.png",
+                    zone_name = "Port Windurst",
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -24,7 +25,7 @@ return {
                     },
                 },
                 {
-                    file     = "maps/windurst_woods.png",
+                    zone_name = "Windurst Woods",
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -33,7 +34,7 @@ return {
                     },
                 },
                 {
-                    file     = "maps/windurst_walls.png",
+                    zone_name = "Windurst Walls",
                     width    = 512,
                     height   = 512,
                     state    = 1,
