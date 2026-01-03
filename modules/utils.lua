@@ -35,6 +35,8 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
     local mdata = quest_data[topCat] and quest_data[topCat][subfile] and quest_data[topCat][subfile][mission]
     if not mdata or not mdata.steps then return {} end
     local step_data = mdata.steps[stepIndex]
+
+    -- If step has manually-defined images, use those (existing functionality)
     if type(step_data) == 'table' and step_data.images then
         local matched = {}
         for _, image_info in ipairs(step_data.images) do
@@ -44,6 +46,43 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
         end
         return matched
     end
+
+    -- NEW: Auto-generate route maps if route_to is defined
+    if type(step_data) == 'table' and step_data.route_to then
+        -- Load pathfinding module on demand
+        local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+        if pathfinding_ok then
+            -- Get player's current zone (Ashita API)
+            local party = AshitaCore:GetMemoryManager():GetParty()
+            if party then
+                local player_zone_id = party:GetMemberZone(0)
+                if player_zone_id and player_zone_id > 0 then
+                    local zones_db = require('data.zones')
+                    local current_zone = nil
+
+                    -- Find zone name from zone ID
+                    for zone_name, zone_id in pairs(zones_db) do
+                        if zone_id == player_zone_id then
+                            current_zone = zone_name
+                            break
+                        end
+                    end
+
+                    if current_zone then
+                        local destination = step_data.route_to
+                        local path = pathfinding.findPath(current_zone, destination)
+
+                        if path then
+                            -- Generate route images with exit highlights
+                            local route_images = pathfinding.generateRouteImages(path, current_zone)
+                            return route_images
+                        end
+                    end
+                end
+            end
+        end
+    end
+
     return {}
 end
 

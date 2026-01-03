@@ -842,6 +842,67 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         imgui.EndChild()
                     end
 
+                    -- ROUTE DISPLAY (if route_to is defined)
+                    if type(step_data) == 'table' and step_data.route_to then
+                        -- Load pathfinding module on demand
+                        local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+
+                        if pathfinding_ok then
+                            -- Get player's current zone (Ashita API)
+                            local party = AshitaCore:GetMemoryManager():GetParty()
+                            if party then
+                                local player_zone_id = party:GetMemberZone(0)
+                                if player_zone_id and player_zone_id > 0 then
+                                    local zones_db = require('data.zones')
+                                    local current_zone = nil
+
+                                    -- Find zone name from zone ID
+                                    for zone_name, zone_id in pairs(zones_db) do
+                                        if zone_id == player_zone_id then
+                                            current_zone = zone_name
+                                            break
+                                        end
+                                    end
+
+                                    if current_zone then
+                                        local destination = step_data.route_to
+                                        local path = pathfinding.findPath(current_zone, destination)
+
+                                        imgui.Indent(20)
+                                        if path then
+                                            local route_str = pathfinding.formatPath(path, current_zone)
+                                            local distance = pathfinding.getRouteDistance(path)
+
+                                            if distance == 0 then
+                                                -- Already at destination
+                                                imgui.TextColored({0, 1, 0, 1}, route_str)
+                                            elseif pathfinding.isLongRoute(path) then
+                                                -- Long route warning
+                                                imgui.TextColored({1, 1, 0, 1}, string.format("Route (%d zones):", distance))
+                                                imgui.TextColored({1, 1, 1, 1}, route_str)
+                                            else
+                                                -- Normal route
+                                                imgui.TextColored({0.7, 0.7, 1, 1}, string.format("Route (%d zones):", distance))
+                                                imgui.TextColored({1, 1, 1, 1}, route_str)
+                                            end
+                                        else
+                                            -- No path found
+                                            imgui.TextColored({1, 0, 0, 1}, "No route found to " .. destination)
+                                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  (Zone graph incomplete)")
+                                        end
+                                        imgui.Unindent(20)
+                                    else
+                                        -- Current zone not in database
+                                        imgui.Indent(20)
+                                        imgui.TextColored({1, 0.5, 0, 1}, "Current zone not mapped")
+                                        imgui.Unindent(20)
+                                    end
+                                end
+                            end
+                        end
+                        -- If pathfinding module doesn't exist, silently skip (no error)
+                    end
+
                     -- KILL COUNTER UI DISPLAY
                     if not st and step_data.kill_requirement then
                         local kill_req = step_data.kill_requirement

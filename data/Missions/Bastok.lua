@@ -148,18 +148,19 @@ return {
             {
                 text = "Step 3: Proceed to South Gustaberg (D-9) and enter Dangruf Wadi.",
                 zone_trigger = "Dangruf Wadi",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "D-9", offsetX = 16, offsetY = 16 },
-                        },
+                route_to = "Dangruf Wadi"
+                -- images = {
+                --     {
+                --         width    = 512,
+                --         height   = 512,
+                --         state    = 3,
+                --         zone_name = "South Gustaberg",
+                --         highlights = {
+                --             { position = "D-9", offsetX = 16, offsetY = 16 },
+                --         },
 
-                    },
-                },
+                --     },
+                -- },
             },
             {
                 text = "Step 4: In Dangruf Wadi, go to the geyser at (I-8) and stand on it to be propelled to the ledge, changing the Blue Acidity Tester to Red Acidity Tester. Check your Key Items to make sure it has changed!",
@@ -186,17 +187,18 @@ return {
                 text = "Step 5: Return to Cid in the Metalworks(H-8) to complete the mission.",
                 onmob_target = {"Cid"},
                 trigger_on_event_id = { 504 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                route_to = "Metalworks",
+                -- images = {
+                --     {
+                --         width    = 512,
+                --         height   = 512,
+                --         state    = 5,
+                --         highlights = {
+                --             { position = "H-8", offsetX = 16, offsetY = 16 },
+                --         },
+                --         zone_name = "Metalworks",
+                --     },
+                -- },
             },
         },
         reward = {

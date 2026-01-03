@@ -204,6 +204,22 @@ return {
                 trigger_on_item_obtain = "flint stone",
             },
             {
+                text = "Pathfinding Demo: Travel to Valkurm Dunes! \n" ..
+                       "This step uses AUTOMATIC ROUTE CALCULATION. \n" ..
+                       "The route shown below changes based on YOUR CURRENT ZONE! \n \n" ..
+                       "Try this: \n" ..
+                       "1. Note the route shown below \n" ..
+                       "2. Zone to a different city (Jeuno, San d'Oria, Windurst) \n" ..
+                       "3. Come back to this quest and see the route update!",
+                --route_to = "Valkurm Dunes"
+                route_to = "Dangruf Wadi"
+            },
+            {
+                text = "Pathfinding Demo 2: Go to Beadeaux! \n" ..
+                       "Another auto-route example - notice how it calculates from your position.",
+                route_to = "Beadeaux"
+            },
+            {
                 text = "Congratulations! You have completed the feature demo."
             }
         }
