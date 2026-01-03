@@ -477,17 +477,18 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                     -- Step navigation buttons in collapsed mode (before items/keyitems)
                     local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
-                    if #steps > 1 then
-                        -- Initialize viewed step to current step if not set OR auto-advance if user completed steps
-                        if not collapsed_viewed_step or collapsed_viewed_step < 1 or collapsed_viewed_step > #steps then
-                            collapsed_viewed_step = math.min(current_step_index, #steps)
-                        elseif collapsed_viewed_step < current_step_index then
-                            -- Auto-advance: user completed steps, follow the current step forward
-                            collapsed_viewed_step = math.min(current_step_index, #steps)
-                        end
-                        -- Note: We don't auto-rewind when user unchecks earlier steps
-                        -- This allows manual navigation with prev/next buttons to work properly
 
+                    -- Initialize viewed step to current step if not set OR auto-advance if user completed steps
+                    if not collapsed_viewed_step or collapsed_viewed_step < 1 or collapsed_viewed_step > #steps then
+                        collapsed_viewed_step = math.min(current_step_index, #steps)
+                    elseif collapsed_viewed_step < current_step_index then
+                        -- Auto-advance: user completed steps, follow the current step forward
+                        collapsed_viewed_step = math.min(current_step_index, #steps)
+                    end
+                    -- Note: We don't auto-rewind when user unchecks earlier steps
+                    -- This allows manual navigation with prev/next buttons to work properly
+
+                    if #steps > 1 then
                         -- Previous button
                         if collapsed_viewed_step > 1 then
                             if imgui.SmallButton("< Prev##CollapsedPrev") then
@@ -752,8 +753,8 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                             imgui.PopStyleColor(4)
                         end
+                        imgui.Separator()
                     end
-                    imgui.Separator()
                 end
 
                 -- Steps
@@ -981,6 +982,25 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             if imgui.Checkbox("Show all steps (vs current step only)", show_all_ref) then
                 ui_settings.show_all_steps = show_all_ref[1]
                 settings.save('QuestHelper_settings', quest_state.settings)
+            end
+
+            imgui.Separator()
+            imgui.Text("Developer Settings")
+            imgui.Separator()
+
+            -- Dev mode toggle
+            local dev_mode_ref = { ui_settings.dev_mode }
+            if imgui.Checkbox("Developer Mode", dev_mode_ref) then
+                ui_settings.dev_mode = dev_mode_ref[1]
+                settings.save('QuestHelper_settings', quest_state.settings)
+                if ui_settings.dev_mode then
+                    print("\30\106[QH]\30\01 Developer mode enabled - Debug output active")
+                else
+                    print("\30\106[QH]\30\01 Developer mode disabled - Debug output hidden")
+                end
+            end
+            if imgui.IsItemHovered() then
+                imgui.SetTooltip("Shows debug messages in chat log for troubleshooting")
             end
 
             imgui.Separator()

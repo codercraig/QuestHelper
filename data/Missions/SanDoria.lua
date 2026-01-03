@@ -768,7 +768,7 @@ return {
         },
     },
 
-    ["5-2: Xarcabard, Land of Truths"] = {
+    ["5-2: The Shadow Lord"] = {
         steps = {
             "Step 1: Receive the mission from any Bastok Gate Guard.",
             {

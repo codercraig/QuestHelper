@@ -4,6 +4,16 @@ local triggers = {}
 
 local ffi = require('ffi')
 
+-- Dev mode flag (set by main module)
+triggers.dev_mode_enabled = false
+
+-- Helper: Debug print (only prints if dev mode is enabled)
+local function debug_print(...)
+    if triggers.dev_mode_enabled then
+        print(...)
+    end
+end
+
 -- Helper: Cleans text by removing FFXI color codes and special characters
 local function clean_text(text)
     if not text then return "" end
@@ -160,7 +170,7 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
                     end
 
                     if should_complete then
-                        print(string.format("\30\105[QH]\30\01 Line Trigger HIT! Completing step %d", step_idx))
+                        debug_print(string.format("\30\105[QH]\30\01 Line Trigger HIT! Completing step %d", step_idx))
                         quest_state.setStepState(topCat, subfile, mission, step_idx, true, nil)
                         return true
                     else
@@ -184,7 +194,7 @@ function triggers.handlePacketIn(e, currentTopCategory, currentSubfile, current_
 
     -- Debug Print
     if event_id > 0 or param0 > 0 then
-        print(string.format("\30\105[QH Debug]\30\01 Event: %d | NPC: %d | Param0: %d", event_id, actor_id, param0))
+        debug_print(string.format("\30\105[QH Debug]\30\01 Event: %d | NPC: %d | Param0: %d", event_id, actor_id, param0))
     end
 
     if not currentTopCategory or not currentSubfile or not current_mission then return end
@@ -440,7 +450,7 @@ function triggers.handleKillText(e, incoming_text, playerName, currentTopCategor
 
     if enemy_name then
         local who = killer_name or "Unknown"
-        print(string.format("\30\106[QH Debug]\30\01 Kill detected: %s defeated '%s'", who, enemy_name))
+        debug_print(string.format("\30\106[QH Debug]\30\01 Kill detected: %s defeated '%s'", who, enemy_name))
 
         -- Check if enemy name matches requirements
         local name_match = false
@@ -452,7 +462,7 @@ function triggers.handleKillText(e, incoming_text, playerName, currentTopCategor
                 end
             end
             if not name_match then
-                print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
+                debug_print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
                     enemy_name, table.concat(kill_req.enemies, ", ")))
             end
         else
@@ -503,7 +513,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
     -- Debug: Show we're tracking kills
     local zone_data = require('data.zones')
     local required_zone_id = kill_req.zone and zone_data[kill_req.zone]
-    print(string.format("\30\105[QH Debug]\30\01 Kill tracking active | Zone: %s (Req: %s, ID: %s) | Current Zone: %s",
+    debug_print(string.format("\30\105[QH Debug]\30\01 Kill tracking active | Zone: %s (Req: %s, ID: %s) | Current Zone: %s",
         kill_req.zone or "ANY",
         required_zone_id or "N/A",
         tostring(required_zone_id),
@@ -512,7 +522,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
     -- Check zone requirement
     if kill_req.zone and playerZoneId then
         if required_zone_id and playerZoneId ~= required_zone_id then
-            print(string.format("\30\106[QH Debug]\30\01 Wrong zone! Need %s (ID: %d), in zone ID: %d",
+            debug_print(string.format("\30\106[QH Debug]\30\01 Wrong zone! Need %s (ID: %d), in zone ID: %d",
                 kill_req.zone, required_zone_id, playerZoneId))
             return -- Not in the required zone
         end
@@ -528,19 +538,19 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
     local byte_09 = e.data:byte(0x09)
     local byte_0A = e.data:byte(0x0A)
 
-    print(string.format("\30\105[QH Debug]\30\01 Packet Bytes: [0x04]=%d [0x08]=%d [0x09]=%d [0x0A]=%d",
+    debug_print(string.format("\30\105[QH Debug]\30\01 Packet Bytes: [0x04]=%d [0x08]=%d [0x09]=%d [0x0A]=%d",
         byte_04 or 0, byte_08 or 0, byte_09 or 0, byte_0A or 0))
 
     -- Get player server ID to check if this is the player's action
     local player_entity = GetPlayerEntity()
     local player_id = player_entity and player_entity.ServerId or 0
 
-    print(string.format("\30\105[QH Debug]\30\01 Action Packet: Actor=%d (Player ID=%d) | Targets=%d",
+    debug_print(string.format("\30\105[QH Debug]\30\01 Action Packet: Actor=%d (Player ID=%d) | Targets=%d",
         actor_id, player_id, target_count))
 
     -- If no targets, skip
     if target_count == 0 then
-        print(string.format("\30\106[QH Debug]\30\01 No targets in packet, skipping"))
+        debug_print(string.format("\30\106[QH Debug]\30\01 No targets in packet, skipping"))
         return
     end
 
@@ -554,7 +564,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
     --     return
     -- end
 
-    print(string.format("\30\105[QH Debug]\30\01 Checking %d targets...", target_count))
+    debug_print(string.format("\30\105[QH Debug]\30\01 Checking %d targets...", target_count))
 
     -- Check each target in the action packet
     for i = 0, target_count - 1 do
@@ -590,7 +600,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
                 local target = GetEntity(target_id)
                 if target then
                     local target_name = target.Name
-                    print(string.format("\30\106[QH Debug]\30\01 Defeat detected! Enemy: %s", target_name))
+                    debug_print(string.format("\30\106[QH Debug]\30\01 Defeat detected! Enemy: %s", target_name))
 
                     -- Check if we need to match specific enemy names
                     local name_match = false
@@ -602,7 +612,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
                             end
                         end
                         if not name_match then
-                            print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
+                            debug_print(string.format("\30\106[QH Debug]\30\01 Enemy '%s' doesn't match required: %s",
                                 target_name, table.concat(kill_req.enemies, ", ")))
                         end
                     else
@@ -627,10 +637,10 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
                                 current_count, kill_req.count))
                         end
                     else
-                        print(string.format("\30\106[QH Debug]\30\01 Enemy name mismatch, not counting"))
+                        debug_print(string.format("\30\106[QH Debug]\30\01 Enemy name mismatch, not counting"))
                     end
                 else
-                    print(string.format("\30\106[QH Debug]\30\01 Could not get entity for target ID: %d", target_id))
+                    debug_print(string.format("\30\106[QH Debug]\30\01 Could not get entity for target ID: %d", target_id))
                 end
             end
         end

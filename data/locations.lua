@@ -387,4 +387,30 @@ return {
         visual_mode = "arc",
         zone = "Gustav Tunnel"
     },
+    -- Temple of Uggalepih
+    ["templeugg1-zm4-granitedoor"] = {
+        target_pos = { x = 60.1, y = -2, z = 11.2},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
+    ["templeugg1-zm4-wornbook1"] = {
+        target_pos = { x = 67.3, y = -2, z = 22.7},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
+    ["templeugg1-zm4-wornbook2"] = {
+        target_pos = { x = 59, y = -2, z = 27.2},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
+    ["templeugg1-zm4-wornbook3"] = {
+        target_pos = { x = 52.9, y = -2, z = 21.7},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
+    ["templeugg1-zm4-oldcasket"] = {
+        target_pos = { x = 63, y = -0.8, z = 17.6},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
 }

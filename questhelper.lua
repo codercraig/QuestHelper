@@ -67,8 +67,6 @@ local keyitems_db = require('data.keyitems')  -- Key items database
 --------------------------------------------------------------------------------
 -- Debug Settings
 --------------------------------------------------------------------------------
-local ENABLE_VERBOSE_DEBUG = false
-local ENABLE_TRIGGER_DEBUG = false -- Toggle with /qh_debug
 local DEBUG_PRINT_INTERVAL = 10
 local lastDebugPrintTime = 0
 local lastFrameTime = os.clock()
@@ -90,7 +88,11 @@ ashita.events.register('d3d_present', 'present_callback', function()
     lastFrameTime = frameCurrentTime
     local shouldPrintDebugNow = false
 
-    if ENABLE_VERBOSE_DEBUG then
+    -- Update dev mode flag for triggers module
+    triggers_module.dev_mode_enabled = quest_state.settings.ui_settings.dev_mode
+
+    -- Check dev mode setting for debug output
+    if quest_state.settings.ui_settings.dev_mode then
         if (systemCurrentTime - lastDebugPrintTime) >= DEBUG_PRINT_INTERVAL then
             shouldPrintDebugNow = true
             lastDebugPrintTime = systemCurrentTime
@@ -109,17 +111,23 @@ ashita.events.register('d3d_present', 'present_callback', function()
         -- Detect zone changes and auto-detect floor/map
         if player_module.zoneId ~= lastZoneId and player_module.zoneId ~= 0 then
             if lastZoneId ~= 0 then -- Don't print on initial load
-                print(string.format("["..addon.name.."] Zone changed (ID: %d -> %d)", lastZoneId, player_module.zoneId))
+                if quest_state.settings.ui_settings.dev_mode then
+                    print(string.format("["..addon.name.."] Zone changed (ID: %d -> %d)", lastZoneId, player_module.zoneId))
+                end
 
                 -- Try to auto-detect floor/map using CheckFloorNumber
                 local detectedFloor = player_module.getFloorId()
                 if detectedFloor and detectedFloor > 0 then
                     quest_state.setCurrentMap(player_module.zoneId, detectedFloor)
-                    print(string.format("["..addon.name.."] Auto-detected floor/map: %d", detectedFloor))
+                    if quest_state.settings.ui_settings.dev_mode then
+                        print(string.format("["..addon.name.."] Auto-detected floor/map: %d", detectedFloor))
+                    end
                 else
                     -- Fallback: reset to map 1
                     quest_state.setCurrentMap(player_module.zoneId, 1)
-                    print(string.format("["..addon.name.."] Using default map 1 (floor auto-detection unavailable)"))
+                    if quest_state.settings.ui_settings.dev_mode then
+                        print(string.format("["..addon.name.."] Using default map 1 (floor auto-detection unavailable)"))
+                    end
                 end
             end
             lastZoneId = player_module.zoneId
@@ -140,7 +148,9 @@ ashita.events.register('d3d_present', 'present_callback', function()
         if currentFloor and currentFloor ~= lastKnownFloor and player_module.zoneId ~= 0 then
             -- Floor changed!
             if lastKnownFloor ~= 0 then
-                print(string.format("["..addon.name.."] Floor changed: %d -> %d, updating map", lastKnownFloor, currentFloor))
+                if quest_state.settings.ui_settings.dev_mode then
+                    print(string.format("["..addon.name.."] Floor changed: %d -> %d, updating map", lastKnownFloor, currentFloor))
+                end
                 quest_state.setCurrentMap(player_module.zoneId, currentFloor)
             end
             lastKnownFloor = currentFloor

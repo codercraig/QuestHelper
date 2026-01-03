@@ -22,8 +22,41 @@ beam_drawing.ARGB_BEAM_COLOR = 0
 
 -- Player Arc Start Offsets
 beam_drawing.PLAYER_ARC_START_X_OFFSET = 0
-beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER = -2
 beam_drawing.PLAYER_ARC_START_Z_OFFSET = 0
+
+-- Race-based height offsets for beam start position (aiming for head level)
+-- FFXI Race IDs: 1=Hume M, 2=Hume F, 3=Elvaan M, 4=Elvaan F, 5=Taru M, 6=Taru F, 7=Mithra, 8=Galka
+beam_drawing.RACE_HEIGHT_OFFSETS = {
+    [0] = -1.8,   -- Default/Unknown
+    [1] = -1.8,   -- Hume Male
+    [2] = -1.8,   -- Hume Female (slightly shorter)
+    [3] = -2.2,   -- Elvaan Male (taller)
+    [4] = -2.1,   -- Elvaan Female
+    [5] = -0.8,   -- Tarutaru Male (shortest)
+    [6] = -0.8,   -- Tarutaru Female (shortest)
+    [7] = -1.5,   -- Mithra
+    [8] = -2.3,   -- Galka (tallest)
+}
+
+-- Gets the appropriate height offset for the player's race
+function beam_drawing.getPlayerHeightOffset(dev_mode)
+    local playerEntity = GetPlayerEntity()
+    if playerEntity then
+        -- Try different possible race property names
+        local race = playerEntity.Race or (playerEntity.GetRace and playerEntity:GetRace()) or playerEntity.race
+
+        if race then
+            local offset = beam_drawing.RACE_HEIGHT_OFFSETS[race] or beam_drawing.RACE_HEIGHT_OFFSETS[0]
+            -- Debug output (only print occasionally to avoid spam)
+            if dev_mode and math.random() < 0.001 then  -- Print ~0.1% of the time
+                print(string.format("[QH Debug] Race: %d, Height Offset: %.2f", race, offset))
+            end
+            return offset
+        end
+    end
+    -- Fallback to default if we can't get race
+    return beam_drawing.RACE_HEIGHT_OFFSETS[0]
+end
 
 -- FFI definition for 2D icon vertices
 ffi.cdef [[
@@ -176,8 +209,11 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
             local visualStartX, visualStartY_height, visualStartZ_depth
             local visualEndX, visualEndY_height, visualEndZ_depth
 
+            -- Get race-based height offset
+            local heightOffset = beam_drawing.getPlayerHeightOffset(shouldPrintDebug)
+
             visualStartX = playerPosX + beam_drawing.PLAYER_ARC_START_X_OFFSET
-            visualStartY_height = playerPosZ_depth + beam_drawing.PLAYER_ARC_START_Y_OFFSET_ON_PLAYER
+            visualStartY_height = playerPosZ_depth + heightOffset
             visualStartZ_depth = playerPosY_height + beam_drawing.PLAYER_ARC_START_Z_OFFSET
 
             visualEndX = effectiveTargetX

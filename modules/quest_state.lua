@@ -4,6 +4,14 @@ local quest_state = {}
 
 local settings = require('settings')
 
+-- Helper: Debug print (only prints if dev mode is enabled)
+local function debug_print(...)
+    -- Access dev_mode from settings
+    if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
+        print(...)
+    end
+end
+
 local QUESTHELPER_ALIAS = 'QuestHelper_settings'
 local default_settings = T{
     step_states = T{},
@@ -19,7 +27,8 @@ local default_settings = T{
         map_pos_x = nil,            -- Map window X position (nil = centered on first launch)
         map_pos_y = nil,            -- Map window Y position (nil = centered on first launch)
         items_section_expanded = true,     -- Items Needed section expanded state
-        keyitems_section_expanded = true   -- Key Items Needed section expanded state
+        keyitems_section_expanded = true,  -- Key Items Needed section expanded state
+        dev_mode = false            -- Developer mode - enables debug output
     }
 }
 
@@ -56,7 +65,7 @@ function quest_state.setStepState(topCat, subfile, mission, step, state, step_tr
 
     local path = ensure_key_path(quest_state.settings.step_states, topCat, subfile, mission)
     path[step] = state
-    print(string.format("Saving step: %s -> %s -> %s -> Step %d = %s",
+    debug_print(string.format("Saving step: %s -> %s -> %s -> Step %d = %s",
         topCat, subfile, mission, step, tostring(state)))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
@@ -71,7 +80,7 @@ end
 function quest_state.setPartialState(cat, sub, mis, step, item_name, state)
     local path = ensure_key_path(quest_state.settings.partial_progress, cat, sub, mis, step)
     path[item_name:lower()] = state
-    print(string.format("\30\105[QuestHelper] Checked item: %s", item_name))
+    debug_print(string.format("\30\105[QuestHelper] Checked item: %s", item_name))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 
@@ -106,7 +115,7 @@ end
 -- Sets the active map number for a zone
 function quest_state.setCurrentMap(zone_id, map_num)
     quest_state.settings.current_map[zone_id] = map_num
-    print(string.format("\30\106[QH]\30\01 Switched to map %d", map_num))
+    debug_print(string.format("\30\106[QH]\30\01 Switched to map %d", map_num))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 

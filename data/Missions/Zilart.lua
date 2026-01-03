@@ -1,1202 +1,287 @@
 return {
-    ["1-1: The Zeruhn Report"] = {
+    ["ZM1: The New Frontier"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Bastok", name = "5-2: Xarcabard, Land of Truths"},
+            {category = "Missions", subfile = "SanDoria", name = "5-2: The Shadow Lord"},
+            {category = "Missions", subfile = "Windurst", name = "5-2: The Shadow Awaits"},
+        },
         steps = {
-          {
-            text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
-            images = {
-                {
-                    file     = "maps/bastok_mines.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 1,
-                    highlights = {
-                        { position = "H-10", offsetX = 16, offsetY = 16 },
-                    },
-                },
-                {
-                    file     = "maps/bastok_markets.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 1,
-                    highlights = {
-                        { position = "D-11", offsetX = 16, offsetY = 16 },
-                    },
-                },
-                {
-                    file     = "maps/port_bastok.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 1,
-                    highlights = {
-                        { position = "L-6", offsetX = 16, offsetY = 16 },
+            {
+                text = "Enter Norg to receive a cutscene and a Key Item: Map of Norg.",
+                --zone_trigger = "Norg",
+                trigger_on_event_id = {1},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Norg",
                     },
                 },
             },
-          },
-          {
-            text = "Step 2: Go to Bastok Mines (D-7) and enter Zeruhn Mines. The entrance to Zeruhn Mines is located in the southwest corner of Bastok Mines.",
-            images = {
-                {
-                    file     = "maps/bastok_mines.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 2,
-                    highlights = {
-                        { position = "D-7", offsetX = 16, offsetY = 16 },
-                    },
-                },
-            },
-          },
-          {
-            text = "Step 3: Talk to Makarim at (H-11) in Zeruhn Mines to receive the Zeruhn Report. He is located all the way to the south within Zeruhn Mines. Although there are creatures here in the level 75-80 range, they are not aggressive and do not aggro by sound.",
-            images = {
-                {
-                    file     = "maps/zeruhn_mines.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 3,
-                    highlights = {
-                        { position = "H-11", offsetX = 16, offsetY = 16 },
-                    },
-                },
-            },
-          },
-          {
-            text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
-            images = {
-                {
-                    file     = "maps/metalworks.png",
-                    width    = 512,
-                    height   = 512,
-                    state    = 4,
-                    highlights = {
-                        { position = "J-8", offsetX = 16, offsetY = 16 },
-                    },
-                },
-            },
-          },
         },
         reward = {
-            text = "Rank Points!",
-            -- images = {
-            --     {
-            --         file   = "equipment/rajasring.png",
-            --         width  = 300,
-            --         height = 100,
-            --     },
-            --     {
-            --         file   = "equipment/rajasring.png",
-            --         width  = 300,
-            --         height = 100,
-            --     },
-            -- },
+            text = "Key Item: Map of Norg",
         }
     },
 
-    ["1-2: A Geological Survey"] = {
+    ["ZM2: Welcome tNorg"] = {
         steps = {
             {
-              text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
-              images = {
-                    {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 1,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 1,
-                        highlights = {
-                            { position = "D-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 1,
-                        highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
+                text = "Click on the 'Oaken Door' at (K-8) in Norg for a cutscene with Gilgamesh. The dialog will ask if you want to open the door, choose Yes. Note: If you are on one of the numerous Rhapsodies Missions where you click on the door, you will get that cutscene first. Just touch the door again.",
+                onmob_target = "_700",
+                trigger_on_event_id = {2},
                 images = {
                     {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
+                        width = 512,
+                        height = 512,
+                        state = 1,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Proceed to South Gustaberg (D-9) and enter Dangruf Wadi.",
-                images = {
-                    {
-                        file     = "maps/south_gustaberg.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "D-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: In Dangruf Wadi, go to the geyser at (I-8) and stand on it to be propelled to the ledge, changing the Blue Acidity Tester to Red Acidity Tester. Check your Key Items to make sure it has changed!",
-                images = {
-                    {
-                        file     = "maps/dangruf_wadi.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 5: Return to Cid in the Metalworks(H-8) to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
+                        zone_name = "Norg",
                     },
                 },
             },
         },
-        reward = "Rank Points"
+        reward = {
+            text = "None",
+        }
     },
 
-    ["1-3: Fetichism"] = {
+    ["ZM3: Kazhams Chieftainess"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
-                images = {
-                      {
-                          file     = "maps/bastok_mines.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "H-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                          file     = "maps/bastok_markets.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "D-11", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                          file     = "maps/port_bastok.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          highlights = {
-                              { position = "L-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
-            },
-            {
-                text = "Step 2: Collect four Quadav fetiches. Go to North Gustaberg(K-3) and zone into Palborough Mines: You will require Head, Torso, Arms, and Legs from enemy Quadav in this zone. Can be purchased on Auction House under [Other -> Beast-made]",
-                images = {
-                      {
-                          file     = "maps/north_gustaberg.png",
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          highlights = {
-                              { position = "K-3", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
-            },
-            {
-                text = "Step 3: Return to the Bastok Gate Guard and trade the Head, Torso, Arms, and Legs fetiches to complete the mission!",
+                text = "Talk to Jakoh Wahcondalo at (J-9) in Kazham (Home Point #1) to obtain the Key Item: Sacrificial Chamber Key, which is required to enter the deeper areas of the Temple of Uggalepih.",
+                onmob_target = "Jakoh Wahcondalo",
+                trigger_on_event_id = {114},
                 images = {
                     {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "D-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                  },
-            },
-        },
-        reward = "Rank 2, 1000g"
-    },
-
-    ["2-1: The Crystal Line"] = {
-        steps = {
-            "Step 1: Receive the mission from any of the Bastokan Gate Guards.",
-            {
-                text = "Step 2: Talk to Savae E Paleade at (K-7) in Port Bastok.",
-                images = {
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to North Gustaberg and locate the hut at (L-8).",
-                images = {
-                    {
-                        file     = "maps/north_gustaberg.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Savae E Paleade to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/port_bastok.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["2-2: Wading Beasts"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Nbu Latteh at (J-9) in Bastok Markets.",
-                images = {
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
+                        width = 512,
+                        height = 512,
+                        state = 1,
                         highlights = {
                             { position = "J-9", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                },
-            },
-            "Step 3: Travel to Dangruf Wadi and obtain three Dhalmel Saliva from Dhalmel.",
-            {
-                text = "Step 4: Return to Nbu Latteh to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/bastok_markets.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
-                        },
+                        zone_name = "Kazham",
                     },
                 },
             },
         },
+        reward = {
+            text = "Key Item: Sacrificial Chamber Key",
+        }
     },
 
-    ["2-3: The Emissary"] = {
-        steps = {
-            {
-                text = "Step 1: Receive the mission from Naji at (J-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 1,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 2: Choose to go to either San d'Oria or Windurst first.",
-            "Step 3: Deliver the letter to the respective consulate in the chosen nation.",
-            "Step 4: Complete the assigned task from the consulate.",
-            "Step 5: Repeat steps 3 and 4 for the other nation.",
-            {
-                text = "Step 6: Return to Naji in the Metalworks to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 6,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
+    ["ZM4: The Temple of Uggalepih"] = {
+        prerequisites = {
+            {category = "Quests", subfile = "Temple of Uggalepih", name = "Paintbrush of Souls"},
         },
-        reward = "Rank 3, Adventurer's Certificate, 3000g, access to Chateau d'Oraguille"
-    },
-
-    ["3-1: The Four Musketeers"] = {
         steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
             {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
+                keyitems_needed = {272},
+                text = "Quick Route (Recommended): If you have already acquired the Den of Rancor Home Point #1, use that to arrive at Den of Rancor, Map 2 (E-4), wherein you just take a few steps west to arrive at your destination (skip to step 10). Alternatively, use Unity Concord Teleportation - talk to a Unity Concord NPC and select 'Bring me to Wanted encounter area', then choose Den of Rancor from the list of Level 128 encounter areas. You will arrive at Den of Rancor, Map 2 (G-12).",
                 images = {
                     {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
+                        width = 512,
+                        height = 512,
+                        state = 1,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "E-4", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Den of Rancor",
+                        floor_id = 1,
                     },
                 },
             },
             {
-                text = "Step 3: Travel to Beadeaux and locate the target point at (H-7).",
+                text = "Quick Route (Recommended): If you have already acquired the Den of Rancor Home Point #1 otherwise Travel to the Temple of Uggalepih, either via Survival Guide (Elshimo Uplands) to Map 1 (F-6), or via Yhoator Jungle to the main entrance at Map 1, (I-6). If you aren't in possession of the Permanent Key Item: Paintbrush of Souls, complete the mini-quest to receive it.",
                 images = {
                     {
-                        file     = "maps/beadeaux.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["3-2: To the Forsaken Mines"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Gusgen Mines and locate the target point at (I-7).",
-                images = {
-                    {
-                        file     = "maps/gusgen_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Cid to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["3-3: Jeuno"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Travel to Jeuno and speak with Savae E Paleade at (G-8) in Lower Jeuno.",
-                images = {
-                    {
-                        file     = "maps/lower_jeuno.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 3: Complete the assigned task from Savae E Paleade.",
-            "Step 4: Return to the Bastok Gate Guard to complete the mission.",
-        },
-    },
-
-    ["4-1: Magicite"] = {
-        steps = {
-            -- Initiating the Mission
-            "Step 1: Ensure your Rank Points are nearly or completely full by trading crystals to a Conquest Overseer.",
-            {
-                text = "Step 2: Speak with Goggehn at the Bastokan Embassy in Ru'Lude Gardens to begin the mission.",
-                images = {
-                    {
-                        file = "maps/ru_lude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 2,
                         highlights = {
-                            -- e.g., if Goggehn is at H-10, use:
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 0,
                     },
                 },
             },
             {
-                text = "Step 3: Examine the Door: Bastokan Embassy at (H-10) in Ru'Lude Gardens to receive the Key Item: Archducal Audience Permit.",
+                text = "Take the northwest exit to Yhoator Jungle at Map 1, F-5. Head west in Yhoator on the outside of the temple to reach the entrance and enter the Temple of Uggalepih's Map 2.",
                 images = {
                     {
-                        file = "maps/ru_lude_gardens.png",
                         width = 512,
                         height = 512,
                         state = 3,
                         highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 0,
                     },
                 },
             },
-            "Step 4: Proceed to the Audience Chamber at (H-6) in Ru'Lude Gardens and examine the door for a cutscene, receiving the Key Item: Letter to Aldo.",
             {
-                text = "Step 5: In Lower Jeuno, enter Neptune's Spire and speak with Aldo at (J-8) to receive the Key Item: Silver Bell.",
+                text = "Head south to (I-10). If you do not possess an Unlit Lantern, kill any Tonberry Maledictor, Tonberry Jinxer, and Tonberry Pursuer you see in the western rooms. Only one is required, but having up to four speeds things up. Once at (I-10), kill the Temple Guardian to open the door.",
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "I-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Enter the large room and take the northeast exit, following the corridor to arrive at (I-7/8), the room containing the Picture Frames and the Granite Door. Click on the empty Picture Frame in the middle of the eastern wall just once. You must stand directly in the center of the empty frame, as close to the wall as possible.",
+                images = {
+                    {
                         width = 512,
                         height = 512,
                         state = 5,
                         highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
                     },
                 },
             },
-
-            -- Obtaining the Yagudo Torch
             {
-                text = "Step 6: Speak to Paya-Sabya at (I-8) in Upper Jeuno.",
+                text = "When you receive the message 'By focusing your thoughts on the paintbrush of souls, a new painting begins to appear on the canvas...', wait at least 30 seconds (the screen should flash briefly) before confirming. After the message 'You succeeded in projecting the image in your soul to the blank canvas. The door to the Rancor Den has opened!', the Granite Door should open. Follow the passageway downward into Den of Rancor.",
+                zone_trigger = "Den of Rancor",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 6,
                         highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
                     },
                 },
             },
             {
-                text = "Step 7: Then, talk to Muckvix at (H-9) in Lower Jeuno to receive the Key Item: Yagudo Torch.",
+                text = "You should now be in a cavern of Den of Rancor, Map 1 (G-6) which contains some Tonberry Imprecators who can drop the Unlit Lantern, if you don't already possess one. Trade your Unlit Lantern to the Altar of Rancor on Map 1 (E-5) to receive a Rancor Flame. IMPORTANT: Only use the 'Rancor Flame' from this altar, not colored flames from other altars deeper in the Den.",
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 7,
                         highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                            { position = "E-5", offsetX = 16, offsetY = 16 },
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Den of Rancor",
+                        floor_id = 0,
                     },
                 },
             },
-
-            -- Obtaining the Crest of Davoi
             {
-                text = "Step 8: Speak with Baudin at (G-8) in Upper Jeuno; he will request a slice of Coeurl Meat.",
+                text = "Drop down the hole at the northeast corner of (F-7) to reach Map 2. Head northwest up the passageway to reach the four torches and the gate of the Sacrificial Chamber at (E-5).",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
                         width = 512,
                         height = 512,
                         state = 8,
                         highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
                         },
+                        zone_name = "Den of Rancor",
+                        floor_id = 0,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        highlights = {
+                            { position = "E-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Den of Rancor",
+                        floor_id = 1,
                     },
                 },
             },
-            "Step 9: Acquire Coeurl Meat by defeating Coeurls in areas like Meriphataud Mountains or by purchasing from the Auction House.",
-            "Step 10: Trade the Coeurl Meat to Baudin to receive the Key Item: Crest of Davoi.",
-
-            -- Obtaining the Coruscant Rosary and Black Matinee Necklace
             {
-                text = "Step 11: Speak to Sattal-Mansal at (J-8) in Lower Jeuno, outside Aldo's room in Neptune's Spire, to initiate the quests 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'.",
+                text = "Trade a Rancor Flame to one torch to light it up and receive an Unlit Lantern in return. All four torches need to be lit to open the gate. You cannot trade while Invisible - you may need to fight enemies. Repeat the process of trading Unlit Lantern at the Altar to get Rancor Flame, then lighting torches, until all four are lit. The torches stay lit until the door is opened. WARNING: Players exiting via the door switch will cause lit torches to become unlit.",
                 images = {
                     {
-                        file = "maps/lower_jeuno.png",
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        highlights = {
+                            { position = "E-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Den of Rancor",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Once inside, interact with the Home Point so you don't have to repeat this process. Before proceeding to the battle, consider warping away to reset your Tonberry hate at the Temple of Uggalepih to avoid being K.O.'d by Everyone's Rancor. After entering the Sacrificial Chamber, examine the Mahogany Door to enter the Battlefield (level 99 cap, 6 players max). Buffs wear upon entry.",
+                zone_trigger = "Sacrificial Chamber",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 10,
+                        highlights = {
+                            { position = "E-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Den of Rancor",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "BATTLE: There are three Tonberry NMs that must be defeated. Recommended kill order: 1) Grav'iton (Thief with crown - immune to sleep), 2) Molyb'iton (Black Mage), 3) Tungs'iton (Summoner). The Thief is completely immune to sleep, so kill it while you Silence/Sleep the other two. The Summoner comes with a random elemental pet that dies when its master does.",
+                images = {
+                    {
                         width = 512,
                         height = 512,
                         state = 11,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
+                        zone_name = "Sacrificial Chamber",
                     },
                 },
             },
-            "Step 12: Travel to Beadeaux; ensure you have Sneak active to avoid sound-aggro from Quadavs.",
             {
-                text = "Step 13: Enter Map 2 via exit A at (H-7) and examine 'The Mute' at (G-7) to receive Silence, allowing safe passage past 'The Afflictor' without being Cursed.",
+                text = "At approximately 25% HP, the Summoner summons a random avatar for Astral Flow (max damage ~700-800). At approximately 25% HP, the Thief may use Everyone's Rancor which can K.O. in one shot if you haven't reset your Tonberry hate. This fight can be completed solo by most jobs at 99 and is easily duoed.",
                 images = {
                     {
-                        file = "maps/beadeaux.png",
+                        width = 512,
+                        height = 512,
+                        state = 12,
+                        zone_name = "Sacrificial Chamber",
+                    },
+                },
+            },
+            {
+                text = "Clearing the battlefield gives a cutscene and places you in a different location. You will obtain a Key Item: Dark Fragment. After the cutscene, walking out of the Sacrificial Chamber zones you to Map 2 of the Temple of Uggalepih at the Northwest room. Note: If you're doing this for Rhapsodies of Vana'diel prerequisite, you can now continue past The Cursed Temple. You do not need any further Zilart progress to finish Rhapsodies.",
+                images = {
+                    {
                         width = 512,
                         height = 512,
                         state = 13,
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
+                        zone_name = "Sacrificial Chamber",
                     },
                 },
             },
-            "Step 14: Proceed to Map 1 via exit B at (F-8) and use the ramp at (E-10) to reach the upper level.",
-            {
-                text = "Step 15: Defeat De'Vyu Headhunter at (I-9) to obtain a Quadav Charm.",
-                images = {
-                    {
-                        file = "maps/beadeaux.png",
-                        width = 512,
-                        height = 512,
-                        state = 15,
-                        highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 16: Defeat Go'Bhu Gascon at (F-6) to obtain a Quadav Augury Shell.",
-                images = {
-                    {
-                        file = "maps/beadeaux.png",
-                        width = 512,
-                        height = 512,
-                        state = 16,
-                        highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 17: Return to Sattal-Mansal in Lower Jeuno and trade the Quadav Charm to receive the Key Item: Coruscant Rosary.",
-            "Step 18: Trade the Quadav Augury Shell to Sattal-Mansal to receive the Key Item: Black Matinee Necklace.",
-
-            -- Acquiring the Magicite: Optistone in Davoi
-            {
-                text = "Step 19: Travel to Davoi; use Invisible to avoid sight-aggro from Orcs.",
-                images = {
-                    {
-                        file = "maps/davoi.png",
-                        width = 512,
-                        height = 512,
-                        state = 19,
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 20: Disable the 'Wall of Dark Arts' at (G-7) to access Monastic Cavern.",
-            "Step 21: Navigate through Monastic Cavern to the Magicite room and examine the Magicite to receive the Key Item: Magicite: Optistone.",
-
-            -- Acquiring the Magicite: Aurastone in Beadeaux
-            "Step 22: Return to Beadeaux; use Sneak to avoid sound-aggro from Quadavs.",
-            "Step 23: Enter Map 2 via exit A at (H-7) and proceed to Qulun Dome at (I-7).",
-            "Step 24: Open the door in Qulun Dome; if prompted with 'The Silver Bell, Coruscant Rosary, Black Matinee Necklace, glow faintly.', move closer and try again.",
-            "Step 25: Inside Qulun Dome, examine the Magicite to receive the Key Item: Magicite: Aurastone.",
-
-            -- Acquiring the Magicite: Orastone in Castle Oztroja
-            {
-                text = "Step 26: Travel to Castle Oztroja; use Invisible to avoid sight-aggro from Yagudo and Sneak for bats.",
-                images = {
-                    {
-                        file = "maps/castle_oztroja.png",
-                        width = 512,
-                        height = 512,
-                        state = 26,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 27: Navigate to the door at (I-8) on Map 1; operate the correct lever to avoid the trapdoor and proceed to Map 3.",
-            "Step 28: From Map 3, enter Map 7 via exit F at (G-7), then proceed to Map 2 via exit I at (I-7).",
-            "Step 29: Light the Yagudo Torch at (H-9/10) to open the Brass Door at (G-10).",
-            "Step 30: Enter the Altar Room and examine the Magicite to receive the Key Item: Magicite: Orastone.",
-
-            -- Completing the Mission
-            "Step 31: After obtaining all three Magicites, return to the Audience Chamber at (H-6) in Ru'Lude Gardens for a cutscene.",
-            "Step 32: You will receive an Airship Pass; if you already possess one, you'll receive 20,000 gil instead.",
-            "Step 33: Return to Goggehn at the Bastokan Embassy to complete the mission, earning Rank 5, the Key Item: Message to Jeuno, and 10,000 gil."
+        },
+        reward = {
+            text = "Key Item: Dark Fragment",
         }
-    },
-
-    ["5-1: Darkness Rising"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Beadeaux and locate the target point at (H-7).",
-                images = {
-                    {
-                        file     = "maps/beadeaux.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["5-2: Xarcabard, Land of Truths"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Travel to Xarcabard and locate the target point at (J-9).",
-                images = {
-                    {
-                        file     = "maps/xarcabard.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 3: Return to the Bastok Gate Guard to complete the mission."
-        },
-    },
-
-    ["6-1: Return of the Talekeeper"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Medicine Eagle at (H-7) in Bastok Mines.",
-                images = {
-                    {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Quicksand Caves and locate the target point at (K-7).",
-                images = {
-                    {
-                        file     = "maps/quicksand_caves.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Medicine Eagle to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["6-2: The Pirate's Cove"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Norg and speak with Gilgamesh at (I-8).",
-                images = {
-                    {
-                        file     = "maps/norg.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Cid to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["6-2: The Chains That Bind Us"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
-                images = {
-                    {
-                        file     = "maps/gustav_tunnel.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 4: Defeat the required NM to proceed.",
-            {
-                text = "Step 5: Return to Cid to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["7-1: The Final Image"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Ro'Maeve and locate the target point at (H-5).",
-                images = {
-                    {
-                        file     = "maps/ro_maeve.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 4: Return to Iron Eater to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["7-2: On My Way"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Travel to Ifrit's Cauldron and locate the target point at (H-6).",
-                images = {
-                    {
-                        file     = "maps/ifrits_cauldron.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 3: Defeat the required NM to proceed.",
-            "Step 4: Return to the Bastok Gate Guard to complete the mission."
-        },
-    },
-
-    ["8-1: The Chains That Bind Us"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Talk to Cid at (H-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Gustav Tunnel and locate the target point at (F-7).",
-                images = {
-                    {
-                        file     = "maps/gustav_tunnel.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 4: Defeat the required NM to proceed.",
-            {
-                text = "Step 5: Return to Cid to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["8-2: Enter the Talekeeper"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Speak to Medicine Eagle at (H-7) in Bastok Mines.",
-                images = {
-                    {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to the Quicksand Caves and locate the target point at (K-7).",
-                images = {
-                    {
-                        file     = "maps/quicksand_caves.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 4: Defeat the required NM to proceed.",
-            {
-                text = "Step 5: Return to Medicine Eagle at (H-7) in Bastok Mines to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/bastok_mines.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["9-1: The Salt of the Earth"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Speak to Raibaht at (J-8) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Cape Teriggan and locate the target point at (L-6).",
-                images = {
-                    {
-                        file     = "maps/cape_teriggan.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 4: Collect the required key item from the location.",
-            {
-                text = "Step 5: Return to Raibaht to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
-    },
-
-    ["9-2: Where Two Paths Converge"] = {
-        steps = {
-            "Step 1: Receive the mission from any Bastok Gate Guard.",
-            {
-                text = "Step 2: Speak to Lucius at (K-7) in the Metalworks.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            {
-                text = "Step 3: Travel to Castle Zvahl Baileys and locate the target point at (J-6).",
-                images = {
-                    {
-                        file     = "maps/castle_zvahl_baileys.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "J-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-            "Step 4: Defeat the Shadow Lord in the final battle.",
-            {
-                text = "Step 5: Return to Lucius to complete the mission.",
-                images = {
-                    {
-                        file     = "maps/metalworks.png",
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-            },
-        },
     },
 }

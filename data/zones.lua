@@ -149,7 +149,7 @@ return {
 
     ["Middle Delkfutt's Tower"] = 157,
     ["Upper Delkfutt's Tower"] = 158,
-    --["Temple of Uggalepih"] = 157,
+    ["Temple of Uggalepih"] = 159,
     ["Den of Rancor"] = 158,
     ["Castle Zvahl Baileys"] = 161,
     ["Castle Zvahl Keep"] = 162,
