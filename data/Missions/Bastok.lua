@@ -40,18 +40,7 @@ return {
           {
             text = "Step 2: Go to Bastok Mines (D-7) and enter Zeruhn Mines. The entrance to Zeruhn Mines is located in the southwest corner of Bastok Mines.",
             zone_trigger = "Zeruhn Mines",
-            images = {
-                {
-                    width    = 512,
-                    height   = 512,
-                    state    = 2,
-                    highlights = {
-                        { position = "D-7", offsetX = 16, offsetY = 16 },
-                    },
-                    zone_name = "Bastok Mines",
-
-                },
-            },
+            route_to = "Zeruhn Mines",
           },
           {
             text = "Step 3: Talk to Makarim at (H-11) in Zeruhn Mines to receive the Zeruhn Report. He is located all the way to the south within Zeruhn Mines. Although there are creatures here in the level 75-80 range, they are not aggressive and do not aggro by sound.",
@@ -74,17 +63,8 @@ return {
             text = "Step 4: Deliver the report to Naji at (J-8) outside the President's Office in the Metalworks. Side note: If you examine the Key Item 'Zeruhn Report' before talking to Naji, the dialogue in this cutscene will be slightly different.",
             onmob_target = "Naji",
             trigger_on_event_id = { 710 },
-            images = {
-                {
-                    width    = 512,
-                    height   = 512,
-                    state    = 4,
-                    highlights = {
-                        { position = "J-8", offsetX = 16, offsetY = 16 },
-                    },
-                    zone_name = "Metalworks",
-                },
-            },
+            route_to = "Metalworks",
+            destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16}
           },
         },
         reward = {
@@ -133,34 +113,14 @@ return {
                 text = "Step 2: Go to Metalworks and talk to Cid (H-8), inside Cid's Lab, for a Key Item Blue Acidity Tester.",
                 onmob_target = {"Cid"},
                 trigger_on_event_id = 503,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                keyitems_needed = {3,4},
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Proceed to South Gustaberg (D-9) and enter Dangruf Wadi.",
                 zone_trigger = "Dangruf Wadi",
                 route_to = "Dangruf Wadi"
-                -- images = {
-                --     {
-                --         width    = 512,
-                --         height   = 512,
-                --         state    = 3,
-                --         zone_name = "South Gustaberg",
-                --         highlights = {
-                --             { position = "D-9", offsetX = 16, offsetY = 16 },
-                --         },
-
-                --     },
-                -- },
             },
             {
                 text = "Step 4: In Dangruf Wadi, go to the geyser at (I-8) and stand on it to be propelled to the ledge, changing the Blue Acidity Tester to Red Acidity Tester. Check your Key Items to make sure it has changed!",
@@ -188,17 +148,7 @@ return {
                 onmob_target = {"Cid"},
                 trigger_on_event_id = { 504 },
                 route_to = "Metalworks",
-                -- images = {
-                --     {
-                --         width    = 512,
-                --         height   = 512,
-                --         state    = 5,
-                --         highlights = {
-                --             { position = "H-8", offsetX = 16, offsetY = 16 },
-                --         },
-                --         zone_name = "Metalworks",
-                --     },
-                -- },
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -254,17 +204,18 @@ return {
                 },
 
                 require_all_items = true,
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          highlights = {
-                              { position = "K-3", offsetX = 16, offsetY = 16 },
-                          },
-                          zone_name = "North Gustaberg",
-                      },
-                  },
+                route_to = "Palborough Mines",
+                -- images = {
+                --       {
+                --           width    = 512,
+                --           height   = 512,
+                --           state    = 2,
+                --           highlights = {
+                --               { position = "K-3", offsetX = 16, offsetY = 16 },
+                --           },
+                --           zone_name = "North Gustaberg",
+                --       },
+                --   },
             },
             {
                 text = "Step 3: Return to the Bastok Gate Guard and trade the Head, Torso, Arms, and Legs fetiches to complete the mission!",
@@ -364,89 +315,33 @@ return {
                         }
                     }
                 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        -- [NEW] 1. Define the Zone Name (Must match zones.lua)
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Trade any crystal (these drop from any monster with Signet/Sanction or Sigil on ) to the Telepoints: \n" ..
-                       "-{!Recommended!} Crag of Dem(I-6) \n \n" ..
+                       "-{!Recommended!} Crag of Dem(I-6) - North Gustaberg divides into two - GO TO THE WESTERN EXITS IN THE ROUTES! \n \n" ..
                        "It will then become a Faded Crystal, check your inventory and it should update visually to be a white crystal.\n" ..
                        "Remember to click on the tele-crystal, this will give you {KI:Dem Gate Crystal} allowing you to Teleport-Dem to that location later. \n \n" ..
                        "You can warp back to Bastok-Metalworks. \n \n",
                 trigger_on_item_obtain = "Faded Crystal",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "North Gustaberg",
-                        highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Konschtat Highlands",
-                        highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Konschtat Highlands",
+                destination_highlight = {position = "I-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Return and Trade Cid the Faded Crystal in the Metalworks(H-8).\n" ..
                        "Optional: Talk to Naji(J-8) for some cheesy dialogue. \n \n",
                 onmob_target = {"Cid"},
                 trigger_on_event_id = 506,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 5: Talk to Ayame inside the Cannonry in the Metalworks(K-7). \n \n",
                 onmob_target = {"Ayame"},
                 trigger_on_event_id = 712,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 5,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "K-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -503,43 +398,15 @@ return {
                     "Lizard Egg"
                 },
                 trigger_on_item_obtain = {"Lizard Egg"},
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "D-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Dangruf Wadi",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "G-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Dangruf Wadi",
+                destination_highlight = {position = "G-11", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Go to Metalworks(J-8) in Bastok and trade Alois a Lizard Egg to complete the mission",
                 onmob_target = {"Alois"},
                 trigger_on_event_id = { 373, 372 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -592,17 +459,8 @@ return {
                        "Which order will affect the tasks, titles and cutscenes so this section will be split into two so follow the one you prefer! \n \n",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = { 714 },
-                images = {
-                      {
-                          zone_name = "Metalworks",
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          highlights = {
-                              { position = "J-8", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -615,17 +473,19 @@ return {
                 text = "Step 1: Talk to Baraka (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
                 trigger_on_event_id = { 11141 },
                 onmob_target = {"Baraka"},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "K-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
+                -- images = {
+                --       {
+                --           width    = 512,
+                --           height   = 512,
+                --           state    = 1,
+                --           zone_name = "Northern San d'Oria",
+                --           highlights = {
+                --               { position = "K-10", offsetX = 16, offsetY = 16 },
+                --           },
+                --       },
+                --   },
             },
             {
                 text = "Step 2: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",

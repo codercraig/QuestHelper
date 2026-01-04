@@ -244,6 +244,44 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
+                -- Add height for route display (if route_to is defined)
+                if type(step_data) == 'table' and step_data.route_to then
+                    -- Load pathfinding to calculate route lines
+                    local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+                    if pathfinding_ok then
+                        local party = AshitaCore:GetMemoryManager():GetParty()
+                        if party then
+                            local player_zone_id = party:GetMemberZone(0)
+                            if player_zone_id and player_zone_id > 0 then
+                                local zones_db = require('data.zones')
+                                local current_zone = nil
+                                for zone_name, zone_id in pairs(zones_db) do
+                                    if zone_id == player_zone_id then
+                                        current_zone = zone_name
+                                        break
+                                    end
+                                end
+                                if current_zone then
+                                    local path = pathfinding.findPath(current_zone, step_data.route_to)
+                                    if path then
+                                        local route_str = pathfinding.formatPath(path, current_zone)
+                                        -- Count lines in route string (each "\n" is a new line)
+                                        local route_lines = 1  -- Start with header line "Route (X zones):"
+                                        for _ in route_str:gmatch("\n") do
+                                            route_lines = route_lines + 1
+                                        end
+                                        -- Add indent (20px) + route lines * 20px per line
+                                        items_height = items_height + 20 + (route_lines * 20)
+                                    else
+                                        -- No path found message: 2 lines
+                                        items_height = items_height + 20 + (2 * 20)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+
                 -- Calculate total height
                 window_height = base_height + text_height + items_height
 
@@ -761,6 +799,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 -- Determine which steps to display based on show_all_steps setting
                 local steps_to_show = {}
 
+                -- Get current step for route display optimization
+                local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+
                 if ui_settings.show_all_steps then
                     -- Show all steps
                     for i = 1, #steps do
@@ -842,8 +883,8 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         imgui.EndChild()
                     end
 
-                    -- ROUTE DISPLAY (if route_to is defined)
-                    if type(step_data) == 'table' and step_data.route_to then
+                    -- ROUTE DISPLAY (if route_to is defined, step is not complete, and is the current step)
+                    if not st and i == current_step_index and type(step_data) == 'table' and step_data.route_to then
                         -- Load pathfinding module on demand
                         local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
 

@@ -62,6 +62,9 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
     )
 
     if imgui.Begin("##ImagesDrawer", true, drawerFlags) then
+        -- Apply font scaling for the entire window (including buttons)
+        imgui.SetWindowFontScale(map_scale)
+
         local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
         local step_imgs = utils.get_images_for_step(currentTopCategory, currentSubfile, current_mission, step_idx, quest_data)
 

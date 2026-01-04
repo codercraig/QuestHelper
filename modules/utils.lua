@@ -74,7 +74,9 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
 
                         if path then
                             -- Generate route images with exit highlights
-                            local route_images = pathfinding.generateRouteImages(path, current_zone)
+                            -- Optional: destination_highlight for marking NPCs/targets at final destination
+                            local dest_highlight = step_data.destination_highlight
+                            local route_images = pathfinding.generateRouteImages(path, current_zone, dest_highlight)
                             return route_images
                         end
                     end
