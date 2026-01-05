@@ -471,53 +471,23 @@ return {
         steps = {
             {
                 text = "Step 1: Talk to Baraka (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
-                trigger_on_event_id = { 11141 },
+                --trigger_on_event_id = { 11141 },
+                trigger_on_talk = " all the same.",
                 onmob_target = {"Baraka"},
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
-                -- images = {
-                --       {
-                --           width    = 512,
-                --           height   = 512,
-                --           state    = 1,
-                --           zone_name = "Northern San d'Oria",
-                --           highlights = {
-                --               { position = "K-10", offsetX = 16, offsetY = 16 },
-                --           },
-                --       },
-                --   },
             },
             {
                 text = "Step 2: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
                 trigger_on_event_id = { 536 },
                 onmob_target = {"Helaku"},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "K-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6/J-6). \n",
                 zone_trigger = "Chateau d'Oraguille",
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 3,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "I-6", offsetX = 16, offsetY = 16 },
-                              { position = "J-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Chateau d'Oraguille",
             },
             {
                 text = "Step 4: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
@@ -539,17 +509,7 @@ return {
             {
                 text = "Step 5: Travel to Ghelsba Outpost which can be reached from West Ronfaure (E-4). \n",
                 zone_trigger = "Ghelsba Outpost",
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 5,
-                          zone_name = "West Ronfaure",
-                          highlights = {
-                              { position = "E-4", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Ghelsba Outpost",
             },
             {
                 text = "Step 6: Defeat the NM Warchief Vatgit in Ghlesba Outpost (H-7). \n \n" ..
@@ -569,7 +529,7 @@ return {
                        "Notes: Warchief Vatgit is sometimes followed by Bloody Vrukwuk or Fogweaver Mozzfuzz. Try and one-shot these monsters build tp on surrounding monsters! \n \n",
                  kill_requirement = {
                     count = 1,
-                    enemies = {"Warchief Vatgit"},  -- Only Stone Eater kills count
+                    enemies = {"Warchief Vatgit"},  -- Only Warchief kills count
                     zone = "Ghelsba Outpost",
                     count_party_kills = true  -- Count kills from party members and trusts
                 },
@@ -590,117 +550,14 @@ return {
                 text = "Step 7: Return back to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
                 onmob_target = {"Helaku"},
                 trigger_on_event_id = { 543 },
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 7,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "K-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 8: Travel to Port Windurst!\n " ..
-                       "If you have the teleport crystal from Crag of Mea you can get a White Mage to teleport you, or Outpost Warp to Kolshushu \n \n" ..
-                       "Otherwise time to get some virtual cardio in, a suggested route is: \n" ..
-                       "West Ronfaure (F-12)      ->\n" ..
-                       "La Thiene Plateau (I-13)  ->\n" ..
-                       "Valkrum Dunes (G-9)       ->\n" ..
-                       "Selbina[BOAT] (H-10)      ->\n" ..
-                       "Mhaura (H-5)              ->\n" ..
-                       "Buburimu Peninsula (D-7)  ->\n" ..
-                       "Tahrongi Canyon (H-13)    ->\n" ..
-                       "East Sarutabaruta (G-11)  ->\n" ..
-                       "Windurst(thank f***!!)    ->\n \n" ..
-                       "You made it!! Now stretch your real life legs! \n",
+                       "If you have the teleport crystal from Crag of Mea you can get a White Mage to teleport you, or Outpost Warp to Kolshushu \n",
                 zone_trigger = "Port Windurst",
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 8,
-                          zone_name = "West Ronfaure",
-                          highlights = {
-                              { position = "F-12", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "La Theine Plateau",
-                        highlights = {
-                            { position = "I-13", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "Valkurm Dunes",
-                        highlights = {
-                            { position = "G-9", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "Selbina",
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "Mhaura",
-                        highlights = {
-                            { position = "H-5", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "Buburimu Peninsula",
-                        highlights = {
-                            { position = "D-7", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "Tahrongi Canyon",
-                        highlights = {
-                            { position = "H-13", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        zone_name = "East Sarutabaruta",
-                        highlights = {
-                            { position = "G-11", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        highlights = {
-                            { position = "E-11", offsetX = 16, offsetY = 16 },
-                            { position = "E-12", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Windurst Woods",
-                      },
-                  },
+                route_to = "Port Windurst",
             },
             {
                 text = "Step 9: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
@@ -721,65 +578,23 @@ return {
             {
                 text = "Step 10: Talk to Kupipi in Heavens Tower on the first floor north side, she will give you a KI:Dark Key. \n" ..
                        "All party members need one Dark Key! \n" ..
-                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n \n" ..
-                       "Suggested Route: \n" ..
-                       "Port Windurst (N-5)  ->\n" ..
-                       "Windurst Woods (F-5) ->\n" ..
-                       "Windurst Walls (H-7) ->\n" ..
-                       "Heavens Tower",
+                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n",
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = {242},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 10,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "N-5", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 10,
-                        zone_name = "Windurst Woods",
-                        highlights = {
-                            { position = "F-5", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 10,
-                        zone_name = "Windurst Walls",
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                  },
+                route_to = "Heavens Tower",
             },
             {
-                text = "Step 11: Travel to Giddeus with your party. \n" ..
-                       "Suggested Route: \n" ..
-                       "West Sarutabaruta (F-8)  ->\n" ..
-                       "Giddeus           (F-12) ->\n" ..
-                       "Balga's Dais.              \n",
-                zone_trigger = "Balga's Dais",
+                text = "Step 11: Travel to Giddeus with your party! \n",
+                zone_trigger = "Giddeus",
+                route_to = "Giddeus",
+            },
+            {
+                text = "Step 12: Navigate to Balga's Dias  \n",
                 images = {
                       {
                           width    = 512,
                           height   = 512,
-                          state    = 11,
-                          zone_name = "West Sarutabaruta",
-                          highlights = {
-                              { position = "F-8", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 11,
+                          state    = 12,
                           zone_name = "Giddeus",
                           floor_id = 1,
                           highlights = {
@@ -789,7 +604,7 @@ return {
                       {
                           width    = 512,
                           height   = 512,
-                          state    = 11,
+                          state    = 12,
                           zone_name = "Giddeus",
                           floor_id = 15,
                           highlights = {
@@ -799,7 +614,7 @@ return {
                   },
             },
             {
-                text = "Step 12: This is a BCNM battle! You will face Searcher and Black Dragon. \n" ..
+                text = "Step 13: This is a BCNM battle! You will face Searcher and Black Dragon. \n" ..
                        "Recommended: Level 35+ or a party. \n \n" ..
                        "===== Searcher ===== \n" ..
                        "Family: Bigeye thing \n" ..
@@ -815,36 +630,18 @@ return {
                   },
             },
             {
-                text = "Step 13: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
+                text = "Step 14: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
                 onmob_target = {"Melek"},
                 trigger_on_event_id = {66},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 13,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "F-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Port Windurst",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 14: Return to Naji in Metalworks (J-8) to complete the mission!",
+                text = "Step 15: Return to Naji in Metalworks (J-8) to complete the mission!",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {713},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 14,
-                          zone_name = "Metalworks",
-                          highlights = {
-                              { position = "J-8", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {

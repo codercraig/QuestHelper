@@ -208,6 +208,8 @@ return {
     ["Port Bastok"] = 236,
     ["Metalworks"] = 237,
     ["Windurst Waters"] = 238,
+    ["Windurst Waters North"] = 238,
+    ["Windurst Waters South"] = 238,
     ["Windurst Walls"] = 239,
     ["Port Windurst"] = 240,
     ["Windurst Woods"] = 241,

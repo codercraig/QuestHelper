@@ -11,6 +11,9 @@ local d3d8dev = d3d.get_device()
 -- DAT loader for loading maps from FFXI ROM files
 local dat_loader = require('modules.dat_loader')
 
+-- Quest state for accessing dev_mode
+local quest_state = require('modules.quest_state')
+
 ffi.cdef[[
 HRESULT __stdcall D3DXCreateTextureFromFileA(
     IDirect3DDevice8* pDevice,
@@ -60,11 +63,16 @@ function images.GetTexture(filename, zone_id, floor_id, force_png)
         local texture, err = dat_loader.load_map_texture(zone_id, floor_id)
         if texture then
             dat_cache[cache_key] = texture
-            print(string.format('[QuestHelper] Loaded map from DAT: Zone %d, Floor %d', zone_id, floor_id))
+            -- Only log success in dev mode
+            if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
+                print(string.format('[QuestHelper] Loaded map from DAT: Zone %d, Floor %d', zone_id, floor_id))
+            end
             return texture
         else
-            -- DAT loading failed, log and fall back to PNG
-            print(string.format('[QuestHelper] DAT load failed (%s), falling back to PNG: %s', err or 'unknown error', filename or 'none'))
+            -- DAT loading failed, only log in dev mode
+            if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
+                print(string.format('[QuestHelper] DAT load failed (%s), falling back to PNG: %s', err or 'unknown error', filename or 'none'))
+            end
         end
     end
 

@@ -82,7 +82,7 @@ return {
         {zone = "Northern San d'Oria", exit = "F-10"}
     },
     ["Chateau d'Oraguille"] = {
-        {zone = "Northern San d'Oria", exit = "H-9"},
+        {zone = "Northern San d'Oria", exit = "I-9"},
         {zone = "Bostaunieux Oubliette", exit = "I-8"}
     },
     ["West Ronfaure"] = {
@@ -108,26 +108,26 @@ return {
     },
 
     -- Windurst Area
-    ["Windurst Waters"] = {
-        {zone = "Windurst Walls", exit = "L-9", floor_id = 1},      -- North/Floor 1
-        {zone = "West Sarutabaruta", exit = "G-4", floor_id = 1},   -- North/Floor 1
-        {zone = "Port Windurst", exit = "G-10", floor_id = 2},      -- South/Floor 2
-        {zone = "Windurst Waters", exit = "H-5", floor_id = 2}       -- South/Floor 2
+    ["Windurst Waters North"] = {
+        {zone = "Windurst Walls", exit = "L-9"},
+        {zone = "West Sarutabaruta", exit = "G-4"},
+        {zone = "Windurst Waters South", exit = "G-12"}
+    },
+    ["Windurst Waters South"] = {
+        {zone = "Port Windurst", exit = "G-10"},
+        {zone = "Windurst Waters North", exit = "H-5"}
     },
     ["Windurst Walls"] = {
-        {zone = "Windurst Waters", exit = "B-6", floor_id = 1},
-        {zone = "Port Windurst", exit = "J-11"},
+        {zone = "Windurst Waters North", exit = "B-6"},
         {zone = "Windurst Woods", exit = "J-14"},
         {zone = "Heavens Tower", exit = "H-7"}
     },
     ["Port Windurst"] = {
-        {zone = "Windurst Waters", exit = "E-3", floor_id = 2},
-        {zone = "Windurst Walls", exit = "E-7"},
+        {zone = "Windurst Waters South", exit = "E-3"},
         {zone = "Windurst Woods", exit = "N-5"},
         {zone = "West Sarutabaruta", exit = "A-4"}
     },
     ["Windurst Woods"] = {
-        {zone = "Windurst Waters", exit = "E-3", floor_id = 2},
         {zone = "Windurst Walls", exit = "F-5"},
         {zone = "Port Windurst", exit = "E-11"},
         {zone = "East Sarutabaruta", exit = "K-10"}
@@ -136,8 +136,8 @@ return {
         {zone = "Windurst Walls", exit = "H-8"}
     },
     ["West Sarutabaruta"] = {
-        {zone = "Windurst Waters", exit = "H-10", floor_id = 1},
-        {zone = "Port Windurst", exit = "K-8"},
+        {zone = "Windurst Waters North", exit = "H-10"},
+        {zone = "Port Windurst", exit = "I-10"},
         {zone = "East Sarutabaruta", exit = "K-4"},
         {zone = "East Sarutabaruta", exit = "L-8"},
         {zone = "Giddeus", exit = "F-7"}
@@ -168,8 +168,8 @@ return {
         {zone = "Mhaura", exit = "H-10"}
     },
     ["Meriphataud Mountains"] = {
-        {zone = "Tahrongi Canyon", exit = "J-4"},
-        {zone = "Sauromugue Champaign", exit = "I-12"}
+        {zone = "Tahrongi Canyon", exit = "F-12"},
+        {zone = "Sauromugue Champaign", exit = "D-4"}
     },
 
     -- Jeuno Area
@@ -193,7 +193,7 @@ return {
         {zone = "Lower Jeuno", exit = "H-5"},
         {zone = "Pashhow Marshlands", exit = "H-14"},
         {zone = "Crawlers' Nest", exit = "I-7"},
-        {zone = "Sauromugue Champaign", exit = "I-5"}
+        {zone = "Sauromugue Champaign", exit = "K-5"}
     },
     ["Pashhow Marshlands"] = {
         {zone = "Rolanberry Fields", exit = "H-5"},
@@ -201,7 +201,7 @@ return {
         {zone = "Beadeaux", exit = "K-11"}
     },
     ["Sauromugue Champaign"] = {
-        {zone = "Meriphataud Mountains", exit = "G-5"},
+        {zone = "Meriphataud Mountains", exit = "K-11"},
         {zone = "Rolanberry Fields", exit = "K-6"},
         {zone = "Batallia Downs", exit = "K-12"}
     },
@@ -231,7 +231,11 @@ return {
         {zone = "West Ronfaure", exit = "J-8"}
     },
     ["Giddeus"] = {
-        {zone = "West Sarutabaruta", exit = "J-8"}
+        {zone = "West Sarutabaruta", exit = "H-3"},
+        {zone = "Balga's Dais", exit = "F-12"}
+    },
+    ["Balga's Dais"] = {
+        --{zone = "Giddeus", exit = "J-8"}
     },
     ["Ordelle's Caves"] = {
         {zone = "La Theine Plateau", exit = "F-5"}

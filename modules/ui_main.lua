@@ -254,13 +254,8 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                             local player_zone_id = party:GetMemberZone(0)
                             if player_zone_id and player_zone_id > 0 then
                                 local zones_db = require('data.zones')
-                                local current_zone = nil
-                                for zone_name, zone_id in pairs(zones_db) do
-                                    if zone_id == player_zone_id then
-                                        current_zone = zone_name
-                                        break
-                                    end
-                                end
+                                local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
+
                                 if current_zone then
                                     local path = pathfinding.findPath(current_zone, step_data.route_to)
                                     if path then
@@ -895,15 +890,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                 local player_zone_id = party:GetMemberZone(0)
                                 if player_zone_id and player_zone_id > 0 then
                                     local zones_db = require('data.zones')
-                                    local current_zone = nil
-
-                                    -- Find zone name from zone ID
-                                    for zone_name, zone_id in pairs(zones_db) do
-                                        if zone_id == player_zone_id then
-                                            current_zone = zone_name
-                                            break
-                                        end
-                                    end
+                                    local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
 
                                     if current_zone then
                                         local destination = step_data.route_to

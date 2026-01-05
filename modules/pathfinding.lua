@@ -4,6 +4,69 @@ local pathfinding = {}
 -- Load zone connections
 local zone_connections = require('data.zone_connections')
 
+-- Map specific zone names to their floor_id (for multi-floor zones split by name)
+local zone_name_to_floor = {
+    ["Windurst Waters North"] = 1,
+    ["Windurst Waters South"] = 2,
+}
+
+-- Map zone_id + floor_id to specific zone names (inverse of zone_name_to_floor)
+-- Used for detecting which "sub-zone" the player is in based on their floor
+local zone_floor_to_name = {
+    [238] = {  -- Windurst Waters
+        [1] = "Windurst Waters North",
+        [2] = "Windurst Waters South"
+    }
+}
+
+-- Get current zone name with floor detection support
+-- Parameters:
+--   player_zone_id: The zone ID from party:GetMemberZone(0)
+--   zones_db: Optional zones database (will load if not provided)
+-- Returns: zone name string, or nil if not found
+function pathfinding.getCurrentZone(player_zone_id, zones_db)
+    if not player_zone_id or player_zone_id <= 0 then
+        return nil
+    end
+
+    -- Load zones database if not provided
+    if not zones_db then
+        local ok, db = pcall(require, 'data.zones')
+        if ok then
+            zones_db = db
+        else
+            return nil
+        end
+    end
+
+    local current_zone = nil
+
+    -- Only try floor detection if this zone needs it
+    if zone_floor_to_name[player_zone_id] then
+        local floor_ok, floor_mappings = pcall(require, 'data.floor_mappings')
+        local player_ok, player_module = pcall(require, 'modules.player')
+
+        if floor_ok and player_ok and player_module.getFloorId then
+            local status_ok, player_floor_id = pcall(player_module.getFloorId, floor_mappings)
+            if status_ok and player_floor_id and zone_floor_to_name[player_zone_id][player_floor_id] then
+                current_zone = zone_floor_to_name[player_zone_id][player_floor_id]
+            end
+        end
+    end
+
+    -- If no floor-based name found, use regular zone lookup (works for all zones)
+    if not current_zone then
+        for zone_name, zone_id in pairs(zones_db) do
+            if zone_id == player_zone_id then
+                current_zone = zone_name
+                break
+            end
+        end
+    end
+
+    return current_zone
+end
+
 -- Helper function to get ALL floor_ids for a zone (for multi-floor zones)
 -- Returns: array of floor_ids sorted in ascending order, or {0} if not found
 local function getAllFloorIds(zone_id)
@@ -205,10 +268,13 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
     -- If already at destination, show destination map with highlight (player needs to see where NPC is)
     if #path == 1 and path[1] and not path[1].exit then
         if destination and destination_highlight then
+            -- Check if zone name specifies a floor
+            local floor_id = zone_name_to_floor[destination] or 0
+
             -- Create a simple map entry for the destination zone with the NPC/target highlight
             table.insert(images, {
                 zone_name = destination,
-                floor_id = 0,  -- Default floor, will be auto-detected by map system
+                floor_id = floor_id,
                 width = 512,
                 height = 512,
                 highlights = {destination_highlight}
@@ -252,16 +318,19 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
             end
         end
 
-        -- Second pass: collect exits that have minimum distance, grouped by floor_id
+        -- Second pass: collect exits that have minimum distance
+        -- NOTE: floor_id in connections refers to the DESTINATION floor, not current zone floor
+        -- So we DON'T group by floor_id here - we just collect all exits
+        local all_exits = {}
         for _, conn in ipairs(connections) do
             if conn.zone and zone_distances[conn.zone] == min_distance and conn.exit then
-                -- Use 0 as sentinel for "no floor_id specified" (can't use nil as table key in Lua)
-                local floor_id = conn.floor_id or 0
-                if not exits_by_floor[floor_id] then
-                    exits_by_floor[floor_id] = {}
-                end
-                table.insert(exits_by_floor[floor_id], {position = conn.exit, offsetX = 16, offsetY = 16})
+                table.insert(all_exits, {position = conn.exit, offsetX = 16, offsetY = 16})
             end
+        end
+
+        -- Return as floor_id=0 (no specific floor) since floor_id in connections is for destination
+        if #all_exits > 0 then
+            exits_by_floor[0] = all_exits
         end
 
         return exits_by_floor
@@ -273,15 +342,22 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
         if norm_zone then
             local exits_by_floor = getExitsTowardDestinationByFloor(current_zone)
 
-            -- Get zone_id to determine available floors
+            -- Get zone_id to determine available floors for the CURRENT zone
             local zone_id = zones_db[norm_zone]
+            local available_floors
+
+            -- Check if this zone name has a specific floor mapping (e.g., Windurst Waters North/South)
+            if zone_name_to_floor[current_zone] then
+                available_floors = {zone_name_to_floor[current_zone]}
+            else
+                available_floors = zone_id and getAllFloorIds(zone_id) or {0}
+            end
 
             -- Process exits grouped by floor_id
             for floor_id, highlights in pairs(exits_by_floor) do
                 if floor_id == 0 then
                     -- No floor_id specified in zone_connections: show all floors with same highlights
-                    local floor_ids = zone_id and getAllFloorIds(zone_id) or {0}
-                    for _, fid in ipairs(floor_ids) do
+                    for _, fid in ipairs(available_floors) do
                         images[#images + 1] = {
                             zone_name = norm_zone,
                             width = 512,
@@ -291,14 +367,35 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
                         }
                     end
                 else
-                    -- floor_id IS specified: only show that specific floor
-                    images[#images + 1] = {
-                        zone_name = norm_zone,
-                        width = 512,
-                        height = 512,
-                        floor_id = floor_id,
-                        highlights = highlights
-                    }
+                    -- floor_id IS specified: verify this floor actually exists in current zone
+                    local floor_exists = false
+                    for _, fid in ipairs(available_floors) do
+                        if fid == floor_id then
+                            floor_exists = true
+                            break
+                        end
+                    end
+
+                    if floor_exists then
+                        -- Floor exists, show it
+                        images[#images + 1] = {
+                            zone_name = norm_zone,
+                            width = 512,
+                            height = 512,
+                            floor_id = floor_id,
+                            highlights = highlights
+                        }
+                    else
+                        -- Floor doesn't exist in this zone (e.g., Port Windurst floor 2)
+                        -- Show the zone's default/only floor instead
+                        images[#images + 1] = {
+                            zone_name = norm_zone,
+                            width = 512,
+                            height = 512,
+                            floor_id = available_floors[1] or 0,
+                            highlights = highlights
+                        }
+                    end
                 end
             end
         end
@@ -313,15 +410,22 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
             if norm_zone then
                 local exits_by_floor = getExitsTowardDestinationByFloor(current_step.zone)
 
-                -- Get zone_id to determine available floors
+                -- Get zone_id to determine available floors for THIS zone
                 local zone_id = zones_db[norm_zone]
+                local available_floors
+
+                -- Check if this zone name has a specific floor mapping (e.g., Windurst Waters North/South)
+                if zone_name_to_floor[current_step.zone] then
+                    available_floors = {zone_name_to_floor[current_step.zone]}
+                else
+                    available_floors = zone_id and getAllFloorIds(zone_id) or {0}
+                end
 
                 -- Process exits grouped by floor_id
                 for floor_id, highlights in pairs(exits_by_floor) do
                     if floor_id == 0 then
                         -- No floor_id specified in zone_connections: show all floors with same highlights
-                        local floor_ids = zone_id and getAllFloorIds(zone_id) or {0}
-                        for _, fid in ipairs(floor_ids) do
+                        for _, fid in ipairs(available_floors) do
                             images[#images + 1] = {
                                 zone_name = norm_zone,
                                 width = 512,
@@ -331,14 +435,35 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
                             }
                         end
                     else
-                        -- floor_id IS specified: only show that specific floor
-                        images[#images + 1] = {
-                            zone_name = norm_zone,
-                            width = 512,
-                            height = 512,
-                            floor_id = floor_id,
-                            highlights = highlights
-                        }
+                        -- floor_id IS specified: verify this floor actually exists in this zone
+                        local floor_exists = false
+                        for _, fid in ipairs(available_floors) do
+                            if fid == floor_id then
+                                floor_exists = true
+                                break
+                            end
+                        end
+
+                        if floor_exists then
+                            -- Floor exists, show it
+                            images[#images + 1] = {
+                                zone_name = norm_zone,
+                                width = 512,
+                                height = 512,
+                                floor_id = floor_id,
+                                highlights = highlights
+                            }
+                        else
+                            -- Floor doesn't exist in this zone
+                            -- Show the zone's default/only floor instead
+                            images[#images + 1] = {
+                                zone_name = norm_zone,
+                                width = 512,
+                                height = 512,
+                                floor_id = available_floors[1] or 0,
+                                highlights = highlights
+                            }
+                        end
                     end
                 end
             end
@@ -349,11 +474,22 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
     if destination then
         local norm_zone = normalizeZoneName(destination)
         if norm_zone then
-            -- Get zone_id and all floor_ids for this zone
-            local zone_id = zones_db[norm_zone]
-            local floor_ids = zone_id and getAllFloorIds(zone_id) or {0}
+            -- Check if zone name explicitly specifies a floor (e.g., "Windurst Waters South")
+            local destination_floor_id = zone_name_to_floor[destination]
 
-            -- Add a map for EACH floor of the destination zone
+            -- Get zone_id and determine which floors to show
+            local zone_id = zones_db[norm_zone]
+            local floor_ids
+
+            if destination_floor_id then
+                -- Zone name specifies a floor (e.g., Windurst Waters North = floor 1)
+                floor_ids = {destination_floor_id}
+            else
+                -- No floor specified in name, show all floors
+                floor_ids = zone_id and getAllFloorIds(zone_id) or {0}
+            end
+
+            -- Add a map for each relevant floor of the destination zone
             for _, floor_id in ipairs(floor_ids) do
                 local final_map = {
                     zone_name = norm_zone,
@@ -362,7 +498,8 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
                     floor_id = floor_id
                 }
 
-                -- Add custom highlight if provided (e.g., NPC location)
+                -- Only show destination_highlight (NPC location, etc.) if provided
+                -- Don't show entrance point - that's where you came from, not where you're going
                 if destination_highlight then
                     final_map.highlights = {destination_highlight}
                 end
