@@ -655,73 +655,23 @@ return {
                 text = "Step 1: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
                 onmob_target = {"Melek"},
                 trigger_on_event_id = {49},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 1,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "F-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Port Windurst",
+                destination_highlight = {position = "F-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 2: Talk to Kupipi in Heavens Tower on the first floor north side to receive the KI:Sword Offering. \n \n" ..
-                       "Suggested Route: \n" ..
-                       "Port Windurst (N-5) ->\n" ..
-                       "Windurst Woods (F-5) ->\n" ..
-                       "Windurst Walls (H-7) ->\n" ..
-                       "Heavens Tower \n \n"..
                        "Note: If you posses KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n",
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = { 239 },
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 2,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "N-5", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Windurst Woods",
-                        highlights = {
-                            { position = "F-5", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Windurst Walls",
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                  },
+                route_to = "Windurst Walls",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Talk to Gold Skull in the Consulate of Bastok in Port Windurst (F-6) to receive a Dull Sword.",
                 onmob_target = {"Gold Skull"},
                 trigger_on_event_id = { 53 },
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 3,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "F-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Port Windurst",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Travel to Giddeus Map 2 and speak with Uu Zhoumo (F-7) you can drop down either from 'A','E','F' and 'G' on Map1. You need to get an Aspir Knife! \n \n" ..
@@ -801,183 +751,41 @@ return {
                 text = "Step 6: Return to Melek in the Consulate of Bastok in Port Windurst (F-6).",
                 onmob_target = {"Melek"},
                 trigger_on_event_id = { 55 },
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 6,
-                          zone_name = "Port Windurst",
-                          highlights = {
-                              { position = "F-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Port Windurst",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 7: Travel to San d'Oria! \n " ..
-                       "If you have the teleport crystal from Crag of Holla you can get a White Mage to teleport you or use Unity Warp. \n \n" ..
-                       "Otherwise here's a suggested route from Windurst: \n" ..
-                       "Port Windurst  (A-4)/(A-5)    ->\n" ..
-                       "West Sarutabaruta (J-4)       ->\n" ..
-                       "East Sarutabaruta (J-4)       ->\n" ..
-                       "Tahrongi Canyon (K-8)         ->\n" ..
-                       "Buburimu Peninsula (I-9)      ->\n" ..
-                       "Mhaura - get the boat! (H-10) ->\n" ..
-                       "Selbina (H-6)/(I-6)           ->\n" ..
-                       "Valkrum Dunes (K-5)/(L-5)     ->\n" ..
-                       "La Thiene Plateau (D-3)/(E-3) ->\n" ..
-                       "West Ronfaure (I-5) -> Northern San d'Oria!\n \n",
+                       "If you have the teleport crystal from Crag of Holla you can get a White Mage to teleport you or use Unity Warp. \n \n",
                 zone_trigger = "Northern San d'Oria",
-                images = {
-                      {
-                            width    = 512,
-                            height   = 512,
-                            state    = 7,
-                            zone_name = "Port Windurst",
-                            highlights = {
-                                { position = "A-4", offsetX = 16, offsetY = 16 },
-                                { position = "A-5", offsetX = 16, offsetY = 16 },
-                            },
-                      },
-                      {
-                            width    = 512,
-                            height   = 512,
-                            state    = 7,
-                            zone_name = "West Sarutabaruta",
-                            highlights = {
-                                { position = "K-4", offsetX = 16, offsetY = 16 },
-                            },
-                      },
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 7,
-                          zone_name = "East Sarutabaruta",
-                          highlights = {
-                              { position = "J-4", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Tahrongi Canyon",
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Buburimu Peninsula",
-                        highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Mhaura",
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Selbina",
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Valkurm Dunes",
-                        highlights = {
-                            { position = "K-5", offsetX = 16, offsetY = 16 },
-                            { position = "L-5", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "La Theine Plateau",
-                        highlights = {
-                            { position = "D-3", offsetX = 16, offsetY = 16 },
-                            { position = "E-3", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                      {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "West Ronfaure",
-                        highlights = {
-                            { position = "I-5", offsetX = 16, offsetY = 16 },
-                        },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
             },
             {
                 text = "Step 8: Talk to Helaku (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
                 onmob_target = {"Helaku"},
                 trigger_on_talk = {"Helaku:"},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 8,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "K-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 9: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6/J-6). \n",
+                text = "Step 9: Go to Chateau d'Oraguille which resides in Northern San d'Oria (I-6). \n",
                 zone_trigger = "Chateau d'Oraguille",
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 9,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "I-6", offsetX = 16, offsetY = 16 },
-                              { position = "J-6", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "I-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 10: Talk to Halver in Chateau d'Oraguille (I-9). \n" ..
                        "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Halver. \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {503},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 10,
-                          zone_name = "Chateau d'Oraguille",
-                          highlights = {
-                              { position = "I-9", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 11: Travel to Horlais Peak in La Theine Plateau (F-5) with your party. \n \n" ..
+                text = "Step 11: Travel to Horlais Peak with your party. \n \n" ..
 
                        "Notes: Orcs sight-Aggro to players around level 35 unless they are Invisible. Bats will aggro by sound. \n \n" ..
+                       "Hard coded route - this will take off from Sandy! \n" ..
                        "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
                        "Ghelsba Outpost: Go to (H-11)-> Yughott Grotto  - exit 1. \n" ..
                        "Yughott Grotto : Go to (K-5) -> Fort Ghelsba    - exit 3. \n" ..
@@ -1049,36 +857,18 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 13: Return to Helaku in Northern San d'Oria (K-10) to receive the KI:Kindred Report. Backtrack the route you took to get here. \n",
+                text = "Step 13: Return to Helaku in Northern San d'Oria (K-10) to receive the KI:Kindred Report. \n",
                 onmob_target = {"Helaku"},
                 trigger_on_event_id = {545},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 13,
-                          zone_name = "Northern San d'Oria",
-                          highlights = {
-                              { position = "K-10", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 14: Return to Bastok and speak with Naji in Metalworks (J-8) to complete the mission!",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {713},
-                images = {
-                      {
-                          width    = 512,
-                          height   = 512,
-                          state    = 14,
-                          zone_name = "Metalworks",
-                          highlights = {
-                              { position = "J-8", offsetX = 16, offsetY = 16 },
-                          },
-                      },
-                  },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -1127,43 +917,15 @@ return {
                 text = "Step 2: Talk to Iron Eater at (J-8) in the Metalworks, outside the President's Office. You may need to speak with him twice to receive the cutscene!",
                 onmob_target = {"Iron Eater"},
                 trigger_on_event_id = {715},
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Travel to Beadeaux via Pashhow Marshlands (J-9). \n" ..
                        "From Konschtat Highlands, you can travel to (K-3) to enter Pashhow Marshlands. \n" ..
                        "You also can use the Beadeaux Survival Guide if unlocked!",
                 zone_trigger = "Beadeaux",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Konschtat Highlands",
-                        highlights = {
-                            { position = "K-3", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Pashhow Marshlands",
-                        highlights = {
-                            { position = "L-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Beadeaux",
             },
             {
                 text = "Step 4: Zone into Beadeaux for a cutscene. \n \n" ..
@@ -1264,61 +1026,13 @@ return {
                     "Hare Meat"
                 },
                 trigger_on_item_obtain = {"Hare Meat"},
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "North Gustaberg",
-                        highlights = {
-                            { position = "K-3", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Palborough Mines",
-                        floor_id = 1,
-                        --highlights = {
-                        --    { position = "K-3", offsetX = 16, offsetY = 16 },
-                        --},
-                    },
-                },
+                route_to = "Palborough Mines",
             },
             {
                 text = "Step 3: Travel to Gusgen Mines via Konschtat Highlands (L-7). You can also use a Survival Guide or assisted images for directions from Bastok! \n" ..
                        "Recommended: Level 30+ with Sneak, or level 40+ (mobs aggro by hearing and HP). \n \n",
                 zone_trigger = "Gusgen Mines",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "North Gustaberg",
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Konschtat Highlands",
-                        highlights = {
-                            { position = "L-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Gusgen Mines",
             },
             {
                 text = "Step 4: In Gusgen Mines, find the ??? at Map 1 (J-7). \n \n" ..
@@ -1428,164 +1142,22 @@ return {
                 text = "Step 2: Visit Lucius at the Metalworks (I-9) to obtain the KI:Letter to the Ambassador.",
                 onmob_target = {"Lucius"},
                 trigger_on_event_id = 322,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Goggehn at the Embassy of Bastok (H-10). \n \n" ..
-                       "The trip is quite long to Jeuno - it can be done via the following route: \n \n" ..
-                       "Metalworks          : Go to (E-7/8) -> Bastok Markets. \n" ..
-                       "Bastok Markets      : Go to (D-11)  -> South Gustaberg. \n" ..
-                       "South Gustaberg     : Go to (E-6)   -> North Gustaberg. \n" ..
-                       "North Gustaberg     : Go to (D/E-6) -> Konschtat Highlands. \n" ..
-                       "Konschtat Highlands : Go to (K-3)   -> Pashhow Marshlands. \n" ..
-                       "Pashhow Marshlands  : Go to (K-4)   -> Rolanberry Fields. \n" ..
-                       "Rolanberry Fields   : Go to (L-3)   -> Lower Jeuno. \n" ..
-                       "Lower Jeuno         : Go to (I-5)   -> Upper Jeuno. \n" ..
-                       "Upper Jeuno         : Go to (J-10)  -> Ru'Lude Gardens. \n \n" ..
-                       "Now go stretch your legs irl and grab the Home Point crystals so you can teleport back! \n \n",
+                text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Goggehn at the Embassy of Bastok (H-10). \n \n",
                 onmob_target = {"Goggehn"},
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {41, 66, 139},
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "E-7", offsetX = 16, offsetY = 16 },
-                            { position = "E-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Bastok Markets",
-                        highlights = {
-                            { position = "D-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "North Gustaberg",
-                        highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Konschtat Highlands",
-                        highlights = {
-                            { position = "K-3", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Pashhow Marshlands",
-                        highlights = {
-                            { position = "K-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Rolanberry Fields",
-                        highlights = {
-                            { position = "L-3", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "I-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Upper Jeuno",
-                        highlights = {
-                            { position = "J-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        zone_name = "Ru'Lude Gardens",
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
-                text = "Step 4: Travel to Qufim Island and enter Lower Delkfutts Tower - If walking for first time : \n \n" ..
-                       "Lower Jeuno  : Go to (K-6) -> Port Jeuno. \n" ..
-                       "Port Jeuno   : Go to (F-5) -> Qufim Island. \n" ..
-                       "Qufim Island : Go to (F-5) -> Lower Delkfutts Tower. \n \n" ..
+                text = "Step 4: Travel to Qufim Island and enter Lower Delkfutts Tower. \n \n" ..
                        "Alternatively, you can use Unity Warp/Outpost Warp/Home Point to Qufim Island if unlocked for quickness",
                 zone_trigger = "Lower Delkfutt's Tower",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "K-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "Port Jeuno",
-                        highlights = {
-                            { position = "F-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "Qufim Island",
-                        highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Qufim Island",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 5: Navigate Delkfutt's Tower in Qufim Island (10 floors). \n" ..
@@ -1785,17 +1357,8 @@ return {
                 text = "Step 9: Return to Goggehn at the Embassy of Bastok in Ru'Lude Gardens (H-10).",
                 onmob_target = {"Goggehn"},
                 trigger_on_event_id = 139,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 9,
-                        zone_name = "Ru'Lude Gardens",
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 10: Click on the Door:Bastokan Embassy at (H-10) in Ru'Lude Gardens to complete the mission.",
@@ -1820,6 +1383,9 @@ return {
     },
 
     ["4-1: Magicite"] = {
+        prerequisites = {
+                      {category = "Quests", subfile = "Lower Jeuno", name = "Tenshodo Membership"},
+                },
         steps = {
             -- PREREQUISITES
             {
@@ -1830,18 +1396,8 @@ return {
                 onmob_target = {"Goggehn"},
                 trigger_on_talk = {" pronto!"},
                 trigger_on_event_id = 0,
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Ru'Lude Gardens",
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
-
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
             },
 
             -- MISSION START
@@ -1888,110 +1444,54 @@ return {
                        "If on CoP mission 'A Vessel Without a Captain', that scene appears first - talk to Aldo twice. \n \n",
                 onmob_target = {"Aldo"},
                 trigger_on_event_id = {152},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 4,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Lower Jeuno",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             -- YAGUDO TORCH
             {
                 text = "Step 5: Talk to Paya-Sabya (I-8) in Upper Jeuno. \n" ..
                 "Notes: Home Point#3 closest teleport. \n \n",
                 onmob_target = {"Paya-Sabya"},
+                route_to = "Upper Jeuno",
+                destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {80},
                 keyitems_needed = {20,21,46,47},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 5,
-                        zone_name = "Upper Jeuno",
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
                 text = "Step 6: Talk to Muckvix (H-9) teleport to Home Point#1 in Lower Jeuno and head inside Muckvix's Junk Shop. \n \n" ..
                        "You will receive KI:Yagudo Torch. \n \n",
                 onmob_target = {"Muckvix"},
+                route_to = "Lower Jeuno",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {184},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 6,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
 
             -- CREST OF DAVOI
             {
                 text = "Step 7: Talk to Baudin at (G-7) southwest corner in Upper Jeuno. \n \n",
                 onmob_target = {"Baudin"},
+                route_to = "Upper Jeuno",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {174},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 7,
-                        zone_name = "Upper Jeuno",
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
                 text = "Step 8: Obtain Coeurl Meat by: \n \n" ..
                        "Purchasing from Auction House: Food > Ingredients section! \n \n" ..
-                       "Defeating Coeurls (drops from all Coeurls, including in Sauromugue Champaign/Meriphataud Mountains) \n \n" ..
-                       "Go to Port Jeuno (E-6) - Home Point#1 and zone into Sauromugue Champaign. \n \n",
-
+                       "Defeating Coeurls (drops from all Coeurls, including in Sauromugue Champaign/Meriphataud Mountains) \n \n",
                 items_needed = {
                     "Coeurl Meat"
                 },
                 trigger_on_item_obtain = {"Coeurl Meat"},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 8,
-                        zone_name = "Sauromugue Champaign",
-                        highlights = {
-                            { position = "J-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Sauromugue Champaign",
+                destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 9: Trade Coeurl Meat to Baudin (G-7) in Upper Jeuno. \n \n" ..
                        "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi') \n \n",
                 onmob_target = {"Baudin"},
                 trigger_on_event_id = {171},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 9,
-                        zone_name = "Upper Jeuno",
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Upper Jeuno",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
 
             -- BEADEAUX KEY ITEMS
@@ -2000,40 +1500,22 @@ return {
                        "This initiates quests: 'Mysteries of Beadeaux I' and 'Mysteries of Beadeaux II'. \n \n" ..
                        "He will request: Quadav Charm (Rare/Ex) and Quadav Augury Shell (Rare). \n \n",
                 onmob_target = {"Sattal-Mansal"},
+                route_to = "Lower Jeuno",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {89},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 10,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
                 text = "Step 11: Travel to Beadeaux. \n \n" ..
                        "Fastest route: Survival Guide to Beadeaux directly, or Outpost to Passhow Marshlands. \n \n",
                 zone_trigger = "Beadeaux",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 11,
-                        zone_name = "Pashhow Marshlands",
-                        highlights = {
-                            { position = "K-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Pashhow Marshlands",
+                destination_highlight = {position = "K-11", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 12: In Beadeaux Map 1, head to ramp at (H-7) to enter Map 2. \n \n" ..
                        "In Map 2, examine 'The Mute' at (G-7) to receive Silence effect. \n \n" ..
                        "This allows you to pass 'The Afflictor' without being Cursed. \n \n",
-                trigger_on_buff = 6,  -- Silence status effect (ID: 6 on this server)
+                trigger_on_buff = 6,  -- Silence status effect (ID: 6 when server is using LSB)
                 zone_name = "Beadeaux",
                 onmob_target = {"The Mute1"},
                 images = {
@@ -2133,84 +1615,24 @@ return {
                        "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {91},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 15,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Lower Jeuno",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 16: Return to Sattal-Mansal (J-8) in Lower Jeuno. \n \n" ..
                         "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {92},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 16,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Lower Jeuno",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             -- DAVOI - OPTISTONE
             {
                 text = "Step 17: Travel to Davoi! \n \n" ..
-                       "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Outpost to Norvallen > Davoi. \n \n" ..
-                       "If running and no teleports here's a route from Jeuno: \n \n" ..
-                       "Lower Jeuno    (I-5)  ->\n" ..
-                       "Upper Jeuno    (F-5)  ->\n" ..
-                       "Batallia Downs (F-9)  ->\n" ..
-                       "Jugner Forrest (G-12) ->\n" ..
-                       "Davoi. \n \n",
+                       "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Outpost to Norvallen > Davoi. \n \n",
+                route_to = "Jugner Forest",
+                destination_highlight = {position = "G-12", offsetX = 16, offsetY = 16},
                 zone_trigger = "Davoi",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 17,
-                        zone_name = "Lower Jeuno",
-                        highlights = {
-                            { position = "I-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 17,
-                        zone_name = "Upper Jeuno",
-                        highlights = {
-                            { position = "F-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 17,
-                        zone_name = "Batallia Downs",
-                        highlights = {
-                            { position = "F-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 17,
-                        zone_name = "Jugner Forest",
-                        highlights = {
-                            { position = "G-12", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
                 text = "Step 18: Navigate to Wall of Dark Arts (G-7) and click! \n \n" ..
@@ -2268,24 +1690,20 @@ return {
             -- BEADEAUX - AURASTONE
             {
                 text = "Step 21: Return to Beadeaux! \n \n" ..
-                       "Use the Survival Guide or Outpost [Derfland] in Pashhow Marshlands to get there! \n \n" ..
-                       "Map 1 go to (H-7). \n \n" ..
+                       "Use the Survival Guide or Outpost [Derfland] in Pashhow Marshlands to get there! \n \n",
+                zone_trigger = "Beadeaux",
+                route_to = "Pashhow Marshlands",
+                destination_highlight = {position = "K-11", offsetX = 16, offsetY = 16},
+            },
+             {
+                text = "Step 22: Map 1 go to (H-7). \n \n" ..
                        "Navigate to Qulun Dome entrance at (I-7). \n \n",
                 zone_trigger = "Qulun Dome",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 21,
-                        zone_name = "Pashhow Marshlands",
-                        highlights = {
-                            { position = "K-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 21,
+                        state = 22,
                         zone_name = "Beadeaux",
                         floor_id = 1,
                         highlights = {
@@ -2295,7 +1713,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 21,
+                        state = 22,
                         zone_name = "Beadeaux",
                         floor_id = 15,
                         highlights = {
@@ -2305,7 +1723,7 @@ return {
                 },
             },
             {
-                text = "Step 22: In Qulun Dome, check the Door (G-8). \n \n" ..
+                text = "Step 23: In Qulun Dome, check the Door (G-8). \n \n" ..
                        "Open the door - you need: KI:Silver Bell, KI:Coruscant Rosary, KI:Black Matinee Necklace. \n \n" ..
                        "Might have to click it twice, till an option: 'Investigate the door?' -  Click Yes! \n \n",
                 onmob_target = {"Qulun Door 1"},
@@ -2316,7 +1734,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 22,
+                        state = 23,
                         zone_name = "Qulun Dome",
                         highlights = {
                             { position = "G-8", offsetX = 16, offsetY = 16 },
@@ -2325,7 +1743,7 @@ return {
                 },
             },
             {
-                text = "Step 23: In Qulun Dome, check the Magicite at the end of the hall. \n \n" ..
+                text = "Step 24: In Qulun Dome, check the Magicite at the end of the hall. \n \n" ..
                        "You will receive KI:Magicite: Aurastone. \n \n",
                 keyitems_needed = {15},
                 trigger_on_keyitem_obtain = {15},
@@ -2334,7 +1752,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 23,
+                        state = 24,
                         zone_name = "Qulun Dome",
                         highlights = {
                             { position = "E-7", offsetX = 16, offsetY = 16 },
@@ -2345,47 +1763,14 @@ return {
 
             -- CASTLE OZTROJA - ORASTONE
             {
-                text = "Step 24: Travel to Castle Oztroja. \n \n"..
-                       "Fastest route: Survival Guide to Aragoneu > Castle Oztroja OR outpost to Meriphataud Mountains! \n \n" ..
-                       "If you like getting some virtual cardio in heres a route from Jeuno: \n \n" ..
-                       "Port Jeuno            : (K-8)  ->\n" ..
-                       "Sauromugue Champaign  : (K-11) ->\n" ..
-                       "Meriphataud Mountains : (L-8)  ->\n" ..
-                       "Castle Oztroja - woo! \n \n",
+                text = "Step 25: Travel to Castle Oztroja. \n \n"..
+                       "Fastest route: Survival Guide to Aragoneu > Castle Oztroja OR outpost to Meriphataud Mountains! \n \n",
+                route_to = "Meriphataud Mountains",
+                destination_highlight = {position = "L-8", offsetX = 16, offsetY = 16},
                 zone_trigger = "Castle Oztroja",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 24,
-                        zone_name = "Port Jeuno",
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 24,
-                        zone_name = "Sauromugue Champaign",
-                        highlights = {
-                            { position = "K-11", offsetX = 16, offsetY = 16 },
-                            { position = "L-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 24,
-                        zone_name = "Meriphataud Mountains",
-                        highlights = {
-                            { position = "L-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
             {
-                text = "Step 25: Castle Oztroja Route: \n \n" ..
+                text = "Step 26: Castle Oztroja Route: \n \n" ..
                        "Navigate through: \n \n" ..
                        "Map 1 (I-8)    -> \n" ..
                        "Map 2 (G-7)    -> \n" ..
@@ -2414,7 +1799,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 26,
                         zone_name = "Castle Oztroja",
                         floor_id = 1,
                         highlights = {
@@ -2424,7 +1809,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 26,
                         zone_name = "Castle Oztroja",
                         floor_id = 2,
                         highlights = {
@@ -2434,7 +1819,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 26,
                         zone_name = "Castle Oztroja",
                         floor_id = 5,
                         highlights = {
@@ -2444,7 +1829,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 26,
                         zone_name = "Castle Oztroja",
                         floor_id = 6,
                         highlights = {
@@ -2454,7 +1839,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 25,
+                        state = 26,
                         zone_name = "Castle Oztroja",
                         floor_id = 15,
                         highlights = {
@@ -2465,14 +1850,14 @@ return {
                 },
             },
             {
-                text = "Step 26: Now proceed to the Altar Room! \n \n" ..
+                text = "Step 27: Now proceed to the Altar Room! \n \n" ..
                        "You'll have to go through another Brass Door! \n \n",
                 zone_trigger = "Altar Room",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 26,
+                        state = 27,
                         zone_name = "Castle Oztroja",
                         floor_id = 15,
                         highlights = {
@@ -2482,7 +1867,7 @@ return {
                 },
             },
             {
-                text = "Step 27: In Altar Room, check the Magicite at the end of the hall. \n \n" ..
+                text = "Step 28: In Altar Room, check the Magicite at the end of the hall. \n \n" ..
                        "You will receive KI:Magicite: Orastone. \n \n" ..
                        "NOTE: If you spoke to Paya-Sabya and Muckvix, you get Fickblix cutscene. If repeating mission and skipped them, cutscene is skipped. \n \n",
                 keyitems_needed = {16},
@@ -2492,7 +1877,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 27,
+                        state = 28,
                         zone_name = "Altar Room",
                         highlights = {
                             { position = "G-8", offsetX = 16, offsetY = 16 },
@@ -2503,42 +1888,22 @@ return {
 
             -- MISSION COMPLETION
             {
-                text = "Step 28: After obtaining all THREE Magicites, return to Ru'Lude Gardens (Home Point #1) and check the Audience Chamber door at (H-6). \n \n" ..
+                text = "Step 29: After obtaining all THREE Magicites, return to Ru'Lude Gardens (Home Point #1) and check the Audience Chamber door at (H-6). \n \n" ..
                        "You will receive KI:Airship Pass (or 20,000 gil if you already have one). \n \n" ..
                        "You will also receive title: 'Have Wings, Will Fly'. \n \n",
                 onmob_target = {"Door: Audience Chamber"},
                 trigger_on_event_id = {60},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 28,
-                        zone_name = "Ru'Lude Gardens",
-                        floor_id = 0,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 29: Talk to Goggehn (H-10) at the Bastokan Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
+                text = "Step 30: Talk to Goggehn (H-10) at the Bastokan Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
                        "Rewards: Rank 5, KI:Message to Jeuno, 10,000 gil. \n \n" ..
                        "Mission 5-1 'Darkness Rising' begins immediately. You cannot change allegiance until completing or rejecting 5-1. \n \n",
                 onmob_target = {"Goggehn"},
                 trigger_on_event_id = {35},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 29,
-                        zone_name = "Ru'Lude Gardens",
-                        floor_id = 0,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -2554,17 +1919,7 @@ return {
                        "If you postpone the mission, you will be able to change allegiances.",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {720},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
             },
             {
                 text = "Step 2: Zone into Fei'Yin for a cutscene with Zeid. \n \n" ..

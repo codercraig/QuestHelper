@@ -169,7 +169,8 @@ end
 -- Format a path into a readable string
 -- Returns: formatted route string with current zone and exit coordinates
 -- Format: "Current Zone (Exit) ->\nNext Zone (Exit) ->\nDestination"
-function pathfinding.formatPath(path, current_zone)
+-- destination_highlight: optional table with .position field to show at end (e.g., {position = "L-8"})
+function pathfinding.formatPath(path, current_zone, destination_highlight)
     if not path or type(path) ~= "table" or #path == 0 then
         return "No route found"
     end
@@ -214,7 +215,12 @@ function pathfinding.formatPath(path, current_zone)
     if #path > 0 and path[#path] and path[#path].zone then
         local norm_zone = normalizeZoneName(path[#path].zone)
         if norm_zone then
-            parts[#parts + 1] = norm_zone
+            -- Add destination highlight position if provided
+            if destination_highlight and destination_highlight.position then
+                parts[#parts + 1] = string.format("%s (%s)", norm_zone, destination_highlight.position)
+            else
+                parts[#parts + 1] = norm_zone
+            end
         end
     end
 

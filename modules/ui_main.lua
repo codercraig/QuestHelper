@@ -259,7 +259,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                 if current_zone then
                                     local path = pathfinding.findPath(current_zone, step_data.route_to)
                                     if path then
-                                        local route_str = pathfinding.formatPath(path, current_zone)
+                                        local route_str = pathfinding.formatPath(path, current_zone, step_data.destination_highlight)
                                         -- Count lines in route string (each "\n" is a new line)
                                         local route_lines = 1  -- Start with header line "Route (X zones):"
                                         for _ in route_str:gmatch("\n") do
@@ -898,7 +898,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                                         imgui.Indent(20)
                                         if path then
-                                            local route_str = pathfinding.formatPath(path, current_zone)
+                                            local route_str = pathfinding.formatPath(path, current_zone, step_data.destination_highlight)
                                             local distance = pathfinding.getRouteDistance(path)
 
                                             if distance == 0 then

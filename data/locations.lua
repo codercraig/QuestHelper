@@ -54,6 +54,12 @@ return {
         visual_mode = "arc",
         zone = "Port Bastok",
     },
+    ["Jabbar"] = {
+        target_pos = { x = -99.7, y = -3.8, z = 26.1 },
+        trigger_npc = "Jabbar",
+        visual_mode = "arc",
+        zone = "Port Bastok",
+    },
     -- Metalworks
         ["Cid"] = {
         target_pos = { x = -12.6, y = -13.0, z = 2.5 },
@@ -234,6 +240,12 @@ return {
     },
     -- Jueno
     -- Lower Jeuno
+    ["Ghebi Damomohe"] = {
+        target_pos = { x = 15.6, y= -1.7, z=-7.6},
+        trigger_npc = "Ghebi Damomohe",
+        visual_mode = "arc",
+        zone = "Lower Jeuno"
+    },
     ["Aldo"] = {
         target_pos = { x = 21, y= 1.9, z=-61.7},
         trigger_npc = "Aldo",

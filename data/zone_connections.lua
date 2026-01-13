@@ -136,7 +136,7 @@ return {
         {zone = "Windurst Walls", exit = "H-8"}
     },
     ["West Sarutabaruta"] = {
-        {zone = "Windurst Waters North", exit = "H-10"},
+        {zone = "Windurst Waters North", exit = "J-8"},
         {zone = "Port Windurst", exit = "I-10"},
         {zone = "East Sarutabaruta", exit = "K-4"},
         {zone = "East Sarutabaruta", exit = "L-8"},
@@ -169,7 +169,15 @@ return {
     },
     ["Meriphataud Mountains"] = {
         {zone = "Tahrongi Canyon", exit = "F-12"},
-        {zone = "Sauromugue Champaign", exit = "D-4"}
+        {zone = "Sauromugue Champaign", exit = "D-4"},
+        {zone = "Castle Oztroja", exit = "L-8"},
+        {zone = "The Sanctuary of Zitah", exit = "L-4"}
+    },
+    ["Castle Oztroja"] = {
+        {zone = "Meriphataud Mountains", exit = "K-8"}
+    },
+    ["The Sanctuary of Zitah"] = {
+        {zone = "Meriphataud Mountains", exit = "E-12"}
     },
 
     -- Jeuno Area
@@ -187,16 +195,24 @@ return {
         {zone = "Rolanberry Fields", exit = "F-12"}
     },
     ["Port Jeuno"] = {
-        {zone = "Lower Jeuno", exit = "H-8"}
+        {zone = "Lower Jeuno", exit = "E-10"},
+        {zone = "Qufim Island", exit = "E-5"},
+        {zone = "Sauromugue Champaign", exit = "K-8"}
+    },
+    ["Qufim Island"] = {
+        {zone = "Port Jeuno", exit = "F-6"},
+        {zone = "Lower Delkfutt's Tower", exit = "F-6"},
+        {zone = "Behemoth's Dominion", exit = "D-5"},
+        {zone = "Misareaux Coast", exit = "E-6"}
     },
     ["Rolanberry Fields"] = {
-        {zone = "Lower Jeuno", exit = "H-5"},
+        {zone = "Lower Jeuno", exit = "K-4"},
         {zone = "Pashhow Marshlands", exit = "H-14"},
         {zone = "Crawlers' Nest", exit = "I-7"},
         {zone = "Sauromugue Champaign", exit = "K-5"}
     },
     ["Pashhow Marshlands"] = {
-        {zone = "Rolanberry Fields", exit = "H-5"},
+        {zone = "Rolanberry Fields", exit = "K-4"},
         {zone = "Konschtat Highlands", exit = "E-12"},
         {zone = "Beadeaux", exit = "K-11"}
     },
@@ -206,8 +222,9 @@ return {
         {zone = "Batallia Downs", exit = "K-12"}
     },
     ["Batallia Downs"] = {
-        {zone = "Sauromugue Champaign", exit = "H-5"},
-        {zone = "Jugner Forest", exit = "H-4"}
+        {zone = "Upper Jeuno", exit = "L-9"},
+        {zone = "Rolanberry Fields", exit = "K-9"},
+        {zone = "Jugner Forest", exit = "F-9"}
     },
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "E-4"},

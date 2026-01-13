@@ -27,6 +27,7 @@ local id_to_name = {
     [47] = "Black Matinee Necklace",
     [74] = "Shadow Fragment",
     [78] = "Gustaberg Supplies",
+    [121] = "Tenshodo Application Form",
     [266] = "Altepa Moonpebble",
     [272] = "Paintbrush of Souls",
     [273] = "Old Rusty Key",
