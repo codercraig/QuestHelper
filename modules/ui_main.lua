@@ -246,34 +246,39 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 -- Add height for route display (if route_to is defined)
                 if type(step_data) == 'table' and step_data.route_to then
-                    -- Load pathfinding to calculate route lines
-                    local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
-                    if pathfinding_ok then
-                        local party = AshitaCore:GetMemoryManager():GetParty()
-                        if party then
-                            local player_zone_id = party:GetMemberZone(0)
-                            if player_zone_id and player_zone_id > 0 then
-                                local zones_db = require('data.zones')
-                                local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
+                    if ui_settings.route_section_expanded then
+                        -- Load pathfinding to calculate route lines
+                        local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+                        if pathfinding_ok then
+                            local party = AshitaCore:GetMemoryManager():GetParty()
+                            if party then
+                                local player_zone_id = party:GetMemberZone(0)
+                                if player_zone_id and player_zone_id > 0 then
+                                    local zones_db = require('data.zones')
+                                    local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
 
-                                if current_zone then
-                                    local path = pathfinding.findPath(current_zone, step_data.route_to)
-                                    if path then
-                                        local route_str = pathfinding.formatPath(path, current_zone, step_data.destination_highlight)
-                                        -- Count lines in route string (each "\n" is a new line)
-                                        local route_lines = 1  -- Start with header line "Route (X zones):"
-                                        for _ in route_str:gmatch("\n") do
-                                            route_lines = route_lines + 1
+                                    if current_zone then
+                                        local path = pathfinding.findPath(current_zone, step_data.route_to)
+                                        if path then
+                                            local route_str = pathfinding.formatPath(path, current_zone, step_data.destination_highlight)
+                                            -- Count lines in route string (each "\n" is a new line)
+                                            local route_lines = 1  -- Start with header line "Route (X zones):"
+                                            for _ in route_str:gmatch("\n") do
+                                                route_lines = route_lines + 1
+                                            end
+                                            -- Add header (30px) + route lines * 20px per line
+                                            items_height = items_height + 30 + (route_lines * 20)
+                                        else
+                                            -- No path found message: header + 2 lines
+                                            items_height = items_height + 30 + (2 * 20)
                                         end
-                                        -- Add indent (20px) + route lines * 20px per line
-                                        items_height = items_height + 20 + (route_lines * 20)
-                                    else
-                                        -- No path found message: 2 lines
-                                        items_height = items_height + 20 + (2 * 20)
                                     end
                                 end
                             end
                         end
+                    else
+                        -- Collapsed route header only
+                        items_height = items_height + 30
                     end
                 end
 
@@ -790,12 +795,81 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
+                -- Get current step for route display optimization
+                local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+
+                -- Route Section (collapsible, shows route for current step)
+                -- In collapsed mode: use viewed step, in expanded mode: use current step
+                local route_step_index = ui_settings.show_all_steps and current_step_index or collapsed_viewed_step
+                local route_step_data = steps[route_step_index]
+                if route_step_data and type(route_step_data) == 'table' and route_step_data.route_to then
+                    -- Track the expanded state for dynamic height calculation
+                    local route_header_expanded = imgui.CollapsingHeader("Route:", ui_settings.route_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
+
+                    -- Update state if it changed
+                    if route_header_expanded ~= ui_settings.route_section_expanded then
+                        ui_settings.route_section_expanded = route_header_expanded
+                        settings.save('QuestHelper_settings', quest_state.settings)
+                    end
+
+                    if route_header_expanded then
+                        -- Load pathfinding module on demand
+                        local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+
+                        if pathfinding_ok then
+                            -- Get player's current zone (Ashita API)
+                            local party = AshitaCore:GetMemoryManager():GetParty()
+                            if party then
+                                local player_zone_id = party:GetMemberZone(0)
+                                if player_zone_id and player_zone_id > 0 then
+                                    local zones_db = require('data.zones')
+                                    local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
+
+                                    if current_zone then
+                                        local destination = route_step_data.route_to
+                                        local path = pathfinding.findPath(current_zone, destination)
+
+                                        if path then
+                                            local route_str = pathfinding.formatPath(path, current_zone, route_step_data.destination_highlight)
+                                            local distance = pathfinding.getRouteDistance(path)
+
+                                            if distance == 0 then
+                                                -- Already at destination
+                                                imgui.TextColored({0, 1, 0, 1}, "  " .. route_str)
+                                            elseif pathfinding.isLongRoute(path) then
+                                                -- Long route warning
+                                                imgui.TextColored({1, 1, 0, 1}, string.format("  %d zones:", distance))
+                                                -- Display each zone on its own line with indent
+                                                for line in route_str:gmatch("[^\n]+") do
+                                                    imgui.TextColored({1, 1, 1, 1}, "  " .. line)
+                                                end
+                                            else
+                                                -- Normal route
+                                                imgui.TextColored({0.7, 0.7, 1, 1}, string.format("  %d zones:", distance))
+                                                -- Display each zone on its own line with indent
+                                                for line in route_str:gmatch("[^\n]+") do
+                                                    imgui.TextColored({1, 1, 1, 1}, "  " .. line)
+                                                end
+                                            end
+                                        else
+                                            -- No path found
+                                            imgui.TextColored({1, 0, 0, 1}, "  No route found to " .. destination)
+                                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  (Zone graph incomplete)")
+                                        end
+                                    else
+                                        -- Current zone not in database
+                                        imgui.TextColored({1, 0.5, 0, 1}, "  Current zone not mapped")
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    imgui.Separator()
+                end
+
                 -- Steps
                 -- Determine which steps to display based on show_all_steps setting
                 local steps_to_show = {}
-
-                -- Get current step for route display optimization
-                local current_step_index = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
 
                 if ui_settings.show_all_steps then
                     -- Show all steps
@@ -876,59 +950,6 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     -- End scrollable container if we started one
                     if use_scrollable_text then
                         imgui.EndChild()
-                    end
-
-                    -- ROUTE DISPLAY (if route_to is defined, step is not complete, and is the current step)
-                    if not st and i == current_step_index and type(step_data) == 'table' and step_data.route_to then
-                        -- Load pathfinding module on demand
-                        local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
-
-                        if pathfinding_ok then
-                            -- Get player's current zone (Ashita API)
-                            local party = AshitaCore:GetMemoryManager():GetParty()
-                            if party then
-                                local player_zone_id = party:GetMemberZone(0)
-                                if player_zone_id and player_zone_id > 0 then
-                                    local zones_db = require('data.zones')
-                                    local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
-
-                                    if current_zone then
-                                        local destination = step_data.route_to
-                                        local path = pathfinding.findPath(current_zone, destination)
-
-                                        imgui.Indent(20)
-                                        if path then
-                                            local route_str = pathfinding.formatPath(path, current_zone, step_data.destination_highlight)
-                                            local distance = pathfinding.getRouteDistance(path)
-
-                                            if distance == 0 then
-                                                -- Already at destination
-                                                imgui.TextColored({0, 1, 0, 1}, route_str)
-                                            elseif pathfinding.isLongRoute(path) then
-                                                -- Long route warning
-                                                imgui.TextColored({1, 1, 0, 1}, string.format("Route (%d zones):", distance))
-                                                imgui.TextColored({1, 1, 1, 1}, route_str)
-                                            else
-                                                -- Normal route
-                                                imgui.TextColored({0.7, 0.7, 1, 1}, string.format("Route (%d zones):", distance))
-                                                imgui.TextColored({1, 1, 1, 1}, route_str)
-                                            end
-                                        else
-                                            -- No path found
-                                            imgui.TextColored({1, 0, 0, 1}, "No route found to " .. destination)
-                                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  (Zone graph incomplete)")
-                                        end
-                                        imgui.Unindent(20)
-                                    else
-                                        -- Current zone not in database
-                                        imgui.Indent(20)
-                                        imgui.TextColored({1, 0.5, 0, 1}, "Current zone not mapped")
-                                        imgui.Unindent(20)
-                                    end
-                                end
-                            end
-                        end
-                        -- If pathfinding module doesn't exist, silently skip (no error)
                     end
 
                     -- KILL COUNTER UI DISPLAY

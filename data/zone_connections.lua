@@ -227,13 +227,33 @@ return {
         {zone = "Jugner Forest", exit = "F-9"}
     },
     ["Jugner Forest"] = {
-        {zone = "La Theine Plateau", exit = "E-4"},
+        {zone = "La Theine Plateau", exit = "D-11"},
         {zone = "Batallia Downs", exit = "I-11"}
     },
 
     -- Dungeons/Other
     ["Zeruhn Mines"] = {
-        {zone = "Bastok Mines", exit = "I-7"}
+        {zone = "Bastok Mines", exit = "I-7"},
+        {zone = "Korroloka Tunnel 1", exit = "F-7"}
+    },
+    ["Korroloka Tunnel 1"] = {
+        {zone = "Zeruhn Mines", exit = "N-6"},
+        {zone = "Korroloka Tunnel 2", exit = "A-9"}
+    },
+    ["Korroloka Tunnel 2"] = {
+        {zone = "Korroloka Tunnel 1", exit = "N-7"},
+        {zone = "Eastern Altepa Desert", exit = "C-8"}
+    },
+    ["Eastern Altepa Desert"] = {
+        {zone = "Korroloka Tunnel 2", exit = "J-8"},
+        {zone = "Western Altepa Desert", exit = "I-6"}
+    },
+    ["Western Altepa Desert"] = {
+        {zone = "Eastern Altepa Desert", exit = "K-7"},
+        {zone = "Rabao", exit = "L-5"}
+    },
+    ["Rabao"] = {
+        {zone = "Western Altepa Desert", exit = "G-11"}
     },
     ["Palborough Mines"] = {
         {zone = "North Gustaberg", exit = "K-6"}
@@ -245,7 +265,11 @@ return {
         {zone = "Pashhow Marshlands", exit = "F-7"}
     },
     ["Ghelsba Outpost"] = {
-        {zone = "West Ronfaure", exit = "J-8"}
+        {zone = "West Ronfaure", exit = "J-11"},
+        {zone = "Yughott Grotto 1", exit = "I-11"}
+    },
+    ["Yughott Grotto 1"] = {
+        {zone = "Ghelsba Outpost", exit = "E-9"}
     },
     ["Giddeus"] = {
         {zone = "West Sarutabaruta", exit = "H-3"},

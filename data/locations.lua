@@ -239,6 +239,13 @@ return {
         zone = "Altar Room"
     },
     -- Jueno
+    -- Port Jeuno
+    ["Guddal"] = {
+        target_pos = { x = -17.5, y= 6, z=42.1},
+        trigger_npc = "Guddal",
+        visual_mode = "arc",
+        zone = "Port Jeuno"
+    },
     -- Lower Jeuno
     ["Ghebi Damomohe"] = {
         target_pos = { x = 15.6, y= -1.7, z=-7.6},

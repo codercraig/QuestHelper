@@ -2251,118 +2251,23 @@ return {
                 text = "Step 2: Go to Bastok Mines and talk to Medicine Eagle at (H-5) for a cutscene.",
                 onmob_target = {"Medicine Eagle"},
                 trigger_on_event_id = 180,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Bastok Mines",
-                        arrows = {
-                            {
-                                from = "H-10",
-                                to = "H-5",
-                                floor_id = 0,
-                                offsetX_from = 16,
-                                offsetY_from = 16,
-                                offsetX_to = 16,
-                                offsetY_to = 16,
-                            },
-                        },
-                    },
-                },
+                route_to = "Bastok Mines",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Travel to Zeruhn Mines and talk to Drake Fang at (H-6) next to the boat from Palborough Mines. You will see a cutscene where Iron Eater will approve your mission and tell you to go check out Altepa. You don't have to get on the boat to talk to him, just come through Zeruhn.",
                 onmob_target = {"Drake Fang"},
                 trigger_on_event_id = 200,
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "D-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Bastok Mines",
-                        arrows = {
-                            {
-                                from = "H-5",
-                                to = "D-7",
-                                floor_id = 0,
-                                offsetX_from = 16,
-                                offsetY_from = 16,
-                                offsetX_to = 16,
-                                offsetY_to = 16,
-                            },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                        floor_id = 0,
-                    },
-                },
+                route_to = "Zeruhn Mines",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 4: Go to Western Altepa Desert. Travel to the center of the desert (Revelation Rock). Southwest of the rock is a ??? at (G-8). Examine it to spawn the Western Sphinx and Eastern Sphinx. A quick way to get there is to Unity warp (Level 125 category). \n \n" ..
-                       "If running for first time: \n \n" ..
-                       "Zeruhn Mines          (F-7)    :  -> \n" ..
-                       "Korroloka Tunnel      (A-9/10) :  -> \n" ..
-                       "Eastern Altepa Desert (I-6)    :  -> \n" ..
-                       "Western Altepa Desert! \n \n",
+                text = "Step 4: Go to Western Altepa Desert. Travel to the center of the desert (Revelation Rock). Southwest of the rock is a ??? at (G-8). Examine it to spawn the Western Sphinx and Eastern Sphinx. A quick way to get there is to Unity warp (Level 125 category). \n \n",
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
                 zone_trigger = "Western Altepa Desert",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "A-9", offsetX = 16, offsetY = 16 },
-                            { position = "A-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "B-8", offsetX = 16, offsetY = 16 },
-                            { position = "C-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 2,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Eastern Altepa Desert",
-                    },
-                },
             },
-             {
+            {
                 text = "Step 5: Check the ??? at (G-8) and prepare for battle against Eastern Sphinx(Lvl.62) and Western Sphinx(Lvl.62)! \n \n" ..
                        "Notes: This fight is soloable with a party/trusts around level 65. \n \n",
                 trigger_on_talk = {"You sense something evil looming above you."},
@@ -2434,17 +2339,8 @@ return {
                 text = "Step 8: Return to Bastok Mines and talk to Tall Mountain downstairs at (J-7) on Ore Street by the 'Restricted Section' (next to Bastok Mines Home Point #3) to complete this mission.",
                 onmob_target = "Tall Mountain",
                 trigger_on_event_id = { 182 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        highlights = {
-                            { position = "J-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Bastok Mines",
-                    },
-                },
+                route_to = "Bastok Mines",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -2493,17 +2389,8 @@ return {
                 text = "Step 2: Talk to Naji in Metalworks at (J-8). He is the guard outside the President's Office, where you will be treated to a cutscene.",
                 onmob_target = "Naji",
                 trigger_on_event_id = { 761 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: You will be sent to speak with Gilgamesh (through the Oaken Door at (K-8) in Norg) where you will get another cutscene. \n \n" ..
@@ -2532,8 +2419,6 @@ return {
                     { type = 'arrow', center = { x = -264.3, y = 13.5, z = -376.8 }, size = 4, direction = 'left',floor_id = 0 },
                     { type = 'arrow', center = { x = -390.2, y = 17, z = -366.3 }, size = 4, direction = 'left',floor_id = 0 },
                     { type = 'arrow', center = { x = -477.6, y = 16.3, z = -378.9 }, size = 4, direction = 'left',floor_id = 0 },
-
-
                 },
                 zone_name = "Yuhtunga Jungle",
                 onmob_target = "Gilgamesh",

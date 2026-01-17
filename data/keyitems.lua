@@ -18,6 +18,7 @@ local keyitems = {}
 local id_to_name = {
     [3] = "Blue Acidity Tester",
     [4] = "Red Acidity Tester",
+    [9] = "Airship Pass for Kazham",
     [14] = "Magicite Optistone",
     [15] = "Magicite Aurastone",
     [16] = "Magicite Orastone",

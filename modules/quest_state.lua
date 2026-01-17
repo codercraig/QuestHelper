@@ -28,6 +28,8 @@ local default_settings = T{
         map_pos_y = nil,            -- Map window Y position (nil = centered on first launch)
         items_section_expanded = true,     -- Items Needed section expanded state
         keyitems_section_expanded = true,  -- Key Items Needed section expanded state
+        prerequisites_section_expanded = true, -- Prerequisites section expanded state
+        route_section_expanded = true,     -- Route section expanded state
         dev_mode = false            -- Developer mode - enables debug output
     }
 }

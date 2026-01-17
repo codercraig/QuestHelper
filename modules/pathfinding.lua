@@ -10,6 +10,9 @@ local zone_name_to_floor = {
     ["Windurst Waters South"] = 2,
     ["Fei'Yin 1"] = 1,
     ["Fei'Yin 15"] = 15,
+    ['Korroloka Tunnel 1'] = 1,
+    ['Korroloka Tunnel 2'] = 2,
+    ['Yughott Grotto 1'] = 1,
 }
 
 -- Map sub-zone names to base zone names (for map/image loading)
@@ -18,6 +21,10 @@ local subzone_to_base = {
     ["Windurst Waters South"] = "Windurst Waters",
     ["Fei'Yin 1"] = "Fei'Yin",
     ["Fei'Yin 15"] = "Fei'Yin",
+    ['Korroloka Tunnel 1'] = "Korroloka Tunnel",
+    ['Korroloka Tunnel 2'] = "Korroloka Tunnel",
+    ['Yughott Grotto 1'] = "Yughott Grotto",
+
 }
 
 -- Get base zone name for map loading (converts sub-zone names to base names)
@@ -28,13 +35,20 @@ end
 -- Map zone_id + floor_id to specific zone names (inverse of zone_name_to_floor)
 -- Used for detecting which "sub-zone" the player is in based on their floor
 local zone_floor_to_name = {
-    [238] = {  -- Windurst Waters
-        [1] = "Windurst Waters North",
-        [2] = "Windurst Waters South"
+    [142] = {
+        [1] = "Yughott Grotto 1"
+    },
+    [173] = {
+        [1] = "Korroloka Tunnel 1",
+        [2] = "Korroloka Tunnel 2"
     },
     [204] = {  -- Fei'Yin
         [1] = "Fei'Yin 1",
         [2] = "Fei'Yin 15"  -- logical floor 2 (raw floor_id 15)
+    },
+    [238] = {  -- Windurst Waters
+        [1] = "Windurst Waters North",
+        [2] = "Windurst Waters South"
     }
 }
 
