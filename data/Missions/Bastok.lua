@@ -1920,6 +1920,7 @@ return {
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {720},
                 route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 2: Zone into Fei'Yin for a cutscene with Zeid. \n \n" ..
@@ -1927,43 +1928,10 @@ return {
                        "Home Point #1 teleport (if unlocked) \n" ..
                        "Unity Concord warp \n" ..
                        "Warp to Qu'Bia Arena via Domenic (J-7) in Lower Jeuno (if completed Beyond Infinity), then walk out \n \n" ..
-                       "From San d'Oria: \n" ..
-                       "East Ronfaure (K-4) > \n" ..
-                       "Ranguemont Pass (L-4) > \n" ..
-                       "Beaucedine Glacier (J-4) > \n" ..
-                       "Fei'Yin! \n \n" ..
                        "Note: If cutscene doesn't trigger, zone out to Beaucedine Glacier and back in. \n \n",
                 --zone_trigger = "Fei'Yin",
                 trigger_on_event_id = {1},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "East Ronfaure",
-                        highlights = {
-                            { position = "K-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Ranguemont Pass",
-                        highlights = {
-                            { position = "L-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Beaucedine Glacier",
-                        highlights = {
-                            { position = "J-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Fei'Yin 1",
             },
             {
                 text = "Step 3: Travel to Qu'Bia Arena entrance at (K-8) in Fei'Yin. \n \n" ..
@@ -2003,17 +1971,8 @@ return {
                 text = "Step 5: Return to Naji at (J-8) in Metalworks to complete the mission.",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = {722},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 5,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -2063,77 +2022,25 @@ return {
                 text = "Step 2: Travel to Metalworks and speak to President Karst at (K-8) for a cutscene.",
                 onmob_target = {"Karst"},
                 trigger_on_event_id = {602},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Travel to Castle Zvahl Baileys! \n \n" ..
                        "Outpost: Fauregandi/Valdeaunia if possible. \n \n" ..
-                       "If walking a good route is from San d'Oria: \n" ..
-                       "East Ronfaure      (K-4) > \n" ..
-                       "Ranguemont Pass    (L-4) > \n" ..
-                       "Beaucedine Glacier (F-6) > \n" ..
-                       "Xarcabard          (D-7) > \n" ..
-                       "Castle Zvahl Baileys \n \n",
+                       "If walking a good route is from San d'Oria: \n",
                 zone_trigger = "Castle Zvahl Baileys",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "East Ronfaure",
-                        highlights = {
-                            { position = "K-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Ranguemont Pass",
-                        highlights = {
-                            { position = "L-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Beaucedine Glacier",
-                        highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Xarcabard",
-                        highlights = {
-                            { position = "D-7", offsetX = 16, offsetY = 16 },
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Xarcabard",
+                destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
             },
-             {
+            {
                 text = "Step 4: Route through Castle Zvahl Baileys -> Castle Zvahl Keep! \n \n" ..
                        "Map 1: Go to (G-8) staying on the lower level and take a first Right!(North)\n \n" ..
                        "Follow the arrows on the ground will lead you to (F-8) - Map 2! \n \n" ..
                        "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
                        "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
                        "Map 2: Follow the arrows end goal is (F-8) to Castle Zvhal Keep. \n \n" ..
-                       "Aggro: Tigers/Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70. \n \n",
-                zone_trigger = "Castle Zvahl Keep",
+                       "Aggro: Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70. \n \n",
                 visual_zones = {
                     -- Floor 1
                     --1
@@ -2294,17 +2201,8 @@ return {
                 text = "Step 7: Return to President Karst at (K-8) in Metalworks to complete the mission.",
                 onmob_target = {"Karst"},
                 trigger_on_event_id = {603},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 7,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
             },
         },
         reward = {

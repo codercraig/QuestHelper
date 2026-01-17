@@ -8,7 +8,22 @@ local zone_connections = require('data.zone_connections')
 local zone_name_to_floor = {
     ["Windurst Waters North"] = 1,
     ["Windurst Waters South"] = 2,
+    ["Fei'Yin 1"] = 1,
+    ["Fei'Yin 15"] = 15,
 }
+
+-- Map sub-zone names to base zone names (for map/image loading)
+local subzone_to_base = {
+    ["Windurst Waters North"] = "Windurst Waters",
+    ["Windurst Waters South"] = "Windurst Waters",
+    ["Fei'Yin 1"] = "Fei'Yin",
+    ["Fei'Yin 15"] = "Fei'Yin",
+}
+
+-- Get base zone name for map loading (converts sub-zone names to base names)
+local function getBaseZoneName(zone_name)
+    return subzone_to_base[zone_name] or zone_name
+end
 
 -- Map zone_id + floor_id to specific zone names (inverse of zone_name_to_floor)
 -- Used for detecting which "sub-zone" the player is in based on their floor
@@ -16,6 +31,10 @@ local zone_floor_to_name = {
     [238] = {  -- Windurst Waters
         [1] = "Windurst Waters North",
         [2] = "Windurst Waters South"
+    },
+    [204] = {  -- Fei'Yin
+        [1] = "Fei'Yin 1",
+        [2] = "Fei'Yin 15"  -- logical floor 2 (raw floor_id 15)
     }
 }
 
@@ -279,7 +298,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
 
             -- Create a simple map entry for the destination zone with the NPC/target highlight
             table.insert(images, {
-                zone_name = destination,
+                zone_name = getBaseZoneName(destination),
                 floor_id = floor_id,
                 width = 512,
                 height = 512,
@@ -344,7 +363,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
 
     -- Add current zone map with ALL exits toward destination
     if current_zone then
-        local norm_zone = normalizeZoneName(current_zone)
+        local norm_zone = getBaseZoneName(normalizeZoneName(current_zone))
         if norm_zone then
             local exits_by_floor = getExitsTowardDestinationByFloor(current_zone)
 
@@ -412,7 +431,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
         local current_step = path[i]
 
         if current_step and current_step.zone then
-            local norm_zone = normalizeZoneName(current_step.zone)
+            local norm_zone = getBaseZoneName(normalizeZoneName(current_step.zone))
             if norm_zone then
                 local exits_by_floor = getExitsTowardDestinationByFloor(current_step.zone)
 
@@ -478,7 +497,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
 
     -- Add final destination map with optional custom highlight
     if destination then
-        local norm_zone = normalizeZoneName(destination)
+        local norm_zone = getBaseZoneName(normalizeZoneName(destination))
         if norm_zone then
             -- Check if zone name explicitly specifies a floor (e.g., "Windurst Waters South")
             local destination_floor_id = zone_name_to_floor[destination]

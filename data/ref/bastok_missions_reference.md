@@ -6,13 +6,13 @@
 [2-2] Wading Beasts - DONE /ro
 [2-3] The Emissary[Introduction] - DONE /ro
 [2-3] The Emissary - San d'Oria -> Windurst - DONE /ro
-[2-3] The Emissary - Windurst -> San d'Oria - DONE
-[3-1] The Four Musketeers - DONE
-[3-2] To the Forsaken Mines - DONE
-[3-3] Jueno - DONE
-[4-1] Magicite - DONE
-[5-1] Darkness Rising - DONE
-[5-2] Xarcabard Lands of Truth - DONE
+[2-3] The Emissary - Windurst -> San d'Oria - DONE /ro
+[3-1] The Four Musketeers - DONE /ro
+[3-2] To the Forsaken Mines - DONE /ro
+[3-3] Jueno - DONE /ro
+[4-1] Magicite - DONE /ro
+[5-1] Darkness Rising - DONE /ro
+[5-2] Xarcabard Lands of Truth - DONE /ro
 [6-1] Return of the Talekeeper - DONE
 [6-2] Pirate's Cove - DONE
 [7-1] The Final Image - DONE

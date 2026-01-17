@@ -270,6 +270,30 @@ return {
         {zone = "East Ronfaure", exit = "I-9"}
     },
     ["Ranguemont Pass"] = {
-        {zone = "East Ronfaure", exit = "E-6"}
+        {zone = "East Ronfaure", exit = "G-12"},
+        {zone = "Beaucedine Glacier", exit = "L-4"}
     },
+    ["Beaucedine Glacier"] = {
+        {zone = "Ranguemont Pass", exit = "E-11"},
+        {zone = "Batallia Downs", exit = "H-11"},
+        {zone = "Xarcabard", exit = "F-6"},
+        {zone = "Fei'Yin 1", exit = "J-4"}
+    },
+    ["Fei'Yin 1"] = {
+        {zone = "Beaucedine Glacier", exit = "F-11"},
+        {zone = "Fei'Yin 15", exit = "G-9"}
+    },
+    ["Fei'Yin 15"] = {
+        {zone = "Fei'Yin 1", exit = "G-9"}
+    },
+    ["Xarcabard"] = {
+        {zone = "Beaucedine Glacier", exit = "K-9"},
+        {zone = "Castle Zvahl Baileys", exit = "D-8"},
+        {zone = "Uleguerand Range", exit = "F-6"}
+    },
+    ["Uleguerand Range"] = {
+        {zone = "Xarcabard", exit = "F-12"},
+    },
+
 }
+
