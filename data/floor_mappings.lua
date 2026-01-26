@@ -49,6 +49,9 @@ return {
         [2] = 2,  -- Lower floor
         [3] = 3,  -- Lower floor
     },
+    [144] = {
+        [1] = 1,
+    },
     [151] = {
         [1] = 1,   -- Upper floor
         [2] = 2,  -- Lower floor

@@ -2631,44 +2631,9 @@ return {
             {
                 text = "Step 3: Travel to Ro'Maeve. Be sure to have Silent Oils, Ninja's Monomi: Ichi (with tools), or Dancer's Spectral Jig. Monsters in Ro'Maeve are aggressive to level 75+ players by Sound and Magic spellcasting. \n \n" ..
                        "Mounts can now be used in Ro'Maeve, allowing you to move quicker and avoid aggro altogether. If using trusts, pull them out before mounting as there may not be a safe area to dismount near the ???. \n \n" ..
-                       "You can reach Ro'Maeve from multiple locations: \n" ..
-                       "Port Jeuno             : -> \n" ..
-                       "Sauromugue Champaign   : (K-11/L-11) -> \n" ..
-                       "Meriphataud Mountains  : (M-4) -> \n" ..
-                       "The Sanctuary of Zi'Tah: (F-4) -> \n" ..
-                       "Ro'Maeve \n \n" ..
-                       "OR: Use the Ro'Maeve Survival Guide for instant travel!",
+                       "Notes: Use the Ro'Maeve Survival Guide for instant travel!",
                 zone_trigger = "Ro'Maeve",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "K-11", offsetX = 16, offsetY = 16 },
-                            { position = "L-11", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Sauromugue Champaign",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "M-4", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Meriphataud Mountains",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-4", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "The Sanctuary of Zi'Tah",
-                    },
-                },
+                route_to = "Ro'Maeve",
             },
             {
                 text = "Step 4: Find the ??? in Ro'Maeve. The ??? can be located at one of the following positions: D-10, E-9, E-10, E-11, G-9, I-8/J-8, K-10, K-11, L-10, L-7. \n \n" ..
@@ -2744,18 +2709,9 @@ return {
             {
                 text = "Step 6: Go back and talk with Cid at (H-8) in Metalworks to get a cutscene and complete the mission.",
                 onmob_target = "Cid",
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 764 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 6,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
         },
         reward = {
@@ -2804,95 +2760,24 @@ return {
             {
                 text = "Step 2: Talk to President Karst in Metalworks at (K-8) for a cutscene.",
                 onmob_target = "Karst",
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 765 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
             {
                 text = "Step 3: Talk to Hilda at (E-6) in the 'Steaming Sheep' restaurant in Port Bastok. (Next to Home Point #3)",
                 onmob_target = "Hilda",
+                route_to = "Port Bastok",
+                destination_highlight = {position = "E-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 255 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Port Bastok",
-                    },
-                },
             },
             {
                 text = "Step 4: Go through Palborough Mines and into Waughroon Shrine. \n \n" ..
                        "Alternative routes: \n" ..
                        "- If you've beaten Beyond Infinity, you can talk to Domenic inside Neptune's Spire in Lower Jeuno and have him teleport you to the shrine. \n" ..
-                       "- If you've previously activated the Home Point outside the arena, you can go there directly. \n \n" ..
-                       "Full route from Bastok: \n" ..
-                       "Bastok Markets (D-11) -> \n" ..
-                       "South Gustaberg (H-5) -> \n" ..
-                       "North Gustaberg (K-3) -> \n" ..
-                       "Palborough Mines! - wahoo! Find the elevator on Floor 1, and this will take you to Floor 3 and use the map provided(Grab the Home Point!) \n \n",
+                       "- If you've previously activated the Home Point outside the arena, you can go there directly. \n \n",
                 zone_trigger = "Waughroon Shrine",
-                images = {
-                     {
-                          width    = 512,
-                          height   = 512,
-                          state    = 4,
-                          highlights = {
-                              { position = "D-11", offsetX = 16, offsetY = 16 },
-                          },
-                          zone_name = "Bastok Markets",
-                    },
-                    {
-                          width    = 512,
-                          height   = 512,
-                          state    = 4,
-                          highlights = {
-                              { position = "H-5", offsetX = 16, offsetY = 16 },
-                          },
-                          zone_name = "South Gustaberg",
-                    },
-                    {
-                          width    = 512,
-                          height   = 512,
-                          state    = 4,
-                          highlights = {
-                              { position = "K-3", offsetX = 16, offsetY = 16 },
-                          },
-                          zone_name = "North Gustaberg",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Palborough Mines",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Palborough Mines",
-                        floor_id = 3,
-                    },
-                },
+                route_to = "Waughroon Shrine",
             },
             {
                 text = "Step 5: Click on the Burning Circle to enter the battlefield 'On My Way', a 6-person uncapped level BCNM. \n \n" ..
@@ -2913,34 +2798,16 @@ return {
                 text = "Step 6: The next two steps can be completed in either order, but you must do both to complete the mission. \n \n" ..
                        "Talk to Gumbah at (J-7) inside an upper-level house in Bastok Mines. Gumbah also starts several quests, so be sure the cutscene relates to Werei's letter.",
                 onmob_target = "Gumbah",
+                route_to = "Bastok Mines",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 175,177 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 6,
-                        highlights = {
-                            { position = "J-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Bastok Mines",
-                    },
-                },
             },
             {
                 text = "Step 7: Talk to President Karst in Metalworks at (K-8). At this point you will receive Rank 8 and your reward.",
                 onmob_target = "Karst",
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 766 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
         },
         reward = {
@@ -2958,6 +2825,7 @@ return {
                 onmob_target = {"Rashid", "Cleades", "Argus"},
                 trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
+                keyitems_needed = {2051},
                 images = {
                     {
                         width    = 512,
@@ -2992,88 +2860,24 @@ return {
                 text = "Step 2: Talk to Iron Eater at (J-8) guarding the Door to the President's Office in Metalworks. \n \n" ..
                        "Iron Eater is involved in multiple quests and missions. If necessary, keep talking to him until he tells you to investigate the Quicksand Caves.",
                 onmob_target = "Iron Eater",
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 767 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
             {
                 text = "Step 3: Travel to Western Altepa Desert (G-5) and enter Quicksand Caves. \n \n" ..
                        "Routes: \n" ..
                        "- Voidwatch warp to Kuftal Tunnel entrance is near this location (Requires starting the Zilart branch of Voidwatch). \n" ..
                        "- Use the Kuftal Tunnel Survival Guide and exit back into Altepa. \n" ..
-                       "- Unity warping to Western Altepa Desert (Level 125 category). \n \n" ..
-                       "If running from Bastok: \n" ..
-                       "Zeruhn Mines          (F-7)    -> \n" ..
-                       "Korroloka Tunnel      (A-9/10) -> \n" ..
-                       "Eastern Altepa Desert (I-6)    -> \n" ..
-                       "Western Altepa Desert (G-5)    -> \n" ..
-                       "Quicksand Caves",
+                       "- Unity warping to Western Altepa Desert (Level 125 category). \n \n",
                 zone_trigger = "Quicksand Caves",
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "G-5", offsetX = 16, offsetY = 16},
                 visual_zones = {
                     { type = 'arrow', center = { x = -280.8, y = 0.8, z = 263.8 }, size = 4, direction = 'left',floor_id = 0 },
                     { type = 'arrow', center = { x = -339.9, y = 10.2, z = 300.2 }, size = 4, direction = 'right',floor_id = 0 },
                  },
-                 zone_name = "Western Altepa Desert",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "A-9", offsetX = 16, offsetY = 16 },
-                            { position = "A-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "B-8", offsetX = 16, offsetY = 16 },
-                            { position = "C-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 2,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Eastern Altepa Desert",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "G-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Western Altepa Desert",
-                    },
-                },
+                zone_name = "Western Altepa Desert",
             },
             {
                 text = "Step 4: Navigate through Quicksand Caves. Head to (H-8) and pass through the Weight Detection's door [works with 1 Galka, 2 Hume/Elvaan/Mithra, 3 Tarutaru also works with 1 Tarutaru and 1 of any other race, or Key Item: Loadstone]. Trust NPCs do not work!!! \n \n" ..
@@ -3150,7 +2954,12 @@ return {
             {
                 text = "Step 7: Next go to the Western Altepa Desert (D-12) entrance. \n \n" ..
                        "The entrance in Western Altepa Desert is accessed through a hidden area on the map, starting at (C-11)/(D-11) in the far Southwest corner. Hug the southern wall in the lower area to climb the broken stairs. \n \n",
-                zone_trigger = "Quicksand Caves",
+                --zone_trigger = "Quicksand Caves",
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "D-12", offsetX = 16, offsetY = 16},
+                trigger_zones = {
+                    { type = 'square', center = { x = -739.8, y = -9.8, z = -704.3 }, size = 5},
+                },
                 visual_zones = {
                     { type = 'arrow', center = { x = -833.6, y = -8.8, z = -605.8 }, size = 4, direction = 'se', floor_id = 0 },
                     { type = 'arrow', center = { x = -802, y = -19.1, z = -698.6 }, size = 4, direction = 'up', floor_id = 0 },
@@ -3161,30 +2970,19 @@ return {
 
                 },
                 zone_name = "Western Altepa Desert",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        highlights = {
-                            { position = "I-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Quicksand Caves",
-                        floor_id = 5,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        highlights = {
-                            { position = "D-12", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Western Altepa Desert",
-                    },
-                },
             },
             {
-                text = "Step 8: Once inside, make sure you cast Sneak and make your way through the caves to (K-8). You will come to a weighted door leading East. Go through that door and continue to follow the caves (both the left and the right path lead to the next door). \n \n" ..
+                text = "Step 8: Now enter the Quicksand Caves!",
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "D-12", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { type = 'arrow', center = { x = -740.2, y = -9.8, z = -706.2 }, size = 3, direction = 'down'},
+                },
+                zone_name = "Western Altepa Desert",
+                zone_trigger = "Quicksand Caves",
+            },
+            {
+                text = "Step 9: Once inside, make sure you cast Sneak and make your way through the caves to (K-8). You will come to a weighted door leading East. Go through that door and continue to follow the caves (both the left and the right path lead to the next door). \n \n" ..
                        "You will arrive at another weighted door at (G-8) facing East. Again, go through that door into a smaller room with another door. \n \n" ..
                        "After going through the second weighted door and through the door behind it, you will notice the mural on the wall to your left, and a ??? on a small pedestal, which you will check for another cutscene with Zeid and some interesting storyline.",
                 trigger_on_event_id = { 10 },
@@ -3200,7 +2998,7 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 8,
+                        state    = 9,
                         highlights = {
                             { position = "K-8", offsetX = 16, offsetY = 16 },
                         },
@@ -3210,9 +3008,9 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 8,
+                        state    = 9,
                         highlights = {
-                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Quicksand Caves",
                         floor_id = 7,
@@ -3220,20 +3018,11 @@ return {
                 },
             },
             {
-                text = "Step 9: When that is done, head back to Metalworks in Bastok and talk to Iron Eater at (J-8) for another cutscene to complete the mission.",
+                text = "Step 10: When that is done, head back to Metalworks in Bastok and talk to Iron Eater at (J-8) for another cutscene to complete the mission.",
                 onmob_target = "Iron Eater",
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 768 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 9,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
         },
         reward = {
@@ -3281,18 +3070,9 @@ return {
             {
                 text = "Step 2: Talk to Drake Fang at (H-6) in Zeruhn Mines for a cutscene.",
                 onmob_target = "Drake Fang",
+                route_to = "Zeruhn Mines",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 202 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                },
             },
             {
                 text = "Step 3: Head to Kuftal Tunnel. The entrance is at (H-4) from Western Altepa Desert. \n \n" ..

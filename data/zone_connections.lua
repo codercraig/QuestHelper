@@ -171,15 +171,18 @@ return {
         {zone = "Tahrongi Canyon", exit = "F-12"},
         {zone = "Sauromugue Champaign", exit = "D-4"},
         {zone = "Castle Oztroja", exit = "L-8"},
-        {zone = "The Sanctuary of Zitah", exit = "L-4"}
+        {zone = "The Sanctuary of Zi'Tah", exit = "L-4"}
     },
     ["Castle Oztroja"] = {
         {zone = "Meriphataud Mountains", exit = "K-8"}
     },
-    ["The Sanctuary of Zitah"] = {
-        {zone = "Meriphataud Mountains", exit = "E-12"}
+    ["The Sanctuary of Zi'Tah"] = {
+        {zone = "Meriphataud Mountains", exit = "E-12"},
+        {zone = "Ro'Maeve", exit = "F-5"}
     },
-
+    ["Ro'Maeve"] = {
+        {zone = "The Sanctuary of Zi'Tah", exit = "H-11"}
+    },
     -- Jeuno Area
     ["Ru'Lude Gardens"] = {
         {zone = "Upper Jeuno", exit = "H-11"},

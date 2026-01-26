@@ -13,11 +13,11 @@
 [4-1] Magicite - DONE /ro
 [5-1] Darkness Rising - DONE /ro
 [5-2] Xarcabard Lands of Truth - DONE /ro
-[6-1] Return of the Talekeeper - DONE
-[6-2] Pirate's Cove - DONE
-[7-1] The Final Image - DONE
-[7-2] On My Way - DONE
-[8-1] Chain That Binds Us - DONE
+[6-1] Return of the Talekeeper - DONE /ro
+[6-2] Pirate's Cove - DONE /ro
+[7-1] The Final Image - DONE /ro
+[7-2] On My Way - DONE /ro
+[8-1] Chain That Binds Us - DONE /ro
 [8-2] Enter The Talekeeper - DONE
 [9-1] The Salt Of The Earth - DONE
 [9-2] Where Two Paths Converge - DONE
