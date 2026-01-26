@@ -2348,6 +2348,9 @@ return {
         }
     },
     ["6-2: The Pirate's Cove"] = {
+        prerequisites = {
+            {category = "Quests", subfile = "Port Jeuno", name = "Kazham Airship Pass Quest"},
+        },
         steps = {
             {
                 text = "Step 1: This mission requires a certain level of Rank Bar. Trade 4 crystals to a Conquest Overseer, then speak to any Gate Guard and select the mission from the list. \n \n" ..
@@ -2393,14 +2396,19 @@ return {
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 3: You will be sent to speak with Gilgamesh (through the Oaken Door at (K-8) in Norg) where you will get another cutscene. \n \n" ..
-                       "NOTE: If you have not started the Rise of the Zilart Missions then the first cutscene you get may be related to the Rise of the Zilart Missions. Talk to Gilgamesh until he tells you to retrieve a Frag Rock from Ifrit's Cauldron." ..
-                       "If you haven't been to Norg already - Rhapsody of Vanadiel gives a free teleport - Look at the Kazham Airship Pass Quest to allow travel to Kazham via airship! \n \n" ..
-                       "From Kazham grab the Survival Guide/Home Point and get on a chocobo and follow this route to Norg: \n" ..
-                       "Kazham            : (F-10)   -> \n" ..
-                       "Yuhtunga Jungle   : (E/F-11) -> \n" ..
-                       "Sea Serpent Grotto: (F-3)    -> \n" ..
-                       "Norg! \n \n",
+                text = "Step 3: Make your way to Norg, this will involve a trip to Kazham and Chocobo (F-9) ride through the jungle! \n \n" ..
+                       "From Kazham grab the Survival Guide/Home Point if you wish to teleport back later! \n",
+                onmob_target = "Tielleque",
+                zone_trigger = "Yuhtunga Jungle",
+                route_to = "Kazham",
+                destination_highlight = {position = "F-9", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 4: You will be sent to speak with Gilgamesh (through the Oaken Door at (K-8) in Norg) where you will get another cutscene. \n \n" ..
+                       "Rhapsody of Vanadiel gives a free teleport, also look at the Kazham Airship Pass Quest to allow travel to Kazham via airship from Port Jeuno! \n \n" ..
+                       "There's some arrows drawn in the jungle to help with navigation!",
+                route_to = "Norg",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 visual_zones = {
                     -- Floor 1
                     --1
@@ -2423,51 +2431,12 @@ return {
                 zone_name = "Yuhtunga Jungle",
                 onmob_target = "Gilgamesh",
                 trigger_on_event_id = { 98 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Kazham",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "E-11", offsetX = 16, offsetY = 16 },
-                            { position = "F-11", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Yuhtunga Jungle",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-3", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Sea Serpent Grotto",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Norg",
-                    },
-                },
             },
             {
-                text = "Step 4: Take a chocobo from Norg and this will take you to Yuhtunga Jungle! \n \n" ..
+                text = "Step 5: Take a chocobo from Norg and this will take you to Yuhtunga Jungle! \n \n" ..
                        "Next go to (I-11) which will take you into Yhoator Jungle also DONT FALL DOWN HOLES! \n \n",
                 zone_trigger = "Yhoator Jungle",
+                onmob_target = "Marilleune",
                 visual_zones = {
                     { type = 'arrow', center = { x = -452.3, y = 17.3, z = -345.2 }, size = 4, direction = 'ne',floor_id = 0 },
                     { type = 'arrow', center = { x = -415.3, y = 17, z = -313.4 }, size = 4, direction = 'up',floor_id = 0 },
@@ -2485,7 +2454,16 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 4,
+                        state    = 5,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Norg",
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 5,
                         highlights = {
                             { position = "I-11", offsetX = 16, offsetY = 16 },
                         },
@@ -2494,11 +2472,11 @@ return {
                 },
             },
             {
-                text = "Step 5: Next go to (I-5) entrance in Yhoator Jungle to Ifrit's Cauldron. \n \n" ..
+                text = "Step 6: Next go to (I-5) entrance in Yhoator Jungle to Ifrit's Cauldron. \n \n" ..
                        "Fastest method is to use the Ifrit's Cauldron Home Point and cast Escape. \n \n" ..
                        "If running from Yhoator Jungle, enter at (I-5) - i'll draw some arrows from (D-9) if running/chocoboing. \n \n" ..
                        "Notes: There is a Teleport-Yhoat Crystal KI and Outpost warp to pick up at (F-9) we will take the scenic route! \n \n" ..
-                       "If you know the way it is much easier to run from Kazham but for this guide we will pick up the KI's",
+                       "If you know the way it is much easier to run from Kazham but for this guide we will pick up the KI's to allow us to teleport back later!",
                 zone_trigger = "Ifrit's Cauldron",
                 visual_zones = {
                     { type = 'arrow', center = { x = -461.6, y = 1.4, z = -218.7 }, size = 4, direction = 'up',floor_id = 0 },
@@ -2522,7 +2500,7 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 5,
+                        state    = 6,
                         highlights = {
                             { position = "I-5", offsetX = 16, offsetY = 16 },
                         },
@@ -2531,7 +2509,7 @@ return {
                 },
             },
             {
-                text = "Step 6: From the entrance, go south at the first fork, then north at the second. At (H-7) there will be a lava puddle with a ??? close by. \n \n" ..
+                text = "Step 7: From the entrance, go south at the first fork, then north at the second. At (H-7) there will be a lava puddle with a ??? close by. \n \n" ..
                        "IMPORTANT: Bees do not aggro, but bats and bombs will!. \n \n" ..
                        "You will need 1x Adaman Ore to trade to the ???. Adaman Ore can be bought from Auction House or acquired via several other methods. \n \n" ..
                        "NOTE: Magma drops 6 Rare/Ex Frag Rocks. Each person completing the mission will need one so one Adaman Ore would be enough for 6 people; if more than 6 people need the mission, it will need to be killed more than once. \n \n" ..
@@ -2552,7 +2530,7 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 6,
+                        state    = 7,
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
@@ -2562,7 +2540,7 @@ return {
                 },
             },
             {
-                text = "Step 7: Kill Magma to obtain the Frag Rock. (The Salamander does not need to be killed, but will likely aggro during the fight). \n \n" ..
+                text = "Step 8: Kill Magma to obtain the Frag Rock. (The Salamander does not need to be killed, but will likely aggro during the fight). \n \n" ..
                        "NOTE: Only Magma drops the Frag Rock, so focus on killing it first!",
                 kill_requirement = {
                     count = 1,
@@ -2576,7 +2554,7 @@ return {
                     {
                         width    = 512,
                         height   = 512,
-                        state    = 7,
+                        state    = 8,
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
@@ -2586,36 +2564,18 @@ return {
                 },
             },
             {
-                text = "Step 8: Once everyone has a Frag Rock, return to Norg and trade your Frag Rock to Gilgamesh at (K-8) for a cutscene.",
+                text = "Step 9: Once everyone has a Frag Rock, return to Norg and trade your Frag Rock to Gilgamesh at (K-8) for a cutscene.",
                 onmob_target = "Gilgamesh",
+                route_to = "Norg",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 99 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Norg",
-                    },
-                },
             },
             {
-                text = "Step 9: Finally, return to Bastok and talk to Naji at (K-8) in Metalworks for a final cutscene and to complete the mission.",
+                text = "Step 10: Finally, return to Bastok and talk to Naji at (K-8) in Metalworks for a final cutscene and to complete the mission.",
                 onmob_target = "Naji",
+                route_to = "Metalworks",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 762 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 9,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
         },
         reward = {
@@ -2664,18 +2624,9 @@ return {
             {
                 text = "Step 2: Talk to Cid in Metalworks (Home Point #1) at (H-8) for a cutscene.",
                 onmob_target = "Cid",
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 763 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
             },
             {
                 text = "Step 3: Travel to Ro'Maeve. Be sure to have Silent Oils, Ninja's Monomi: Ichi (with tools), or Dancer's Spectral Jig. Monsters in Ro'Maeve are aggressive to level 75+ players by Sound and Magic spellcasting. \n \n" ..

@@ -100,6 +100,16 @@ function map_renderer.drawHighlights(imageX, imageY, w, h, highlights)
             local colorFill, colorOutline = 0x5500FF00, 0xFFFFFFFF
             drawList:AddRectFilled({x1, y1}, {x2, y2}, colorFill)
             drawList:AddRect({x1, y1}, {x2, y2}, colorOutline)
+
+            -- Draw label if provided (e.g., "1", "2" for ordering)
+            if highlight.label then
+                local labelText = tostring(highlight.label)
+                local textColor = 0xFFFFFFFF  -- White text
+                -- Center the text in the box
+                local textX = centerX - 4 * map_scale  -- Approximate centering
+                local textY = centerY - 6 * map_scale
+                drawList:AddText({textX, textY}, textColor, labelText)
+            end
         end
     end
 end

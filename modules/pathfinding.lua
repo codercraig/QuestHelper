@@ -13,6 +13,8 @@ local zone_name_to_floor = {
     ['Korroloka Tunnel 1'] = 1,
     ['Korroloka Tunnel 2'] = 2,
     ['Yughott Grotto 1'] = 1,
+    ['Palborough Mines 1'] = 1,
+    ['Palborough Mines 3'] = 3,
 }
 
 -- Map sub-zone names to base zone names (for map/image loading)
@@ -24,7 +26,8 @@ local subzone_to_base = {
     ['Korroloka Tunnel 1'] = "Korroloka Tunnel",
     ['Korroloka Tunnel 2'] = "Korroloka Tunnel",
     ['Yughott Grotto 1'] = "Yughott Grotto",
-
+    ['Palborough Mines 1'] = "Palborough Mines",
+    ['Palborough Mines 3'] = "Palborough Mines",
 }
 
 -- Get base zone name for map loading (converts sub-zone names to base names)
@@ -37,6 +40,10 @@ end
 local zone_floor_to_name = {
     [142] = {
         [1] = "Yughott Grotto 1"
+    },
+    [143] = {
+        [1] = "Palborough Mines 1",
+        [3] = "Palborough Mines 3"
     },
     [173] = {
         [1] = "Korroloka Tunnel 1",
@@ -289,7 +296,12 @@ end
 -- Parameters:
 --   path: The route path from BFS
 --   current_zone: Player's current zone name
---   destination_highlight: Optional highlight for final destination (e.g., {position = "H-8", offsetX = 16, offsetY = 16})
+--   destination_highlight: Optional highlight(s) for final destination
+--     Old format (single, shows on all floors): {position = "H-8", offsetX = 16, offsetY = 16}
+--     New format (array with floor/label support): {
+--       {position = "H-8", floor_id = 1, label = "1"},
+--       {position = "G-10", floor_id = 2, label = "2"}
+--     }
 function pathfinding.generateRouteImages(path, current_zone, destination_highlight)
     if not path or type(path) ~= "table" or #path == 0 then
         return {}
@@ -306,18 +318,68 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
 
     -- If already at destination, show destination map with highlight (player needs to see where NPC is)
     if #path == 1 and path[1] and not path[1].exit then
-        if destination and destination_highlight then
-            -- Check if zone name specifies a floor
-            local floor_id = zone_name_to_floor[destination] or 0
+        if destination then
+            local norm_zone = getBaseZoneName(normalizeZoneName(destination))
+            local zone_id = zones_db[norm_zone]
+            local floor_ids
 
-            -- Create a simple map entry for the destination zone with the NPC/target highlight
-            table.insert(images, {
-                zone_name = getBaseZoneName(destination),
-                floor_id = floor_id,
-                width = 512,
-                height = 512,
-                highlights = {destination_highlight}
-            })
+            -- Check if zone name specifies a floor (e.g., "Windurst Waters North")
+            if zone_name_to_floor[destination] then
+                floor_ids = {zone_name_to_floor[destination]}
+            elseif destination_highlight and not destination_highlight.position then
+                -- New format array: infer floors from destination_highlight floor_ids
+                local seen_floors = {}
+                local unique_floors = {}
+                for _, highlight in ipairs(destination_highlight) do
+                    if highlight.floor_id and not seen_floors[highlight.floor_id] then
+                        seen_floors[highlight.floor_id] = true
+                        table.insert(unique_floors, highlight.floor_id)
+                    end
+                end
+                if #unique_floors > 0 then
+                    table.sort(unique_floors)
+                    floor_ids = unique_floors
+                else
+                    -- New format but no floor_ids specified: default to first floor
+                    local all_floors = zone_id and getAllFloorIds(zone_id) or {0}
+                    floor_ids = {all_floors[1]}
+                end
+            else
+                -- Old format or no highlight: default to first floor only
+                local all_floors = zone_id and getAllFloorIds(zone_id) or {0}
+                floor_ids = {all_floors[1]}
+            end
+
+            -- Generate a map for each floor
+            for _, floor_id in ipairs(floor_ids) do
+                local map_entry = {
+                    zone_name = norm_zone,
+                    floor_id = floor_id,
+                    width = 512,
+                    height = 512
+                }
+
+                -- Handle destination_highlight (supports old and new format)
+                if destination_highlight then
+                    if destination_highlight.position then
+                        -- Old format: single highlight - show on all floors
+                        map_entry.highlights = {destination_highlight}
+                    else
+                        -- New format: array with optional floor_id filtering
+                        local floor_highlights = {}
+                        for _, highlight in ipairs(destination_highlight) do
+                            if not highlight.floor_id or highlight.floor_id == floor_id then
+                                table.insert(floor_highlights, highlight)
+                            end
+                        end
+                        if #floor_highlights > 0 then
+                            map_entry.highlights = floor_highlights
+                        end
+                    end
+                end
+
+                table.insert(images, map_entry)
+            end
         end
         return images
     end
@@ -523,9 +585,29 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
             if destination_floor_id then
                 -- Zone name specifies a floor (e.g., Windurst Waters North = floor 1)
                 floor_ids = {destination_floor_id}
+            elseif destination_highlight and not destination_highlight.position then
+                -- New format array: infer floors from destination_highlight floor_ids
+                local seen_floors = {}
+                local unique_floors = {}
+                for _, highlight in ipairs(destination_highlight) do
+                    if highlight.floor_id and not seen_floors[highlight.floor_id] then
+                        seen_floors[highlight.floor_id] = true
+                        table.insert(unique_floors, highlight.floor_id)
+                    end
+                end
+                if #unique_floors > 0 then
+                    -- Sort floors so they display in consistent order
+                    table.sort(unique_floors)
+                    floor_ids = unique_floors
+                else
+                    -- New format but no floor_ids specified: default to first floor
+                    local all_floors = zone_id and getAllFloorIds(zone_id) or {0}
+                    floor_ids = {all_floors[1]}
+                end
             else
-                -- No floor specified in name, show all floors
-                floor_ids = zone_id and getAllFloorIds(zone_id) or {0}
+                -- Old format or no highlight: default to first floor only
+                local all_floors = zone_id and getAllFloorIds(zone_id) or {0}
+                floor_ids = {all_floors[1]}
             end
 
             -- Add a map for each relevant floor of the destination zone
@@ -540,7 +622,24 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
                 -- Only show destination_highlight (NPC location, etc.) if provided
                 -- Don't show entrance point - that's where you came from, not where you're going
                 if destination_highlight then
-                    final_map.highlights = {destination_highlight}
+                    -- Check if it's the old format (single object with .position) or new format (array)
+                    if destination_highlight.position then
+                        -- Old format: single highlight object - show on all floors (backward compatible)
+                        final_map.highlights = {destination_highlight}
+                    else
+                        -- New format: array of highlights, possibly with floor_id and label
+                        -- Filter highlights for this specific floor
+                        local floor_highlights = {}
+                        for _, highlight in ipairs(destination_highlight) do
+                            -- Include highlight if: no floor_id specified, or floor_id matches current floor
+                            if not highlight.floor_id or highlight.floor_id == floor_id then
+                                table.insert(floor_highlights, highlight)
+                            end
+                        end
+                        if #floor_highlights > 0 then
+                            final_map.highlights = floor_highlights
+                        end
+                    end
                 end
 
                 images[#images + 1] = final_map

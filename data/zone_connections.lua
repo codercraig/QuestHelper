@@ -45,7 +45,7 @@ return {
         {zone = "Port Bastok", exit = "L-8"},
         {zone = "South Gustaberg", exit = "E-12"},
         {zone = "South Gustaberg", exit = "H-11"},
-        {zone = "Palborough Mines", exit = "K-3"},
+        {zone = "Palborough Mines 1", exit = "K-3"},
         {zone = "Konschtat Highlands", exit = "E-6"}
     },
     ["Konschtat Highlands"] = {
@@ -197,7 +197,37 @@ return {
     ["Port Jeuno"] = {
         {zone = "Lower Jeuno", exit = "E-10"},
         {zone = "Qufim Island", exit = "E-5"},
-        {zone = "Sauromugue Champaign", exit = "K-8"}
+        {zone = "Sauromugue Champaign", exit = "K-8"},
+        {zone = "Kazham", exit = "I-7"}
+    },
+    ["Kazham"] = {
+        {zone = "Port Jeuno", exit = "G-6"},
+        {zone = "Yuhtunga Jungle", exit = "F-10"}
+    },
+    ["Yuhtunga Jungle"] = {
+        {zone = "Kazham", exit = "G-5"},
+        {zone = "Sea Serpent Grotto", exit = "E-11", floor_id = 1},
+        {zone = "Yhoator Jungle", exit = "I-8"},
+        {zone = "Yhoator Jungle", exit = "I-10"},
+        {zone = "Yhoator Jungle", exit = "I-11"},
+    },
+    ["Yhoator Jungle"] = {
+        {zone = "Temple of Uggalepih", exit = "J-11"},
+        {zone = "Ifrit's Cauldron", exit = "G-6"},
+        {zone = "Ifrit's Cauldron", exit = "I-5"},
+        {zone = "Yuhtunga Jungle", exit = "E-7"},
+        {zone = "Yuhtunga Jungle", exit = "D-9"},
+        {zone = "Yuhtunga Jungle", exit = "F-11"}
+    },
+    ["Ifrit's Cauldron"] = {
+        {zone = "Yhoator Jungle", exit = "K-9"},
+    },
+    ["Sea Serpent Grotto"] = {
+        {zone = "Yuhtunga Jungle", exit = "M-3", floor_id = 1},
+        {zone = "Norg", exit = "F-2", floor_id = 1}
+    },
+    ["Norg"] = {
+        {zone = "Sea Serpent Grotto", exit = "H-10", floor_id = 1}
     },
     ["Qufim Island"] = {
         {zone = "Port Jeuno", exit = "F-6"},
@@ -218,7 +248,7 @@ return {
     },
     ["Sauromugue Champaign"] = {
         {zone = "Meriphataud Mountains", exit = "K-11"},
-        {zone = "Rolanberry Fields", exit = "K-6"},
+        {zone = "Rolanberry Fields", exit = "E-7"},
         {zone = "Batallia Downs", exit = "K-12"}
     },
     ["Batallia Downs"] = {
@@ -255,8 +285,15 @@ return {
     ["Rabao"] = {
         {zone = "Western Altepa Desert", exit = "G-11"}
     },
-    ["Palborough Mines"] = {
-        {zone = "North Gustaberg", exit = "K-6"}
+    ["Palborough Mines 1"] = {
+        {zone = "North Gustaberg", exit = "F-8"},
+        {zone = "Palborough Mines 3", exit = "I-8"}
+    },
+    ["Palborough Mines 3"] = {
+        {zone = "Palborough Mines 1", exit = "I-8"},
+        {zone = "Waughroon Shrine", exit = "H-10"}
+    },
+    ["Waughroon Shrine"] = {
     },
     ["Gusgen Mines"] = {
         {zone = "Konschtat Highlands", exit = "D-6"}
@@ -272,8 +309,8 @@ return {
         {zone = "Ghelsba Outpost", exit = "E-9"}
     },
     ["Giddeus"] = {
-        {zone = "West Sarutabaruta", exit = "H-3"},
-        {zone = "Balga's Dais", exit = "F-12"}
+        {zone = "West Sarutabaruta", exit = "H-3", floor_id = 1},
+        {zone = "Balga's Dais", exit = "F-12", floor_id = 1}
     },
     ["Balga's Dais"] = {
         --{zone = "Giddeus", exit = "J-8"}

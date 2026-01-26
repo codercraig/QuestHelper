@@ -34,10 +34,10 @@ return {
                 text = "Step 3: Let's grab the Palborough Chest Key! \n \n" ..
                        "This key drops from Scimitar Scorpion(Level:19-21), Brass Quadav(Level:21-23), Copper Quadav(Level:21-23), and Old Quadav(Level:21-23). \n \n" ..
                        "Notes: Take the elevator up on map 1 (I-8) and this will take you to the third floor and make your way just before the Waughroon Shrine with mobs spawning after the river around (H-9), in the four rooms and the path leading up to the zone. \n \n",
-                route_to = "Giddeus",
-                destination_highlight = {position = "H-13", offsetX = 16, offsetY = 16},
+                route_to = "Palborough Mines 3",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_item_obtain = {
-                     "Giddeus Chest Key",
+                     "Palborough Chest Key",
                  },
             },
             {
@@ -45,7 +45,11 @@ return {
                        "This key drops from Yagudo Votary(Level:21-23), Yagudo Priest(Level:21-23), and Yagudo Theologist(Level:21-23). \n \n" ..
                        "Notes: Stay to the right and make your way to the cave at (G-7). Head left after you enter and drop down the hole concealed by bramble at (H-7). Head south outside the tunnel and follow the path all the way to the bottom of the map, taking care to not fall down. The very last room (H-13/14) contains all of the chest key mobs. \n \n",
                 route_to = "Giddeus",
-                destination_highlight = {position = "H-13", offsetX = 16, offsetY = 16},
+                destination_highlight = {
+                    {position = "H-7", offsetX = 16, offsetY = 16, label = "1", floor_id = 1},
+                    {position = "H-8", offsetX = 16, offsetY = 16, label = "2", floor_id = 15},
+                    {position = "H-13", offsetX = 16, offsetY = 16, label = "3", floor_id = 1},
+            },
                 trigger_on_item_obtain = {
                      "Giddeus Chest Key",
                  },

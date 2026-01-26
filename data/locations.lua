@@ -246,6 +246,12 @@ return {
         visual_mode = "arc",
         zone = "Port Jeuno"
     },
+    ["Tielleque"] = {
+        target_pos = { x = -55.3, y= -12, z=-94.8},
+        trigger_npc = "Tielleque",
+        visual_mode = "arc",
+        zone = "Kazham"
+    },
     -- Lower Jeuno
     ["Ghebi Damomohe"] = {
         target_pos = { x = 15.6, y= -1.7, z=-7.6},
@@ -366,11 +372,17 @@ return {
         trigger_npc = "Gilgamesh",
         zone = "Norg"
     },
+    ["Marilleune"] = {
+        target_pos = { x = -11.3, y = -2.6, z = -51.3},
+        visual_mode = "arc",
+        trigger_npc = "Marilleune",
+        zone = "Norg"
+    },
     -- Ifrit's Caldroun
     ["ifrit-6-2-???"] = {
         target_pos = { x = 172.2, y = -0.5, z = -26.9},
         visual_mode = "arc",
-        zone = "Ifrit's Caldroun"
+        zone = "Ifrit's Cauldron"
     },
     -- Quicksand Caves
     ["quicksand-8-1-???"] = {
