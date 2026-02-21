@@ -3078,65 +3078,10 @@ return {
                 text = "Step 3: Head to Kuftal Tunnel. The entrance is at (H-4) from Western Altepa Desert. \n \n" ..
                        "Routes: \n" ..
                        "- Fastest teleport option is the Survival Guide in Kuftal Tunnel. \n" ..
-                       "- You can ride from Rabao, use the Voidwatch Zilart teleport, Western Altepa Desert Survival Guide teleport, or Unity teleport (Level 125 category) to get to the Western Altepa Desert exit to Kuftal Tunnel. \n \n" ..
-                       "If running from Bastok: \n" ..
-                       "Zeruhn Mines          (F-7)    -> \n" ..
-                       "Korroloka Tunnel      (A-9/10) -> \n" ..
-                       "Eastern Altepa Desert (I-6)    -> \n" ..
-                       "Western Altepa Desert (H-4)    -> \n" ..
-                       "Kuftal Tunnel",
+                       "- You can ride from Rabao, use the Voidwatch Zilart teleport, Western Altepa Desert Survival Guide teleport, or Unity teleport (Level 125 category) to get to the Western Altepa Desert exit to Kuftal Tunnel. \n \n",
                 zone_trigger = "Kuftal Tunnel",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "A-9", offsetX = 16, offsetY = 16 },
-                            { position = "A-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "B-8", offsetX = 16, offsetY = 16 },
-                            { position = "C-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 2,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Eastern Altepa Desert",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "H-4", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Western Altepa Desert",
-                    },
-                },
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "H-4", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Examine the ??? at (H-8) on the top of the cliff near the entrance to Western Altepa Desert. The dialogue should end with it saying the piece of wood fell down. \n \n" ..
@@ -3237,17 +3182,8 @@ return {
                 text = "Step 8: Talk to Drake Fang at (H-6) in Zeruhn Mines again for a long cutscene. You will be teleported to Bastok Mines and the mission will complete.",
                 onmob_target = "Drake Fang",
                 trigger_on_event_id = { 204, 176 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                },
+                route_to = "Zeruhn Mines",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -3296,130 +3232,21 @@ return {
                 text = "Step 2: Talk to Alois in the 'Conference Room' to the left of the President's Office in Metalworks for a cutscene.",
                 onmob_target = "Alois",
                 trigger_on_event_id = { 773 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Talk to Dancing Wolf at (G-7) in Rabao, near Home Point #2 - Same route as previous missions(Use the maps if need a route from Bastok or OP Warp to Kuzotz!)",
                 onmob_target = "Dancing Wolf",
                 trigger_on_event_id = { 102 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Zeruhn Mines",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "A-9", offsetX = 16, offsetY = 16 },
-                            { position = "A-10", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 1,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "B-8", offsetX = 16, offsetY = 16 },
-                            { position = "C-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Korroloka Tunnel",
-                        floor_id = 2,
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Eastern Altepa Desert",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "L-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Western Altepa Desert",
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 3,
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Rabao",
-                    },
-                },
+                route_to = "Rabao",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 4: Go to Gustav Tunnel. \n \n" ..
-                       "Routes: \n" ..
-                       "- Survival Guide teleport to Gustav Tunnel. \n" ..
-                       "- Unity warp (Level 128 category) will place you right at the entrance to the second map. \n" ..
-                       "- Outpost Warp to Zulkheim which will take you to Valkurm Dunes and travel to (B-8)! \n" ..
-                       "- Route from Bastok Markets if you are running without any teleports(Use the maps!)",
+                text = "Step 4: Go to Gustav Tunnel. \n \n",
                 zone_trigger = "Gustav Tunnel",
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "South Gustaberg",
-                        highlights = {
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "North Gustaberg",
-                        highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
-                            { position = "E-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        zone_name = "Konschtat Highlands",
-                        highlights = {
-                            { position = "G-3", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 4,
-                        highlights = {
-                            { position = "B-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Valkurm Dunes",
-                    },
-                },
+                route_to = "Valkurm Dunes",
+                destination_highlight = {position = "B-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 5: Click the ??? which is located at (G-6). The fight starts off with one Gigaplasm. Once you kill it, it turns into two Macroplasms. Each one of those turns into two Microplasms and each one of those turn into two Nanoplasms. \n \n" ..
@@ -3483,33 +3310,15 @@ return {
                 text = "Step 7: Return to Rabao and talk to Dancing Wolf at (G-7) for a cutscene after obtaining the key item.",
                 onmob_target = "Dancing Wolf",
                 trigger_on_event_id = { 104 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        highlights = {
-                            { position = "G-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Rabao",
-                    },
-                },
+                route_to = "Rabao",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 8: Return to the Conference Room and talk to Alois at (J-7) in Metalworks again to complete the mission.",
                 onmob_target = "Alois",
                 trigger_on_event_id = { 776 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 8,
-                        highlights = {
-                            { position = "J-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
             },
         },
         reward = {
@@ -3558,71 +3367,20 @@ return {
                 text = "Step 2: Talk to Iron Eater at (J-8) in Metalworks for a cutscene. May require you talking to him multiple times to get the correct cutscene.",
                 onmob_target = "Iron Eater",
                 trigger_on_event_id = { 780 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 2,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Metalworks",
-                    },
-                },
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Travel to Castle Zvahl Baileys. \n \n" ..
-                       "Outpost: Fauregandi/Valdeaunia if possible or use Castle Baileys HP#1 teleport.\n \n" ..
-                       "If walking a good route is from San d'Oria: \n" ..
-                       "East Ronfaure      (K-4) -> \n" ..
-                       "Ranguemont Pass    (L-4) -> \n" ..
-                       "Beaucedine Glacier (F-6) -> \n" ..
-                       "Xarcabard          (D-7) -> \n" ..
-                       "Castle Zvahl Baileys \n \n" ..
-                       "NOTE: In Xarcabard enter Castle Zvahl Baileys at (D-7/D-8).",
+                       "Outpost: Fauregandi/Valdeaunia if possible or use Castle Baileys HP#1 teleport.\n \n",
                 zone_trigger = "Castle Zvahl Baileys",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "East Ronfaure",
-                        highlights = {
-                            { position = "K-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Ranguemont Pass",
-                        highlights = {
-                            { position = "L-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Beaucedine Glacier",
-                        highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Xarcabard",
-                        highlights = {
-                            { position = "D-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Xarcabard",
+                destination_highlight = {position = "D-7", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Route through Castle Zvahl Baileys -> Castle Zvahl Keep. \n \n" ..
                        "Map 1: Go to (G-8) staying on the lower level and take a first Right (North). Follow the arrows on the ground will lead you to (F-8) - Map 2. \n \n" ..
+                       "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
                        "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
                        "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
                        "Map 2: Follow the arrows, end goal is (F-8) to Castle Zvahl Keep. \n \n" ..
@@ -3758,18 +3516,9 @@ return {
             {
                 text = "Step 7: Return to Iron Eater at (J-8) in Metalworks to complete the mission and receive your rewards.",
                 onmob_target = "Iron Eater",
+                route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = { 782 },
-                images = {
-                    {
-                        width    = 512,
-                        height   = 512,
-                        state    = 7,
-                        zone_name = "Metalworks",
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
             },
         },
         reward = {

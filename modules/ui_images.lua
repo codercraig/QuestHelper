@@ -188,7 +188,8 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         end
 
         -- Render pagination buttons
-        imgui.Text(string.format("Map %d/%d:", current_map_index, total_maps))
+        local idx_digits = #tostring(total_maps)
+        imgui.Text(string.format("Map %" .. idx_digits .. "d/%d:", current_map_index, total_maps))
         imgui.SameLine()
 
         -- Previous button
@@ -199,19 +200,34 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         end
         imgui.SameLine()
 
-        -- Numbered map buttons
-        for i = 1, total_maps do
+        -- Scale-aware button sizing: map window is (512*map_scale)+20 px wide,
+        -- so fewer/smaller buttons fit at lower scales (slider range 0.25–1.0)
+        local MAX_VISIBLE_BTNS = math.max(4, math.floor(10 * map_scale))
+        local btn_w = math.max(20, math.floor((total_maps >= 100 and 36 or 28) * map_scale))
+
+        local btn_start, btn_end
+        if total_maps <= MAX_VISIBLE_BTNS then
+            btn_start, btn_end = 1, total_maps
+        else
+            local half = math.floor(MAX_VISIBLE_BTNS / 2)
+            btn_start = math.max(1, current_map_index - half)
+            btn_end   = math.min(total_maps, btn_start + MAX_VISIBLE_BTNS - 1)
+            if btn_end == total_maps then
+                btn_start = math.max(1, btn_end - MAX_VISIBLE_BTNS + 1)
+            end
+        end
+
+        for i = btn_start, btn_end do
             if i == current_map_index then
-                -- Highlight current map button
                 imgui.PushStyleColor(ImGuiCol_Button, {0.2, 0.6, 0.2, 1.0})
-                imgui.Button(tostring(i) .. "##MapBtn" .. i)
+                imgui.Button(tostring(i) .. "##MapBtn" .. i, {btn_w, 0})
                 imgui.PopStyleColor()
             else
-                if imgui.Button(tostring(i) .. "##MapBtn" .. i) then
+                if imgui.Button(tostring(i) .. "##MapBtn" .. i, {btn_w, 0}) then
                     ui_images.current_map_indices[step_key] = i
                 end
             end
-            if i < total_maps then
+            if i < btn_end then
                 imgui.SameLine()
             end
         end

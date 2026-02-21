@@ -283,7 +283,11 @@ return {
     },
     ["Western Altepa Desert"] = {
         {zone = "Eastern Altepa Desert", exit = "K-7"},
-        {zone = "Rabao", exit = "L-5"}
+        {zone = "Rabao", exit = "L-5"},
+        {zone = "Kuftal Tunnel", exit = "H-4"},
+    },
+    ["Kuftal Tunnel"] = {
+        {zone = "Western Altepa Desert", exit = "H-9"},
     },
     ["Rabao"] = {
         {zone = "Western Altepa Desert", exit = "G-11"}

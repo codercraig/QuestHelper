@@ -18,9 +18,9 @@
 [7-1] The Final Image - DONE /ro
 [7-2] On My Way - DONE /ro
 [8-1] Chain That Binds Us - DONE /ro
-[8-2] Enter The Talekeeper - DONE
-[9-1] The Salt Of The Earth - DONE
-[9-2] Where Two Paths Converge - DONE
+[8-2] Enter The Talekeeper - DONE /ro
+[9-1] The Salt Of The Earth - DONE /ro
+[9-2] Where Two Paths Converge - DONE /ro
 DONE whew!
 
 

@@ -101,20 +101,18 @@ function keyitem.updateFromMemory()
     if not player then return end
 
     -- Read all key items (0-4095 possible IDs)
-    local foundAny = false
     for ki_id = 0, 4095 do
         local hasKI = player:HasKeyItem(ki_id)
         if hasKI then
             keyitem.owned_keyitems[ki_id] = true
-            foundAny = true
         else
             keyitem.owned_keyitems[ki_id] = nil
         end
     end
 
-    if foundAny then
-        initialized = true
-    end
+    -- Mark initialized any time we successfully ran a scan with a valid player object.
+    -- Even zero results is a valid state (player has no key items yet).
+    initialized = true
 end
 
 --- Periodic check - call from prerender or similar
