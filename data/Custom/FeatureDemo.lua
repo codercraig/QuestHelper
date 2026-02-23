@@ -167,7 +167,7 @@ return {
                     "honey"
                 },
                 -- Key items needed (displayed in UI, not required for step completion)
-                keyitems_needed = {78},  -- Gustaberg Supplies (ID from LSB)
+                keyitems_needed = {75},  -- Gustaberg Supplies (ID from LSB)
             },
             {
                 text = "Key Item Trigger Test: Get the Gustaberg Supplies key item! \n" ..

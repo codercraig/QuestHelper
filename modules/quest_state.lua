@@ -18,6 +18,7 @@ local default_settings = T{
     partial_progress = T{},
     kill_counts = T{},
     current_map = T{},  -- Tracks active map number per zone ID
+    keyitem_cache = T{},  -- Cached list of owned key item IDs (array of numbers)
     ui_settings = T{
         map_opacity = 1.0,         -- Map image opacity (0.0 - 1.0)
         map_scale = 1.0,           -- Map size scale (1.0 = 512x512, 0.5 = 256x256)
@@ -36,6 +37,12 @@ local default_settings = T{
 
 -- Load settings
 quest_state.settings = settings.load(default_settings, QUESTHELPER_ALIAS)
+
+--- Re-load settings from disk. Call this once the character is fully in-world
+--- to ensure Ashita resolves the correct character-specific settings file.
+function quest_state.reloadSettings()
+    quest_state.settings = settings.load(default_settings, QUESTHELPER_ALIAS)
+end
 
 -- Ensure a nested key path exists in a table
 local function ensure_key_path(t, ...)

@@ -246,9 +246,16 @@ return {
         visual_mode = "arc",
         zone = "Port Jeuno"
     },
+    --Kazham
     ["Tielleque"] = {
         target_pos = { x = -55.3, y= -12, z=-94.8},
         trigger_npc = "Tielleque",
+        visual_mode = "arc",
+        zone = "Kazham"
+    },
+    ["Jakoh Wahcondalo"] = {
+        target_pos = { x = 101.8, y= -16.5, z=-115.8},
+        trigger_npc = "Jakoh Wahcondalo",
         visual_mode = "arc",
         zone = "Kazham"
     },
@@ -366,6 +373,11 @@ return {
         zone = "Eastern Altepa Desert"
     },
     -- Norg
+    ["Norg_OakenDoor"] = {
+        target_pos = { x = 101.3, y = -8.8, z = -12.1},
+        visual_mode = "arc",
+        zone = "Norg"
+    },
     ["Gilgamesh"] = {
         target_pos = { x = 122.5, y = -9.8, z = -12.1},
         visual_mode = "arc",

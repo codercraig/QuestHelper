@@ -4,12 +4,20 @@ local keyitem = {}
 local struct = require('struct')
 
 -- Storage for key item states
-keyitem.owned_keyitems = T{}  -- Set of key item IDs the player owns
+-- This table persists in Lua memory across zone changes - do not clear it on zone.
+-- The 0x55 packet is the sole source of truth; it arrives on zone-in and on any change.
+keyitem.owned_keyitems = T{}
 
--- Track if we've done initial scan
-local initialized = false
-local last_memory_check = 0
-local MEMORY_CHECK_INTERVAL = 2.0  -- Check memory every 2 seconds
+-- True once we have received at least one authoritative 0x55 packet.
+-- Used by isInitialized() so the UI can show "zone to update" until we have reliable data.
+local packet_initialized = false
+
+-- True once initFromMemory() has run (best-effort bootstrap, may be incomplete).
+-- Prevents re-running the memory scan on every frame, but does NOT suppress the UI hint.
+local memory_scanned = false
+
+-- Flagged true when 0x55 updates owned_keyitems so questhelper can persist the cache.
+local cache_dirty = false
 
 --- Checks if player has a specific key item
 --- @param ki_id number - Key item ID
@@ -58,14 +66,13 @@ function keyitem.getKeyItemCount(ki_list)
 end
 
 --- Packet handler for key item updates (0x55)
---- Call this from your main packet_in event handler
+--- The server sends this on zone-in (one packet per 512-item chunk) and on any change.
+--- Call this from your main packet_in event handler.
 function keyitem.handlePacket(e)
     if e.id == 0x55 then
-        -- Packet 0x55 contains key item data
-        -- The key items are stored as bits in the packet
+        -- Each 0x55 packet covers a specific 512-bit chunk of the key item table.
         local offset = struct.unpack('B', e.data, 0x84 + 1) * 512
 
-        -- Process all possible key items in this packet chunk (512 bits)
         for ki_id = offset, offset + 511 do
             local has_ki = (ashita.bits.unpack_be(e.data_raw, 0x04, ki_id - offset, 1) == 1)
 
@@ -76,55 +83,70 @@ function keyitem.handlePacket(e)
             end
         end
 
-        initialized = true
+        packet_initialized = true
+        cache_dirty = true
     end
 end
 
---- Reset key item tracking (useful on zone change or logout)
-function keyitem.reset()
-    keyitem.owned_keyitems = T{}
-    initialized = false
+--- Load owned key items from a previously saved cache (array of KI IDs).
+--- Treats the data as authoritative: suppresses the "zone to update" hint.
+--- 0x55 packets will overwrite this when the player next zones.
+function keyitem.loadFromCache(cache)
+    if not cache then return end
+    local count = 0
+    for _, ki_id in ipairs(cache) do
+        keyitem.owned_keyitems[ki_id] = true
+        count = count + 1
+    end
+    if count > 0 then
+        packet_initialized = true  -- Cache is good enough to suppress the hint
+    end
 end
 
---- Check if key item system has been initialized
-function keyitem.isInitialized()
-    return initialized
+--- Returns true if 0x55 has updated owned_keyitems since the last clearCacheDirty().
+function keyitem.isCacheDirty()
+    return cache_dirty
 end
 
---- Read key items directly from memory
---- This runs periodically and doesn't require packet 0x55
-function keyitem.updateFromMemory()
+--- Clears the dirty flag after the cache has been persisted to settings.
+function keyitem.clearCacheDirty()
+    cache_dirty = false
+end
+
+--- One-shot memory scan for addon reload mid-session.
+--- Populates owned_keyitems from memory as a best-effort bootstrap.
+--- Does NOT set packet_initialized, so the UI hint stays visible until a real
+--- 0x55 packet confirms the data.
+function keyitem.initFromMemory()
+    if packet_initialized or memory_scanned then return end
+
     local memManager = AshitaCore:GetMemoryManager()
     if not memManager then return end
 
     local player = memManager:GetPlayer()
     if not player then return end
 
-    -- Read all key items (0-4095 possible IDs)
     for ki_id = 0, 4095 do
-        local hasKI = player:HasKeyItem(ki_id)
-        if hasKI then
+        if player:HasKeyItem(ki_id) then
             keyitem.owned_keyitems[ki_id] = true
-        else
-            keyitem.owned_keyitems[ki_id] = nil
         end
     end
 
-    -- Mark initialized any time we successfully ran a scan with a valid player object.
-    -- Even zero results is a valid state (player has no key items yet).
-    initialized = true
+    memory_scanned = true
 end
 
---- Periodic check - call from prerender or similar
---- Silently updates key items from memory
-function keyitem.periodicCheck()
-    local current_time = os.clock()
+--- Reset key item tracking (useful on logout/unload)
+function keyitem.reset()
+    keyitem.owned_keyitems = T{}
+    packet_initialized = false
+    memory_scanned = false
+    cache_dirty = false
+end
 
-    -- Check memory every 2 seconds
-    if current_time - last_memory_check >= MEMORY_CHECK_INTERVAL then
-        last_memory_check = current_time
-        keyitem.updateFromMemory()
-    end
+--- Returns true only once a 0x55 packet has been received (authoritative data).
+--- The UI uses this to show a "zone to update" hint until then.
+function keyitem.isInitialized()
+    return packet_initialized
 end
 
 --- Debug function to list all owned key items

@@ -727,7 +727,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         -- Check if key item tracking is initialized
                         if not keyitem_module.isInitialized() then
                             imgui.TextColored({1, 1, 0, 1}, "  [!] Key item tracking not ready yet")
-                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  Open your Key Items menu in-game")
+                            imgui.TextColored({0.7, 0.7, 0.7, 1}, "  This will require a zone to update.")
                         else
                             for _, ki in ipairs(keyItemsNeeded) do
                                 local hasKI = keyitem_module.hasKeyItem(ki.id)

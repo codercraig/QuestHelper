@@ -7,20 +7,10 @@ return {
         },
         steps = {
             {
-                text = "Enter Norg to receive a cutscene and a Key Item: Map of Norg.",
+                text = "Step 1: Enter Norg to receive a cutscene and a Key Item: Map of Norg.",
                 --zone_trigger = "Norg",
                 trigger_on_event_id = {1},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Norg",
-                    },
-                },
+                route_to = "Norg",
             },
         },
         reward = {
@@ -31,20 +21,12 @@ return {
     ["ZM2: Welcome tNorg"] = {
         steps = {
             {
-                text = "Click on the 'Oaken Door' at (K-8) in Norg for a cutscene with Gilgamesh. The dialog will ask if you want to open the door, choose Yes. Note: If you are on one of the numerous Rhapsodies Missions where you click on the door, you will get that cutscene first. Just touch the door again.",
-                onmob_target = "_700",
+                text = "Step 1: Click on the 'Oaken Door' at (K-8) in Norg for a cutscene with Gilgamesh. The dialog will ask if you want to open the door, choose Yes. \n \n" ..
+                       "Note: If you are on one of the numerous Rhapsodies Missions where you click on the door, you will get that cutscene first. Just touch the door again. \n \n",
+                route_to = "Norg",
+                onmob_target = {"Norg_OakenDoor"},
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {2},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        highlights = {
-                            { position = "K-8", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Norg",
-                    },
-                },
             },
         },
         reward = {
@@ -57,18 +39,11 @@ return {
             {
                 text = "Talk to Jakoh Wahcondalo at (J-9) in Kazham (Home Point #1) to obtain the Key Item: Sacrificial Chamber Key, which is required to enter the deeper areas of the Temple of Uggalepih.",
                 onmob_target = "Jakoh Wahcondalo",
-                trigger_on_event_id = {114},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        highlights = {
-                            { position = "J-9", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Kazham",
-                    },
-                },
+                route_to = "Kazham",
+                destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                --trigger_on_event_id = {114},
+                keyitems_needed = {238},
+                trigger_on_keyitem_obtain = {238},
             },
         },
         reward = {

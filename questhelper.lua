@@ -99,6 +99,17 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
+    -- One-shot memory scan on addon reload (no-op once 0x55 packets have arrived)
+    keyitem_module.initFromMemory()
+
+    -- Persist key item cache to settings after any 0x55 update
+    if keyitem_module.isCacheDirty() then
+        keyitem_module.clearCacheDirty()
+        local owned, _ = keyitem_module.listOwnedKeyItems()
+        quest_state.settings.keyitem_cache = owned
+        quest_state.save()
+    end
+
     -- Update player position
     local memManager = AshitaCore:GetMemoryManager()
     if memManager then
@@ -156,9 +167,6 @@ ashita.events.register('d3d_present', 'present_callback', function()
             lastKnownFloor = currentFloor
         end
     end
-
-    -- Periodic key item check (request updates if not initialized)
-    keyitem_module.periodicCheck()
 
     -- Periodic inventory check for trigger_on_item_obtain
     if currentTopCategory and currentSubfile and current_mission then
@@ -1244,6 +1252,9 @@ ashita.events.register('load', 'load_callback', function()
         print(string.format("[%s] WARNING: Could not load 'assets/quest_icon.png'.", addon.name))
     end
 
+    -- Restore key items from last saved cache (best-effort until 0x55 arrives)
+    keyitem_module.loadFromCache(quest_state.settings.keyitem_cache)
+
     print(string.format("[%s] Data loaded. Use /questhelper to open.", addon.name))
 
     if ENABLE_VERBOSE_DEBUG then
@@ -1265,7 +1276,18 @@ end)
 --------------------------------------------------------------------------------
 -- Packet Events
 --------------------------------------------------------------------------------
+-- Track whether we've done the initial settings reload on first zone-in
+local settings_reloaded = false
+
 ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
+    -- On the first zone-in (0x0A), reload settings from disk so Ashita resolves
+    -- the correct character-specific file (may not be available at addon load time).
+    if e.id == 0x0A and not settings_reloaded then
+        settings_reloaded = true
+        quest_state.reloadSettings()
+        keyitem_module.loadFromCache(quest_state.settings.keyitem_cache)
+    end
+
     -- Key item tracking (Packet 0x55)
     keyitem_module.handlePacket(e)
 
