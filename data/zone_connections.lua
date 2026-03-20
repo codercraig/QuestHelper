@@ -222,6 +222,9 @@ return {
         {zone = "Yuhtunga Jungle", exit = "D-9"},
         {zone = "Yuhtunga Jungle", exit = "F-11"}
     },
+    ["Temple of Uggalepih"] = {
+        --static
+    },
     ["Ifrit's Cauldron"] = {
         {zone = "Yhoator Jungle", exit = "K-9"},
     },

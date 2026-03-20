@@ -74,6 +74,12 @@ return {
         [1] = 1,   -- Upper floor
         [2] = 2,  -- Lower floor
     },
+    --Temple of Ugg
+    [159] = {
+        [1] = 1,   -- Upper floor
+        [2] = 2,  -- Lower floor
+        [3] = 3,
+    },
     [161] = {
         [1] = 1,
         [2] = 2,

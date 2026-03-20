@@ -37,7 +37,7 @@ return {
     ["ZM3: Kazhams Chieftainess"] = {
         steps = {
             {
-                text = "Talk to Jakoh Wahcondalo at (J-9) in Kazham (Home Point #1) to obtain the Key Item: Sacrificial Chamber Key, which is required to enter the deeper areas of the Temple of Uggalepih.",
+                text = "Step 1: Talk to Jakoh Wahcondalo at (J-9) in Kazham (Home Point #1) to obtain the Key Item: Sacrificial Chamber Key, which is required to enter the deeper areas of the Temple of Uggalepih.",
                 onmob_target = "Jakoh Wahcondalo",
                 route_to = "Kazham",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
@@ -58,205 +58,468 @@ return {
         steps = {
             {
                 keyitems_needed = {272},
-                text = "Quick Route (Recommended): If you have already acquired the Den of Rancor Home Point #1, use that to arrive at Den of Rancor, Map 2 (E-4), wherein you just take a few steps west to arrive at your destination (skip to step 10). Alternatively, use Unity Concord Teleportation - talk to a Unity Concord NPC and select 'Bring me to Wanted encounter area', then choose Den of Rancor from the list of Level 128 encounter areas. You will arrive at Den of Rancor, Map 2 (G-12).",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        highlights = {
-                            { position = "E-4", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Den of Rancor",
-                        floor_id = 1,
-                    },
-                },
+                text = "Step 1: Start traveling to The Temple of Uggalepih. \n" ..
+                       "Upper Elshimo Outpost warp will get you there quickly if you have it! \n \n",
+                route_to = "Yhoator Jungle",
+                destination_highlight = {position = "J-11", offsetX = 16, offsetY = 16},
+                zone_trigger = "Temple of Uggalepih"
             },
             {
-                text = "Quick Route (Recommended): If you have already acquired the Den of Rancor Home Point #1 otherwise Travel to the Temple of Uggalepih, either via Survival Guide (Elshimo Uplands) to Map 1 (F-6), or via Yhoator Jungle to the main entrance at Map 1, (I-6). If you aren't in possession of the Permanent Key Item: Paintbrush of Souls, complete the mini-quest to receive it.",
+                text = "Step 2: Head back out to Yhoator Jungle via (F-5) exit, once outside of the temple go west back into exit3 - this will take you BACK into the Temple of Uggalepih (map2).\n \n" ..
+                       "Follow the arrows back into the temple again if lost! \n \n" ..
+                       "Run to the Granite Door (I-10) to the south and kill the Temple Guardian to open the door - run through quick or you will have to kill the Temple Guardian again",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Temple Guardian"},
+                    zone = "Temple of Uggalepih",
+                    count_party_kills = true
+                },
+                visual_zones = {
+                    -- Floor 0 Yhoator
+                    --1
+                    { type = 'arrow', center = { x = 32.5, y = -10, z = -454.1 }, size = 4, direction = 'left',floor_id = 0 },
+                    --2
+                    { type = 'arrow', center = { x = 8.0, y = -10, z = -453.7 }, size = 4, direction = 'down',floor_id = 0 },
+                },
+                zone_name = "Yhoator Jungle",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 2,
                         highlights = {
-                            { position = "F-6", offsetX = 16, offsetY = 16 },
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Temple of Ugg`alepih",
+                        floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "H-11", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yhoator Jungle",
+                        floor_id = 0,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "I-10", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Temple of Uggalepih",
-                        floor_id = 0,
+                        floor_id = 2,
                     },
                 },
             },
             {
-                text = "Take the northwest exit to Yhoator Jungle at Map 1, F-5. Head west in Yhoator on the outside of the temple to reach the entrance and enter the Temple of Uggalepih's Map 2.",
+                text = "Step 3: Enter the large room and take northeast exit and make your way to (I-7)! \n \n" ..
+                       "You will have to navigate through a Granite Door, and you will find yourself in a room with paintings. \n \n" ..
+                       "Click on the painting on the east wall only ONCE and do NOT confirm the second message just yet. \n \n" ..
+                       "It should say 'There is a blank canvas in this frame. The Paintbrush of souls begins to twitch.' \n \n" ..
+                       "You should then see 'By focusing your thoughts on the paintbrush of souls, a new painting begins to appear on the canvas...' DO NOT CLICK YET - wait about 30seconds and the screen should flash white! Then you can click! \n \n" ..
+                       "Note: Will be safer to clear the Tonberries out as they will aggroe level 75s. \n \n",
+                trigger_on_talk = " Den of Rancor has opened!",
+                onmob_target = "templeugg2-zm4-eastpainting",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 3,
                         highlights = {
-                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Temple of Uggalepih",
-                        floor_id = 0,
+                        floor_id = 2,
                     },
                 },
             },
             {
-                text = "Head south to (I-10). If you do not possess an Unlit Lantern, kill any Tonberry Maledictor, Tonberry Jinxer, and Tonberry Pursuer you see in the western rooms. Only one is required, but having up to four speeds things up. Once at (I-10), kill the Temple Guardian to open the door.",
+                text = "Step 4: A door has opened on your left side - look for an arrow, that will lead to the Den of Rancor.",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -54.4, y = -0, z = 20.2 }, size = 4, direction = 'right',floor_id = 2 },
+                },
+                zone_name = "Temple of Uggalepih",
+                zone_trigger = "Den of Rancor",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 4,
                         highlights = {
-                            { position = "I-10", offsetX = 16, offsetY = 16 },
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
                         },
                         zone_name = "Temple of Uggalepih",
-                        floor_id = 1,
+                        floor_id = 2,
                     },
                 },
             },
             {
-                text = "Enter the large room and take the northeast exit, following the corridor to arrive at (I-7/8), the room containing the Picture Frames and the Granite Door. Click on the empty Picture Frame in the middle of the eastern wall just once. You must stand directly in the center of the empty frame, as close to the wall as possible.",
+            text = "Step 5: Den of Rancor - Light 4 torches to open the gate. Make sure to read ALL of the steps - Items are RARE/EX, so repeat this cycle x4:\n \n" ..
+                "Tip: Having someone with the Home Point open the gate is strongly recommended.\n \n" ..
+                "[1] Kill a Tonberry Imprecator (G-6) for an Unlit Lantern (skip if you have one - after 1st cycle you should have an Unlit Lantern returned to you!).\n \n" ..
+                "[2] Trade to the Altar of Rancor (E-5) Map 1 for a Rancor Flame.\n" ..
+                "    !! Only THIS Altar works - deeper Altars produce the wrong flame.\n \n" ..
+                "[3] Head to Map 2 via the drop at (F-7).\n \n" ..
+                "[4] Trade the Rancor Flame to a torch (E-5) Map 2 — torch lit, Unlit Lantern returned run back up to light the next Unlit Lantern - rinse repeat till all are lit and door opens!\n \n" ..
+                "Notes: You cannot trade while Invisible. If you loot an Unlit Lantern mid-fight while holding a Rancor Flame, drop it before trading.\n \n" ..
+                "WARNING: The exit switch unlights all torches! If others are present, wait for them to go through first. Get the Home Point on the other side!\n \n",
+                zone_trigger = "Sacrificial Chamber",
+                visual_zones = {
+                    {
+                        type = 'square',
+                        center = { x = -78.3, y = 15.4, z = -0.5 },
+                        size = 1,
+                        floor_id = 1  -- Optional: only show on floor 1
+                    },
+                    {
+                        type = 'square',
+                        center = { x = -63.2, y = 45.7, z = 26.5 },
+                        size = 2,
+                        floor_id = 2  -- Optional: only show on floor 1
+                    },
+                    {
+                        type = 'square',
+                        center = { x = -56.9, y = 46, z = 26.5 },
+                        size = 2,
+                        floor_id = 2  -- Optional: only show on floor 1
+                    },
+                    {
+                        type = 'square',
+                        center = { x = -65.1, y = 45.9, z = 21 },
+                        size = 2,
+                        floor_id = 2  -- Optional: only show on floor 1
+                    },
+                    {
+                        type = 'square',
+                        center = { x = -54.9, y = 45.9, z = 21 },
+                        size = 2,
+                        floor_id = 2  -- Optional: only show on floor 1
+                    },
+                    { type = 'arrow', center = { x = -9.6, y = 16.6, z = -61.5 }, size = 4, direction = 'se',floor_id = 1 },
+
+                },
+                zone_name = "Den of Rancor",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 5,
                         highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                            { position = "E-5", offsetX = 16, offsetY = 16, label = "2" },
+                            { position = "F-7", offsetX = 16, offsetY = 16 ,  label = "3" },
+                            { position = "G-6", offsetX = 16, offsetY = 16 ,  label = "1" },
                         },
-                        zone_name = "Temple of Uggalepih",
+                        zone_name = "Den of Rancor",
                         floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "E-5", offsetX = 16, offsetY = 16, label = "4"},
+                            { position = "D-4", offsetX = 16, offsetY = 16, label = "X"},
+                        },
+                        zone_name = "Den of Rancor",
+                        floor_id = 2,
                     },
                 },
             },
             {
-                text = "When you receive the message 'By focusing your thoughts on the paintbrush of souls, a new painting begins to appear on the canvas...', wait at least 30 seconds (the screen should flash briefly) before confirming. After the message 'You succeeded in projecting the image in your soul to the blank canvas. The door to the Rancor Den has opened!', the Granite Door should open. Follow the passageway downward into Den of Rancor.",
-                zone_trigger = "Den of Rancor",
+                text = "Step 6: Inside the Sacrificial Chamber, examine the Mahogany Door to enter the Battlefield.\n \n" ..
+                    "Level 99 cap, 6 players max. All buffs wear on entry (including Reraise) — no EXP loss.\n \n" ..
+                    "Defeat all three Tonberry NMs. Recommended order:\n" ..
+                    "[1] Grav'iton (Thief - crown on head). Immune to sleep - kill first while sleeping/silencing the others.\n" ..
+                    "    Warning: At ~25% HP may use Everyone's Rancor, which can one-shot if your Tonberry hate is high.\n" ..
+                    "[2] Molyb'iton (Black Mage).\n" ..
+                    "[3] Tungs'iton (Summoner). Has a random elemental pet that dies with it - no need to kill the pet.\n" ..
+                    "    Warning: At ~25% HP will use Astral Flow (~700-800 damage max). Heal up before waking the elemental.\n \n" ..
+                    "Soloable by most jobs at 99. Clearing gives a cutscene and Key Item: Dark Fragment.\n" ..
+                    "Exiting zones you to Temple of Uggalepih Map 2 (NW room).\n",
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Grav'iton", "Molyb'iton", "Tungs'iton"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {246},
+            },
+        },
+        reward = {
+            text = "Key Item: Dark Fragment",
+        }
+    },
+
+    ["ZM5: Headstone Pilgrimage"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM4: The Temple of Uggalepih"},
+        },
+        steps = {
+            {
+                text = "Step 1 [Water Fragment] — La Theine Plateau\n \n" ..
+                    "You need to collect 8 Fragments from across Vana'diel. The Dark Fragment from ZM4 already counts — 7 more to go.\n \n" ..
+                    "Note: At battle headstones only one party member needs to examine to spawn the NMs. You have 15 minutes to collect your fragment after defeating them.\n \n" ..
+                    "The Cermet Headstone is at (G-11) in La Theine Plateau — no battle required here.\n \n" ..
+                    "Fastest: Geomagnetic Fount to La Theine Plateau (arrives at H-10), then run SW to (G-11).\n \n" ..
+                    "Run mode: Enter Ordelle's Caves from La Theine Plateau at (F-7) - Look for my wee arrows!\n \n",
+                route_to = "La Theine Plateau",
+                zone_trigger = "Ordelle's Caves",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { type = 'arrow', center = { x = -285.8, y = 9.4, z = 289.0 }, size = 4, direction = 'nw',floor_id = 0 },
+                    { type = 'arrow', center = { x = -298.0, y = 25.5, z = 348.4 }, size = 4, direction = 'sw',floor_id = 0 },
+                },
+                zone_name = "La Theine Plateau",
+            },
+            {
+                text = "Step 2 [Water Fragment] — Enter Ordelle's Cave! \n \n" ..
+                    "[1] Once inside Ordelle's Cave head east initially and then south to (I-6)! \n \n" ..
+                    "[2] Next we will go to (H-9) on the next map! \n \n" ..
+                    "[3] This will lead back to the intial map, we want to go to (H-11) in the SOUTH-EAST room and drop down marked hole. \n \n" ..
+                    "Notes: Make sure to NOT fall down the first hole, we will mark the correct hole with a SQUARE. \n \n" ..
+                    "[4] Head east to (H-11) to the next map.. \n \n" ..
+                    "[5] Last map in the caves, head to (G-10) which will zone you ou to La Theine Plateau ! \n \n",
+
+                visual_zones = {
+                    { type = 'arrow', center = { x = -89.9, y = 0.3, z = 589.6 }, size = 4, direction = 'right',floor_id = 1 },
+                    { type = 'arrow', center = { x = -145.0, y = 32.1, z = 180.0 }, size = 4, direction = 'right',floor_id = 15 },
+                    { type = 'arrow', center = { x = -22.3, y = 32.3, z = 149.2 }, size = 4, direction = 'down',floor_id = 15 },
+                    { type = 'arrow', center = { x = -31.6, y = 0.6, z = -8.4 }, size = 4, direction = 'se',floor_id = 1 },
+                    { type = 'square', center = { x = -45.6, y = 0.5, z = -74.6 }, size = 7,floor_id = 1 },
+                    { type = 'arrow', center = { x = -39.9, y = 28.1, z = -73.6 }, size = 4, direction = 'right',floor_id = 15 },
+                    { type = 'arrow', center = { x = -60.2, y = -27.3, z = 55.5 }, size = 4, direction = 'down',floor_id = 2 },
+                    { type = 'arrow', center = { x = -100.1, y = -27.5, z = -179.6 }, size = 4, direction = 'left',floor_id = 2 },
+                },
+                zone_name = "Ordelle's Caves",
+                zone_trigger = "La Theine Plateau",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16, label = "1"},
+                            { position = "H-11", offsetX = 16, offsetY = 16, label = "3"},
+                        },
+                        floor_id = 1,
+                        zone_name = "Ordelle's Caves",
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16, label = "2"},
+                            { position = "I-11", offsetX = 16, offsetY = 16, label = "4"},
+                        },
+                        floor_id = 15,
+                        zone_name = "Ordelle's Caves",
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16, label = "5"},
+                        },
+                        floor_id = 2,
+                        zone_name = "Ordelle's Caves",
+                    },
+                },
+            },
+             {
+                text = "Step 3 [Water Fragment] - Final ! \n \n" ..
+                       "Run to the Cermet Headstone and clicky for your first Key Item: Water Fragment!! \n \n",
+                keyitems_needed = {240},
+                trigger_on_keyitem_obtain = {240},
+                onmob_target = "zm4-la-theine-cermet-headstone",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "G-11", offsetX = 16, offsetY = 16,},
+                        },
+                        floor_id = 0,
+                        zone_name = "La Theine Plateau",
+                    },
+
+                },
+            },
+            {
+                text = "Step 4 [Earth Fragment] — Western Altepa Desert \n\n" ..
+                    "Fastest: Unity Teleport (Content Level 125) to Western Altepa Desert — drops you right above the pit.\n" ..
+                    "Otherwise: Enter Quicksand Caves at (J-9), drop through the sand pit at (K-6), then head east to re-enter Western Altepa Desert underground.\n\n" ..
+                    "Follow the underground path to (H-9) and examine the Cermet Headstone. No battle required.",
+                route_to = "Western Altepa Desert",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                trigger_on_keyitem_obtain = {570}, -- TODO: verify Earth Fragment key item ID
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+            },
+            {
+                text = "Step 3 [Ice Fragment] — Fei'Yin / Cloister of Frost\n\n" ..
+                    "Fastest: Home Point #2 in Fei'Yin — short walk north to the Cloister.\n" ..
+                    "Alternative: Home Point #1 in Fei'Yin, use Sneak navigating to (G-9).\n" ..
+                    "Mini Tuning Fork of Ice holders can warp directly from Northern San d'Oria.\n\n" ..
+                    "Inside Fei'Yin: go to (G-9) [1] and head downstairs, then (I-5) [2] into the Cloister of Frost.\n" ..
+                    "!! Sneak required past Hellish Weapons at (I-6) — they aggro even at 99.\n\n" ..
+                    "The Cermet Headstone is past the protocrystal. No battle required.",
+                route_to = "Fei'Yin",
+                destination_highlight = {position = "I-5", offsetX = 16, offsetY = 16},
+                trigger_on_keyitem_obtain = {573}, -- TODO: verify Ice Fragment key item ID
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "I-5", offsetX = 16, offsetY = 16, label = "2" },
+                        },
+                        zone_name = "Fei'Yin",
+                    },
+                },
+            },
+            {
+                text = "Step 4 [Lightning Fragment] — Behemoth's Dominion\n\n" ..
+                    "Fastest: Unity warp (Level 135) or Survival Guide.\n" ..
+                    "Otherwise: Enter via the tunnel at (D-5) in Qufim Island and follow it west.\n\n" ..
+                    "Head to (G-9) and examine the Cermet Headstone.\n\n" ..
+                    "BATTLE: Legendary Weapon (RDM) and Ancient Weapon (WAR) spawn.\n" ..
+                    "Tip: Examine with Sneak active — they won't attack immediately. Kill the Ancient Weapon (WAR), then wait for the Legendary Weapon to despawn. You don't need to kill both.",
+                route_to = "Behemoth's Dominion",
+                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Ancient Weapon"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {574}, -- TODO: verify Lightning Fragment key item ID
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Behemoth's Dominion",
+                    },
+                },
+            },
+            {
+                text = "Step 5 [Wind Fragment] — Cape Teriggan\n\n" ..
+                    "Fastest: Home Point #1 at Cloister of Gales, or Unity warp (Level 128).\n\n" ..
+                    "Enter the uncharted tunnel at (F-7) [1], follow it south, then enter the tunnel at (G-5) [2].\n" ..
+                    "The Cermet Headstone is at (H-5).\n\n" ..
+                    "BATTLE: Shadow named Axesarion the Wanderer spawns.\n" ..
+                    "Uses Dimensional Death frequently. Immune to Stun. Nearby Goblins respawn every 5 minutes.",
+                route_to = "Cape Teriggan",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Axesarion the Wanderer"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {572}, -- TODO: verify Wind Fragment key item ID
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "H-5", offsetX = 16, offsetY = 16, label = "2" },
+                        },
+                        zone_name = "Cape Teriggan",
+                    },
+                },
+            },
+            {
+                text = "Step 6 [Fire Fragment] — Ifrit's Cauldron → Yuhtunga Jungle\n\n" ..
+                    "Bring 3+ Ice Clusters. Everyone needs Sneak and Invisible — Bombs detect magic use.\n" ..
+                    "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n\n" ..
+                    "Route:\n" ..
+                    "  Map 4: Enter at (G-6) → head to (H-8) → Map 7\n" ..
+                    "  Map 7: (D-12) → Map 5\n" ..
+                    "  Map 5: (J-8) → Map 2. Flame Spout at (H-6)/(H-7) — trade Ice Cluster or wait ~5 min.\n" ..
+                    "  Map 2: (E-7) → Map 7\n" ..
+                    "  Map 7: (G-7) → Map 8\n" ..
+                    "  Map 8: Follow tunnel to (C-7) → exit to Yuhtunga Jungle. Two more Flame Spouts on the way.\n" ..
+                    "  !! Ash Dragon near the end has wide detection — time your entry when it moves away.\n\n" ..
+                    "In Yuhtunga Jungle: exit tunnel, turn left, enter the tunnel at (L-7) for the Cermet Headstone.\n\n" ..
+                    "BATTLE: Two Opo-Opos — Carthi and Tipha. Both immune to Sleep and Lullaby. Gravity and Bind work.",
+                route_to = "Yhoator Jungle",
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Carthi", "Tipha"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {569}, -- TODO: verify Fire Fragment key item ID
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 6,
                         highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Temple of Uggalepih",
-                        floor_id = 1,
+                        zone_name = "Yhoator Jungle",
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        highlights = {
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yuhtunga Jungle",
                     },
                 },
             },
             {
-                text = "You should now be in a cavern of Den of Rancor, Map 1 (G-6) which contains some Tonberry Imprecators who can drop the Unlit Lantern, if you don't already possess one. Trade your Unlit Lantern to the Altar of Rancor on Map 1 (E-5) to receive a Rancor Flame. IMPORTANT: Only use the 'Rancor Flame' from this altar, not colored flames from other altars deeper in the Den.",
+                text = "Step 7 [Light Fragment] — The Sanctuary of Zi'Tah\n\n" ..
+                    "Head to the SE corner of (J-9), take the hidden path north to the top-right of (J-9), then hug left along the uncharted path to (I-7).\n\n" ..
+                    "BATTLE: Doomed named Doomed Pilgrims — considered the hardest headstone fight. Hits hard and fast. High evasion recommended.\n\n" ..
+                    "Once all 8 fragments are collected: 'You now have all 8 fragments of light!' — mission complete!",
+                route_to = "The Sanctuary of Zi'Tah",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Doomed Pilgrims"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {575}, -- TODO: verify Light Fragment key item ID
+                trigger_on_talk = "You now have all 8 fragments of light!",
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 7,
                         highlights = {
-                            { position = "E-5", offsetX = 16, offsetY = 16 },
-                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "I-7", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Den of Rancor",
-                        floor_id = 0,
-                    },
-                },
-            },
-            {
-                text = "Drop down the hole at the northeast corner of (F-7) to reach Map 2. Head northwest up the passageway to reach the four torches and the gate of the Sacrificial Chamber at (E-5).",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 8,
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Den of Rancor",
-                        floor_id = 0,
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 8,
-                        highlights = {
-                            { position = "E-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Den of Rancor",
-                        floor_id = 1,
-                    },
-                },
-            },
-            {
-                text = "Trade a Rancor Flame to one torch to light it up and receive an Unlit Lantern in return. All four torches need to be lit to open the gate. You cannot trade while Invisible - you may need to fight enemies. Repeat the process of trading Unlit Lantern at the Altar to get Rancor Flame, then lighting torches, until all four are lit. The torches stay lit until the door is opened. WARNING: Players exiting via the door switch will cause lit torches to become unlit.",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 9,
-                        highlights = {
-                            { position = "E-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Den of Rancor",
-                        floor_id = 1,
-                    },
-                },
-            },
-            {
-                text = "Once inside, interact with the Home Point so you don't have to repeat this process. Before proceeding to the battle, consider warping away to reset your Tonberry hate at the Temple of Uggalepih to avoid being K.O.'d by Everyone's Rancor. After entering the Sacrificial Chamber, examine the Mahogany Door to enter the Battlefield (level 99 cap, 6 players max). Buffs wear upon entry.",
-                zone_trigger = "Sacrificial Chamber",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 10,
-                        highlights = {
-                            { position = "E-5", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Den of Rancor",
-                        floor_id = 1,
-                    },
-                },
-            },
-            {
-                text = "BATTLE: There are three Tonberry NMs that must be defeated. Recommended kill order: 1) Grav'iton (Thief with crown - immune to sleep), 2) Molyb'iton (Black Mage), 3) Tungs'iton (Summoner). The Thief is completely immune to sleep, so kill it while you Silence/Sleep the other two. The Summoner comes with a random elemental pet that dies when its master does.",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 11,
-                        zone_name = "Sacrificial Chamber",
-                    },
-                },
-            },
-            {
-                text = "At approximately 25% HP, the Summoner summons a random avatar for Astral Flow (max damage ~700-800). At approximately 25% HP, the Thief may use Everyone's Rancor which can K.O. in one shot if you haven't reset your Tonberry hate. This fight can be completed solo by most jobs at 99 and is easily duoed.",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 12,
-                        zone_name = "Sacrificial Chamber",
-                    },
-                },
-            },
-            {
-                text = "Clearing the battlefield gives a cutscene and places you in a different location. You will obtain a Key Item: Dark Fragment. After the cutscene, walking out of the Sacrificial Chamber zones you to Map 2 of the Temple of Uggalepih at the Northwest room. Note: If you're doing this for Rhapsodies of Vana'diel prerequisite, you can now continue past The Cursed Temple. You do not need any further Zilart progress to finish Rhapsodies.",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 13,
-                        zone_name = "Sacrificial Chamber",
+                        zone_name = "The Sanctuary of Zi'Tah",
                     },
                 },
             },
         },
         reward = {
-            text = "Key Item: Dark Fragment",
+            text = "Key Items: Fire, Earth, Water, Wind, Ice, Lightning & Light Fragments\nTitle: Bearer of the Eight Prayers",
         }
     },
 }

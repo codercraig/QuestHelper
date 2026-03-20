@@ -220,6 +220,13 @@ return {
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
     },
+    -- La Theine Plateau
+    ["zm4-la-theine-cermet-headstone"] = {
+        target_pos = { x = -172.75, y= 38, z=-508.4},
+        visual_mode = "arc",
+        zone = "La Theine Plateau"
+    },
+
     -- Davoi
     ["Wall of Dark Arts"] = {
         target_pos = { x = -23.2, y= -0.6, z=-69.1},
@@ -453,6 +460,11 @@ return {
     },
     ["templeugg1-zm4-oldcasket"] = {
         target_pos = { x = 63, y = -0.8, z = 17.6},
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih"
+    },
+    ["templeugg2-zm4-eastpainting"] = {
+        target_pos = { x = -52.1, y = -2.2, z = -0.1},
         visual_mode = "arc",
         zone = "Temple of Uggalepih"
     },
