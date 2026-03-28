@@ -468,4 +468,10 @@ return {
         visual_mode = "arc",
         zone = "Temple of Uggalepih"
     },
+    -- Cloister of Frost
+    ["cloister-of-frost-zm5-cermet-headstone"] = {
+        target_pos = { x = 567.9, y = -1.2, z = 608},
+        visual_mode = "arc",
+        zone = "Cloister of Frost"
+    },
 }

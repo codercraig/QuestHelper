@@ -259,7 +259,7 @@ return {
         },
         steps = {
             {
-                text = "Step 1 [Water Fragment] — La Theine Plateau\n \n" ..
+                text = "Step 1: [Water Fragment] — La Theine Plateau\n \n" ..
                     "You need to collect 8 Fragments from across Vana'diel. The Dark Fragment from ZM4 already counts — 7 more to go.\n \n" ..
                     "Note: At battle headstones only one party member needs to examine to spawn the NMs. You have 15 minutes to collect your fragment after defeating them.\n \n" ..
                     "The Cermet Headstone is at (G-11) in La Theine Plateau — no battle required here.\n \n" ..
@@ -275,7 +275,7 @@ return {
                 zone_name = "La Theine Plateau",
             },
             {
-                text = "Step 2 [Water Fragment] — Enter Ordelle's Cave! \n \n" ..
+                text = "Step 2: [Water Fragment] — Enter Ordelle's Cave! \n \n" ..
                     "[1] Once inside Ordelle's Cave head east initially and then south to (I-6)! \n \n" ..
                     "[2] Next we will go to (H-9) on the next map! \n \n" ..
                     "[3] This will lead back to the intial map, we want to go to (H-11) in the SOUTH-EAST room and drop down marked hole. \n \n" ..
@@ -331,7 +331,7 @@ return {
                 },
             },
              {
-                text = "Step 3 [Water Fragment] - Final ! \n \n" ..
+                text = "Step 3: [Water Fragment] - Final ! \n \n" ..
                        "Run to the Cermet Headstone and clicky for your first Key Item: Water Fragment!! \n \n",
                 keyitems_needed = {240},
                 trigger_on_keyitem_obtain = {240},
@@ -351,48 +351,65 @@ return {
                 },
             },
             {
-                text = "Step 4 [Earth Fragment] — Western Altepa Desert \n\n" ..
+                text = "Step 4 [Ice Fragment] — Travel To Fei'Yin!\n \n" ..
+                    "Fastest: Home Point #2 in Fei'Yin — short walk north to the Cloister.\n" ..
+                    "Alternative: Home Point #1 in Fei'Yin, use Sneak navigating to (G-9).\n" ..
+                    "Mini Tuning Fork of Ice holders can warp directly from Northern San d'Oria.\n \n" ..
+                    "If running follow route to Fei'Yin! \n \n",
+                keyitems_needed = {244},
+                route_to = "Beaucedine Glacier",
+                destination_highlight = {position = "J-4", offsetX = 16, offsetY = 16},
+                zone_trigger = "Fei'Yin",
+            },
+            {
+                text = "Step 5 [Ice Fragment] — Inside Fei'Yin -> Cloister of Frost\n \n" ..
+                    "Once inside Fei'Yin head to (G-9), and then run to (I-5) near the Cloister of Frost \n \n" ..
+                    "Notes: Remember to Sneak up! \n \n",
+                visual_zones = {
+                    { type = 'arrow', center = { x = -78.8, y = -15.6, z = -73.4 }, size = 4, direction = 'ne',floor_id = 1 },
+                    { type = 'arrow', center = { x = -20.6, y = -16, z = -61.1 }, size = 4, direction = 'right',floor_id = 1 },
+                    { type = 'arrow', center = { x = -18.8, y = -16, z = -18.9 }, size = 4, direction = 'left',floor_id = 1 },
+                },
+                zone_name = "Fei'Yin",
+                zone_trigger = "Cloister of Frost",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Fei'Yin",
+                        floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "I-5", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Fei'Yin",
+                        floor_id = 15,
+                    },
+                },
+            },
+            {
+                text = "Step 6 [Ice Fragment] — Cloister of Frost Cermet Headstone \n \n" ..
+                       "Once inside Cloister of Frost, run past the protocrystal and click on the Cermet Headstone. \n \n",
+                trigger_on_keyitem_obtain = {244},
+                onmob_target = "cloister-of-frost-zm5-cermet-headstone",
+
+            },
+             {
+                text = "Step 7: [Earth Fragment] — Western Altepa Desert \n\n" ..
                     "Fastest: Unity Teleport (Content Level 125) to Western Altepa Desert — drops you right above the pit.\n" ..
                     "Otherwise: Enter Quicksand Caves at (J-9), drop through the sand pit at (K-6), then head east to re-enter Western Altepa Desert underground.\n\n" ..
                     "Follow the underground path to (H-9) and examine the Cermet Headstone. No battle required.",
                 route_to = "Western Altepa Desert",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_keyitem_obtain = {570}, -- TODO: verify Earth Fragment key item ID
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Western Altepa Desert",
-                    },
-                },
-            },
-            {
-                text = "Step 3 [Ice Fragment] — Fei'Yin / Cloister of Frost\n\n" ..
-                    "Fastest: Home Point #2 in Fei'Yin — short walk north to the Cloister.\n" ..
-                    "Alternative: Home Point #1 in Fei'Yin, use Sneak navigating to (G-9).\n" ..
-                    "Mini Tuning Fork of Ice holders can warp directly from Northern San d'Oria.\n\n" ..
-                    "Inside Fei'Yin: go to (G-9) [1] and head downstairs, then (I-5) [2] into the Cloister of Frost.\n" ..
-                    "!! Sneak required past Hellish Weapons at (I-6) — they aggro even at 99.\n\n" ..
-                    "The Cermet Headstone is past the protocrystal. No battle required.",
-                route_to = "Fei'Yin",
-                destination_highlight = {position = "I-5", offsetX = 16, offsetY = 16},
-                trigger_on_keyitem_obtain = {573}, -- TODO: verify Ice Fragment key item ID
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        highlights = {
-                            { position = "G-9", offsetX = 16, offsetY = 16, label = "1" },
-                            { position = "I-5", offsetX = 16, offsetY = 16, label = "2" },
-                        },
-                        zone_name = "Fei'Yin",
-                    },
-                },
             },
             {
                 text = "Step 4 [Lightning Fragment] — Behemoth's Dominion\n\n" ..
