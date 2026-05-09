@@ -11,7 +11,7 @@
 require('common')
 addon.author   = 'Oxos'
 addon.name     = 'QuestHelper'
-addon.version  = '2.0.0'
+addon.version  = '1.0.0'
 
 -- Core Requirements
 local imgui        = require('imgui')

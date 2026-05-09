@@ -474,4 +474,10 @@ return {
         visual_mode = "arc",
         zone = "Cloister of Frost"
     },
+    -- Western Altepa Desern
+    ["western-altepa-desert-zm5-cermet-headstone"] = {
+        target_pos = { x = -112.4, y = 9.5, z = -220.8},
+        visual_mode = "arc",
+        zone = "Western Altepa Desert"
+    },
 }

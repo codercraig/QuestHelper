@@ -351,7 +351,7 @@ return {
                 },
             },
             {
-                text = "Step 4 [Ice Fragment] — Travel To Fei'Yin!\n \n" ..
+                text = "Step 4 [Ice Fragment] - Travel To Fei'Yin!\n \n" ..
                     "Fastest: Home Point #2 in Fei'Yin — short walk north to the Cloister.\n" ..
                     "Alternative: Home Point #1 in Fei'Yin, use Sneak navigating to (G-9).\n" ..
                     "Mini Tuning Fork of Ice holders can warp directly from Northern San d'Oria.\n \n" ..
@@ -362,7 +362,7 @@ return {
                 zone_trigger = "Fei'Yin",
             },
             {
-                text = "Step 5 [Ice Fragment] — Inside Fei'Yin -> Cloister of Frost\n \n" ..
+                text = "Step 5 [Ice Fragment] - Inside Fei'Yin -> Cloister of Frost\n \n" ..
                     "Once inside Fei'Yin head to (G-9), and then run to (I-5) near the Cloister of Frost \n \n" ..
                     "Notes: Remember to Sneak up! \n \n",
                 visual_zones = {
@@ -396,23 +396,120 @@ return {
                 },
             },
             {
-                text = "Step 6 [Ice Fragment] — Cloister of Frost Cermet Headstone \n \n" ..
+                text = "Step 6 [Ice Fragment] - Cloister of Frost -> Cermet Headstone \n \n" ..
                        "Once inside Cloister of Frost, run past the protocrystal and click on the Cermet Headstone. \n \n",
                 trigger_on_keyitem_obtain = {244},
                 onmob_target = "cloister-of-frost-zm5-cermet-headstone",
 
             },
-             {
-                text = "Step 7: [Earth Fragment] — Western Altepa Desert \n\n" ..
-                    "Fastest: Unity Teleport (Content Level 125) to Western Altepa Desert — drops you right above the pit.\n" ..
-                    "Otherwise: Enter Quicksand Caves at (J-9), drop through the sand pit at (K-6), then head east to re-enter Western Altepa Desert underground.\n\n" ..
-                    "Follow the underground path to (H-9) and examine the Cermet Headstone. No battle required.",
+            {
+                text = "Step 7: [Earth Fragment] - Western Altepa Desert \n \n" ..
+                    "Fastest: Unity Teleport (Content Level 125) to Western Altepa Desert - drops you right above the pit.\n \n" ..
+                    "Otherwise: Enter Quicksand Caves at (J-9).",
                 route_to = "Western Altepa Desert",
-                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
-                trigger_on_keyitem_obtain = {570}, -- TODO: verify Earth Fragment key item ID
+                destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                keyitems_needed = {241},
+                visual_zones = {
+                    { type = 'arrow', center = { x = 127.8, y = 1.1, z = -218.6 }, size = 4, direction = 'right' },
+                },
+                zone_name = "Western Altepa Desert",
+                zone_trigger = "Quicksand Caves",
+                --trigger_on_keyitem_obtain = {570}, -- TODO: verify Earth Fragment key item ID
             },
             {
-                text = "Step 4 [Lightning Fragment] — Behemoth's Dominion\n\n" ..
+                text = "Step 8: [Earth Fragment] - Quicksand Caves \n \n" ..
+                    "After zoning, drop down through the sand pit at (K-6) then head east to re-enter Western Altepa Desert.\n \n",
+                visual_zones = {
+                    {
+                        type = 'square',
+                        center = { x = 217.3, y = 6.3, z = -15.5 },
+                        size = 5,
+                        floor_id = 3  -- Optional: only show on floor 1
+                    },
+                },
+                zone_name = "Quicksand Caves",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        highlights = {
+                            { position = "K-6", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "N-4", offsetX = 16, offsetY = 16, label = "2" },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 3,
+                    },
+                },
+                zone_trigger = "Western Altepa Desert",
+            },
+            {
+                text = "Step 9: [Earth Fragment] - Re-entering Western Altepa Desert. \n \n" ..
+                       "Drop down and follow the below ground level path/tunnel to (H-9) and touch the Cermet Headstone.\n \n",
+                visual_zones = {
+                     { type = 'arrow', center = { x = 140.5, y = 10.2, z = -19.6 }, size = 4, direction = 'down' },
+                     { type = 'arrow', center = { x = 58.9, y = 10.2, z = -99.6 }, size = 4, direction = 'left' },
+                     { type = 'arrow', center = { x = -19.2, y = 10.2, z = -76.2 }, size = 4, direction = 'down' },
+                },
+                zone_name = "Western Altepa Desert",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Western Altepa Desert",
+                    },
+                },
+                trigger_on_keyitem_obtain = {241},
+                onmob_target = "western-altepa-desert-zm5-cermet-headstone",
+            },
+            {
+                text = "Step 10 [Fire Fragment] — Ifrit's Cauldron → Yuhtunga Jungle\n\n" ..
+                    "Bring 3+ Ice Clusters. Everyone needs Sneak and Invisible — Bombs detect magic use.\n" ..
+                    "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n\n" ..
+                    "Route:\n" ..
+                    "  Map 4: Enter at (G-6) → head to (H-8) → Map 7\n" ..
+                    "  Map 7: (D-12) → Map 5\n" ..
+                    "  Map 5: (J-8) → Map 2. Flame Spout at (H-6)/(H-7) — trade Ice Cluster or wait ~5 min.\n" ..
+                    "  Map 2: (E-7) → Map 7\n" ..
+                    "  Map 7: (G-7) → Map 8\n" ..
+                    "  Map 8: Follow tunnel to (C-7) → exit to Yuhtunga Jungle. Two more Flame Spouts on the way.\n" ..
+                    "  !! Ash Dragon near the end has wide detection — time your entry when it moves away.\n\n" ..
+                    "In Yuhtunga Jungle: exit tunnel, turn left, enter the tunnel at (L-7) for the Cermet Headstone.\n\n" ..
+                    "BATTLE: Two Opo-Opos — Carthi and Tipha. Both immune to Sleep and Lullaby. Gravity and Bind work.",
+                route_to = "Yhoator Jungle",
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Carthi", "Tipha"},
+                    count_party_kills = true,
+                },
+                trigger_on_keyitem_obtain = {569}, -- TODO: verify Fire Fragment key item ID
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yhoator Jungle",
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        highlights = {
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yuhtunga Jungle",
+                    },
+                },
+            },
+            {
+                text = "Step 8 [Fire Fragment] — Journey to Ifrit's Cauldron! \n\n" ..
                     "Fastest: Unity warp (Level 135) or Survival Guide.\n" ..
                     "Otherwise: Enter via the tunnel at (D-5) in Qufim Island and follow it west.\n\n" ..
                     "Head to (G-9) and examine the Cermet Headstone.\n\n" ..
