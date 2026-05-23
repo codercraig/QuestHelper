@@ -480,4 +480,10 @@ return {
         visual_mode = "arc",
         zone = "Western Altepa Desert"
     },
+    --Yuhtunga Jungle
+    ["yuhtunga-jungle-zm5-cermet-headstone"] = {
+        target_pos = { x = 493.8, y = 19.5, z = 303.5},
+        visual_mode = "arc",
+        zone = "Yuhtunga Jungle"
+    },
 }

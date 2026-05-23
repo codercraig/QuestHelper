@@ -31,6 +31,7 @@ local id_to_name = {
     [78] = "Gustaberg Supplies",
     [121] = "Tenshodo Application Form",
     [238] = "Sacrificial Chamber Key",
+    [239] = "Fire Fragment",
     [240] = "Water Fragment",
     [241] = "Earth Fragment",
     [242] = "Wind Fragment",

@@ -468,10 +468,10 @@ return {
             },
             {
                 text = "Step 10 [Fire Fragment] - Journey to Ifrit's Cauldron! \n \n" ..
-                    "Bring 3+ Ice Clusters just to be safe. Everyone needs Sneak and Invisible — Bombs detect magic use.\n \n" ..
+                    "Bring 3+ Ice Clusters[Crystals] just to be safe, optionally a Garnet[Materials > Goldsmithing] . Everyone needs Sneak and Invisible — Bombs detect magic use.\n \n" ..
                     "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n \n" ..
                     "Otherwise let's head to Yhoator Jungle (G-6) and enter Ifrit's Cauldron. \n \n" ..
-                    "Follow the Arrows from Kazham if you don't know the way to (G-6)!!",
+                    "Follow the Arrows from Kazham into Yuhtunga Jungle if you don't know the way to (G-6)!!",
                 route_to = "Yhoator Jungle",
                 destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
                 zone_trigger = "Ifrit's Cauldron",
@@ -561,18 +561,19 @@ return {
                 },
             },
             {
-                text = "Step 12 [Fire Fragment] — Back to Yuhtunga Jungle! \n \n" ..
-                       "",
+                text = "Step 12 [Fire Fragment] - Back to Yuhtunga Jungle! \n \n" ..
+                       "Once back in Yuhtunga Jungle, take a left until you find a passage way towards (L-7). \n \n" ..
+                       "Click on the Cermet Headstone and prepare for Battle! \n \n" ..
+                       "Two Opo-Opos will spawn both Level 65 named: Carthi and Tipha. Both immune to Sleep and Lullaby. \n",
                 visual_zones = {
                     { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 381.3, y = 20.3, z = 317.3 }, size = 4, direction = 'se' },
                     { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 395.6, y = 20.2, z = 296.5 }, size = 4, direction = 'right' },
                     { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 419.2, y = 20.1, z = 305.4 }, size = 4, direction = 'right' },
                 },
-                -- kill_requirement = {
-                --     count = 1,
-                --     enemies = {"Ancient Weapon"},
-                --     count_party_kills = true,
-                -- },
+                trigger_zones = {
+                    { zone_name = "Yuhtunga Jungle", type = 'square', center = {  x = 493.8, y = 20.7, z = 303.5 }, size = 3, colour = "yellow" },
+                },
+                onmob_target = "yuhtunga-jungle-zm5-cermet-headstone",
                 images = {
                     {
                         width = 512,
@@ -586,28 +587,75 @@ return {
                 },
             },
             {
-                text = "Step 5 [Wind Fragment] — Cape Teriggan\n\n" ..
-                    "Fastest: Home Point #1 at Cloister of Gales, or Unity warp (Level 128).\n\n" ..
-                    "Enter the uncharted tunnel at (F-7) [1], follow it south, then enter the tunnel at (G-5) [2].\n" ..
-                    "The Cermet Headstone is at (H-5).\n\n" ..
-                    "BATTLE: Shadow named Axesarion the Wanderer spawns.\n" ..
-                    "Uses Dimensional Death frequently. Immune to Stun. Nearby Goblins respawn every 5 minutes.",
+                text = "Step 13 [Fire Fragment] - Fight commences - Carthi and Tipha. \n \n" ..
+                       "Make sure you get in close and click the Cermet Headstone - defeat both Opo-Opos! NO MERCY! \n \n",
+                visual_zones = {
+                 { zone_name = "Yuhtunga Jungle", type = 'square', center = {  x = 493.8, y = 20.7, z = 303.5  }, size = 3, colour = "green" },
+                },
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Carthi", "Tipha"},
+                    count_party_kills = true,
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 13,
+                        highlights = {
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yuhtunga Jungle",
+                    },
+                },
+            },
+            {
+                text = "Step 14 [Fire Fragment] - Obtain the Fire Fragment! \n \n" ..
+                       "Click on the Cermet Headstone once more to receive the Fire Fragment.  \n \n" ..
+                       "Note: Now is also the time to trade the Garnet to the Cermet Headstone to obtain an Opo-opo Necklace(good for Maat!) \n",
+                onmob_target = "yuhtunga-jungle-zm5-cermet-headstone",
+                keyitems_needed = {239},
+                trigger_on_keyitem_obtain = {239},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 14,
+                        highlights = {
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Yuhtunga Jungle",
+                    },
+                },
+            },
+            {
+                text = "Step 15 [Wind Fragment] - Head to Cape Teriggan\n \n" ..
+                    "Fastest: Home Point #1 at Cloister of Gales, or Unity warp (Level 128).\n \n" ..
+                    "Enter the uncharted tunnel at (F-7), and make your way to the Cermet Headstone at (H-5).\n \n" ..
+                    "Note: Optional to grab a Rain Lily[Materials > Alchemy] item to trade it for a Flagellant's Rope. \n",
+                items_needed = {
+                    { item = "Rain Lily", quantity = 1, optional = true },
+                },
                 route_to = "Cape Teriggan",
-                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 16 [Wind Fragment] - Prepare for Battle!\n \n" ..
+                    "BATTLE: Shadow named Axesarion the Wanderer spawns after interacting with the Cermet Headstone.\n \n" ..
+                    "Uses Dimensional Death frequently. Immune to Stun. Nearby Goblins respawn every 5 minutes. \n",
                 kill_requirement = {
                     count = 1,
                     enemies = {"Axesarion the Wanderer"},
                     count_party_kills = true,
                 },
-                trigger_on_keyitem_obtain = {572}, -- TODO: verify Wind Fragment key item ID
+                --trigger_on_keyitem_obtain = {242}, -- TODO: verify Wind Fragment key item ID
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 16,
                         highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16, label = "1" },
-                            { position = "H-5", offsetX = 16, offsetY = 16, label = "2" },
+                            { position = "H-5", offsetX = 16, offsetY = 16},
                         },
                         zone_name = "Cape Teriggan",
                     },

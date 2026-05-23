@@ -451,13 +451,21 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         -- Draw trigger zones (these also check collision)
                         if step_data.trigger_zones then
                             for _, zone in ipairs(step_data.trigger_zones) do
+                                -- Per-shape zone_name overrides step-level, same as visual_zones
+                                local zoneForDraw = zone.zone_name or requiredZone
+                                if zone.zone_name then
+                                    local zid = zone_data[zone.zone_name]
+                                    if not zid or player_module.zoneId ~= zid then
+                                        goto draw_continue
+                                    end
+                                end
+
                                 -- Check floor_id if specified
                                 local should_draw_zone = true
                                 if zone.floor_id and player_floor then
-                                    -- Convert raw floor_id to mapped floor number
                                     local zone_floor_number = zone.floor_id
-                                    if requiredZone and zone_data[requiredZone] and floor_mappings then
-                                        local zone_id = zone_data[requiredZone]
+                                    if zoneForDraw and zone_data[zoneForDraw] and floor_mappings then
+                                        local zone_id = zone_data[zoneForDraw]
                                         if floor_mappings[zone_id] and floor_mappings[zone_id][zone.floor_id] then
                                             zone_floor_number = floor_mappings[zone_id][zone.floor_id]
                                         end
@@ -477,6 +485,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
                                     end
                                 end
+                                ::draw_continue::
                             end
                         end
 
