@@ -97,10 +97,10 @@ local function getAllItemsNeeded(missionData)
                             end
                             itemData[displayName].quantity = itemData[displayName].quantity + (item.quantity or 1)
                         elseif item.item then
-                            -- Object format: { item = "Name", quantity = 6 }
+                            -- Object format: { item = "Name", quantity = 6, optional = true }
                             local itemName = item.item
                             if not itemData[itemName] then
-                                itemData[itemName] = { quantity = 0, alternatives = nil }
+                                itemData[itemName] = { quantity = 0, alternatives = nil, optional = item.optional or false }
                             end
                             local qty = item.quantity or 1
                             itemData[itemName].quantity = itemData[itemName].quantity + qty
@@ -116,7 +116,8 @@ local function getAllItemsNeeded(missionData)
         table.insert(allItems, {
             name = itemName,
             quantity = data.quantity,
-            alternatives = data.alternatives
+            alternatives = data.alternatives,
+            optional = data.optional
         })
     end
 
@@ -698,12 +699,20 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                     imgui.TextColored(color, locationStr)
                                 end
                             else
-                                -- RED - Don't have it
-                                -- If this has alternatives, the display name already includes quantity info
-                                if itemData.alternatives then
-                                    imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s", itemName))
+                                if itemData.optional then
+                                    -- GREY - Optional, don't have it
+                                    if itemData.alternatives then
+                                        imgui.TextColored({0.6, 0.6, 0.6, 1}, string.format("  [ ] %s (optional)", itemName))
+                                    else
+                                        imgui.TextColored({0.6, 0.6, 0.6, 1}, string.format("  [ ] %s x%d (optional)", itemName, qtyNeeded))
+                                    end
                                 else
-                                    imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
+                                    -- RED - Don't have it
+                                    if itemData.alternatives then
+                                        imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s", itemName))
+                                    else
+                                        imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
+                                    end
                                 end
                             end
                         end

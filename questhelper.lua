@@ -480,38 +480,6 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             end
                         end
 
-                        -- Draw visual zones (visual only, no collision check)
-                        if step_data.visual_zones then
-                            for _, zone in ipairs(step_data.visual_zones) do
-                                -- Check floor_id if specified
-                                local should_draw_zone = true
-                                if zone.floor_id and player_floor then
-                                    -- Convert raw floor_id to mapped floor number
-                                    local zone_floor_number = zone.floor_id
-                                    if requiredZone and zone_data[requiredZone] and floor_mappings then
-                                        local zone_id = zone_data[requiredZone]
-                                        if floor_mappings[zone_id] and floor_mappings[zone_id][zone.floor_id] then
-                                            zone_floor_number = floor_mappings[zone_id][zone.floor_id]
-                                        end
-                                    end
-                                    should_draw_zone = (zone_floor_number == player_floor)
-                                end
-
-                                if should_draw_zone then
-                                    -- Determine color: use zone.colour if specified, otherwise default
-                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
-
-                                    if zone.type == 'square' and zone.center and zone.size then
-                                        drawingModule.drawSquare(zone.center, zone.size, color)
-                                    elseif zone.type == 'line' and zone.start and zone.stop then
-                                        drawingModule.drawLine(zone.start, zone.stop, color)
-                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
-                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
-                                    end
-                                end
-                            end
-                        end
-
                         if step_data.draw_type then
                             -- Determine color: use step_data.colour if specified, otherwise default
                             local color = step_data.colour and beam_drawing.colorNameToARGB(step_data.colour) or beam_drawing.ARGB_BEAM_COLOR
@@ -522,6 +490,48 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 drawingModule.drawSquare(step_data.center, step_data.size, color)
                             elseif step_data.draw_type == 'arrow' and step_data.center and step_data.size and step_data.direction then
                                 drawingModule.drawArrow(step_data.center, step_data.size, step_data.direction, color, step_data.outline)
+                            end
+                        end
+                    end
+
+                    -- Draw visual zones outside shouldDraw: shapes with their own zone_name
+                    -- draw in that zone; shapes without fall back to the step-level shouldDraw
+                    if step_data.visual_zones then
+                        local player_floor = player_module.getFloorId(floor_mappings)
+                        beam_drawing.calculateDynamicColor()
+                        for _, zone in ipairs(step_data.visual_zones) do
+                            local shape_should_draw
+                            if zone.zone_name then
+                                local zid = zone_data[zone.zone_name]
+                                shape_should_draw = zid and player_module.zoneId == zid
+                            else
+                                shape_should_draw = shouldDraw
+                            end
+
+                            if shape_should_draw then
+                                local should_draw_zone = true
+                                if zone.floor_id and player_floor then
+                                    local zone_floor_number = zone.floor_id
+                                    local checkZone = zone.zone_name or requiredZone
+                                    if checkZone and zone_data[checkZone] and floor_mappings then
+                                        local zone_id = zone_data[checkZone]
+                                        if floor_mappings[zone_id] and floor_mappings[zone_id][zone.floor_id] then
+                                            zone_floor_number = floor_mappings[zone_id][zone.floor_id]
+                                        end
+                                    end
+                                    should_draw_zone = (zone_floor_number == player_floor)
+                                end
+
+                                if should_draw_zone then
+                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
+                                    if zone.type == 'square' and zone.center and zone.size then
+                                        drawingModule.drawSquare(zone.center, zone.size, color)
+                                    elseif zone.type == 'line' and zone.start and zone.stop then
+                                        drawingModule.drawLine(zone.start, zone.stop, color)
+                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
+                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
+                                    end
+                                end
                             end
                         end
                     end

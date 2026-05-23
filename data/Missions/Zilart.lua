@@ -467,71 +467,121 @@ return {
                 onmob_target = "western-altepa-desert-zm5-cermet-headstone",
             },
             {
-                text = "Step 10 [Fire Fragment] — Ifrit's Cauldron → Yuhtunga Jungle\n\n" ..
-                    "Bring 3+ Ice Clusters. Everyone needs Sneak and Invisible — Bombs detect magic use.\n" ..
-                    "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n\n" ..
-                    "Route:\n" ..
-                    "  Map 4: Enter at (G-6) → head to (H-8) → Map 7\n" ..
-                    "  Map 7: (D-12) → Map 5\n" ..
-                    "  Map 5: (J-8) → Map 2. Flame Spout at (H-6)/(H-7) — trade Ice Cluster or wait ~5 min.\n" ..
-                    "  Map 2: (E-7) → Map 7\n" ..
-                    "  Map 7: (G-7) → Map 8\n" ..
-                    "  Map 8: Follow tunnel to (C-7) → exit to Yuhtunga Jungle. Two more Flame Spouts on the way.\n" ..
-                    "  !! Ash Dragon near the end has wide detection — time your entry when it moves away.\n\n" ..
-                    "In Yuhtunga Jungle: exit tunnel, turn left, enter the tunnel at (L-7) for the Cermet Headstone.\n\n" ..
-                    "BATTLE: Two Opo-Opos — Carthi and Tipha. Both immune to Sleep and Lullaby. Gravity and Bind work.",
+                text = "Step 10 [Fire Fragment] - Journey to Ifrit's Cauldron! \n \n" ..
+                    "Bring 3+ Ice Clusters just to be safe. Everyone needs Sneak and Invisible — Bombs detect magic use.\n \n" ..
+                    "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n \n" ..
+                    "Otherwise let's head to Yhoator Jungle (G-6) and enter Ifrit's Cauldron. \n \n" ..
+                    "Follow the Arrows from Kazham if you don't know the way to (G-6)!!",
                 route_to = "Yhoator Jungle",
-                kill_requirement = {
-                    count = 2,
-                    enemies = {"Carthi", "Tipha"},
-                    count_party_kills = true,
+                destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
+                zone_trigger = "Ifrit's Cauldron",
+                items_needed = {
+                    { item = "Ice Cluster", quantity = 3 },
+                    { item = "Garnet", quantity = 1, optional = true },
                 },
-                trigger_on_keyitem_obtain = {569}, -- TODO: verify Fire Fragment key item ID
+                visual_zones = {
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -160.6, y = 0, z = 362.3 }, size = 4, direction = 'ne' },
+                    { zone_name = "Yuhtunga Jungle", type = 'square', center = { x = -94.8, y = 0, z = 418.3 }, size = 7 },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -94.1, y = 11.2, z = 419.1 }, size = 4, direction = 'sw' },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 16.3, y = 1.1, z = 262.5 }, size = 4, direction = 'down' },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 30.7, y = 0, z = 222.1 }, size = 4, direction = 'sw' },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 20.9, y = 4.5, z = 139.6 }, size = 4, direction = 'down' },
+                    -- Yhoator Jungle shapes go here
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -218.0, y = 1.3, z = 176.9 }, size = 4, direction = 'down' },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -167.1, y = 0, z = 58.4 }, size = 4, direction = 'sw' },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -161.4, y = 0.8, z = 15 }, size = 4, direction = 'ne' },
+                },
+            },
+            {
+                text = "Step 11 [Fire Fragment] - Ifrit's Cauldron - Yuhtunga Jungle\n \n" ..
+                    "Route:\n" ..
+                    "  Map 4: Enter at (G-6) - head to (H-8) - Map 7\n" ..
+                    "  Map 7: (D-12) - Map 5 \n" ..
+                    "  Map 5: (J-8) - Map 2. Flame Spout at (H-6)/(H-7) - trade Ice Cluster or wait ~5 min.\n" ..
+                    "  Map 2: (E-7) - Map 7 \n" ..
+                    "  Map 7: (G-7) - Map 8 \n" ..
+                    "  Map 8: Follow tunnel to (C-7) - exit to Yuhtunga Jungle. Two more Flame Spouts on the way.\n \n" ..
+                    "  Ash Dragon near the end has wide detection — time your entry when it moves away.\n \n",
+                visual_zones = {
+                    { zone_name = "Ifrit's Cauldron", type = 'arrow', center = { x = -58.8, y = 20.3, z = 20.5 }, size = 4, direction = 'up' },
+                },
+                zone_trigger = "Yuhtunga Jungle",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 6,
+                        state = 11,
                         highlights = {
-                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Yhoator Jungle",
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 4,
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 6,
+                        state = 11,
                         highlights = {
-                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                            { position = "D-12", offsetX = 16, offsetY = 16, label="1" },
+                            { position = "G-7", offsetX = 16, offsetY = 16, label="2" },
                         },
-                        zone_name = "Yuhtunga Jungle",
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 16,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 5,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        highlights = {
+                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 2,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        highlights = {
+                            { position = "C-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Ifrit's Cauldron",
+                        floor_id = 17,
                     },
                 },
             },
             {
-                text = "Step 8 [Fire Fragment] — Journey to Ifrit's Cauldron! \n\n" ..
-                    "Fastest: Unity warp (Level 135) or Survival Guide.\n" ..
-                    "Otherwise: Enter via the tunnel at (D-5) in Qufim Island and follow it west.\n\n" ..
-                    "Head to (G-9) and examine the Cermet Headstone.\n\n" ..
-                    "BATTLE: Legendary Weapon (RDM) and Ancient Weapon (WAR) spawn.\n" ..
-                    "Tip: Examine with Sneak active — they won't attack immediately. Kill the Ancient Weapon (WAR), then wait for the Legendary Weapon to despawn. You don't need to kill both.",
-                route_to = "Behemoth's Dominion",
-                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
-                kill_requirement = {
-                    count = 1,
-                    enemies = {"Ancient Weapon"},
-                    count_party_kills = true,
+                text = "Step 12 [Fire Fragment] — Back to Yuhtunga Jungle! \n \n" ..
+                       "",
+                visual_zones = {
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 381.3, y = 20.3, z = 317.3 }, size = 4, direction = 'se' },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 395.6, y = 20.2, z = 296.5 }, size = 4, direction = 'right' },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 419.2, y = 20.1, z = 305.4 }, size = 4, direction = 'right' },
                 },
-                trigger_on_keyitem_obtain = {574}, -- TODO: verify Lightning Fragment key item ID
+                -- kill_requirement = {
+                --     count = 1,
+                --     enemies = {"Ancient Weapon"},
+                --     count_party_kills = true,
+                -- },
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 12,
                         highlights = {
-                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                            { position = "L-7", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Behemoth's Dominion",
+                        zone_name = "Yuhtunga Jungle",
                     },
                 },
             },
