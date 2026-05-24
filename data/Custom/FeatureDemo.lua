@@ -190,9 +190,10 @@ return {
                        "This will count Stone Eater kills by you, your trusts, and party members.",
                 kill_requirement = {
                     count = 3,
-                    enemies = {"Stone Eater"},  -- Only Stone Eater kills count
+                    enemies = {"Stone Eater", "Huge Hornet", "Tunnel Worm"},  -- Only Stone Eater kills count
                     zone = "South Gustaberg",
-                    count_party_kills = true  -- Count kills from party members and trusts
+                    count_party_kills = true,  -- Count kills from party members and trusts
+                    reset_on_zone_entry = true
                 },
             },
             {

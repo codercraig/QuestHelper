@@ -199,7 +199,7 @@ return {
     },
     ["Port Jeuno"] = {
         {zone = "Lower Jeuno", exit = "E-10"},
-        {zone = "Qufim Island", exit = "E-5"},
+        {zone = "Qufim Island", exit = "E-6"},
         {zone = "Sauromugue Champaign", exit = "K-8"},
         {zone = "Kazham", exit = "I-7"}
     },
@@ -240,6 +240,9 @@ return {
         {zone = "Lower Delkfutt's Tower", exit = "F-6"},
         {zone = "Behemoth's Dominion", exit = "D-5"},
         {zone = "Misareaux Coast", exit = "E-6"}
+    },
+    ["Behemoth's Dominion"] = {
+        {zone = "Qufim Island", exit = "M-9"},
     },
     ["Rolanberry Fields"] = {
         {zone = "Lower Jeuno", exit = "K-4"},

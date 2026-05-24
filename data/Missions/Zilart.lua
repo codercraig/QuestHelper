@@ -244,6 +244,7 @@ return {
                     count = 3,
                     enemies = {"Grav'iton", "Molyb'iton", "Tungs'iton"},
                     count_party_kills = true,
+                    reset_on_zone_entry = true,
                 },
                 trigger_on_keyitem_obtain = {246},
             },
@@ -596,6 +597,7 @@ return {
                     count = 2,
                     enemies = {"Carthi", "Tipha"},
                     count_party_kills = true,
+                    reset_on_zone_entry = true,
                 },
                 images = {
                     {
@@ -636,19 +638,33 @@ return {
                 items_needed = {
                     { item = "Rain Lily", quantity = 1, optional = true },
                 },
+                keyitems_needed = {242},
                 route_to = "Cape Teriggan",
-                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                onmob_target = "cape-teriggan-zm5-cermet-headstone",
+                visual_zones = {
+                    { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -67.1, y = -0.2, z = 31.4 }, size = 4, direction = 'ne' },
+                    { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 60.7, y = -1.9, z = 209.9 }, size = 4, direction = 'nw' },
+                    { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -95.7, y = -9.4, z = 226.1 }, size = 4, direction = 'left' },
+                    { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -190.2, y = -7.3, z = 208.8 }, size = 4, direction = 'sw' },
+                    { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -200.3, y = 0, z = 438.8 }, size = 4, direction = 'right' },
+                },
+                trigger_zones = {
+                    { zone_name = "Cape Teriggan", type = 'square', center = {   x = -109.2, y = -8.5, z = 453.8 }, size = 3, colour = "yellow" },
+                },
             },
             {
                 text = "Step 16 [Wind Fragment] - Prepare for Battle!\n \n" ..
-                    "BATTLE: Shadow named Axesarion the Wanderer spawns after interacting with the Cermet Headstone.\n \n" ..
-                    "Uses Dimensional Death frequently. Immune to Stun. Nearby Goblins respawn every 5 minutes. \n",
+                    "BATTLE: Get in close and click the Cermet Headstone, a Shadow named Axesarion the Wanderer will spawn.\n \n" ..
+                    "Uses Dimensional Death frequently. Immune to Stun. Nearby Goblins respawn every 5 minutes. \n \n",
                 kill_requirement = {
                     count = 1,
                     enemies = {"Axesarion the Wanderer"},
                     count_party_kills = true,
                 },
-                --trigger_on_keyitem_obtain = {242}, -- TODO: verify Wind Fragment key item ID
+                visual_zones = {
+                    { zone_name = "Cape Teriggan", type = 'square', center = {   x = -109.2, y = -8.5, z = 453.8 }, size = 3, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -662,76 +678,221 @@ return {
                 },
             },
             {
-                text = "Step 6 [Fire Fragment] — Ifrit's Cauldron → Yuhtunga Jungle\n\n" ..
-                    "Bring 3+ Ice Clusters. Everyone needs Sneak and Invisible — Bombs detect magic use.\n" ..
-                    "Fastest start: Survival Guide to Yhoator Jungle (G-6) entrance of Ifrit's Cauldron.\n\n" ..
-                    "Route:\n" ..
-                    "  Map 4: Enter at (G-6) → head to (H-8) → Map 7\n" ..
-                    "  Map 7: (D-12) → Map 5\n" ..
-                    "  Map 5: (J-8) → Map 2. Flame Spout at (H-6)/(H-7) — trade Ice Cluster or wait ~5 min.\n" ..
-                    "  Map 2: (E-7) → Map 7\n" ..
-                    "  Map 7: (G-7) → Map 8\n" ..
-                    "  Map 8: Follow tunnel to (C-7) → exit to Yuhtunga Jungle. Two more Flame Spouts on the way.\n" ..
-                    "  !! Ash Dragon near the end has wide detection — time your entry when it moves away.\n\n" ..
-                    "In Yuhtunga Jungle: exit tunnel, turn left, enter the tunnel at (L-7) for the Cermet Headstone.\n\n" ..
-                    "BATTLE: Two Opo-Opos — Carthi and Tipha. Both immune to Sleep and Lullaby. Gravity and Bind work.",
-                route_to = "Yhoator Jungle",
-                kill_requirement = {
-                    count = 2,
-                    enemies = {"Carthi", "Tipha"},
-                    count_party_kills = true,
-                },
-                trigger_on_keyitem_obtain = {569}, -- TODO: verify Fire Fragment key item ID
+                text = "Step 17 [Wind Fragment] - Obtain the Wind Fragment!\n \n" ..
+                    "Click the Cermet Headstone once more \n \n" ..
+                    "Note: Remember to trade the optional Rain Lily for a Flagellant's Rope if you haven't already! \n \n",
+                trigger_on_keyitem_obtain = {242},
+                onmob_target = "cape-teriggan-zm5-cermet-headstone",
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 6,
+                        state = 16,
                         highlights = {
-                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "H-5", offsetX = 16, offsetY = 16},
                         },
-                        zone_name = "Yhoator Jungle",
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 6,
-                        highlights = {
-                            { position = "L-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "Yuhtunga Jungle",
+                        zone_name = "Cape Teriggan",
                     },
                 },
             },
             {
-                text = "Step 7 [Light Fragment] — The Sanctuary of Zi'Tah\n\n" ..
-                    "Head to the SE corner of (J-9), take the hidden path north to the top-right of (J-9), then hug left along the uncharted path to (I-7).\n\n" ..
-                    "BATTLE: Doomed named Doomed Pilgrims — considered the hardest headstone fight. Hits hard and fast. High evasion recommended.\n\n" ..
-                    "Once all 8 fragments are collected: 'You now have all 8 fragments of light!' — mission complete!",
+                text = "Step 18 [Lightning Fragment] - Head to Behemoths Dominion! \n \n" ..
+                    "Fastest: Unity warp (Level 135).\n \n" ..
+                    "Go to (D-5) in Qufim Island and go down the left tunnel it will lead you to Behemoth's Dominion.\n \n",
+                route_to = "Behemoth's Dominion",
+                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+                onmob_target = "behemoth's-dominion-zm5-cermet-headstone",
+                keyitems_needed = {243},
+                trigger_zones = {
+                    { zone_name = "Behemoth's Dominion", type = 'square', center = {   x = -74.8, y = -4, z = -89.2 }, size = 3, colour = "yellow" },
+                },
+            },
+             {
+                text = "Step 19 [Lightning Fragment] - Prepare for Battle!\n \n" ..
+                    "BATTLE: Get in close and click the Cermet Headstone, two Weapons will spawn - Legendary Weapon(RDM) and Ancient Weapon(WAR).\n \n" ..
+                    "You tehcnically only have to kill the Ancient Weapon but easier and faster to kill both - Can pop both with Sneak up and they will not attack. \n \n",
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Legendary Weapon", "Ancient Weapon"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                },
+                visual_zones = {
+                    { zone_name = "Behemoth's Dominion", type = 'square', center = {   x = -74.8, y = -4, z = -89.2 }, size = 3, colour = "green" },
+                },
+                route_to = "Behemoth's Dominion",
+                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 20 [Lightning Fragment] - Obtain the Lightning Fragment!\n \n" ..
+                    "Click the Cermet Headstone once more for the Lightning Fragment.\n \n",
+                onmob_target = "behemoth's-dominion-zm5-cermet-headstone",
+                trigger_on_keyitem_obtain = {243},
+                route_to = "Behemoth's Dominion",
+                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 21 [Light Fragment] - The Sanctuary of Zi'Tah \n \n" ..
+                    "Head to the SE corner of (J-9), take the hidden path north to the top-right of (J-9), then hug left along the uncharted path to (I-7).\n \n",
+                keyitems_needed = {245},
                 route_to = "The Sanctuary of Zi'Tah",
                 destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                onmob_target = "sanctuary-of-zitah-zm5-cermet-headstone",
+                visual_zones = {
+                    { zone_name = "The Sanctuary of Zi'Tah", type = 'arrow', center = { x = 418.8, y = 0.9, z = -35.4 }, size = 4, direction = 'left' },
+                },
+                trigger_zones = {
+                    { zone_name = "The Sanctuary of Zi'Tah", type = 'square', center = {   x = 231.8, y = 0, z = 279.9 }, size = 5, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 22 [Light Fragment] - Prepare for Battle!\n \n" ..
+                    "BATTLE: Get in close and click the Cermet Headstone, a Doomed named Doomed Pilgrims(Level 70) - considered the hardest headstone fight. Hits hard and fast. High evasion recommended.\n \n",
+                route_to = "The Sanctuary of Zi'Tah",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "The Sanctuary of Zi'Tah", type = 'square', center = {   x = 231.8, y = 0, z = 279.9 }, size = 5, colour = "green" },
+                },
                 kill_requirement = {
                     count = 1,
                     enemies = {"Doomed Pilgrims"},
                     count_party_kills = true,
                 },
-                trigger_on_keyitem_obtain = {575}, -- TODO: verify Light Fragment key item ID
-                trigger_on_talk = "You now have all 8 fragments of light!",
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 7,
-                        highlights = {
-                            { position = "I-7", offsetX = 16, offsetY = 16 },
-                        },
-                        zone_name = "The Sanctuary of Zi'Tah",
-                    },
-                },
+            },
+            {
+                text = "Step 23 [Light Fragment] - Obtain Light Fragment! \n \n" ..
+                    "Once again after defeating the Doomed Pilgrims click the Cermet Headstone for the final Light Fragment.\n \n" ..
+                    "Congratulations on obtaining all 8 Fragments!",
+                route_to = "The Sanctuary of Zi'Tah",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                onmob_target = "sanctuary-of-zitah-zm5-cermet-headstone",
+                keyitems_needed = {245},
             },
         },
         reward = {
             text = "Key Items: Fire, Earth, Water, Wind, Ice, Lightning & Light Fragments\nTitle: Bearer of the Eight Prayers",
+        }
+    },
+    ["ZM6: Through the Quicksand Caves"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM5: Headstone Pilgrimage"},
+            {category = "Quests", subfile = "Eastern Altepa Desert", name = "Open Sesame"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Quicksand Caves via Western Altepa Desert.\n \n" ..
+                       "Fastest: Home Point #1 of Quicksand Caves warps you directly to the Chamber of Oracles entrance — skip to Step 3 if you have it!\n \n" ..
+                       "Otherwise: Head to (C-11) of Western Altepa Desert. There's a small tunnel at (D-11) — enter it and drop down the ramp at (D-12) into Quicksand Caves.\n \n" ..
+                       "Bring Sneak — Antica and Sabotenders aggro in the caves. There is a Grounds Tome at the entrance for Circumspection.\n \n",
+                route_to = "Western Altepa Desert",
+                keyitems_needed = {2051},
+                destination_highlight = {position = "C-11", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -833.6, y = -8.8, z = -605.8 }, size = 4, direction = 'se', floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -802, y = -19.1, z = -698.6 }, size = 4, direction = 'up', floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -779.9, y = -16.6, z = -616.3 }, size = 4, direction = 'down', floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -774, y = -8.4, z = -702.5 }, size = 4, direction = 'right', floor_id = 0 },
+                    -- --Quicksand
+                    -- { type = 'square', center = { x = -700.1, y = -0.4, z = -380.1 }, size =5, floor_id = 7 }
+
+                },
+                zone_trigger = "Quicksand Caves",
+            },
+            {
+                text = "Step 2: Navigate Quicksand Caves to the Chamber of Oracles.\n \n" ..
+                       "[1] Travel to (I-9) and step on the circular pad to open the door.\n \n" ..
+                       "Requires weight value of 3 OR a Key Item: Loadstone.\n" ..
+                       "Weight values: Galka = 3, Hume/Mithra/Elvaan = 2, Tarutaru = 1.\n \n" ..
+                       "[2] Head west to the pad at (H-7) to open the next door.\n \n" ..
+                       "[3] Enter the next room and drop down the hole at (F-7).\n \n" ..
+                       "[4] Hug the left wall with Sneak to reach the Chamber of Oracles zone at (D-4) and grab the home point!.\n \n",
+                zone_name = "Quicksand Caves",
+                zone_trigger = "Chamber of Oracles",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "H-7", offsetX = 16, offsetY = 16, label = "2" },
+                            { position = "F-7", offsetX = 16, offsetY = 16, label = "3" },
+                            { position = "D-4", offsetX = 16, offsetY = 16, label = "4" },
+                        },
+                        floor_id = 4,
+                        zone_name = "Quicksand Caves",
+                    },
+                },
+            },
+            {
+                text = "Step 3: Chamber of Oracles - Examine the Shimmering Circle when ready to enter the fight.\n \n" ..
+                       "Level 99 cap, 6 party max. Buffs wear on entry (food stays). No EXP loss on death.\n \n" ..
+                       "Defeat 3 Antica in this order:\n" ..
+                       "[1] Centurio V-III (PLD) - Immune to Sleep, can heal/buff itself and allies. Kill first.\n" ..
+                       "[2] Triarius V-VIII (BLM) - Spams Sleepga. Poison Potions are useful. Can be Silenced.\n" ..
+                       "[3] Princeps V-XI (RNG) - Beware Eagle Eye Shot at ~60% HP. Fast attack rate, Blink tanks may struggle.\n \n" ..
+                       "Tip: Elemental Seal + Sleepga II works well to open. Dispel Protect/Shell from the PLD.",
+                zone_name = "Chamber of Oracles",
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Centurio V-III", "Triarius V-VIII", "Princeps V-XI"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                },
+            },
+            {
+                text = "Step 4: Mission complete!\n \n" ..
+                       "After defeating the 3 Antica a cutscene plays and you appear in a new section of the Chamber of Oracles — this is the start of ZM7.\n \n" ..
+                       "WARNING: Do NOT leave this room before completing ZM7 tasks. The only way back is to fight the 3 Antica again!\n \n",
+                trigger_on_event_id = 32001,
+            },
+        },
+        reward = {
+            text = "Mission complete — access to Chamber of Oracles for ZM7",
+        }
+    },
+    ["ZM7: The Chamber of Oracles"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM6: Through the Quicksand Caves"},
+        },
+        steps = {
+            {
+                text = "Step 1: Place all 8 Fragments into their pedestals around the central device.\n \n" ..
+                       "  Fire Fragment - Pedestal of Fire\n" ..
+                       "  Earth Fragment - Pedestal of Earth\n" ..
+                       "  Water Fragment - Pedestal of Water\n" ..
+                       "  Wind Fragment - Pedestal of Wind\n" ..
+                       "  Ice Fragment - Pedestal of Ice\n" ..
+                       "  Lightning Fragment - Pedestal of Lightning\n" ..
+                       "  Light Fragment - Pedestal of Light\n" ..
+                       "  Dark Fragment - Pedestal of Darkness\n \n" ..
+                       "After all 8 are placed a cutscene fires automatically.\n" ..
+                       "If it does not start, touch any pedestal again.\n \n" ..
+                       "WARNING: Do NOT leave this room — the only way back is to redo the ZM6 Antica fight!\n \n",
+                zone_name = "Chamber of Oracles",
+                keyitems_needed = {239, 241, 240, 242, 244, 243, 245, 246},
+                trigger_on_keyitem_obtain = {247},
+            },
+        },
+        reward = {
+            text = "Key Item: Prismatic Fragment\nTitle: Lightweaver",
+        }
+    },
+    ["ZM8: Return to Delkfutt's Tower"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM6: The Chamber of Oracles"},
+        },
+        steps = {
+            {
+                text = "Step 1: Back to the tower!.\n \n" ..
+                       "",
+                --zone_name = "Chamber of Oracles",
+                --keyitems_needed = {239, 241, 240, 242, 244, 243, 245, 246},
+                --trigger_on_keyitem_obtain = {247},
+            },
+        },
+        reward = {
+            text = "Key Item: Prismatic Fragment\nTitle: Lightweaver",
         }
     },
 }

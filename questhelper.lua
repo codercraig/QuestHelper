@@ -142,6 +142,29 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 end
             end
             lastZoneId = player_module.zoneId
+
+            -- Reset kill counts on any zone change for steps flagged with reset_on_zone_entry,
+            -- but only if the kill requirement isn't already satisfied (step still in progress).
+            if currentTopCategory and currentSubfile and current_mission then
+                local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+                if missionData and missionData.steps then
+                    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+                    local step_data = missionData.steps[step_idx]
+                    if step_data and type(step_data) == 'table' then
+                        local kill_req = step_data.kill_requirement
+                        if kill_req and kill_req.reset_on_zone_entry then
+                            local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, step_idx)
+                            if current_count < kill_req.count then
+                                quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, 0)
+                                if quest_state.settings.ui_settings.dev_mode then
+                                    print(string.format("[%s] Kill count reset for step %d on zone change (%d/%d were incomplete)",
+                                        addon.name, step_idx, current_count, kill_req.count))
+                                end
+                            end
+                        end
+                    end
+                end
+            end
         end
     else
         if shouldPrintDebugNow then
@@ -553,8 +576,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
     local filteredTargets = {}
     for _, targetData in ipairs(targetsToDraw) do
         if targetData then
-            if targetData.zone and zone_data[targetData.zone] then
-                if player_module.zoneId == zone_data[targetData.zone] then
+            if targetData.zone then
+                if zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone] then
                     table.insert(filteredTargets, targetData)
                 end
             else

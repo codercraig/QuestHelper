@@ -2919,7 +2919,8 @@ return {
                     count = 3,
                     enemies = {"Triarius IV-XIV", "Princeps IV-XLV", "Centurio IV-VII"},
                     zone = "Quicksand Caves",
-                    count_party_kills = true
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
                 },
                 images = {
                     {

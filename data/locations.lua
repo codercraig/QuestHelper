@@ -486,4 +486,22 @@ return {
         visual_mode = "arc",
         zone = "Yuhtunga Jungle"
     },
+    --Cape Teriggan
+    ["cape-teriggan-zm5-cermet-headstone"] = {
+        target_pos = { x = -109.2, y = -8.5, z = 453.8},
+        visual_mode = "arc",
+        zone = "Cape Teriggan"
+    },
+    --behemoth's dominion
+    ["behemoth's-dominion-zm5-cermet-headstone"] = {
+        target_pos = { x = -74.8, y = -5.3, z = -89.2},
+        visual_mode = "arc",
+        zone = "Behemoth's Dominion"
+    },
+    --sanctuary of zitah
+    ["sanctuary-of-zitah-zm5-cermet-headstone"] = {
+        target_pos = { x = 231.8, y = -1, z = 279.9},
+        visual_mode = "arc",
+        zone = "The Sanctuary of Zi'Tah"
+    },
 }

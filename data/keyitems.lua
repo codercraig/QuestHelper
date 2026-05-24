@@ -39,6 +39,7 @@ local id_to_name = {
     [244] = "Ice Fragment",
     [245] = "Light Fragment",
     [246] = "Dark Fragment",
+    [247] = "Prismatic Fragment",
     [266] = "Altepa Moonpebble",
     [272] = "Paintbrush of Souls",
     [273] = "Old Rusty Key",

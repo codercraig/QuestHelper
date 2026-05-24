@@ -3,4 +3,6 @@
 [ZM2] Welcome t'Norg   - DONE
 [ZM3] Kazham's Chieftainess - DONE
 [ZM4] The Temple of Uggalepih - DONE
-[ZM5] Headstone Pilgrimage - Step 10 (fire fragment)
+[ZM5] Headstone Pilgrimage - DONE
+[ZM6] Through the Quicksand Caves -
+[ZM7] The Chamber of Oracles -
