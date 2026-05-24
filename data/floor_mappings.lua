@@ -128,6 +128,10 @@ return {
         [1] = 1,
         [2] = 2,
     },
+    --Hall of the Gods
+    [251] = {
+        [1] = 1,
+    },
     -- [184] removed - uses auto-increment (sequential floor IDs)
     -- If floors don't increment properly, run /qh_checkfloor on each floor
     -- and add the actual raw IDs here

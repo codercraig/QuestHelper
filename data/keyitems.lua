@@ -47,7 +47,10 @@ local id_to_name = {
     [290] = "Letter From Werei",
     [293] = "Old Piece of Wood",
     [417] = "Map of Norg",
+    [451] = "Scrap of Papyrus",
+    [452] = "Cerulean Crystal",
     [477] = "Miracle Salt",
+    [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
 
     -- Add more key items as needed:

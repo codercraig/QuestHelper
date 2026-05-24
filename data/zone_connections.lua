@@ -181,7 +181,11 @@ return {
         {zone = "Ro'Maeve", exit = "F-5"}
     },
     ["Ro'Maeve"] = {
-        {zone = "The Sanctuary of Zi'Tah", exit = "H-11"}
+        {zone = "The Sanctuary of Zi'Tah", exit = "H-11"},
+        {zone = "Hall of the Gods", exit = "H-5"}
+    },
+    ["Hall of the Gods"] = {
+        {zone = "Ro'Maeve", exit = "H-13"}
     },
     -- Jeuno Area
     ["Ru'Lude Gardens"] = {

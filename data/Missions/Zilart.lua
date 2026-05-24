@@ -1,5 +1,5 @@
 return {
-    ["ZM1: The New Frontier"] = {
+    ["ZM01: The New Frontier"] = {
         prerequisites = {
             {category = "Missions", subfile = "Bastok", name = "5-2: Xarcabard, Land of Truths"},
             {category = "Missions", subfile = "SanDoria", name = "5-2: The Shadow Lord"},
@@ -18,7 +18,7 @@ return {
         }
     },
 
-    ["ZM2: Welcome tNorg"] = {
+    ["ZM02: Welcome to Norg"] = {
         steps = {
             {
                 text = "Step 1: Click on the 'Oaken Door' at (K-8) in Norg for a cutscene with Gilgamesh. The dialog will ask if you want to open the door, choose Yes. \n \n" ..
@@ -34,7 +34,7 @@ return {
         }
     },
 
-    ["ZM3: Kazhams Chieftainess"] = {
+    ["ZM03: Kazhams Chieftainess"] = {
         steps = {
             {
                 text = "Step 1: Talk to Jakoh Wahcondalo at (J-9) in Kazham (Home Point #1) to obtain the Key Item: Sacrificial Chamber Key, which is required to enter the deeper areas of the Temple of Uggalepih.",
@@ -51,7 +51,7 @@ return {
         }
     },
 
-    ["ZM4: The Temple of Uggalepih"] = {
+    ["ZM04: The Temple of Uggalepih"] = {
         prerequisites = {
             {category = "Quests", subfile = "Temple of Uggalepih", name = "Paintbrush of Souls"},
         },
@@ -254,9 +254,9 @@ return {
         }
     },
 
-    ["ZM5: Headstone Pilgrimage"] = {
+    ["ZM05: Headstone Pilgrimage"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Zilart", name = "ZM4: The Temple of Uggalepih"},
+            {category = "Missions", subfile = "Zilart", name = "ZM04: The Temple of Uggalepih"},
         },
         steps = {
             {
@@ -773,9 +773,9 @@ return {
             text = "Key Items: Fire, Earth, Water, Wind, Ice, Lightning & Light Fragments\nTitle: Bearer of the Eight Prayers",
         }
     },
-    ["ZM6: Through the Quicksand Caves"] = {
+    ["ZM06: Through the Quicksand Caves"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Zilart", name = "ZM5: Headstone Pilgrimage"},
+            {category = "Missions", subfile = "Zilart", name = "ZM05: Headstone Pilgrimage"},
             {category = "Quests", subfile = "Eastern Altepa Desert", name = "Open Sesame"},
         },
         steps = {
@@ -851,9 +851,9 @@ return {
             text = "Mission complete — access to Chamber of Oracles for ZM7",
         }
     },
-    ["ZM7: The Chamber of Oracles"] = {
+    ["ZM07: The Chamber of Oracles"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Zilart", name = "ZM6: Through the Quicksand Caves"},
+            {category = "Missions", subfile = "Zilart", name = "ZM06: Through the Quicksand Caves"},
         },
         steps = {
             {
@@ -878,21 +878,281 @@ return {
             text = "Key Item: Prismatic Fragment\nTitle: Lightweaver",
         }
     },
-    ["ZM8: Return to Delkfutt's Tower"] = {
+    ["ZM08: Return to Delkfutt's Tower"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Zilart", name = "ZM6: The Chamber of Oracles"},
+            {category = "Missions", subfile = "Zilart", name = "ZM07: The Chamber of Oracles"},
         },
         steps = {
             {
-                text = "Step 1: Back to the tower!.\n \n" ..
-                       "",
-                --zone_name = "Chamber of Oracles",
-                --keyitems_needed = {239, 241, 240, 242, 244, 243, 245, 246},
-                --trigger_on_keyitem_obtain = {247},
+                text = "Step 1: Head to Delkfutt's Tower.\n \n" ..
+                       "Fastest: Upper Delkfutt's Tower Home Point #1 - take the transporter on arrival to reach the Stellar Fulcrum on the 12th floor directly.\n \n" ..
+                       "Otherwise: Head to Qufim Island and enter Lower Delkfutt's Tower.\n \n" ..
+                       "Optional: Talk to Aldo in the Tenshodo (Neptune Spire Inn, Lower Jeuno) for a cutscene with Lion first.\n \n" ..
+                       "Optional: Zone into Lower Delkfutt's Tower for a cutscene with Lion, Zeid and Aldo.\n \n",
+                route_to = "Qufim Island",
+                keyitems_needed = {1111},
+                zone_trigger = "Lower Delkfutt's Tower",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 2: Navigate Lower Delkfutt's Tower to Upper Delkfutt's Tower.\n \n" ..
+                       "Bring Delkfutt Keys (from your nation's 3-3 mission) to use Cermet Doors and skip most of the climb.\n \n" ..
+                       "[1] At the first fork go LEFT to (E-8) - stay on the lower level and click the Cermet Door.\n" ..
+                       "[2] Head downstairs and follow the path to the next Cermet Door at (J-8).\n" ..
+                       "Remember: Sneak/Invisible — bats and giants aggro, dolls and pots aggro to magic.\n \n",
+                zone_name = "Lower Delkfutt's Tower",
+                zone_trigger = "Upper Delkfutt's Tower",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                            --{ position = "J-8", offsetX = 16, offsetY = 16, label = "2" },
+                            --{ position = "H-8", offsetX = 16, offsetY = 16, label = "3" },
+                        },
+                        zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16},
+                            --{ position = "H-8", offsetX = 16, offsetY = 16, label = "3" },
+                        },
+                        zone_name = "Lower Delkfutt's Tower",
+                        floor_id = 15,
+                    },
+                },
+                visual_zones = {
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 374.6, y = 0.3, z = -31.9 }, size = 4, direction = 'left', floor_id = 1  },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 343.5, y = 0, z = 19.5 }, size = 4, direction = 'right', floor_id = 1  },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 538.7, y = 16, z = 19.7 }, size = 4, direction = 'left', floor_id = 15 },
+                },
+            },
+            {
+                text = "Step 3: Navigate Upper Delkfutt's Tower to the Stellar Fulcrum.\n \n" ..
+
+                       "[1] Go to (H-8) and examine the ??? to be transported to Upper Delkfutt's Tower.\n" ..
+                       "[2] Head through the door at (F-8) and run up the stairs to the 11th floor. \n" ..
+                       "[2] On the 11th floor, take the stairs at (J-6) up to the 12th floor.\n" ..
+                       "[3] On the 12th floor, go to (F-10) and step through the portal to the Stellar Fulcrum.\n \n" ..
+                       "Keep Sneak/Invisible up throughout — bats, giants, dolls and pots all aggro.\n \n",
+                zone_name = "Upper Delkfutt's Tower",
+                onmob_target = "delkfutts-tower-zm8-lift-???",
+                zone_trigger = "Stellar Fulcrum",
+                visual_zones = {
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = 374.6, y = 0.3, z = -31.9 }, size = 4, direction = 'left', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = 343.5, y = 0, z = 19.5 }, size = 4, direction = 'right', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = 538.7, y = 16, z = 19.7 }, size = 4, direction = 'left', floor_id = 15 },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -284.9, y = -143.6, z = 44.3 }, size = 4, direction = 'nw', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -298.8, y = -144, z = 60.2 }, size = 4, direction = 'left', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -361.5, y = -143.6, z = 73.3 }, size = 4, direction = 'left', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -379.3, y = -143.9, z = 6.7 }, size = 4, direction = 'down', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -367.4, y = -144, z = -31.4 }, size = 4, direction = 'right', floor_id = 1  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -295, y = -159.4, z = 29.1 }, size = 4, direction = 'ne', floor_id = 2  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -249.8, y = -160, z = 69.6 }, size = 4, direction = 'up', floor_id = 2  },
+                    { zone_name = "Upper Delkfutt's Tower", type = 'arrow', center = { x = -257.5, y = -175.5, z = 85.2 }, size = 4, direction = 'sw', floor_id = 3  },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 6,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "J-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 2,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "F-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Upper Delkfutt's Tower",
+                        floor_id = 3,
+                    },
+                },
+            },
+            {
+                text = "Step 4: Stellar Fulcrum - prepare for the fight.\n \n" ..
+                       "A cutscene plays on entry. When ready, examine the 'Qe'lov Gate' at the far end of the chamber for another cutscene, then you enter the battlefield.\n \n" ..
+                       "IMPORTANT: Do NOT call Trusts until AFTER the cutscene at the gate - they will be dispelled if called before it.\n \n" ..
+                       "Buffs wear on entry. Trusts are permitted after the cutscene. No EXP loss on death.\n \n" ..
+                       "~10,000 HP. Immune to Sleep and Silence.\n \n" ..
+                       "Key abilities:\n" ..
+                       "Elemental Blade - gives him an En-spell that ABSORBS damage of that element. Watch the element and switch accordingly.\n" ..
+                       "Great Wheel - ~200 AoE damage and Hate Reset.\n" ..
+                       "Light Blade - 700-1200 single target physical damage (blocked by Utsusemi).\n" ..
+                       "Dispelga / Silencega / Slowga - Slowga overrides Haste, reapply after.\n \n" ..
+                       "After the fight there is a long cutscene (~6 minutes). You return to Stellar Fulcrum when it ends.\n \n" ..
+                       "Note: Exit via Upper Delkfutt's Tower and use the Home Point there to head to Norg for ZM9.\n \n",
+                zone_name = "Stellar Fulcrum",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Kam'lanaut"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                },
+                trigger_on_event_id = {32001},
             },
         },
         reward = {
-            text = "Key Item: Prismatic Fragment\nTitle: Lightweaver",
+            text = "Zilart Rank 8\nTitle: Destroyer of Antiquity",
+        }
+    },
+    ["ZM09: Ro'Maeve"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM08: Return to Delkfutt's Tower"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Norg (Home Point #1) and examine the Oaken Door at (K-8) for a cutscene.\n \n",
+                route_to = "Norg",
+                onmob_target = "Norg_OakenDoor",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {3},
+            },
+        },
+        reward = {
+            text = "Mission log updated - head to Ro'Maeve",
+        }
+    },
+    ["ZM10: The Temple of Desolation"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM09: Ro'Maeve"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Ro'Maeve and zone into the Hall of the Gods at (H-5).\n \n" ..
+                       "Everything in Ro'Maeve aggros to magic - use Silent Oils and Prism Powders (or Spectral Jig/Ninjutsu).\n" ..
+                       "You can ride Mounts in Ro'Maeve to avoid aggro entirely if you have one.\n" ..
+                       "Watch for golems or bombs near the (H-5) entrance to Hall of the Gods.\n \n",
+                route_to = "Ro'Maeve",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                zone_trigger = "Hall of the Gods",
+            },
+            {
+                text = "Step 2: Inside the Hall of the Gods, head to the far end and examine the Cermet Grate.\n \n" ..
+                       "Your mission log will update after the cutscene.\n \n",
+                zone_name = "Hall of the Gods",
+                onmob_target = "hall-of-gods-zm10-gate",
+                trigger_on_event_id = {1},
+                route_to = "Hall of the Gods",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+            },
+        },
+        reward = {
+            text = "Mission log updated",
+        }
+    },
+    ["ZM11: The Hall of the Gods"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM10: The Temple of Desolation"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Norg (Home Point #1) and speak with Gilgamesh.\n \n" ..
+                       "Gilgamesh will give a cutscene. Mission complete after the conversation.\n \n",
+                route_to = "Norg",
+                onmob_target = "Gilgamesh",
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {169},
+            },
+        },
+        reward = {
+            text = "Mission complete — next: The Mithra and the Crystal",
+        }
+    },
+    ["ZM12: The Mithra and the Crystal"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM11: The Hall of the Gods"},
+            {category = "Quests", subfile = "Eastern Altepa Desert", name = "Open Sesame"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Rabao (Home Point #2) and talk to Maryoh Comyujah at the windmill (G-7).\n \n",
+                route_to = "Rabao",
+                onmob_target = "maryoh-comyujah",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {81},
+                keyitems_needed = {451, 2051},
+            },
+            {
+                text = "Step 2: Head to Western Altepa Desert and enter Quicksand Caves at D-12.\n \n" ..
+                       "The entrance is in a trench at D-12 via an unmapped pathway at the SW corner of D-11.\n \n" ..
+                       "Navigate through the caves to reach I-8 on map 7:\n" ..
+                       "  [1] Stand on the weight pad at K-8 to open the door east (exit at L-8).\n" ..
+                       "       Requires 1 Galka, 3 Tarutaru, 2 of any other race, or a Loadstone.\n" ..
+                       "  [2] On the next map pass the door at G-8, then drop into the pit at I-8.\n \n",
+                route_to = "Western Altepa Desert",
+                visual_zones = {
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -833.6, y = -8.8,  z = -605.8 }, size = 4, direction = 'se',    floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -802,   y = -19.1, z = -698.6 }, size = 4, direction = 'up',    floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -779.9, y = -16.6, z = -616.3 }, size = 4, direction = 'down',  floor_id = 0 },
+                    { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -774,   y = -8.4,  z = -702.5 }, size = 4, direction = 'right', floor_id = 0 },
+                },
+                zone_trigger = "Quicksand Caves",
+                destination_highlight = {position = "D-12", offsetX = 16, offsetY = 16},
+            },
+            {
+                text = "Step 3: Touch the ??? at I-8 and select Yes to spawn the Ancient Vessel. Kill it, then touch the ??? again to obtain the Scrap of Papyrus.\n \n" ..
+                       "WARNING: If you zone after killing the Ancient Vessel without picking up the Scrap of Papyrus, you must redo the fight.\n \n",
+                zone_name = "Quicksand Caves",
+                onmob_target = "zm12-ancient-vessel-qm7",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Ancient Vessel"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                },
+                trigger_on_event_id = {13},
+            },
+            {
+                text = "Step 4: Return to Maryoh Comyujah in Rabao (G-7) with the Scrap of Papyrus.\n \n" ..
+                       "She will trade it for the Cerulean Crystal.\n \n",
+                route_to = "Rabao",
+                onmob_target = "maryoh-comyujah",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {83},
+            },
+            {
+                text = "Step 5: Head to the Hall of the Gods and touch the sealed gate for a cutscene.\n \n" ..
+                       "Then go down the hallway and examine the Shimmering Circle for the final cutscene.\n \n",
+                route_to = "Hall of the Gods",
+                onmob_target = "hall-of-gods-zm10-gate",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {3},
+            },
+        },
+        reward = {
+            text = "ZM12 complete — next: The Gate of the Gods",
         }
     },
 }

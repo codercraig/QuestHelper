@@ -504,4 +504,29 @@ return {
         visual_mode = "arc",
         zone = "The Sanctuary of Zi'Tah"
     },
+    --delkfutts tower
+    ["delkfutts-tower-zm8-lift-???"] = {
+        target_pos = { x = 260.1, y = 19.4, z = 20.2},
+        visual_mode = "arc",
+        zone = "Upper Delkfutt's Tower",
+        floor_id = 6
+    },
+    --Hall of the Gods
+    ["hall-of-gods-zm10-gate"] = {
+        target_pos = { x = 0.1, y = -14.3 , z = 49.7},
+        visual_mode = "arc",
+        zone = "Hall of the Gods"
+    },
+    --Rabao
+    ["maryoh-comyujah"] = {
+        target_pos = { x = -0.8, y = 6.5, z = 75.2 },
+        visual_mode = "arc",
+        zone = "Rabao"
+    },
+    --Quicksand Caves
+    ["zm12-ancient-vessel-qm7"] = {
+        target_pos = { x = -504, y = 20, z = -419 },
+        visual_mode = "arc",
+        zone = "Quicksand Caves"
+    },
 }

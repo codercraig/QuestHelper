@@ -572,15 +572,20 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
-    -- Filter targets by zone
+    -- Filter targets by zone and optional floor_id
     local filteredTargets = {}
+    local filter_floor = player_module.getFloorId(floor_mappings)
     for _, targetData in ipairs(targetsToDraw) do
         if targetData then
+            local zoneOk = true
+            local floorOk = true
             if targetData.zone then
-                if zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone] then
-                    table.insert(filteredTargets, targetData)
-                end
-            else
+                zoneOk = zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone]
+            end
+            if targetData.floor_id and filter_floor then
+                floorOk = targetData.floor_id == filter_floor
+            end
+            if zoneOk and floorOk then
                 table.insert(filteredTargets, targetData)
             end
         end

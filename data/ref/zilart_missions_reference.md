@@ -1,8 +1,19 @@
 # Zilart missions - eventid added but not 100% tested, can correct these after v1.
-[ZM1] The New Frontier - DONE
-[ZM2] Welcome t'Norg   - DONE
-[ZM3] Kazham's Chieftainess - DONE
-[ZM4] The Temple of Uggalepih - DONE
-[ZM5] Headstone Pilgrimage - DONE
-[ZM6] Through the Quicksand Caves -
-[ZM7] The Chamber of Oracles -
+[ZM01] The New Frontier - DONE
+[ZM02] Welcome t'Norg - DONE
+[ZM03] Kazham's Chieftainess - DONE
+[ZM04] The Temple of Uggalepih - DONE
+[ZM05] Headstone Pilgrimage - DONE
+[ZM06] Through the Quicksand Caves - DONE
+[ZM07] The Chamber of Oracles - DONE
+[ZM08] Return to Delkfutt's Tower - DONE
+[ZM09] Ro'Maeve - DONE
+[ZM10] The Temple of Desolation - DONE
+[ZM11] The Hall of the Gods - DONE
+[ZM12] The Mithra and the Crystal - STARTED
+[ZM13] The Gate of the Gods -
+[ZM14] Ark Angels -
+[ZM15] The Sealed Shrine -
+[ZM16] The Celestial Nexus -
+[ZM17] Awakening -
+[ZM18] The Last Verse -
