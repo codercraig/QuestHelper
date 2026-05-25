@@ -283,6 +283,15 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
+                -- Add height for kill requirement display
+                if type(step_data) == 'table' and step_data.kill_requirement then
+                    items_height = items_height + 25  -- "[X/Y] Kills Remaining" line
+                    local kill_enemies = step_data.kill_requirement.enemies
+                    if type(kill_enemies) == 'table' then
+                        items_height = items_height + (#kill_enemies * 20)
+                    end
+                end
+
                 -- Calculate total height
                 window_height = base_height + text_height + items_height
 

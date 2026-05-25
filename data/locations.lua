@@ -515,7 +515,14 @@ return {
     ["hall-of-gods-zm10-gate"] = {
         target_pos = { x = 0.1, y = -14.3 , z = 49.7},
         visual_mode = "arc",
-        zone = "Hall of the Gods"
+        zone = "Hall of the Gods",
+        floor_id = 1
+    },
+    ["hall-of-gods-zm12-shimmering"] = {
+        target_pos = { x = 0.1, y = -20.7 , z = 149.1},
+        visual_mode = "arc",
+        zone = "Hall of the Gods",
+        floor_id = 1
     },
     --Rabao
     ["maryoh-comyujah"] = {
@@ -525,8 +532,38 @@ return {
     },
     --Quicksand Caves
     ["zm12-ancient-vessel-qm7"] = {
-        target_pos = { x = -504, y = 20, z = -419 },
+        target_pos = { x = -506.8, y = 17.5, z = -420.3 },
         visual_mode = "arc",
-        zone = "Quicksand Caves"
+        zone = "Quicksand Caves",
+        floor_id = 7
+    },
+    --The Shrine of Ru'Avitau
+    ["zm14-ark-angel-cs-locale"] = {
+        target_pos = { x = -39.9, y = -1.3, z = -147.8 },
+        visual_mode = "arc",
+        zone = "The Shrine of Ru'Avitau",
+        floor_id = 1
+    },
+    -- La'Loff Amphitheater
+    ["zm14-la-loff-ark-tt-shimmering-circle"] = {
+        target_pos = {x = -264.6, y = -137.3, z = 374.7 },
+        visual_mode = "arc",
+        zone = "La'Loff Amphitheater",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["zm14-la-loff-ark-mr-shimmering-circle"] = {
+        target_pos = {x = 14.4, y = -224.3, z = 488.1 },
+        visual_mode = "arc",
+        zone = "La'Loff Amphitheater",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["zm14-la-loff-ark-hm-shimmering-circle"] = {
+        target_pos = {x = -605, y = -22.7, z = 483.7 },
+        visual_mode = "arc",
+        zone = "La'Loff Amphitheater",
+        floor_id = 0,
+        max_distance = 35
     },
 }

@@ -1108,9 +1108,9 @@ return {
                 text = "Step 2: Head to Western Altepa Desert and enter Quicksand Caves at D-12.\n \n" ..
                        "The entrance is in a trench at D-12 via an unmapped pathway at the SW corner of D-11.\n \n" ..
                        "Navigate through the caves to reach I-8 on map 7:\n" ..
-                       "  [1] Stand on the weight pad at K-8 to open the door east (exit at L-8).\n" ..
-                       "       Requires 1 Galka, 3 Tarutaru, 2 of any other race, or a Loadstone.\n" ..
-                       "  [2] On the next map pass the door at G-8, then drop into the pit at I-8.\n \n",
+                       "[1] Stand on the weight pad at K-8 to open the door east (exit at L-8).\n" ..
+                       "Requires 1 Galka, 3 Tarutaru, 2 of any other race, or a Loadstone.\n" ..
+                       "[2] On the next map pass the door at G-8, then drop into the pit at I-8.\n \n",
                 route_to = "Western Altepa Desert",
                 visual_zones = {
                     { zone_name = "Western Altepa Desert", type = 'arrow', center = { x = -833.6, y = -8.8,  z = -605.8 }, size = 4, direction = 'se',    floor_id = 0 },
@@ -1122,37 +1122,239 @@ return {
                 destination_highlight = {position = "D-12", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 3: Touch the ??? at I-8 and select Yes to spawn the Ancient Vessel. Kill it, then touch the ??? again to obtain the Scrap of Papyrus.\n \n" ..
-                       "WARNING: If you zone after killing the Ancient Vessel without picking up the Scrap of Papyrus, you must redo the fight.\n \n",
+                text = "Step 3: Go to (K-8) and stand on the pressure plate which will open the door to the East.\n \n" ..
+                       "Once the door is open, head through to next map (L-8) \n \n" ..
+                       "You can then go to (G-8) and step on the pressure plate to open the next door, then drop down the hole at (I-8) to reach the next map.\n \n" ..
+                       "Once you drop down the hole there will be a ??? on a nearby pillar!\n \n",
                 zone_name = "Quicksand Caves",
                 onmob_target = "zm12-ancient-vessel-qm7",
+                trigger_zones = {
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = -506.8, y = 18.5, z = -420.3 }, size = 3, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "L-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 4,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 7,
+                    },
+                },
+            },
+            {
+                text = "Step 4: Touch the ??? at I-8 and select 'Yes' to spawn the Ancient Vessel. Casts many GA spells, but can be stunned! \n \n",
+                zone_name = "Quicksand Caves",
+                onmob_target = "zm12-ancient-vessel-qm7",
+                visual_zones = {
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = -506.8, y = 18.5, z = -420.3 }, size = 3, colour = "green" },
+                },
                 kill_requirement = {
                     count = 1,
                     enemies = {"Ancient Vessel"},
                     count_party_kills = true,
                     reset_on_zone_entry = true,
                 },
-                trigger_on_event_id = {13},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 7,
+                    },
+                },
             },
             {
-                text = "Step 4: Return to Maryoh Comyujah in Rabao (G-7) with the Scrap of Papyrus.\n \n" ..
+                text = "Step 5: Touch the ??? again to obtain the Scrap of Papyrus.\n \n" ..
+                       "WARNING: If you zone after killing the Ancient Vessel without picking up the Scrap of Papyrus, you must redo the fight.\n \n",
+                zone_name = "Quicksand Caves",
+                onmob_target = "zm12-ancient-vessel-qm7",
+                trigger_on_event_id = {13},
+                trigger_on_keyitem_obtain = {451},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Quicksand Caves",
+                        floor_id = 7,
+                    },
+                },
+            },
+            {
+                text = "Step 6: Warp out and return to Maryoh Comyujah in Rabao (G-7) with the Scrap of Papyrus.\n \n" ..
                        "She will trade it for the Cerulean Crystal.\n \n",
                 route_to = "Rabao",
                 onmob_target = "maryoh-comyujah",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {83},
+                trigger_on_keyitem_obtain = {452},
             },
             {
-                text = "Step 5: Head to the Hall of the Gods and touch the sealed gate for a cutscene.\n \n" ..
-                       "Then go down the hallway and examine the Shimmering Circle for the final cutscene.\n \n",
+                text = "Step 7: Head to the Hall of the Gods and touch the sealed gate for a cutscene.\n \n",
                 route_to = "Hall of the Gods",
                 onmob_target = "hall-of-gods-zm10-gate",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {4},
+            },
+            {
+                text = "Step 8: Continue down the hallway and examine the Shimmering Circle for the final cutscene. \n \n" ..
+                       "Welcome to Ru'Aun Gardens(SKY)! \n \n",
+                route_to = "Hall of the Gods",
+                keyitems_needed = {452},
+                onmob_target = "hall-of-gods-zm12-shimmering",
+                destination_highlight = {position = "H-4", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {3},
             },
         },
         reward = {
             text = "ZM12 complete — next: The Gate of the Gods",
+        }
+    },
+     ["ZM13: The Gate of the Gods"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM12: The Hall of the Gods"},
+        },
+        steps = {
+            {
+                text = "Step 1: After clicking on the shimmering circle you will be elevated up a floor, keep heading north to Ru'Aun Gardens! \n \n" ..
+                       "This mission will complete on zoning into Ru'Aun Gardens. \n \n",
+                route_to = "Hall of the Gods",
+                destination_highlight = {position = "H-4", offsetX = 16, offsetY = 16},
+                zone_trigger = "Ru'Aun Gardens",
+                visual_zones = {
+                    { zone_name = "Hall of the Gods",  type = 'arrow', center = { x = -0.0, y = 0.1,  z = 261.3 }, size = 4, direction = 'up', floor_id = 0 },
+                    { zone_name = "Hall of the Gods",  type = 'arrow', center = { x = -0.2, y = 0.1,  z = 320.1 }, size = 4, direction = 'up', floor_id = 0 },
+                }
+            },
+        },
+        reward = {
+            text = "ZM13 complete — next: Ark Angels",
+        }
+    },
+    ["ZM14: Ark Angels"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM13: The Gate of the Gods"},
+        },
+        steps = {
+            {
+                text = "Step 1: In Ru'Aun Gardens (Tu'Lia), take the center portal to the main island.\n \n" ..
+                       "There is a Survival Guide just to the right of the center portal.\n \n" ..
+                       "Head North to the Ru'Avitau Gate at H-8. WARNING: Groundskeepers near blue pads are aggressive to both magic AND sight.\n \n" ..
+                       "Enter the Shrine of Ru'Avitau.\n \n",
+                route_to = "Ru'Aun Gardens",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_trigger = "The Shrine of Ru'Avitau",
+                keyitems_needed = {455, 456, 457, 458, 459},
+            },
+            {
+                text = "Step 2: Inside the Shrine of Ru'Avitau, continue North until you find an unmarked target on the wall. Sneak is needed to avoid Weapon aggro.\n \n" ..
+                       "Examine it for a cutscene. If you want to also flag Divine Might (separate quest, Ark Pentasphere reward), click it again after the first cutscene completes.\n \n",
+                route_to = "The Shrine of Ru'Avitau",
+                onmob_target = "zm14-ark-angel-cs-locale",
+                destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {53},
+            },
+            {
+                text = "Step 3: Defeat all 5 Ark Angels in La'Loff Amphitheater.\n \n" ..
+                       "The battlefields are on the 5 islands surrounding the main Ru'Aun Gardens island, follow the yellow arrows and jump in the Red Portals.\n \n" ..
+                       "To reach a new(bigger) island: activate a Pincer Stone(Will put Squares around them) and take the Blue Portals - you will have to do this to get to each Ark Angel. \n \n" ..
+                       "TIP: Register all 5 Home Points in Ru'Aun Gardens - they warp you directly to each island section.\n \n" ..
+                       "Once all 5 Shards are collected the mission completes automatically.\n \n",
+                route_to = "Ru'Aun Gardens",
+                destination_highlight = {
+                    {position = "F-11", offsetX = 16, offsetY = 16, label = "TT"},
+                    {position = "E-7", offsetX = 16, offsetY = 16, label = "MR"},
+                    {position = "H-4", offsetX = 16, offsetY = 16, label = "HM"},
+                },
+                kill_requirement = {
+                    count = 5,
+                    enemies = {"Ark Angel TT", "Ark Angel MR", "Ark Angel EV", "Ark Angel GK", "Ark Angel HM"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = false,
+                },
+                --trigger_on_keyitem_obtain = {455, 456, 457, 458, 459},
+                onmob_target = {"zm14-la-loff-ark-tt-shimmering-circle","zm14-la-loff-ark-mr-shimmering-circle","zm14-la-loff-ark-hm-shimmering-circle"},
+                visual_zones = {
+                    -- ARK TT
+                    -- First Pincer go clockwise!
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -4.2, y = -40, z = -427.6 }, size = 4, direction = 'left', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -41.1, y = -40, z = -423.3 }, size = 4, direction = 'up', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -47.6, y = -32, z = -382.9 }, size = 4, direction = 'up', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -49.9, y = -32, z = -370.3 }, size = 8, colour = "cyan" },
+                    -- 1st Portal
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -51.3, y = -32, z = -384.8 }, size = 4, direction = 'se', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -44.7, y = -40, z = -429.3 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -108.8, y = -40, z = -441 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -297.6, y = -42, z = -409 }, size = 4, direction = 'sw', floor_id = 0, colour = "yellow" },
+                    { zone_name = "La'Loff Amphitheater", type = 'square', center = { x = -264.6, y = -137.3, z = 374.7 }, size = 1, colour = "yellow" },
+                    -- ARK MR
+                    -- 2nd Island
+                    -- #1 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -297.4, y = -24, z = -268.8 }, size = 4, direction = 'ne', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -303.6, y = -40, z = -228.4 }, size = 4, direction = 'nw', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -316.2, y = -40.2, z = -198.9 }, size = 4, direction = 'up', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -318.1, y = -40.2, z = -180 }, size = 8, colour = "cyan" },
+                    -- #2 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -395.9, y = -24, z = 39.8 }, size = 4, direction = 'right', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -370.1, y = -40.2, z = 3.4 }, size = 4, direction = 'down', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -363.2, y = -40.2, z = -40.7 }, size = 8, colour = "cyan" },
+                    -- 2nd Portal -> MR
+                    -- #1 From South West
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -299.4, y = -24, z = -266.8 }, size = 4, direction = 'ne', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -302.1, y = -40, z = -229.7 }, size = 4, direction = 'sw', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -337.9, y = -40.2, z = -248.5 }, size = 4, direction = 'nw', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -374.2, y = -40.2, z = -223.5 }, size = 4, direction = 'nw', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -441.3, y = -40, z = -43.3 }, size = 4, direction = 'up', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -445.7, y = -40, z = 5.6 }, size = 4, direction = 'up', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -482.7, y = -42, z = 157 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
+                    -- #2 From  West
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -397.8, y = -24, z = 37.5 }, size = 4, direction = 'right', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -382.6, y = -40, z = 10 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
+
+                    --ARK HM
+                    -- 3rd Island
+                    -- #1 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -344.6, y = -24, z = 200.4 }, size = 4, direction = 'se', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -308.5, y = -40, z = 212.3 }, size = 4, direction = 'ne', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -268.5, y = -40.2, z = 247.2 }, size = 8, colour = "cyan" },
+                    -- #1 Portal
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -343.8, y = -24, z = 202.9 }, size = 4, direction = 'ne', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -314.9, y = -24, z = 246 }, size = 4, direction = 'ne', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -343.2, y = -40, z = 259.2 }, size = 4, direction = 'up', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -136.3, y = -24, z = 375.7 }, size = 4, direction = 'right', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -83.8, y = -24, z = 388.9 }, size = 4, direction = 'down', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -106.4, y = -40, z = 360.5 }, size = 4, direction = 'up', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -120.3, y = -40, z = 422.8 }, size = 4, direction = 'right', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 0.2, y = -42, z = 504.2 }, size = 4, direction = 'up', floor_id = 0, colour = "yellow" },
+                    -- #2 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -81.8, y = -24, z = 390.9 }, size = 4, direction = 'down', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -106.8, y = -40, z = 355.8 }, size = 4, direction = 'left', floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -150.4, y = -40.2, z = 332.5 }, size = 8, colour = "cyan" },
+                },
+            },
+        },
+        reward = {
+            text = "ZM14 complete — next: The Sealed Shrine",
         }
     },
 }

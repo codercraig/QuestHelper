@@ -185,7 +185,14 @@ return {
         {zone = "Hall of the Gods", exit = "H-5"}
     },
     ["Hall of the Gods"] = {
-        {zone = "Ro'Maeve", exit = "H-13"}
+        {zone = "Ro'Maeve", exit = "H-13"},
+        {zone = "Hall of the Gods", exit = "H-4"},
+    },
+    ["Ru'Aun Gardens"] = {
+        {zone = "Hall of the Gods", exit = "H-13"},
+    },
+    ["The Shrine of Ru'Avitau"] = {
+        {zone = "Ru'Aun Gardens", exit = "H-12"},
     },
     -- Jeuno Area
     ["Ru'Lude Gardens"] = {

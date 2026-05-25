@@ -579,13 +579,19 @@ ashita.events.register('d3d_present', 'present_callback', function()
         if targetData then
             local zoneOk = true
             local floorOk = true
+            local distOk = true
             if targetData.zone then
                 zoneOk = zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone]
             end
             if targetData.floor_id and filter_floor then
                 floorOk = targetData.floor_id == filter_floor
             end
-            if zoneOk and floorOk then
+            if targetData.max_distance and targetData.target_pos then
+                local dx = player_module.posX - targetData.target_pos.x
+                local dz = player_module.posY_height - targetData.target_pos.z
+                distOk = (dx * dx + dz * dz) <= (targetData.max_distance * targetData.max_distance)
+            end
+            if zoneOk and floorOk and distOk then
                 table.insert(filteredTargets, targetData)
             end
         end
