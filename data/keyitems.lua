@@ -55,6 +55,11 @@ local id_to_name = {
     [458] = "Shard of Envy",
     [459] = "Shard of Rage",
     [477] = "Miracle Salt",
+    [590] = "Light of Holla",
+    [591] = "Light of Dem",
+    [592] = "Light of Mea",
+    [593] = "Light of Vahzl",
+    [594] = "Light of Altaieu",
     [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
 

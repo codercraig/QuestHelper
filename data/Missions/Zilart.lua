@@ -1435,35 +1435,160 @@ return {
                 route_to = "Ru'Aun Gardens",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 zone_trigger = "The Shrine of Ru'Avitau",
+                visual_zones = {
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 0.2, y = -40.0, z = -394.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -0.2, y = -43.6, z = -202.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                }
             },
         },
         reward = {
             text = "ZM15 complete — next: The Celestial Nexus",
         }
     },
-    ["ZM15: The Celestial Nexus"] = {
+    ["ZM16: The Celestial Nexus"] = {
         prerequisites = {
             {category = "Missions", subfile = "Zilart", name = "ZM15: The Sealed Shrine"},
         },
         steps = {
             {
-                text = "Step 1: Head to Norg and talk to Gilgamesh (L-8) for a second cutscene.\n \n" ..
-                       "Optional: Then head to Lower Jeuno and talk to Aldo in the Tenshodo HQ (J-8) for an extra cutscene.\n \n",
-                route_to = "Norg",
-                onmob_target = "Gilgamesh",
-                destination_highlight = {position = "L-8", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {173},
+                text = "Step 1: Make sure to READ this section or you will have to backtrack! \n \n" ..
+                       "While you're still near the Shrine of Ru'Avitau after ZM15, head inside via the main entrance (H-8 in Ru'Aun Gardens) and go straight north to H-10 on Map 2.\n \n" ..
+                       "Touch the yellow Monolith here to open the first yellow door, this saves you having to find a partner to open it later - if someone opens the blue gate before you get through the next phase you will have to come back here.\n \n",
+                route_to = "Ru'Aun Gardens",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                --zone_trigger = "Ru'Aun Gardens",
+                onmob_target = "zm16-shrine-of-ru-avitau-yellow-monolith",
+                trigger_zones = {
+                        { zone_name = "The Shrine of Ru'Avitau", type = 'square', center = { x = 7.9, y = -0.4, z = -116.0 }, size = 7, colour = "yellow" },
+                },
             },
             {
-                text = "Step 2: Return to Ru'Aun Gardens and enter the Shrine of Ru'Avitau from (H-8/9). A cutscene will play automatically on zone-in — this completes the mission.\n \n" ..
-                       "Note: After completing the Quest 'Divine Might', if you have not received your Rare/EX earring, re-enter the Shrine here to collect it.\n \n",
+                text = "Step 2: Head back to Ru'Aun Gardens and go to (I-6) near Genbu's island (Home Point #1 is the quickest). \n \n" ..
+                       "Re-enter The Shrine of Ru'Avitau from this entrance to get on Map 2 from the correct side.\n \n",
                 route_to = "Ru'Aun Gardens",
-                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
-                zone_trigger = "The Shrine of Ru'Avitau",
+                destination_highlight = {position = "I-6", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 0.3, y = -43.6, z = -221.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 1.1, y = -40.0, z = -425.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 39.4, y = -40.0, z = -421.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 49.8, y = -32.0, z = -371.4 }, size = 8, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 53.8, y = -32.0, z = -391.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 111.1, y = -24.0, z = -388.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 158.7, y = -24.0, z = -381.3 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 153.2, y = -30.0, z = -353.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 303.2, y = -24.0, z = -261.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 330.4, y = -24.0, z = -225.1 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 374.7, y = -20.0, z = -116.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 400.1, y = -24.0, z = -14.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 394.0, y = -24.0, z = 35.7 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 378.1, y = -40.0, z = 6.1 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 374.1, y = -40.0, z = -29.9 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 363.1, y = -40.2, z = -38.6 }, size = 8, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 360.8, y = -40.2, z = -30.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 366.6, y = -40.0, z = 10.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 390.6, y = -24.0, z = 47.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 347.2, y = -24.0, z = 201.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 316.5, y = -24.0, z = 244.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 230.1, y = -20.0, z = 313.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 260.1, y = -8.0, z = 337.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 216.7, y = -8.0, z = 298.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                },
+                trigger_zones = {
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'square', center = { x = 240.0, y = -1.7, z = 352.0 }, size = 6, colour = "yellow" },
+                },
+                --zone_trigger = "The Celestial Nexus",
+            },
+            {
+                text = "Step 3: Keep Sneak up throughout - Weapons aggro. Invisible when you see Aura Statues (Golems), they aggro to sight.\n \n" ..
+                       "Route through the Shrine - can follow the arrows:\n" ..
+                       "[1] Head south and follow the path to J-7, through the first yellow door (now open).\n" ..
+                       "[2] Head west past the second yellow door to the control room at H-7 (2 Monoliths — touch one to open the second door if closed).\n" ..
+                       "[3] Head south through the room with 2 Dark Elementals — Sneak only from here.\n" ..
+                       "[4] Follow the corridor east or west to the room with 2 Dark Elementals at H-10.\n" ..
+                       "[5] Head north and descend the stairs - zone into The Celestial Nexus at H-9.\n \n",
+                visual_zones = {
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 239.4, y = -0.1, z = 300.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 180.0, y = 0.1, z = 300.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 181.9, y = 0.1, z = 181.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 121.3, y = 0.2, z = 128.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 4.2, y = 0.5, z = 118.5 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = 19.6, y = 0.1, z = 60.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = -20.1, y = 0.1, z = -60.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = -11.4, y = -0.0, z = -5.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Shrine of Ru'Avitau", type = 'arrow', center = { x = -12.1, y = 48.0, z = 6.7 }, size = 4, direction = "nw", floor_id = 15, colour = "yellow" },
+                },
+                zone_trigger = "The Celestial Nexus",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Shrine of Ru'Avitau",
+                        floor_id = 1,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Shrine of Ru'Avitau",
+                        floor_id = 15,
+                    },
+                },
+
+            },
+            {
+                text = "Step 4: Pass through 4 Celestial Gates in sequence. Do NOT open the 4th gate (sirens in room) until your party is ready - entering immediately starts the fight.\n \n" ..
+                       "[FORM 1] Exoplates (~10,000 HP): Eald'narche is invulnerable until the armour shell is destroyed. Sleep the 2 Orbitals - don't kill them, they respawn instantly. Phase Shift fires at ~66/33/1 percent HP (30' AoE physical, Stun, Bind). Rest up before finishing off Eald'narche (~2000 HP) after Exoplates fall.\n \n" ..
+                       "[FORM 2] (~2500 HP): Teleports constantly, ~75percent melee resist, extremely fast attacks. Casts Ancient Magic, Sleepga II, Bindga - drink Poison Potions and stun key spells. Hate is random, burn fast. WARNING: Do NOT Reraise inside - instant aggro.\n \n" ..
+                       "After the final cutscene you appear in Hall of the Gods. Congratulations!\n \n",
+                        onmob_enemy = {"Eald'narche"},
+                        onmob_enemy_colour = "red",
+                        kill_requirement = {
+                            count = 1,
+                            enemies = {"Eald'narche"},
+                            count_party_kills = true,
+                            reset_on_zone_entry = true,
+                        },
+                        trigger_on_event_id = {32001},
             },
         },
         reward = {
-            text = "ZM15 complete — next: The Celestial Nexus",
+            text = "Rise of the Zilart complete!\nTitle: Burier of the Illusion\nNext: Awakening",
+        }
+    },
+    ["ZM17: Awakening"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM16: The Celestial Nexus"},
+        },
+        steps = {
+            {
+                text = "Step 1: Zone into Norg (Home Point #1) - a cutscene with Gilgamesh plays automatically on zone-in.\n \n" ..
+                       "Tip: Do Norg first so you end up in Jeuno for the next quest (Shadows of the Departed).\n \n" ..
+                       "Optional: Speak with Gilgamesh again after the cutscene for extra dialogue.\n \n",
+                route_to = "Norg",
+                --onmob_target = "Gilgamesh",
+                --destination_highlight = {position = "L-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {176},
+            },
+            {
+                text = "Step 2: Head to Lower Jeuno and enter the Neptune's Spire inn (Tenshodo HQ) at (J-8). A cutscene with Aldo triggers automatically inside.\n \n" ..
+                       "Both this and the Norg cutscene are required before Shadows of the Departed becomes available.\n \n" ..
+                       "Optional: Speak with Aldo, Garnev, Yin Pocanakhu, and Sattal-Mansal after for extra dialogue.\n \n",
+                route_to = "Lower Jeuno",
+                onmob_target = "Door: Neptune's Spire",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {20},
+            },
+        },
+        reward = {
+            text = "ZM17 complete — next: Shadows of the Departed",
         }
     },
 }

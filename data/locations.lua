@@ -226,7 +226,21 @@ return {
         visual_mode = "arc",
         zone = "La Theine Plateau"
     },
-
+    -- Konschtat Highlands
+   ["konschtat-highlands-shattered-telepoint"] = {
+        target_pos = { x = 140.0, y = 19.1, z = 220.0 },
+        visual_mode = "arc",
+        zone = "Konschtat Highlands",
+        max_distance = 60
+    },
+    -- Hall Of Transference
+    ["hall-of-transference-dem-large-apparatus"] = {
+        target_pos = { x = -236.3, y = -44.9, z = -270.0 },
+        visual_mode = "arc",
+        zone = "Hall of Transference",
+        floor_id = 2,
+        max_distance = 35
+    },
     -- Davoi
     ["Wall of Dark Arts"] = {
         target_pos = { x = -23.2, y= -0.6, z=-69.1},
@@ -306,6 +320,12 @@ return {
         visual_mode = "arc",
         zone = "Lower Jeuno"
     },
+    ["Door: Neptune's Spire"] = {
+        target_pos = { x = 38.1, y = -1.6, z = -16.6 },
+        visual_mode = "arc",
+        zone = "Lower Jeuno",
+        max_distance = 35
+    },
     -- Upper Jeuno
     ["Paya-Sabya"] = {
         target_pos = { x = 11.85, y= 1.5, z=70.9},
@@ -318,6 +338,12 @@ return {
         trigger_npc = "Baudin",
         visual_mode = "arc",
         zone = "Upper Jeuno"
+    },
+    ["Monberaux"] = {
+        target_pos = { x = -42.4, y = -2, z = -1.9 },
+        visual_mode = "arc",
+        zone = "Upper Jeuno",
+        max_distance = 45
     },
     ["Door: Jeuno Auction House"] = {
         target_pos = { x = 5.1, y= 0, z=45.3},
@@ -335,6 +361,18 @@ return {
         trigger_npc = "Goggehn",
         visual_mode = "arc",
         zone = "Ru'Lude Gardens"
+    },
+    ["Pherimociel"] = {
+        target_pos = { x = -31.6, y = 0, z = 68.0 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        max_distance = 35
+    },
+    ["Harith"] = {
+        target_pos = { x = -4.3, y = 0.3, z = 134.0 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        max_distance = 35
     },
     ["Door:Bastokan Embassy"] = {
         target_pos = { x = 18.6, y= 7.3, z=-75.4},
@@ -389,7 +427,8 @@ return {
         target_pos = { x = 122.5, y = -9.8, z = -12.1},
         visual_mode = "arc",
         trigger_npc = "Gilgamesh",
-        zone = "Norg"
+        zone = "Norg",
+        max_distance = 35,
     },
     ["Marilleune"] = {
         target_pos = { x = -11.3, y = -2.6, z = -51.3},
@@ -580,4 +619,11 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["zm16-shrine-of-ru-avitau-yellow-monolith"] = {
+        target_pos = { x = 7.9, y = -2.3, z = -116.0 },
+        visual_mode = "arc",
+        zone = "The Shrine of Ru'Avitau",
+        floor_id = 1,
+        max_distance = 35
+},
 }

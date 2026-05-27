@@ -376,6 +376,25 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             if imgui.Button("Back##BackToMissions") then
                 new_current_mission = nil
             end
+
+            -- Next Mission button (Missions only, within same subfile)
+            if currentTopCategory == "Missions" then
+                local subData_nav = quest_data[currentTopCategory] and quest_data[currentTopCategory][currentSubfile]
+                if subData_nav then
+                    local keys_nav = utils.get_sorted_keys(subData_nav)
+                    local cur_idx = nil
+                    for i, k in ipairs(keys_nav) do
+                        if k == current_mission then cur_idx = i break end
+                    end
+                    if cur_idx and cur_idx < #keys_nav then
+                        imgui.SameLine()
+                        if imgui.SmallButton("Next >##NextMission") then
+                            new_current_mission = keys_nav[cur_idx + 1]
+                            collapsed_viewed_step = 1
+                        end
+                    end
+                end
+            end
         elseif currentSubfile then
             -- Back to Subfiles button (when viewing mission list)
             imgui.SameLine()

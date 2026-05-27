@@ -588,7 +588,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
                         for i = 0, 1023 do
                             local ent = GetEntity(i)
-                            if ent and ent.Name and name_set[ent.Name] then
+                            if ent and ent.Name and name_set[ent.Name] and ent.Status ~= 2 and ent.Status ~= 3 then
                                 local lp = ent.Movement and ent.Movement.LocalPosition
                                 if lp then
                                     -- Horizontal-only distance check (X and LocalPosition.Y axes)

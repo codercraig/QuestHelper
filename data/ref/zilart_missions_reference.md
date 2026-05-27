@@ -10,10 +10,10 @@
 [ZM09] Ro'Maeve - DONE
 [ZM10] The Temple of Desolation - DONE
 [ZM11] The Hall of the Gods - DONE
-[ZM12] The Mithra and the Crystal - STARTED
-[ZM13] The Gate of the Gods -
-[ZM14] Ark Angels -
-[ZM15] The Sealed Shrine -
-[ZM16] The Celestial Nexus -
-[ZM17] Awakening -
-[ZM18] The Last Verse -
+[ZM12] The Mithra and the Crystal - DONE
+[ZM13] The Gate of the Gods - DONE
+[ZM14] Ark Angels - DONE
+[ZM15] The Sealed Shrine - DONE
+[ZM16] The Celestial Nexus - DONE
+[ZM17] Awakening - DONE
+[ZM18] The Last Verse - NOT IN LSB
