@@ -2,15 +2,16 @@
 -- Includes: packet events, text chat, item obtains, zone entries, trigger zones
 local triggers = {}
 
-local ffi = require('ffi')
+local ffi      = require('ffi')
+local ui_debug = require('modules.ui_debug')
 
 -- Dev mode flag (set by main module)
 triggers.dev_mode_enabled = false
 
 -- Helper: Debug print (only prints if dev mode is enabled)
-local function debug_print(...)
+local function debug_print(msg)
     if triggers.dev_mode_enabled then
-        print(...)
+        ui_debug.addLine(msg)
     end
 end
 
@@ -125,7 +126,7 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
 
                 -- Debug: Show when checking zones (throttled)
                 if should_debug then
-                    print(string.format("\30\106[QH Debug]\30\01 Checking step %d, zone %d: Player(%.1f, %.1f) vs Center(%.1f, %.1f) | dx=%.1f<%.1f? dz=%.1f<%.1f?",
+                    ui_debug.addLine(string.format("\30\106[QH Debug]\30\01 Checking step %d, zone %d: Player(%.1f, %.1f) vs Center(%.1f, %.1f) | dx=%.1f<%.1f? dz=%.1f<%.1f?",
                         step_idx, i, playerPosX, playerPosZ_depth, zone.center.x, zone.center.z, dx, half_size, dz, half_size))
                     last_trigger_debug_time = current_time
                 end

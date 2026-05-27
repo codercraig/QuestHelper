@@ -566,4 +566,18 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["zm14-la-loff-ark-ev-shimmering-circle"] = {
+        target_pos = { x = 235.6, y = -173.6, z = 361.3 },
+        visual_mode = "arc",
+        zone = "La'Loff Amphitheater",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["zm14-la-loff-ark-gk-shimmering-circle"] = {
+        target_pos = { x = 556.0, y = -38.2, z = 520.6 },
+        visual_mode = "arc",
+        zone = "La'Loff Amphitheater",
+        floor_id = 0,
+        max_distance = 35
+    },
 }

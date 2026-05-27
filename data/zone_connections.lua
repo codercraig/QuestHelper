@@ -186,7 +186,7 @@ return {
     },
     ["Hall of the Gods"] = {
         {zone = "Ro'Maeve", exit = "H-13"},
-        {zone = "Hall of the Gods", exit = "H-4"},
+        {zone = "Ru'Aun Gardens", exit = "H-4"},
     },
     ["Ru'Aun Gardens"] = {
         {zone = "Hall of the Gods", exit = "H-13"},

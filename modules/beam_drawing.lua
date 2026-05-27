@@ -1,9 +1,10 @@
 -- Beam drawing module - Handles 3D beam/arc rendering and quest icons
 local beam_drawing = {}
 
-local ffi = require('ffi')
-local bit = require('bit')
-local d3d = require('d3d8')
+local ffi      = require('ffi')
+local bit      = require('bit')
+local d3d      = require('d3d8')
+local ui_debug = require('modules.ui_debug')
 local d3d8dev = d3d.get_device()
 local C = ffi.C
 
@@ -49,7 +50,7 @@ function beam_drawing.getPlayerHeightOffset(dev_mode)
             local offset = beam_drawing.RACE_HEIGHT_OFFSETS[race] or beam_drawing.RACE_HEIGHT_OFFSETS[0]
             -- Debug output (only print occasionally to avoid spam)
             if dev_mode and math.random() < 0.001 then  -- Print ~0.1% of the time
-                print(string.format("[QH Debug] Race: %d, Height Offset: %.2f", race, offset))
+                ui_debug.addLine(string.format("[QH Debug] Race: %d, Height Offset: %.2f", race, offset))
             end
             return offset
         end
@@ -202,7 +203,7 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
                 effectiveTargetZ_depth = targetData.target_pos.z or 0.0
             else
                 if shouldPrintDebug then
-                    print(string.format("[%s Debug] Error: Location data for target is missing 'target_pos' table.", addon_name))
+                    ui_debug.addLine(string.format("[%s Debug] Error: Location data for target is missing 'target_pos' table.", addon_name))
                 end
             end
 
@@ -227,7 +228,7 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
                 if targetData and targetData.trigger_npc then
                     npc_name_for_print = targetData.trigger_npc
                 end
-                print(string.format("[%s Debug] Drawing Arc for step '%s'. Target: %s", addon_name, targetStepText, npc_name_for_print))
+                ui_debug.addLine(string.format("[%s Debug] Drawing Arc for step '%s'. Target: %s", addon_name, targetStepText, npc_name_for_print))
             end
 
             drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height,

@@ -1276,8 +1276,8 @@ return {
             },
             {
                 text = "Step 3: Defeat all 5 Ark Angels in La'Loff Amphitheater.\n \n" ..
-                       "The battlefields are on the 5 islands surrounding the main Ru'Aun Gardens island, follow the yellow arrows and jump in the Red Portals.\n \n" ..
-                       "To reach a new(bigger) island: activate a Pincer Stone(Will put Squares around them) and take the Blue Portals - you will have to do this to get to each Ark Angel. \n \n" ..
+                       "The battlefields are on the 5 islands surrounding the main Ru'Aun Gardens island, let's go CLOCKWISE following the yellow arrows and jump in the Red Portals.\n \n" ..
+                       "To reach a new(bigger) island: Activate a Pincer Stone(Will put blue Arrows/Squares to help locate) and take the Blue Portals, the Red Portals do not require Blue activation to reach the ARK Angels islands. \n \n" ..
                        "TIP: Register all 5 Home Points in Ru'Aun Gardens - they warp you directly to each island section.\n \n" ..
                        "Once all 5 Shards are collected the mission completes automatically.\n \n",
                 route_to = "Ru'Aun Gardens",
@@ -1285,6 +1285,8 @@ return {
                     {position = "F-11", offsetX = 16, offsetY = 16, label = "TT"},
                     {position = "E-7", offsetX = 16, offsetY = 16, label = "MR"},
                     {position = "H-4", offsetX = 16, offsetY = 16, label = "HM"},
+                    {position = "K-7", offsetX = 16, offsetY = 16, label = "EV"},
+                    {position = "J-11", offsetX = 16, offsetY = 16, label = "GK"},
                 },
                 kill_requirement = {
                     count = 5,
@@ -1292,21 +1294,29 @@ return {
                     count_party_kills = true,
                     reset_on_zone_entry = false,
                 },
-                --trigger_on_keyitem_obtain = {455, 456, 457, 458, 459},
-                onmob_target = {"zm14-la-loff-ark-tt-shimmering-circle","zm14-la-loff-ark-mr-shimmering-circle","zm14-la-loff-ark-hm-shimmering-circle"},
+                trigger_on_keyitem_obtain = {455, 456, 457, 458, 459},
+                onmob_target = {"zm14-la-loff-ark-tt-shimmering-circle",
+                                "zm14-la-loff-ark-mr-shimmering-circle",
+                                "zm14-la-loff-ark-hm-shimmering-circle",
+                                "zm14-la-loff-ark-ev-shimmering-circle",
+                                "zm14-la-loff-ark-gk-shimmering-circle"},
+                onmob_enemy= {"Ark Angel TT", "Ark Angel MR", "Ark Angel HM", "Ark Angel EV", "Ark Angel GK"},
                 visual_zones = {
                     -- ARK TT
-                    -- First Pincer go clockwise!
+                    -- First Pincer left side
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -4.2, y = -40, z = -427.6 }, size = 4, direction = 'left', floor_id = 0, colour = "cyan" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -41.1, y = -40, z = -423.3 }, size = 4, direction = 'up', floor_id = 0, colour = "cyan" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -47.6, y = -32, z = -382.9 }, size = 4, direction = 'up', floor_id = 0, colour = "cyan" },
                     { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -49.9, y = -32, z = -370.3 }, size = 8, colour = "cyan" },
+                    --Second Pincer right side
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 11.6, y = -40.0, z = -426.9 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 50.5, y = -32.0, z = -380.8 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 49.8, y = -32.0, z = -371.4 }, size = 8, colour = "cyan" },
                     -- 1st Portal
-                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -51.3, y = -32, z = -384.8 }, size = 4, direction = 'se', floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -3.4, y = -40.0, z = -429.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -44.7, y = -40, z = -429.3 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -108.8, y = -40, z = -441 }, size = 4, direction = 'left', floor_id = 0, colour = "yellow" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -297.6, y = -42, z = -409 }, size = 4, direction = 'sw', floor_id = 0, colour = "yellow" },
-                    { zone_name = "La'Loff Amphitheater", type = 'square', center = { x = -264.6, y = -137.3, z = 374.7 }, size = 1, colour = "yellow" },
                     -- ARK MR
                     -- 2nd Island
                     -- #1 Pincer
@@ -1350,11 +1360,110 @@ return {
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -81.8, y = -24, z = 390.9 }, size = 4, direction = 'down', floor_id = 0, colour = "cyan" },
                     { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = -106.8, y = -40, z = 355.8 }, size = 4, direction = 'left', floor_id = 0, colour = "cyan" },
                     { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = -150.4, y = -40.2, z = 332.5 }, size = 8, colour = "cyan" },
+                    --ARK EV
+                    -- 1 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 82.6, y = -24.0, z = 388.1 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 108.2, y = -40.0, z = 357.7 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 140.2, y = -40.2, z = 340.0 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 149.0, y = -40.2, z = 333.5 }, size = 8, colour = "cyan" },
+                    -- 2 Pincer
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 343.6, y = -24.0, z = 201.9 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 300.8, y = -40.2, z = 216.5 }, size = 4, direction = "nw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 278.4, y = -40.2, z = 236.1 }, size = 4, direction = "nw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 271.1, y = -40.2, z = 244.6 }, size = 8, colour = "cyan" },
+                    -- 1 Portal
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 80.8, y = -24.0, z = 389.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 107.1, y = -40.0, z = 367.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 136.1, y = -40.0, z = 408.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 190.3, y = -40.0, z = 406.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 328.9, y = -40.0, z = 301.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 370.9, y = -40.0, z = 237.7 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 483.5, y = -42.0, z = 158.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    --ARK GK
+                    --Portal 1
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 10.1, y = -40.0, z = -424.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 44.2, y = -40.0, z = -424.7 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 110.2, y = -40.0, z = -441.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 169.5, y = -40.0, z = -419.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    -- Portal 2
+                    -- { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 300.1, y = -24.0, z = -265.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    -- { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 298.2, y = -40.0, z = -228.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    -- { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 345.3, y = -40.0, z = -264.0 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    -- { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 296.3, y = -42.0, z = -408.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    -- Portal 3
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 394.7, y = -24.0, z = 38.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 379.2, y = -40.0, z = 9.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 426.1, y = -40.0, z = -6.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 445.5, y = -40.0, z = -55.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 386.4, y = -40.0, z = -220.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 297.6, y = -42.0, z = -409.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+
+                    -- Pincer 1
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 393.4, y = -24.0, z = 39.9 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 368.1, y = -40.2, z = -7.4 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 362.9, y = -40.2, z = -32.9 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 363.1, y = -40.2, z = -38.6 }, size = 8, colour = "cyan" },
+                    -- Pincer 2
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 297.3, y = -24.0, z = -265.7 }, size = 4, direction = "nw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 295.4, y = -40.0, z = -226.0 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'arrow', center = { x = 311.2, y = -40.2, z = -188.9 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Aun Gardens", type = 'square', center = { x = 316.4, y = -40.2, z = -182.2 }, size = 8, colour = "cyan" },
+
                 },
             },
         },
         reward = {
             text = "ZM14 complete — next: The Sealed Shrine",
+        }
+    },
+    ["ZM15: The Sealed Shrine"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM14: Ark Angels"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Norg and talk to Gilgamesh (L-8) for a second cutscene.\n \n" ..
+                       "Optional: Then head to Lower Jeuno and talk to Aldo in the Tenshodo HQ (J-8) for an extra cutscene.\n \n",
+                route_to = "Norg",
+                onmob_target = "Gilgamesh",
+                destination_highlight = {position = "L-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {173},
+            },
+            {
+                text = "Step 2: Return to Ru'Aun Gardens and enter the Shrine of Ru'Avitau from (H-8/9). A cutscene will play automatically on zone-in — this completes the mission.\n \n" ..
+                       "Note: After completing the Quest 'Divine Might', if you have not received your Rare/EX earring, re-enter the Shrine here to collect it.\n \n",
+                route_to = "Ru'Aun Gardens",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_trigger = "The Shrine of Ru'Avitau",
+            },
+        },
+        reward = {
+            text = "ZM15 complete — next: The Celestial Nexus",
+        }
+    },
+    ["ZM15: The Celestial Nexus"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Zilart", name = "ZM15: The Sealed Shrine"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Norg and talk to Gilgamesh (L-8) for a second cutscene.\n \n" ..
+                       "Optional: Then head to Lower Jeuno and talk to Aldo in the Tenshodo HQ (J-8) for an extra cutscene.\n \n",
+                route_to = "Norg",
+                onmob_target = "Gilgamesh",
+                destination_highlight = {position = "L-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {173},
+            },
+            {
+                text = "Step 2: Return to Ru'Aun Gardens and enter the Shrine of Ru'Avitau from (H-8/9). A cutscene will play automatically on zone-in — this completes the mission.\n \n" ..
+                       "Note: After completing the Quest 'Divine Might', if you have not received your Rare/EX earring, re-enter the Shrine here to collect it.\n \n",
+                route_to = "Ru'Aun Gardens",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_trigger = "The Shrine of Ru'Avitau",
+            },
+        },
+        reward = {
+            text = "ZM15 complete — next: The Celestial Nexus",
         }
     },
 }

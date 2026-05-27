@@ -30,6 +30,7 @@ local triggers_module  = require('modules.triggers')
 local beam_drawing     = require('modules.beam_drawing')
 local ui_main          = require('modules.ui_main')
 local ui_images        = require('modules.ui_images')
+local ui_debug         = require('modules.ui_debug')
 local map_renderer     = require('modules.map_renderer')
 local utils            = require('modules.utils')
 local inventory_cache  = require('modules.inventory_cache')
@@ -115,7 +116,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
     if memManager then
         if not player_module.updatePosition(memManager) then
             if shouldPrintDebugNow then
-                print("["..addon.name.."] Could not update player position.")
+                ui_debug.addLine("["..addon.name.."] Could not update player position.")
             end
         end
 
@@ -123,7 +124,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         if player_module.zoneId ~= lastZoneId and player_module.zoneId ~= 0 then
             if lastZoneId ~= 0 then -- Don't print on initial load
                 if quest_state.settings.ui_settings.dev_mode then
-                    print(string.format("["..addon.name.."] Zone changed (ID: %d -> %d)", lastZoneId, player_module.zoneId))
+                    ui_debug.addLine(string.format("["..addon.name.."] Zone changed (ID: %d -> %d)", lastZoneId, player_module.zoneId))
                 end
 
                 -- Try to auto-detect floor/map using CheckFloorNumber
@@ -131,13 +132,13 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 if detectedFloor and detectedFloor > 0 then
                     quest_state.setCurrentMap(player_module.zoneId, detectedFloor)
                     if quest_state.settings.ui_settings.dev_mode then
-                        print(string.format("["..addon.name.."] Auto-detected floor/map: %d", detectedFloor))
+                        ui_debug.addLine(string.format("["..addon.name.."] Auto-detected floor/map: %d", detectedFloor))
                     end
                 else
                     -- Fallback: reset to map 1
                     quest_state.setCurrentMap(player_module.zoneId, 1)
                     if quest_state.settings.ui_settings.dev_mode then
-                        print(string.format("["..addon.name.."] Using default map 1 (floor auto-detection unavailable)"))
+                        ui_debug.addLine("["..addon.name.."] Using default map 1 (floor auto-detection unavailable)")
                     end
                 end
             end
@@ -157,7 +158,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             if current_count < kill_req.count then
                                 quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, 0)
                                 if quest_state.settings.ui_settings.dev_mode then
-                                    print(string.format("[%s] Kill count reset for step %d on zone change (%d/%d were incomplete)",
+                                    ui_debug.addLine(string.format("[%s] Kill count reset for step %d on zone change (%d/%d were incomplete)",
                                         addon.name, step_idx, current_count, kill_req.count))
                                 end
                             end
@@ -168,7 +169,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     else
         if shouldPrintDebugNow then
-            print("["..addon.name.."] MemoryManager not ready.")
+            ui_debug.addLine("["..addon.name.."] MemoryManager not ready.")
         end
     end
 
@@ -183,7 +184,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
             -- Floor changed!
             if lastKnownFloor ~= 0 then
                 if quest_state.settings.ui_settings.dev_mode then
-                    print(string.format("["..addon.name.."] Floor changed: %d -> %d, updating map", lastKnownFloor, currentFloor))
+                    ui_debug.addLine(string.format("["..addon.name.."] Floor changed: %d -> %d, updating map", lastKnownFloor, currentFloor))
                 end
                 quest_state.setCurrentMap(player_module.zoneId, currentFloor)
             end
@@ -329,7 +330,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
                         -- DEBUG: Print what we're checking
                         if ENABLE_TRIGGER_DEBUG then
-                            print(string.format("[%s] Checking for buffs: %s", addon.name, table.concat(buffs_to_check, ", ")))
+                            ui_debug.addLine(string.format("[%s] Checking for buffs: %s", addon.name, table.concat(buffs_to_check, ", ")))
                         end
 
                         -- Check if step requires all buffs or just one
@@ -339,7 +340,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             for _, buffId in ipairs(buffs_to_check) do
                                 local hasBuff = player_module.hasBuff(buffId)
                                 if ENABLE_TRIGGER_DEBUG then
-                                    print(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
+                                    ui_debug.addLine(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
                                 end
                                 if hasBuff then
                                     -- Mark this specific buff as active in partial progress
@@ -362,7 +363,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             for _, buffId in ipairs(buffs_to_check) do
                                 local hasBuff = player_module.hasBuff(buffId)
                                 if ENABLE_TRIGGER_DEBUG then
-                                    print(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
+                                    ui_debug.addLine(string.format("[%s] Checking buff ID %d: %s", addon.name, buffId, hasBuff and "FOUND" or "NOT FOUND"))
                                 end
                                 if hasBuff then
                                     print(string.format("\30\106[%s]\30\01 Buff detected (ID: %d)! Completing step %d", addon.name, buffId, step_idx))
@@ -423,7 +424,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             table.insert(targetsToDraw, location_data[name])
                         else
                             if shouldPrintDebugNow then
-                                print(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
+                                ui_debug.addLine(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
                             end
                         end
                     end
@@ -449,11 +450,11 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         if player_module.zoneId == required_zone_id then
                             shouldDraw = true
                             if shouldPrintDebugNow then
-                                print(string.format("["..addon.name.."] Zone match: Drawing in %s (ID: %d)", requiredZone, required_zone_id))
+                                ui_debug.addLine(string.format("["..addon.name.."] Zone match: Drawing in %s (ID: %d)", requiredZone, required_zone_id))
                             end
                         else
                             if shouldPrintDebugNow then
-                                print(string.format("["..addon.name.."] Zone mismatch: Required %s (ID: %d), Current (ID: %d)",
+                                ui_debug.addLine(string.format("["..addon.name.."] Zone mismatch: Required %s (ID: %d), Current (ID: %d)",
                                     requiredZone, required_zone_id, player_module.zoneId))
                             end
                         end
@@ -461,7 +462,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         -- No zone restriction, always draw
                         shouldDraw = true
                         if shouldPrintDebugNow and requiredZone then
-                            print(string.format("["..addon.name.."] Warning: Zone '%s' not found in zone_data", requiredZone))
+                            ui_debug.addLine(string.format("["..addon.name.."] Warning: Zone '%s' not found in zone_data", requiredZone))
                         end
                     end
 
@@ -567,6 +568,42 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             end
                         end
                     end
+
+                    -- Draw squares around enemies matching onmob_enemy (name scan, within range)
+                    if step_data.onmob_enemy and player_module.zoneId ~= 0 then
+                        local enemy_list = type(step_data.onmob_enemy) == 'string'
+                            and { step_data.onmob_enemy }
+                            or step_data.onmob_enemy
+                        local ecolour     = step_data.onmob_enemy_colour or 'magenta'
+                        local esize       = step_data.onmob_enemy_size or 2
+                        local ecolor      = beam_drawing.colorNameToARGB(ecolour, 0.85)
+                        local max_dist_sq = (step_data.onmob_enemy_max_range or 45) ^ 2
+
+                        -- Build lookup set for O(1) name matching
+                        local name_set = {}
+                        for _, n in ipairs(enemy_list) do name_set[n] = true end
+
+                        local px = player_module.posX
+                        local ph = player_module.posY_height  -- LocalPosition.Y = horizontal depth axis
+
+                        for i = 0, 1023 do
+                            local ent = GetEntity(i)
+                            if ent and ent.Name and name_set[ent.Name] then
+                                local lp = ent.Movement and ent.Movement.LocalPosition
+                                if lp then
+                                    -- Horizontal-only distance check (X and LocalPosition.Y axes)
+                                    local dx = lp.X - px
+                                    local dz = lp.Y - ph
+                                    if (dx * dx + dz * dz) <= max_dist_sq then
+                                        -- Data-format center: y=elevation(lp.Z), z=horizontal(lp.Y)
+                                        drawingModule.drawSquare(
+                                            { x = lp.X, y = lp.Z, z = lp.Y },
+                                            esize, ecolor)
+                                    end
+                                end
+                            end
+                        end
+                    end
                 end
             end
         end
@@ -635,6 +672,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         quest_state, quest_data, utils, image_loader, map_renderer,
                         player_module, zone_data, map_db, floor_mappings, quest_state.settings.ui_settings)
     end
+
+    ui_debug.render(player_module, floor_mappings, quest_state, zone_data)
 end)
 
 --------------------------------------------------------------------------------

@@ -3,12 +3,12 @@
 local quest_state = {}
 
 local settings = require('settings')
+local ui_debug = require('modules.ui_debug')
 
 -- Helper: Debug print (only prints if dev mode is enabled)
-local function debug_print(...)
-    -- Access dev_mode from settings
+local function debug_print(msg)
     if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
-        print(...)
+        ui_debug.addLine(msg)
     end
 end
 
