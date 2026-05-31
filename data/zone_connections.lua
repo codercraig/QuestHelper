@@ -66,9 +66,20 @@ return {
         {zone = "Tavnazian Safehold 2", exit = "E-8"},
         {zone = "Tavnazian Safehold 2", exit = "F-10"},
     },
+    ["Misareaux Coast"] = {
+        {zone = "Qufim Island", exit = "G-7"},
+        {zone = "Tavnazian Safehold 2", exit = "K-8"},
+        {zone = "Tavnazian Safehold 2", exit = "K-10"},
+        {zone = "Riverne - Site #A01", exit = "D-6", floor_id = 2},
+    },
+    ["Riverne - Site #A01"] = {
+        --{zone = "Misareaux Coast", exit = "M-9"},
+    },
     ["Tavnazian Safehold 2"] = {
         {zone = "Lufaise Meadows", exit = "I-5"},
         {zone = "Lufaise Meadows", exit = "I-6"},
+        {zone = "Misareaux Coast", exit = "G-5"},
+        {zone = "Misareaux Coast", exit = "G-6"},
         {zone = "Tavnazian Safehold 1", exit = "I-9"},
         {zone = "Tavnazian Safehold 3", exit = "H-9"},
     },

@@ -4,6 +4,7 @@
 [CoP 1-3] The Mothercrystals - DONE
 [CoP 2-1] An Invitation West - DONE
 [CoP 2-2] The Lost City - DONE
-[Cop 2-3] Distant Beliefs - DONE
-
+[CoP 2-3] Distant Beliefs - DONE
+[CoP 2-4] An Eternal Melody - DONE
+[CoP 2-5] Ancient Vows - STARTED
 

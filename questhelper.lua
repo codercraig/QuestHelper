@@ -1417,8 +1417,6 @@ ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
     -- Kill tracking (Action packets)
     triggers_module.handleActionPacket(e, currentTopCategory, currentSubfile, current_mission,
                                       quest_data, quest_state, player_module.zoneId)
-    triggers_module.handleActionMessage(e, currentTopCategory, currentSubfile, current_mission,
-                                       quest_data, quest_state, player_module.zoneId)
 end)
 
 --------------------------------------------------------------------------------

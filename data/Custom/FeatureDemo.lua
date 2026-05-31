@@ -189,7 +189,7 @@ return {
                 text = "Kill Counter Demo 2: Defeat 3 Stone Eaters! \n" ..
                        "This will count Stone Eater kills by you, your trusts, and party members.",
                 kill_requirement = {
-                    count = 3,
+                    count = 100,
                     enemies = {"Stone Eater", "Huge Hornet", "Tunnel Worm"},  -- Only Stone Eater kills count
                     zone = "South Gustaberg",
                     count_party_kills = true,  -- Count kills from party members and trusts

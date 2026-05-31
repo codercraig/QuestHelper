@@ -794,31 +794,160 @@ return {
         }
     },
 
-    ["CoP 2-2: The Lost City"] = {
+    ["CoP 2-4: An Eternal Melody"] = {
         prerequisites = {
-            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 2-1: An Invitation West"},
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 2-3: Distant Beliefs"},
         },
         steps = {
             {
-                text = "Step 1: Head to the top floor of Tavnazian Safehold and pass through the Walnut Door at K-9.\n \n" ..
-                       "Speak to Despachiaire at K-10 for a cutscene.\n \n",
+                text = "Step 1: Head to the top floor of Tavnazian Safehold and examine the Walnut Door at (K-7) for a cutscene.\n \n" ..
+                       "The Mysterious Amulet key item will be returned to you.\n \n",
                 route_to = "Tavnazian Safehold 1",
-                onmob_target = "Despachiaire",
-                destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {102},
+                onmob_target = "tavnazian-safehold-walnut-door",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {104},
             },
             {
-                text = "Step 2: Head all the way down to the basement level of Tavnazian Safehold.\n \n" ..
-                       "Examine the Sewer Entrance at I-7 to trigger a cutscene and complete the mission.\n \n" ..
-                       "This will also unlock the next mission: Distant Beliefs (CoP 2-3).\n \n",
-                route_to = "Tavnazian Safehold 3",
-                onmob_target = "tavnazian-safehold-sewer-entrance",
-                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {103},
+                text = "Step 2: Speak with Justinius at J-6 to learn of Ulmia's whereabouts.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "Justinius",
+                destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {127},
+            },
+            {
+                text = "Step 3: Exit Tavnazian Safehold via the southwest exit at (G-6).\n \n" ..
+                       "Head to Misareaux Coast and examine the Dilapidated Gate at (I-11) for a cutscene.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-dilapidated-gate",
+                destination_highlight = {position = "I-11", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                        { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 290.0, y = 24.5, z = -388.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {5},
+            },
+            {
+                text = "Step 4: Return to Tavnazian Safehold and walk towards the Bridge for a final cutscene to complete the mission.\n \n",
+                route_to = "Tavnazian Safehold 2",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Tavnazian Safehold", type = 'square', center = { x = -0.0, y = -22.3, z = 14.2 }, size = 4, floor_id = 2, colour = "cyan" },
+                },
+                trigger_on_event_id = {105},
             },
         },
         reward = {
-            text = "Access to Phomiuna Aqueducts\nNext: Distant Beliefs (CoP 2-3)",
+            text = "Access to Riverne - Site A01\nNext: Ancient Vows (CoP 2-5)",
+        }
+    },
+
+    ["CoP 2-5: Ancient Vows"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 2-4: An Eternal Melody"},
+        },
+        steps = {
+            {
+                text = "Step 1: Exit Tavnazian Safehold via the northwest exit at (G-5).\n \n" ..
+                       "Head to Misareaux Coast and examine the Dilapidated Gate at (F-7) for a cutscene.\n \n" ..
+                       "NOTE: This is a DIFFERENT gate from CoP 2-4 - it is to the northwest. The Survival Guide puts you on the wrong side of the mountains, use Unity warp 128 to land right at it.\n \n",
+                route_to = "Misareaux Coast",
+                items_needed = {
+                    { item = "Yellow Liquid", quantity = 1, optional = true},
+                },
+                onmob_target = "misareaux-coast-dilapidated-gate-f7",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 428.4, y = -15.7, z = 200.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 292.6, y = -15.5, z = 187.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 250.3, y = -15.5, z = 151.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 18.8, y = -15.1, z = 43.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -83.8, y = -16.1, z = 40.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -164.1, y = -32.1, z = 113.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -239.6, y = -32.0, z = 204.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {6},
+            },
+            {
+                text = "Step 2: After the cutscene you will be placed next to a Spatial Displacement at (D-6).\n \n" ..
+                       "Click it to enter Riverne - Site #A01. A cutscene will play on entry.\n \n",
+                route_to = "Misareaux Coast",
+                destination_highlight = {position = "D-6", offsetX = 16, offsetY = 16},
+                onmob_target = "misareaux-coast-spatial-displacement",
+                zone_trigger = "Riverne - Site #A01",
+            },
+            {
+                text = "Step 3:Defeat Firedrakes(Highlighted Monsters!) along the way to (G-10) to collect 2 Giant Scales - you will need them at the Unstable Displacements ahead.\n \n" ..
+                       "There's also a homepoint to pickup at (I-9) will which be useful for a return trip later.\n \n",
+                onmob_enemy = {"Firedrake"},
+                onmob_enemy_size = 4,
+                items_needed = {
+                    { item = "Giant Scale", quantity = 2, on_the_way = true },
+                },
+                trigger_on_item_obtain = {{item = "Giant Scale", quantity = 2}},
+                onmob_target = "riverne-site-a01-spatial-displacement-l8",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Riverne - Site #A01",
+                        floor_id = 2,
+                    },
+                },
+            },
+            {
+                text = "Step 4: After attaining both Giant Scales: \n \n" ..
+                       "[1] At the NE corner of (G-10), trade one Giant Scale at the Unstable Displacement to grow it and pass through.\n \n" ..
+                       "[2] Continue to (E-10) and trade the second Giant Scale at the Unstable Displacement there, once it grows after trading you will be able enter.\n \n" ..
+                       "[3] Follow the Spatial Displacements at (D-9) NE corner \n \n" ..
+                       "[4] Continue to (E-8) NE tip - the (E-8) one says 'majestic presence of a terrestrial avatar' and takes you into Monarch Linn.\n \n",
+                onmob_target = {"riverne-site-a01-unstable-displacement-g10",
+                                "riverne-site-a01-unstable-displacement-e10",
+                                "riverne-site-a01-spatial-displacement-d9",
+                                "riverne-site-a01-spatial-displacement-e8"},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "E-10", offsetX = 16, offsetY = 16, label = "2" },
+                            { position = "D-9", offsetX = 16, offsetY = 16, label = "3" },
+                            { position = "E-8", offsetX = 16, offsetY = 16, label = "4" },
+                        },
+                        zone_name = "Riverne - Site #A01",
+                        floor_id = 2,
+                    },
+                },
+                zone_trigger = "Monarch Linn",
+            },
+            {
+                text = "Step 5: Use the Spatial Displacement to enter the Ancient Vows battlefield (cap: 99, 6 players, 30 min, buffs wear on entry).\n \n" ..
+                       "Defeat 3x Mammet-19 Epsilon (~3800 HP each). They can be Slept.\n \n" ..
+                       "They switch forms by changing weapons - watch for:\n \n" ..
+                       "TRANSMOGRIFICATION (Hand Form) - absorbs ALL physical damage for ~30s. Call it out immediately and stop attacking.\n \n" ..
+                       "MIND WALL (Staff Form) - absorbs magic ~30s. Silence the Staff Form if possible.\n \n" ..
+                       "Sword Form attacks very fast - hard to maintain Utsusemi.\n \n" ..
+                       "Polearm Form is slow - preferred for tanking/kiting.\n \n" ..
+                       "Yellow Liquid (AH: Medicines) locks a Mammet into its current form for 30s.\n \n" ..
+                       "On victory your party is teleported to South Gustaberg.\n \n",
+                zone_name = "Monarch Linn",
+                onmob_target = "monarch-linn-spatial-displacement",
+                onmob_enemy = {"Mammet-19 Epsilon"},
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Mammet-19 Epsilon"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                },
+                trigger_on_event_id = {32001},
+            },
+        },
+        reward = {
+            text = "Title: Tavnazian Traveler\n1000 EXP\nNext: The Call of the Wyrmking (CoP 3-1)",
         }
     },
 }

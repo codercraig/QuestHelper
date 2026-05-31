@@ -292,6 +292,78 @@ return {
         floor_id = 3,
         max_distance = 40
     },
+    ["tavnazian-safehold-walnut-door"] = {
+        target_pos = { x = 117.0, y = -42.8, z = 42.0 },
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 1,
+        max_distance = 35
+    },
+   ["misareaux-coast-dilapidated-gate"] = {
+        target_pos = { x = 260.0, y = 7.3, z = -440.0 },
+        visual_mode = "arc",
+        zone = "Misareaux Coast",
+        floor_id = 0,
+        max_distance = 40
+    },
+    ["misareaux-coast-dilapidated-gate-f7"] = {
+        target_pos = { x = -260.0, y = -32.7, z = 280.0 },
+        visual_mode = "arc",
+        zone = "Misareaux Coast",
+        floor_id = 0,
+        max_distance = 50
+    },
+    ["misareaux-coast-spatial-displacement"] = {
+        target_pos = { x = -544.3, y = -33.3, z = 358.0 },
+        visual_mode = "arc",
+        zone = "Misareaux Coast",
+        floor_id = 0,
+        max_distance = 120
+    },
+    -- Riverne Site #A01
+    ["riverne-site-a01-spatial-displacement-l8"] = {
+        target_pos = { x = 660.7, y = -35.2, z = -463.0 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #A01",
+        floor_id = 2,
+        max_distance = 20
+    },
+    ["riverne-site-a01-unstable-displacement-g10"] = {
+        target_pos = { x = -12.6, y = 0.6, z = 308.0 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #A01",
+        floor_id = 1,
+        max_distance = 35
+    },
+    ["riverne-site-a01-unstable-displacement-e10"] = {
+        target_pos = { x = -458.9, y = 15.6, z = -703.5 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #A01",
+        floor_id = 2,
+        max_distance = 45
+    },
+    ["riverne-site-a01-spatial-displacement-d9"] = {
+        target_pos = { x = -587.2, y = 21.8, z = -507.6 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #A01",
+        floor_id = 2,
+        max_distance = 40
+    },
+    ["riverne-site-a01-spatial-displacement-e8"] = {
+        target_pos = { x = -504.0, y = -11.2, z = -381.9 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #A01",
+        floor_id = 2,
+        max_distance = 40
+    },
+    -- Monarch Linn
+    ["monarch-linn-spatial-displacement"] = {
+        target_pos = { x = -39.1, y = -3.3, z = -540.0 },
+        visual_mode = "arc",
+        zone = "Monarch Linn",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Davoi
     ["Wall of Dark Arts"] = {
         target_pos = { x = -23.2, y= -0.6, z=-69.1},

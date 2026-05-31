@@ -8,6 +8,7 @@ local ui_debug = require('modules.ui_debug')
 -- Dev mode flag (set by main module)
 triggers.dev_mode_enabled = false
 
+
 -- Helper: Debug print (only prints if dev mode is enabled)
 local function debug_print(msg)
     if triggers.dev_mode_enabled then
@@ -328,7 +329,19 @@ function triggers.handleTextIn(e, currentTopCategory, currentSubfile, current_mi
         end
 
         -- 2. Loop through every item in the list
-        for _, current_item in ipairs(items_to_check) do
+        -- Supports string "Item" or table {item = "Item", quantity = 2}
+        for _, entry in ipairs(items_to_check) do
+            local current_item, required_qty
+            if type(entry) == 'string' then
+                current_item = entry
+                required_qty = 1
+            elseif type(entry) == 'table' and entry.item then
+                current_item = entry.item
+                required_qty = entry.quantity or 1
+            end
+
+            if not current_item then break end
+
             -- Case A: Dropped / Synthesized Items
             local matched_drop = false
             if playerName ~= "" and
@@ -345,8 +358,16 @@ function triggers.handleTextIn(e, currentTopCategory, currentSubfile, current_mi
                 matched_buy = true
             end
 
-            -- If matched, handle completion logic
+            -- If matched, check quantity then handle completion
             if matched_drop or matched_buy then
+                if required_qty > 1 then
+                    local inv = require('modules.inventory')
+                    local _, count = inv.hasItem(current_item, true)
+                    if count < required_qty then
+                        break
+                    end
+                end
+
                 -- Checklist logic
                 if step_data.require_all_items then
                     quest_state.setPartialState(currentTopCategory, currentSubfile, current_mission, step_idx, current_item, true)
@@ -644,85 +665,5 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
     end
 end
 
--- Handles action message packets for kill tracking (0x029 - Action Message)
--- Simpler and more reliable than 0x028 - flat structure, no bit unpacking needed.
--- Message ID at offset 0x18 (mask high bit). ID 6 = "defeats".
-function triggers.handleActionMessage(e, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, playerZoneId)
-    if e.id ~= 0x029 then return end
-
-    if not currentTopCategory or not currentSubfile or not current_mission then return end
-
-    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
-    if not missionData or not missionData.steps then return end
-
-    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
-    if not missionData.steps[step_idx] then return end
-
-    local step_data = missionData.steps[step_idx]
-    if not step_data.kill_requirement then return end
-
-    local kill_req = step_data.kill_requirement
-
-    -- Read message ID, mask high bit (randomly set per Discord/Windower research)
-    local msg_id = bit.band(read_uint16(e.data, 0x18), 0x7FFF)
-    if msg_id ~= 6 and msg_id ~= 20 then return end
-
-    local actor_id  = read_uint32(e.data, 0x04)
-    local target_id = read_uint32(e.data, 0x08)
-
-    -- Zone check
-    if kill_req.zone and playerZoneId then
-        local zone_data = require('data.zones')
-        local required_zone_id = zone_data[kill_req.zone]
-        if required_zone_id and playerZoneId ~= required_zone_id then return end
-    end
-
-    -- Check actor is player or party member (covers trusts in party slots)
-    local valid_actor = false
-    if AshitaCore then
-        local party = AshitaCore:GetMemoryManager():GetParty()
-        if party then
-            for i = 0, 5 do
-                if party:GetMemberServerId(i) == actor_id then
-                    valid_actor = true
-                    break
-                end
-            end
-        end
-    end
-    if not valid_actor then return end
-
-    -- Get target name
-    local target = GetEntity(target_id)
-    if not target then return end
-
-    -- Check enemy name match
-    local name_match = false
-    if kill_req.enemies and #kill_req.enemies > 0 then
-        for _, enemy_name in ipairs(kill_req.enemies) do
-            if target.Name:lower():find(enemy_name:lower(), 1, true) then
-                name_match = true
-                break
-            end
-        end
-    else
-        name_match = true
-    end
-
-    if not name_match then return end
-
-    local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, step_idx) or 0
-    current_count = current_count + 1
-    quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, current_count)
-
-    debug_print(string.format("\30\106[QH Debug]\30\01 0x029 Kill: %s (msg=%d, %d/%d)", target.Name, msg_id, current_count, kill_req.count))
-
-    if current_count >= kill_req.count then
-        if not kill_req.display_only then
-            quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
-        end
-        debug_print(string.format("\30\106[QH Debug]\30\01 Kill requirement met via 0x029"))
-    end
-end
 
 return triggers

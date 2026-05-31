@@ -97,10 +97,10 @@ local function getAllItemsNeeded(missionData)
                             end
                             itemData[displayName].quantity = itemData[displayName].quantity + (item.quantity or 1)
                         elseif item.item then
-                            -- Object format: { item = "Name", quantity = 6, optional = true }
+                            -- Object format: { item = "Name", quantity = 6, optional = true, on_the_way = true }
                             local itemName = item.item
                             if not itemData[itemName] then
-                                itemData[itemName] = { quantity = 0, alternatives = nil, optional = item.optional or false }
+                                itemData[itemName] = { quantity = 0, alternatives = nil, optional = item.optional or false, on_the_way = item.on_the_way or false }
                             end
                             local qty = item.quantity or 1
                             itemData[itemName].quantity = itemData[itemName].quantity + qty
@@ -117,7 +117,8 @@ local function getAllItemsNeeded(missionData)
             name = itemName,
             quantity = data.quantity,
             alternatives = data.alternatives,
-            optional = data.optional
+            optional = data.optional,
+            on_the_way = data.on_the_way
         })
     end
 
@@ -718,7 +719,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                     end
                                 else
                                     -- ORANGE - Have some but not enough
-                                    imgui.TextColored({1, 0.5, 0, 1}, string.format("  [~] %s x%d (have %d)", displayName, displayQty, result.count))
+                                    if itemData.on_the_way then
+                                        imgui.TextColored({1, 0.5, 0, 1}, string.format("  [~] %s x%d (have %d, pick up during quest)", displayName, displayQty, result.count))
+                                    else
+                                        imgui.TextColored({1, 0.5, 0, 1}, string.format("  [~] %s x%d (have %d)", displayName, displayQty, result.count))
+                                    end
                                 end
 
                                 -- Display storage locations on one line
@@ -733,6 +738,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                         imgui.TextColored({0.6, 0.6, 0.6, 1}, string.format("  [ ] %s (optional)", itemName))
                                     else
                                         imgui.TextColored({0.6, 0.6, 0.6, 1}, string.format("  [ ] %s x%d (optional)", itemName, qtyNeeded))
+                                    end
+                                elseif itemData.on_the_way then
+                                    -- YELLOW - Don't have it but can pick up during quest
+                                    if itemData.alternatives then
+                                        imgui.TextColored({1, 1, 0, 1}, string.format("  [ ] %s (pick up during quest)", itemName))
+                                    else
+                                        imgui.TextColored({1, 1, 0, 1}, string.format("  [ ] %s x%d (pick up during quest)", itemName, qtyNeeded))
                                     end
                                 else
                                     -- RED - Don't have it
