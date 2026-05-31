@@ -17,6 +17,9 @@ local zone_name_to_floor = {
     ['Yughott Grotto 1'] = 1,
     ['Palborough Mines 1'] = 1,
     ['Palborough Mines 3'] = 3,
+    ['Tavnazian Safehold 1'] = 1,
+    ['Tavnazian Safehold 2'] = 2,
+    ['Tavnazian Safehold 3'] = 3,
 }
 
 -- Map sub-zone names to base zone names (for map/image loading)
@@ -32,6 +35,9 @@ local subzone_to_base = {
     ['Yughott Grotto 1'] = "Yughott Grotto",
     ['Palborough Mines 1'] = "Palborough Mines",
     ['Palborough Mines 3'] = "Palborough Mines",
+    ['Tavnazian Safehold 1'] = "Tavnazian Safehold",
+    ['Tavnazian Safehold 2'] = "Tavnazian Safehold",
+    ['Tavnazian Safehold 3'] = "Tavnazian Safehold",
 }
 
 -- Get base zone name for map loading (converts sub-zone names to base names)
@@ -64,6 +70,11 @@ local zone_floor_to_name = {
     [238] = {  -- Windurst Waters
         [1] = "Windurst Waters North",
         [2] = "Windurst Waters South"
+    },
+    [26] = {  -- Tavnazian Safehold
+        [1] = "Tavnazian Safehold 1",  -- upper floor (ramp up from I-9)
+        [2] = "Tavnazian Safehold 2",  -- entry floor (from Lufaise Meadows)
+        [3] = "Tavnazian Safehold 3",  -- lower floor (ramp down from H-8)
     }
 }
 

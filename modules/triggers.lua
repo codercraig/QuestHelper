@@ -266,7 +266,8 @@ function triggers.handleTextIn(e, currentTopCategory, currentSubfile, current_mi
 
     local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
     local step_data = missionData.steps[step_idx]
-    if not step_data or not e.message_modified then return end
+    local msg_text = e.message_modified or e.message
+    if not step_data or not msg_text then return end
 
     -- 3. Get Player Name if not set
     if playerName == "" then
@@ -275,7 +276,7 @@ function triggers.handleTextIn(e, currentTopCategory, currentSubfile, current_mi
     end
 
     -- 4. Clean the message
-    local incoming_text = clean_text(e.message_modified)
+    local incoming_text = clean_text(msg_text)
 
     if type(step_data) ~= 'table' then return end
 
@@ -484,7 +485,9 @@ function triggers.handleKillText(e, incoming_text, playerName, currentTopCategor
 
             -- Check if requirement met
             if current_count >= kill_req.count then
-                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                if not kill_req.display_only then
+                    quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                end
                 print(string.format("\30\106[QH]\30\01 Kill requirement complete! (%d/%d)",
                     current_count, kill_req.count))
             end
@@ -531,7 +534,7 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
 
     -- Parse action packet
     local actor_id = read_uint32(e.data, 0x04)
-    local target_count = e.data:byte(0x09)
+    local target_count = e.data:byte(0x0A)
 
     -- Debug: Show raw packet header bytes
     local byte_04 = e.data:byte(0x04)
@@ -555,15 +558,6 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
         return
     end
 
-    -- Check if we should count party/trust kills
-    local count_all_party = kill_req.count_party_kills or false
-
-    -- For now, let's not filter by player to see if we can detect ANY kills
-    -- TODO: Re-enable player filtering once we confirm kills are detected
-    -- if not count_all_party and actor_id ~= player_id then
-    --     print(string.format("\30\106[QH Debug]\30\01 Not player's kill (Actor: %d, Player: %d), skipping", actor_id, player_id))
-    --     return
-    -- end
 
     debug_print(string.format("\30\105[QH Debug]\30\01 Checking %d targets...", target_count))
 
@@ -633,7 +627,9 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
 
                         -- Check if requirement met
                         if current_count >= kill_req.count then
-                            quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                            if not kill_req.display_only then
+                                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+                            end
                             print(string.format("\30\106[QH]\30\01 Kill requirement complete! (%d/%d)",
                                 current_count, kill_req.count))
                         end
@@ -645,6 +641,87 @@ function triggers.handleActionPacket(e, currentTopCategory, currentSubfile, curr
                 end
             end
         end
+    end
+end
+
+-- Handles action message packets for kill tracking (0x029 - Action Message)
+-- Simpler and more reliable than 0x028 - flat structure, no bit unpacking needed.
+-- Message ID at offset 0x18 (mask high bit). ID 6 = "defeats".
+function triggers.handleActionMessage(e, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, playerZoneId)
+    if e.id ~= 0x029 then return end
+
+    if not currentTopCategory or not currentSubfile or not current_mission then return end
+
+    local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
+    if not missionData or not missionData.steps then return end
+
+    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+    if not missionData.steps[step_idx] then return end
+
+    local step_data = missionData.steps[step_idx]
+    if not step_data.kill_requirement then return end
+
+    local kill_req = step_data.kill_requirement
+
+    -- Read message ID, mask high bit (randomly set per Discord/Windower research)
+    local msg_id = bit.band(read_uint16(e.data, 0x18), 0x7FFF)
+    if msg_id ~= 6 and msg_id ~= 20 then return end
+
+    local actor_id  = read_uint32(e.data, 0x04)
+    local target_id = read_uint32(e.data, 0x08)
+
+    -- Zone check
+    if kill_req.zone and playerZoneId then
+        local zone_data = require('data.zones')
+        local required_zone_id = zone_data[kill_req.zone]
+        if required_zone_id and playerZoneId ~= required_zone_id then return end
+    end
+
+    -- Check actor is player or party member (covers trusts in party slots)
+    local valid_actor = false
+    if AshitaCore then
+        local party = AshitaCore:GetMemoryManager():GetParty()
+        if party then
+            for i = 0, 5 do
+                if party:GetMemberServerId(i) == actor_id then
+                    valid_actor = true
+                    break
+                end
+            end
+        end
+    end
+    if not valid_actor then return end
+
+    -- Get target name
+    local target = GetEntity(target_id)
+    if not target then return end
+
+    -- Check enemy name match
+    local name_match = false
+    if kill_req.enemies and #kill_req.enemies > 0 then
+        for _, enemy_name in ipairs(kill_req.enemies) do
+            if target.Name:lower():find(enemy_name:lower(), 1, true) then
+                name_match = true
+                break
+            end
+        end
+    else
+        name_match = true
+    end
+
+    if not name_match then return end
+
+    local current_count = quest_state.getKillCount(currentTopCategory, currentSubfile, current_mission, step_idx) or 0
+    current_count = current_count + 1
+    quest_state.setKillCount(currentTopCategory, currentSubfile, current_mission, step_idx, current_count)
+
+    debug_print(string.format("\30\106[QH Debug]\30\01 0x029 Kill: %s (msg=%d, %d/%d)", target.Name, msg_id, current_count, kill_req.count))
+
+    if current_count >= kill_req.count then
+        if not kill_req.display_only then
+            quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, nil)
+        end
+        debug_print(string.format("\30\106[QH Debug]\30\01 Kill requirement met via 0x029"))
     end
 end
 

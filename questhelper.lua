@@ -428,6 +428,25 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             end
                         end
                     end
+
+                    local vday_ref = step_data.vday_targets
+                    if vday_ref then
+                        local current_day = utils.getVanaDay()
+                        if current_day then
+                            local day_targets = vday_ref[current_day]
+                            if day_targets then
+                                for _, name in ipairs(day_targets) do
+                                    if location_data[name] then
+                                        table.insert(targetsToDraw, location_data[name])
+                                    else
+                                        if shouldPrintDebugNow then
+                                            ui_debug.addLine(string.format("[%s Debug] Error: vday_targets key '%s' (day: %s) not in locations.lua.", addon.name, name, current_day))
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
                 end
             end
         end
@@ -1313,6 +1332,15 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_day' then
+        local day, _  = utils.getVanaDay()
+        local weather, _ = utils.getWeather()
+        print(string.format("[%s] Vana'diel Day: %s", addon.name, day or "unavailable"))
+        print(string.format("[%s] Current Weather: %s", addon.name, weather or "unavailable"))
+        e.blocked = true
+        return true
+    end
+
     return false
 end)
 
@@ -1389,6 +1417,8 @@ ashita.events.register('packet_in', 'qh_packet_in_cb', function(e)
     -- Kill tracking (Action packets)
     triggers_module.handleActionPacket(e, currentTopCategory, currentSubfile, current_mission,
                                       quest_data, quest_state, player_module.zoneId)
+    triggers_module.handleActionMessage(e, currentTopCategory, currentSubfile, current_mission,
+                                       quest_data, quest_state, player_module.zoneId)
 end)
 
 --------------------------------------------------------------------------------
@@ -1400,8 +1430,9 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
                                                      player_module.name) or player_module.name
 
     -- Kill tracking via text messages
-    if e.message_modified then
-        local incoming_text = e.message_modified
+    local raw_kill_text = e.message_modified or e.message
+    if raw_kill_text then
+        local incoming_text = raw_kill_text
         -- Remove FFXI color codes
         incoming_text = incoming_text:gsub('[\x1E\x1F].', '')
         incoming_text = incoming_text:gsub('[\xEF\x7F].', '')

@@ -201,12 +201,10 @@ local function render_position_tab()
     imgui.SameLine(); imgui.Text(string.format("%d", viz.size)); imgui.SameLine()
     if imgui.Button(" + ##vs") then viz.size = viz.size + 1 end
 
-    if viz.entry_type == 'arrow' then
-        imgui.SameLine(); imgui.Text("   Floor ID:"); imgui.SameLine()
-        if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
-        imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
-        if imgui.Button(" + ##vf") then viz.floor_id = viz.floor_id + 1 end
-    end
+    imgui.SameLine(); imgui.Text("   Floor ID:"); imgui.SameLine()
+    if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
+    imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
+    if imgui.Button(" + ##vf") then viz.floor_id = viz.floor_id + 1 end
 
     -- Actions
     imgui.Separator()
@@ -215,8 +213,8 @@ local function render_position_tab()
         local line
         if viz.entry_type == 'square' then
             line = string.format(
-                "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, colour = %q },",
-                p.zone_name, src_x, src_y, src_z, viz.size, viz.colour)
+                "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, floor_id = %d, colour = %q },",
+                p.zone_name, src_x, src_y, src_z, viz.size, viz.floor_id, viz.colour)
         else
             line = string.format(
                 "    { zone_name = %q, type = 'arrow', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, direction = %q, floor_id = %d, colour = %q },",

@@ -58,7 +58,29 @@ return {
         {zone = "Konschtat Highlands", exit = "M-11"},
         {zone = "Gustav Tunnel", exit = "B-8"},
         {zone = "Selbina", exit = "G-9"},
-        {zone = "La Theine Plateau", exit = "L-5"}
+        {zone = "La Theine Plateau", exit = "L-5"},
+        {zone = "Lufaise Meadows", exit = "I-9"}
+    },
+    ["Lufaise Meadows"] = {
+        {zone = "Valkurm Dunes", exit = "K-8"},
+        {zone = "Tavnazian Safehold 2", exit = "E-8"},
+        {zone = "Tavnazian Safehold 2", exit = "F-10"},
+    },
+    ["Tavnazian Safehold 2"] = {
+        {zone = "Lufaise Meadows", exit = "I-5"},
+        {zone = "Lufaise Meadows", exit = "I-6"},
+        {zone = "Tavnazian Safehold 1", exit = "I-9"},
+        {zone = "Tavnazian Safehold 3", exit = "H-9"},
+    },
+    ["Tavnazian Safehold 1"] = {
+        {zone = "Tavnazian Safehold 2", exit = "H-8"},
+    },
+    ["Tavnazian Safehold 3"] = {
+        {zone = "Tavnazian Safehold 2", exit = "H-8"},
+        {zone = "Phomiuna Aqueducts", exit = "I-7"},
+    },
+    ["Phomiuna Aqueducts"] = {
+        --{zone = "Tavnazian Safehold 3", exit = "J-11"},
     },
     ["Dangruf Wadi"] = {
         {zone = "South Gustaberg", exit = "I-6"},
@@ -278,9 +300,12 @@ return {
     },
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "D-11"},
-        {zone = "Batallia Downs", exit = "I-11"}
+        {zone = "Batallia Downs", exit = "I-11"},
+        {zone = "Davoi", exit = "G-12"}
     },
-
+    ["Davoi"] = {
+        {zone = "Jugner Forest", exit = "J-6"}
+    },
     -- Dungeons/Other
     ["Zeruhn Mines"] = {
         {zone = "Bastok Mines", exit = "I-7"},

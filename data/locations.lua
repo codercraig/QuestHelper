@@ -226,6 +226,21 @@ return {
         visual_mode = "arc",
         zone = "La Theine Plateau"
     },
+    ["la-theine-plateau-shattered-telepoint"] = {
+        target_pos = { x = 340.0, y = 19.1, z = -60.0 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 60
+    },
+    -- Tahrongi Canyon
+    ["tahrongi-canyon-shattered-telepoint"] = {
+        target_pos = { x = 180.0, y = 35.2, z = 260.0 },
+        visual_mode = "arc",
+        zone = "Tahrongi Canyon",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Konschtat Highlands
    ["konschtat-highlands-shattered-telepoint"] = {
         target_pos = { x = 140.0, y = 19.1, z = 220.0 },
@@ -240,6 +255,42 @@ return {
         zone = "Hall of Transference",
         floor_id = 2,
         max_distance = 35
+    },
+    ["hall-of-transference-holla-large-apparatus"] = {
+        target_pos = { x = -236.3, y = -4.9, z = 290.0 },
+        visual_mode = "arc",
+        zone = "Hall of Transference",
+        floor_id = 1,
+        max_distance = 35
+    },
+    ["hall-of-transference-mea-large-apparatus"] = {
+        target_pos = { x = 270.0, y = -84.9, z = -36.3 },
+        visual_mode = "arc",
+        zone = "Hall of Transference",
+        floor_id = 3,
+        max_distance = 35
+    },
+    -- Tavnazian Safehold
+    ["Despachiaire"] = {
+        target_pos = { x = 111.2, y = -42.0, z = -85.5 },
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 1,
+        max_distance = 35
+    },
+    ["Justinius"] = {
+        target_pos = { x = 78.7, y = -35.5, z = 70.5 },
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 1,
+        max_distance = 35
+    },
+    ["tavnazian-safehold-sewer-entrance"] = {
+        target_pos = { x = 28.0, y = -13.9, z = 45.9 },
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 3,
+        max_distance = 40
     },
     -- Davoi
     ["Wall of Dark Arts"] = {
@@ -625,5 +676,86 @@ return {
         zone = "The Shrine of Ru'Avitau",
         floor_id = 1,
         max_distance = 35
-},
+    },
+    -- Phomiuna Aqueducts - CoP 2-3
+    ["phomiuna-aqueducts-wooden-ladder"] = {
+        target_pos = { x = -159.32, y = -2.5, z = 60.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 2,
+        max_distance = 30
+    },
+    ["phomiuna-aqueducts-???"] = {
+        target_pos = { x = -75.3, y = -24.6, z = 92.5 },
+            visual_mode = "arc",
+            zone = "Phomiuna Aqueducts",
+            floor_id = 3,
+            max_distance = 2.5
+    },
+
+    -- CoP 2-3 Oil Lamps (corridor F-8, south to north: Fire/Earth/Water/Wind/Ice/Lightning/Light/Dark)
+    -- TODO: Replace target_pos with actual NPC coordinates from zone NPC data
+    ["phomiuna-aqueducts-fire-oil-lamp"] = {
+    target_pos = { x = -63.7, y = -26.2, z = 43.0 },
+    visual_mode = "arc",
+    zone = "Phomiuna Aqueducts",
+    floor_id = 3,
+    max_distance = 35
+    },
+    ["phomiuna-aqueducts-earth-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 47.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-water-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 53.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-wind-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 57.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-ice-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 63.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-thunder-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 67.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-light-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 73.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-darkness-oil-lamp"] = {
+        target_pos = { x = -63.7, y = -26.2, z = 77.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
+    ["phomiuna-aqueducts-ornate-gate"] = {
+        target_pos = { x = -99.0, y = -25.5, z = 60.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+    },
 }

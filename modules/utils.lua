@@ -1,6 +1,44 @@
 -- Utility functions module
 local utils = {}
 
+-- Scan once at load; reads from FFXiMain.dll memory kept in sync with the server clock
+local vanatime_ptr = ashita.memory.find('FFXiMain.dll', 0, 'B0015EC390518B4C24088D4424005068', 0x34, 0)
+
+local VANA_DAYS = {'Firesday','Earthsday','Watersday','Windsday','Iceday','Lightningday','Lightsday','Darksday'}
+
+-- Returns current Vana'diel day name and 0-based index (0=Firesday .. 7=Darksday)
+function utils.getVanaDay()
+    if not vanatime_ptr or vanatime_ptr == 0 then return nil, nil end
+    local ptr = ashita.memory.read_uint32(vanatime_ptr)
+    local ts  = (ashita.memory.read_uint32(ptr + 0x0C) + 92514960) * 25
+    local idx = math.floor(ts / 86400) % 8
+    return VANA_DAYS[idx + 1], idx
+end
+
+-- Memory pattern from Ashita v3 weather.lua (atom0s, CC BY-NC-ND 4.0) — adapted for v4
+local weather_ptr = ashita.memory.find('FFXiMain.dll', 0, '66A1????????663D????72', 0x02, 0)
+
+local WEATHER_NAMES = {
+    [0]  = 'Clear',      [1]  = 'Sunshine',
+    [2]  = 'Clouds',     [3]  = 'Fog',
+    [4]  = 'Fire',       [5]  = 'Fire x2',
+    [6]  = 'Water',      [7]  = 'Water x2',
+    [8]  = 'Earth',      [9]  = 'Earth x2',
+    [10] = 'Wind',       [11] = 'Wind x2',
+    [12] = 'Ice',        [13] = 'Ice x2',
+    [14] = 'Thunder',    [15] = 'Thunder x2',
+    [16] = 'Light',      [17] = 'Light x2',
+    [18] = 'Dark',       [19] = 'Dark x2',
+}
+
+-- Returns current weather name and raw ID
+function utils.getWeather()
+    if not weather_ptr or weather_ptr == 0 then return nil, nil end
+    local ptr = ashita.memory.read_uint32(weather_ptr)
+    local id  = ashita.memory.read_uint8(ptr)
+    return WEATHER_NAMES[id] or ('Unknown('..id..')'), id
+end
+
 -- Text wrapping for UI display
 function utils.wrap_text(text, max_length)
     local wrapped_text = {}
@@ -36,7 +74,7 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
     if not mdata or not mdata.steps then return {} end
     local step_data = mdata.steps[stepIndex]
 
-    -- If step has manually-defined images, use those (existing functionality)
+    -- If step has manually-defined images, check if player is in any image's zone first
     if type(step_data) == 'table' and step_data.images then
         local matched = {}
         for _, image_info in ipairs(step_data.images) do
@@ -44,6 +82,67 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                 table.insert(matched, image_info)
             end
         end
+
+        -- Collect all unique zone_names from matched images
+        if #matched > 0 then
+            local image_zones = {}
+            local seen = {}
+            for _, img in ipairs(matched) do
+                if img.zone_name and not seen[img.zone_name] then
+                    seen[img.zone_name] = true
+                    table.insert(image_zones, img.zone_name)
+                end
+            end
+
+            -- If images specify zones and player isn't in any of them, route to nearest
+            if #image_zones > 0 then
+                local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
+                if pathfinding_ok then
+                    local party = AshitaCore:GetMemoryManager():GetParty()
+                    if party then
+                        local player_zone_id = party:GetMemberZone(0)
+                        if player_zone_id and player_zone_id > 0 then
+                            local zones_db = require('data.zones')
+                            local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
+                            if current_zone then
+                                local in_valid_zone = false
+                                for _, z in ipairs(image_zones) do
+                                    if current_zone == z then in_valid_zone = true; break end
+                                end
+                                if not in_valid_zone then
+                                    local best_path, best_len, best_dest = nil, math.huge, nil
+                                    for _, z in ipairs(image_zones) do
+                                        local path = pathfinding.findPath(current_zone, z)
+                                        if path and #path >= 1 and #path < best_len then
+                                            best_path = path
+                                            best_len = #path
+                                            best_dest = z
+                                        end
+                                    end
+                                    if best_path then
+                                        -- Extract highlights from images in the destination zone
+                                        local dest_highlights = {}
+                                        for _, img in ipairs(matched) do
+                                            if img.zone_name == best_dest and img.highlights then
+                                                for _, hl in ipairs(img.highlights) do
+                                                    local h = {}
+                                                    for k, v in pairs(hl) do h[k] = v end
+                                                    if img.floor_id ~= nil then h.floor_id = img.floor_id end
+                                                    table.insert(dest_highlights, h)
+                                                end
+                                            end
+                                        end
+                                        local dh = #dest_highlights > 0 and dest_highlights or nil
+                                        return pathfinding.generateRouteImages(best_path, current_zone, dh)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
         return matched
     end
 
