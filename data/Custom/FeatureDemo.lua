@@ -193,7 +193,8 @@ return {
                     enemies = {"Stone Eater", "Huge Hornet", "Tunnel Worm"},  -- Only Stone Eater kills count
                     zone = "South Gustaberg",
                     count_party_kills = true,  -- Count kills from party members and trusts
-                    reset_on_zone_entry = true
+                    reset_on_zone_entry = true,
+                    --kill_type = {"melee", "magic", "ranged"},
                 },
             },
             {

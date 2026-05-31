@@ -6,5 +6,8 @@
 [CoP 2-2] The Lost City - DONE
 [CoP 2-3] Distant Beliefs - DONE
 [CoP 2-4] An Eternal Melody - DONE
-[CoP 2-5] Ancient Vows - STARTED
+[CoP 2-5] Ancient Vows - DONE
+[CoP 3-1] The Call of the Wyrmking - DONE
+[CoP 3-2] A Vessel Without a Captain - DONE
+[CoP 3-3] Road Forks - STARTED
 

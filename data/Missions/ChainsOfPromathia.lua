@@ -875,7 +875,7 @@ return {
                 zone_trigger = "Riverne - Site #A01",
             },
             {
-                text = "Step 3:Defeat Firedrakes(Highlighted Monsters!) along the way to (G-10) to collect 2 Giant Scales - you will need them at the Unstable Displacements ahead.\n \n" ..
+                text = "Step 3: Defeat Firedrakes(Highlighted Monsters!) along the way to (G-10) to collect 2 Giant Scales - you will need them at the Unstable Displacements ahead.\n \n" ..
                        "There's also a homepoint to pickup at (I-9) will which be useful for a return trip later.\n \n",
                 onmob_enemy = {"Firedrake"},
                 onmob_enemy_size = 4,
@@ -933,7 +933,8 @@ return {
                        "Sword Form attacks very fast - hard to maintain Utsusemi.\n \n" ..
                        "Polearm Form is slow - preferred for tanking/kiting.\n \n" ..
                        "Yellow Liquid (AH: Medicines) locks a Mammet into its current form for 30s.\n \n" ..
-                       "On victory your party is teleported to South Gustaberg.\n \n",
+                       "On victory your party is teleported to South Gustaberg.\n \n" ..
+                       "If you die without reraise, you will have to collect 2 more Giant Scales and navigate through the mission again so be carefu! \n \n",
                 zone_name = "Monarch Linn",
                 onmob_target = "monarch-linn-spatial-displacement",
                 onmob_enemy = {"Mammet-19 Epsilon"},
@@ -948,6 +949,159 @@ return {
         },
         reward = {
             text = "Title: Tavnazian Traveler\n1000 EXP\nNext: The Call of the Wyrmking (CoP 3-1)",
+        }
+    },
+
+    ["CoP 3-1: The Call of the Wyrmking"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 2-5: Ancient Vows"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Port Bastok and approach the Departures Entrance of the Air Travel Agency at (F-7) for a cutscene.\n \n" ..
+                       "Tip: Use Home Point #3 in Port Bastok to land nearby.\n \n" ..
+                       "Note: If the cutscene does not trigger, zone out and back in.\n \n",
+                route_to = "Port Bastok",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Port Bastok", type = 'arrow', center = { x = -119.0, y = -1.0, z = -9.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {305},
+            },
+            {
+                text = "Step 2: Head to the Metalworks and talk to Cid (H-8) for the final cutscene.\n \n",
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                onmob_target = "Cid",
+                trigger_on_event_id = {845},
+            },
+        },
+        reward = {
+            text = "Next: A Vessel Without a Captain (CoP 3-2)",
+        }
+    },
+
+    ["CoP 3-2: A Vessel Without a Captain"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 3-1: The Call of the Wyrmking"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Lower Jeuno and click on the Tenshodo HQ door in Neptune's Spire (H-8) for a cutscene.\n \n" ..
+                       "Tip: Use Home Point #2 in Lower Jeuno to land nearby.\n \n",
+                route_to = "Lower Jeuno",
+                onmob_target = "Door: Neptune's Spire",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {86},
+            },
+            {
+                text = "Step 2: Head to Ru'Lude Gardens and approach the Audience Chamber for the final cutscene.\n \n" ..
+                       "Tip: Use Home Point #1 in Ru'Lude Gardens.\n \n" ..
+                       "Note: If you are on Rhapsodies mission 'Crashing Waves', you will receive that cutscene here too.\n \n",
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'square', center = { x = -0.0, y = 2.0, z = 31.0 }, size = 6, floor_id = 0, colour = "cyan" },
+                },
+                trigger_on_event_id = {65},
+            },
+        },
+        reward = {
+            text = "Next: The Road Forks (CoP 3-3)",
+        }
+    },
+
+    ["CoP 3-3: The Road Forks"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 3-2: A Vessel Without a Captain"},
+        },
+        steps = {
+            -- === SAN D'ORIA ROUTE ===
+            {
+                text = "Step 1 (San d'Oria): Note - this mission has TWO routes (San d'Oria and Windurst) that must both be completed. They can be done in any order or simultaneously.\n \n" ..
+                       "Zone into Northern San d'Oria for an automatic cutscene.\n \n" ..
+                       "Talk to Arnau (M-6) on the dais at the far end of the Cathedral main hall.\n \n" ..
+                       "Then talk to Chasalvige in the Manuscript Room (end of the north-west hall).\n \n" ..
+                       "Tip: Home Point #2 or #3 are close to the Cathedral.\n \n",
+                route_to = "Northern San d'Oria",
+                onmob_target = "Chasalvige",
+                destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {38},
+            },
+            {
+                text = "Step 2 (San d'Oria): Head to Carpenters' Landing via the (E-6) entrance in Jugner Forest.\n \n" ..
+                       "Find Guilloud at (H-10) beside a boulder. Talk to him to spawn the Overgrown Ivy NM - be ready to fight immediately!\n \n" ..
+                       "Overgrown Ivy: Very fast attack rate. Spams Bad Breath at ~15% HP. Susceptible to Head Butt stun. Tolerates Sleep after repeated casts.\n \n" ..
+                       "After defeating Overgrown Ivy, talk to Guilloud again.\n \n",
+                route_to = "Carpenters' Landing",
+                onmob_target = "Guilloud",
+                onmob_enemy = {"Overgrown Ivy"},
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {0},
+            },
+            {
+                text = "Step 3 (San d'Oria): Head to Southern San d'Oria and speak to Hinaree on the second floor of the Count's Manor (B-6).\n \n" ..
+                       "Tip: Home Point #4 is closest.\n \n" ..
+                       "San d'Oria route complete!\n \n",
+                route_to = "Southern San d'Oria",
+                onmob_target = "Hinaree",
+                destination_highlight = {position = "B-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {23},
+            },
+            {
+                text = "Step 4 (Windurst): Zone into Windurst Waters for an automatic cutscene.\n \n" ..
+                       "Talk to Ohbiru-Dohbiru in the Rhinostery right-hand room (J-9).\n \n" ..
+                       "Go to Windurst Walls (Home Point #1) and talk to Yoran-Oran (E-5). You may need to speak to him twice.\n \n" ..
+                       "Return to Windurst Waters and talk to Kyume-Romeh at the Timbre Timbers Tavern (F-10). May need to speak twice.\n \n",
+                route_to = "Windurst Waters",
+                onmob_target = "Kyume-Romeh",
+                destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {873},
+            },
+            {
+                text = "Step 5 (Windurst): In Windurst Waters, enter the trader's home via back stairs at (E-7) and talk to Honoi-Gomoi to receive the Cracked Mimeo Mirror.\n \n" ..
+                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran - this removes the Cracked Mimeo Mirror.\n \n" ..
+                       "Important: Confirm the Cracked Mimeo Mirror is gone from your Key Items before the next step - you cannot spawn the NM with it.\n \n",
+                route_to = "Windurst Waters",
+                onmob_target = "Honoi-Gomoi",
+                destination_highlight = {position = "E-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {470},
+            },
+            {
+                text = "Step 6 (Windurst): Travel to Attohwa Chasm (fastest: Unity Concord warp, level 125 section).\n \n" ..
+                       "Find the Loose Sand at (K-8). Click it to spawn Lioumere (Antlion NM). Warning: Lioumere uses Pit Ambush on whoever spawns it! It resets HP if allowed to return to its spawn point - use Bind/Gravity/Sleep.\n \n" ..
+                       "After defeating Lioumere, click the Loose Sand again to obtain the Mimeo Jewel. A 30-minute timer starts - do NOT mount, zone, or use Nexus Cape!\n \n" ..
+                       "Climb Parradamo Tor from the northwest corner of (K-9). Hug the right wall southwest to an open clearing then follow the mountain wall south to find the narrow path.\n \n" ..
+                       "Some vents are temporary (wait 1 min to confirm), permanent vents require carefully falling to a lower path.\n \n" ..
+                       "At the summit check the Cradle of Rebirth - each party member must click it individually to receive Mimeo Feather x3.\n \n" ..
+                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran.\n \n",
+                route_to = "Attohwa Chasm",
+                onmob_target = "Cradle of Rebirth",
+                onmob_enemy = {"Lioumere"},
+                destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {471},
+            },
+            {
+                text = "Step 7 (Windurst): Go to Port Windurst and talk to Yujuju (M-6) just outside the Air Travel Agency.\n \n" ..
+                       "Go to Windurst Waters (G-8, Northern Map) and talk to Tosuka-Porika inside the east Optistery.\n \n" ..
+                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran. You may need to speak to him twice.\n \n" ..
+                       "Windurst route complete!\n \n",
+                route_to = "Port Windurst",
+                onmob_target = "Yujuju",
+                destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {472},
+            },
+            -- === COMPLETION ===
+            {
+                text = "STEP 8 [Completion]: Both routes complete! Head to the Metalworks and talk to Cid (H-8). You may need to speak to him twice.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {847},
+            },
+        },
+        reward = {
+            text = "Next: Tending Aged Wounds (CoP 3-4)",
         }
     },
 }
