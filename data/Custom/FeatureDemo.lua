@@ -197,6 +197,18 @@ return {
                 },
             },
             {
+                text = "Kill Counter Demo 2: Defeat 3 Stone Eaters! \n" ..
+                       "This will count Stone Eater kills by you, your trusts, and party members.",
+                onmob_enemy = "Locus Colibri",
+                kill_requirement = {
+                    count = 100,
+                    enemies = {"Locus Colibri"},  -- Only Stone Eater kills count
+                    zone = "Bhaflau Thickets",
+                    count_party_kills = true,  -- Count kills from party members and trusts
+                    reset_on_zone_entry = true
+                },
+            },
+            {
                 text = "whaaaat",
                 -- [NEW] This line turns the list below into a mandatory checklist
                 require_all_items = false,

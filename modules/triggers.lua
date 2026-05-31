@@ -419,20 +419,17 @@ function triggers.handleKillText(e, incoming_text, playerName, currentTopCategor
         end
     end
 
-    -- Build list of valid names to check (player + party members if enabled)
+    -- Build list of valid names to check (player + active party members if enabled)
     local valid_names = {playerName}
 
-    -- If count_party_kills is enabled, add party member names
     if kill_req.count_party_kills then
         if AshitaCore then
             local memManager = AshitaCore:GetMemoryManager()
             if memManager then
                 local party = memManager:GetParty()
                 if party then
-                    -- Party positions 0-5 (0 = player, 1-5 = party members)
                     for i = 1, 5 do
-                        local member_id = party:GetMemberServerId(i)
-                        if member_id and member_id ~= 0 then
+                        if party:GetMemberIsActive(i) == 1 then
                             local member_name = party:GetMemberName(i)
                             if member_name and member_name ~= "" then
                                 table.insert(valid_names, member_name)

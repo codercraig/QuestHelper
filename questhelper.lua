@@ -710,6 +710,25 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_partyslots' then
+        local mem = AshitaCore:GetMemoryManager()
+        local party = mem and mem:GetParty()
+        if party then
+            print(string.format("\30\106[%s]\30\01 Party slots (GetParty() live read):", addon.name))
+            for i = 0, 5 do
+                local id     = party:GetMemberServerId(i)
+                local zone   = party:GetMemberZone(i)
+                local name   = party:GetMemberName(i)
+                local active = party:GetMemberIsActive(i)
+                print(string.format("  slot %d: id=%-12d zone=%-5d active=%-5s name=%s", i, id or 0, zone or 0, tostring(active), name or ""))
+            end
+        else
+            print(string.format("[%s] Could not read party memory.", addon.name))
+        end
+        e.blocked = true
+        return true
+    end
+
     if command_base == 'qh_zone_id' then
         local mem = AshitaCore:GetMemoryManager()
         if mem and mem:GetParty() then
