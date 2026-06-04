@@ -312,7 +312,8 @@ return {
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "D-11"},
         {zone = "Batallia Downs", exit = "I-11"},
-        {zone = "Davoi", exit = "G-12"}
+        {zone = "Davoi", exit = "G-12"},
+        {zone = "Carpenters' Landing", exit = "E-6"}
     },
     ["Davoi"] = {
         {zone = "Jugner Forest", exit = "J-6"}
@@ -391,7 +392,9 @@ return {
         {zone = "Rolanberry Fields", exit = "H-7"}
     },
     ["Carpenters' Landing"] = {
-        {zone = "Northern San d'Oria", exit = "H-8"}
+        --{zone = "Northern San d'Oria", exit = "H-8"},
+        {zone = "Jugner Forest", exit = "F-11", floor_id = 1},
+        {zone = "Jugner Forest", exit = "H-12", floor_id = 1}
     },
     ["Bostaunieux Oubliette"] = {
         {zone = "Chateau d'Oraguille", exit = "I-9"}

@@ -183,7 +183,37 @@ return {
         visual_mode = "arc",
         zone = "Port Windurst"
     },
-
+    -- Windurst Waters North
+    ["Kyume-Romeh"] = {
+        target_pos = { x = -54.5, y = -5.3, z = 23.2 },
+        visual_mode = "arc",
+        zone = "Windurst Waters North",
+        floor_id = 1,
+        max_distance = 40
+    },
+    -- Windurst Waters South
+    ["Ohbiru-Dohbiru"] = {
+        target_pos = { x = 22.7, y = -6.2, z = -195.0 },
+        visual_mode = "arc",
+        zone = "Windurst Waters South",
+        floor_id = 2,
+        max_distance = 40
+    },
+    ["Honoi-Gomoi"] = {
+        target_pos = { x = -194.1, y = -10.9, z = -122.9 },
+        visual_mode = "arc",
+        zone = "Windurst Waters South",
+        floor_id = 2,
+        max_distance = 45
+    },
+    -- Windurst Walls
+    ["Yoran-Oran"] = {
+        target_pos = { x = -110.0, y = -13.8, z = 203.3 },
+        visual_mode = "arc",
+        zone = "Windurst Walls",
+        floor_id = 0,
+        max_distance = 45
+    },
     --Heavens Tower
     ["Kupipi"] = {
         target_pos = { x = 2, y= -1, z=32.1},
@@ -200,6 +230,14 @@ return {
     },
 
     --San d'Oria
+    --Southern San d'Oria
+    ["Hinaree"] = {
+        target_pos = { x = -301.5, y = -11, z = 97.7 },
+        visual_mode = "arc",
+        zone = "Southern San d'Oria",
+        floor_id = 0,
+        max_distance = 50
+    },
     --Northern San d'Oria
     ["Baraka"] = {
         target_pos = { x = 38.65, y= -3.5, z=-5.75},
@@ -212,6 +250,20 @@ return {
         trigger_npc = "Helaku",
         visual_mode = "arc",
         zone = "Northern San d'Oria"
+    },
+    ["Arnau"] = {
+        target_pos = { x = 149.9, y = -2.6, z = 141.9 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 45
+    },
+    ["Chasalvige"] = {
+        target_pos = { x = 96.4, y = -2.5, z = 134.0 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 45
     },
     -- Chateau d'Oraguille
     ["Halver"] = {
@@ -232,6 +284,14 @@ return {
         zone = "La Theine Plateau",
         floor_id = 0,
         max_distance = 60
+    },
+    -- Carpenters' Landing
+    ["carpenters-landing-guilloud"] = {
+        target_pos = { x = -123.8, y = -7.8, z = -469.1 },
+        visual_mode = "arc",
+        zone = "Carpenters' Landing",
+        floor_id = 1,
+        max_distance = 35
     },
     -- Tahrongi Canyon
     ["tahrongi-canyon-shattered-telepoint"] = {

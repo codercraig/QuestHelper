@@ -1020,27 +1020,71 @@ return {
             {
                 text = "Step 1 (San d'Oria): Note - this mission has TWO routes (San d'Oria and Windurst) that must both be completed. They can be done in any order or simultaneously.\n \n" ..
                        "Zone into Northern San d'Oria for an automatic cutscene.\n \n" ..
-                       "Talk to Arnau (M-6) on the dais at the far end of the Cathedral main hall.\n \n" ..
-                       "Then talk to Chasalvige in the Manuscript Room (end of the north-west hall).\n \n" ..
                        "Tip: Home Point #2 or #3 are close to the Cathedral.\n \n",
                 route_to = "Northern San d'Oria",
-                onmob_target = "Chasalvige",
+                trigger_on_event_id = {14},
+                zone_trigger = "Northern San d'Oria",
+            },
+            {
+                text = "Step 2 (San d'Oria): Talk to Arnau (M-6) on at the far end of the Cathedral main hall.\n \n",
+                route_to = "Northern San d'Oria",
+                onmob_target = "Arnau",
                 destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {51},
+            },
+            {
+                text = "Step 3 (San d'Oria): Talk to Chasalvige in the Manuscript Room (end of the north-west hall).\n \n",
+                route_to = "Northern San d'Oria",
+                onmob_target = "Chasalvige",
+                destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {38},
             },
             {
-                text = "Step 2 (San d'Oria): Head to Carpenters' Landing via the (E-6) entrance in Jugner Forest.\n \n" ..
-                       "Find Guilloud at (H-10) beside a boulder. Talk to him to spawn the Overgrown Ivy NM - be ready to fight immediately!\n \n" ..
-                       "Overgrown Ivy: Very fast attack rate. Spams Bad Breath at ~15% HP. Susceptible to Head Butt stun. Tolerates Sleep after repeated casts.\n \n" ..
-                       "After defeating Overgrown Ivy, talk to Guilloud again.\n \n",
-                route_to = "Carpenters' Landing",
-                onmob_target = "Guilloud",
-                onmob_enemy = {"Overgrown Ivy"},
-                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {0},
+                text = "Step 4 (San d'Oria): Head to Jugner Forest and enter Carpenters' Landing via the gate at (E-6).\n \n",
+                route_to = "Jugner Forest",
+                destination_highlight = {position = "E-6", offsetX = 16, offsetY = 16},
+                zone_trigger = "Carpenters' Landing",
+                visual_zones = {
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -450.5, y = 8.3, z = 280.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -518.6, y = 8.0, z = 320.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                },
             },
             {
-                text = "Step 3 (San d'Oria): Head to Southern San d'Oria and speak to Hinaree on the second floor of the Count's Manor (B-6).\n \n" ..
+                text = "Step 5 (San d'Oria): Find Guilloud at (H-10) beside a boulder and talk to him - this immediately spawns the Overgrown Ivy NM. Be ready to fight!\n \n",
+                route_to = "Carpenters' Landing",
+                onmob_target = "carpenters-landing-guilloud",
+                --onmob_enemy = {"Overgrown Ivy"},
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                trigger_on_talk = "squash another worm!",
+                visual_zones = {
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = -298.7, y = -4.1, z = -456.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = -249.4, y = -5.2, z = -419.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = -194.1, y = -5.8, z = -445.2 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = -133.9, y = -5.4, z = -485.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 6 (San d'Oria): Defeat the Overgrown Ivy, then talk to Guilloud again.\n \n" ..
+                       "Overgrown Ivy(Morbol): Very fast attack rate(hundred fists like). Spams Bad Breath at ~15percent HP. Susceptible to Head Butt stun. Tolerates Sleep after repeated casts.\n \n",
+                route_to = "Carpenters' Landing",
+                onmob_enemy = {"Overgrown Ivy"},
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Overgrown Ivy"},
+                    count_party_kills = true,
+                    zone = "Carpenters' Landing",
+                },
+            },
+            {
+                text = "Step 7 (San d'Oria): Talk to Guilloud (H-10) once more. \n \n",
+                route_to = "Carpenters' Landing",
+                onmob_target = "carpenters-landing-guilloud",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {0}
+            },
+            {
+                text = "Step 8 (San d'Oria): Head back to Southern San d'Oria and speak to Hinaree on the second floor of the Count's Manor (B-6).\n \n" ..
                        "Tip: Home Point #4 is closest.\n \n" ..
                        "San d'Oria route complete!\n \n",
                 route_to = "Southern San d'Oria",
@@ -1048,52 +1092,106 @@ return {
                 destination_highlight = {position = "B-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {23},
             },
+            -- === WINDURST ROUTE ===
             {
-                text = "Step 4 (Windurst): Zone into Windurst Waters for an automatic cutscene.\n \n" ..
-                       "Talk to Ohbiru-Dohbiru in the Rhinostery right-hand room (J-9).\n \n" ..
-                       "Go to Windurst Walls (Home Point #1) and talk to Yoran-Oran (E-5). You may need to speak to him twice.\n \n" ..
-                       "Return to Windurst Waters and talk to Kyume-Romeh at the Timbre Timbers Tavern (F-10). May need to speak twice.\n \n",
-                route_to = "Windurst Waters",
-                onmob_target = "Kyume-Romeh",
+                text = "Step 9 (Windurst): Zone into Windurst Waters for an automatic cutscene.\n \n",
+                route_to = "Windurst Waters South",
+                trigger_on_event_id = {871},
+            },
+            {
+                text = "Step 10 (Windurst): Talk to Ohbiru-Dohbiru in the Rhinostery right-hand room (J-9).\n \n" ..
+                       "Tip: Home Point #3 is on the south map of Windurst Waters.\n \n",
+                route_to = "Windurst Waters South",
+                onmob_target = "Ohbiru-Dohbiru",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {872},
+            },
+            {
+                text = "Step 11 (Windurst): Head to Windurst Walls (Home Point #1) and talk to Yoran-Oran (E-5).\n \n",
+                route_to = "Windurst Walls",
+                onmob_target = "Yoran-Oran",
+                destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {469},
+            },
+            {
+                text = "Step 12 (Windurst): Return to Windurst Waters and talk to Kyume-Romeh at the Timbre Timbers Tavern (F-10) near (Home Point #4). You may need to speak twice.\n \n",
+                route_to = "Windurst Waters North",
+                onmob_target = "Kyume-Romeh",
+                destination_highlight = {position = "F-10", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                       { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -74.0, y = -3.5, z = 16.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                },
                 trigger_on_event_id = {873},
             },
             {
-                text = "Step 5 (Windurst): In Windurst Waters, enter the trader's home via back stairs at (E-7) and talk to Honoi-Gomoi to receive the Cracked Mimeo Mirror.\n \n" ..
-                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran - this removes the Cracked Mimeo Mirror.\n \n" ..
-                       "Important: Confirm the Cracked Mimeo Mirror is gone from your Key Items before the next step - you cannot spawn the NM with it.\n \n",
-                route_to = "Windurst Waters",
+                text = "Step 13 (Windurst): Talk to Honoi-Gomoi to receive the Cracked Mimeo Mirror.\n \n" ..
+                       "Enter via the back stairs at (E-7) - door marked 'Trader's Home'. (Home Point #3 is closest.)\n \n",
+                route_to = "Windurst Waters South",
                 onmob_target = "Honoi-Gomoi",
                 destination_highlight = {position = "E-7", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {470},
+                visual_zones = {
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -204.3, y = -2.7, z = -134.0 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -182.2, y = -3.0, z = -127.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -184.4, y = -4.4, z = -101.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -183.9, y = -10.1, z = -115.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -194.4, y = -10.1, z = -113.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                },
+                trigger_on_event_id = {874},
             },
             {
-                text = "Step 6 (Windurst): Travel to Attohwa Chasm (fastest: Unity Concord warp, level 125 section).\n \n" ..
-                       "Find the Loose Sand at (K-8). Click it to spawn Lioumere (Antlion NM). Warning: Lioumere uses Pit Ambush on whoever spawns it! It resets HP if allowed to return to its spawn point - use Bind/Gravity/Sleep.\n \n" ..
-                       "After defeating Lioumere, click the Loose Sand again to obtain the Mimeo Jewel. A 30-minute timer starts - do NOT mount, zone, or use Nexus Cape!\n \n" ..
-                       "Climb Parradamo Tor from the northwest corner of (K-9). Hug the right wall southwest to an open clearing then follow the mountain wall south to find the narrow path.\n \n" ..
-                       "Some vents are temporary (wait 1 min to confirm), permanent vents require carefully falling to a lower path.\n \n" ..
-                       "At the summit check the Cradle of Rebirth - each party member must click it individually to receive Mimeo Feather x3.\n \n" ..
-                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran.\n \n",
+                text = "Step 14 (Windurst): Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran.\n \n" ..
+                       "This removes the Cracked Mimeo Mirror. Confirm it is gone in 'Key Items Needed:' before the next step - you cannot spawn the NM with it.\n \n",
+                route_to = "Windurst Walls",
+                onmob_target = "Yoran-Oran",
+                destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {470},
+                keyitems_needed = {581},
+            },
+            {
+                text = "Step 15 (Windurst): Travel to Attohwa Chasm.\n \n" ..
+                       "Find the Loose Sand at (K-8) and click it to spawn Lioumere (Antlion NM).\n \n" ..
+                       "Warning: Lioumere uses Pit Ambush on spawn. Resets HP if it returns to its spawn point - use Bind/Gravity/Sleep to prevent this.\n \n" ..
+                       "After defeating Lioumere, click the Loose Sand again to obtain the Mimeo Jewel. A 30-minute timer starts!\n \n" ..
+                       "Do NOT mount, zone, or use Nexus Cape with the Mimeo Jewel.\n \n" ..
+                       "Climb Parradamo Tor and click the Cradle of Rebirth at the summit. Each party member must click it individually to receive Mimeo Feather x3.\n \n",
                 route_to = "Attohwa Chasm",
                 onmob_target = "Cradle of Rebirth",
                 onmob_enemy = {"Lioumere"},
                 destination_highlight = {position = "K-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {2},
+            },
+            {
+                text = "Step 16 (Windurst): Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran to hand over the Mimeo Feathers.\n \n",
+                route_to = "Windurst Walls",
+                onmob_target = "Yoran-Oran",
+                destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {471},
             },
             {
-                text = "Step 7 (Windurst): Go to Port Windurst and talk to Yujuju (M-6) just outside the Air Travel Agency.\n \n" ..
-                       "Go to Windurst Waters (G-8, Northern Map) and talk to Tosuka-Porika inside the east Optistery.\n \n" ..
-                       "Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran. You may need to speak to him twice.\n \n" ..
-                       "Windurst route complete!\n \n",
+                text = "Step 17 (Windurst): Head to Port Windurst and talk to Yujuju (M-6) just outside the Air Travel Agency.\n \n",
                 route_to = "Port Windurst",
                 onmob_target = "Yujuju",
                 destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {592},
+            },
+            {
+                text = "Step 18 (Windurst): Return to Windurst Waters and talk to Tosuka-Porika (G-8, Northern Map) inside the east Optistery.\n \n",
+                route_to = "Windurst Waters",
+                onmob_target = "Tosuka-Porika",
+                destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {875},
+            },
+            {
+                text = "Step 19 (Windurst): Return to Windurst Walls (Home Point #1) and talk to Yoran-Oran.\n \n" ..
+                       "Windurst route complete!\n \n",
+                route_to = "Windurst Walls",
+                onmob_target = "Yoran-Oran",
+                destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {472},
             },
             -- === COMPLETION ===
             {
-                text = "STEP 8 [Completion]: Both routes complete! Head to the Metalworks and talk to Cid (H-8). You may need to speak to him twice.\n \n",
+                text = "Step 20 [Completion]: Both routes complete! Head to the Metalworks and talk to Cid (H-8).\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
