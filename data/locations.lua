@@ -183,9 +183,23 @@ return {
         visual_mode = "arc",
         zone = "Port Windurst"
     },
+    ["Yujuju"] = {
+        target_pos = { x = 201.5, y = -5.7, z = 139.0 },
+        visual_mode = "arc",
+        zone = "Port Windurst",
+        floor_id = 0,
+        max_distance = 40
+    },
     -- Windurst Waters North
     ["Kyume-Romeh"] = {
         target_pos = { x = -54.5, y = -5.3, z = 23.2 },
+        visual_mode = "arc",
+        zone = "Windurst Waters North",
+        floor_id = 1,
+        max_distance = 40
+    },
+    ["Tosuka-Porika"] = {
+        target_pos = { x = -28.7, y = -6.2, z = 104.4 },
         visual_mode = "arc",
         zone = "Windurst Waters North",
         floor_id = 1,
@@ -300,6 +314,21 @@ return {
         zone = "Tahrongi Canyon",
         floor_id = 0,
         max_distance = 35
+    },
+    -- Attohwa Chasm
+    ["attohwa-chasm-loose-sand"] = {
+        target_pos = { x = 478.9, y = 20.0, z = 41.7 },
+        visual_mode = "arc",
+        zone = "Attohwa Chasm",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["attohwa-chasm-cradle-of-rebirth"] = {
+        target_pos = { x = 320.2, y = -23.3, z = -15.9 },
+        visual_mode = "arc",
+        zone = "Attohwa Chasm",
+        floor_id = 0,
+        max_distance = 45
     },
     -- Konschtat Highlands
    ["konschtat-highlands-shattered-telepoint"] = {

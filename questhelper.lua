@@ -517,15 +517,41 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 end
 
                                 if should_draw_zone then
-                                    -- Determine color: use zone.colour if specified, otherwise default
-                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
-
-                                    if zone.type == 'square' and zone.center and zone.size then
-                                        drawingModule.drawSquare(zone.center, zone.size, color)
-                                    elseif zone.type == 'line' and zone.start and zone.stop then
-                                        drawingModule.drawLine(zone.start, zone.stop, color)
-                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
-                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
+                                    local max_dist = zone.max_distance or step_data.zone_max_distance
+                                    local dist_ok = true
+                                    if max_dist then
+                                        local ref_x, ref_y, ref_z
+                                        if zone.type == 'line' and zone.start and zone.stop then
+                                            ref_x = (zone.start.x + zone.stop.x) * 0.5
+                                            ref_y = (zone.start.y + zone.stop.y) * 0.5
+                                            ref_z = (zone.start.z + zone.stop.z) * 0.5
+                                        elseif zone.center then
+                                            ref_x = zone.center.x
+                                            ref_y = zone.center.y
+                                            ref_z = zone.center.z
+                                        end
+                                        if ref_x then
+                                            local dx = player_module.posX - ref_x
+                                            local dy = (player_module.posZ_depth - ref_y) * 0.5
+                                            local dz = player_module.posY_height - ref_z
+                                            dist_ok = (dx*dx + dy*dy + dz*dz) <= max_dist * max_dist
+                                        end
+                                    end
+                                    if dist_ok then
+                                        local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
+                                        if zone.type == 'square' and zone.center and zone.size then
+                                            drawingModule.drawSquare(zone.center, zone.size, color)
+                                        elseif zone.type == 'line' and zone.start and zone.stop then
+                                            local arrow_end = zone.arrow_end or step_data.line_arrow_end
+                                            if arrow_end then
+                                                local hs = zone.arrow_head_size or step_data.line_arrow_head_size
+                                                drawingModule.drawLineWithArrow(zone.start, zone.stop, color, hs)
+                                            else
+                                                drawingModule.drawLine(zone.start, zone.stop, color)
+                                            end
+                                        elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
+                                            drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
+                                        end
                                     end
                                 end
                                 ::draw_continue::
@@ -575,13 +601,41 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 end
 
                                 if should_draw_zone then
-                                    local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
-                                    if zone.type == 'square' and zone.center and zone.size then
-                                        drawingModule.drawSquare(zone.center, zone.size, color)
-                                    elseif zone.type == 'line' and zone.start and zone.stop then
-                                        drawingModule.drawLine(zone.start, zone.stop, color)
-                                    elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
-                                        drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
+                                    local max_dist = zone.max_distance or step_data.zone_max_distance
+                                    local dist_ok = true
+                                    if max_dist then
+                                        local ref_x, ref_y, ref_z
+                                        if zone.type == 'line' and zone.start and zone.stop then
+                                            ref_x = (zone.start.x + zone.stop.x) * 0.5
+                                            ref_y = (zone.start.y + zone.stop.y) * 0.5
+                                            ref_z = (zone.start.z + zone.stop.z) * 0.5
+                                        elseif zone.center then
+                                            ref_x = zone.center.x
+                                            ref_y = zone.center.y
+                                            ref_z = zone.center.z
+                                        end
+                                        if ref_x then
+                                            local dx = player_module.posX - ref_x
+                                            local dy = (player_module.posZ_depth - ref_y) * 0.5
+                                            local dz = player_module.posY_height - ref_z
+                                            dist_ok = (dx*dx + dy*dy + dz*dz) <= max_dist * max_dist
+                                        end
+                                    end
+                                    if dist_ok then
+                                        local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
+                                        if zone.type == 'square' and zone.center and zone.size then
+                                            drawingModule.drawSquare(zone.center, zone.size, color)
+                                        elseif zone.type == 'line' and zone.start and zone.stop then
+                                            local arrow_end = zone.arrow_end or step_data.line_arrow_end
+                                            if arrow_end then
+                                                local hs = zone.arrow_head_size or step_data.line_arrow_head_size
+                                                drawingModule.drawLineWithArrow(zone.start, zone.stop, color, hs)
+                                            else
+                                                drawingModule.drawLine(zone.start, zone.stop, color)
+                                            end
+                                        elseif zone.type == 'arrow' and zone.center and zone.size and zone.direction then
+                                            drawingModule.drawArrow(zone.center, zone.size, zone.direction, color, zone.outline)
+                                        end
                                     end
                                 end
                             end

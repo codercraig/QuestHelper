@@ -41,6 +41,12 @@ local viz = {
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
 local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue' }
 
+-- ── Line builder (Position tab) ───────────────────────────────────────────────
+local lin = {
+    start_pos = nil,   -- { x, y, z } once set
+    stop_pos  = nil,   -- { x, y, z } once set
+}
+
 -- ── locations.lua builder (Target tab) ───────────────────────────────────────
 local loc = {
     visual_mode  = 'arc',
@@ -164,63 +170,108 @@ local function render_position_tab()
     if toggle_btn("Arrow##vt",  viz.entry_type == 'arrow')  then viz.entry_type = 'arrow'  end
     imgui.SameLine()
     if toggle_btn("Square##vt", viz.entry_type == 'square') then viz.entry_type = 'square' end
-
-    -- Colour (split into 2 lines for readability)
-    imgui.Text("Colour:")
     imgui.SameLine()
-    for i = 1, 4 do
-        if i > 1 then imgui.SameLine() end
-        if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
-    end
-    imgui.Text("       ")  -- indent to match label above
-    imgui.SameLine()
-    for i = 5, #COLOURS do
-        if i > 5 then imgui.SameLine() end
-        if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
-    end
+    if toggle_btn("Line##vt",   viz.entry_type == 'line')   then viz.entry_type = 'line'   end
 
-    -- Direction (arrow only) - two rows of 4
-    if viz.entry_type == 'arrow' then
-        imgui.Text("Direction:")
+    if viz.entry_type ~= 'line' then
+        -- Colour (split into 2 lines for readability)
+        imgui.Text("Colour:")
         imgui.SameLine()
         for i = 1, 4 do
             if i > 1 then imgui.SameLine() end
-            if toggle_btn(DIRECTIONS[i], viz.direction == DIRECTIONS[i]) then viz.direction = DIRECTIONS[i] end
+            if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
         end
-        imgui.Text("          ")
+        imgui.Text("       ")  -- indent to match label above
         imgui.SameLine()
-        for i = 5, 8 do
+        for i = 5, #COLOURS do
             if i > 5 then imgui.SameLine() end
-            if toggle_btn(DIRECTIONS[i], viz.direction == DIRECTIONS[i]) then viz.direction = DIRECTIONS[i] end
+            if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
+        end
+
+        -- Direction (arrow only) - two rows of 4
+        if viz.entry_type == 'arrow' then
+            imgui.Text("Direction:")
+            imgui.SameLine()
+            for i = 1, 4 do
+                if i > 1 then imgui.SameLine() end
+                if toggle_btn(DIRECTIONS[i], viz.direction == DIRECTIONS[i]) then viz.direction = DIRECTIONS[i] end
+            end
+            imgui.Text("          ")
+            imgui.SameLine()
+            for i = 5, 8 do
+                if i > 5 then imgui.SameLine() end
+                if toggle_btn(DIRECTIONS[i], viz.direction == DIRECTIONS[i]) then viz.direction = DIRECTIONS[i] end
+            end
+        end
+
+        -- Size / Floor ID
+        imgui.Text("Size:"); imgui.SameLine()
+        if imgui.Button(" - ##vs") then viz.size = math.max(1, viz.size - 1) end
+        imgui.SameLine(); imgui.Text(string.format("%d", viz.size)); imgui.SameLine()
+        if imgui.Button(" + ##vs") then viz.size = viz.size + 1 end
+
+        imgui.SameLine(); imgui.Text("   Floor ID:"); imgui.SameLine()
+        if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
+        imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
+        if imgui.Button(" + ##vf") then viz.floor_id = viz.floor_id + 1 end
+    else
+        -- Colour (line shares same colour picker)
+        imgui.Text("Colour:")
+        imgui.SameLine()
+        for i = 1, 4 do
+            if i > 1 then imgui.SameLine() end
+            if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
+        end
+        imgui.Text("       ")
+        imgui.SameLine()
+        for i = 5, #COLOURS do
+            if i > 5 then imgui.SameLine() end
+            if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
+        end
+
+        -- Line: Set Start / Set End
+        if imgui.Button("Set Start##lb") then lin.start_pos = { x = src_x, y = src_y, z = src_z } end
+        imgui.SameLine()
+        if imgui.Button("Set End##lb")   then lin.stop_pos  = { x = src_x, y = src_y, z = src_z } end
+
+        if lin.start_pos then
+            imgui.Text(string.format("  Start:  X=%.2f  Y=%.2f  Z=%.2f", lin.start_pos.x, lin.start_pos.y, lin.start_pos.z))
+        else
+            imgui.Text("  Start:  (not set)")
+        end
+        if lin.stop_pos then
+            imgui.Text(string.format("  End:    X=%.2f  Y=%.2f  Z=%.2f", lin.stop_pos.x, lin.stop_pos.y, lin.stop_pos.z))
+        else
+            imgui.Text("  End:    (not set)")
         end
     end
 
-    -- Size
-    imgui.Text("Size:"); imgui.SameLine()
-    if imgui.Button(" - ##vs") then viz.size = math.max(1, viz.size - 1) end
-    imgui.SameLine(); imgui.Text(string.format("%d", viz.size)); imgui.SameLine()
-    if imgui.Button(" + ##vs") then viz.size = viz.size + 1 end
-
-    imgui.SameLine(); imgui.Text("   Floor ID:"); imgui.SameLine()
-    if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
-    imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
-    if imgui.Button(" + ##vf") then viz.floor_id = viz.floor_id + 1 end
-
     -- Actions
     imgui.Separator()
-    local add_lbl = viz.entry_type == 'arrow' and "+ Add Arrow##v" or "+ Add Square##v"
+    local add_lbl = viz.entry_type == 'arrow' and "+ Add Arrow##v"
+                 or viz.entry_type == 'line'  and "+ Add Line##v"
+                 or "+ Add Square##v"
     if imgui.Button(add_lbl) then
-        local line
+        local entry
         if viz.entry_type == 'square' then
-            line = string.format(
+            entry = string.format(
                 "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, floor_id = %d, colour = %q },",
                 p.zone_name, src_x, src_y, src_z, viz.size, viz.floor_id, viz.colour)
+        elseif viz.entry_type == 'line' then
+            if lin.start_pos and lin.stop_pos then
+                entry = string.format(
+                    "    { type = 'line', start = { x = %.1f, y = %.1f, z = %.1f }, stop = { x = %.1f, y = %.1f, z = %.1f }, colour = %q },",
+                    lin.start_pos.x, lin.start_pos.y, lin.start_pos.z,
+                    lin.stop_pos.x,  lin.stop_pos.y,  lin.stop_pos.z, viz.colour)
+                lin.start_pos = nil
+                lin.stop_pos  = nil
+            end
         else
-            line = string.format(
+            entry = string.format(
                 "    { zone_name = %q, type = 'arrow', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, direction = %q, floor_id = %d, colour = %q },",
                 p.zone_name, src_x, src_y, src_z, viz.size, viz.direction, viz.floor_id, viz.colour)
         end
-        table.insert(viz.entries, line)
+        if entry then table.insert(viz.entries, entry) end
     end
     imgui.SameLine()
     if imgui.Button(string.format("Copy All (%d)##vc", #viz.entries)) then

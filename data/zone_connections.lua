@@ -192,6 +192,15 @@ return {
         {zone = "Maze of Shakhrami", exit = "F-6"},
         {zone = "Labyrinth of Onzozo", exit = "K-6"}
     },
+    ["Maze of Shakhrami"] = {
+        {zone = "Tahrongi Canyon", exit = "C-9"},
+        {zone = "Attohwa Chasm", exit = "F-5"},
+        --{zone = "Buburimu Peninsula", exit = "N-11"}
+    },
+    ["Attohwa Chasm"] = {
+        {zone = "Maze of Shakhrami", exit = "G-10"},
+        --{zone = "Buburimu Peninsula", exit = "N-11"}
+    },
     ["Mhaura"] = {
         {zone = "Buburimu Peninsula", exit = "H-5"},
         {zone = "Selbina", exit = "H-10"}

@@ -74,6 +74,20 @@ function drawingModule.drawLine(p1, p2, color)
     drawLine(p1, p2, color)
 end
 
+function drawingModule.drawLineWithArrow(p1, p2, color, head_size)
+    drawLine(p1, p2, color)
+    local hs = head_size or 1.8
+    local dx = p2.x - p1.x
+    local dz = p2.z - p1.z
+    local len = math.sqrt(dx*dx + dz*dz)
+    if len < 0.001 then return end
+    local nx, nz = dx / len, dz / len
+    local wing1 = { x = p2.x - nx*hs + (-nz)*hs*0.5, y = p2.y, z = p2.z - nz*hs + nx*hs*0.5 }
+    local wing2 = { x = p2.x - nx*hs - (-nz)*hs*0.5, y = p2.y, z = p2.z - nz*hs - nx*hs*0.5 }
+    drawLine(p2, wing1, color)
+    drawLine(p2, wing2, color)
+end
+
 function drawingModule.drawArrow(center, size, direction, color, outline)
     -- direction can be: 'up', 'down', 'left', 'right', 'north', 'south', 'east', 'west'
     -- and diagonals: 'northeast', 'northwest', 'southeast', 'southwest', 'ne', 'nw', 'se', 'sw'

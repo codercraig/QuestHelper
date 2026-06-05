@@ -57,6 +57,7 @@ local id_to_name = {
     [477] = "Miracle Salt",
     [581] = "Cracked Mimeo Mirror",
     [583] = "Mimeo Stone",
+    [586] = "Mimeo Jewel",
     [590] = "Light of Holla",
     [591] = "Light of Dem",
     [592] = "Light of Mea",
