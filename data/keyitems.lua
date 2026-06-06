@@ -63,6 +63,7 @@ local id_to_name = {
     [592] = "Light of Mea",
     [593] = "Light of Vahzl",
     [594] = "Light of Altaieu",
+    [604] = "Psoxja Pass",
     [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
 

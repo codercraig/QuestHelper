@@ -15,6 +15,10 @@
 -- },
 
 return {
+    --Pso'Xja
+    [9] = {
+        [8] = 1,
+    },
     --Phoniuna Aqueducts
     [27] = {
         [1] = 1,

@@ -9,5 +9,8 @@
 [CoP 2-5] Ancient Vows - DONE
 [CoP 3-1] The Call of the Wyrmking - DONE
 [CoP 3-2] A Vessel Without a Captain - DONE
-[CoP 3-3] Road Forks - STARTED
+[CoP 3-3] Road Forks - DONE
+[CoP 3-4] Tending Aged Wounds - DONE
+[CoP 3-5] Darkness Named - DONE
+[CoP 4-1] Sheltering Doubt - STARTED
 

@@ -1481,15 +1481,237 @@ return {
             },
             {
                 text = "Step 2: Inspect the door of the Tenshodo Headquarters (Neptune's Spire) in Lower Jeuno.\n \n" ..
-                       "The door is at (H-9) - look for Neptune's Spire entrance.\n \n",
+                       "The door is at (J-7) - look for Neptune's Spire, second door in!\n \n",
                 route_to = "Lower Jeuno",
-                onmob_target = "lower-jeuno-neptunes-spire",
-                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                onmob_target = "Door: Neptune's Spire",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {22},
             },
         },
         reward = {
             text = "Next: Darkness Named (CoP 3-5)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 3-5: Darkness Named
+    -----------------------------------
+    ["CoP 3-5: Darkness Named"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 3-4: Tending Aged Wounds"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Upper Jeuno (Home Point #3) and speak to Monberaux (G-10) in the Infirmary for a cutscene.\n \n" ..
+                       "Your Key Item: Mysterious Amulet will be removed.\n \n",
+                route_to = "Upper Jeuno",
+                onmob_target = "Monberaux",
+                destination_highlight = {position = "G-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {82},
+            },
+            {
+                text = "Step 2: Head to Beaucedine Glacier and enter Pso'Xja via the tower at (H-8) - the one nearest to the Survival Guide book.\n \n" ..
+                       "Sneak and Invisible are recommended inside.\n \n",
+                route_to = "Beaucedine Glacier",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_trigger = "Pso'Xja",
+                onmob_target = "beaucedine-glacier-iron-grate-h8",
+            },
+            {
+                text = "Step 3: Kill Diremites inside Pso'Xja to obtain a chip. \n \n" ..
+                       "Any colour works: Gray Chip, Carmine Chip, or Cyan Chip. Each character needs one.\n \n" ..
+                       "13 Diremites en route to The Shrouded Maw drop Gray Chips.\n \n",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "J-12", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Pso'Xja",
+                        floor_id = 8,
+                    },
+                },
+                onmob_enemy = {"Diremite","Snow Lizards"},
+                onmob_enemy_size = 4,
+                items_needed = {
+                    { display = "Gray/Carmine/Cyan Chip", alternatives = {"Gray Chip", "Carmine Chip", "Cyan Chip"} },
+                },
+                trigger_on_item_obtain = {"Gray Chip", "Carmine Chip", "Cyan Chip"},
+            },
+            {
+                text = "Step 4: Head to Lower Jeuno (Home Point #2) and speak to Ghebi Damomohe inside Neptune's Spire (I-7).\n \n" ..
+                       "Speak to her first for a dialogue cutscene, then trade her your chip.\n \n" ..
+                       "You will receive 500 Gil and the Key Item: Pso'Xja Pass.\n \n",
+                route_to = "Lower Jeuno",
+                onmob_target = "Ghebi Damomohe",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                trigger_on_keyitem_obtain = {604},
+                keyitems_needed = {604},
+                --trigger_on_event_id = {52},
+            },
+            {
+                text = "Step 5: Return to Beaucedine Glacier and re-enter Pso'Xja via the tower at (H-8) - the one nearest to the Survival Guide book.\n \n",
+                route_to = "Beaucedine Glacier",
+                onmob_target = "beaucedine-glacier-iron-grate-h8",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_trigger = "Pso'Xja",
+            },
+            {
+                text = "Step 6: Navigate through Pso'Xja to The Shrouded Maw - follow the yellow arrows!\n \n" ..
+                       "Pass through the smoke walls in order: Red -> Black/Purple -> Red -> Black/Purple.\n \n" ..
+                       "In the fourth area, take the elevator down. Go left down the stairs to find the Stone Gate - your Pso'Xja Pass opens it automatically.\n \n" ..
+                       "Home Point #1 is just behind the gate. Zone into The Shrouded Maw for a cutscene.\n \n",
+                onmob_target = "pso-xja-stone-gate",
+                visual_zones = {
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -137.1, y = 0.2, z = 12.1 }, size = 4, direction = "nw", floor_id = 8, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -149.7, y = 0.0, z = 38.3 }, size = 4, direction = "up", floor_id = 8, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -26.1, y = 0.2, z = 230.5 }, size = 4, direction = "right", floor_id = 9, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -4.6, y = 0.2, z = 230.1 }, size = 4, direction = "right", floor_id = 9, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 107.0, y = 0.2, z = 70.3 }, size = 4, direction = "left", floor_id = 10, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 89.9, y = 0.2, z = 67.6 }, size = 4, direction = "down", floor_id = 10, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -29.4, y = 0.2, z = -50.6 }, size = 4, direction = "right", floor_id = 11, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -0.8, y = 0.0, z = -50.1 }, size = 4, direction = "right", floor_id = 11, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -30.0, y = 0.2, z = 70.0 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -28.9, y = 0.0, z = 34.4 }, size = 4, direction = "sw", floor_id = 16, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -31.1, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+
+                        -- down elevator
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -20.0, y = 32.2, z = 28.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -21.3, y = 32.0, z = 60.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -59.7, y = 40.0, z = 36.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -60.0, y = 40.0, z = 7.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        -- highlights = {
+                        --     { position = "H-7", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 8,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        -- highlights = {
+                        --     { position = "H-7", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 9,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        -- highlights = {
+                        --     { position = "H-7", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 10,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        -- highlights = {
+                        --     { position = "H-7", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 11,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        -- highlights = {
+                        --     { position = "H-7", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 16,
+                    },
+                },
+                zone_trigger = "The Shrouded Maw",
+                trigger_on_event_id = {2},
+            },
+            {
+                text = "Step 7: Examine the Memento Circle and enter the Darkness Named battlefield.\n \n" ..
+                       "Boss: Diabolos (buffs wear on entry, no EXP loss from KO)\n \n" ..
+                       "- Noctoshield: Defense buff on Diabolos - dispel if possible.\n" ..
+                       "- Ultimate Terror: AoE Terror - spreads fear, followed immediately by Camisado.\n" ..
+                       "- Nightmare: Triggers at a random HP% (25-75%) - drops random floor tiles. Players that fall through land in a pit with aggressive Diremites.\n" ..
+                       "- Camisado: Always follows Nightmare or Ultimate Terror - single target draw-in.\n" ..
+                       "- Below 35 PERCENT HP: Diabolos gains Regain - expect rapid TP move spam.\n" ..
+                       "- Immune to: Sleep, Petrify, Silence, Slow, Terror.\n \n" ..
+                       "On victory you receive the Title: Transient Dreamer.\n \n",
+                zone_name = "The Shrouded Maw",
+                onmob_enemy = {"Diabolos"},
+                --onmob_target = "the-shrouded-maw-memento-circle",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Diabolos"},
+                    count_party_kills = true,
+                },
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 8: Return to Upper Jeuno (Home Point #3). \n \n" ..
+                       "Speak to Monberaux (G-10) in the Infirmary to complete the mission.\n \n",
+                route_to = "Upper Jeuno",
+                onmob_target = "Monberaux",
+                destination_highlight = {position = "G-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {75},
+            },
+        },
+        reward = {
+            text = "Title: Transient Dreamer\n1000 EXP\nAccess to Dreamworld Dynamis\nNext: Sheltering Doubt (CoP 4-1)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 4-1: Sheltering Doubt
+    -----------------------------------
+    ["CoP 4-1: Sheltering Doubt"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 3-5: Darkness Named"},
+        },
+        steps = {
+            {
+                text = "Step 1: Zone into Tavnazian Safehold (Home Point #3) for an automatic cutscene.\n \n" ..
+                       "The Tavnazian Safehold Auction House will now become accessible.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                zone_trigger = "Tavnazian Safehold",
+                trigger_on_event_id = {107},
+            },
+            {
+                text = "Step 2: Head to the top floor and speak to Despachiaire (K-9) behind the Walnut Door.\n \n" ..
+                       "There are multiple Walnut Doors - the correct one is at (K-9), with Fouagine standing beside the entrance.\n \n" ..
+                       "You may need to speak to him twice to trigger the cutscene involving Tenzen.\n \n" ..
+                       "Optional: Speak to Justinius (J-6) on the same floor for additional dialogue.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "Despachiaire",
+                destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {108},
+            },
+            {
+                text = "Step 3: Head to Misareaux Coast and examine the Dilapidated Gate at (I-11) to complete the mission.\n \n" ..
+                       "Exit Tavnazian Safehold via the southwest exit at (G-6) to reach Misareaux Coast.\n \n" ..
+                       "Note: If the cutscene appears bugged and won't continue, disable any 60 FPS plugin and restart.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-dilapidated-gate",
+                destination_highlight = {position = "I-11", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 290.0, y = 24.5, z = -388.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {7},
+            },
+        },
+        reward = {
+            text = "Next: The Savage (CoP 4-2)",
         }
     },
 }

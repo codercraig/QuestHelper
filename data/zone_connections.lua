@@ -419,7 +419,11 @@ return {
         {zone = "Ranguemont Pass", exit = "E-11"},
         {zone = "Batallia Downs", exit = "H-11"},
         {zone = "Xarcabard", exit = "F-6"},
-        {zone = "Fei'Yin 1", exit = "J-4"}
+        {zone = "Fei'Yin 1", exit = "J-4"},
+        {zone = "Pso'Xja", exit = "H-8", floor_id = 8}
+    },
+    ["Pso'Xja"] = {
+        {zone = "Beaucedine Glacier", exit = "G-11"}
     },
     ["Fei'Yin 1"] = {
         {zone = "Beaucedine Glacier", exit = "F-11"},

@@ -555,7 +555,7 @@ return {
         target_pos = { x = -42.4, y = -2, z = -1.9 },
         visual_mode = "arc",
         zone = "Upper Jeuno",
-        max_distance = 45
+        max_distance = 30
     },
     ["Door: Jeuno Auction House"] = {
         target_pos = { x = 5.1, y= 0, z=45.3},
@@ -737,6 +737,22 @@ return {
         visual_mode = "arc",
         zone = "Yuhtunga Jungle"
     },
+    -- Beaucedine Glacier
+    ["beaucedine-glacier-iron-grate-h8"] = {
+        target_pos = { x = -20.0, y = -55.0, z = -41.0 },
+        visual_mode = "arc",
+        zone = "Beaucedine Glacier",
+        floor_id = 0,
+        max_distance = 35
+    },
+    -- Pso'Xja
+    ["pso-xja-stone-gate"] = {
+        target_pos = { x = -60.0, y = 38.4, z = 25.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 0,
+        max_distance = 8
+    },
     --Cape Teriggan
     ["cape-teriggan-zm5-cermet-headstone"] = {
         target_pos = { x = -109.2, y = -8.5, z = 453.8},
@@ -855,14 +871,13 @@ return {
     },
 
     -- CoP 2-3 Oil Lamps (corridor F-8, south to north: Fire/Earth/Water/Wind/Ice/Lightning/Light/Dark)
-    -- TODO: Replace target_pos with actual NPC coordinates from zone NPC data
     ["phomiuna-aqueducts-fire-oil-lamp"] = {
-    target_pos = { x = -63.7, y = -26.2, z = 43.0 },
-    visual_mode = "arc",
-    zone = "Phomiuna Aqueducts",
-    floor_id = 3,
-    max_distance = 35
-    },
+        target_pos = { x = -63.7, y = -26.2, z = 43.0 },
+        visual_mode = "arc",
+        zone = "Phomiuna Aqueducts",
+        floor_id = 3,
+        max_distance = 35
+        },
     ["phomiuna-aqueducts-earth-oil-lamp"] = {
         target_pos = { x = -63.7, y = -26.2, z = 47.0 },
         visual_mode = "arc",
