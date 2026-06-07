@@ -71,8 +71,12 @@ return {
         {zone = "Tavnazian Safehold 2", exit = "K-8"},
         {zone = "Tavnazian Safehold 2", exit = "K-10"},
         {zone = "Riverne - Site #A01", exit = "D-6", floor_id = 2},
+        {zone = "Riverne - Site #B01", exit = "M-9", floor_id = 2},
     },
     ["Riverne - Site #A01"] = {
+        --{zone = "Misareaux Coast", exit = "M-9"},
+    },
+    ["Riverne - Site #B01"] = {
         --{zone = "Misareaux Coast", exit = "M-9"},
     },
     ["Tavnazian Safehold 2"] = {

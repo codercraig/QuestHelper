@@ -5,17 +5,25 @@ local imgui = require('imgui')
 local bit = require('bit')
 
 -- ImGui Tree Node Flags
-ImGuiTreeNodeFlags_DefaultOpen = 0x20  -- Default node to be open
+ImGuiTreeNodeFlags_DefaultOpen = 0x20
 
 -- ImGui Condition Flags
-ImGuiCond_FirstUseEver = 2  -- Set the variable only on first use
+ImGuiCond_FirstUseEver = 2
 
 -- ImGui Window Flags
-ImGuiWindowFlags_AlwaysAutoResize = 0x40  -- Resize every frame based on content
+ImGuiWindowFlags_AlwaysAutoResize = 0x40
+
+-- ImGui Color Indices (Ashita runtime globals — defined here to satisfy linter)
+ImGuiCol_Button        = 21
+ImGuiCol_ButtonHovered = 22
+ImGuiCol_ButtonActive  = 23
 
 -- Search functionality
 local search_query = ""
 local search_results = T{}
+
+-- Hardcoded progression guide
+local progression_guide = require('data.progression_guide')
 
 -- Inventory checking (periodic, not every frame)
 local inventory_results = {} -- Cached results
@@ -24,6 +32,7 @@ local INVENTORY_CHECK_INTERVAL = 5.0 -- Check every 5 seconds
 
 -- Settings window state
 local show_settings_window = false
+local show_progression_guide = false
 
 -- Collapsed mode step navigation
 local collapsed_viewed_step = nil  -- Track which step we're viewing in collapsed mode
@@ -367,12 +376,22 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
         -- Settings button
         imgui.SameLine()
-        if imgui.SmallButton("\xE2\x9A\x99##Settings") then  -- ⚙ gear icon
+        if imgui.SmallButton("\xE2\x9A\x99##Settings") then
             show_settings_window = not show_settings_window
         end
 
-        -- Navigation back buttons and toggles
-        if current_mission then
+        -- Progression guide toggle
+        imgui.SameLine()
+        if show_progression_guide then
+            imgui.PushStyleColor(ImGuiCol_Button, {0.2, 0.5, 0.2, 1.0})
+            if imgui.SmallButton("Guide##GuideToggle") then show_progression_guide = false end
+            imgui.PopStyleColor(1)
+        else
+            if imgui.SmallButton("Guide##GuideToggle") then show_progression_guide = true end
+        end
+
+        -- Navigation back buttons and toggles (hidden while guide is open)
+        if not show_progression_guide and current_mission then
             -- Collapse/Expand Steps Toggle
             imgui.SameLine()
             if ui_settings.show_all_steps then
@@ -411,13 +430,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
             end
-        elseif currentSubfile then
+        elseif not show_progression_guide and currentSubfile then
             -- Back to Subfiles button (when viewing mission list)
             imgui.SameLine()
             if imgui.Button("< Back##BackToSubfiles") then
                 new_currentSubfile = nil
             end
-        elseif currentTopCategory then
+        elseif not show_progression_guide and currentTopCategory then
             -- Back to Categories button (when viewing subfile list)
             imgui.SameLine()
             if imgui.Button("< Back##BackToCategories") then
@@ -480,7 +499,43 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
             imgui.Separator()
         else
             -- Normal Navigation
-            if not currentTopCategory then
+            if show_progression_guide then
+                -- Dedicated progression guide page
+                imgui.TextColored({1, 0.65, 0, 1}, "Progression Guide")
+                imgui.TextColored({0.6, 0.6, 0.6, 1}, "Suggested mission order by level.")
+                imgui.Spacing()
+                for _, tier in ipairs(progression_guide) do
+                    imgui.TextColored({1, 0.65, 0, 1}, tier.label)
+                    imgui.Separator()
+                    for _, entry in ipairs(tier.entries) do
+                        local subfileData = quest_data[entry.topCategory] and quest_data[entry.topCategory][entry.subfile]
+                        local done = subfileData and quest_state.isSubfileComplete(entry.topCategory, entry.subfile, quest_data)
+                        if done then
+                            imgui.PushStyleColor(ImGuiCol_Button,        {0, 0.6, 0, 0.5})
+                            imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 0.6, 0, 0.7})
+                            imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 0.6, 0, 0.9})
+                        elseif subfileData then
+                            imgui.PushStyleColor(ImGuiCol_Button,        {0.55, 0.1, 0.1, 0.6})
+                            imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.7,  0.1, 0.1, 0.8})
+                            imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.8,  0.1, 0.1, 1.0})
+                        else
+                            imgui.PushStyleColor(ImGuiCol_Button,        {0.3, 0.3, 0.3, 0.5})
+                            imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.3, 0.3, 0.3, 0.5})
+                            imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.3, 0.3, 0.3, 0.5})
+                        end
+                        local btnLabel = entry.label .. (entry.note and (' (' .. entry.note .. ')') or '') .. '##pg_' .. entry.topCategory .. entry.subfile .. entry.label
+                        if imgui.Button(btnLabel) and subfileData then
+                            new_currentTopCategory = entry.topCategory
+                            new_currentSubfile     = entry.subfile
+                            new_current_mission    = entry.mission or nil
+                            show_progression_guide = false
+                        end
+                        imgui.PopStyleColor(3)
+                    end
+                    imgui.Spacing()
+                end
+
+            elseif not currentTopCategory then
                 imgui.Text('Select a top category:')
                 for category, _ in pairs(quest_data) do
                     if imgui.Button(category) then
@@ -822,28 +877,33 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                     if prereq_header_expanded then
                         for idx, prereq in ipairs(prerequisites) do
-                            -- Check if the prerequisite quest/mission is complete
                             local isComplete = quest_state.isMissionComplete(prereq.category, prereq.subfile, prereq.name, quest_data)
+                            local isRecommended = prereq.recommended == true
 
-                            -- Set button color based on completion status
                             if isComplete then
-                                -- GREEN - Completed
                                 imgui.PushStyleColor(ImGuiCol_Button,        {0, 0.5, 0, 0.5})
                                 imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 0.7, 0, 0.7})
                                 imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 0.9, 0, 0.9})
                                 imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                            elseif isRecommended then
+                                -- AMBER - Recommended, not completed
+                                imgui.PushStyleColor(ImGuiCol_Button,        {0.6, 0.4, 0,   0.6})
+                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.8, 0.55, 0,  0.8})
+                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {1.0, 0.65, 0,  1.0})
+                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
                             else
-                                -- RED - Not completed
                                 imgui.PushStyleColor(ImGuiCol_Button,        {0.5, 0, 0, 0.5})
                                 imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.7, 0, 0, 0.7})
                                 imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.9, 0, 0, 0.9})
                                 imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
                             end
 
-                            local buttonLabel = string.format("%s %s: %s##prereq_%d",
+                            local suffix = isRecommended and " (recommended)" or ""
+                            local buttonLabel = string.format("%s %s: %s%s##prereq_%d",
                                 isComplete and "[x]" or "[ ]",
                                 prereq.category,
                                 prereq.name,
+                                suffix,
                                 idx)
 
                             if imgui.Button(buttonLabel) then
@@ -1005,10 +1065,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     -- Render the step text
                     -- Use narrower wrap width when scrollbar is present to prevent text cutoff
                     local wrap_width = use_scrollable_text and 55 or 60
+                    local wrapped = utils.wrap_text(text, wrap_width)
                     if ref[1] then
-                        imgui.TextColored({0,1,0,1}, utils.wrap_text(text, wrap_width))
+                        imgui.TextColored({0, 1, 0, 1}, wrapped)
+                    elseif i == current_step_index then
+                        imgui.TextColored({1, 0.55, 0, 1}, wrapped)
                     else
-                        imgui.Text(utils.wrap_text(text, wrap_width))
+                        imgui.Text(wrapped)
                     end
 
                     -- End scrollable container if we started one

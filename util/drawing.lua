@@ -11,6 +11,7 @@ local drawingModule = {}
 local d3d8dev       = require('d3d8').get_device()
 local ffi           = require('ffi')
 local C             = ffi.C
+local bit           = require('bit')
 
 ffi.cdef[[
     #pragma pack(1)
@@ -25,6 +26,7 @@ local arrowVertSize   = ffi.sizeof('struct ArrowVertFormat')
 local ARROW_VERTEX_FORMAT = bit.bor(C.D3DFVF_XYZRHW, C.D3DFVF_DIFFUSE, C.D3DFVF_TEX1)
 
 local arrowBeamTex
+local squareBeamTex
 local function drawLine(start_pos, end_pos, color)
     local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
     local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
@@ -39,11 +41,11 @@ local function drawLine(start_pos, end_pos, color)
     local len = math.sqrt(dx*dx + dy*dy)
     if len < 0.001 then return end
 
-    local lineWidth = 2
+    local lineWidth = 1
     local nx = (-dy / len) * lineWidth
     local ny = ( dx / len) * lineWidth
 
-    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beam.png')
 
     local verts = ffi.new('struct ArrowVertFormat[4]', {
         { sx1 + nx, sy1 + ny, 0.5, 1.0, color, 0, 0   },
@@ -85,7 +87,7 @@ function drawingModule.drawSquare(center, size, color)
         sx[i], sy[i], sz[i] = helpers.worldToScreen(c.x, c.y, c.z, view, projection)
     end
 
-    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+    squareBeamTex = squareBeamTex or helpers.getTexture(addon.path .. 'assets/beam.png')
 
     d3d8dev:SetStreamSource(0, nil, 0)
     d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
@@ -98,9 +100,9 @@ function drawingModule.drawSquare(center, size, color)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
-    d3d8dev:SetTexture(0, arrowBeamTex)
+    d3d8dev:SetTexture(0, squareBeamTex)
 
-    local lineWidth = 4
+    local lineWidth = 2
     local sides = {{1,2},{2,3},{3,4},{4,1}}
     for _, s in ipairs(sides) do
         local a, b = s[1], s[2]
@@ -143,7 +145,7 @@ function drawingModule.drawLineWithArrow(p1, p2, color, head_size)
     if len < 0.001 then return end
 
     local lineWidth = 4
-    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beam.png')
 
     d3d8dev:SetStreamSource(0, nil, 0)
     d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
@@ -192,8 +194,8 @@ function drawingModule.drawArrow(center, size, direction, color, outline)
     local dir = string.lower(direction or 'up')
 
     -- Arrow dimensions
-    local head_length = size * 0.4
-    local head_width = size * 0.5
+    local head_length = size * 0.2
+    local head_width = size * 0.25
 
     -- For diagonals, use sqrt(2) to maintain proper length
     local diagonal_factor = 0.707  -- 1/sqrt(2)
@@ -305,7 +307,7 @@ function drawingModule.drawArrow(center, size, direction, color, outline)
 
     if bz < 0 or bz > 1 or tz < 0 or tz > 1 then return end
 
-    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beam.png')
 
     d3d8dev:SetStreamSource(0, nil, 0)
     d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
@@ -313,10 +315,10 @@ function drawingModule.drawArrow(center, size, direction, color, outline)
     d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
     d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
     d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,  C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,   C.D3DTOP_BLENDTEXTUREALPHA)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,  C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
     d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
     d3d8dev:SetTexture(0, arrowBeamTex)
 

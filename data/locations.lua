@@ -374,6 +374,13 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+    ["Ferchinne"] = {
+        target_pos = { x = -69.1, y = -13.2, z = -5.7 },
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 2,
+        max_distance = 35
+    },
     ["tavnazian-safehold-sewer-entrance"] = {
         target_pos = { x = 28.0, y = -13.9, z = 45.9 },
         visual_mode = "arc",
@@ -388,6 +395,7 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+   -- Misareaux Coast
    ["misareaux-coast-dilapidated-gate"] = {
         target_pos = { x = 260.0, y = 7.3, z = -440.0 },
         visual_mode = "arc",
@@ -444,6 +452,42 @@ return {
         zone = "Riverne - Site #A01",
         floor_id = 2,
         max_distance = 40
+    },
+    -- Riverne Site #B01
+    ["riverne-site-b01-spatial-displacement-m9"] = {
+        target_pos = { x = 663.4, y = -27.2, z = 340.1 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #B01",
+        floor_id = 2,
+        max_distance = 35
+    },
+    ["riverne-site-b01-unstable-displacement-g8"] = {
+        target_pos = { x = -56.4, y = -4.4, z = -420.4 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #B01",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["riverne-site-b01-spatial-displacement-f6"] = {
+        target_pos = { x = -333.7, y = 33.8, z = 773.0 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #B01",
+        floor_id = 2,
+        max_distance = 35
+    },
+    ["riverne-site-b01-spatial-displacement-e7"] = {
+        target_pos = { x = -500.0, y = -3.2, z = 663.1 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #B01",
+        floor_id = 2,
+        max_distance = 35
+    },
+    ["riverne-site-b01-spatial-displacement-e8"] = {
+        target_pos = { x = -536.9, y = -23.2, z = 500.0 },
+        visual_mode = "arc",
+        zone = "Riverne - Site #B01",
+        floor_id = 2,
+        max_distance = 35
     },
     -- Monarch Linn
     ["monarch-linn-spatial-displacement"] = {

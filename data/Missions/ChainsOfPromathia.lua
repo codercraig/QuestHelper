@@ -876,11 +876,13 @@ return {
             },
             {
                 text = "Step 3: Defeat Firedrakes(Highlighted Monsters!) along the way to (G-10) to collect 2 Giant Scales - you will need them at the Unstable Displacements ahead.\n \n" ..
-                       "There's also a homepoint to pickup at (I-9) will which be useful for a return trip later.\n \n",
-                onmob_enemy = {"Firedrake"},
+                       "There's also a homepoint to pickup at (I-9) will which be useful for a return trip later.\n \n" ..
+                       "Notes: Try and gather some Hippogryph Tailfeathers along the way for mission (CoP 4-2) whilst we are here, i'll highlight the Hippogryphs for this reason. \n \n",
+                onmob_enemy = {"Firedrake","Hippogryph","Cloud Hippogryph"},
                 onmob_enemy_size = 4,
                 items_needed = {
                     { item = "Giant Scale", quantity = 2, on_the_way = true },
+                    { item = "Hippogryph Tailfeather", quantity = 8, on_the_way = true, optional = true},
                 },
                 trigger_on_item_obtain = {{item = "Giant Scale", quantity = 2}},
                 onmob_target = "riverne-site-a01-spatial-displacement-l8",
@@ -1715,6 +1717,247 @@ return {
         },
         reward = {
             text = "Next: The Savage (CoP 4-2)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 4-2: The Savage
+    -----------------------------------
+    ["CoP 4-2: The Savage"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 4-1: Sheltering Doubt"},
+            {category = "Quests",   subfile = "Tavnazian Safehold", name = "Fly High", recommended = true},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Misareaux Coast and examine the Dilapidated Gate at (F-7) for a cutscene.\n \n" ..
+                       "Exit Tavnazian Safehold via the southwest exit at (G-6) to reach Misareaux Coast.\n \n" ..
+                       "Tip: Unity warp 128 to Misareaux Coast puts you right at the gate.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-dilapidated-gate-f7",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 428.4, y = -15.7, z = 200.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 292.6, y = -15.5, z = 187.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 250.3, y = -15.5, z = 151.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = 18.8, y = -15.1, z = 43.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -83.8, y = -16.1, z = 40.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -164.1, y = -32.1, z = 113.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -239.6, y = -32.0, z = 204.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {8},
+            },
+            {
+                text = "Step 2: After the cutscene you will be placed next to a Spatial Displacement.\n \n" ..
+                       "Click it to enter Riverne - Site #B01.\n \n",
+                route_to = "Misareaux Coast",
+                destination_highlight = {position = "D-6", offsetX = 16, offsetY = 16},
+                onmob_target = "misareaux-coast-spatial-displacement",
+                zone_trigger = "Riverne - Site #B01",
+            },
+            {
+                text = "Step 3: You are now in Riverne - Site #B01. Collect Giant Scales dropped by Wyverns in the area.\n \n" ..
+                       "You need at least 1 Giant Scale (2 if you want to unlock the geomagnetic fount).\n \n" ..
+                       "Warning: Blazedrakes will sight aggro at any level, and Hippogryphs have truesight - avoid them!\n \n" ..
+                       "Trade a Giant Scale to the Unstable Displacement at (G-8)/(H-8) to proceed.\n \n",
+                images = {
+                        {
+                            width = 512,
+                            height = 512,
+                            state = 3,
+                            highlights = {
+                                { position = "G-8", offsetX = 16, offsetY = 16 },
+                            },
+                            zone_name = "Riverne - Site #B01",
+                            floor_id = 2,
+                        },
+                },
+                onmob_target = {"riverne-site-b01-spatial-displacement-m9", "riverne-site-b01-unstable-displacement-g8"},
+                onmob_enemy = {"Pyrodrake", "Blazedrake","Ignidrake"},
+                zone_max_distance = 60,
+                onmob_enemy_size = 4,
+                visual_zones = {
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 519.9, y = 0.2, z = -647.1 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 479.5, y = 0.0, z = -605.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 470.6, y = 0.9, z = -542.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 438.6, y = -0.2, z = -516.8 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 350.1, y = 0.4, z = -478.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 294.6, y = 0.7, z = -485.7 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 250.9, y = 0.3, z = -518.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 205.8, y = 0.1, z = -520.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 169.6, y = 0.3, z = -528.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 121.8, y = 1.4, z = -552.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 80.4, y = 1.0, z = -538.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 53.1, y = 0.7, z = -525.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 6.1, y = 1.8, z = -500.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -44.5, y = 0.4, z = -471.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -54.5, y = -0.2, z = -429.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                },
+                items_needed = {
+                    { item = "Giant Scale", quantity = 1, on_the_way = true },
+                },
+                trigger_on_item_obtain = {{item = "Giant Scale", quantity = 1}},
+                --zone_trigger = "Monarch Linn",
+            },
+            {
+                text = "Step 4: Trade a Giant Scale to the Unstable Displacement at (G-8)/(H-8) to proceed.\n \n" ..
+                       "Next, go to (F-6) and interact with the Spatial Displacement. \n \n" ..
+                       "Run south to (E-7) for the final Spatial Displacement in this area.\n \n" ..
+                       "Continue south to zone into Monarch Linn at (F-8)! \n \n",
+                images = {
+                        {
+                            width = 512,
+                            height = 512,
+                            state = 4,
+                            highlights = {
+                                { position = "G-8", offsetX = 16, offsetY = 16 },
+                                { position = "E-8", offsetX = 16, offsetY = 16, label = "ML"  },
+                            },
+                            zone_name = "Riverne - Site #B01",
+                            floor_id = 2,
+                        },
+                },
+                onmob_target = {"riverne-site-b01-spatial-displacement-m9",
+                                "riverne-site-b01-unstable-displacement-g8",
+                                "riverne-site-b01-spatial-displacement-f6",
+                                "riverne-site-b01-spatial-displacement-e7",
+                                "riverne-site-b01-spatial-displacement-e8"},
+                zone_max_distance = 60,
+                visual_zones = {
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 519.9, y = 0.2, z = -647.1 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 479.5, y = 0.0, z = -605.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 470.6, y = 0.9, z = -542.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 438.6, y = -0.2, z = -516.8 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 350.1, y = 0.4, z = -478.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 294.6, y = 0.7, z = -485.7 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 250.9, y = 0.3, z = -518.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 205.8, y = 0.1, z = -520.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 169.6, y = 0.3, z = -528.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 121.8, y = 1.4, z = -552.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 80.4, y = 1.0, z = -538.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 53.1, y = 0.7, z = -525.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = 6.1, y = 1.8, z = -500.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -44.5, y = 0.4, z = -471.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -54.5, y = -0.2, z = -429.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                        --after giant scale trade
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -193.1, y = 34.5, z = 675.1 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -216.3, y = 32.9, z = 709.2 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -239.3, y = 32.3, z = 728.3 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -295.7, y = 33.7, z = 751.7 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+
+                        -- to monarch linn island
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -475.3, y = 2.2, z = 765.3 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -489.7, y = 0.5, z = 732.6 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -505.4, y = -0.5, z = 705.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -512.2, y = 0.4, z = 691.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -505.6, y = -0.5, z = 668.5 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+
+                        -- on monarch linn island
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -512.6, y = -19.9, z = 553.8 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Riverne - Site #B01", type = 'arrow', center = { x = -528.8, y = -19.5, z = 511.2 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                },
+                zone_trigger = "Monarch Linn",
+            },
+            {
+                text = "Step 5: Enter the battlefield and defeat Ouryu (The Savage).\n \n" ..
+                       "Bring 2-6 Mistmelts (obtained via the Fly High quest).\n \n" ..
+                       "Ouryu is IMMUNE to earth-based magic and effects.\n \n" ..
+                       "Ouryu surrenders at ~30% HP - you only need to inflict ~6000 damage total.\n \n" ..
+                       "[PHASES:]\n" ..
+                       "Ouryu alternates ground and air every 2 minutes:\n" ..
+                       "Ground: physical damage attacks - melee works normally.\n" ..
+                       "Air: earth elemental damage, ignores shadows/Invincible/physical reduction - melee MISSES. Use Dragoon Jumps or Mistmelt to force back down.\n \n" ..
+                       "[KEY ATTACKS:]\n" ..
+                       "Horrid Roar: Dispels up to 15 buffs including food AND resets enmity - expect hate reset.\n" ..
+                       "Absolute Terror: Inflicts Terror, halting all actions until it wears.\n" ..
+                       "Spike Flail: AoE physical, only used if someone behind has hate - stay in front.\n \n" ..
+                       "Invincible may activate between 75-95% HP. High resistance to Stun.\n \n" ..
+                       "After winning, use the Spatial Displacement to leave Monarch Linn back to Misareaux Coast.\n \n",
+                trigger_on_event_id = {32001},
+                onmob_target = "monarch-linn-spatial-displacement",
+                onmob_enemy = {"Ouryu"},
+                onmob_enemy_size = 6,
+            },
+            {
+                text = "Step 6: Head to Tavnazian Safehold and speak to Justinius (J-6) on the upper level for a cutscene.\n \n" ..
+                       "Use Home Point #3 to warp directly to Tavnazian Safehold.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "Justinius",
+                destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {110},
+            },
+        },
+        reward = {
+            text = "1500 EXP\nTitle: Mist Melter or Nag'molada's Underling\nNext: The Secrets of Worship (CoP 4-3)",
+        }
+    },
+
+    ["CoP 4-3: The Secrets of Worship"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 4-2: The Savage"},
+            {category = "Quests",   subfile = "Tavnazian Safehold", name = "A Hard Day's Knight", recommended = true},
+        },
+        steps = {
+            {
+                text = "Step 1: Speak to Justinius (J-6) on the upper floor of Tavnazian Safehold.\n \n" ..
+                       "Note: You may get an Uninvited Guests cutscene or a Monarch Linn Patrol Permit dialogue - speak to him again to get the mission dialogue.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "Justinius",
+                destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {131},
+            },
+            {
+                text = "Step 2: Click the Walnut Door (K-7) just up the small ramp from Justinius for a cutscene.\n \n" ..
+                       "Parelbriaux stands nearby - the door is right next to him.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {111},
+            },
+            {
+                text = "Step 3: Head to the Iron Gate at (G-4) in the northern part of Misareaux Coast for a cutscene.\n \n" ..
+                       "This grants you access to Sacrarium.\n" ..
+                       "Fastest route: Use the Undulating Confluence Home Point in Misareaux Coast.\n \n",
+                route_to = "Misareaux Coast",
+                destination_highlight = {position = "G-4", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {9},
+            },
+            {
+                text = "Step 4: Enter Sacrarium and make your way to the locked door at (H-7) on the second map.\n \n" ..
+                       "CAUTION: The maze walls on Map 1 shift with each Vana'diel day!\n \n" ..
+                       "[KEYS NEEDED:]\n" ..
+                       "Coral Crest Key: Dropped by Fomors inside the Sacrarium.\n" ..
+                       "Sealion Crest Key: Dropped by Keremet (Corse NM at the far end of the locked room).\n" ..
+                       "  - Kill all 12 Skeletons in hallways (J-7/8) and (J-8/9) before pulling Keremet!\n" ..
+                       "  - Keremet uses Danse Macabre (charm) - charmed players MUST be slept.\n \n" ..
+                       "[UNLOCKING THE DOOR at H-7 Map 2:]\n" ..
+                       "Trade Coral Crest Key to the small keyhole and Sealion Crest Key to the large keyhole simultaneously.\n" ..
+                       "Coral Crest Key WILL break. Sealion Crest Key is reusable.\n" ..
+                       "Tip: Temple Knight Key (from A Hard Day's Knight quest) allows solo entry - no keys needed.\n \n" ..
+                       "After unlocking, click the Wooden Gate (G-8) for a cutscene.\n \n",
+                zone_trigger = "Sacrarium",
+                trigger_on_event_id = {6},
+            },
+            {
+                text = "Step 5: Search the six classroom ??? spots on the second map to spawn Old Professor Mariselle.\n \n" ..
+                       "He spawns in rooms that contain Fomors - check each ??? on the desks.\n \n" ..
+                       "[FIGHT NOTES:]\n" ..
+                       "Do NOT kill Mariselle's Pupils - he will resummon them endlessly.\n" ..
+                       "He casts Sleepga II repeatedly - bring Poison Potions!\n" ..
+                       "He teleports around the room every ~20-30 seconds.\n" ..
+                       "DO NOT use Tractor or the fight resets.\n \n" ..
+                       "After defeating him, click any ??? in any classroom to receive the Key Item: Reliquiarium Key.\n" ..
+                       "Re-unlock the locked door with a second Coral Crest Key (or have a party member operate the inside switch).\n" ..
+                       "Click the Wooden Gate (G-8) again for the final cutscene to complete the mission.\n \n",
+                trigger_on_event_id = {5},
+            },
+        },
+        reward = {
+            text = "Key Item: Reliquiarium Key\nAccess to Sacrarium\nTitle: The Lost One\nNext: Slanderous Utterings (CoP 4-4)",
         }
     },
 }
