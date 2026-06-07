@@ -289,7 +289,7 @@ return {
         {zone = "Sea Serpent Grotto", exit = "H-10", floor_id = 1}
     },
     ["Qufim Island"] = {
-        {zone = "Port Jeuno", exit = "F-6"},
+        {zone = "Port Jeuno", exit = "I-11"},
         {zone = "Lower Delkfutt's Tower", exit = "F-6"},
         {zone = "Behemoth's Dominion", exit = "D-5"},
         {zone = "Misareaux Coast", exit = "E-6"}

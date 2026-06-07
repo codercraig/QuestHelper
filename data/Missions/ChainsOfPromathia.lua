@@ -1703,7 +1703,7 @@ return {
             {
                 text = "Step 3: Head to Misareaux Coast and examine the Dilapidated Gate at (I-11) to complete the mission.\n \n" ..
                        "Exit Tavnazian Safehold via the southwest exit at (G-6) to reach Misareaux Coast.\n \n" ..
-                       "Note: If the cutscene appears bugged and won't continue, disable any 60 FPS plugin and restart.\n \n",
+                       "Note: If the cutscene appears bugged and won't continue, press 'Print Screen' to nudge it along.\n \n",
                 route_to = "Misareaux Coast",
                 onmob_target = "misareaux-coast-dilapidated-gate",
                 destination_highlight = {position = "I-11", offsetX = 16, offsetY = 16},

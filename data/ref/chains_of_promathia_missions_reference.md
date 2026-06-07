@@ -12,5 +12,6 @@
 [CoP 3-3] Road Forks - DONE
 [CoP 3-4] Tending Aged Wounds - DONE
 [CoP 3-5] Darkness Named - DONE
-[CoP 4-1] Sheltering Doubt - STARTED
+[CoP 4-1] Sheltering Doubt - DONE
+[CoP 4-2] The Savage - STARTED
 

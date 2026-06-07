@@ -27,6 +27,7 @@ local show_settings_window = false
 
 -- Collapsed mode step navigation
 local collapsed_viewed_step = nil  -- Track which step we're viewing in collapsed mode
+local prev_show_all_steps   = nil  -- Detect collapse/expand transitions
 
 local function perform_search(quest_data)
     search_results = T{}
@@ -311,19 +312,28 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
         window_height = 600
     end
 
-    -- Set window size with fixed width (600) and dynamic height based on collapsed/expanded mode
-    -- Apply UI scale setting (ui_scale already defined at top of function)
     local scaled_width = 600 * ui_scale
     local scaled_height = window_height * ui_scale
 
-    -- Use ImGuiCond_Always to enforce size constraints every frame
-    imgui.SetNextWindowSize({scaled_width, scaled_height}, ImGuiCond_Always)
+    -- Snapshot before any button clicks can mutate show_all_steps this frame
+    local show_all_steps_this_frame = ui_settings.show_all_steps
+    local is_expanding = (prev_show_all_steps == false and show_all_steps_this_frame == true)
 
-    local mainFlags = bit.bor(
-        ImGuiWindowFlags_NoCollapse,
-        ImGuiWindowFlags_NoTitleBar,
-        ImGuiWindowFlags_NoResize  -- Disable manual resizing
-    )
+    local mainFlags
+    if current_mission and not ui_settings.show_all_steps then
+        -- Collapsed mode: enforce dynamic size every frame so height tracks content
+        imgui.SetNextWindowSize({scaled_width, scaled_height}, ImGuiCond_Always)
+        mainFlags = bit.bor(ImGuiWindowFlags_NoCollapse, ImGuiWindowFlags_NoTitleBar, ImGuiWindowFlags_NoResize)
+    else
+        -- Expanded mode: lock width, allow height resize
+        -- On transition from collapsed, force-restore the saved expanded height
+        local saved_h = (ui_settings.expanded_window_height or 600) * ui_scale
+        imgui.SetNextWindowSizeConstraints({scaled_width, 200}, {scaled_width, 2000})
+        if is_expanding then
+            imgui.SetNextWindowSize({scaled_width, saved_h}, ImGuiCond_Always)
+        end
+        mainFlags = bit.bor(ImGuiWindowFlags_NoCollapse, ImGuiWindowFlags_NoTitleBar)
+    end
     local window_open = imgui.Begin('Quest Helper', nil, mainFlags)
 
     -- Apply font scaling for the entire window
@@ -339,6 +349,11 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
     if window_open then
         mainX, mainY = imgui.GetWindowPos()
         mainW, mainH = imgui.GetWindowSize()
+
+        -- Save expanded height so re-expanding restores the user's last set height
+        if ui_settings.show_all_steps then
+            ui_settings.expanded_window_height = mainH / ui_scale
+        end
 
         -- STICKY TOP BAR: All control buttons in one line
         -- Images drawer toggle
@@ -1022,6 +1037,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         end
                         imgui.Unindent(20)
                     end
+
+                    -- Red separator between steps in expanded mode
+                    if ui_settings.show_all_steps and i < #steps then
+                        imgui.PushStyleColor(3, {0.6, 0.1, 0.1, 1.0})  -- ImGuiCol_Separator = 3
+                        imgui.Separator()
+                        imgui.PopStyleColor(1)
+                    end
                 end
 
                 -- Rewards (hide when collapsed to save space)
@@ -1177,6 +1199,8 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
     if new_current_mission ~= current_mission then
         collapsed_viewed_step = nil
     end
+
+    prev_show_all_steps = show_all_steps_this_frame
 
     return window_open, mainX, mainY, mainW, mainH, new_showImagesDrawer,
            new_currentTopCategory, new_currentSubfile, new_current_mission
