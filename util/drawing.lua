@@ -13,61 +13,114 @@ local ffi           = require('ffi')
 local C             = ffi.C
 
 ffi.cdef[[
-    struct LineVertFormat {
+    #pragma pack(1)
+    struct ArrowVertFormat {
         float x, y, z, rhw;
         unsigned int diffuse;
+        float u, v;
     };
 ]]
-local lineVertSize = ffi.sizeof('struct LineVertFormat')
+local arrowVertSize   = ffi.sizeof('struct ArrowVertFormat')
 
-local VERTEX_FORMAT = bit.bor(C.D3DFVF_XYZRHW, C.D3DFVF_DIFFUSE)
+local ARROW_VERTEX_FORMAT = bit.bor(C.D3DFVF_XYZRHW, C.D3DFVF_DIFFUSE, C.D3DFVF_TEX1)
+
+local arrowBeamTex
 local function drawLine(start_pos, end_pos, color)
     local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
     local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
 
-    local p1_x, p1_y, p1_z = helpers.worldToScreen(start_pos.x, start_pos.y, start_pos.z, view, projection)
-    local p2_x, p2_y, p2_z = helpers.worldToScreen(end_pos.x, end_pos.y, end_pos.z, view, projection)
+    local sx1, sy1, sz1 = helpers.worldToScreen(start_pos.x, start_pos.y, start_pos.z, view, projection)
+    local sx2, sy2, sz2 = helpers.worldToScreen(end_pos.x, end_pos.y, end_pos.z, view, projection)
 
-    if p1_x == nil or p2_x == nil then
-        return
-    end
+    if sz1 < 0 or sz1 > 1 or sz2 < 0 or sz2 > 1 then return end
 
-    -- Check if points are behind the camera
-    if p1_z < 0 or p1_z > 1 or p2_z < 0 or p2_z > 1 then
-        return
-    end
+    local dx = sx2 - sx1
+    local dy = sy2 - sy1
+    local len = math.sqrt(dx*dx + dy*dy)
+    if len < 0.001 then return end
 
-    local vertices = ffi.new('struct LineVertFormat[2]', {
-        {p1_x, p1_y, 0.5, 1.0, color},
-        {p2_x, p2_y, 0.5, 1.0, color},
+    local lineWidth = 2
+    local nx = (-dy / len) * lineWidth
+    local ny = ( dx / len) * lineWidth
+
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+
+    local verts = ffi.new('struct ArrowVertFormat[4]', {
+        { sx1 + nx, sy1 + ny, 0.5, 1.0, color, 0, 0   },
+        { sx1 - nx, sy1 - ny, 0.5, 1.0, color, 0, 0.5 },
+        { sx2 + nx, sy2 + ny, 0.5, 1.0, color, 1, 0   },
+        { sx2 - nx, sy2 - ny, 0.5, 1.0, color, 1, 0.5 },
     })
-    d3d8dev:SetTexture(0, nil)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP, C.D3DTOP_SELECTARG1)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_DIFFUSE)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP, C.D3DTOP_SELECTARG1)
-    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_DIFFUSE)
+
+    d3d8dev:SetStreamSource(0, nil, 0)
+    d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
     d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0)
     d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
     d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
     d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,   C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTexture(0, arrowBeamTex)
 
-    d3d8dev:SetVertexShader(VERTEX_FORMAT)
-    d3d8dev:DrawPrimitiveUP(C.D3DPT_LINESTRIP, 1, vertices, lineVertSize)
+    d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
 end
 
 function drawingModule.drawSquare(center, size, color)
-    local half_size = size / 2
+    local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+    local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
+
+    local h = size / 2
     local corners = {
-        {x = center.x - half_size, y = center.y, z = center.z - half_size},
-        {x = center.x + half_size, y = center.y, z = center.z - half_size},
-        {x = center.x + half_size, y = center.y, z = center.z + half_size},
-        {x = center.x - half_size, y = center.y, z = center.z + half_size}
+        {x = center.x - h, y = center.y, z = center.z - h},
+        {x = center.x + h, y = center.y, z = center.z - h},
+        {x = center.x + h, y = center.y, z = center.z + h},
+        {x = center.x - h, y = center.y, z = center.z + h},
     }
 
-    drawLine(corners[1], corners[2], color)
-    drawLine(corners[2], corners[3], color)
-    drawLine(corners[3], corners[4], color)
-    drawLine(corners[4], corners[1], color)
+    local sx, sy, sz = {}, {}, {}
+    for i, c in ipairs(corners) do
+        sx[i], sy[i], sz[i] = helpers.worldToScreen(c.x, c.y, c.z, view, projection)
+    end
+
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+
+    d3d8dev:SetStreamSource(0, nil, 0)
+    d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
+    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0)
+    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
+    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
+    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,   C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTexture(0, arrowBeamTex)
+
+    local lineWidth = 4
+    local sides = {{1,2},{2,3},{3,4},{4,1}}
+    for _, s in ipairs(sides) do
+        local a, b = s[1], s[2]
+        if sz[a] >= 0 and sz[a] <= 1 and sz[b] >= 0 and sz[b] <= 1 then
+            local dx = sx[b] - sx[a]
+            local dy = sy[b] - sy[a]
+            local qlen = math.sqrt(dx*dx + dy*dy)
+            if qlen >= 0.001 then
+                local nx = (-dy / qlen) * lineWidth
+                local ny = ( dx / qlen) * lineWidth
+                local verts = ffi.new('struct ArrowVertFormat[4]', {
+                    { sx[a] + nx, sy[a] + ny, 0.5, 1.0, color, 0, 0   },
+                    { sx[a] - nx, sy[a] - ny, 0.5, 1.0, color, 0, 0.5 },
+                    { sx[b] + nx, sy[b] + ny, 0.5, 1.0, color, 1, 0   },
+                    { sx[b] - nx, sy[b] - ny, 0.5, 1.0, color, 1, 0.5 },
+                })
+                d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
+            end
+        end
+    end
 end
 
 function drawingModule.drawLine(p1, p2, color)
@@ -75,17 +128,60 @@ function drawingModule.drawLine(p1, p2, color)
 end
 
 function drawingModule.drawLineWithArrow(p1, p2, color, head_size)
-    drawLine(p1, p2, color)
-    local hs = head_size or 1.8
-    local dx = p2.x - p1.x
-    local dz = p2.z - p1.z
-    local len = math.sqrt(dx*dx + dz*dz)
+    local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+    local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
+
+    local sx1, sy1, sz1 = helpers.worldToScreen(p1.x, p1.y, p1.z, view, projection)
+    local sx2, sy2, sz2 = helpers.worldToScreen(p2.x, p2.y, p2.z, view, projection)
+
+    if sx1 == nil or sx2 == nil then return end
+    if sz1 < 0 or sz1 > 1 or sz2 < 0 or sz2 > 1 then return end
+
+    local dx = sx2 - sx1
+    local dy = sy2 - sy1
+    local len = math.sqrt(dx*dx + dy*dy)
     if len < 0.001 then return end
-    local nx, nz = dx / len, dz / len
-    local wing1 = { x = p2.x - nx*hs + (-nz)*hs*0.5, y = p2.y, z = p2.z - nz*hs + nx*hs*0.5 }
-    local wing2 = { x = p2.x - nx*hs - (-nz)*hs*0.5, y = p2.y, z = p2.z - nz*hs - nx*hs*0.5 }
-    drawLine(p2, wing1, color)
-    drawLine(p2, wing2, color)
+
+    local lineWidth = 4
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+
+    d3d8dev:SetStreamSource(0, nil, 0)
+    d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
+    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0)
+    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
+    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
+    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,   C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTexture(0, arrowBeamTex)
+
+    local function beamQuad(ax, ay, ex, ey)
+        local bdx = ex - ax
+        local bdy = ey - ay
+        local blen = math.sqrt(bdx*bdx + bdy*bdy)
+        if blen < 0.001 then return end
+        local bnx = (-bdy / blen) * lineWidth
+        local bny = ( bdx / blen) * lineWidth
+        local verts = ffi.new('struct ArrowVertFormat[4]', {
+            { ax + bnx, ay + bny, 0.5, 1.0, color, 0, 0   },
+            { ax - bnx, ay - bny, 0.5, 1.0, color, 0, 0.5 },
+            { ex + bnx, ey + bny, 0.5, 1.0, color, 1, 0   },
+            { ex - bnx, ey - bny, 0.5, 1.0, color, 1, 0.5 },
+        })
+        d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
+    end
+
+    beamQuad(sx1, sy1, sx2, sy2)
+
+    -- Arrowhead wings in screen space
+    local headLen = 20
+    local fx, fy = dx / len, dy / len
+    local px, py = -dy / len, dx / len
+    beamQuad(sx2, sy2, sx2 - fx*headLen + px*headLen*0.5, sy2 - fy*headLen + py*headLen*0.5)
+    beamQuad(sx2, sy2, sx2 - fx*headLen - px*headLen*0.5, sy2 - fy*headLen - py*headLen*0.5)
 end
 
 function drawingModule.drawArrow(center, size, direction, color, outline)
@@ -199,31 +295,51 @@ function drawingModule.drawArrow(center, size, direction, color, outline)
         points.right = {x = center.x + head_width/2, y = center.y, z = center.z + size/2 - head_length}
     end
 
-    -- Draw thick outline if requested (black border for visibility)
-    if outline then
-        local black_color = 0xFF000000  -- Solid black
-        local outline_thickness = 0.08  -- Thickness of outline in world units
+    local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+    local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
 
-        -- Draw multiple offset lines to create thick outline effect
-        for offset_y = -outline_thickness, outline_thickness, outline_thickness/2 do
-            -- Offset points in Y direction (up/down in world space)
-            local base_offset = {x = points.base.x, y = points.base.y + offset_y, z = points.base.z}
-            local tip_offset = {x = points.tip.x, y = points.tip.y + offset_y, z = points.tip.z}
-            local left_offset = {x = points.left.x, y = points.left.y + offset_y, z = points.left.z}
-            local right_offset = {x = points.right.x, y = points.right.y + offset_y, z = points.right.z}
+    local bx, by, bz = helpers.worldToScreen(points.base.x,  points.base.y,  points.base.z,  view, projection)
+    local tx, ty, tz = helpers.worldToScreen(points.tip.x,   points.tip.y,   points.tip.z,   view, projection)
+    local lx, ly, lz = helpers.worldToScreen(points.left.x,  points.left.y,  points.left.z,  view, projection)
+    local rx, ry, rz = helpers.worldToScreen(points.right.x, points.right.y, points.right.z, view, projection)
 
-            drawLine(base_offset, tip_offset, black_color)
-            drawLine(tip_offset, left_offset, black_color)
-            drawLine(tip_offset, right_offset, black_color)
-        end
+    if bz < 0 or bz > 1 or tz < 0 or tz > 1 then return end
+
+    arrowBeamTex = arrowBeamTex or helpers.getTexture(addon.path .. 'assets/beamd.png')
+
+    d3d8dev:SetStreamSource(0, nil, 0)
+    d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
+    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0)
+    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
+    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
+    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,  C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,  C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTexture(0, arrowBeamTex)
+
+    local lineWidth = 4
+    local function beamQuad(ax, ay, ex, ey)
+        local dx = ex - ax
+        local dy = ey - ay
+        local qlen = math.sqrt(dx*dx + dy*dy)
+        if qlen < 0.001 then return end
+        local nx = (-dy / qlen) * lineWidth
+        local ny = ( dx / qlen) * lineWidth
+        local verts = ffi.new('struct ArrowVertFormat[4]', {
+            { ax + nx, ay + ny, 0.5, 1.0, color, 0, 0   },
+            { ax - nx, ay - ny, 0.5, 1.0, color, 0, 0.5 },
+            { ex + nx, ey + ny, 0.5, 1.0, color, 1, 0   },
+            { ex - nx, ey - ny, 0.5, 1.0, color, 1, 0.5 },
+        })
+        d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
     end
 
-    -- Draw the arrow shaft
-    drawLine(points.base, points.tip, color)
-
-    -- Draw the arrowhead (two lines forming a V)
-    drawLine(points.tip, points.left, color)
-    drawLine(points.tip, points.right, color)
+    beamQuad(bx, by, tx, ty)
+    if lz >= 0 and lz <= 1 then beamQuad(tx, ty, lx, ly) end
+    if rz >= 0 and rz <= 1 then beamQuad(tx, ty, rx, ry) end
 end
 
 return drawingModule

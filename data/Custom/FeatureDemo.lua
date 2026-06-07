@@ -17,22 +17,6 @@ return {
                         { position = "H-10", offsetX = 16, offsetY = 16 },
                     },
                 },
-                {
-                    -- DAT loading enabled - loads map from FFXI ROM files
-                    -- use_dat_map = true,
-                    -- zone_id  = 235,
-                    -- floor_id = 0,
-
-                    -- PNG fallback if DAT loading fails
-                    file     = "maps/bastok_mines.png",
-                    width    = 512,
-                    height   = 512,
-                    zone_name = "Bastok Markets",
-                    --state    = 3,
-                    highlights = {
-                        { position = "H-10", offsetX = 16, offsetY = 16 },
-                    },
-                },
                 },
                 trigger_zones = {
                     { type = 'square', center = { x = 2, y = 0, z = -79 }, size = 2 },
@@ -42,7 +26,7 @@ return {
                 },
                 visual_zones = {
                     -- Cardinal directions
-                    { type = 'arrow', center = { x = -10, y = 0, z = -79 }, size = 4, direction = 'up' },      -- North
+                    { type = 'arrow', center = { x = -10, y = 0, z = -79 }, size = 4, direction = 'up', colour = "cyan" },      -- North
                     { type = 'arrow', center = { x = -20, y = 0, z = -79 }, size = 4, direction = 'down' },    -- South
                     { type = 'arrow', center = { x = -10, y = 0, z = -90 }, size = 4, direction = 'left' },    -- West
                     { type = 'arrow', center = { x = -20, y = 0, z = -90 }, size = 4, direction = 'right' },   -- East
