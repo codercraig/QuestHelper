@@ -381,6 +381,16 @@ return {
         floor_id = 2,
         max_distance = 35
     },
+    ["Quelveuiat"] = {
+        target_pos = { x = 3.2, y = -24.7, z = -26.0 },
+        dynamic_pos = true,
+        y_offset = -1.9,
+        trigger_npc = "Quelveuiat",
+        visual_mode = "arc",
+        zone = "Tavnazian Safehold",
+        floor_id = 2,
+        max_distance = 35
+    },
     ["tavnazian-safehold-sewer-entrance"] = {
         target_pos = { x = 28.0, y = -13.9, z = 45.9 },
         visual_mode = "arc",
@@ -395,8 +405,24 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+    -- Sealion's Den
+    ["sealions-den-iron-gate"] = {
+        target_pos = { x = 612.0, y = 130.9, z = 770.0 },
+        visual_mode = "arc",
+        zone = "Sealion's Den",
+        floor_id = 1,
+        max_distance = 25
+    },
+   -- Lufaise Meadows
+    ["lufaise-meadows-???-h10"] = {
+        target_pos = { x = -38.6, y = -9.0, z = -290.7 },
+        visual_mode = "arc",
+        zone = "Lufaise Meadows",
+        floor_id = 0,
+        max_distance = 5
+    },
    -- Misareaux Coast
-   ["misareaux-coast-dilapidated-gate"] = {
+    ["misareaux-coast-dilapidated-gate"] = {
         target_pos = { x = 260.0, y = 7.3, z = -440.0 },
         visual_mode = "arc",
         zone = "Misareaux Coast",
@@ -417,6 +443,127 @@ return {
         floor_id = 0,
         max_distance = 120
     },
+    ["misareaux-coast-iron-gate"] = {
+        target_pos = { x = 56.5, y = -25.5, z = 740.0 },
+        visual_mode = "arc",
+        zone = "Misareaux Coast",
+        floor_id = 0,
+        max_distance = 35
+    },
+    -- Sacrarium
+    ["sacrarium-wooden-gate-1"] = {
+        target_pos = { x = 213.4, y = -3.5, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-wooden-gate-2"] = {
+        target_pos = { x = 213.4, y = -3.5, z = -20.0 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-large-keyhole"] = {
+    target_pos = { x = 100.2, y = -1.4, z = 51.7 },
+    visual_mode = "arc",
+    zone = "Sacrarium",
+    floor_id = 2,
+    max_distance = 5
+    },
+    ["sacrarium-small-keyhole"] = {
+        target_pos = { x = 99.8, y = -1.6, z = 51.5 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-wooden-gate-g8"] = {
+        target_pos = { x = 45.5, y = -1.5, z = 10.0 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-wooden-gate-f10"] = {
+    target_pos = { x = 20.0, y = -3.5, z = -97.4 },
+    visual_mode = "arc",
+    zone = "Sacrarium",
+    floor_id = 2,
+    max_distance = 5
+    },
+    ["sacrarium-classroom-???-f11"] = {
+        target_pos = { x = 22.7, y = -3.7, z = -127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-classroom-???-g11"] = {
+        target_pos = { x = 62.7, y = -3.7, z = -127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-wooden-gate-h10"] = {
+        target_pos = { x = 100.0, y = -3.5, z = -97.4 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-classroom-???-h11"] = {
+        target_pos = { x = 102.7, y = -3.7, z = -127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-wooden-gate-h6"] = {
+        target_pos = { x = 100.0, y = -3.5, z = 97.4 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-classroom-???-h5"] = {
+        target_pos = { x = 102.7, y = -3.7, z = 127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-wooden-gate-g6"] = {
+        target_pos = { x = 60.0, y = -3.5, z = 97.4 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-classroom-???-g5"] = {
+        target_pos = { x = 62.7, y = -3.7, z = 127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+    ["sacrarium-wooden-gate-f6"] = {
+        target_pos = { x = 20.0, y = -3.5, z = 97.4 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["sacrarium-classroom-???-f5"] = {
+        target_pos = { x = 22.7, y = -3.7, z = 127.3 },
+        visual_mode = "arc",
+        zone = "Sacrarium",
+        floor_id = 2,
+        max_distance = 15
+    },
+
     -- Riverne Site #A01
     ["riverne-site-a01-spatial-displacement-l8"] = {
         target_pos = { x = 660.7, y = -35.2, z = -463.0 },
@@ -784,6 +931,13 @@ return {
     -- Beaucedine Glacier
     ["beaucedine-glacier-iron-grate-h8"] = {
         target_pos = { x = -20.0, y = -55.0, z = -41.0 },
+        visual_mode = "arc",
+        zone = "Beaucedine Glacier",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["beaucedine-glacier-iron-grate-f7"] = {
+        target_pos = { x = -340.0, y = -95.0, z = 159.0 },
         visual_mode = "arc",
         zone = "Beaucedine Glacier",
         floor_id = 0,

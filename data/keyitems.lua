@@ -56,6 +56,7 @@ local id_to_name = {
     [459] = "Shard of Rage",
     [477] = "Miracle Salt",
     [581] = "Cracked Mimeo Mirror",
+    [582] = "Reliquiarium Key",
     [583] = "Mimeo Stone",
     [586] = "Mimeo Jewel",
     [590] = "Light of Holla",
@@ -66,6 +67,7 @@ local id_to_name = {
     [604] = "Psoxja Pass",
     [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
+    [2506] = "Temple Knight Key"
 
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",

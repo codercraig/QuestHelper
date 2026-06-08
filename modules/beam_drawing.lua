@@ -167,9 +167,10 @@ end
 -- Draws beams to all active targets for current quest step
 function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_depth, playerPosY_height,
                                          memManager, drawArcModule, questIconTexture, helpers,
-                                         shouldPrintDebug, targetStepText, addon_name)
+                                         shouldPrintDebug, addon_name)
     for _, targetData in ipairs(targetsToDraw) do
         local drawActive = false
+        local liveNpcPos = nil
         if targetData then
             local npcNameToActuallyFindInGame = targetData.trigger_npc
 
@@ -182,6 +183,15 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
                         local entity = GetEntity(i)
                         if entity and entity.Name and entity.Name == npcNameToActuallyFindInGame then
                             npcFoundThisFrame = true
+                            if targetData.dynamic_pos then
+                                if entity.Movement and entity.Movement.LocalPosition then
+                                    local p = entity.Movement.LocalPosition
+                                    -- Match target_pos convention: .y = game Z (north-south), .z = game Y (height)
+                                    liveNpcPos = { x = p.X, y = p.Z, z = p.Y }
+                                elseif entity.X then
+                                    liveNpcPos = { x = entity.X, y = entity.Z, z = entity.Y }
+                                end
+                            end
                             break
                         end
                     end
@@ -197,7 +207,11 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
             local effectiveTargetY_height = 0.0
             local effectiveTargetZ_depth = 0.0
 
-            if targetData.target_pos and type(targetData.target_pos) == 'table' then
+            if liveNpcPos then
+                effectiveTargetX = liveNpcPos.x
+                effectiveTargetY_height = liveNpcPos.y + (targetData.y_offset or 0)
+                effectiveTargetZ_depth = liveNpcPos.z
+            elseif targetData.target_pos and type(targetData.target_pos) == 'table' then
                 effectiveTargetX = targetData.target_pos.x or 0.0
                 effectiveTargetY_height = targetData.target_pos.y or 0.0
                 effectiveTargetZ_depth = targetData.target_pos.z or 0.0
@@ -222,14 +236,6 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
             visualEndZ_depth = effectiveTargetZ_depth
 
             beam_drawing.calculateDynamicColor()
-
-            if shouldPrintDebug then
-                local npc_name_for_print = "Position"
-                if targetData and targetData.trigger_npc then
-                    npc_name_for_print = targetData.trigger_npc
-                end
-                ui_debug.addLine(string.format("[%s Debug] Drawing Arc for step '%s'. Target: %s", addon_name, targetStepText, npc_name_for_print))
-            end
 
             drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height,
                          visualEndX, visualEndZ_depth, visualEndY_height,

@@ -380,7 +380,6 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
     -- Resolve targets to draw beams to
     local targetsToDraw = {}
-    local targetStepText = nil
 
     if currentTopCategory and currentSubfile and current_mission then
         local missionData = quest_data[currentTopCategory][currentSubfile][current_mission]
@@ -405,7 +404,6 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 end
 
                 if type(step_data) == 'table' then
-                    targetStepText = step_data.text or ("Step " .. step_idx)
                     local target_ref = step_data.onmob_target
 
                     local potential_targets = {}
@@ -600,6 +598,16 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                     should_draw_zone = (zone_floor_number == player_floor)
                                 end
 
+                                if should_draw_zone and zone.check_day then
+                                    local current_day = utils.getVanaDay()
+                                    should_draw_zone = false
+                                    if current_day then
+                                        for _, d in ipairs(zone.check_day) do
+                                            if d == current_day then should_draw_zone = true; break end
+                                        end
+                                    end
+                                end
+
                                 if should_draw_zone then
                                     local max_dist = zone.max_distance or step_data.zone_max_distance
                                     local dist_ok = true
@@ -711,8 +719,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
     beam_drawing.updateBeamProgress(deltaTime)
     beam_drawing.drawBeamsToTargets(filteredTargets, player_module.posX, player_module.posZ_depth,
                                    player_module.posY_height, memManager, drawArcModule,
-                                   questIconTexture, helpers, shouldPrintDebugNow,
-                                   targetStepText, addon.name)
+                                   questIconTexture, helpers, shouldPrintDebugNow, addon.name)
 
     -- Render UI
     if not is_open then return end

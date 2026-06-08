@@ -1916,48 +1916,621 @@ return {
                        "Parelbriaux stands nearby - the door is right next to him.\n \n",
                 route_to = "Tavnazian Safehold 1",
                 destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                onmob_target = "tavnazian-safehold-walnut-door",
                 trigger_on_event_id = {111},
             },
             {
                 text = "Step 3: Head to the Iron Gate at (G-4) in the northern part of Misareaux Coast for a cutscene.\n \n" ..
                        "This grants you access to Sacrarium.\n" ..
-                       "Fastest route: Use the Undulating Confluence Home Point in Misareaux Coast.\n \n",
+                       "Fastest route: Use the Undulating Confluence Home Point in Misareaux Coast.\n \n" ..
+                       "Note: For the 'Old Professor Mariselle' fight it is reccomended to bring some Poison Potions, best grab some before you head out off the Auction House. Advise your friends! \n \n",
                 route_to = "Misareaux Coast",
                 destination_highlight = {position = "G-4", offsetX = 16, offsetY = 16},
+                onmob_target = "misareaux-coast-iron-gate",
                 trigger_on_event_id = {9},
+                items_needed = {
+                    { item = "Poison Potion", quantity = 2, optional = true },
+                },
             },
             {
-                text = "Step 4: Enter Sacrarium and make your way to the locked door at (H-7) on the second map.\n \n" ..
-                       "CAUTION: The maze walls on Map 1 shift with each Vana'diel day!\n \n" ..
-                       "[KEYS NEEDED:]\n" ..
-                       "Coral Crest Key: Dropped by Fomors inside the Sacrarium.\n" ..
-                       "Sealion Crest Key: Dropped by Keremet (Corse NM at the far end of the locked room).\n" ..
-                       "  - Kill all 12 Skeletons in hallways (J-7/8) and (J-8/9) before pulling Keremet!\n" ..
-                       "  - Keremet uses Danse Macabre (charm) - charmed players MUST be slept.\n \n" ..
-                       "[UNLOCKING THE DOOR at H-7 Map 2:]\n" ..
+                text = "BIG Step 4: Enter Sacrarium and make your way to the locked door at (H-6) on the second map.\n \n" ..
+                       "CAUTION: The maze walls on Map 1 shift with each Vana'diel day - always go to (J-10) as you can access everywhere from there.\n \n" ..
+                       "Note: If playing SOLO take both keys for yourself, and head back to Tavnazian Safehold to use the Temple Knight Key (from A Hard Day's Knight quest npc ) for solo entry - no keys needed.\n \n" ..
+                       "If playing as a group, make sure 1 person has a Coral Crest Key and another has a Sealion Crest Key before proceeding to the locked door.\n \n" ..
+                       "[KEYS NEEDED:]\n \n" ..
+                       "Coral Crest Key: Dropped by Fomors(Marked) inside Sacrarium.\n \n" ..
+                       "Sealion Crest Key: Dropped by Keremet(K on map - Corse NM at the far end of the locked room).\n" ..
+                       "- Kill all 12 Skeletons in hallways(Marked) (J-7/8) and (J-8/9) before pulling Keremet!\n" ..
+                       "- Keremet uses Danse Macabre (charm) - charmed players MUST be slept.\n \n" ..
+                       "[UNLOCKING THE DOOR at H-7 Map 2:]\n \n" ..
                        "Trade Coral Crest Key to the small keyhole and Sealion Crest Key to the large keyhole simultaneously.\n" ..
                        "Coral Crest Key WILL break. Sealion Crest Key is reusable.\n" ..
                        "Tip: Temple Knight Key (from A Hard Day's Knight quest) allows solo entry - no keys needed.\n \n" ..
                        "After unlocking, click the Wooden Gate (G-8) for a cutscene.\n \n",
-                zone_trigger = "Sacrarium",
+                --zone_trigger = "Sacrarium",
                 trigger_on_event_id = {6},
+                onmob_enemy = {"Fomor Bard",
+                               "Fomor Ranger",
+                               "Fomor Ninja",
+                               "Fomor Monk",
+                               "Fomor Samurai",
+                               "Fomor Red Mage",
+                               "Fomor Summoner",
+                               "Fomor Dark Knight",
+                               "Fomor Paladin",
+                               "Fomor Thief",
+                               "Fomor Warrior",
+                               "Fomor Beastmaster",
+                               "Fomor Dragoon",
+                               "Fomor Black Mage",
+                               "Azren Kuguza",
+                               "Azren Kuba",
+                               "Keremet"},
+                items_needed = {
+                    { item = "Coral Crest Key", quantity = 1, on_the_way = true },
+                    { item = "Sealion Crest Key", quantity = 1, on_the_way = true },
+                },
+                keyitems_needed = {2506},
+                zone_max_distance = 20,
+                onmob_target = {"misareaux-coast-iron-gate",
+                                "sacrarium-wooden-gate-1",
+                                "sacrarium-wooden-gate-2",
+                                "sacrarium-large-keyhole",
+                                "sacrarium-small-keyhole",
+                                "sacrarium-wooden-gate-g8"},
+                visual_zones = {
+                    -- Lightsday and Watersday
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -181.1, y = -8.0, z = 59.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.5, y = -4.0, z = 56.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.1, y = 0.0, z = 35.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.0, y = 0.0, z = 25.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -97.0, y = 0.0, z = 15.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.8, y = 0.0, z = 5.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.8, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.4, y = 0.0, z = -19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.1, y = 0.0, z = -18.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -54.9, y = 0.0, z = -23.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.5, y = 0.0, z = -19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.2, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.6, y = 0.0, z = -36.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --to A(not needed)
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -18.1, y = 0.0, z = -35.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -6.2, y = 0.0, z = -24.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -25.3, y = 0.0, z = -15.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -34.6, y = 0.0, z = 19.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    -- Windsday and Darksday
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -179.9, y = -8.0, z = 59.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -174.8, y = -8.0, z = 19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -137.6, y = 0.0, z = -20.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.3, y = 0.0, z = -20.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = -4.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.3, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.3, y = 0.0, z = 4.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.4, y = 0.0, z = 19.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -64.3, y = 0.0, z = 5.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -55.4, y = 0.0, z = 23.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.3, y = 0.0, z = 20.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -34.5, y = 0.0, z = 21.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    --To A not needed
+                    --{ check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -15.5, y = 0.0, z = 34.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -7.3, y = 0.0, z = 24.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.0, y = 0.0, z = 14.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.5, y = 0.0, z = 3.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -22.7, y = 0.0, z = -4.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -18.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.2, y = 0.0, z = -36.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Firesday and Iceday
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.5, y = -8.0, z = 59.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -139.3, y = -8.0, z = 59.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = 35.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.7, y = 0.0, z = 20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.3, y = 0.0, z = 5.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.6, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -86.1, y = 0.0, z = -5.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = -19.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -76.0, y = 0.0, z = -20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -61.6, y = 0.0, z = -35.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = -20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -19.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.3, y = 0.0, z = -5.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -5.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -24.6, y = 0.0, z = -15.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -24.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = -36.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Earthsday and Lightningday
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.0, y = -8.0, z = 60.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -177.7, y = -8.0, z = 19.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -138.4, y = 0.0, z = -19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -115.1, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -104.9, y = 0.0, z = -34.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -95.7, y = 0.0, z = -15.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.6, y = 0.0, z = -21.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.4, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.5, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -74.9, y = 0.0, z = 20.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -60.9, y = 0.0, z = 35.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = 34.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.8, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.7, y = 0.0, z = 19.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = 4.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -5.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -6.5, y = 0.0, z = -14.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.4, y = 0.0, z = -25.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = -35.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --wooden gate (g8)
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 98.3, y = -0.0, z = 20.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 59.3, y = -0.0, z = 9.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                },
+                images = {
+                        {
+                            width = 512,
+                            height = 512,
+                            state = 4,
+                            highlights = {
+                                -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                { position = "J-10", offsetX = 16, offsetY = 16, label = "B" },
+                            },
+                            zone_name = "Sacrarium",
+                            floor_id = 1,
+                        },
+                        {
+                            width = 512,
+                            height = 512,
+                            state = 4,
+                            highlights = {
+                                { position = "L-8", offsetX = 16, offsetY = 16, label = "K" },
+                                { position = "H-6", offsetX = 16, offsetY = 16, label = "D" },
+                            },
+                            zone_name = "Sacrarium",
+                            floor_id = 2,
+                        },
+                },
             },
             {
                 text = "Step 5: Search the six classroom ??? spots on the second map to spawn Old Professor Mariselle.\n \n" ..
                        "He spawns in rooms that contain Fomors - check each ??? on the desks.\n \n" ..
+                       "Note: Farm another Coral Crest Key if you do NOT have the SOLO key item, as we will need to get back through the locked door after the fight.\n \n" ..
+                       "Make sure it is a different person than the one who has the Sealion Crest Key as it will require 2 people.\n \n" ..
+                       "Ignore this if you have the 'Temple Knight Key'. \n \n" ..
                        "[FIGHT NOTES:]\n" ..
                        "Do NOT kill Mariselle's Pupils - he will resummon them endlessly.\n" ..
                        "He casts Sleepga II repeatedly - bring Poison Potions!\n" ..
                        "He teleports around the room every ~20-30 seconds.\n" ..
                        "DO NOT use Tractor or the fight resets.\n \n" ..
-                       "After defeating him, click any ??? in any classroom to receive the Key Item: Reliquiarium Key.\n" ..
-                       "Re-unlock the locked door with a second Coral Crest Key (or have a party member operate the inside switch).\n" ..
-                       "Click the Wooden Gate (G-8) again for the final cutscene to complete the mission.\n \n",
+                       "After defeating him, click any ??? in any classroom to receive the Key Item: Reliquiarium Key.\n",
+                zone_max_distance = 20,
+                visual_zones = {
+                    -- Lightsday and Watersday
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -181.1, y = -8.0, z = 59.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.5, y = -4.0, z = 56.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.1, y = 0.0, z = 35.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.0, y = 0.0, z = 25.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -97.0, y = 0.0, z = 15.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.8, y = 0.0, z = 5.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.8, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.4, y = 0.0, z = -19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.1, y = 0.0, z = -18.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -54.9, y = 0.0, z = -23.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.5, y = 0.0, z = -19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.2, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.6, y = 0.0, z = -36.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --to A(not needed)
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -18.1, y = 0.0, z = -35.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -6.2, y = 0.0, z = -24.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -25.3, y = 0.0, z = -15.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -34.6, y = 0.0, z = 19.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    -- Windsday and Darksday
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -179.9, y = -8.0, z = 59.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -174.8, y = -8.0, z = 19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -137.6, y = 0.0, z = -20.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.3, y = 0.0, z = -20.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = -4.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.3, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.3, y = 0.0, z = 4.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.4, y = 0.0, z = 19.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -64.3, y = 0.0, z = 5.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -55.4, y = 0.0, z = 23.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.3, y = 0.0, z = 20.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -34.5, y = 0.0, z = 21.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    --To A not needed
+                    --{ check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -15.5, y = 0.0, z = 34.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -7.3, y = 0.0, z = 24.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.0, y = 0.0, z = 14.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.5, y = 0.0, z = 3.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -22.7, y = 0.0, z = -4.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -18.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.2, y = 0.0, z = -36.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Firesday and Iceday
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.5, y = -8.0, z = 59.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -139.3, y = -8.0, z = 59.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = 35.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.7, y = 0.0, z = 20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.3, y = 0.0, z = 5.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.6, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -86.1, y = 0.0, z = -5.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = -19.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -76.0, y = 0.0, z = -20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -61.6, y = 0.0, z = -35.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = -20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -19.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.3, y = 0.0, z = -5.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -5.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -24.6, y = 0.0, z = -15.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -24.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = -36.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Earthsday and Lightningday
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.0, y = -8.0, z = 60.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -177.7, y = -8.0, z = 19.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -138.4, y = 0.0, z = -19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -115.1, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -104.9, y = 0.0, z = -34.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -95.7, y = 0.0, z = -15.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.6, y = 0.0, z = -21.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.4, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.5, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -74.9, y = 0.0, z = 20.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -60.9, y = 0.0, z = 35.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = 34.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.8, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.7, y = 0.0, z = 19.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = 4.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -5.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -6.5, y = 0.0, z = -14.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.4, y = 0.0, z = -25.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = -35.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --wooden gate (g8)
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 98.3, y = -0.0, z = 20.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 59.3, y = -0.0, z = 9.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                },
+
+                onmob_enemy = {"Fomor Bard",
+                               "Fomor Ranger",
+                               "Fomor Ninja",
+                               "Fomor Monk",
+                               "Fomor Samurai",
+                               "Fomor Red Mage",
+                               "Fomor Summoner",
+                               "Fomor Dark Knight",
+                               "Fomor Paladin",
+                               "Fomor Thief",
+                               "Fomor Warrior",
+                               "Fomor Beastmaster",
+                               "Fomor Dragoon",
+                               "Fomor Black Mage",
+                               "Old Professor Mariselle"},
+                onmob_target = {"misareaux-coast-iron-gate",
+                                "sacrarium-wooden-gate-f10",
+                                "sacrarium-classroom-???-f11",
+                                "sacrarium-classroom-???-g11",
+                                "sacrarium-wooden-gate-h10",
+                                "sacrarium-classroom-???-h11",
+                                "sacrarium-wooden-gate-h6",
+                                "sacrarium-classroom-???-h5",
+                                "sacrarium-wooden-gate-g6",
+                                "sacrarium-classroom-???-g5",
+                                "sacrarium-wooden-gate-f6",
+                                "sacrarium-classroom-???-f5"
+                            },
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Old Professor Mariselle"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                images = {
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 5,
+                                highlights = {
+                                    -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                    { position = "J-10", offsetX = 16, offsetY = 16, label = "B" },
+                                },
+                                zone_name = "Sacrarium",
+                                floor_id = 1,
+                            },
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 5,
+                                highlights = {
+                                    { position = "F-5", offsetX = 16, offsetY = 16 },
+                                    { position = "G-5", offsetX = 16, offsetY = 16 },
+                                    { position = "H-5", offsetX = 16, offsetY = 16 },
+                                    { position = "F-11", offsetX = 16, offsetY = 16 },
+                                    { position = "G-11", offsetX = 16, offsetY = 16 },
+                                    { position = "H-11", offsetX = 16, offsetY = 16 },
+                                },
+                                zone_name = "Sacrarium",
+                                floor_id = 2,
+                        },
+                },
+                trigger_on_keyitem_obtain = {582},
+            },
+            {
+                text = "Step 6: Click the Wooden Gate (G-8) again for the final cutscene to complete the mission.\n \n" ..
+                       "Note: you will have to unlock the door again at (H-6), I've marked the Fomor's for the Coral Crest Key if you still need it. \n \n",
                 trigger_on_event_id = {5},
+                zone_max_distance = 20,
+                visual_zones = {
+                    -- Lightsday and Watersday
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -181.1, y = -8.0, z = 59.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.5, y = -4.0, z = 56.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -101.1, y = 0.0, z = 35.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.0, y = 0.0, z = 25.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -97.0, y = 0.0, z = 15.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.8, y = 0.0, z = 5.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.8, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.4, y = 0.0, z = -19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.1, y = 0.0, z = -18.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -54.9, y = 0.0, z = -23.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.5, y = 0.0, z = -19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.2, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Lightsday", "Watersday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.6, y = 0.0, z = -36.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --to A(not needed)
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -18.1, y = 0.0, z = -35.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -6.2, y = 0.0, z = -24.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -25.3, y = 0.0, z = -15.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -34.6, y = 0.0, z = 19.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    -- { check_day = {"Lightsday", "Watersday"},zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    -- Windsday and Darksday
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -179.9, y = -8.0, z = 59.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -174.8, y = -8.0, z = 19.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -137.6, y = 0.0, z = -20.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -114.3, y = 0.0, z = -20.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = -4.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -98.3, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.3, y = 0.0, z = 4.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -75.4, y = 0.0, z = 19.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -64.3, y = 0.0, z = 5.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -55.4, y = 0.0, z = 23.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.3, y = 0.0, z = 20.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -34.5, y = 0.0, z = 21.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    --To A not needed
+                    --{ check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = 38.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -15.5, y = 0.0, z = 34.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -7.3, y = 0.0, z = 24.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.0, y = 0.0, z = 14.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.5, y = 0.0, z = 3.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -22.7, y = 0.0, z = -4.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -18.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Windsday", "Darksday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.2, y = 0.0, z = -36.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Firesday and Iceday
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.5, y = -8.0, z = 59.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -139.3, y = -8.0, z = 59.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.2, y = 0.0, z = 35.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -85.7, y = 0.0, z = 20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.3, y = 0.0, z = 5.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -100.6, y = 0.0, z = -4.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -86.1, y = 0.0, z = -5.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = -19.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -76.0, y = 0.0, z = -20.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -61.6, y = 0.0, z = -35.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = -20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -35.0, y = 0.0, z = -19.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.3, y = 0.0, z = -5.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -5.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -24.6, y = 0.0, z = -15.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -5.7, y = 0.0, z = -24.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Firesday", "Iceday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -20.1, y = 0.0, z = -36.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    -- Earthsday and Lightningday
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -180.0, y = -8.0, z = 60.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -177.7, y = -8.0, z = 19.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -138.4, y = 0.0, z = -19.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -115.1, y = 0.0, z = -21.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -104.9, y = 0.0, z = -34.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -95.7, y = 0.0, z = -15.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.6, y = 0.0, z = -21.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.4, y = 0.0, z = -4.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -99.5, y = 0.0, z = 4.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -84.9, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -74.9, y = 0.0, z = 20.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -60.9, y = 0.0, z = 35.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -45.3, y = 0.0, z = 34.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -44.8, y = 0.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -36.7, y = 0.0, z = 19.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = 4.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.8, y = 0.0, z = -5.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -6.5, y = 0.0, z = -14.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -25.4, y = 0.0, z = -25.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { check_day = {"Earthsday", "Lightningday"}, zone_name = "Sacrarium", type = 'arrow', center = { x = -19.9, y = 0.0, z = -35.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --wooden gate (g8)
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 98.3, y = -0.0, z = 20.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Sacrarium", type = 'arrow', center = { x = 59.3, y = -0.0, z = 9.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                },
+
+                onmob_enemy = {"Fomor Bard",
+                               "Fomor Ranger",
+                               "Fomor Ninja",
+                               "Fomor Monk",
+                               "Fomor Samurai",
+                               "Fomor Red Mage",
+                               "Fomor Summoner",
+                               "Fomor Dark Knight",
+                               "Fomor Paladin",
+                               "Fomor Thief",
+                               "Fomor Warrior",
+                               "Fomor Beastmaster",
+                               "Fomor Dragoon",
+                               "Fomor Black Mage"},
+                onmob_target = {"misareaux-coast-iron-gate",
+                                "sacrarium-wooden-gate-1",
+                                "sacrarium-wooden-gate-2",
+                                "sacrarium-large-keyhole",
+                                "sacrarium-small-keyhole",
+                                "sacrarium-wooden-gate-g8"},
+                images = {
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 6,
+                                highlights = {
+                                    -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                    { position = "J-10", offsetX = 16, offsetY = 16, label = "B" },
+                                },
+                                zone_name = "Sacrarium",
+                                floor_id = 1,
+                            },
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 6,
+                                highlights = {
+                                    { position = "G-8", offsetX = 16, offsetY = 16, label = 'D' },
+                                },
+                                zone_name = "Sacrarium",
+                                floor_id = 2,
+                        },
+                },
+            },
+        reward = {
+            text = "Key Item: Reliquiarium Key\nAccess to Sacrarium\nTitle: The Lost One\nNext: Slanderous Utterings (CoP 4-4)",
+            }
+        },
+    },
+
+    ["CoP 4-4: Slanderous Utterings"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 4-3: The Secrets of Worship"},
+        },
+        steps = {
+            {
+                text = "Step 1: Speak with Despachiaire in Tavnazian Safehold (K-9/K-10).\n \n" ..
+                       "Use Home Point #3 to warp directly to Tavnazian Safehold.\n \n" ..
+                       "A cutscene will play automatically when you enter the area near him.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "Despachiaire",
+                destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {112},
+            },
+            {
+                text = "Step 2: Enter Sealion's Den via the entrance at H-9 on the lower level of Tavnazian Safehold.\n \n" ..
+                       "Head to Home Point #2 and descend to the lower level - Sealion's Den is at H-9.\n \n" ..
+                       "Inspect the Iron Gate inside at H-6 for the final cutscene to complete the mission.\n \n" ..
+                       "Optional: Sueleen, near the gate, will comment on the mission.\n \n",
+                route_to = "Sealion's Den",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                onmob_target = "sealions-den-iron-gate",
+                trigger_on_event_id = {13},
             },
         },
         reward = {
-            text = "Key Item: Reliquiarium Key\nAccess to Sacrarium\nTitle: The Lost One\nNext: Slanderous Utterings (CoP 4-4)",
+            text = "Title: The Lost One\nNext: The Enduring Tumult of War (CoP 5-1)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 5-1: The Enduring Tumult of War
+    -----------------------------------
+    ["CoP 5-1: The Enduring Tumult of War"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 4-4: Slanderous Utterings"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Port Bastok for a cutscene that begins Chapter 5.\n \n" ..
+                       "The cutscene triggers automatically on zone-in.\n \n" ..
+                       "Optional pre-cutscenes: Despachiaire in Tavnazian Safehold (K-10), Chasalvige in North San d'Oria (L-6), and Anoki in Port San d'Oria (H-6).\n \n",
+                route_to = "Port Bastok",
+                zone_trigger = "Port Bastok",
+                trigger_on_event_id = {306},
+            },
+            {
+                text = "Step 2: Speak to Cid on the second floor of Metalworks (H-8) for a cutscene.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {849},
+            },
+            {
+                text = "Step 3: Head to Beaucedine Glacier and enter Pso'Xja at (F-7) for a cutscene.\n \n" ..
+                       "Use the Iron Grate at F-7 - the tower to the south of the zone.\n \n" ..
+                       "Note: Use the survival guide/outpost warp to Fauregandi and follow the arrows from (H-9)! \n \n",
+                route_to = "Beaucedine Glacier",
+                onmob_target = "beaucedine-glacier-iron-grate-f7",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_trigger = "Pso'Xja",
+                trigger_on_event_id = {1},
+                zone_max_distance = 55,
+                visual_zones = {
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -4.7, y = -59.8, z = -89.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 12.3, y = -59.6, z = -38.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 6.2, y = -59.6, z = 26.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 3.6, y = -59.8, z = 87.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -108.0, y = -79.9, z = 87.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -57.1, y = -79.1, z = 80.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -18.9, y = -80.7, z = 57.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -22.9, y = -79.9, z = 11.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -50.5, y = -80.7, z = -25.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -96.8, y = -79.8, z = -79.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -103.8, y = -80.0, z = -119.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -141.2, y = -80.1, z = -138.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -178.8, y = -79.5, z = -111.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -180.8, y = -87.0, z = -62.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -197.3, y = -99.9, z = -6.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -252.4, y = -99.6, z = 21.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 4: Follow the path forward (do NOT drop into any holes) to the Stone Door.\n \n" ..
+                       "Check the Stone Door to spawn Nunyunuwi - defeat it to proceed.\n \n" ..
+                       "Nunyunuwi has ~3,500 HP with strong Auto-Regen. Any job around level 75 can handle it.\n \n",
+                zone_name = "Pso'Xja",
+                onmob_enemy = {"Nunyunuwi"},
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Nunyunuwi"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {69, 70},
+            },
+            {
+                text = "Step 5: Check the Stone Door again to move onward, then take the elevator down.\n \n" ..
+                       "WARNING: Cast Sneak before descending if under level 50. Do NOT cast magic or rest while on the elevator.\n \n" ..
+                       "At the bottom, follow the hallway to the next Stone Door and check it to zone into Promyvion-Vahzl.\n \n" ..
+                       "A cutscene plays on entry and you receive the Key Item: Light of Vahzl, completing the mission.\n \n",
+                zone_name = "Pso'Xja",
+                trigger_on_keyitem_obtain = 593,
+            },
+        },
+        reward = {
+            text = "Key Item: Light of Vahzl\nNext: Desires of Emptiness (CoP 5-2)",
         }
     },
 }

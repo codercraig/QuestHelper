@@ -71,7 +71,8 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
         -- Get or initialize current map index for this step
         local step_key = string.format("%s|%s|%s|%d",
             currentTopCategory or "", currentSubfile or "", current_mission or "", step_idx or 0)
-        if not ui_images.current_map_indices[step_key] then
+        local is_new_step = not ui_images.current_map_indices[step_key]
+        if is_new_step then
             ui_images.current_map_indices[step_key] = 1
         end
         local current_map_index = ui_images.current_map_indices[step_key]
@@ -97,7 +98,8 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
 
         -- Auto-switch to player's current zone/floor
         local current_player_floor = player_module.getFloorId(floor_mappings)
-        if ui_images.last_auto_switch_zone ~= player_module.zoneId or
+        if is_new_step or
+           ui_images.last_auto_switch_zone ~= player_module.zoneId or
            ui_images.last_auto_switch_floor ~= current_player_floor then
             -- Zone or floor changed, find matching map
             ui_images.last_auto_switch_zone = player_module.zoneId

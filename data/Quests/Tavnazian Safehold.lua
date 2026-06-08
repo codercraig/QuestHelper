@@ -76,17 +76,39 @@ return {
                        "Click the ??? at the top to spawn Splinterspine Grukjuk (Orc Ranger NM).\n" ..
                        "Kill Splinterspine Grukjuk.\n \n",
                 route_to = "Lufaise Meadows",
-                onmob_enemy = {"Splinterspine_Grukjuk"},
+                onmob_target = "lufaise-meadows-???-h10",
+                onmob_enemy = {"Splinterspine Grukjuk"},
+                visual_zones = {
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -274.1, y = -5.1, z = -232.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -199.0, y = -8.1, z = -198.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -137.0, y = -6.5, z = -174.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -90.2, y = -7.6, z = -177.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -68.1, y = -7.0, z = -221.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -19.5, y = -6.2, z = -248.0 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = -50.5, y = -0.3, z = -276.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                },
                 destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Splinterspine Grukjuk"},
+                    count_party_kills = true,
+                },
             },
             {
-                text = "Step 3: Return to Tavnazian Safehold and speak to Quelveuiat (I-10) to complete the quest.\n \n" ..
-                       "Optional: After completion, trade a Sealion Crest Key AND a Coral Crest Key to Quelveuiat to receive the Key Item: Temple Knight Key.\n" ..
-                       "The Temple Knight Key grants solo access to the inner Sacrarium (useful for CoP 4-3).\n \n",
+                text = "Step 3: Return to Tavnazian Safehold (Home Point #2) and speak to Quelveuiat (I-10) to complete the quest.\n \n",
                 route_to = "Tavnazian Safehold 2",
                 onmob_target = "Quelveuiat",
                 destination_highlight = {position = "I-10", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {121},
+            },
+            {
+                text = "Step 4: After completion, trade a Sealion Crest Key AND a Coral Crest Key to Quelveuiat to receive the Key Item: Temple Knight Key.\n" ..
+                       "The Temple Knight Key grants solo access to the inner Sacrarium (useful for CoP 4-3).\n \n",
+                route_to = "Tavnazian Safehold 2",
+                onmob_target = "Quelveuiat",
+                destination_highlight = {position = "I-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {632},
+                trigger_on_keyitem_obtain = {2506}
             },
         },
         reward = {
