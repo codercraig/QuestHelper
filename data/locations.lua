@@ -809,6 +809,13 @@ return {
         visual_mode = "arc",
         zone = "Lower Delkfutt's Tower"
     },
+    ["lower-delkfutt-tower-cermet-door-h5"] = {
+        target_pos = { x = 460.0, y = -2.5, z = 125.8 },
+        visual_mode = "arc",
+        zone = "Lower Delkfutt's Tower",
+        floor_id = 1,
+        max_distance = 15
+    },
     -- Upper Delkfutts Tower
     ["Elevator"] = {
         target_pos = { x = -300, y= -143.6, z=19.9},
@@ -965,6 +972,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["beaucedine-glacier-iron-grate-h10"] = {
+        target_pos = { x = 60.0, y = 5.0, z = -359.0 },
+        visual_mode = "arc",
+        zone = "Beaucedine Glacier",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Pso'Xja
     ["pso-xja-stone-gate"] = {
         target_pos = { x = -60.0, y = 38.4, z = 25.0 },
@@ -1102,6 +1116,13 @@ return {
     },
     ["pso-xja-avatar-gate"] = {
         target_pos = { x = 280.0, y = 30.4, z = -60.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 0,
+        max_distance = 15
+    },
+    ["pso-xja-avatar-gate-2"] = {
+        target_pos = { x = 140.0, y = 46.4, z = -360.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 0,

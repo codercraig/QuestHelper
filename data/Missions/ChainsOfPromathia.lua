@@ -1265,158 +1265,158 @@ return {
                     { zone_name = "Attohwa Chasm", type = 'arrow', center = { x = 405.4, y = 20.0, z = -9.7 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
                     { zone_name = "Attohwa Chasm", type = 'square', center = { x = 392.1, y = 19.9, z = -20.5 }, size = 2, floor_id = 0, colour = "cyan" },
                     -- Lines up
-                    { type = 'line', start = { x = 391.9, y = 19.9, z = -20.5 }, stop = { x = 386.4, y = 16.6, z = -26.4 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 386.2, y = 16.5, z = -26.1 }, stop = { x = 390.5, y = 15.5, z = -20.5 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 390.8, y = 15.3, z = -20.1 }, stop = { x = 392.5, y = 11.4, z = -14.6 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 392.7, y = 11.4, z = -14.6 }, stop = { x = 390.8, y = 9.0, z = -12.0 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 391.9, y = 19.9, z = -20.5 }, stop = { x = 386.4, y = 16.6, z = -26.4 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 386.2, y = 16.5, z = -26.1 }, stop = { x = 390.5, y = 15.5, z = -20.5 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 390.8, y = 15.3, z = -20.1 }, stop = { x = 392.5, y = 11.4, z = -14.6 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 392.7, y = 11.4, z = -14.6 }, stop = { x = 390.8, y = 9.0, z = -12.0 }, colour = "cyan" , max_distance = 6 },
 
-                    { type = 'line', start = { x = 390.7, y = 8.9, z = -12.1 }, stop = { x = 391.0, y = 9.2, z = -14.5 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 391.0, y = 9.2, z = -14.9 }, stop = { x = 390.1, y = 8.7, z = -17.9 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 390.2, y = 8.7, z = -17.8 }, stop = { x = 389.4, y = 8.3, z = -18.9 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 389.4, y = 8.4, z = -18.9 }, stop = { x = 384.1, y = 8.0, z = -23.7 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 390.7, y = 8.9, z = -12.1 }, stop = { x = 391.0, y = 9.2, z = -14.5 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 391.0, y = 9.2, z = -14.9 }, stop = { x = 390.1, y = 8.7, z = -17.9 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 390.2, y = 8.7, z = -17.8 }, stop = { x = 389.4, y = 8.3, z = -18.9 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 389.4, y = 8.4, z = -18.9 }, stop = { x = 384.1, y = 8.0, z = -23.7 }, colour = "cyan" , max_distance = 6 },
 
-                    { type = 'line', start = { x = 383.1, y = 7.9, z = -24.0 }, stop = { x = 387.7, y = 5.9, z = -18.8 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 387.8, y = 5.9, z = -18.8 }, stop = { x = 388.7, y = 3.7, z = -15.4 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 388.8, y = 3.5, z = -15.1 }, stop = { x = 388.2, y = 1.9, z = -12.3 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 388.2, y = 1.9, z = -12.3 }, stop = { x = 386.1, y = 0.7, z = -8.7 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 383.1, y = 7.9, z = -24.0 }, stop = { x = 387.7, y = 5.9, z = -18.8 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 387.8, y = 5.9, z = -18.8 }, stop = { x = 388.7, y = 3.7, z = -15.4 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 388.8, y = 3.5, z = -15.1 }, stop = { x = 388.2, y = 1.9, z = -12.3 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 388.2, y = 1.9, z = -12.3 }, stop = { x = 386.1, y = 0.7, z = -8.7 }, colour = "cyan" ,  max_distance = 6 },
 
-                    { type = 'line', start = { x = 386.2, y = 0.7, z = -8.8 }, stop = { x = 384.7, y = 0.4, z = -5.8 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 384.7, y = 0.4, z = -5.8 }, stop = { x = 384.3, y = 0.3, z = 2.0 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 384.3, y = 0.3, z = 2.0 }, stop = { x = 383.4, y = 0.1, z = 8.9 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 383.4, y = 0.1, z = 8.8 }, stop = { x = 382.3, y = 1.0, z = 13.2 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 382.2, y = 0.9, z = 13.6 }, stop = { x = 383.5, y = 0.4, z = 17.7 }, colour = "cyan" ,  max_distance = 6 },
-                    { type = 'line', start = { x = 383.6, y = 0.5, z = 17.7 }, stop = { x = 383.7, y = -0.1, z = 22.8 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 386.2, y = 0.7, z = -8.8 }, stop = { x = 384.7, y = 0.4, z = -5.8 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 384.7, y = 0.4, z = -5.8 }, stop = { x = 384.3, y = 0.3, z = 2.0 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 384.3, y = 0.3, z = 2.0 }, stop = { x = 383.4, y = 0.1, z = 8.9 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 383.4, y = 0.1, z = 8.8 }, stop = { x = 382.3, y = 1.0, z = 13.2 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 382.2, y = 0.9, z = 13.6 }, stop = { x = 383.5, y = 0.4, z = 17.7 }, colour = "cyan" ,  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 383.6, y = 0.5, z = 17.7 }, stop = { x = 383.7, y = -0.1, z = 22.8 }, colour = "cyan" ,  max_distance = 6 },
                     -- Past first bone
-                    { type = 'line', start = { x = 383.7, y = 0.0, z = 23.1 }, stop = { x = 388.5, y = 0.8, z = 28.4 }, colour = "cyan",  max_distance = 6 },
-                    { type = 'line', start = { x = 388.5, y = 0.8, z = 28.4 }, stop = { x = 388.3, y = 0.5, z = 33.0 }, colour = "cyan",  max_distance = 6 },
-                    { type = 'line', start = { x = 388.3, y = 0.5, z = 33.0 }, stop = { x = 385.8, y = 0.3, z = 36.8 }, colour = "cyan" , max_distance = 6 },
-                    { type = 'line', start = { x = 385.0, y = 0.2, z = 37.1 }, stop = { x = 384.4, y = 0.3, z = 42.1 }, colour = "cyan",  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 383.7, y = 0.0, z = 23.1 }, stop = { x = 388.5, y = 0.8, z = 28.4 }, colour = "cyan",  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 388.5, y = 0.8, z = 28.4 }, stop = { x = 388.3, y = 0.5, z = 33.0 }, colour = "cyan",  max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 388.3, y = 0.5, z = 33.0 }, stop = { x = 385.8, y = 0.3, z = 36.8 }, colour = "cyan" , max_distance = 6 },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 385.0, y = 0.2, z = 37.1 }, stop = { x = 384.4, y = 0.3, z = 42.1 }, colour = "cyan",  max_distance = 6 },
                     --First drop
-                    { type = 'line', start = { x = 384.7, y = 0.3, z = 42.2 }, stop = { x = 388.1, y = 8.0, z = 42.8 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 384.7, y = 0.3, z = 42.2 }, stop = { x = 388.1, y = 8.0, z = 42.8 }, colour = "cyan",  max_distance = 6  },
                     --Second drop
-                    { type = 'line', start = { x = 388.0, y = 7.9, z = 42.9 }, stop = { x = 387.2, y = 7.8, z = 45.6 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 387.2, y = 7.9, z = 45.9 }, stop = { x = 387.0, y = 13.1, z = 49.4 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 388.0, y = 7.9, z = 42.9 }, stop = { x = 387.2, y = 7.8, z = 45.6 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 387.2, y = 7.9, z = 45.9 }, stop = { x = 387.0, y = 13.1, z = 49.4 }, colour = "cyan",  max_distance = 6  },
 
-                    { type = 'line', start = { x = 387.0, y = 13.1, z = 49.4 }, stop = { x = 385.9, y = 11.5, z = 52.5 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 385.9, y = 11.5, z = 52.5 }, stop = { x = 382.6, y = 7.8, z = 59.2 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 382.6, y = 7.8, z = 59.2 }, stop = { x = 380.3, y = 4.8, z = 63.4 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 387.0, y = 13.1, z = 49.4 }, stop = { x = 385.9, y = 11.5, z = 52.5 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 385.9, y = 11.5, z = 52.5 }, stop = { x = 382.6, y = 7.8, z = 59.2 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 382.6, y = 7.8, z = 59.2 }, stop = { x = 380.3, y = 4.8, z = 63.4 }, colour = "cyan",  max_distance = 6  },
 
-                    { type = 'line', start = { x = 380.1, y = 4.9, z = 63.5 }, stop = { x = 370.4, y = 2.8, z = 65.6 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 370.5, y = 2.9, z = 65.6 }, stop = { x = 370.9, y = 8.2, z = 67.8 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 380.1, y = 4.9, z = 63.5 }, stop = { x = 370.4, y = 2.8, z = 65.6 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 370.5, y = 2.9, z = 65.6 }, stop = { x = 370.9, y = 8.2, z = 67.8 }, colour = "cyan",  max_distance = 6  },
 
-                    { type = 'line', start = { x = 370.9, y = 8.2, z = 67.8 }, stop = { x = 367.8, y = 8.1, z = 68.5 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 367.4, y = 8.1, z = 68.5 }, stop = { x = 356.8, y = 7.9, z = 68.3 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 356.8, y = 7.9, z = 68.3 }, stop = { x = 354.4, y = 7.9, z = 67.9 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 354.4, y = 7.9, z = 67.9 }, stop = { x = 351.8, y = 8.0, z = 65.3 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 351.8, y = 8.0, z = 65.3 }, stop = { x = 352.0, y = 7.7, z = 63.0 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 370.9, y = 8.2, z = 67.8 }, stop = { x = 367.8, y = 8.1, z = 68.5 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 367.4, y = 8.1, z = 68.5 }, stop = { x = 356.8, y = 7.9, z = 68.3 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 356.8, y = 7.9, z = 68.3 }, stop = { x = 354.4, y = 7.9, z = 67.9 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 354.4, y = 7.9, z = 67.9 }, stop = { x = 351.8, y = 8.0, z = 65.3 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 351.8, y = 8.0, z = 65.3 }, stop = { x = 352.0, y = 7.7, z = 63.0 }, colour = "cyan",  max_distance = 6  },
 
                     --second bone up
-                    { type = 'line', start = { x = 351.9, y = 7.7, z = 63.3 }, stop = { x = 352.5, y = 7.0, z = 59.6 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 352.5, y = 7.0, z = 59.6 }, stop = { x = 351.3, y = 5.9, z = 54.7 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 343.6, y = 3.5, z = 49.6 }, stop = { x = 339.6, y = 1.8, z = 48.3 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 350.8, y = 5.7, z = 53.8 }, stop = { x = 347.2, y = 4.9, z = 51.9 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 347.2, y = 4.9, z = 51.9 }, stop = { x = 343.1, y = 3.2, z = 49.4 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 339.6, y = 1.8, z = 48.2 }, stop = { x = 333.3, y = -1.3, z = 49.8 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 333.3, y = -1.3, z = 49.8 }, stop = { x = 332.3, y = -3.1, z = 55.0 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 332.1, y = -3.2, z = 55.9 }, stop = { x = 329.1, y = -4.0, z = 56.1 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 351.9, y = 7.7, z = 63.3 }, stop = { x = 352.5, y = 7.0, z = 59.6 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 352.5, y = 7.0, z = 59.6 }, stop = { x = 351.3, y = 5.9, z = 54.7 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 343.6, y = 3.5, z = 49.6 }, stop = { x = 339.6, y = 1.8, z = 48.3 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 350.8, y = 5.7, z = 53.8 }, stop = { x = 347.2, y = 4.9, z = 51.9 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 347.2, y = 4.9, z = 51.9 }, stop = { x = 343.1, y = 3.2, z = 49.4 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 339.6, y = 1.8, z = 48.2 }, stop = { x = 333.3, y = -1.3, z = 49.8 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 333.3, y = -1.3, z = 49.8 }, stop = { x = 332.3, y = -3.1, z = 55.0 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 332.1, y = -3.2, z = 55.9 }, stop = { x = 329.1, y = -4.0, z = 56.1 }, colour = "cyan",  max_distance = 6  },
 
-                    { type = 'line', start = { x = 329.3, y = -4.0, z = 55.9 }, stop = { x = 323.0, y = -7.2, z = 59.2 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 323.0, y = -7.2, z = 59.2 }, stop = { x = 314.8, y = -7.3, z = 59.3 }, colour = "cyan",  max_distance = 6  },
-                    { type = 'line', start = { x = 314.8, y = -7.3, z = 59.3 }, stop = { x = 308.3, y = -8.3, z = 56.8 }, colour = "cyan",  max_distance = 6  },
-
-                    -- drop
-                        { type = 'line', start = { x = 308.3, y = -8.3, z = 57.0 }, stop = { x = 307.1, y = -8.5, z = 56.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 305.6, y = -8.7, z = 55.4 }, stop = { x = 304.9, y = -10.5, z = 52.6 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 304.9, y = -10.5, z = 52.6 }, stop = { x = 302.0, y = -9.7, z = 52.6 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 302.0, y = -9.7, z = 52.6 }, stop = { x = 300.1, y = -8.2, z = 54.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 300.1, y = -8.2, z = 54.0 }, stop = { x = 300, y = -3.74, z = 56.1 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 329.3, y = -4.0, z = 55.9 }, stop = { x = 323.0, y = -7.2, z = 59.2 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 323.0, y = -7.2, z = 59.2 }, stop = { x = 314.8, y = -7.3, z = 59.3 }, colour = "cyan",  max_distance = 6  },
+                    { zone_name = "Attohwa Chasm", type = 'line', start = { x = 314.8, y = -7.3, z = 59.3 }, stop = { x = 308.3, y = -8.3, z = 56.8 }, colour = "cyan",  max_distance = 6  },
 
                     -- drop
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 308.3, y = -8.3, z = 57.0 }, stop = { x = 307.1, y = -8.5, z = 56.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 305.6, y = -8.7, z = 55.4 }, stop = { x = 304.9, y = -10.5, z = 52.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 304.9, y = -10.5, z = 52.6 }, stop = { x = 302.0, y = -9.7, z = 52.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 302.0, y = -9.7, z = 52.6 }, stop = { x = 300.1, y = -8.2, z = 54.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 300.1, y = -8.2, z = 54.0 }, stop = { x = 300, y = -3.74, z = 56.1 }, colour = "cyan",  max_distance = 6  },
 
-                        { type = 'line', start = { x = 300.0, y = -3.7, z = 56.4 }, stop = { x = 296.2, y = -3.6, z = 59.1 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 296.2, y = -3.6, z = 59.1 }, stop = { x = 294.1, y = -3.4, z = 63.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 293.7, y = -3.3, z = 64.1 }, stop = { x = 290.7, y = -3.6, z = 65.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 290.7, y = -3.6, z = 65.5 }, stop = { x = 286.1, y = -5.5, z = 63.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 286.1, y = -5.5, z = 63.4 }, stop = { x = 281.1, y = -7.4, z = 59.3 }, colour = "cyan",  max_distance = 6  },
                     -- drop
 
-                        { type = 'line', start = { x = 281.1, y = -7.4, z = 59.3 }, stop = { x = 279.7, y = -7.4, z = 59.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 279.7, y = -7.4, z = 59.3 }, stop = { x = 276.2, y = -7.3, z = 60.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 276.2, y = -7.3, z = 60.0 }, stop = { x = 274.8, y = -0.3, z = 64.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 300.0, y = -3.7, z = 56.4 }, stop = { x = 296.2, y = -3.6, z = 59.1 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 296.2, y = -3.6, z = 59.1 }, stop = { x = 294.1, y = -3.4, z = 63.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 293.7, y = -3.3, z = 64.1 }, stop = { x = 290.7, y = -3.6, z = 65.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 290.7, y = -3.6, z = 65.5 }, stop = { x = 286.1, y = -5.5, z = 63.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 286.1, y = -5.5, z = 63.4 }, stop = { x = 281.1, y = -7.4, z = 59.3 }, colour = "cyan",  max_distance = 6  },
+                    -- drop
+
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 281.1, y = -7.4, z = 59.3 }, stop = { x = 279.7, y = -7.4, z = 59.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 279.7, y = -7.4, z = 59.3 }, stop = { x = 276.2, y = -7.3, z = 60.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 276.2, y = -7.3, z = 60.0 }, stop = { x = 274.8, y = -0.3, z = 64.7 }, colour = "cyan",  max_distance = 6  },
 
                     --route
 
-                        { type = 'line', start = { x = 274.5, y = -0.1, z = 64.7 }, stop = { x = 264.0, y = 2.1, z = 66.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 264.0, y = 2.1, z = 66.3 }, stop = { x = 260.8, y = 3.4, z = 65.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 260.8, y = 3.4, z = 65.2 }, stop = { x = 259.9, y = 4.1, z = 63.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 259.9, y = 4.1, z = 63.3 }, stop = { x = 260.2, y = 6.9, z = 53.1 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 260.2, y = 6.9, z = 53.1 }, stop = { x = 257.7, y = 8.5, z = 48.1 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 257.7, y = 8.5, z = 48.1 }, stop = { x = 252.7, y = 8.3, z = 44.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 274.5, y = -0.1, z = 64.7 }, stop = { x = 264.0, y = 2.1, z = 66.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 264.0, y = 2.1, z = 66.3 }, stop = { x = 260.8, y = 3.4, z = 65.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 260.8, y = 3.4, z = 65.2 }, stop = { x = 259.9, y = 4.1, z = 63.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 259.9, y = 4.1, z = 63.3 }, stop = { x = 260.2, y = 6.9, z = 53.1 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 260.2, y = 6.9, z = 53.1 }, stop = { x = 257.7, y = 8.5, z = 48.1 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 257.7, y = 8.5, z = 48.1 }, stop = { x = 252.7, y = 8.3, z = 44.4 }, colour = "cyan",  max_distance = 6  },
 
-                        { type = 'line', start = { x = 252.7, y = 8.3, z = 44.4 }, stop = { x = 250.7, y = 8.1, z = 38.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 250.7, y = 8.1, z = 38.2 }, stop = { x = 245.5, y = 8.3, z = 33.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 245.5, y = 8.3, z = 33.0 }, stop = { x = 245.1, y = 8.4, z = 28.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 245.1, y = 8.4, z = 28.4 }, stop = { x = 253.2, y = 7.6, z = 20.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 252.7, y = 8.3, z = 44.4 }, stop = { x = 250.7, y = 8.1, z = 38.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 250.7, y = 8.1, z = 38.2 }, stop = { x = 245.5, y = 8.3, z = 33.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 245.5, y = 8.3, z = 33.0 }, stop = { x = 245.1, y = 8.4, z = 28.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 245.1, y = 8.4, z = 28.4 }, stop = { x = 253.2, y = 7.6, z = 20.3 }, colour = "cyan",  max_distance = 6  },
 
                         --drop
-                        { type = 'line', start = { x = 253.2, y = 7.6, z = 20.3 }, stop = { x = 254.5, y = 7.8, z = 12.7 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 254.5, y = 7.8, z = 12.7 }, stop = { x = 253.1, y = 7.8, z = 7.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 253.1, y = 7.8, z = 7.0 }, stop = { x = 250.7, y = 16.0, z = 7.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 253.2, y = 7.6, z = 20.3 }, stop = { x = 254.5, y = 7.8, z = 12.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 254.5, y = 7.8, z = 12.7 }, stop = { x = 253.1, y = 7.8, z = 7.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 253.1, y = 7.8, z = 7.0 }, stop = { x = 250.7, y = 16.0, z = 7.3 }, colour = "cyan",  max_distance = 6  },
 
                         --route
-                        { type = 'line', start = { x = 250.7, y = 16.0, z = 7.3 }, stop = { x = 249.0, y = 15.9, z = 3.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 249.0, y = 15.9, z = 3.2 }, stop = { x = 248.7, y = 15.9, z = -1.6 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 248.7, y = 15.9, z = -1.6 }, stop = { x = 253.2, y = 16.1, z = -8.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 253.2, y = 16.1, z = -8.0 }, stop = { x = 267.1, y = 16.4, z = -12.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 267.1, y = 16.4, z = -12.9 }, stop = { x = 270.0, y = 16.5, z = -17.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 270.0, y = 16.5, z = -17.4 }, stop = { x = 269.4, y = 15.8, z = -23.1 }, colour = "cyan",  max_distance = 6  },
-                        --{ type = 'line', start = { x = 269.4, y = 15.8, z = -23.1 }, stop = { x = 261.6, y = 16.3, z = -29.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 269.4, y = 15.8, z = -22.8 }, stop = { x = 268.5, y = 15.6, z = -24.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 268.5, y = 15.6, z = -24.9 }, stop = { x = 264.0, y = 16.4, z = -29.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 264.0, y = 16.4, z = -29.3 }, stop = { x = 261.6, y = 16.3, z = -29.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 261.6, y = 16.3, z = -29.9 }, stop = { x = 253.3, y = 16.6, z = -30.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 253.3, y = 16.6, z = -30.0 }, stop = { x = 250.1, y = 16.1, z = -31.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 250.1, y = 16.1, z = -31.4 }, stop = { x = 248.1, y = 16.1, z = -35.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 248.1, y = 16.1, z = -35.4 }, stop = { x = 248.7, y = 16.0, z = -45.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 250.7, y = 16.0, z = 7.3 }, stop = { x = 249.0, y = 15.9, z = 3.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 249.0, y = 15.9, z = 3.2 }, stop = { x = 248.7, y = 15.9, z = -1.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 248.7, y = 15.9, z = -1.6 }, stop = { x = 253.2, y = 16.1, z = -8.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 253.2, y = 16.1, z = -8.0 }, stop = { x = 267.1, y = 16.4, z = -12.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 267.1, y = 16.4, z = -12.9 }, stop = { x = 270.0, y = 16.5, z = -17.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 270.0, y = 16.5, z = -17.4 }, stop = { x = 269.4, y = 15.8, z = -23.1 }, colour = "cyan",  max_distance = 6  },
+                        --{ zone_name = "Attohwa Chasm", type = 'line', start = { x = 269.4, y = 15.8, z = -23.1 }, stop = { x = 261.6, y = 16.3, z = -29.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 269.4, y = 15.8, z = -22.8 }, stop = { x = 268.5, y = 15.6, z = -24.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 268.5, y = 15.6, z = -24.9 }, stop = { x = 264.0, y = 16.4, z = -29.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 264.0, y = 16.4, z = -29.3 }, stop = { x = 261.6, y = 16.3, z = -29.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 261.6, y = 16.3, z = -29.9 }, stop = { x = 253.3, y = 16.6, z = -30.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 253.3, y = 16.6, z = -30.0 }, stop = { x = 250.1, y = 16.1, z = -31.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 250.1, y = 16.1, z = -31.4 }, stop = { x = 248.1, y = 16.1, z = -35.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 248.1, y = 16.1, z = -35.4 }, stop = { x = 248.7, y = 16.0, z = -45.7 }, colour = "cyan",  max_distance = 6  },
 
                         --cont route
-                        { type = 'line', start = { x = 248.6, y = 16.1, z = -45.5 }, stop = { x = 246.1, y = 15.9, z = -54.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 246.1, y = 15.9, z = -54.2 }, stop = { x = 249.7, y = 15.7, z = -61.6 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 249.7, y = 15.7, z = -61.6 }, stop = { x = 248.2, y = 13.5, z = -57.7 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 248.2, y = 13.5, z = -57.7 }, stop = { x = 247.4, y = 11.2, z = -54.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 247.4, y = 11.2, z = -54.3 }, stop = { x = 249.3, y = 8.9, z = -51.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 249.3, y = 8.9, z = -51.4 }, stop = { x = 250.1, y = 8.6, z = -58.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 250.1, y = 8.6, z = -58.3 }, stop = { x = 256.4, y = 7.9, z = -63.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 248.6, y = 16.1, z = -45.5 }, stop = { x = 246.1, y = 15.9, z = -54.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 246.1, y = 15.9, z = -54.2 }, stop = { x = 249.7, y = 15.7, z = -61.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 249.7, y = 15.7, z = -61.6 }, stop = { x = 248.2, y = 13.5, z = -57.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 248.2, y = 13.5, z = -57.7 }, stop = { x = 247.4, y = 11.2, z = -54.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 247.4, y = 11.2, z = -54.3 }, stop = { x = 249.3, y = 8.9, z = -51.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 249.3, y = 8.9, z = -51.4 }, stop = { x = 250.1, y = 8.6, z = -58.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 250.1, y = 8.6, z = -58.3 }, stop = { x = 256.4, y = 7.9, z = -63.7 }, colour = "cyan",  max_distance = 6  },
 
                         -- cont route
-                        { type = 'line', start = { x = 256.4, y = 7.9, z = -63.7 }, stop = { x = 251.7, y = 4.7, z = -57.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 251.7, y = 4.7, z = -57.4 }, stop = { x = 251.5, y = 2.6, z = -53.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 251.5, y = 2.6, z = -53.5 }, stop = { x = 254.1, y = 0.5, z = -47.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 254.1, y = 0.5, z = -47.5 }, stop = { x = 255.5, y = 0.3, z = -38.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 255.5, y = 0.3, z = -38.4 }, stop = { x = 254.6, y = -0.3, z = -35.8 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 254.6, y = -0.3, z = -35.8 }, stop = { x = 258.7, y = -0.3, z = -33.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 258.7, y = -0.3, z = -33.3 }, stop = { x = 267.8, y = -0.5, z = -28.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 267.8, y = -0.5, z = -28.9 }, stop = { x = 271.9, y = -2.2, z = -19.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 272.0, y = -2.2, z = -19.3 }, stop = { x = 270.7, y = -3.1, z = -13.2 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 270.7, y = -3.1, z = -13.2 }, stop = { x = 264.5, y = -3.9, z = -11.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 256.4, y = 7.9, z = -63.7 }, stop = { x = 251.7, y = 4.7, z = -57.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 251.7, y = 4.7, z = -57.4 }, stop = { x = 251.5, y = 2.6, z = -53.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 251.5, y = 2.6, z = -53.5 }, stop = { x = 254.1, y = 0.5, z = -47.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 254.1, y = 0.5, z = -47.5 }, stop = { x = 255.5, y = 0.3, z = -38.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 255.5, y = 0.3, z = -38.4 }, stop = { x = 254.6, y = -0.3, z = -35.8 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 254.6, y = -0.3, z = -35.8 }, stop = { x = 258.7, y = -0.3, z = -33.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 258.7, y = -0.3, z = -33.3 }, stop = { x = 267.8, y = -0.5, z = -28.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 267.8, y = -0.5, z = -28.9 }, stop = { x = 271.9, y = -2.2, z = -19.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 272.0, y = -2.2, z = -19.3 }, stop = { x = 270.7, y = -3.1, z = -13.2 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 270.7, y = -3.1, z = -13.2 }, stop = { x = 264.5, y = -3.9, z = -11.9 }, colour = "cyan",  max_distance = 6  },
 
-                        --{ type = 'line', start = { x = 264.5, y = -3.9, z = -11.9 }, stop = { x = 261.1, y = -6.8, z = -4.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 264.5, y = -3.8, z = -11.6 }, stop = { x = 262.9, y = -5.4, z = -6.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 262.9, y = -5.4, z = -6.4 }, stop = { x = 261.1, y = -6.6, z = -4.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 261.1, y = -6.8, z = -4.4 }, stop = { x = 260.2, y = -7.3, z = 4.8 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 260.2, y = -7.3, z = 4.8 }, stop = { x = 263.4, y = -8.4, z = 12.6 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 263.4, y = -8.4, z = 12.6 }, stop = { x = 265.3, y = -8.3, z = 20.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 265.3, y = -8.3, z = 20.3 }, stop = { x = 261.4, y = -8.2, z = 24.2 }, colour = "cyan",  max_distance = 6  },
+                        --{ zone_name = "Attohwa Chasm", type = 'line', start = { x = 264.5, y = -3.9, z = -11.9 }, stop = { x = 261.1, y = -6.8, z = -4.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 264.5, y = -3.8, z = -11.6 }, stop = { x = 262.9, y = -5.4, z = -6.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 262.9, y = -5.4, z = -6.4 }, stop = { x = 261.1, y = -6.6, z = -4.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 261.1, y = -6.8, z = -4.4 }, stop = { x = 260.2, y = -7.3, z = 4.8 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 260.2, y = -7.3, z = 4.8 }, stop = { x = 263.4, y = -8.4, z = 12.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 263.4, y = -8.4, z = 12.6 }, stop = { x = 265.3, y = -8.3, z = 20.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 265.3, y = -8.3, z = 20.3 }, stop = { x = 261.4, y = -8.2, z = 24.2 }, colour = "cyan",  max_distance = 6  },
 
                         -- finish
-                        { type = 'line', start = { x = 261.4, y = -8.2, z = 24.2 }, stop = { x = 258.9, y = -3.4, z = 24.4 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 258.9, y = -3.4, z = 24.4 }, stop = { x = 255.3, y = -3.3, z = 27.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 255.3, y = -3.3, z = 27.3 }, stop = { x = 255.7, y = -5.0, z = 33.0 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 255.7, y = -5.0, z = 33.0 }, stop = { x = 260.7, y = -7.4, z = 38.5 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 260.7, y = -7.4, z = 38.5 }, stop = { x = 261.4, y = -7.5, z = 43.7 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 261.4, y = -7.5, z = 43.7 }, stop = { x = 266.3, y = -10.6, z = 53.3 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 266.3, y = -10.6, z = 53.3 }, stop = { x = 277.9, y = -14.2, z = 51.9 }, colour = "cyan",  max_distance = 6  },
-                        { type = 'line', start = { x = 277.9, y = -14.2, z = 51.9 }, stop = { x = 283.0, y = -18.4, z = 44.6 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 261.4, y = -8.2, z = 24.2 }, stop = { x = 258.9, y = -3.4, z = 24.4 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 258.9, y = -3.4, z = 24.4 }, stop = { x = 255.3, y = -3.3, z = 27.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 255.3, y = -3.3, z = 27.3 }, stop = { x = 255.7, y = -5.0, z = 33.0 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 255.7, y = -5.0, z = 33.0 }, stop = { x = 260.7, y = -7.4, z = 38.5 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 260.7, y = -7.4, z = 38.5 }, stop = { x = 261.4, y = -7.5, z = 43.7 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 261.4, y = -7.5, z = 43.7 }, stop = { x = 266.3, y = -10.6, z = 53.3 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 266.3, y = -10.6, z = 53.3 }, stop = { x = 277.9, y = -14.2, z = 51.9 }, colour = "cyan",  max_distance = 6  },
+                        { zone_name = "Attohwa Chasm", type = 'line', start = { x = 277.9, y = -14.2, z = 51.9 }, stop = { x = 283.0, y = -18.4, z = 44.6 }, colour = "cyan",  max_distance = 6  },
 
                         --arrows to ???
                         { zone_name = "Attohwa Chasm", type = 'arrow', center = { x = 285.7, y = -20.2, z = 38.5 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
@@ -3192,14 +3192,14 @@ return {
                 trigger_on_event_id = {58},
             },
             {
-                text = "Step 6: [Tenzen] Exit Upper Jeuno to Batallia Downs and examine the ??? at (K-9) for a cutscene.\n \n",
+                text = "Step 7: [Tenzen] Exit Upper Jeuno to Batallia Downs and examine the ??? at (K-9) for a cutscene.\n \n",
                 route_to = "Batallia Downs",
                 destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
                 onmob_target = "batallia-downs-???-k9",
                 trigger_on_event_id = {0},
             },
             {
-                text = "Step 7: [Tenzen] Examine the same ??? at Batallia Downs (K-9) a SECOND time to receive Key Item: Delkfutt Recognition Device.\n \n" ..
+                text = "Step 8: [Tenzen] Examine the same ??? at Batallia Downs (K-9) a SECOND time to receive Key Item: Delkfutt Recognition Device.\n \n" ..
                        "Confirm you receive the key item - it is required for the next step.\n \n",
                 route_to = "Batallia Downs",
                 destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
@@ -3207,39 +3207,140 @@ return {
                 trigger_on_keyitem_obtain = {613}
             },
             {
-                text = "Step 8: [Tenzen] Enter Lower Delkfutt's Tower and find the Cermet Door on floor 1 at (H-5), north side.\n \n" ..
-                       "Touch the Cermet Door to spawn Disaster Idol. Defeat it:\n" ..
-                       "- Susceptible to: Blind, Poison, Gravity, elemental debuffs and ninjutsu.\n" ..
-                       "- Resistant to: Elegy, Requiem, Silence, Stun, Flash. Does NOT use Meltdown.\n \n" ..
-                       "Examine the Cermet Door again after the kill for a cutscene.\n \n",
+                text = "Step 9: [Tenzen] Enter Lower Delkfutt's Tower and find the Cermet Door on floor 1 at (H-5), north side.\n \n" ..
+                       "Touch the Cermet Door - you'll see: 'Something huge is bearing down upon you!' and Disaster Idol will spawn.\n \n",
                 route_to = "Lower Delkfutt's Tower",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                onmob_target = "lower-delkfutt-tower-cermet-door-h5",
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 464.0, y = 0.0, z = -60.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 526.2, y = 0.4, z = -77.9 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 556.3, y = 0.6, z = -41.8 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.7, y = 0.0, z = -16.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 580.1, y = 0.0, z = 18.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 563.7, y = 0.6, z = 79.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 536.3, y = -0.0, z = 106.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 503.7, y = 0.0, z = 140.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 459.5, y = 0.0, z = 139.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                },
+                trigger_on_talk = "Something huge is bearing down upon you!",
+            },
+            {
+                text = "Step 10: [Tenzen] Defeat Disaster Idol:\n" ..
+                       "- Susceptible to: Blind, Poison, Gravity, elemental debuffs and ninjutsu.\n" ..
+                       "- Resistant to: Elegy, Requiem, Silence, Stun, Flash. Does NOT use Meltdown.\n \n",
+                route_to = "Lower Delkfutt's Tower",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
                 onmob_enemy = {"Disaster Idol"},
                 onmob_enemy_size = 5,
                 kill_requirement = {
                     count = 1,
                     enemies = {"Disaster Idol"},
                     count_party_kills = true,
-                    display_only = true,
                 },
-                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {25},
             },
             {
-                text = "Step 9: [Tenzen] Return to Pso'Xja via the H-10 tower in Beaucedine Glacier.\n \n" ..
-                       "A cutscene plays automatically when you zone in - no further action required.\n \n" ..
-                       "Inside: Use Sneak and Invisible. Follow the right wall to (I-8), drop to the lower level, then head south and north to the elevator.\n \n",
+                text = "Step 11: [Tenzen] Examine the Cermet Door again at (H-5) for a cutscene.\n \n",
+                onmob_target = "lower-delkfutt-tower-cermet-door-h5",
+                route_to = "Lower Delkfutt's Tower",
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {25},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 464.0, y = 0.0, z = -60.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 526.2, y = 0.4, z = -77.9 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 556.3, y = 0.6, z = -41.8 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.7, y = 0.0, z = -16.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 580.1, y = 0.0, z = 18.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 563.7, y = 0.6, z = 79.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 536.3, y = -0.0, z = 106.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 503.7, y = 0.0, z = 140.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 459.5, y = 0.0, z = 139.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 12: [Tenzen] Return to Pso'Xja via the H-10 tower in Beaucedine Glacier.\n \n" ..
+                       "A cutscene plays automatically when you zone in - no further action required.\n \n",
                 route_to = "Beaucedine Glacier",
-                zone_trigger = "Pso'Xja",
                 destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                onmob_target = "beaucedine-glacier-iron-grate-h10",
+                zone_max_distance = 45,
+                visual_zones = {
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -34.7, y = -59.9, z = -114.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -60.4, y = -53.8, z = -110.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -62.1, y = -48.4, z = -136.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -53.7, y = -39.4, z = -197.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -18.2, y = -39.1, z = -200.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 16.8, y = -41.1, z = -179.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 26.0, y = -40.3, z = -147.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 59.5, y = -40.0, z = -116.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 107.9, y = -39.6, z = -99.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 138.5, y = -40.2, z = -66.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 140.0, y = -40.9, z = -21.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 129.2, y = -40.2, z = -0.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 93.9, y = -39.4, z = 4.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 68.8, y = -34.3, z = 20.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 104.8, y = -26.6, z = 21.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 163.1, y = -19.2, z = 16.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 167.7, y = -19.9, z = -12.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 164.6, y = -20.0, z = -76.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 147.2, y = -20.3, z = -127.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 99.5, y = -19.2, z = -152.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 65.2, y = -15.7, z = -179.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 103.7, y = -7.2, z = -183.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 135.0, y = -1.3, z = -182.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 171.1, y = 0.2, z = -194.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 172.6, y = 0.0, z = -251.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 135.4, y = -0.3, z = -287.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 100.2, y = 0.2, z = -301.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 60.6, y = 0.9, z = -322.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {4},
             },
             {
-                text = "Step 10: [Tenzen] Take the elevator down then examine the Avatar Gate at (H-10) for a cutscene.\n \n",
-                zone_name = "Pso'Xja",
+                text = "Step 13: [Tenzen] Take the elevator down then examine the Avatar Gate at (H-10) for a cutscene.\n \n" ..
+                       "Use Sneak and Invisible. Follow the right wall to (I-8), drop to the lower level, then head south and north to the elevator.\n \n" ..
+                       "There will be arrows to guide you! \n \n",
+                zone_max_distance = 20,
+                onmob_target = "pso-xja-avatar-gate-2",
+                visual_zones = {
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 219.0, y = 0.0, z = -329.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 189.5, y = 0.2, z = -330.7 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 188.2, y = 8.0, z = -290.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 149.1, y = 16.2, z = -290.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 123.8, y = 16.0, z = -290.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 89.9, y = 8.0, z = -290.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 90.2, y = 0.2, z = -330.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 89.9, y = 0.2, z = -349.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 90.5, y = 8.0, z = -390.4 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 130.5, y = 16.2, z = -389.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 152.7, y = 16.2, z = -390.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 189.7, y = 8.0, z = -388.6 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 188.1, y = 0.2, z = -349.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 172.9, y = 0.2, z = -349.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'line', start = { x = 171.3, y = 0.0, z = -349.9 }, stop = { x = 170.1, y = 16.2, z = -349.6 }, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 170.2, y = 16.2, z = -351.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 169.1, y = 16.0, z = -370.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 150.2, y = 16.2, z = -369.6 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 140.3, y = 16.0, z = -355.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 13,
+                        -- highlights = {
+                        --     { position = "F-9", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 2,
+                    },
+                },
                 trigger_on_event_id = {5},
             },
             {
-                text = "Step 11: [Tenzen] Talk to Cid at Metalworks (H-8) to complete Tenzen's Path.\n \n",
+                text = "Step 14: [Tenzen] Talk to Cid at Metalworks (H-8) to complete Tenzen's Path.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
@@ -3247,7 +3348,7 @@ return {
             },
             -- === ULMIA'S PATH ===
             {
-                text = "Step 12: [Ulmia] Talk to Hinaree at Count Caffaule's Manor in Southern San d'Oria (B-6) for a cutscene.\n \n" ..
+                text = "Step 15: [Ulmia] Talk to Hinaree at Count Caffaule's Manor in Southern San d'Oria (B-6) for a cutscene.\n \n" ..
                        "The manor is in the western residential area of Southern San d'Oria.\n \n",
                 route_to = "Southern San d'Oria",
                 onmob_target = "Hinaree",
@@ -3255,20 +3356,20 @@ return {
                 trigger_on_event_id = {22},
             },
             {
-                text = "Step 13: [Ulmia] Enter Port San d'Oria for an automatic cutscene.\n \n",
+                text = "Step 16: [Ulmia] Enter Port San d'Oria for an automatic cutscene.\n \n",
                 route_to = "Port San d'Oria",
                 zone_trigger = "Port San d'Oria",
                 trigger_on_event_id = {4},
             },
             {
-                text = "Step 14: [Ulmia] Talk to Chasalvige in the Cathedral in Northern San d'Oria (L-6) - first door on the left inside the manuscript room.\n \n",
+                text = "Step 17: [Ulmia] Talk to Chasalvige in the Cathedral in Northern San d'Oria (L-6) - first door on the left inside the manuscript room.\n \n",
                 route_to = "Northern San d'Oria",
                 onmob_target = "Chasalvige",
                 destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {762},
             },
             {
-                text = "Step 15: [Ulmia] Talk to Kerutoto in the Rhinostery in Windurst Waters (J-8, use the north door).\n \n" ..
+                text = "Step 18: [Ulmia] Talk to Kerutoto in the Rhinostery in Windurst Waters (J-8, use the north door).\n \n" ..
                        "You may need to talk twice - the mission cutscene references a girl with 'crikey-spiky hair'.\n \n",
                 route_to = "Windurst Waters South",
                 onmob_target = "Kerutoto",
@@ -3276,14 +3377,14 @@ return {
                 trigger_on_event_id = {876},
             },
             {
-                text = "Step 16: [Ulmia] Talk to Yoran-Oran at the Optistery in Windurst Walls (E-5) for a cutscene.\n \n",
+                text = "Step 19: [Ulmia] Talk to Yoran-Oran at the Optistery in Windurst Walls (E-5) for a cutscene.\n \n",
                 route_to = "Windurst Walls",
                 onmob_target = "Yoran-Oran",
                 destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {473},
             },
             {
-                text = "Step 17: [Ulmia] Travel to Attohwa Chasm and enter Boneyard Gully. Examine the Wall of Dark Miasma for battlefield 'Head Wind'.\n \n" ..
+                text = "Step 20: [Ulmia] Travel to Attohwa Chasm and enter Boneyard Gully. Examine the Wall of Dark Miasma for battlefield 'Head Wind'.\n \n" ..
                        "Fastest route: Attohwa Chasm Home Point #1 or Unity Concord warp.\n \n" ..
                        "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
                        "Opponents: Shikaree X (BST/NIN - daggers), Shikaree Y (DRK/MNK - scythe), Shikaree Z (DRG/WHM - polearm) and their pets (~2000 HP each).\n" ..
@@ -3295,7 +3396,7 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 18: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
+                text = "Step 20: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
                        "Examine the ??? to enter battlefield 'Flames for the Dead'.\n \n" ..
                        "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
                        "Opponent: Snoll Tzar (~7000 HP). You have 45 seconds to kill it before Hypothermal Combustion (near-lethal AoE).\n \n" ..
@@ -3310,7 +3411,7 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 19: [Ulmia] Talk to Cid at Metalworks (H-8) to complete Ulmia's Path.\n \n",
+                text = "Step 21: [Ulmia] Talk to Cid at Metalworks (H-8) to complete Ulmia's Path.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
@@ -3318,14 +3419,14 @@ return {
             },
             -- === LOUVERANCE'S PATH ===
             {
-                text = "Step 20: [Louverance] Talk to Despachiaire at the top level of Tavnazian Safehold (K-10) - behind the walnut door near Home Point #3.\n \n",
+                text = "Step 22: [Louverance] Talk to Despachiaire at the top level of Tavnazian Safehold (K-10) - behind the walnut door near Home Point #3.\n \n",
                 route_to = "Tavnazian Safehold 3",
                 onmob_target = "Despachiaire",
                 destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {118},
             },
             {
-                text = "Step 21: [Louverance] Talk to Perih Vashai in Windurst Woods (K-7) for a long cutscene.\n \n" ..
+                text = "Step 23: [Louverance] Talk to Perih Vashai in Windurst Woods (K-7) for a long cutscene.\n \n" ..
                        "She may offer a Trust cutscene first - work through it then talk again for the mission cutscene.\n \n",
                 route_to = "Windurst Woods",
                 onmob_target = "Perih_Vashai",
@@ -3333,7 +3434,7 @@ return {
                 trigger_on_event_id = {686},
             },
             {
-                text = "Step 22: [Louverance] Travel to Bibiki Bay - Purgonorgo Isle and examine the ??? Warmachine at (H-11) for a cutscene.\n \n" ..
+                text = "Step 24: [Louverance] Travel to Bibiki Bay - Purgonorgo Isle and examine the ??? Warmachine at (H-11) for a cutscene.\n \n" ..
                        "Getting to Purgonorgo Isle:\n" ..
                        "- Ferry: Manaclipper from Bibiki Bay. Departs at 4:50-5:30 and 16:50-17:30 (Vana'diel time). Multi-ticket from Tswe Panipahr.\n" ..
                        "- Teleport: Atmacite Refiner (requires Hyacinth Stratum Abyssite II).\n \n",
@@ -3342,14 +3443,14 @@ return {
                 trigger_on_event_id = {33},
             },
             {
-                text = "Step 23: [Louverance] Zone into Oldton Movalpolos for an automatic cutscene with Louverance.\n \n" ..
+                text = "Step 25: [Louverance] Zone into Oldton Movalpolos for an automatic cutscene with Louverance.\n \n" ..
                        "Fastest route: Survival Guide in Oldton Movalpolos. Alternatively, Gusgen Mines Survival Guide then head west.\n \n",
                 route_to = "Oldton Movalpolos",
                 zone_trigger = "Oldton Movalpolos",
                 trigger_on_event_id = {1},
             },
             {
-                text = "Step 24: [Louverance] Enter Mine Shaft #2716 and complete battlefield 'A Century of Hardship'.\n \n" ..
+                text = "Step 26: [Louverance] Enter Mine Shaft #2716 and complete battlefield 'A Century of Hardship'.\n \n" ..
                        "Getting to Mine Shaft #2716:\n" ..
                        "- Trade a Snow Lily to Tarnotik in Oldton Movalpolos (K-10) to warp directly.\n" ..
                        "- Or pay Twinkbrix (Oldton Movalpolos E-13) 1-10,000 gil for a chance at a Shaft Gate Operating Dial, then 2,000 gil to warp.\n" ..
@@ -3364,21 +3465,21 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 25: [Louverance] Talk to Cid at Metalworks (H-8) for a cutscene.\n \n",
+                text = "Step 27: [Louverance] Talk to Cid at Metalworks (H-8) for a cutscene.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {852},
             },
             {
-                text = "Step 26: [Louverance] Obtain a Gold Key and trade it to the Shaft Entrance at Mine Shaft #2716 for a cutscene.\n \n" ..
+                text = "Step 28: [Louverance] Obtain a Gold Key and trade it to the Shaft Entrance at Mine Shaft #2716 for a cutscene.\n \n" ..
                        "Gold Keys drop from Moblins and Goblins in Newton Movalpolos, or buy via bazaar.\n \n" ..
                        "Note: If you disconnect during the cutscene you lose the key, but you can recheck the door.\n \n",
                 route_to = "Oldton Movalpolos",
                 trigger_on_event_id = {3},
             },
             {
-                text = "Step 27: [Louverance] Return to Metalworks (H-8) and talk to Cid to complete Louverance's Path and the mission.\n \n",
+                text = "Step 29: [Louverance] Return to Metalworks (H-8) and talk to Cid to complete Louverance's Path and the mission.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
