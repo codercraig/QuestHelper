@@ -951,6 +951,42 @@ return {
         floor_id = 0,
         max_distance = 8
     },
+    ["pso-xja-stone-door-h8"] = {
+        target_pos = { x = -330.0, y = -1.9, z = 318.4 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 12,
+        max_distance = 10
+    },
+    ["pso-xja-stone-door-g7"] = {
+        target_pos = { x = -380.0, y = 46.1, z = 330.5 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 15,
+        max_distance = 20
+    },
+    -- Promvyion Vahlz
+    ["promyvion-vahzl-memory-flux-j8"] = {
+        target_pos = { x = 180.0, y = -2.5, z = -60.0 },
+        visual_mode = "arc",
+        zone = "Promyvion - Vahzl",
+        floor_id = 0,
+        max_distance = 100
+    },
+    ["promyvion-vahzl-memory-flux-m6"] = {
+        target_pos = { x = 420.0, y = -2.5, z = 140.0 },
+        visual_mode = "arc",
+        zone = "Promyvion - Vahzl",
+        floor_id = 0,
+        max_distance = 100
+    },
+    ["promyvion-vahzl-memory-flux-d6"] = {
+        target_pos = { x = -340.0, y = -2.5, z = 140.0 },
+        visual_mode = "arc",
+        zone = "Promyvion - Vahzl",
+        floor_id = 0,
+        max_distance = 100
+    },
     --Cape Teriggan
     ["cape-teriggan-zm5-cermet-headstone"] = {
         target_pos = { x = -109.2, y = -8.5, z = 453.8},

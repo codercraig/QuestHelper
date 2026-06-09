@@ -432,7 +432,8 @@ return {
         {zone = "Batallia Downs", exit = "H-11"},
         {zone = "Xarcabard", exit = "F-6"},
         {zone = "Fei'Yin 1", exit = "J-4"},
-        {zone = "Pso'Xja", exit = "H-8", floor_id = 8}
+        {zone = "Pso'Xja", exit = "H-8", floor_id = 8, label = "6"},
+        {zone = "Pso'Xja", exit = "F-7", floor_id = 12, label = "5"}
     },
     ["Pso'Xja"] = {
         {zone = "Beaucedine Glacier", exit = "G-11"}

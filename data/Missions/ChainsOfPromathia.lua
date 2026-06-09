@@ -2477,11 +2477,11 @@ return {
             },
             {
                 text = "Step 3: Head to Beaucedine Glacier and enter Pso'Xja at (F-7) for a cutscene.\n \n" ..
-                       "Use the Iron Grate at F-7 - the tower to the south of the zone.\n \n" ..
+                       "Use the Iron Grate at (F-7) - marked 5 - the tower to the south of the zone.\n \n" ..
                        "Note: Use the survival guide/outpost warp to Fauregandi and follow the arrows from (H-9)! \n \n",
                 route_to = "Beaucedine Glacier",
                 onmob_target = "beaucedine-glacier-iron-grate-f7",
-                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16, label = "5"},
                 zone_trigger = "Pso'Xja",
                 trigger_on_event_id = {1},
                 zone_max_distance = 55,
@@ -2519,18 +2519,483 @@ return {
                     display_only = true,
                 },
                 trigger_on_event_id = {69, 70},
+                visual_zones = {
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -329.9, y = 0.2, z = 288.3 }, size = 4, direction = "up", floor_id = 12, colour = "yellow" },
+                },
+                onmob_target = "pso-xja-stone-door-h8",
+                images = {
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 4,
+                                highlights = {
+                                    -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                    { position = "H-7", offsetX = 16, offsetY = 16 },
+                                },
+                                zone_name = "Pso'Xja",
+                                floor_id = 12,
+                            },
+                },
             },
             {
                 text = "Step 5: Check the Stone Door again to move onward, then take the elevator down.\n \n" ..
                        "WARNING: Cast Sneak before descending if under level 50. Do NOT cast magic or rest while on the elevator.\n \n" ..
                        "At the bottom, follow the hallway to the next Stone Door and check it to zone into Promyvion-Vahzl.\n \n" ..
                        "A cutscene plays on entry and you receive the Key Item: Light of Vahzl, completing the mission.\n \n",
-                zone_name = "Pso'Xja",
+                images = {
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 5,
+                                highlights = {
+                                    -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                    { position = "H-7", offsetX = 16, offsetY = 16 },
+                                },
+                                zone_name = "Pso'Xja",
+                                floor_id = 12,
+                            },
+                            {
+                                width = 512,
+                                height = 512,
+                                state = 5,
+                                highlights = {
+                                    -- { position = "J-7", offsetX = 16, offsetY = 16, label = "A" },
+                                    { position = "F-8", offsetX = 16, offsetY = 16 },
+                                },
+                                zone_name = "Pso'Xja",
+                                floor_id = 15,
+                            },
+                },
+                visual_zones = {
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = -359.1, y = 48.0, z = 350.1 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                },
+                onmob_target = "pso-xja-stone-door-g7",
                 trigger_on_keyitem_obtain = 593,
             },
         },
         reward = {
             text = "Key Item: Light of Vahzl\nNext: Desires of Emptiness (CoP 5-2)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 5-2: Desires of Emptiness
+    -----------------------------------
+    ["CoP 5-2: Desires of Emptiness"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 5-1: The Enduring Tumult of War"},
+        },
+        steps = {
+            {
+                text = "Step 1: Travel to Beaucedine Glacier and enter Pso'Xja at (F-7) - same route as CoP 5-1.\n \n" ..
+                       "Use the Survival Guide warp to Fauregandi and follow the arrows from (H-9).\n \n" ..
+                       "Inside Pso'Xja, interact with the Stone Door portal to be teleported into Promyvion-Vahzl.\n \n" ..
+                       "Tip: If you've previously cleared any Memory Flux gates, the portal will warp you directly to your furthest unlocked island!\n \n",
+                route_to = "Beaucedine Glacier",
+                onmob_target = "beaucedine-glacier-iron-grate-f7",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16, label = "5"},
+                zone_trigger = "Promyvion - Vahzl",
+                zone_max_distance = 55,
+                visual_zones = {
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -4.7, y = -59.8, z = -89.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 12.3, y = -59.6, z = -38.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 6.2, y = -59.6, z = 26.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 3.6, y = -59.8, z = 87.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -108.0, y = -79.9, z = 87.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -57.1, y = -79.1, z = 80.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -18.9, y = -80.7, z = 57.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -22.9, y = -79.9, z = 11.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -50.5, y = -80.7, z = -25.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -96.8, y = -79.8, z = -79.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -103.8, y = -80.0, z = -119.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -141.2, y = -80.1, z = -138.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -178.8, y = -79.5, z = -111.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -180.8, y = -87.0, z = -62.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -197.3, y = -99.9, z = -6.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -252.4, y = -99.6, z = 21.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 2: [Island 1] Sneak/Invisible does NOT work ,all mobs are True Sight.\n \n" ..
+                       "WARNING: Idle Wanderers, Woeful Weepers, and Livid Seethers aggro to level 99 - avoid them!\n \n" ..
+                       "Defeat the Memory Receptacle(marked on map/game) to unlock the Memory Stream portal, then use it to advance to Island 2.\n \n" ..
+                       "Can either be at (I-8) or (H-12), and if portal doesnt appear after killing you can check the other location! \n \n",
+                zone_name = "Promyvion - Vahzl",
+                trigger_on_event_id = {32, 33},
+                onmob_enemy = "Memory Receptacle",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        highlights = {
+                            { position = "I-8",  offsetX = 16, offsetY = 16 },
+                            { position = "H-12", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 3: [Island 2] Defeat the Memory Receptacle \n \n" ..
+                       "This will unlock the Memory Stream portal - either at (F-5) or (F-6), then use it to advance to Island 3.\n \n",
+                zone_name = "Promyvion - Vahzl",
+                trigger_on_event_id = {30, 31},
+                onmob_enemy = "Memory Receptacle",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        highlights = {
+                            { position = "F-5",  offsetX = 16, offsetY = 16 },
+                            { position = "F-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            -- Island 3: Memory Flux (Propagator)
+            {
+                text = "Step 4: [Island 3] Find the green Memory Flux gate. \n \n" ..
+                       "Interact with it at (J-8)!\n \n" ..
+                       "You will see: 'You sense a dark, empty presence...' - Propagator (Gorger) has spawned.\n \n",
+                trigger_on_talk = "You sense a dark, empty presence...",
+                onmob_target = "promyvion-vahzl-memory-flux-j8",
+                zone_max_distance = 55,
+                visual_zones = {
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 421.8, y = 0.0, z = -261.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 399.7, y = 0.0, z = -250.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 364.6, y = 0.0, z = -245.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 341.6, y = 0.0, z = -242.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 321.0, y = 0.0, z = -236.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 305.9, y = 0.0, z = -221.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 289.2, y = 0.0, z = -205.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 272.5, y = 0.0, z = -188.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 258.1, y = 0.0, z = -170.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 233.4, y = 0.0, z = -144.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 207.7, y = 0.0, z = -117.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 197.3, y = 0.0, z = -92.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 193.8, y = 0.0, z = -62.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 5: [Island 3] Defeat Propagator.\n \n" ..
+                       "- Fission: Spawns Offspring adds - all die when Propagator is killed. Use Terroanima when it uses Fission to buy time.\n" ..
+                       "- Vanity Drive: Directional AoE - stay behind the boss.\n" ..
+                       "- Stygian Flatus: AoE Paralyze - cast Barparalyzra before engaging.\n" ..
+                       "- Spirit Absorption: Drains ~200 HP, blinkable with 1-2 shadows.\n" ..
+                       "- Promyvion Barrier: Defense boost - dispel if possible.\n" ..
+                       "- Quadratic Continuum: Single target damage.\n \n",
+                onmob_enemy = {"Propagator"},
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Propagator"},
+                    count_party_kills = true,
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 6: [Island 3] Examine the Memory Flux gate (J-8) again to receive the cutscene.\n \n" ..
+                       "IMPORTANT: This cutscene is mandatory - you cannot enter the Spire without it!\n \n",
+                onmob_target = "promyvion-vahzl-memory-flux-j8",
+                trigger_on_event_id = {51},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 7: [Island 3] Defeat the Memory Receptacle to unlock the Memory Stream \n \n" ..
+                       "These are located at (K-8), (K-11), (J-10), (L-8) to advance to Island 4.\n \n",
+                zone_name = "Promyvion - Vahzl",
+                onmob_enemy = {"Memory Receptacle"},
+                onmob_enemy_size = 4,
+                trigger_on_event_id = {35, 36, 37, 38},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                            { position = "K-11", offsetX = 16, offsetY = 16 },
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                            { position = "L-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            -- Island 4: Memory Flux (Solicitor)
+            {
+                text = "Step 8: [Island 4] Find the green Memory Flux gate (M-6) and interact with it.\n \n" ..
+                       "You will see: 'You sense a dark, empty presence...' - Solicitor has spawned.\n \n",
+                zone_name = "Promyvion - Vahzl",
+                onmob_target = "promyvion-vahzl-memory-flux-m6",
+                trigger_on_talk = "You sense a dark, empty presence...",
+                visual_zones =   {
+                    { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 273.3, y = -0.2, z = 143.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 304.2, y = 0.0, z = 151.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 348.6, y = -0.3, z = 145.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 389.4, y = 0.0, z = 145.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        highlights = {
+                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 9: [Island 4] Defeat Solicitor.\n \n" ..
+                       "- Brain Spike: Single-target damage.\n" ..
+                       "- Carousel: AoE damage.\n" ..
+                       "- Promyvion Brume: AoE damage, Poison, and resets hate.\n" ..
+                       "- Empty Crush: Single-target damage.\n" ..
+                       "- Impalement: Single-target damage (Throat Stab mechanics - this will leave the player on 5percent HP be careful ).\n \n" ..
+                       "Gravity helps keep healers safe.\n \n",
+                onmob_enemy = {"Solicitor"},
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Solicitor"},
+                    count_party_kills = true,
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        highlights = {
+                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 10: [Island 4] Examine the Memory Flux gate again to receive the cutscene.\n \n",
+                zone_name = "Promyvion - Vahzl",
+                trigger_on_event_id = {52},
+                onmob_target = "promyvion-vahzl-memory-flux-m6",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        highlights = {
+                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 11: [Island 4] Defeat the Memory Receptacle to unlock the Memory Stream. \n \n" ..
+                       "These are located at (N-4), (N-7), and (J-7) to advance to Island 5.\n \n",
+                onmob_enemy = {"Memory Receptacle"},
+                onmob_enemy_size = 4,
+                trigger_on_event_id = {34, 39, 40},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        highlights = {
+                            { position = "N-4", offsetX = 16, offsetY = 16 },
+                            { position = "N-7", offsetX = 16, offsetY = 16 },
+                            { position = "J-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            -- Island 5: Memory Flux (Ponderer)
+            {
+                text = "Step 12: [Island 5] Find the green Memory Flux gate (D-6) and interact with it.\n \n" ..
+                       "You will see: 'You sense a dark, empty presence...' - Ponderer has spawned.\n \n",
+                trigger_on_talk = "You sense a dark, empty presence...",
+                onmob_target = "promyvion-vahzl-memory-flux-d6",
+                zone_max_distance = 55,
+                visual_zones = {
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = 27.9, y = 0.0, z = -10.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -18.6, y = 0.0, z = 1.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -45.1, y = 0.0, z = 20.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -98.6, y = -0.0, z = 19.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -134.0, y = 0.0, z = 14.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -157.3, y = 0.0, z = 14.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -179.9, y = 0.0, z = 11.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -203.0, y = 0.0, z = 13.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -226.2, y = 0.0, z = 15.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -249.3, y = 0.0, z = 18.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -272.5, y = 0.0, z = 20.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -290.1, y = 0.0, z = 24.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -314.6, y = 0.0, z = 56.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -316.3, y = 0.0, z = 86.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -319.8, y = 0.0, z = 126.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 12,
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 13: [Island 5] Defeat Ponderer.\n \n" ..
+                       "- Shadow Spread: AoE Sleep, Curse, Blind - Poison Potions highly recommended. If everyone is asleep, it stops attacking for ~10 seconds.\n" ..
+                       "- Negative Whirl: Medium-high AoE damage + Slow, strips shadows.\n" ..
+                       "- Winds of Promyvion: Erases a single debuff from itself.\n" ..
+                       "- Stygian Vapor: Short range AoE Plague.\n" ..
+                       "- Trinary Tap: Absorbs up to 3 buffs from a single target - don't eat defense food near it.\n" ..
+                       "- Trinary Absorption: Absorbs ~200-300 HP, spams at ~20% HP - have Hysteroanima ready. Utsusemi blocks it; Third Eye does not.\n \n",
+                zone_name = "Promyvion - Vahzl",
+                onmob_enemy = {"Ponderer"},
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Ponderer"},
+                    count_party_kills = true,
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 13,
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 14: [Island 5] Examine the Memory Flux gate again to receive the cutscene.\n \n",
+                onmob_target = "promyvion-vahzl-memory-flux-d6",
+                trigger_on_event_id = {53},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 14,
+                        highlights = {
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 15: [Island 5] Proceed directly to the Spire of Vahzl entrance.\n \n",
+                zone_trigger = "Spire of Vahzl",
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -330.3, y = 0.0, z = 132.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -307.8, y = 0.0, z = 88.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -284.6, y = 0.0, z = 70.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -247.3, y = -0.2, z = 63.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -226.4, y = 0.0, z = 44.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -200.0, y = 0.0, z = 21.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -172.4, y = 0.0, z = 0.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -163.6, y = 0.0, z = -9.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -159.9, y = 0.0, z = -36.7 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Promyvion - Vahzl", type = 'arrow', center = { x = -140.2, y = 0.0, z = -55.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 15,
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Promyvion - Vahzl",
+                        floor_id = 0,
+                    },
+                },
+            },
+            {
+                text = "Step 16: [Spire of Vahzl] Buffs wear on entry. Examine the Web of Recollections to begin the battlefield (30 min limit).\n \n" ..
+                       "Three bosses: Procreator (Gorger), Cumulator (Craver), Agonizer (Thinker).\n \n" ..
+                       "They join the fight in alphabetical order based on who you attack first:\n" ..
+                       "- Attack Procreator - Agonizer joins   -> Cumulator last.\n" ..
+                       "- Attack Cumulator  - Procreator joins -> Agonizer last.\n" ..
+                       "- Attack Agonizer   - Cumulator joins  -> Procreator last.\n \n" ..
+                       "A boss won't join if you one-shot the current one from above 20 percent. Each has a random element - look for the coloured flame.\n \n" ..
+                       "On victory you are warped to Beaucedine Glacier (F-7) for a cutscene.\n \n",
+                onmob_enemy = {"Procreator", "Cumulator", "Agonizer"},
+                onmob_enemy_size = 6,
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Procreator", "Cumulator", "Agonizer"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {206},
+            },
+            {
+                text = "Step 17: Speak to Cid on the second floor of Bastok - Metalworks (H-8) to complete the mission and begin Three Paths (CoP 5-3).\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {850},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nNext: Three Paths (CoP 5-3)",
         }
     },
 }

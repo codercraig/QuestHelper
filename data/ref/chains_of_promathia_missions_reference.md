@@ -14,5 +14,8 @@
 [CoP 3-5] Darkness Named - DONE
 [CoP 4-1] Sheltering Doubt - DONE
 [CoP 4-2] The Savage - DONE
-[Cop 4-3] The Secrets of Worship - STARTED
+[CoP 4-3] The Secrets of Worship - DONE
+[CoP 5-1] The Enduring Tumult of War - DONE
+[CoP 5-2] Desires of Emptiness - DONE
+[CoP 5-3] Three Paths - OH BOY
 

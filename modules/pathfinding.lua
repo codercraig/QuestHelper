@@ -444,7 +444,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
         local all_exits = {}
         for _, conn in ipairs(connections) do
             if conn.zone and zone_distances[conn.zone] == min_distance and conn.exit then
-                table.insert(all_exits, {position = conn.exit, offsetX = 16, offsetY = 16})
+                table.insert(all_exits, {position = conn.exit, offsetX = 16, offsetY = 16, label = conn.label})
             end
         end
 
