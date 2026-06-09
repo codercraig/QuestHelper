@@ -65,6 +65,7 @@ local id_to_name = {
     [593] = "Light of Vahzl",
     [594] = "Light of Altaieu",
     [604] = "Psoxja Pass",
+    [613] = "Delkfutt Recognition Device",
     [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
     [2506] = "Temple Knight Key"

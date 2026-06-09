@@ -299,6 +299,13 @@ return {
         floor_id = 0,
         max_distance = 60
     },
+    ["la-theine-plateau-???-g6"] = {
+        target_pos = { x = -179.7, y = 8.8, z = 254.3 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 45
+    },
     -- Carpenters' Landing
     ["carpenters-landing-guilloud"] = {
         target_pos = { x = -123.8, y = -7.8, z = -469.1 },
@@ -758,6 +765,14 @@ return {
         visual_mode = "arc",
         zone = "Upper Jeuno"
     },
+    -- Batallia Downs
+    ["batallia-downs-???-k9"] = {
+        target_pos = { x = 426.3, y = 8.6, z = -163.3 },
+        visual_mode = "arc",
+        zone = "Batallia Downs",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Ru'Lude Gardens
     ["Goggehn"] = {
         target_pos = { x = 3, y= 6.7, z=-79.4},
@@ -943,6 +958,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["beaucedine-glacier-iron-grate-j8"] = {
+        target_pos = { x = 241.0, y = 5.0, z = -20.0 },
+        visual_mode = "arc",
+        zone = "Beaucedine Glacier",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Pso'Xja
     ["pso-xja-stone-gate"] = {
         target_pos = { x = -60.0, y = 38.4, z = 25.0 },
@@ -964,6 +986,126 @@ return {
         zone = "Pso'Xja",
         floor_id = 15,
         max_distance = 20
+    },
+    -- CoP 5-3 - 16 stone doors
+    ["pso-xja-stone-door-1"] = {
+        target_pos = { x = 341.6, y = -1.9, z = -50.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-2"] = {
+        target_pos = { x = 350.0, y = -1.9, z = -61.6 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-3"] = {
+        target_pos = { x = 338.4, y = -1.9, z = -70.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-4"] = {
+        target_pos = { x = 321.6, y = -1.9, z = -70.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-5"] = {
+        target_pos = { x = 310.0, y = -1.9, z = -101.6 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-6"] = {
+        target_pos = { x = 298.4, y = -1.9, z = -110.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-7"] = {
+        target_pos = { x = 290.0, y = -1.9, z = -98.4 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-8"] = {
+        target_pos = { x = 290.0, y = -1.9, z = -81.6 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-9"] = {
+        target_pos = { x = 258.4, y = -1.9, z = -70.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-10"] = {
+        target_pos = { x = 250.0, y = -1.9, z = -58.4 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-11"] = {
+        target_pos = { x = 261.6, y = -1.9, z = -50.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-12"] = {
+        target_pos = { x = 278.4, y = -1.9, z = -50.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-13"] = {
+        target_pos = { x = 290.0, y = -1.9, z = -18.4 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-14"] = {
+        target_pos = { x = 301.6, y = -1.9, z = -10.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-15"] = {
+        target_pos = { x = 310.0, y = -1.9, z = -21.6 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-stone-door-16"] = {
+        target_pos = { x = 310.0, y = -1.9, z = -38.4 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 1,
+        max_distance = 2
+    },
+    ["pso-xja-avatar-gate"] = {
+        target_pos = { x = 280.0, y = 30.4, z = -60.0 },
+        visual_mode = "arc",
+        zone = "Pso'Xja",
+        floor_id = 0,
+        max_distance = 15
     },
     -- Promvyion Vahlz
     ["promyvion-vahzl-memory-flux-j8"] = {

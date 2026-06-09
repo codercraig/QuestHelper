@@ -2998,4 +2998,395 @@ return {
             text = "Mission Complete!\nNext: Three Paths (CoP 5-3)",
         }
     },
+    -----------------------------------
+    -- CoP 5-3: Three Paths
+    -----------------------------------
+    ["CoP 5-3: Three Paths"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 5-2: Desires of Emptiness"},
+        },
+        steps = {
+            -- === INTRODUCTION ===
+            {
+                text = "Step 1: All three sub-paths must be completed (in any order). You can work on them simultaneously.\n \n" ..
+                       "Talk to Cid at Metalworks (H-8). He outlines the three paths:\n" ..
+                       "- Tenzen's Path: Seek out the tower in Pso'Xja\n" ..
+                       "- Ulmia's Path: Find the girl Prishe spoke of in San d'Oria\n" ..
+                       "- Louverance's Path: Investigate the Movalpolos underworld\n \n" ..
+                       "This guide covers them in order: Tenzen -> Ulmia -> Louverance.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {851},
+            },
+            -- === TENZEN'S PATH ===
+            {
+                text = "Step 2: [Tenzen] Head to La Theine Plateau and examine the ??? at (G-6) - same spot as 'I Can Hear a Rainbow' (Carbuncle's Ruby quest).\n \n" ..
+                       "Fastest route: Teleport-Holla (Holla Crag), Survival Guide, or Unity Concord warp.\n \n" ..
+                       "Make sure this cutscene appears in your mission log - it is required for the Pso'Xja Avatar Gate to trigger in the next step.\n \n",
+                route_to = "La Theine Plateau",
+                destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
+                onmob_target = "la-theine-plateau-???-g6",
+                trigger_on_event_id = {203},
+            },
+            {
+                text = "Step 3: [Tenzen] Enter Pso'Xja via the J-8 tower 1 (the 16-floor tower) \n \n" ..
+                       "Use Fauregandi Survival Guide or Outpost Warp and run through Beaucedine Glacier.\n \n",
+                route_to = "Beaucedine Glacier",
+                zone_max_distance = 55,
+                onmob_target = "beaucedine-glacier-iron-grate-j8",
+                visual_zones = {
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -33.6, y = -59.9, z = -121.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -62.1, y = -54.9, z = -107.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -46.2, y = -39.9, z = -202.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 10.7, y = -40.2, z = -194.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 19.7, y = -40.0, z = -161.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 32.5, y = -40.6, z = -140.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 59.8, y = -40.0, z = -117.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 79.9, y = -39.8, z = -102.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 134.6, y = -40.5, z = -75.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 140.4, y = -40.1, z = -45.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 122.5, y = -40.0, z = -2.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 73.6, y = -32.4, z = 20.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 106.9, y = -26.3, z = 21.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 138.8, y = -20.7, z = 20.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 176.9, y = -19.2, z = 2.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 167.2, y = -20.2, z = -53.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 146.0, y = -19.7, z = -113.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 118.2, y = -19.6, z = -147.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 66.1, y = -15.3, z = -181.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 111.5, y = -5.3, z = -182.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 143.2, y = -0.1, z = -182.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 190.8, y = 0.0, z = -188.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 234.8, y = 0.1, z = -196.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 266.6, y = 0.5, z = -199.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 298.7, y = 0.9, z = -201.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 314.7, y = 0.1, z = -202.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 348.3, y = 0.4, z = -201.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 346.4, y = 0.6, z = -150.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 334.6, y = 0.3, z = -95.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 306.4, y = 0.2, z = -61.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 280.9, y = 1.0, z = -20.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+                zone_trigger = "Pso'Xja",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {3},
+            },
+            {
+                text = "Step 4: [Tenzen] Navigate 16 Stone Doors in four sections. Each door pops a Gargoyle NM - defeat it and pass through within 25 seconds.\n \n" ..
+                       "Door sections and aggro to manage before popping each NM:\n" ..
+                       "- 1-4:   Maze Lizards (non-aggressive - safe to pop immediately).\n" ..
+                       "- 5-8:   Blubber Eyes (sound aggro) and Cryptonberries (sight aggro).\n" ..
+                       "- 9-12:  Camazotz (sound aggro), Magic Millstones (magic aggro), Snolls (ice weather only; magic and sight aggro).\n" ..
+                       "- 13-16: Cryptonberries (sight aggro).\n \n" ..
+                       "Strategy: Approach each door and verify nothing aggros through it, kill any adds on the other side, THEN pop the NM.\n \n" ..
+                       "THF can pick locks with skeleton keys, living keys or Thief's Tools (~50%% success) to skip the NM fight.\n \n" ..
+                       "To exit early, click the door you entered through to teleport outside.\n \n" ..
+                       "Follow the route clockwise to the center of the map, take the elevator down, then click the Avatar Gate to complete this step.\n \n",
+                zone_max_distance = 10,
+                onmob_enemy = "Gargoyle",
+                onmob_target = {"pso-xja-stone-door-1",
+                                "pso-xja-stone-door-2",
+                                "pso-xja-stone-door-3",
+                                "pso-xja-stone-door-4",
+                                "pso-xja-stone-door-5",
+                                "pso-xja-stone-door-6",
+                                "pso-xja-stone-door-7",
+                                "pso-xja-stone-door-8",
+                                "pso-xja-stone-door-9",
+                                "pso-xja-stone-door-10",
+                                "pso-xja-stone-door-11",
+                                "pso-xja-stone-door-12",
+                                "pso-xja-stone-door-13",
+                                "pso-xja-stone-door-14",
+                                "pso-xja-stone-door-15",
+                                "pso-xja-stone-door-16",
+                                "pso-xja-avatar-gate"},
+                visual_zones = {
+                        --1st door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 333.9, y = 0.2, z = -50.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 341.6, y = -0.0, z = -50.0 }, size =3, floor_id = 1, colour = "yellow" },
+                        --2nd door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 349.7, y = 0.2, z = -48.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 350.0, y = 0.2, z = -61.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --3rd door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 351.5, y = 0.2, z = -70.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 338.4, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --4th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 332.4, y = 0.2, z = -70.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 321.6, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --5th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 310.0, y = 0.2, z = -88.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -101.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --6th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 312.4, y = 0.2, z = -109.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 298.4, y = 0.2, z = -110.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --7th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.3, y = 0.2, z = -111.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -98.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --8th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.1, y = 0.2, z = -91.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -81.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --9th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 273.4, y = 0.2, z = -70.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 258.4, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --10th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 249.4, y = 0.2, z = -70.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 250.0, y = 0.2, z = -58.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --11th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 246.6, y = 0.2, z = -49.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 261.6, y = 0.2, z = -50.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --12th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 269.4, y = 0.2, z = -50.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 278.4, y = 0.2, z = -50.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --13th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.1, y = 0.2, z = -32.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -18.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --14th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 288.4, y = 0.2, z = -10.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 301.6, y = 0.2, z = -10.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --15th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 309.9, y = 0.2, z = -7.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -21.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        --16th door
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 310.1, y = 0.2, z = -29.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -38.4 }, size = 4, floor_id = 1, colour = "yellow" },
+
+                        --elevator
+                        { zone_name = "Pso'Xja", type = 'arrow', center = { x = 300.0, y = 0.0, z = -49.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        -- highlights = {
+                        --     { position = "M-6", offsetX = 16, offsetY = 16 },
+                        -- },
+                        zone_name = "Pso'Xja",
+                        floor_id = 1,
+                    },
+                },
+                kill_requirement = {
+                    count = 16,
+                    enemies = {"Gargoyle"},
+                    count_party_kills = true,
+                    display_only = true,
+                    reset_on_zone_entry = true,
+                },
+                trigger_on_event_id = {3},
+            },
+            {
+                text = "Step 5: [Tenzen] Talk to Monberaux in the Infirmary in Upper Jeuno (G-10) - Home Point #3 - to receive Key Item: Envelope from Monberaux.\n \n",
+                route_to = "Upper Jeuno",
+                onmob_target = "Monberaux",
+                destination_highlight = {position = "G-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {74},
+            },
+            {
+                text = "Step 6: [Tenzen] Talk to Pherimociel at the Guard Post in Ru'Lude Gardens (G-6) for a cutscene involving Wolfgang.\n \n" ..
+                       "You may need to talk twice to trigger the mission cutscene.\n \n",
+                route_to = "Ru'Lude Gardens",
+                onmob_target = "Pherimociel",
+                destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {58},
+            },
+            {
+                text = "Step 6: [Tenzen] Exit Upper Jeuno to Batallia Downs and examine the ??? at (K-9) for a cutscene.\n \n",
+                route_to = "Batallia Downs",
+                destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
+                onmob_target = "batallia-downs-???-k9",
+                trigger_on_event_id = {0},
+            },
+            {
+                text = "Step 7: [Tenzen] Examine the same ??? at Batallia Downs (K-9) a SECOND time to receive Key Item: Delkfutt Recognition Device.\n \n" ..
+                       "Confirm you receive the key item - it is required for the next step.\n \n",
+                route_to = "Batallia Downs",
+                destination_highlight = {position = "K-9", offsetX = 16, offsetY = 16},
+                onmob_target = "batallia-downs-???-k9",
+                trigger_on_keyitem_obtain = {613}
+            },
+            {
+                text = "Step 8: [Tenzen] Enter Lower Delkfutt's Tower and find the Cermet Door on floor 1 at (H-5), north side.\n \n" ..
+                       "Touch the Cermet Door to spawn Disaster Idol. Defeat it:\n" ..
+                       "- Susceptible to: Blind, Poison, Gravity, elemental debuffs and ninjutsu.\n" ..
+                       "- Resistant to: Elegy, Requiem, Silence, Stun, Flash. Does NOT use Meltdown.\n \n" ..
+                       "Examine the Cermet Door again after the kill for a cutscene.\n \n",
+                route_to = "Lower Delkfutt's Tower",
+                onmob_enemy = {"Disaster Idol"},
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Disaster Idol"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {25},
+            },
+            {
+                text = "Step 9: [Tenzen] Return to Pso'Xja via the H-10 tower in Beaucedine Glacier.\n \n" ..
+                       "A cutscene plays automatically when you zone in - no further action required.\n \n" ..
+                       "Inside: Use Sneak and Invisible. Follow the right wall to (I-8), drop to the lower level, then head south and north to the elevator.\n \n",
+                route_to = "Beaucedine Glacier",
+                zone_trigger = "Pso'Xja",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {4},
+            },
+            {
+                text = "Step 10: [Tenzen] Take the elevator down then examine the Avatar Gate at (H-10) for a cutscene.\n \n",
+                zone_name = "Pso'Xja",
+                trigger_on_event_id = {5},
+            },
+            {
+                text = "Step 11: [Tenzen] Talk to Cid at Metalworks (H-8) to complete Tenzen's Path.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {854},
+            },
+            -- === ULMIA'S PATH ===
+            {
+                text = "Step 12: [Ulmia] Talk to Hinaree at Count Caffaule's Manor in Southern San d'Oria (B-6) for a cutscene.\n \n" ..
+                       "The manor is in the western residential area of Southern San d'Oria.\n \n",
+                route_to = "Southern San d'Oria",
+                onmob_target = "Hinaree",
+                destination_highlight = {position = "B-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {22},
+            },
+            {
+                text = "Step 13: [Ulmia] Enter Port San d'Oria for an automatic cutscene.\n \n",
+                route_to = "Port San d'Oria",
+                zone_trigger = "Port San d'Oria",
+                trigger_on_event_id = {4},
+            },
+            {
+                text = "Step 14: [Ulmia] Talk to Chasalvige in the Cathedral in Northern San d'Oria (L-6) - first door on the left inside the manuscript room.\n \n",
+                route_to = "Northern San d'Oria",
+                onmob_target = "Chasalvige",
+                destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {762},
+            },
+            {
+                text = "Step 15: [Ulmia] Talk to Kerutoto in the Rhinostery in Windurst Waters (J-8, use the north door).\n \n" ..
+                       "You may need to talk twice - the mission cutscene references a girl with 'crikey-spiky hair'.\n \n",
+                route_to = "Windurst Waters South",
+                onmob_target = "Kerutoto",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {876},
+            },
+            {
+                text = "Step 16: [Ulmia] Talk to Yoran-Oran at the Optistery in Windurst Walls (E-5) for a cutscene.\n \n",
+                route_to = "Windurst Walls",
+                onmob_target = "Yoran-Oran",
+                destination_highlight = {position = "E-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {473},
+            },
+            {
+                text = "Step 17: [Ulmia] Travel to Attohwa Chasm and enter Boneyard Gully. Examine the Wall of Dark Miasma for battlefield 'Head Wind'.\n \n" ..
+                       "Fastest route: Attohwa Chasm Home Point #1 or Unity Concord warp.\n \n" ..
+                       "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
+                       "Opponents: Shikaree X (BST/NIN - daggers), Shikaree Y (DRK/MNK - scythe), Shikaree Z (DRG/WHM - polearm) and their pets (~2000 HP each).\n" ..
+                       "Only the Trackers need to be defeated. They have Regain - expect frequent weaponskills.\n \n",
+                route_to = "Attohwa Chasm",
+                zone_trigger = "Boneyard Gully",
+                onmob_enemy = {"Shikaree X", "Shikaree Y", "Shikaree Z"},
+                onmob_enemy_size = 5,
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 18: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
+                       "Examine the ??? to enter battlefield 'Flames for the Dead'.\n \n" ..
+                       "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
+                       "Opponent: Snoll Tzar (~7000 HP). You have 45 seconds to kill it before Hypothermal Combustion (near-lethal AoE).\n \n" ..
+                       "- Shu'Meyo Salt extends the timer by 20 seconds. Stack usages but do not overlap.\n" ..
+                       "- Arctic Impact: AoE ice damage (~275).\n" ..
+                       "- Cold Wave: AoE Frost (31 HP/tick).\n" ..
+                       "- Hiemal Storm: Directional AoE ice damage (200-1400).\n \n",
+                route_to = "Uleguerand Range",
+                zone_trigger = "Bearclaw Pinnacle",
+                onmob_enemy = {"Snoll Tzar"},
+                onmob_enemy_size = 6,
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 19: [Ulmia] Talk to Cid at Metalworks (H-8) to complete Ulmia's Path.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {855},
+            },
+            -- === LOUVERANCE'S PATH ===
+            {
+                text = "Step 20: [Louverance] Talk to Despachiaire at the top level of Tavnazian Safehold (K-10) - behind the walnut door near Home Point #3.\n \n",
+                route_to = "Tavnazian Safehold 3",
+                onmob_target = "Despachiaire",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {118},
+            },
+            {
+                text = "Step 21: [Louverance] Talk to Perih Vashai in Windurst Woods (K-7) for a long cutscene.\n \n" ..
+                       "She may offer a Trust cutscene first - work through it then talk again for the mission cutscene.\n \n",
+                route_to = "Windurst Woods",
+                onmob_target = "Perih_Vashai",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {686},
+            },
+            {
+                text = "Step 22: [Louverance] Travel to Bibiki Bay - Purgonorgo Isle and examine the ??? Warmachine at (H-11) for a cutscene.\n \n" ..
+                       "Getting to Purgonorgo Isle:\n" ..
+                       "- Ferry: Manaclipper from Bibiki Bay. Departs at 4:50-5:30 and 16:50-17:30 (Vana'diel time). Multi-ticket from Tswe Panipahr.\n" ..
+                       "- Teleport: Atmacite Refiner (requires Hyacinth Stratum Abyssite II).\n \n",
+                route_to = "Bibiki Bay",
+                destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {33},
+            },
+            {
+                text = "Step 23: [Louverance] Zone into Oldton Movalpolos for an automatic cutscene with Louverance.\n \n" ..
+                       "Fastest route: Survival Guide in Oldton Movalpolos. Alternatively, Gusgen Mines Survival Guide then head west.\n \n",
+                route_to = "Oldton Movalpolos",
+                zone_trigger = "Oldton Movalpolos",
+                trigger_on_event_id = {1},
+            },
+            {
+                text = "Step 24: [Louverance] Enter Mine Shaft #2716 and complete battlefield 'A Century of Hardship'.\n \n" ..
+                       "Getting to Mine Shaft #2716:\n" ..
+                       "- Trade a Snow Lily to Tarnotik in Oldton Movalpolos (K-10) to warp directly.\n" ..
+                       "- Or pay Twinkbrix (Oldton Movalpolos E-13) 1-10,000 gil for a chance at a Shaft Gate Operating Dial, then 2,000 gil to warp.\n" ..
+                       "- Newton Movalpolos Home Point #1 (M-9) also works.\n \n" ..
+                       "Touch the Home Point before entering! Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
+                       "Opponents: Chekochuk (BLM), Movamuq (WHM), Swipostik (THF), Trikotrak (RDM), and Bugbby (WAR ~9000 HP).\n" ..
+                       "- All Moblins: Immune to Sleep. Silence them!\n" ..
+                       "- Bugbby: Extremely susceptible to Stun. Uses Mighty Strikes.\n \n",
+                route_to = "Oldton Movalpolos",
+                onmob_enemy = {"Bugbby", "Chekochuk", "Movamuq", "Swipostik", "Trikotrak"},
+                onmob_enemy_size = 5,
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 25: [Louverance] Talk to Cid at Metalworks (H-8) for a cutscene.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {852},
+            },
+            {
+                text = "Step 26: [Louverance] Obtain a Gold Key and trade it to the Shaft Entrance at Mine Shaft #2716 for a cutscene.\n \n" ..
+                       "Gold Keys drop from Moblins and Goblins in Newton Movalpolos, or buy via bazaar.\n \n" ..
+                       "Note: If you disconnect during the cutscene you lose the key, but you can recheck the door.\n \n",
+                route_to = "Oldton Movalpolos",
+                trigger_on_event_id = {3},
+            },
+            {
+                text = "Step 27: [Louverance] Return to Metalworks (H-8) and talk to Cid to complete Louverance's Path and the mission.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {853},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nTitle: Treader of an Icy Past\nTrust: Shikaree Z - talk to Perih Vashai in Windurst Woods (K-7) after completion.\n1000 EXP per battlefield.\nNext: For Whom the Verse is Sung (CoP 5-4)",
+        }
+    },
 }
