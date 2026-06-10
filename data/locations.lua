@@ -220,6 +220,13 @@ return {
         floor_id = 2,
         max_distance = 45
     },
+    ["Kerutoto"] = {
+        target_pos = { x = 13.0, y = -5.4, z = -157.4 },
+        visual_mode = "arc",
+        zone = "Windurst Waters South",
+        floor_id = 2,
+        max_distance = 35
+    },
     -- Windurst Walls
     ["Yoran-Oran"] = {
         target_pos = { x = -110.0, y = -13.8, z = 203.3 },
@@ -334,6 +341,14 @@ return {
         target_pos = { x = 320.2, y = -23.3, z = -15.9 },
         visual_mode = "arc",
         zone = "Attohwa Chasm",
+        floor_id = 0,
+        max_distance = 45
+    },
+    -- Boneyard Gully
+    ["boneyard-gully-dark-miasma"] = {
+        target_pos = { x = -619.4, y = -1.5, z = 505.7 },
+        visual_mode = "arc",
+        zone = "Boneyard Gully",
         floor_id = 0,
         max_distance = 45
     },
