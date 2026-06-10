@@ -166,7 +166,8 @@ return {
                 kill_requirement = {
                     count = 5,
                     -- No specific enemies specified, so any kill counts
-                    zone = "South Gustaberg"
+                    zone = "South Gustaberg",
+                    display_only = true,
                 },
             },
             {

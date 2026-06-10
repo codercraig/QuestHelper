@@ -17,5 +17,5 @@
 [CoP 4-3] The Secrets of Worship - DONE
 [CoP 5-1] The Enduring Tumult of War - DONE
 [CoP 5-2] Desires of Emptiness - DONE
-[CoP 5-3] Three Paths - STARTED TENZEN PATH STEP 7
+[CoP 5-3] Three Paths - ULMIA PATH
 

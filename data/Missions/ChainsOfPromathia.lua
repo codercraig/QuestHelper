@@ -51,6 +51,7 @@ return {
                 route_to = "Ru'Lude Gardens",
                 onmob_target = "Harith",
                 destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {111},
             },
             {
                 text = "Step 3: Head to Konschtat Highlands and examine the Shattered Telepoint (I-8).\n \n" ..
@@ -81,7 +82,6 @@ return {
                 text = "Step 1: [Floor 1 - Easy Prey to Decent Challenge]\n \n" ..
                        "Note: Sneak/Invisible does NOT work - all mobs are True Sight.\n \n" ..
                        "Defeat the Memory Receptacle near J-12 to spawn the teleporter. Use it to ascend to Floor 2.\n \n",
-                zone_name = "Promyvion - Dem",
                 onmob_enemy = {"Memory Receptacle"},
                 trigger_on_event_id = {30},
                 images = {
@@ -210,6 +210,7 @@ return {
                 onmob_target = "la-theine-plateau-shattered-telepoint",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {202},
+                zone_trigger = "Promyvion - Holla",
             },
             {
                 text = "Step 2: Use the Large Apparatus in the Hall of Transference to enter Promyvion-Holla.\n \n" ..
@@ -324,12 +325,12 @@ return {
                        "On defeat you receive the Key Item: Light of Holla.\n \n",
                 kill_requirement = {
                     count = 1,
-                    enemies = {"Ponderer"},
+                    enemies = {"Wreaker"},
                     count_party_kills = true,
-                    reset_on_zone_entry = true,
+                    --reset_on_zone_entry = true,
                     display_only = true,
                 },
-                onmob_enemy = {"Ponderer"},
+                onmob_enemy = {"Wreaker"},
                 onmob_enemy_size = 5,
                 trigger_on_keyitem_obtain = 590,
             },
@@ -345,6 +346,7 @@ return {
                 text = "Step 1: Head to Tahrongi Canyon and examine the Shattered Telepoint to enter the Hall of Transference.\n \n",
                 route_to = "Tahrongi Canyon",
                 onmob_target = "tahrongi-canyon-shattered-telepoint",
+                zone_trigger = "Promyvion - Mea",
                 destination_highlight = {position = "I-6", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {913},
             },
@@ -459,18 +461,19 @@ return {
                        "- Spirit Absorption: Drains 200 HP, ignores Utsusemi.\n" ..
                        "- Promyvion Barrier: Defense Boost (dispel if possible).\n \n" ..
                        "On defeat you receive the Key Item: Light of Mea.\n \n" ..
-                       "Congratulations on completeing the 3 Promyvions! You will get a cutscene and end up in Lufaise Meadows. \n \n",
+                       "Congratulations on completing the 3 Promyvions! You will get a cutscene and end up in Lufaise Meadows. \n \n",
                 keyitems_needed = {590,591,592},
                 kill_requirement = {
                     count = 1,
-                    enemies = {"Agonizer"},
+                    enemies = {"Delver"},
                     count_party_kills = true,
                     reset_on_zone_entry = true,
                     display_only = true,
                 },
-                onmob_enemy = {"Agonizer"},
+                onmob_enemy = {"Delver"},
                 onmob_enemy_size = 4,
                 trigger_on_keyitem_obtain = {590,591,592},
+                require_all_keyitems = true
                 --trigger_on_event_id = {32001},
             },
         },
@@ -487,25 +490,45 @@ return {
         },
         steps = {
             {
-                text = "Step 1: After defeating all 3 Promyvion bosses you will be automatically teleported to Lufaise Meadows and a cutscene will play.\n \n" ..
-                       "WARNING: Do NOT teleport out after the cutscene - it is very hard to return. Complete this mission first!\n \n" ..
-                       "Your Mysterious Amulet is removed during the cutscene.\n \n",
-                zone_name = "Lufaise Meadows",
-                route_to = "Lufaise Meadows",
-                trigger_on_event_id = {110},
-            },
-            {
-                text = "Step 2: Head west through Lufaise Meadows to the Tavnazian Safehold entrance at E-8 or F-10.\n \n" ..
+                text = "Step 1: Head west through Lufaise Meadows to the Tavnazian Safehold entrance at E-8 or F-10.\n \n" ..
                        "WARNING: Orcs and Gigas aggro to sight and link. Bugards aggro to sound. Be careful if under level 50.\n \n" ..
                        "Zone into the Tavnazian Safehold - a cutscene will play and the mission will complete.\n \n" ..
                        "Tip: Access the Survival Guide and Home Point at the front of the Safehold before moving on.\n \n",
                 route_to = "Tavnazian Safehold 2",
-                --zone_trigger = "Tavnazian Safehold",
+                zone_trigger = "Tavnazian Safehold",
                 trigger_on_event_id = {101},
             },
         },
         reward = {
             text = "Title: Dead Body\nNext: The Lost City (CoP 2-2)",
+        }
+    },
+    ["CoP 2-2: The Lost City"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 2-1: An Invitation West"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to the Tavnazian Safehold top floor at K-10.\n \n" ..
+                       "Talk to Despachiaire, hes behind the Walnut Door. .\n \n",
+                route_to = "Tavnazian Safehold 1",
+                destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
+                --zone_trigger = "Tavnazian Safehold",
+                onmob_target = "Despachiaire",
+                trigger_on_event_id = {102},
+            },
+            {
+                text = "Step 2: Examine the Sewer entrance at the basement level (I-7).\n \n" ..
+                       "Click to proceed when ready! \n \n",
+                route_to = "Tavnazian Safehold 3",
+                onmob_target = "tavnazian-safehold-sewer-entrance",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                --zone_trigger = "Tavnazian Safehold",
+                trigger_on_event_id = {103},
+            },
+        },
+        reward = {
+            text = "Title: Dead Body\nNext: Distant Beliefs (CoP 2-3)",
         }
     },
 
@@ -515,9 +538,9 @@ return {
         },
         steps = {
             {
-                text = "Step 1: Enter Phomiuna Aqueducts via the Sewer Entrance in the basement of Tavnazian Safehold (I-7).\n \n" ..
-                       "Choose 'Proceed onward' when prompted, might require clicking it twice for prompt to appear.\n \n",
+                text = "Step 1: Enter Phomiuna Aqueducts via the Sewer Entrance in the basement of Tavnazian Safehold (I-7).\n \n",
                 route_to = "Tavnazian Safehold 3",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
                 onmob_target = "tavnazian-safehold-sewer-entrance",
                 zone_trigger = "Phomiuna Aqueducts",
             },
@@ -1098,6 +1121,7 @@ return {
             {
                 text = "Step 9 (Windurst): Zone into Windurst Waters for an automatic cutscene.\n \n",
                 route_to = "Windurst Waters South",
+                zone_trigger = "Windurst Waters",
                 trigger_on_event_id = {871},
             },
             {
