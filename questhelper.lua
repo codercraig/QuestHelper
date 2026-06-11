@@ -78,6 +78,8 @@ local lastFrameTime = os.clock()
 local lastInventoryTriggerCheck = 0
 local INVENTORY_TRIGGER_CHECK_INTERVAL = 3.0 -- Check every 3 seconds
 local lastZoneId = 0 -- Track zone changes to reset map
+local lastCombatTime = 0
+local COMBAT_DEBOUNCE = 6.0
 local lastFloorCheck = 0
 local FLOOR_CHECK_INTERVAL = 5.0 -- Check floor every 5 seconds
 local lastKnownFloor = 0 -- Track floor changes
@@ -690,6 +692,14 @@ ashita.events.register('d3d_present', 'present_callback', function()
         end
     end
 
+    -- Track combat state for debounce
+    local playerEntity = GetPlayerEntity()
+    local inCombat = playerEntity and playerEntity.Status == 1
+    if inCombat then
+        lastCombatTime = os.clock()
+    end
+    local combatSuppressed = inCombat or (os.clock() - lastCombatTime) < COMBAT_DEBOUNCE
+
     -- Filter targets by zone and optional floor_id
     local filteredTargets = {}
     local filter_floor = player_module.getFloorId(floor_mappings)
@@ -698,6 +708,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
             local zoneOk = true
             local floorOk = true
             local distOk = true
+            local combatOk = true
             if targetData.zone then
                 zoneOk = zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone]
             end
@@ -709,7 +720,10 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 local dz = player_module.posY_height - targetData.target_pos.z
                 distOk = (dx * dx + dz * dz) <= (targetData.max_distance * targetData.max_distance)
             end
-            if zoneOk and floorOk and distOk then
+            if targetData.draw_in_combat == false then
+                combatOk = not combatSuppressed
+            end
+            if zoneOk and floorOk and distOk and combatOk then
                 table.insert(filteredTargets, targetData)
             end
         end

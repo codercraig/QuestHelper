@@ -360,6 +360,14 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+    ["carpenters-landing-???-i9"] = {
+        target_pos = { x = 120.6, y = -5.3, z = -390.1 },
+        visual_mode = "arc",
+        zone = "Carpenters' Landing",
+        floor_id = 1,
+        max_distance = 30,
+        draw_in_combat = false
+    },
     -- Tahrongi Canyon
     ["tahrongi-canyon-shattered-telepoint"] = {
         target_pos = { x = 180.0, y = 35.2, z = 260.0 },
@@ -467,6 +475,13 @@ return {
         max_distance = 35
     },
     -- Sealion's Den
+    ["Sueleen"] = {
+        target_pos = { x = 616.0, y = 131.2, z = 772.9 },
+        visual_mode = "arc",
+        zone = "Sealion's Den",
+        floor_id = 1,
+        max_distance = 25
+    },
     ["sealions-den-iron-gate"] = {
         target_pos = { x = 612.0, y = 130.9, z = 770.0 },
         visual_mode = "arc",
@@ -514,6 +529,13 @@ return {
     },
     ["misareaux-coast-iron-gate"] = {
         target_pos = { x = 56.5, y = -25.5, z = 740.0 },
+        visual_mode = "arc",
+        zone = "Misareaux Coast",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["misareaux-coast-storage-compartment"] = {
+        target_pos = { x = -312.5, y = -34.2, z = 187.2 },
         visual_mode = "arc",
         zone = "Misareaux Coast",
         floor_id = 0,
@@ -1249,6 +1271,14 @@ return {
     },
     -- Bubu
     -- Bibiki Bay
+    ["bibiki-bay-1-???-f6"] = {
+        target_pos = { x = 100.2, y = -44.7, z = 940.5 },
+        visual_mode = "arc",
+        zone = "Bibiki Bay",
+        floor_id = 1,
+        max_distance = 30,
+        draw_in_combat = false,
+    },
     -- Bibiki Bay 2 - Purgonorgo Isle
     ["bibiki-bay-2-warmachine"] = {
         target_pos = { x = -345.2, y = -6.2, z = -976.6 },
@@ -1425,5 +1455,37 @@ return {
         zone = "Phomiuna Aqueducts",
         floor_id = 3,
         max_distance = 35
+    },
+    -- Al'Taieu (CoP 8-1)
+    ["altaieu-crystalline-field"] = {
+        target_pos = { x = 0.1, y = -10.0, z = -464.0 },
+        visual_mode = "arc",
+        zone = "Al'Taieu",
+        max_distance = 30
+    },
+    ["altaieu-rubious-crystal-south"] = {
+        target_pos = { x = 0.0, y = -6.3, z = -736.9 },
+        visual_mode = "arc",
+        zone = "Al'Taieu",
+        max_distance = 30
+    },
+    ["altaieu-rubious-crystal-west"] = {
+        target_pos = { x = -683.7, y = -6.3, z = -222.1 },
+        visual_mode = "arc",
+        zone = "Al'Taieu",
+        max_distance = 30
+    },
+    ["altaieu-rubious-crystal-east"] = {
+        target_pos = { x = 683.7, y = -6.3, z = -222.2 },
+        visual_mode = "arc",
+        zone = "Al'Taieu",
+        max_distance = 30
+    },
+    -- Grand Palace of Hu'Xzoi (CoP 8-1)
+    ["grand-palace-gate-of-gods"] = {
+        target_pos = { x = -20.0, y = 0.1, z = -283.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        max_distance = 30
     },
 }

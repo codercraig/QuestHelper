@@ -3476,7 +3476,7 @@ return {
             },
             {
                 text = "Step 21: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
-                       "Note: PLEASE READ! Kill 'Cwn Annwn' and 'Uleguerand Tiger' for Snow Lily's, it's best to grab 3 PER PERSON for upcoming missions.  MAKE SURE YOU GET 3 or have GIL ready!! \n \n",
+                       "Note: PLEASE READ! Kill 'Cwn Annwn' and 'Uleguerand Tiger' for Snow Lily's, it's best to grab 4 PER PERSON for upcoming missions.  MAKE SURE YOU GET 4 or have GIL ready!! \n \n",
                        "Snow Lily's can also be purchased off the Auction House under: Materials -> Alchemy \n \n" ..
                        "Examine the ??? to enter battlefield 'Flames for the Dead'.\n \n" ..
                        "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
@@ -3487,7 +3487,7 @@ return {
                        "- Hiemal Storm: Directional AoE ice damage (200-1400).\n \n",
                 items_needed = {
                     { item ="Shu'Meyo Salt",  quantity = 1, optional = true },
-                    { item = "Snow Lily", quantity = 3 },
+                    { item = "Snow Lily", quantity = 4 },
                 },
                 route_to = "Uleguerand Range",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
@@ -3751,7 +3751,7 @@ return {
                 text = "Step 30: [Louverance] You got the Gold Key! Rejoice! \n \n" ..
                         "Teleport back to Mine Shaft via Home Point/Twinkbrix/Tarnotik and trade the 'Gold Key' to the Shaft Entrance for another cutscene. \n \n" ..
                         "Can do either to get back quick: \n" ..
-                        "- Tarnotik is closest, trade your last Snow Lily. \n" ..
+                        "- Tarnotik is closest, trade a Snow Lily. \n" ..
                         "- Warp out and Home Point back to Mine Shaft entrance. \n" ..
                         "- Pay Twinkbrix 2000g to Warp you at Oldton entrance (E-13). \n",
                 onmob_target = {"oldton-movalpolos-tarnotik","oldton-movalpolos-twinkbrix","mine-shaft-2716-shaft-entrance"},
@@ -4070,6 +4070,334 @@ return {
         },
         reward = {
             text = "Mission Complete!\nTitle: Esha'ntarl's Comrade in Arms\nNext: Fire in the Eyes of Men (CoP 7-3)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 7-3: Fire in the Eyes of Men
+    -----------------------------------
+    ["CoP 7-3: Fire in the Eyes of Men"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 7-2: Flames in the Darkness"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Mine Shaft #2716 and check the Shaft Entrance for a cutscene.\n \n" ..
+                       "Getting to Mine Shaft #2716:\n" ..
+                       "- Newton Movalpolos Home Point #1 (M-9) is the fastest if set during CoP 5-3.\n" ..
+                       "- Trade a Snow Lily to Tarnotik (Ta) in Oldton Movalpolos (K-10) to warp directly.\n" ..
+                       "- Trade 2,000 gil to Twinkbrix (Tw)if you have completed the Dice Roll minigame in Oldton Movalpolos (E-13) for a teleport.\n \n",
+                route_to = "Oldton Movalpolos",
+                destination_highlight = {
+                    {position = "K-10", offsetX = 16, offsetY = 16, label = "Ta"},
+                    {position = "E-13", offsetX = 16, offsetY = 16, label = "Tw"},
+                },
+                items_needed = {
+                    { item = "Snow Lily", quantity = 1 },
+                },
+                onmob_target = {"oldton-movalpolos-tarnotik", "oldton-movalpolos-twinkbrix", "mine-shaft-2716-shaft-entrance"},
+                zone_max_distance = 35,
+                trigger_on_event_id = {4},
+                visual_zones = {
+                    --E-11 entrance
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -258.6, y = 7.9, z = -21.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -229.6, y = 8.0, z = -30.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -200.4, y = 8.0, z = -20.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -169.8, y = 14.3, z = -60.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -85.9, y = 20.0, z = -89.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -62.2, y = 16.0, z = -108.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -55.8, y = 12.0, z = -133.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -20.1, y = 12.1, z = -121.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -12.0, y = 12.0, z = -103.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 4.3, y = 12.0, z = -93.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 31.3, y = 10.0, z = -83.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 38.3, y = 13.1, z = -52.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 50.5, y = 12.0, z = -57.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 78.1, y = 12.0, z = -59.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 142.3, y = 12.1, z = -60.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    --south entrance meets the rest
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -140.8, y = 7.9, z = -298.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -138.0, y = 8.0, z = -202.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -100.0, y = 16.0, z = -124.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    --Mine shaft
+                    { zone_name = "Mine Shaft #2716", type = 'arrow', center = { x = -100.1, y = -119.9, z = -602.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+            },
+            {
+                text = "Step 2: Head to Metalworks (Home Point #1) and talk to Cid at (H-8) for a cutscene.\n \n" ..
+                       "You can talk to him again immediately for an optional short cutscene.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {857},
+            },
+            {
+                text = "Step 3: Wait until the next Vana'diel day, then talk to Cid again at (H-8) to complete the mission.\n \n" ..
+                       "One Vana'diel day = approximately 57 real minutes.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {890},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nTitle: Prishe's Buddy\nNext: Calm Before the Storm (CoP 7-4)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 7-4: Calm Before the Storm
+    -----------------------------------
+    ["CoP 7-4: Calm Before the Storm"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 7-3: Fire in the Eyes of Men"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Misareaux Coast and check the Storage Compartment in the shed at (E-7) to spawn Boggelmann (Bugard, ~7600 HP).\n \n" ..
+                       "Fastest route: Unity Warp 122 to Misareaux Coast.\n \n" ..
+                       "Kill Boggelmann, then click the Storage Compartment again for a cutscene.\n \n" ..
+                       "- Dispel its Defense Boost (Scutum special). Uses Blood Weapon at low HP.\n" ..
+                       "- Hungry Crunch: Drain + Dispel Food + Drains TP.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-storage-compartment",
+                onmob_enemy = {"Boggelmann"},
+                destination_highlight = {position = "E-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                        { zone_name = "Misareaux Coast", type = 'arrow', center = { x = -291.8, y = -31.3, z = 185.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Boggelmann"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {13},
+            },
+            {
+                text = "Step 2: Head to Carpenters' Landing and click the ??? at (I-9) to spawn Cryptonberry Executor (NIN, ~5000 HP).\n \n" ..
+                       "Route: Jugner Forest (J-8) entrance, it is the eastern entrance mapped on your map.\n" ..
+                       "The ??? is on top of a log at the water's edge, northwest of the docks.\n \n" ..
+                       "Kill the Executor and all three Cryptonberry Assassins (BLM/SMN/THF), then click the ??? again for a cutscene.\n \n" ..
+                       "- Pull Executor to South Landing (J-10) BEFORE dealing damage to avoid Assassin aggro.\n" ..
+                       "- Executor uses Mijin Gakure (~4000 dmg) ~3 min after Assassins spawn - kite or burst it down first.\n" ..
+                       "- SMN can summon 2 pets; Astral Flow ~800 dmg unresisted. Pets are sleepable.\n" ..
+                       "- All Tonberries resist Sleep. Assassins despawn after Executor uses Mijin Gakure.\n \n",
+                route_to = "Carpenters' Landing",
+                onmob_target = "carpenters-landing-???-i9",
+                onmob_enemy = {"Cryptonberry Executor", "Cryptonberry Assassin"},
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 45,
+                visual_zones = {
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -386.4, y = 1.3, z = -390.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -365.4, y = 7.1, z = -342.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -342.4, y = 7.5, z = -325.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -333.2, y = 2.5, z = -266.7 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -284.2, y = -0.1, z = -233.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -239.7, y = -0.0, z = -196.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -205.1, y = 0.0, z = -160.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -183.2, y = 0.9, z = -161.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -107.9, y = 0.5, z = -166.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = -52.4, y = -0.5, z = -185.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 7.4, y = 0.1, z = -195.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 61.8, y = 0.5, z = -190.1 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 88.9, y = 0.3, z = -161.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 138.0, y = -0.7, z = -88.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 162.7, y = 0.0, z = -44.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 165.4, y = 2.4, z = 20.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 217.7, y = -0.4, z = 17.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 238.8, y = 0.0, z = 39.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 288.3, y = 0.2, z = 38.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Jugner Forest", type = 'arrow', center = { x = 329.7, y = -3.1, z = 31.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+
+                        --Carpenters Landing
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 57.2, y = -4.1, z = -741.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 98.4, y = -4.5, z = -697.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 109.3, y = -5.1, z = -661.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 139.0, y = -9.2, z = -619.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 113.5, y = -6.1, z = -576.4 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 82.0, y = -5.3, z = -535.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 80.6, y = -5.3, z = -495.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Carpenters' Landing", type = 'arrow', center = { x = 86.1, y = -5.9, z = -443.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                },
+                kill_requirement = {
+                    count = 4,
+                    enemies = {"Cryptonberry Executor", "Cryptonberry Assassin"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {37},
+            },
+            {
+                text = "Step 3: Head to Bibiki Bay and click the ??? inside the cave at (F-6) to spawn Dalham (Sea Monk).\n \n" ..
+                       "Kill Dalham, then click the ??? again for a cutscene.\n \n" ..
+                       "- Attack speed ramps as HP drops: \n" ..
+                       " - 2 hits/round at ~70 percent. \n" ..
+                       " - 3 hits at ~40 percent. \n" ..
+                       " - Hundred Fists at ~15 percent.\n" ..
+                       " - Cannot be slept. Builds Bind/Gravity resistance very quickly. Additional Effect: Water.\n \n",
+                route_to = "Bibiki Bay 1",
+                onmob_target = "bibiki-bay-1-???-f6",
+                onmob_enemy = {"Dalham"},
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 50,
+                visual_zones = {
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -37.8, y = 0.0, z = -161.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -40.5, y = 16.4, z = -211.8 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -95.7, y = 16.6, z = -283.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -141.1, y = 20.3, z = -335.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -179.5, y = 20.1, z = -333.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Buburimu Peninsula", type = 'arrow', center = { x = -262.8, y = 20.2, z = -334.3 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                        -- Bibiki Bay
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 629.6, y = -20.4, z = 855.9 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 566.9, y = -20.0, z = 809.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 531.1, y = -19.6, z = 803.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 451.8, y = -19.8, z = 806.7 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 392.5, y = -29.6, z = 849.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 345.0, y = -27.3, z = 876.1 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 316.8, y = -27.9, z = 834.8 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 287.9, y = -28.4, z = 812.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 239.7, y = -31.8, z = 817.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 203.2, y = -40.4, z = 821.0 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 182.9, y = -43.7, z = 838.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 150.2, y = -45.3, z = 849.1 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 127.0, y = -44.6, z = 874.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 89.5, y = -45.0, z = 907.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                },
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Dalham"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {41},
+            },
+            {
+                text = "Step 4: Head to Metalworks (Home Point #1) and talk to Cid at (H-8) for a cutscene.\n \n" ..
+                       "You will receive Key Item: Letters from Ulmia and Prishe.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {892},
+            },
+            {
+                text = "Step 5: Head to Sealion's Den and talk to Sueleen at (H-6) to complete the mission.\n \n" ..
+                       "Route: Tavnazian Safehold (Home Point #2) -> walk straight south.\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = "Sueleen",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {17},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nKey Item: Vessel of Light\nKey Item: Letters from Ulmia and Prishe\nNext: The Warrior's Path (CoP 7-5)",
+        }
+    },
+
+    -- CoP 7-5: The Warrior's Path
+    -----------------------------------
+    ["CoP 7-5: The Warrior's Path"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 7-4: Calm Before the Storm"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Sealion's Den and click the Iron Gate at (H-6) for a cutscene.\n \n" ..
+                       "Route: Tavnazian Safehold (Home Point #2) -> walk straight south.\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = "sealions-den-iron-gate",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {32},
+            },
+            {
+                text = "Step 2: Click the Iron Gate again to enter the battlefield 'The Warrior's Path' and defeat Tenzen.\n \n" ..
+                       "The Chebukki siblings (Makki, Kukki, Cherukiki) are invulnerable - only Tenzen matters.\n \n" ..
+                       "- Tenzen surrenders at ~15 percent HP (~12,000-14,000 total damage). Time limit: 30 minutes.\n" ..
+                       "- He eats a Shogun Rice Ball mid-fight boosting Attack/Defense/Magic Defense.\n" ..
+                       "- Uses Meikyo Shisui then self-skillchains. Amatsu: Tsukikage bypasses shadows - use Third Eye.\n" ..
+                       "- Cosmic Elucidation (~1000 AoE) can eject the party from the battlefield. Stay alert.\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = "sealions-den-iron-gate",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Tenzen"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 3: After winning you are automatically returned to Sealion's Den for a cutscene,\n" ..
+                       "then transported to Al'Taieu where the final cutscene plays. Mission complete!\n \n",
+                trigger_on_event_id = {1},
+                zone_trigger = "Al'Taieu",
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nTitle: Seeker of the Light\nReward: Access to Al'Taieu and Limbus\nNext: Garden of Antiquity (CoP 8-1)",
+        }
+    },
+
+    -- CoP 8-1: Garden of Antiquity
+    -----------------------------------
+    ["CoP 8-1: Garden of Antiquity"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 7-5: The Warrior's Path"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Al'Taieu and click the Crystalline Field at (H-11) for an opening cutscene.\n \n" ..
+                       "The Auroral Updraft at (H-12) is a red pillar of light - it will return you to Sealion's Den if clicked.\n \n",
+                route_to = "Al'Taieu",
+                onmob_target = "altaieu-crystalline-field",
+                destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {164},
+            },
+            {
+                text = "Step 2: Visit all three Rubious Crystal towers and defeat the three Ru'aern NMs at each.\n" ..
+                       "After all three at a tower are dead, click the crystal again for a cutscene. Any order.\n \n" ..
+                       "- Southern Tower (H-13): White Mage, Warrior, Samurai Ru'aern.\n" ..
+                       "- Western Tower (D-10): Red Mage, Dark Knight, Ranger Ru'aern.\n" ..
+                       "- Eastern Tower (L-10): Black Mage, Paladin, Monk Ru'aern.\n \n" ..
+                       "Tip: Kill the Om'phuabo (sharks) near the Eastern Tower before clicking the crystal.\n" ..
+                       "The Ru'aern are resistant to Sleep/Silence without Elemental Seal. They do not Reraise.\n \n",
+                route_to = "Al'Taieu",
+                kill_requirement = {
+                    count = 9,
+                    enemies = {"Ru'aern"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {163},
+            },
+            {
+                text = "Step 3: Return to the Crystalline Field at (H-11) for a cutscene.\n \n" ..
+                       "You can choose to be warped directly into the Grand Palace of Hu'Xzoi.\n \n",
+                route_to = "Al'Taieu",
+                onmob_target = "altaieu-crystalline-field",
+                destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {100},
+            },
+            {
+                text = "Step 4: Inside the Grand Palace of Hu'Xzoi, find and click the Gate of the Gods at (H-8).\n \n" ..
+                       "Make sure to grab the Home Point here.\n \n",
+                route_to = "Grand Palace of Hu'Xzoi",
+                onmob_target = "grand-palace-gate-of-gods",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {1},
+            },
+            {
+                text = "Step 5: Find the East Particle Gate at (H-8 on Map 3) and click it for the final cutscene.\n \n" ..
+                       "Mission complete!\n \n",
+                route_to = "Grand Palace of Hu'Xzoi",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {2},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nItem: Tavnazian Ring\nNext: A Fate Decided (CoP 8-2)",
         }
     },
 }

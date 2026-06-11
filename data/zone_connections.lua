@@ -101,7 +101,11 @@ return {
         {zone = "Sealion's Den", exit= "H-9"}
     },
     ["Sealion's Den"] = {
-        {zone = "Tavnazian Safehold 3", exit = "H-5"}
+        {zone = "Tavnazian Safehold 3", exit = "H-5"},
+        {zone = "Al'Taieu", exit = "H-6"},
+    },
+    ["Al'Taieu"] = {
+        {zone = "Sealion's Den", exit = "H-12"},
     },
     ["Phomiuna Aqueducts"] = {
         --{zone = "Tavnazian Safehold 3", exit = "J-11"},
@@ -331,8 +335,7 @@ return {
     },
     ["Sauromugue Champaign"] = {
         {zone = "Meriphataud Mountains", exit = "K-11"},
-        {zone = "Rolanberry Fields", exit = "E-7"},
-        {zone = "Batallia Downs", exit = "K-12"}
+        {zone = "Rolanberry Fields", exit = "E-7"}
     },
     ["Batallia Downs"] = {
         {zone = "Upper Jeuno", exit = "L-9"},
@@ -343,7 +346,8 @@ return {
         {zone = "La Theine Plateau", exit = "D-11"},
         {zone = "Batallia Downs", exit = "I-11"},
         {zone = "Davoi", exit = "G-12"},
-        {zone = "Carpenters' Landing", exit = "E-6"}
+        {zone = "Carpenters' Landing", exit = "E-6"},
+        {zone = "Carpenters' Landing", exit = "J-8"}
     },
     ["Davoi"] = {
         {zone = "Jugner Forest", exit = "J-6"}

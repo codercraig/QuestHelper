@@ -23,5 +23,8 @@
 [CoP 6-3] More Questions Than Answers - DONE
 [CoP 6-4] One to be Feared - DONE
 [CoP 7-1] Chains and Bonds - DONE
-[CoP 7-2] Flames in the Darkness - STARTED
-
+[CoP 7-2] Flames in the Darkness - DONE
+[CoP 7-3] Fire in the Eyes of Men - DONE
+[CoP 7-4] Calm Before the Storm - DONE
+[CoP 7-5] The Warrior's Path - DONE
+[CoP 8-1] Garden of Antiquity - STARTED
