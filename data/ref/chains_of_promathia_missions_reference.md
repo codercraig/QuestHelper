@@ -22,4 +22,6 @@
 [CoP 6-2] A Place to Return - DONE
 [CoP 6-3] More Questions Than Answers - DONE
 [CoP 6-4] One to be Feared - DONE
-[CoP 7-1] Chains and Bonds - STARTED
+[CoP 7-1] Chains and Bonds - DONE
+[CoP 7-2] Flames in the Darkness - STARTED
+

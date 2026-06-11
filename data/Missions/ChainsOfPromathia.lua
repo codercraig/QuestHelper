@@ -4007,18 +4007,69 @@ return {
                 route_to = "Tavnazian Safehold 3",
                 onmob_target = "tavnazian-safehold-sewer-entrance",
                 destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {115},
+                trigger_on_event_id = {116},
             },
             {
                 text = "Step 4: Head to the top floor of Tavnazian Safehold (Home Point #3) and examine the Walnut Door at (K-7) to complete the mission.\n \n",
                 route_to = "Tavnazian Safehold 1",
                 onmob_target = "tavnazian-safehold-walnut-door",
                 destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
-                trigger_on_event_id = {116},
+                trigger_on_event_id = {115},
             },
         },
         reward = {
             text = "Mission Complete!\nTrust: Cherukiki available from Taillegeas in Ru'Lude Gardens (G-6).\nNext: Flames in the Darkness (CoP 7-2)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 7-2: Flames in the Darkness
+    -----------------------------------
+    ["CoP 7-2: Flames in the Darkness"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 7-1: Chains and Bonds"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Misareaux Coast and check the Dilapidated Gate at (F-7) for a cutscene with Tenzen.\n \n" ..
+                       "Fastest route: Unity Warp 122 to Misareaux Coast.\n" ..
+                       "Alt: Home Point warp to Riverne - Site A01 or B01, use Escape, then exit and re-enter the gate.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-dilapidated-gate-f7",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {12},
+            },
+            {
+                text = "Step 2: Head to Sealion's Den and talk to Sueleen at (H-6) for a cutscene.\n \n" ..
+                       "Fastest route: Tavnazian Safehold (Home Point #2) → walk south to Sealion's Den.\n" ..
+                       "You may need to speak with her twice. The correct cutscene starts with \"You just missed them!\"\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = "Sueleen",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {16},
+            },
+            {
+                text = "Step 3: Head to Ru'Lude Gardens (Home Point #1) and approach the Palace at (H-7) for a cutscene.\n \n" ..
+                       "IMPORTANT: While here, talk to Taillegeas at (I-7) to obtain Trust: Cherukiki!\n" ..
+                       "- Choose \"I want to see how this plays out\" to receive her.\n" ..
+                       "- Choosing \"Let me get my hammer\" loses her permanently until after CoP is fully complete.\n \n",
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {
+                    {position = "H-7", offsetX = 16, offsetY = 16, label = "CS"},
+                    {position = "I-7", offsetX = 16, offsetY = 16, label = "TR"},
+                },
+                trigger_on_event_id = {10051},
+            },
+            {
+                text = "Step 4: Head to Upper Jeuno (Home Point #1) and check the Marble Bridge Eatery door at (F-7) for a cutscene to complete the mission.\n \n",
+                route_to = "Upper Jeuno",
+                onmob_target = "Door: Marble Bridge",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10012},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nTitle: Esha'ntarl's Comrade in Arms\nNext: Fire in the Eyes of Men (CoP 7-3)",
         }
     },
 }
