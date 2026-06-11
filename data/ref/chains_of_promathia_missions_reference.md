@@ -17,5 +17,9 @@
 [CoP 4-3] The Secrets of Worship - DONE
 [CoP 5-1] The Enduring Tumult of War - DONE
 [CoP 5-2] Desires of Emptiness - DONE
-[CoP 5-3] Three Paths - ULMIA PATH
-
+[CoP 5-3] Three Paths - DONE(fking hell)
+[CoP 6-1] For Whom the Verse is Sung - DONE
+[CoP 6-2] A Place to Return - DONE
+[CoP 6-3] More Questions Than Answers - DONE
+[CoP 6-4] One to be Feared - DONE
+[CoP 7-1] Chains and Bonds - STARTED

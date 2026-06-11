@@ -46,7 +46,8 @@ return {
         {zone = "South Gustaberg", exit = "E-12"},
         {zone = "South Gustaberg", exit = "H-11"},
         {zone = "Palborough Mines 1", exit = "K-3"},
-        {zone = "Konschtat Highlands", exit = "E-6"}
+        {zone = "Konschtat Highlands", exit = "E-6"},
+        {zone = "Oldton Movalpolos", exit = "J-6"}
     },
     ["Konschtat Highlands"] = {
         {zone = "North Gustaberg", exit = "I-12"},
@@ -202,7 +203,15 @@ return {
         {zone = "Tahrongi Canyon", exit = "D-7"},
         {zone = "Mhaura", exit = "I-9"},
         {zone = "Maze of Shakhrami", exit = "F-6"},
-        {zone = "Labyrinth of Onzozo", exit = "K-6"}
+        {zone = "Labyrinth of Onzozo", exit = "K-6"},
+        {zone = "Bibiki Bay 1", exit = "E-10"}
+    },
+    ["Bibiki Bay 1"] = {
+        {zone = "Buburimu Peninsula", exit = "I-6"},
+        {zone = "Bibiki Bay 2", exit = "H-7"},
+    },
+    ["Bibiki Bay 2"] = {
+        {zone = "Bibiki Bay 1", exit = "H-7"},
     },
     ["Maze of Shakhrami"] = {
         {zone = "Tahrongi Canyon", exit = "C-9"},
@@ -383,6 +392,9 @@ return {
     ["Palborough Mines 3"] = {
         {zone = "Palborough Mines 1", exit = "I-8"},
         {zone = "Waughroon Shrine", exit = "H-10"}
+    },
+    ["Oldton Movalpolos"] = {
+        {zone = "North Gustaberg", exit = "E-11"},
     },
     ["Waughroon Shrine"] = {
     },

@@ -6,6 +6,8 @@ local zone_connections = require('data.zone_connections')
 
 -- Map specific zone names to their floor_id (for multi-floor zones split by name)
 local zone_name_to_floor = {
+    ['Bibiki Bay 1'] = 1,
+    ['Bibiki Bay 2'] = 2,
     ["Windurst Waters North"] = 1,
     ["Windurst Waters South"] = 2,
     ["Fei'Yin 1"] = 1,
@@ -24,6 +26,8 @@ local zone_name_to_floor = {
 
 -- Map sub-zone names to base zone names (for map/image loading)
 local subzone_to_base = {
+    ['Bibiki Bay 1'] = "Bibiki Bay",
+    ['Bibiki Bay 2'] = "Bibiki Bay",
     ["Windurst Waters North"] = "Windurst Waters",
     ["Windurst Waters South"] = "Windurst Waters",
     ["Fei'Yin 1"] = "Fei'Yin",
@@ -75,7 +79,11 @@ local zone_floor_to_name = {
         [1] = "Tavnazian Safehold 1",  -- upper floor (ramp up from I-9)
         [2] = "Tavnazian Safehold 2",  -- entry floor (from Lufaise Meadows)
         [3] = "Tavnazian Safehold 3",  -- lower floor (ramp down from H-8)
-    }
+    },
+    [4] = {  -- Bibiki Bay
+        [1] = "Bibiki Bay 1",
+        [2] = "Bibiki Bay 2",  -- Purgonorgo Isle (boat from I-6)
+    },
 }
 
 -- Get current zone name with floor detection support

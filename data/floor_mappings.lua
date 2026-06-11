@@ -15,6 +15,11 @@
 -- },
 
 return {
+    --Bibiki Bay
+    [4] = {
+        [1] = 1,
+        [2] = 2,  -- Purgonorgo Isle
+    },
     --Pso'Xja
     [9] = {
         [8] = 1,

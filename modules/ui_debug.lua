@@ -260,7 +260,8 @@ local function render_position_tab()
         elseif viz.entry_type == 'line' then
             if lin.start_pos and lin.stop_pos then
                 entry = string.format(
-                    "    { type = 'line', start = { x = %.1f, y = %.1f, z = %.1f }, stop = { x = %.1f, y = %.1f, z = %.1f }, colour = %q },",
+                    "    { zone_name = %q, type = 'line', start = { x = %.1f, y = %.1f, z = %.1f }, stop = { x = %.1f, y = %.1f, z = %.1f }, colour = %q },",
+                    p.zone_name,
                     lin.start_pos.x, lin.start_pos.y, lin.start_pos.z,
                     lin.stop_pos.x,  lin.stop_pos.y,  lin.stop_pos.z, viz.colour)
                 lin.start_pos = nil

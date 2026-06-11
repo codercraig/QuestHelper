@@ -140,6 +140,14 @@ return {
         visual_mode = "arc",
         zone = "Dangruf Wadi"
     },
+    --Selbina
+    ["Mathilde"] = {
+        target_pos = { x = 12.6, y = -8.8, z = -7.6 },
+        visual_mode = "arc",
+        zone = "Selbina",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Gusgen Mines
     ["Blind Moby"] = {
         target_pos = { x = 210.1, y= -59.2, z=-101.8},
@@ -170,6 +178,14 @@ return {
         zone = "Qulun Dome"
     },
     --Windurst
+    -- Windurst Woods
+    ["Perih Vashai"] = {
+        target_pos = { x = 117.5, y = -4.9, z = 90.5 },
+        visual_mode = "arc",
+        zone = "Windurst Woods",
+        floor_id = 0,
+        max_distance = 40
+    },
     --Port Windurst
     ["Melek"] = {
         target_pos = { x = -78, y= -7, z=156},
@@ -292,6 +308,29 @@ return {
         trigger_npc = "Halver",
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
+    },
+    -- Oldton Movalpolo
+    ["oldton-movalpolos-tarnotik"] = {
+        target_pos = { x = 160.9, y = 10.7, z = -55.7 },
+        visual_mode = "arc",
+        zone = "Oldton Movalpolos",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["oldton-movalpolos-twinkbrix"] = {
+        target_pos = { x = -292.8, y = 6.8, z = -263.2 },
+        visual_mode = "arc",
+        zone = "Oldton Movalpolos",
+        floor_id = 0,
+        max_distance = 25
+    },
+    -- Mine Shaft
+    ["mine-shaft-2716-shaft-entrance"] = {
+        target_pos = { x = -54.5, y = -121.7, z = -580.0 },
+        visual_mode = "arc",
+        zone = "Mine Shaft #2716",
+        floor_id = 0,
+        max_distance = 35
     },
     -- La Theine Plateau
     ["zm4-la-theine-cermet-headstone"] = {
@@ -434,6 +473,14 @@ return {
         zone = "Sealion's Den",
         floor_id = 1,
         max_distance = 25
+    },
+    -- CoP 6-4
+    ["sealion-den-airship-door"] = {
+        target_pos = { x = -780.0, y = -104.3, z = -90.3 },
+        visual_mode = "arc",
+        zone = "Sealion's Den",
+        floor_id = 0,
+        max_distance = 7
     },
    -- Lufaise Meadows
     ["lufaise-meadows-???-h10"] = {
@@ -780,6 +827,13 @@ return {
         visual_mode = "arc",
         zone = "Upper Jeuno"
     },
+    ["Door: Marble Bridge"] = {
+        target_pos = { x = -97.8, y = -1.7, z = 90.8 },
+        visual_mode = "arc",
+        zone = "Upper Jeuno",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Batallia Downs
     ["batallia-downs-???-k9"] = {
         target_pos = { x = 426.3, y = 8.6, z = -163.3 },
@@ -994,6 +1048,22 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    -- Uleguerand Range
+    ["uleguerand-range-buffalostalker-dodzbraz"] = {
+        target_pos = { x = -380.2, y = -25.9, z = -180.8 },
+        visual_mode = "arc",
+        zone = "Uleguerand Range",
+        floor_id = 0,
+        max_distance = 35
+    },
+    -- Bearclaw Pinnacle
+    ["bearclaw-pinnacle-wind-pillar"] = {
+        target_pos = { x = -720.0, y = 8.0, z = -440.0 },
+        visual_mode = "arc",
+        zone = "Bearclaw Pinnacle",
+        floor_id = 0,
+        max_distance = 30
+    },
     -- Pso'Xja
     ["pso-xja-stone-gate"] = {
         target_pos = { x = -60.0, y = 38.4, z = 25.0 },
@@ -1176,6 +1246,16 @@ return {
         target_pos = { x = -74.8, y = -5.3, z = -89.2},
         visual_mode = "arc",
         zone = "Behemoth's Dominion"
+    },
+    -- Bubu
+    -- Bibiki Bay
+    -- Bibiki Bay 2 - Purgonorgo Isle
+    ["bibiki-bay-2-warmachine"] = {
+        target_pos = { x = -345.2, y = -6.2, z = -976.6 },
+        visual_mode = "arc",
+        zone = "Bibiki Bay",
+        floor_id = 2,
+        max_distance = 35
     },
     --sanctuary of zitah
     ["sanctuary-of-zitah-zm5-cermet-headstone"] = {

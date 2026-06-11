@@ -900,12 +900,13 @@ return {
             {
                 text = "Step 3: Defeat Firedrakes(Highlighted Monsters!) along the way to (G-10) to collect 2 Giant Scales - you will need them at the Unstable Displacements ahead.\n \n" ..
                        "There's also a homepoint to pickup at (I-9) will which be useful for a return trip later.\n \n" ..
-                       "Notes: Try and gather some Hippogryph Tailfeathers along the way for mission (CoP 4-2) whilst we are here, i'll highlight the Hippogryphs for this reason. \n \n",
-                onmob_enemy = {"Firedrake","Hippogryph","Cloud Hippogryph"},
+                       "Notes: Try and gather some Hippogryph Tailfeathers, and Cluster Cores along the way for missions (CoP 4-2)/(CoP 5-3) whilst we are here, i'll highlight the Hippogryphs/Clusters for this reason. \n \n",
+                onmob_enemy = {"Firedrake","Hippogryph","Cloud Hippogryph","Cluster"},
                 onmob_enemy_size = 4,
                 items_needed = {
                     { item = "Giant Scale", quantity = 2, on_the_way = true },
                     { item = "Hippogryph Tailfeather", quantity = 8, on_the_way = true, optional = true},
+                    { item = "Cluster Core", quantity = 2, on_the_way = true, optional = true},
                 },
                 trigger_on_item_obtain = {{item = "Giant Scale", quantity = 2}},
                 onmob_target = "riverne-site-a01-spatial-displacement-l8",
@@ -3028,6 +3029,7 @@ return {
     ["CoP 5-3: Three Paths"] = {
         prerequisites = {
             {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 5-2: Desires of Emptiness"},
+            {category = "Quests", subfile = "Uleguerand Range", name = "Bombs Away!",  recommended = true},
         },
         steps = {
             -- === INTRODUCTION ===
@@ -3320,7 +3322,8 @@ return {
                         { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 100.2, y = 0.2, z = -301.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
                         { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 60.6, y = 0.9, z = -322.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
                 },
-                trigger_on_event_id = {4},
+                --trigger_on_event_id = {4},
+                zone_trigger = "Pso'Xja",
             },
             {
                 text = "Step 13: [Tenzen] Take the elevator down then examine the Avatar Gate at (H-10) for a cutscene.\n \n" ..
@@ -3472,7 +3475,9 @@ return {
                 },
             },
             {
-                text = "Step 20: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
+                text = "Step 21: [Ulmia] Travel to Uleguerand Range and fall through the hole at (J-9) - the north-westernmost hole drops you nearest to Bearclaw Pinnacle.\n \n" ..
+                       "Note: PLEASE READ! Kill 'Cwn Annwn' and 'Uleguerand Tiger' for Snow Lily's, it's best to grab 3 PER PERSON for upcoming missions.  MAKE SURE YOU GET 3 or have GIL ready!! \n \n",
+                       "Snow Lily's can also be purchased off the Auction House under: Materials -> Alchemy \n \n" ..
                        "Examine the ??? to enter battlefield 'Flames for the Dead'.\n \n" ..
                        "Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
                        "Opponent: Snoll Tzar (~7000 HP). You have 45 seconds to kill it before Hypothermal Combustion (near-lethal AoE).\n \n" ..
@@ -3480,14 +3485,81 @@ return {
                        "- Arctic Impact: AoE ice damage (~275).\n" ..
                        "- Cold Wave: AoE Frost (31 HP/tick).\n" ..
                        "- Hiemal Storm: Directional AoE ice damage (200-1400).\n \n",
+                items_needed = {
+                    { item ="Shu'Meyo Salt",  quantity = 1, optional = true },
+                    { item = "Snow Lily", quantity = 3 },
+                },
                 route_to = "Uleguerand Range",
-                zone_trigger = "Bearclaw Pinnacle",
-                onmob_enemy = {"Snoll Tzar"},
-                onmob_enemy_size = 6,
+                destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                onmob_enemy = {"Snoll Tzar","Cwn Annwn","Uleguerand Tiger"},
+                onmob_enemy_size = 3,
                 trigger_on_event_id = {32001},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Snoll Tzar"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                onmob_target = "bearclaw-pinnacle-wind-pillar",
+                zone_max_distance = 40,
+                visual_zones = {
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 32.0, y = -16.2, z = 8.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 20.0, y = -16.7, z = 60.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 12.0, y = -36.3, z = 149.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 2.5, y = -35.7, z = 109.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -20.9, y = -36.7, z = 58.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -105.7, y = -36.5, z = 65.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -136.4, y = -35.9, z = 47.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -136.7, y = -24.0, z = 100.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -138.9, y = -21.6, z = 130.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+
+                        -- Uleguerand
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -380.9, y = -25.4, z = -167.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -378.3, y = -25.4, z = -139.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -339.8, y = -26.8, z = -189.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -313.0, y = -17.1, z = -219.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -285.1, y = -21.4, z = -228.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -250.3, y = -20.3, z = -272.3 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -216.4, y = -19.7, z = -302.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -189.9, y = -19.4, z = -334.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -178.2, y = -19.1, z = -356.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -178.1, y = -26.9, z = -416.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -166.3, y = -38.8, z = -459.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -140.2, y = -39.8, z = -419.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -126.0, y = -39.9, z = -398.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -80.5, y = -40.0, z = -365.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = -31.1, y = -39.7, z = -379.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 28.6, y = -34.8, z = -382.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 59.6, y = -25.5, z = -398.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 70.3, y = -19.5, z = -420.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 139.9, y = -3.9, z = -410.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 141.6, y = -0.1, z = -350.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 160.9, y = 0.0, z = -321.7 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 201.4, y = 0.9, z = -302.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 247.4, y = 9.1, z = -302.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 295.3, y = 18.6, z = -301.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 325.1, y = 20.8, z = -297.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 356.3, y = 20.7, z = -264.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 374.4, y = 16.1, z = -235.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 383.0, y = 2.2, z = -185.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                        { zone_name = "Uleguerand Range", type = 'line', start = { x = 381.7, y = 2.29, z = -182.79 }, stop = { x = 380.2, y = 34.7, z = -180.3 }, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 381.5, y = 34.6, z = -179.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 420.1, y = 41.2, z = -167.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 419.7, y = 34.4, z = -116.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 406.0, y = 27.8, z = -100.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 381.1, y = 26.5, z = -91.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Uleguerand Range", type = 'arrow', center = { x = 373.0, y = 21.9, z = -63.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+
+                        -- Bearclaw Pinnacle
+                        { zone_name = "Bearclaw Pinnacle", type = 'arrow', center = { x = -698.6, y = 12.0, z = -527.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Bearclaw Pinnacle", type = 'arrow', center = { x = -700.4, y = 3.8, z = -487.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             {
-                text = "Step 21: [Ulmia] Talk to Cid at Metalworks (H-8) to complete Ulmia's Path.\n \n",
+                text = "Step 22: [Ulmia] Talk to Cid at Metalworks (H-8) to complete Ulmia's Path.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
@@ -3495,67 +3567,234 @@ return {
             },
             -- === LOUVERANCE'S PATH ===
             {
-                text = "Step 22: [Louverance] Talk to Despachiaire at the top level of Tavnazian Safehold (K-10) - behind the walnut door near Home Point #3.\n \n",
-                route_to = "Tavnazian Safehold 3",
+                text = "Step 23: [Louverance] Talk to Despachiaire at the top level of Tavnazian Safehold (K-10) - behind the walnut door near Home Point #3.\n \n",
+                route_to = "Tavnazian Safehold 1",
                 onmob_target = "Despachiaire",
                 destination_highlight = {position = "K-10", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {118},
             },
             {
-                text = "Step 23: [Louverance] Talk to Perih Vashai in Windurst Woods (K-7) for a long cutscene.\n \n" ..
+                text = "Step 24: [Louverance] Talk to Perih Vashai in Windurst Woods (K-7) for a long cutscene.\n \n" ..
                        "She may offer a Trust cutscene first - work through it then talk again for the mission cutscene.\n \n",
                 route_to = "Windurst Woods",
-                onmob_target = "Perih_Vashai",
+                onmob_target = "Perih Vashai",
                 destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {686},
             },
             {
-                text = "Step 24: [Louverance] Travel to Bibiki Bay - Purgonorgo Isle and examine the ??? Warmachine at (H-11) for a cutscene.\n \n" ..
+                text = "Step 25: [Louverance] Travel to Bibiki Bay - Purgonorgo Isle (grab the boat!) and examine the ??? Warmachine at (H-11) for a cutscene.\n \n" ..
                        "Getting to Purgonorgo Isle:\n" ..
-                       "- Ferry: Manaclipper from Bibiki Bay. Departs at 4:50-5:30 and 16:50-17:30 (Vana'diel time). Multi-ticket from Tswe Panipahr.\n" ..
-                       "- Teleport: Atmacite Refiner (requires Hyacinth Stratum Abyssite II).\n \n",
-                route_to = "Bibiki Bay",
+                       "- Ferry: Manaclipper from Bibiki Bay. Departs at 4:50-5:30 and 16:50-17:30 (Vana'diel time). \n \n" ..
+                       "Ticket from Tswe Panipahr(Square marked!)\n \n",
+                route_to = "Bibiki Bay 2",
                 destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {33},
+                zone_max_distance = 40,
+                onmob_target = "bibiki-bay-2-warmachine",
+                visual_zones = {
+                   { zone_name = "Bibiki Bay", type = 'square', center = { x = 484.6, y = -3.0, z = 729.7 }, size = 1, floor_id = 1, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 489.7, y = -3.0, z = 719.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                   -- Purgonorgo Isle
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -398.1, y = -3.0, z = -420.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -404.4, y = -3.4, z = -476.2 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -428.6, y = -2.4, z = -509.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -472.2, y = -3.4, z = -512.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -486.4, y = -3.3, z = -522.7 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.2, y = -3.4, z = -563.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.1, y = -2.6, z = -619.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -518.0, y = -3.3, z = -646.8 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -487.9, y = -3.1, z = -674.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -489.4, y = -3.1, z = -718.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -514.0, y = -3.3, z = -767.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -512.0, y = -3.2, z = -801.7 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -481.2, y = -3.4, z = -838.0 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -432.9, y = -3.2, z = -840.6 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -395.8, y = -3.4, z = -841.2 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -365.8, y = -3.0, z = -872.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -368.2, y = -1.4, z = -900.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -370.3, y = -2.5, z = -948.2 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                },
             },
             {
-                text = "Step 25: [Louverance] Zone into Oldton Movalpolos for an automatic cutscene with Louverance.\n \n" ..
+                text = "Step 26: [Louverance] Zone into Oldton Movalpolos for an automatic cutscene with Louverance - Bring a Snow Lily or GIL!\n \n" ..
+                       "There's 2 entrances to Oldton Movalpolos(arrows at both entrances), use the most sourthern to NPC directly with gil if you dont have a Snow Lilly \n \n" ..
                        "Fastest route: Survival Guide in Oldton Movalpolos. Alternatively, Gusgen Mines Survival Guide then head west.\n \n",
                 route_to = "Oldton Movalpolos",
                 zone_trigger = "Oldton Movalpolos",
                 trigger_on_event_id = {1},
+                visual_zones = {
+                    { zone_name = "North Gustaberg", type = 'arrow', center = { x = 442.0, y = -1.3, z = 723.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "North Gustaberg", type = 'arrow', center = { x = 567.0, y = -12.9, z = 686.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                },
             },
             {
-                text = "Step 26: [Louverance] Enter Mine Shaft #2716 and complete battlefield 'A Century of Hardship'.\n \n" ..
+                text = "Step 27: [Louverance] Enter Mine Shaft #2716 and complete battlefield 'A Century of Hardship'.\n \n" ..
                        "Getting to Mine Shaft #2716:\n" ..
-                       "- Trade a Snow Lily to Tarnotik in Oldton Movalpolos (K-10) to warp directly.\n" ..
-                       "- Or pay Twinkbrix (Oldton Movalpolos E-13) 1-10,000 gil for a chance at a Shaft Gate Operating Dial, then 2,000 gil to warp.\n" ..
+                       "- Trade a Snow Lily to Tarnotik(Ta) in Oldton Movalpolos (K-10) to warp directly.\n" ..
+                       "- [Luck based] Pay Twinkbrix (Oldton Movalpolos(Tw) E-13) 1-10,000 gil for a chance at a Shaft Gate Operating Dial, then 2,000 gil to warp.\n" ..
                        "- Newton Movalpolos Home Point #1 (M-9) also works.\n \n" ..
-                       "Touch the Home Point before entering! Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
+                       "Exit out and touch the Home Point before entering! Buffs wear on entry. 30 minute limit. 1000 EXP on win.\n \n" ..
                        "Opponents: Chekochuk (BLM), Movamuq (WHM), Swipostik (THF), Trikotrak (RDM), and Bugbby (WAR ~9000 HP).\n" ..
                        "- All Moblins: Immune to Sleep. Silence them!\n" ..
                        "- Bugbby: Extremely susceptible to Stun. Uses Mighty Strikes.\n \n",
                 route_to = "Oldton Movalpolos",
+                destination_highlight =  {
+                    {position = "K-10", offsetX = 16, offsetY = 16, label = "Ta"},
+                    {position = "E-13", offsetX = 16, offsetY = 16, label = "Tw"},
+                },
+                onmob_target = {"oldton-movalpolos-tarnotik","oldton-movalpolos-twinkbrix","mine-shaft-2716-shaft-entrance"},
                 onmob_enemy = {"Bugbby", "Chekochuk", "Movamuq", "Swipostik", "Trikotrak"},
-                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 5,
+                    enemies = {"Bugbby","Chekochuk", "Movamuq", "Swipostik", "Trikotrak"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                onmob_enemy_size = 3,
                 trigger_on_event_id = {32001},
+
+                zone_max_distance = 35,
+                visual_zones = {
+                    --E-11 entrance
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -258.6, y = 7.9, z = -21.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -229.6, y = 8.0, z = -30.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -200.4, y = 8.0, z = -20.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -169.8, y = 14.3, z = -60.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -85.9, y = 20.0, z = -89.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -62.2, y = 16.0, z = -108.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -55.8, y = 12.0, z = -133.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -20.1, y = 12.1, z = -121.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -12.0, y = 12.0, z = -103.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 4.3, y = 12.0, z = -93.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 31.3, y = 10.0, z = -83.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 38.3, y = 13.1, z = -52.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 50.5, y = 12.0, z = -57.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 78.1, y = 12.0, z = -59.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 142.3, y = 12.1, z = -60.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --south entrance meets the rest
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -140.8, y = 7.9, z = -298.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -138.0, y = 8.0, z = -202.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = -100.0, y = 16.0, z = -124.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+
+                    --Mine shaft
+                    { zone_name = "Mine Shaft #2716", type = 'arrow', center = { x = -100.1, y = -119.9, z = -602.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+
             },
             {
-                text = "Step 27: [Louverance] Talk to Cid at Metalworks (H-8) for a cutscene.\n \n",
+                text = "Step 28: [Louverance] Warp out of Mine Shaft #2716 \n \n" ..
+                       "Return to Cid in the Metalworks (H-8) for a cutscene.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {852},
             },
             {
-                text = "Step 28: [Louverance] Obtain a Gold Key and trade it to the Shaft Entrance at Mine Shaft #2716 for a cutscene.\n \n" ..
+                text = "Step 29: [Louverance] Obtain a Gold Key and trade it to the Shaft Entrance at Mine Shaft #2716 for a cutscene.\n \n" ..
                        "Gold Keys drop from Moblins and Goblins in Newton Movalpolos, or buy via bazaar.\n \n" ..
-                       "Note: If you disconnect during the cutscene you lose the key, but you can recheck the door.\n \n",
+                       "Note: You will need a Gold Key PER PERSON,If you disconnect during the cutscene you lose the key, but you can recheck the door.\n \n",
                 route_to = "Oldton Movalpolos",
-                trigger_on_event_id = {3},
+                items_needed = {
+                    { item ="Gold Key",  quantity = 1 }
+                },
+                onmob_enemy =  {"Moblin Draftsman",
+                                "Goblin Lengthman",
+                                "Goblin Foreman",
+                                "Goblin Fireman",
+                                "Moblin Workman",
+                                "Moblin Yardman",
+                                "Goblin Packman",
+                                "Moblin Tankman"
+                               },
+                trigger_on_item_obtain = "Gold Key",
+                               --trigger_on_event_id = {3},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Head outside
+                    { zone_name = "Mine Shaft #2716", type = 'arrow', center = { x = -117.1, y = -119.9, z = -620.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Mine Shaft #2716", type = 'arrow', center = { x = -117.1, y = -119.9, z = -620.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 378.4, y = 24.1, z = -19.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+
+                    -- to some goblins
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 347.2, y = 23.9, z = -20.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 265.7, y = 19.9, z = -55.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 238.0, y = 16.0, z = -21.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 219.0, y = 19.9, z = -13.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 183.3, y = 16.0, z = 7.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 140.6, y = 16.0, z = -20.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = 106.7, y = 16.2, z = -19.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -8.8, y = 16.0, z = -9.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -37.8, y = 14.1, z = 2.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -52.7, y = 14.8, z = -5.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -54.6, y = 13.6, z = -33.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -20.4, y = 16.0, z = -43.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -25.5, y = 16.1, z = -96.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 29,
+                        zone_name = "Newton Movalpolos",
+                        floor_id = 0,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
             },
             {
-                text = "Step 29: [Louverance] Return to Metalworks (H-8) and talk to Cid to complete Louverance's Path and the mission.\n \n",
+                text = "Step 30: [Louverance] You got the Gold Key! Rejoice! \n \n" ..
+                        "Teleport back to Mine Shaft via Home Point/Twinkbrix/Tarnotik and trade the 'Gold Key' to the Shaft Entrance for another cutscene. \n \n" ..
+                        "Can do either to get back quick: \n" ..
+                        "- Tarnotik is closest, trade your last Snow Lily. \n" ..
+                        "- Warp out and Home Point back to Mine Shaft entrance. \n" ..
+                        "- Pay Twinkbrix 2000g to Warp you at Oldton entrance (E-13). \n",
+                onmob_target = {"oldton-movalpolos-tarnotik","oldton-movalpolos-twinkbrix","mine-shaft-2716-shaft-entrance"},
+                visual_zones = {
+                        --exit 3 back to oldton, to warp back to the mine shaft!
+                        { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -64.9, y = 12.6, z = -100.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -138.6, y = 12.0, z = -100.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Newton Movalpolos", type = 'arrow', center = { x = -181.2, y = 12.1, z = -67.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                        -- find either NPC to warp you
+                        { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 179.7, y = 8.0, z = -116.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 169.5, y = 8.0, z = -82.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Oldton Movalpolos", type = 'arrow', center = { x = 157.7, y = 14.0, z = -81.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+
+                },
+                trigger_on_event_id = {3},
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 30,
+                        zone_name = "Newton Movalpolos",
+                        floor_id = 0,
+                        highlights = {
+                             {position = "E-9", offsetX = 16, offsetY = 16},
+                        },
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 30,
+                        zone_name = "Oldton Movalpolos",
+                        floor_id = 0,
+                        highlights = {
+                             {position = "K-10", offsetX = 16, offsetY = 16, label = "Ta"},
+                             {position = "E-13", offsetX = 16, offsetY = 16, label = "Tw"},
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 31: [Louverance] Warp out, and return to Metalworks (H-8). \n \n" ..
+                       "Talk to Cid to complete Louverance's Path and the mission.\n \n",
                 route_to = "Metalworks",
                 onmob_target = "Cid",
                 destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
@@ -3563,7 +3802,223 @@ return {
             },
         },
         reward = {
-            text = "Mission Complete!\nTitle: Treader of an Icy Past\nTrust: Shikaree Z - talk to Perih Vashai in Windurst Woods (K-7) after completion.\n1000 EXP per battlefield.\nNext: For Whom the Verse is Sung (CoP 5-4)",
+            text = "Mission Complete!\nTitle: Treader of an Icy Past\nTrust: Shikaree Z - talk to Perih Vashai in Windurst Woods (K-7) after completion.\n1000 EXP per battlefield.\nNext: For Whom the Verse is Sung (CoP 6-1)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 6-1: For Whom the Verse is Sung
+    -----------------------------------
+    ["CoP 6-1: For Whom the Verse is Sung"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 5-3: Three Paths"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Ru'Lude Gardens (Home Point #1) and speak to Pherimociel (G-6) inside the Guard Post of the Grand Duke Palace for a cutscene.\n \n" ..
+                       "It may take a few tries to get the correct dialogue.\n \n",
+                route_to = "Ru'Lude Gardens",
+                onmob_target = "Pherimociel",
+                destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10046},
+            },
+            {
+                text = "Step 2: Head to Upper Jeuno (Home Point #1) and click the door to the Marble Bridge Eatery (F-7) for a cutscene.\n \n",
+                route_to = "Upper Jeuno",
+                onmob_target = "Door: Marble Bridge",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10011},
+            },
+            {
+                text = "Step 3: Zone back into Ru'Lude Gardens for a cutscene to complete the mission.\n \n" ..
+                       "Home Point #1 will place you closest to your next destination.\n \n",
+                route_to = "Ru'Lude Gardens",
+                --trigger_on_event_id = {10047},
+                zone_trigger = "Ru'Lude Gardens",
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nNext: A Place to Return (CoP 6-2)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 6-2: A Place to Return
+    -----------------------------------
+    ["CoP 6-2: A Place to Return"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 6-1: For Whom the Verse is Sung"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Ru'Lude Gardens (Home Point #1) and approach the Grand Duke Palace (H-8) for a cutscene.\n \n",
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10048},
+            },
+            {
+                text = "Step 2: Travel to Misareaux Coast and click the Dilapidated Gate (I-11) to spawn three Spheroid NMs: Warder Aglaia, Warder Euphrosyne, and Warder Thalia.\n \n" ..
+                       "Easiest route: Tavnazian Safehold (Home Point #1 or #2) -> south-west exit into Misareaux Coast.\n \n" ..
+                       "Kill all three Warders, then check the gate again for a cutscene to complete the mission.\n \n" ..
+                       "Tips:\n" ..
+                       "- Sleep and pick them off one at a time - they build resistance to Sleep/Bind over time.\n" ..
+                       "- Reactive Armor: Shock Spikes. Electromagnetic Field: AoE knockback + strips shadows. Electrocharge: Single-target Lightning.\n" ..
+                       "- If one is asleep when they use a special, it will use it on wake-up.\n \n",
+                route_to = "Misareaux Coast",
+                onmob_target = "misareaux-coast-dilapidated-gate",
+                onmob_enemy = {"Warder Aglaia", "Warder Euphrosyne", "Warder Thalia"},
+                destination_highlight = {position = "I-11", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Warder Aglaia", "Warder Euphrosyne", "Warder Thalia"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {10},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nNext: More Questions Than Answers (CoP 6-3)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 6-3: More Questions Than Answers
+    -----------------------------------
+    ["CoP 6-3: More Questions Than Answers"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 6-2: A Place to Return"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Ru'Lude Gardens (Home Point #1) and talk to Pherimociel (G-6) for a cutscene.\n \n" ..
+                       "The mission dialogue begins \"You adventurers are quick to hear the news!\". It may take a few tries to get the correct dialogue.\n \n",
+                route_to = "Ru'Lude Gardens",
+                onmob_target = "Pherimociel",
+                destination_highlight = {position = "G-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10049},
+            },
+            {
+                text = "Step 2: Check the Audience Chamber door upstairs at (H-6) for a cutscene with Prishe, Ulmia, Esha'ntarl and Louverance.\n \n" ..
+                       "Note: You may need to click the door twice if you participate in Voidwatch.\n \n",
+                route_to = "Ru'Lude Gardens",
+                onmob_target = "Door: Audience Chamber",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10050},
+            },
+            {
+                text = "Step 3: Head to Selbina and talk to Mathilde (H-9) inside the Weavers' Guild to complete the mission.\n \n" ..
+                       "The Weavers' Guild is through the door closest to the Home Point, near the sheep pen.\n \n",
+                route_to = "Selbina",
+                onmob_target = "Mathilde",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {10005},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nNext: One to be Feared (CoP 6-4)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 6-4: One to be Feared
+    -----------------------------------
+    ["CoP 6-4: One to be Feared"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 6-3: More Questions Than Answers"},
+        },
+        steps = {
+            {
+                text = "Step 1: Head to Metalworks (H-8) and talk to Cid for a cutscene.\n \n",
+                route_to = "Metalworks",
+                onmob_target = "Cid",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {856},
+            },
+            {
+                text = "Step 2: Head to Tavnazian Safehold (Home Point #2) and enter Sealion's Den for a cutscene.\n \n",
+                route_to = "Sealion's Den",
+                zone_trigger = "Sealion's Den",
+                trigger_on_event_id = {15},
+            },
+            {
+                text = "Step 3: Click the Iron Gate ahead in Sealion's Den for a cutscene.\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = "sealions-den-iron-gate",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {31},
+            },
+            {
+                text = "Step 4: Examine the Iron Gate again to enter the battlefield 'One to be Feared'.\n \n" ..
+                       "45 minute limit. Level cap 99 (Level Restriction applies, buffs removed on entry). No EXP loss.\n \n" ..
+                       "Once ready click on 'Airship Door' and click 'Move to the Armada/next Warship' this will move you onto the next Waves(1 -> 2 -> 3) \n \n" ..
+                       "The fight is 3 sequential waves - HP/MP restored between each, TP reset:\n" ..
+                       "Wave 1 - 5x Mammet-22 Zeta (4,000 HP each): Weak to Silence, Bind, Aspir. Changes jobs by weapon drawn.\n" ..
+                       "Wave 2 - Omega (~14,000 HP): Auto-Regen, counters, stuns on melee. Speeds up at 60 percent HP and 25 percent HP. CCB Polymer Pump = Amnesia.\n" ..
+                       "Wave 3 - Ultima (~15,000 HP): Auto-Regen, paralyzes on melee. Spams Antimatter at low HP (550+ dmg). CCB Polymer Pump = Amnesia.\n \n" ..
+                       "After winning, the party is teleported to Lufaise Meadows and receives a Ducal Guard's Ring.\n \n",
+                route_to = "Sealion's Den",
+                onmob_target = {"sealions-den-iron-gate","sealion-den-airship-door"},
+                onmob_enemy = {"Mammet-22 Zeta",
+                               "Omega",
+                               "Ultima"},
+                destination_highlight = {position = "H-5", offsetX = 16, offsetY = 16},
+                kill_requirement = {
+                    count = 7,
+                    enemies = {"Mammet-22 Zeta", "Omega", "Ultima"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {32001},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nReward: Ducal Guard's Ring + 1500 EXP (once per day)\nTitle: Branded by Lightning / Omega Ostracizer / Ultima Undertaker\nNext: Chains and Bonds (CoP 6-5)",
+        }
+    },
+
+    -----------------------------------
+    -- CoP 7-1: Chains and Bonds
+    -----------------------------------
+    ["CoP 7-1: Chains and Bonds"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 6-4: One to be Feared"},
+        },
+        steps = {
+            {
+                text = "Step 1: After winning the 6-4 battlefield you will be teleported to Lufaise Meadows and automatically receive the Ducal Guard's Ring.\n \n" ..
+                       "Then travel to Tavnazian Safehold (Home Point #2) and zone in for a cutscene with Prishe.\n \n" ..
+                       "Optional: Trust: Cherukiki is now available - talk to Taillegeas in Ru'Lude Gardens (G-6).\n \n",
+                route_to = "Tavnazian Safehold 2",
+                zone_trigger = "Tavnazian Safehold",
+                trigger_on_event_id = {114},
+            },
+            {
+                text = "Step 2: From Tavnazian Safehold (Home Point #2), head down to the bottom floor and enter Sealion's Den at (H-9) for a cutscene with Shikaree Z.\n \n" ..
+                       "Note: The following three cutscenes can be completed in any order.\n \n",
+                route_to = "Sealion's Den",
+                zone_trigger = "Sealion's Den",
+                trigger_on_event_id = {14},
+            },
+            {
+                text = "Step 3: Return to the bottom floor of Tavnazian Safehold and examine the Sewer Entrance to Phomiuna Aqueducts in the northeast for a cutscene with Louverance.\n \n",
+                route_to = "Tavnazian Safehold 3",
+                onmob_target = "tavnazian-safehold-sewer-entrance",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {115},
+            },
+            {
+                text = "Step 4: Head to the top floor of Tavnazian Safehold (Home Point #3) and examine the Walnut Door at (K-7) to complete the mission.\n \n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "tavnazian-safehold-walnut-door",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {116},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nTrust: Cherukiki available from Taillegeas in Ru'Lude Gardens (G-6).\nNext: Flames in the Darkness (CoP 7-2)",
         }
     },
 }
