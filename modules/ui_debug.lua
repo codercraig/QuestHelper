@@ -39,7 +39,7 @@ local viz = {
     entries     = {},
 }
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
-local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue' }
+local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue', 'magenta', 'purple', 'pink' }
 
 -- ── Line builder (Position tab) ───────────────────────────────────────────────
 local lin = {
@@ -229,6 +229,12 @@ local function render_position_tab()
             if toggle_btn(COLOURS[i], viz.colour == COLOURS[i]) then viz.colour = COLOURS[i] end
         end
 
+        -- Floor ID (line)
+        imgui.Text("Floor ID:"); imgui.SameLine()
+        if imgui.Button(" - ##lf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
+        imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
+        if imgui.Button(" + ##lf") then viz.floor_id = viz.floor_id + 1 end
+
         -- Line: Set Start / Set End
         if imgui.Button("Set Start##lb") then lin.start_pos = { x = src_x, y = src_y, z = src_z } end
         imgui.SameLine()
@@ -260,10 +266,10 @@ local function render_position_tab()
         elseif viz.entry_type == 'line' then
             if lin.start_pos and lin.stop_pos then
                 entry = string.format(
-                    "    { zone_name = %q, type = 'line', start = { x = %.1f, y = %.1f, z = %.1f }, stop = { x = %.1f, y = %.1f, z = %.1f }, colour = %q },",
+                    "    { zone_name = %q, type = 'line', start = { x = %.1f, y = %.1f, z = %.1f }, stop = { x = %.1f, y = %.1f, z = %.1f }, floor_id = %d, colour = %q },",
                     p.zone_name,
                     lin.start_pos.x, lin.start_pos.y, lin.start_pos.z,
-                    lin.stop_pos.x,  lin.stop_pos.y,  lin.stop_pos.z, viz.colour)
+                    lin.stop_pos.x,  lin.stop_pos.y,  lin.stop_pos.z, viz.floor_id, viz.colour)
                 lin.start_pos = nil
                 lin.stop_pos  = nil
             end

@@ -106,6 +106,10 @@ return {
     },
     ["Al'Taieu"] = {
         {zone = "Sealion's Den", exit = "H-12"},
+        {zone = "Grand Palace of Hu'Xzoi", exit = "H-11"},
+    },
+    ["Grand Palace of Hu'Xzoi"] = {
+        {zone = "Al'Taieu", exit = "H-8", floor_id =1},
     },
     ["Phomiuna Aqueducts"] = {
         --{zone = "Tavnazian Safehold 3", exit = "J-11"},

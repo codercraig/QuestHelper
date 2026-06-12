@@ -42,6 +42,16 @@ if not helpers then error("[" .. addon.name .. "] helpers.lua is missing.") end
 if not drawArcModule then error("[" .. addon.name .. "] drawArc.lua is missing.") end
 if not drawingModule then error("[" .. addon.name .. "] drawing.lua is missing.") end
 
+-- Maps race name strings (lowercase) to FFXI race ID arrays.
+-- Used by visual_zones race= filter.  Male/Female share one name.
+local RACE_GROUPS = {
+    hume      = {1, 2},
+    elvaan    = {3, 4},
+    tarutaru  = {5, 6},
+    mithra    = {7},
+    galka     = {8},
+}
+
 --------------------------------------------------------------------------------
 -- UI State Variables
 --------------------------------------------------------------------------------
@@ -577,6 +587,13 @@ ashita.events.register('d3d_present', 'present_callback', function()
                     if step_data.visual_zones then
                         local player_floor = player_module.getFloorId(floor_mappings)
                         beam_drawing.calculateDynamicColor()
+                        local playerRaceId
+                        do
+                            local pe = GetPlayerEntity()
+                            if pe then
+                                playerRaceId = pe.Race or (pe.GetRace and pe:GetRace()) or pe.race
+                            end
+                        end
                         for _, zone in ipairs(step_data.visual_zones) do
                             local shape_should_draw
                             if zone.zone_name then
@@ -606,6 +623,22 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                     if current_day then
                                         for _, d in ipairs(zone.check_day) do
                                             if d == current_day then should_draw_zone = true; break end
+                                        end
+                                    end
+                                end
+
+                                if should_draw_zone and zone.race then
+                                    local race_filter = type(zone.race) == "string" and {zone.race} or zone.race
+                                    should_draw_zone = false
+                                    if playerRaceId then
+                                        for _, r in ipairs(race_filter) do
+                                            local ids = RACE_GROUPS[r:lower()]
+                                            if ids then
+                                                for _, rid in ipairs(ids) do
+                                                    if rid == playerRaceId then should_draw_zone = true; break end
+                                                end
+                                            end
+                                            if should_draw_zone then break end
                                         end
                                     end
                                 end

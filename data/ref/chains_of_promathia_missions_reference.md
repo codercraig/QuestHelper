@@ -27,4 +27,5 @@
 [CoP 7-3] Fire in the Eyes of Men - DONE
 [CoP 7-4] Calm Before the Storm - DONE
 [CoP 7-5] The Warrior's Path - DONE
-[CoP 8-1] Garden of Antiquity - STARTED
+[CoP 8-1] Garden of Antiquity - DONE
+[CoP 8-2] A Fate Decided - STARTED

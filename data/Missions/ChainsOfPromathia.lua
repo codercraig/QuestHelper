@@ -4340,6 +4340,7 @@ return {
         }
     },
 
+    -----------------------------------
     -- CoP 8-1: Garden of Antiquity
     -----------------------------------
     ["CoP 8-1: Garden of Antiquity"] = {
@@ -4354,18 +4355,149 @@ return {
                 onmob_target = "altaieu-crystalline-field",
                 destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {164},
+                zone_max_distance = 55,
+                visual_zones = {
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -14.8, y = 0.0, z = -602.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -1.0, y = 0.0, z = -576.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.4, y = 0.0, z = -568.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -0.4, y = -4.1, z = -519.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -0.7, y = -8.1, z = -492.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             {
-                text = "Step 2: Visit all three Rubious Crystal towers and defeat the three Ru'aern NMs at each.\n" ..
-                       "After all three at a tower are dead, click the crystal again for a cutscene. Any order.\n \n" ..
-                       "- Southern Tower (H-13): White Mage, Warrior, Samurai Ru'aern.\n" ..
-                       "- Western Tower (D-10): Red Mage, Dark Knight, Ranger Ru'aern.\n" ..
-                       "- Eastern Tower (L-10): Black Mage, Paladin, Monk Ru'aern.\n \n" ..
-                       "Tip: Kill the Om'phuabo (sharks) near the Eastern Tower before clicking the crystal.\n" ..
+                text = "Step 2: Southern Tower (H-13): Defeat the three Ru'aern NMs (White Mage, Warrior, Samurai).\n" ..
+                       "After all three are dead, click the Rubious Crystal again for a cutscene.\n \n" ..
                        "The Ru'aern are resistant to Sleep/Silence without Elemental Seal. They do not Reraise.\n \n",
                 route_to = "Al'Taieu",
+                destination_highlight = {
+                    {position = "H-13", offsetX = 16, offsetY = 16, label = "S"},
+                },
+                onmob_target = "altaieu-rubious-crystal-h13",
+                onmob_enemy = "Ru'aern",
+                onmob_enemy_size = 3,
                 kill_requirement = {
-                    count = 9,
+                    count = 3,
+                    enemies = {"Ru'aern"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.8, y = -10.0, z = -474.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -0.9, y = -7.7, z = -495.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -0.7, y = -4.2, z = -519.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.1, y = 0.0, z = -590.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.4, y = 0.0, z = -617.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.9, y = 0.0, z = -651.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 1.3, y = 0.0, z = -682.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {161},
+            },
+            {
+                text = "Step 3: Western Tower (D-10): Defeat the three Ru'aern NMs (Red Mage, Dark Knight, Ranger).\n" ..
+                       "After all three are dead, click the Rubious Crystal again for a cutscene.\n \n",
+                route_to = "Al'Taieu",
+                destination_highlight = {
+                    {position = "D-10", offsetX = 16, offsetY = 16, label = "W"},
+                },
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Ru'aern"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                trigger_on_event_id = {162},
+                zone_max_distance = 40,
+                onmob_target = "altaieu-rubious-crystal-d10",
+                onmob_enemy = "Ru'aern",
+                onmob_enemy_size = 3,
+                visual_zones = {
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.6, y = -3.8, z = -725.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -3.0, y = 0.0, z = -683.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -24.7, y = 0.0, z = -673.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -97.5, y = 0.0, z = -643.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -124.5, y = 0.0, z = -618.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -179.3, y = 0.0, z = -612.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -210.5, y = 0.0, z = -608.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -234.7, y = 0.0, z = -606.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -310.9, y = 0.0, z = -591.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -335.9, y = 0.0, z = -558.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -372.4, y = 0.0, z = -526.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -422.0, y = 0.0, z = -484.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -471.4, y = 0.0, z = -467.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -509.0, y = 0.0, z = -397.9 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -536.7, y = 0.0, z = -366.3 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -544.1, y = 0.0, z = -330.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -518.7, y = 0.0, z = -290.7 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -505.9, y = 0.0, z = -259.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -519.4, y = 0.0, z = -209.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -556.5, y = 0.0, z = -182.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -605.7, y = 0.0, z = -192.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -628.1, y = 0.0, z = -206.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                }
+            },
+            {
+                text = "Step 4: Eastern Tower (L-10): Defeat the three Ru'aern NMs (Black Mage, Paladin, Monk).\n" ..
+                       "After all three are dead, click the Rubious Crystal again for a cutscene.\n \n" ..
+                       "Tip: Kill the Om'phuabo (sharks) near this tower before clicking the crystal.\n \n",
+                route_to = "Al'Taieu",
+                destination_highlight = {
+                    {position = "L-10", offsetX = 16, offsetY = 16, label = "E"},
+                },
+                onmob_target = "altaieu-rubious-crystal-l10",
+                onmob_enemy = "Ru'aern",
+                onmob_enemy_size = 3,
+                zone_max_distance = 45,
+                visual_zones = {
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -665.3, y = -3.1, z = -216.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -631.4, y = 0.0, z = -203.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -589.8, y = 0.0, z = -181.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -551.9, y = 0.0, z = -187.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -516.4, y = 0.0, z = -231.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -500.9, y = 0.0, z = -271.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -501.0, y = 0.0, z = -294.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -501.3, y = 0.0, z = -342.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -501.5, y = 0.0, z = -388.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -497.4, y = 0.0, z = -412.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -486.8, y = 0.0, z = -429.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -447.6, y = 0.0, z = -478.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -429.5, y = 0.0, z = -483.7 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -417.8, y = 0.0, z = -497.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -393.1, y = 0.0, z = -527.3 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -331.7, y = 0.0, z = -596.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -290.8, y = 0.0, z = -625.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -247.8, y = 0.0, z = -635.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -180.2, y = 0.0, z = -640.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -133.0, y = 0.0, z = -645.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -86.4, y = 0.0, z = -650.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -86.4, y = 0.0, z = -650.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = -43.3, y = 0.0, z = -654.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 3.5, y = 0.0, z = -659.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 31.2, y = 0.0, z = -664.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 99.6, y = 0.0, z = -661.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 134.4, y = 0.0, z = -655.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 163.8, y = 0.0, z = -651.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 189.9, y = 0.0, z = -646.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 206.4, y = 0.0, z = -644.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 249.4, y = 0.0, z = -633.1 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 265.9, y = 0.0, z = -607.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 298.0, y = 0.0, z = -566.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 283.8, y = 0.0, z = -542.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 249.8, y = 0.0, z = -463.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 280.7, y = 0.0, z = -421.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 300.7, y = 0.0, z = -375.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 376.7, y = 0.0, z = -367.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 429.2, y = 0.0, z = -358.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 458.3, y = 0.0, z = -345.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 518.5, y = 0.0, z = -351.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 565.2, y = 0.0, z = -346.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 624.5, y = 0.0, z = -316.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 656.0, y = 0.0, z = -285.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 642.0, y = 0.0, z = -266.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 623.1, y = 0.0, z = -203.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                },
+                kill_requirement = {
+                    count = 3,
                     enemies = {"Ru'aern"},
                     count_party_kills = true,
                     display_only = true,
@@ -4373,31 +4505,488 @@ return {
                 trigger_on_event_id = {163},
             },
             {
-                text = "Step 3: Return to the Crystalline Field at (H-11) for a cutscene.\n \n" ..
+                text = "Step 5: Return to the Crystalline Field at (H-11) for a cutscene.\n \n" ..
                        "You can choose to be warped directly into the Grand Palace of Hu'Xzoi.\n \n",
                 route_to = "Al'Taieu",
                 onmob_target = "altaieu-crystalline-field",
                 destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                zone_max_distance = 55,
+                visual_zones = {
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 664.7, y = -3.1, z = -217.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 619.0, y = 0.0, z = -205.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 581.2, y = 0.0, z = -252.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 551.9, y = 0.0, z = -295.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 521.5, y = 0.0, z = -326.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 468.3, y = 0.0, z = -332.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 412.1, y = 0.0, z = -335.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 359.2, y = 0.0, z = -337.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 300.3, y = 0.0, z = -340.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 254.5, y = 0.0, z = -403.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 224.1, y = 0.0, z = -465.5 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 199.6, y = 0.0, z = -516.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 189.5, y = 0.0, z = -557.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 130.5, y = 0.0, z = -560.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 111.2, y = 0.0, z = -561.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 81.3, y = 0.0, z = -562.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Al'Taieu", type = 'arrow', center = { x = 0.5, y = 0.0, z = -564.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {100},
             },
             {
-                text = "Step 4: Inside the Grand Palace of Hu'Xzoi, find and click the Gate of the Gods at (H-8).\n \n" ..
+                text = "Step 6: Inside the Grand Palace of Hu'Xzoi, find and click the Gate of the Gods at (H-8).\n \n" ..
                        "Make sure to grab the Home Point here.\n \n",
-                route_to = "Grand Palace of Hu'Xzoi",
-                onmob_target = "grand-palace-gate-of-gods",
-                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                onmob_target = "grand-palace-of-hu-xzoi-gate-of-the-gods-north",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 6,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 1,
+                    },
+                },
                 trigger_on_event_id = {1},
             },
             {
-                text = "Step 5: Find the East Particle Gate at (H-8 on Map 3) and click it for the final cutscene.\n \n" ..
+                text = "Step 7: Find the East Particle Gate at (H-8 on Map 3) and click it for the final cutscene.\n \n" ..
                        "Mission complete!\n \n",
-                route_to = "Grand Palace of Hu'Xzoi",
-                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -19.3, y = 0.6, z = -290.2 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -19.5, y = 0.6, z = -320.1 }, size = 4, direction = "right", floor_id = 1, colour = "cyan" },
+                },
+                onmob_target = "grand-palace-of-hu-xzoi-particle-gate-east",
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 7,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 1,
+                    },
+                },
                 trigger_on_event_id = {2},
             },
         },
         reward = {
             text = "Mission Complete!\nItem: Tavnazian Ring\nNext: A Fate Decided (CoP 8-2)",
+        }
+    },
+
+
+    -----------------------------------
+    -- CoP 8-2: A Fate Decided
+    -----------------------------------
+    ["CoP 8-2: A Fate Decided"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 8-1: Garden of Antiquity"},
+        },
+        steps = {
+            {
+                text = "Step 1: Enter the East Particle Gate at (H-8 on Map 3) in the Grand Palace of Hu'Xzoi.\n \n" ..
+                       "WARNING: You cannot save progress on this mission. A wipe with no Reraise means starting over from the beginning.\n \n" ..
+                       "IMPORTANT: There is a one-way door ahead - when prompted to pass through, choose NO.\n" ..
+                       "Some ??? prompts also offer to return you to the main room - refuse these too.\n \n",
+                onmob_target = {"altaieu-crystalline-field","grand-palace-of-hu-xzoi-particle-gate-east"},
+                route_to = "Grand Palace of Hu'Xzoi",
+                destination_highlight = {
+                    {position = "H-8", offsetX = 16, offsetY = 16},
+                },
+                trigger_on_event_id = {56}
+            },
+            {
+                text = "Step 2: Begin the escort mission. Find a Cermet Alcove and click it to spawn a Quasilumin NPC.\n \n" ..
+                       "Click the Quasilumin to start/stop it. It will open Particle Gates along its route - keep it alive.\n" ..
+                       "Clear aggro ahead before letting it move. It can be aggroed and killed by AoE.\n \n" ..
+                       "If a Quasilumin dies before reaching its alcove destination, return to its spawn point for a new one.\n \n" ..
+                       "Escort route 1(E1):\n" ..
+                       "- Map 1 (J-8): Cermet Alcove escort (5 min limit). Follow it through, once its awaiting click on it again and the gate (Purpe Sqaure) opens.\n" ..
+                       "- Map 1 (L-7): Transporter(T) to Map 2.\n \n",
+                       line_arrow_end = true,
+                       line_arrow_head_size = 0.4,
+                       zone_max_distance = 40,
+                       visual_zones = {
+                            -- Entrance to first escort
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -340.4, y = 0.0, z = 263.6 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -340.4, y = 0.0, z = 301.5 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -341.5, y = 0.0, z = 340.1 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -299.6, y = 0.0, z = 343.3 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -303.2, y = 0.0, z = 380.0 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -339.6, y = 0.0, z = 379.2 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -339.1, y = 0.0, z = 420.0 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -300.2, y = 0.0, z = 419.3 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -299.6, y = 0.0, z = 460.3 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -248.8, y = 0.0, z = 459.9 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+
+                            -- First Escort Start
+                            --{ zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -259.8, y = -0.2, z = 428.2 }, stop = { x = -260.0, y = -0.2, z = 493.7 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.1, y = 0.0, z = 426.3 }, stop = { x = -260.1, y = 0.0, z = 426.3 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.3, y = 0.0, z = 435.2 }, stop = { x = -260.2, y = 0.0, z = 446.7 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.2, y = 0.0, z = 446.7 }, stop = { x = -260.2, y = 0.0, z = 458.1 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.2, y = 0.0, z = 458.1 }, stop = { x = -260.2, y = 0.0, z = 467.9 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.2, y = 0.0, z = 467.9 }, stop = { x = -260.3, y = 0.0, z = 479.0 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -260.3, y = 0.0, z = 481.6 }, stop = { x = -260.3, y = 0.0, z = 491.4 }, floor_id = 16, colour = "magenta" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'square', center = { x = -240.0, y = 0.0, z = 460.0 }, size = 3, floor_id = 15, colour = "magenta" },
+
+                            -- TO first teleporter
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -223.4, y = 0.0, z = 459.9 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -175.2, y = 0.0, z = 460.3 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -140.5, y = 0.0, z = 458.4 }, size = 4, direction = "down", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -140.3, y = 0.0, z = 419.9 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -96.2, y = 0.0, z = 410.5 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -76.9, y = 0.0, z = 420.3 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -60.2, y = 0.0, z = 423.2 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -71.4, y = 0.0, z = 462.5 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -60.5, y = 0.0, z = 476.1 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -62.6, y = 0.0, z = 500.2 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -86.7, y = 0.0, z = 500.8 }, size = 4, direction = "nw", floor_id = 15, colour = "yellow" },
+                            { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -100.5, y = 0.0, z = 521.4 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+
+                            --Second Escort
+                        },
+                        onmob_target = {"altaieu-crystalline-field",
+                                       "grand-palace-of-hu-xzoi-particle-gate-east",
+                                       "grand-palace-of-hu-xzoi-cermet-alcove-j8",
+                                       "grand-palace-of-hu-xzoi-quasilumin-j7"},
+                        trigger_on_event_id = {151},
+                        images = {
+                            {
+                                width    = 512,
+                                height   = 512,
+                                state    = 2,
+                                highlights = {
+                                    { position = "H-8", offsetX = 16, offsetY = 16 },
+                                },
+                                zone_name = "Grand Palace of Hu'Xzoi",
+                                floor_id = 1,
+                            },
+                            {
+                                width    = 512,
+                                height   = 512,
+                                state    = 2,
+                                highlights = {
+                                    { position = "J-8", offsetX = 16, offsetY = 16, label = "E1" },
+                                    { position = "L-8", offsetX = 16, offsetY = 16, label = "T" },
+                                },
+                                zone_name = "Grand Palace of Hu'Xzoi",
+                                floor_id = 15,
+                            },
+                            {
+                                width    = 512,
+                                height   = 512,
+                                state    = 2,
+                                highlights = {
+                                    { position = "I-10", offsetX = 16, offsetY = 16, label = "E2" },
+                                    { position = "L-8", offsetX = 16, offsetY = 16, label = "E3" },
+                                },
+                                zone_name = "Grand Palace of Hu'Xzoi",
+                                floor_id = 16,
+                            },
+                        },
+            },
+            {
+                text = "Step 3: Continue the escort through Map 2 and back to Map 1 - remember to click the Quasilumin again once it reaches its destination!\n \n" ..
+                       "- Map 2 (L-8): Cermet Alcove escort(E2) (30 min limit).\n" ..
+                       "- Map 2 (I-10): Cermet Alcove escort(E3) (30 min limit).\n" ..
+                       "- Map 2 (G-12): Transporter(T2) to Map 1.\n",
+                onmob_target = {"grand-palace-of-hu-xzoi-cermet-alcove-m8",
+                                "grand-palace-of-hu-xzoi-quasilumin-j8",
+                                "grand-palace-of-hu-xzoi-cermet-alcove-j10",
+                                "grand-palace-of-hu-xzoi-quasilumin-g10"},
+                trigger_on_event_id = {158},
+                line_arrow_end = true,
+                line_arrow_head_size = 0.4,
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 739.9, y = -1.0, z = 534.3 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 741.8, y = 0.0, z = 511.1 }, size = 4, direction = "se", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 779.3, y = 0.0, z = 501.7 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+
+                    -- 2nd escort
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 793.7, y = 0.0, z = 460.0 }, stop = { x = 787.5, y = 0.0, z = 459.4 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 787.5, y = 0.0, z = 459.4 }, stop = { x = 777.6, y = 0.0, z = 460.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 775.0, y = 0.0, z = 460.6 }, stop = { x = 772.2, y = 0.0, z = 460.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 772.5, y = 0.0, z = 460.4 }, stop = { x = 779.2, y = 0.0, z = 445.7 }, floor_id = 16, colour = "magenta" },
+                    --{ zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 772.2, y = 0.0, z = 460.3 }, stop = { x = 772.3, y = 0.0, z = 451.6 }, floor_id = 16, colour = "magenta" },
+                    --{ zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 772.3, y = 0.0, z = 451.6 }, stop = { x = 779.2, y = 0.0, z = 445.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 779.2, y = 0.0, z = 445.8 }, stop = { x = 779.9, y = 0.0, z = 435.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 779.9, y = 0.0, z = 435.2 }, stop = { x = 780.7, y = 0.0, z = 424.7 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 780.7, y = 0.0, z = 424.7 }, stop = { x = 780.5, y = 0.0, z = 420.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 779.7, y = 0.0, z = 420.4 }, stop = { x = 772.0, y = 0.0, z = 420.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 772.0, y = 0.0, z = 420.1 }, stop = { x = 765.0, y = 0.0, z = 420.4 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 765.0, y = 0.0, z = 420.4 }, stop = { x = 754.3, y = 0.0, z = 419.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 754.2, y = 0.0, z = 420.3 }, stop = { x = 749.9, y = 0.0, z = 414.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 750.0, y = 0.0, z = 414.3 }, stop = { x = 739.4, y = 0.0, z = 411.7 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 739.8, y = 0.0, z = 411.8 }, stop = { x = 731.1, y = 0.0, z = 412.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 731.1, y = 0.0, z = 412.1 }, stop = { x = 725.0, y = 0.0, z = 419.4 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 725.0, y = 0.0, z = 419.4 }, stop = { x = 711.8, y = 0.0, z = 420.0 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 711.8, y = 0.0, z = 420.0 }, stop = { x = 700.5, y = 0.0, z = 422.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 700.5, y = 0.0, z = 422.3 }, stop = { x = 700.0, y = 0.0, z = 436.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 700.0, y = 0.0, z = 436.8 }, stop = { x = 700.1, y = -0.1, z = 449.9 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 700.1, y = -0.1, z = 449.9 }, stop = { x = 700.2, y = 0.0, z = 459.5 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 700.2, y = 0.0, z = 459.5 }, stop = { x = 685.6, y = 0.0, z = 460.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 685.4, y = 0.0, z = 460.1 }, stop = { x = 673.2, y = 0.0, z = 460.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 673.2, y = 0.0, z = 460.3 }, stop = { x = 655.6, y = 0.0, z = 460.5 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 655.6, y = 0.0, z = 460.5 }, stop = { x = 641.8, y = 0.0, z = 459.6 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 641.8, y = 0.0, z = 459.6 }, stop = { x = 625.9, y = 0.0, z = 459.7 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 625.9, y = 0.0, z = 459.7 }, stop = { x = 615.3, y = 0.0, z = 459.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 615.3, y = 0.0, z = 459.8 }, stop = { x = 599.4, y = -0.1, z = 459.9 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 599.4, y = -0.1, z = 459.9 }, stop = { x = 584.5, y = 0.0, z = 460.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 584.5, y = 0.0, z = 460.1 }, stop = { x = 569.6, y = 0.0, z = 460.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 569.6, y = 0.0, z = 460.2 }, stop = { x = 558.2, y = 0.0, z = 460.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 558.2, y = 0.0, z = 460.3 }, stop = { x = 540.3, y = 0.0, z = 460.0 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.3, y = 0.0, z = 460.0 }, stop = { x = 540.3, y = 0.0, z = 447.8 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.3, y = 0.0, z = 447.8 }, stop = { x = 540.3, y = 0.0, z = 431.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.3, y = 0.0, z = 431.2 }, stop = { x = 540.0, y = 0.0, z = 426.3 }, floor_id = 16, colour = "magenta" },
+
+
+                    --2nd door open
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 580.0, y = 0.0, z = 450.0 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'square', center = { x = 580.0, y = 0.0, z = 440.0 }, size = 3, floor_id = 16, colour = "magenta" },
+
+                    -- route to Escort 3
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 579.5, y = 0.0, z = 432.6 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 579.5, y = -6.0, z = 404.3 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 576.7, y = -6.0, z = 380.9 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 539.8, y = -6.0, z = 378.6 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 538.4, y = -6.0, z = 340.7 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 515.0, y = -6.2, z = 339.6 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 499.7, y = 0.0, z = 337.9 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 499.5, y = 0.0, z = 293.0 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 502.5, y = 0.0, z = 267.6 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+
+                    -- Escort 3
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.0, y = 0.0, z = 293.7 }, stop = { x = 539.6, y = -0.1, z = 280.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 539.6, y = -0.1, z = 280.3 }, stop = { x = 540.4, y = 0.0, z = 267.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.4, y = 0.0, z = 267.2 }, stop = { x = 540.7, y = 0.0, z = 259.5 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 540.7, y = 0.0, z = 259.5 }, stop = { x = 522.7, y = 0.0, z = 259.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 522.7, y = 0.0, z = 259.3 }, stop = { x = 503.9, y = 0.0, z = 259.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 503.9, y = 0.0, z = 259.1 }, stop = { x = 486.4, y = 0.0, z = 259.0 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 486.4, y = 0.0, z = 259.0 }, stop = { x = 469.8, y = -0.1, z = 260.0 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 469.8, y = -0.1, z = 260.0 }, stop = { x = 460.1, y = 0.0, z = 252.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 459.9, y = 0.0, z = 252.5 }, stop = { x = 460.2, y = 0.0, z = 236.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 460.2, y = 0.0, z = 236.2 }, stop = { x = 459.6, y = 0.0, z = 220.6 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 459.6, y = 0.0, z = 220.6 }, stop = { x = 443.5, y = 0.0, z = 220.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 443.6, y = 0.0, z = 220.1 }, stop = { x = 428.7, y = 0.0, z = 220.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 428.7, y = 0.0, z = 220.2 }, stop = { x = 417.4, y = 0.0, z = 220.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 417.4, y = 0.0, z = 220.2 }, stop = { x = 396.4, y = 0.0, z = 220.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 396.4, y = 0.0, z = 220.3 }, stop = { x = 380.7, y = 0.0, z = 220.4 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 380.7, y = 0.0, z = 220.4 }, stop = { x = 378.9, y = 0.0, z = 242.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 379.2, y = 0.0, z = 242.3 }, stop = { x = 379.8, y = 0.0, z = 256.3 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 379.8, y = 0.0, z = 256.3 }, stop = { x = 368.6, y = 0.0, z = 259.9 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 368.6, y = 0.0, z = 259.9 }, stop = { x = 353.1, y = 0.0, z = 260.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 353.1, y = 0.0, z = 260.1 }, stop = { x = 340.6, y = 0.0, z = 260.2 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 340.6, y = 0.0, z = 260.2 }, stop = { x = 321.8, y = 0.0, z = 260.4 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 321.8, y = 0.0, z = 260.4 }, stop = { x = 307.9, y = 0.0, z = 260.5 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 308.1, y = 0.0, z = 260.6 }, stop = { x = 300.2, y = 0.0, z = 260.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 300.2, y = 0.0, z = 260.1 }, stop = { x = 299.8, y = 0.0, z = 272.1 }, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = 299.8, y = 0.0, z = 272.1 }, stop = { x = 299.7, y = 0.0, z = 289.3 }, floor_id = 16, colour = "magenta" },
+
+                    --Out door 2
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'square', center = { x = 280.0, y = 0.0, z = 260.0 }, size = 3, floor_id = 16, colour = "magenta" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 290.3, y = 0.0, z = 260.2 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+
+                    --Teleport to Map 1
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 274.1, y = 0.0, z = 260.0 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 259.9, y = 0.0, z = 258.3 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 260.1, y = 0.0, z = 227.5 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 259.7, y = 0.0, z = 187.1 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 260.4, y = 0.0, z = 140.2 }, size = 4, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 220.4, y = 0.0, z = 142.1 }, size = 4, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 211.1, y = 0.0, z = 97.9 }, size = 4, direction = "se", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 221.5, y = 0.0, z = 60.4 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 252.5, y = 0.0, z = 64.3 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 278.9, y = 0.0, z = 60.5 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 299.9, y = 0.0, z = 62.0 }, size = 4, direction = "up", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 301.7, y = 0.0, z = 86.8 }, size = 4, direction = "ne", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = 325.8, y = 0.0, z = 99.9 }, size = 4, direction = "right", floor_id = 16, colour = "yellow" },
+
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "J-8", offsetX = 16, offsetY = 16, label = "E1" },
+                            { position = "L-8", offsetX = 16, offsetY = 16, label = "T1" },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 15,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 3,
+                        highlights = {
+                            { position = "I-10", offsetX = 16, offsetY = 16, label = "E3" },
+                            { position = "L-8", offsetX = 16, offsetY = 16, label = "E2" },
+                            { position = "G-12", offsetX = 16, offsetY = 16, label = "T2" },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 16,
+                    },
+                },
+            },
+            {
+                text = "Step 4: Continue the escort through Map 1 and back to Map 2(once agian!) - remember to click the Quasilumin again once it reaches its destination!\n \n" ..
+                       "- Map 1 (G-10): Cermet Alcove escort (40 min limit).\n" ..
+                       "  Note: Players who have completed CoP 8-3 can join here via the west lobby door.\n" ..
+                       "- Map 1 (G-4): Transporter to Map 2.\n \n" ..
+                       "Continue toward Map 2 (H-8) for the NM fight.\n",
+                onmob_target = {"grand-palace-of-hu-xzoi-cermet-alcove-g10",
+                                "grand-palace-of-hu-xzoi-quasilumin-h7"},
+                --trigger_on_event_id = {158},
+                line_arrow_end = true,
+                line_arrow_head_size = 0.4,
+                zone_max_distance = 40,
+                visual_zones = {
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -508.4, y = -0.1, z = 100.0 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -531.6, y = 0.0, z = 96.4 }, size = 4, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -541.1, y = 0.0, z = 59.9 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -565.5, y = 0.0, z = 60.9 }, size = 4, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -580.0, y = 0.0, z = 77.1 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -574.6, y = 0.0, z = 85.5 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -566.5, y = 0.0, z = 103.0 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -580.0, y = 0.0, z = 115.3 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -580.1, y = 0.0, z = 156.9 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -580.1, y = 0.0, z = 172.5 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -580.1, y = 0.0, z = 192.6 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -581.3, y = 0.0, z = 260.1 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+
+                        --4th Escort
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.1, y = 0.0, z = 293.7 }, stop = { x = -539.8, y = 0.0, z = 287.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -539.8, y = 0.0, z = 287.0 }, stop = { x = -540.2, y = 0.0, z = 268.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.2, y = 0.0, z = 268.7 }, stop = { x = -540.1, y = 0.0, z = 259.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.1, y = 0.0, z = 259.7 }, stop = { x = -524.0, y = 0.0, z = 260.6 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -524.0, y = 0.0, z = 260.6 }, stop = { x = -510.5, y = 0.0, z = 260.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -510.5, y = 0.0, z = 260.4 }, stop = { x = -499.8, y = 0.0, z = 260.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -499.8, y = 0.0, z = 260.4 }, stop = { x = -500.0, y = 0.0, z = 273.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.0, y = 0.0, z = 273.8 }, stop = { x = -500.1, y = 0.0, z = 288.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.1, y = 0.0, z = 288.4 }, stop = { x = -500.0, y = 0.0, z = 308.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.0, y = 0.0, z = 308.4 }, stop = { x = -500.2, y = -0.1, z = 330.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.2, y = -0.1, z = 330.8 }, stop = { x = -507.2, y = 0.0, z = 339.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -507.2, y = 0.0, z = 339.9 }, stop = { x = -526.1, y = 0.0, z = 339.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -526.1, y = 0.0, z = 339.9 }, stop = { x = -541.4, y = 0.0, z = 339.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -541.4, y = 0.0, z = 339.9 }, stop = { x = -540.0, y = 0.0, z = 356.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.0, y = 0.0, z = 356.7 }, stop = { x = -540.1, y = 0.0, z = 374.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.1, y = 0.0, z = 374.8 }, stop = { x = -540.2, y = 0.0, z = 380.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.2, y = 0.0, z = 380.0 }, stop = { x = -524.2, y = 0.0, z = 380.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -524.2, y = 0.0, z = 380.2 }, stop = { x = -505.5, y = 0.0, z = 380.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -505.5, y = 0.0, z = 380.2 }, stop = { x = -499.9, y = 0.0, z = 394.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -499.9, y = 0.0, z = 394.0 }, stop = { x = -500.0, y = -0.1, z = 409.3 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -499.9, y = -0.1, z = 409.6 }, stop = { x = -506.3, y = 0.0, z = 419.3 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -506.3, y = 0.0, z = 419.3 }, stop = { x = -523.6, y = 0.0, z = 420.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -523.6, y = 0.0, z = 420.2 }, stop = { x = -534.0, y = 0.0, z = 420.5 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -534.0, y = 0.0, z = 420.5 }, stop = { x = -540.1, y = 0.0, z = 428.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.1, y = 0.0, z = 428.8 }, stop = { x = -540.2, y = 0.0, z = 447.6 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.2, y = 0.0, z = 447.6 }, stop = { x = -540.1, y = 0.0, z = 462.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -540.1, y = 0.0, z = 462.8 }, stop = { x = -539.9, y = 0.0, z = 476.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -539.9, y = 0.0, z = 476.9 }, stop = { x = -539.9, y = 0.0, z = 492.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -539.9, y = 0.0, z = 492.0 }, stop = { x = -532.0, y = 0.0, z = 499.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -532.0, y = 0.0, z = 499.9 }, stop = { x = -525.4, y = 0.0, z = 500.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -525.4, y = 0.0, z = 500.1 }, stop = { x = -514.8, y = 0.0, z = 500.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -515.3, y = 0.0, z = 500.2 }, stop = { x = -505.5, y = 0.0, z = 500.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -505.5, y = 0.0, z = 500.1 }, stop = { x = -499.9, y = 0.0, z = 506.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -499.9, y = 0.0, z = 506.4 }, stop = { x = -500.1, y = 0.0, z = 522.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.1, y = 0.0, z = 524.3 }, stop = { x = -500.0, y = 0.0, z = 534.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.0, y = 0.0, z = 534.9 }, stop = { x = -500.0, y = 0.0, z = 539.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -500.0, y = 0.0, z = 539.9 }, stop = { x = -481.4, y = 0.0, z = 540.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -481.4, y = 0.0, z = 540.1 }, stop = { x = -466.8, y = 0.0, z = 540.3 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -466.8, y = 0.0, z = 540.3 }, stop = { x = -449.0, y = 0.0, z = 540.5 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -449.0, y = 0.0, z = 540.5 }, stop = { x = -435.1, y = 0.0, z = 540.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -435.1, y = 0.0, z = 540.2 }, stop = { x = -420.0, y = 0.0, z = 540.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -420.0, y = 0.0, z = 540.1 }, stop = { x = -419.9, y = 0.0, z = 525.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -419.9, y = 0.0, z = 525.7 }, stop = { x = -419.8, y = 0.0, z = 514.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -419.8, y = 0.0, z = 514.8 }, stop = { x = -419.7, y = 0.0, z = 499.6 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -419.7, y = 0.0, z = 499.6 }, stop = { x = -405.4, y = 0.0, z = 500.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -405.4, y = 0.0, z = 500.2 }, stop = { x = -392.3, y = 0.0, z = 499.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'line', start = { x = -392.3, y = 0.0, z = 499.7 }, stop = { x = -386.4, y = 0.0, z = 499.9 }, floor_id = 15, colour = "magenta" },
+
+                        --Open (H-6 door)
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'square', center = { x = -420.0, y = 0.0, z = 560.0 }, size = 3, floor_id = 15, colour = "magenta" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -410.6, y = 0.0, z = 509.5 }, size = 4, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -412.3, y = 0.0, z = 539.3 }, size = 4, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "Grand Palace of Hu'Xzoi", type = 'arrow', center = { x = -420.1, y = 0.0, z = 552.2 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+
+
+                },
+                images = {
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 1,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16, label = "E4" },
+                            { position = "G-5", offsetX = 16, offsetY = 16, label = "T3" },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 15,
+                    },
+                    {
+                        width    = 512,
+                        height   = 512,
+                        state    = 4,
+                        highlights = {
+                            { position = "I-10", offsetX = 16, offsetY = 16, label = "E3" },
+                            { position = "L-8", offsetX = 16, offsetY = 16, label = "E2" },
+                            { position = "G-12", offsetX = 16, offsetY = 16, label = "T2" },
+                        },
+                        zone_name = "Grand Palace of Hu'Xzoi",
+                        floor_id = 16,
+                    },
+                },
+            },
+            {
+                text = "Step 5: At Map 2 (H-8), pass through the Cermet Portal, then click the next one to spawn Ix'ghrah.\n \n" ..
+                       "Ix'ghrah shifts form each time it uses a weapon skill:\n" ..
+                       "- Spider: Dangerous - Sickle Slash ignores Utsusemi and crits hard. Uses Mighty Strikes. Kill quickly.\n" ..
+                       "- Bird: Hard to hit with weapons, weak to magic. Uses Damnation Dive + Perfect Dodge.\n" ..
+                       "- Orb: Weak to physical. Spams -ga III (or Sleepga II on Dark day). Uses Manafont. Feed TP to escape.\n" ..
+                       "- Humanoid: Very damage resistant but low threat. Good time for mages to rest MP.\n \n" ..
+                       "Its element is based on the day it spawns (and can change mid-fight if the day changes).\n" ..
+                       "Usually vulnerable to Gravity. Resistant or immune to Bind, Sleep, and Silence.\n \n",
+                route_to = "Grand Palace of Hu'Xzoi",
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Ix'ghrah"},
+                    count_party_kills = true,
+                },
+            },
+            {
+                text = "Step 6: After defeating Ix'ghrah, click the Cermet Portal for the mission completion cutscene.\n \n" ..
+                       "Mission complete! Check your mission log - you should now have 'When Angels Fall' (CoP 8-3).\n \n",
+                route_to = "Grand Palace of Hu'Xzoi",
+                trigger_on_event_id = {3},
+            },
+        },
+        reward = {
+            text = "Mission Complete!\nNext: When Angels Fall (CoP 8-3)",
         }
     },
 }

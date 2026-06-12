@@ -1458,34 +1458,106 @@ return {
     },
     -- Al'Taieu (CoP 8-1)
     ["altaieu-crystalline-field"] = {
-        target_pos = { x = 0.1, y = -10.0, z = -464.0 },
+        target_pos = { x = 0.0, y = -12.5, z = -460.0 },
         visual_mode = "arc",
         zone = "Al'Taieu",
-        max_distance = 30
+        floor_id = 0,
+        max_distance = 35
     },
-    ["altaieu-rubious-crystal-south"] = {
-        target_pos = { x = 0.0, y = -6.3, z = -736.9 },
+    ["altaieu-rubious-crystal-h13"] = {
+        target_pos = { x = 0.0, y = -6.3, z = -738.9 },
         visual_mode = "arc",
         zone = "Al'Taieu",
-        max_distance = 30
+        floor_id = 0,
+        max_distance = 45,
+        draw_in_combat = false
     },
-    ["altaieu-rubious-crystal-west"] = {
+    ["altaieu-rubious-crystal-d10"] = {
         target_pos = { x = -683.7, y = -6.3, z = -222.1 },
         visual_mode = "arc",
         zone = "Al'Taieu",
-        max_distance = 30
+        floor_id = 0,
+        max_distance = 40,
+        draw_in_combat = false
     },
-    ["altaieu-rubious-crystal-east"] = {
+    ["altaieu-rubious-crystal-l10"] = {
         target_pos = { x = 683.7, y = -6.3, z = -222.2 },
         visual_mode = "arc",
         zone = "Al'Taieu",
-        max_distance = 30
+        floor_id = 0,
+        max_distance = 35,
+        draw_in_combat = false
     },
     -- Grand Palace of Hu'Xzoi (CoP 8-1)
-    ["grand-palace-gate-of-gods"] = {
-        target_pos = { x = -20.0, y = 0.1, z = -283.0 },
+    ["grand-palace-of-hu-xzoi-gate-of-the-gods-north"] = {
+        target_pos = { x = -20.0, y = -2.3, z = -280.2 },
         visual_mode = "arc",
         zone = "Grand Palace of Hu'Xzoi",
-        max_distance = 30
+        floor_id = 1,
+        max_distance = 40
+    },
+    ["grand-palace-of-hu-xzoi-particle-gate-east"] = {
+        target_pos = { x = 5.0, y = -1.5, z = -320.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 1,
+        max_distance = 40
+    },
+    -- escort cermet alcove
+    ["grand-palace-of-hu-xzoi-cermet-alcove-j8"] = {
+        target_pos = { x = -260.0, y = -1.0, z = 422.5 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 15,
+        max_distance = 8
+    },
+    ["grand-palace-of-hu-xzoi-quasilumin-j7"] = {
+        target_pos = { x = -260.0, y = -3.0, z = 497.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 15,
+        max_distance = 8
+    },
+    ["grand-palace-of-hu-xzoi-cermet-alcove-m8"] = {
+        target_pos = { x = 797.5, y = -1.0, z = 460.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 16,
+        max_distance = 8
+    },
+    ["grand-palace-of-hu-xzoi-quasilumin-j8"] = {
+        target_pos = { x = 540.0, y = -3.0, z = 423.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 16,
+        max_distance = 8
+    },
+    ["grand-palace-of-hu-xzoi-cermet-alcove-j10"] = {
+        target_pos = { x = 540.0, y = -1.0, z = 297.5 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 16,
+        max_distance = 9
+    },
+    ["grand-palace-of-hu-xzoi-quasilumin-g10"] = {
+        target_pos = { x = 300.0, y = -3.0, z = 297.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 16,
+        max_distance = 9
+    },
+    ["grand-palace-of-hu-xzoi-cermet-alcove-g10"] = {
+        target_pos = { x = -540.0, y = -1.0, z = 297.5 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 15,
+        max_distance = 9
+    },
+    ["grand-palace-of-hu-xzoi-quasilumin-h7"] = {
+        target_pos = { x = -382.0, y = -3.0, z = 500.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 15,
+        max_distance = 9
     },
 }
