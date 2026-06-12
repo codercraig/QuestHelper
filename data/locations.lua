@@ -1560,4 +1560,34 @@ return {
         floor_id = 15,
         max_distance = 9
     },
+    ["grand-palace-of-hu-xzoi-cermet-portal-h8"] = {
+        target_pos = { x = 420.0, y = -1.9, z = 400.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 16,
+        max_distance = 35,
+        draw_in_combat = false
+    },
+    -- CoP 8-3
+    ["the-garden-of-ru-hmet-ebon-panel-taru"] = {
+        target_pos = { x = 257.6, y = -5.2, z = -700.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 4,
+        max_distance = 35
+    },
+    ["the-garden-of-ru-hmet-ebon-panel-galka"] = {
+        target_pos = { x = 577.6, y = -5.2, z = -700.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 4,
+        max_distance = 35
+    },
+    ["the-garden-of-ru-hmet-ebon-panel-hume"] = {
+        target_pos = { x = 422.4, y = -5.2, z = -100.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 4,
+        max_distance = 35
+    },
 }

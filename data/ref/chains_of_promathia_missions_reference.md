@@ -28,4 +28,5 @@
 [CoP 7-4] Calm Before the Storm - DONE
 [CoP 7-5] The Warrior's Path - DONE
 [CoP 8-1] Garden of Antiquity - DONE
-[CoP 8-2] A Fate Decided - STARTED
+[CoP 8-2] A Fate Decided - DONE(also fkin hell)
+[CoP 8-3] When ANgels Fall - STARTED
