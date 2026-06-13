@@ -206,6 +206,13 @@ return {
         floor_id = 0,
         max_distance = 40
     },
+    ["Chipmy-Popmy"] = {
+        target_pos = { x = -183.0, y = -3.8, z = 73.9 },
+        visual_mode = "arc",
+        zone = "Port Windurst",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Windurst Waters North
     ["Kyume-Romeh"] = {
         target_pos = { x = -54.5, y = -5.3, z = 23.2 },
@@ -1642,5 +1649,19 @@ return {
         zone = "The Garden of Ru'Hmet",
         floor_id = 3,
         max_distance = 30
+    },
+    ["the-garden-of-ru-hmet-cermet-portal-h9"] = {
+        target_pos = { x = -420.0, y = -2.0, z = 360.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 1,
+        max_distance = 5
+    },
+    ["empyreal-paradox-transcendental-radiance"] = {
+        target_pos = { x = 540.0, y = -1.2, z = -597.7 },
+        visual_mode = "arc",
+        zone = "Empyreal Paradox",
+        floor_id = 0,
+        max_distance = 25
     },
 }

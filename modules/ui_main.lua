@@ -1111,14 +1111,12 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 -- Rewards (hide when collapsed to save space)
                 if reward and ui_settings.show_all_steps then
-                    if type(reward.text) == 'string' and reward.text ~= "" then
-                         imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
-                         imgui.TextWrapped(reward.text)
+                    local hasItems = type(reward.items) == 'table' and #reward.items > 0
+                    local hasText  = type(reward.text) == 'string' and reward.text ~= ""
+                    if hasItems or hasText then
+                        imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
                     end
-                    if type(reward.items) == 'table' and #reward.items > 0 then
-                        if not reward.text or reward.text == "" then
-                            imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
-                        end
+                    if hasItems then
                         for idx, item_data in ipairs(reward.items) do
                             imgui.Separator()
                             if type(item_data) == 'table' and item_data.name then
@@ -1135,6 +1133,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                             end
                         end
                         imgui.Separator()
+                    end
+                    if hasText then
+                        imgui.TextWrapped(reward.text)
                     end
                 end
             end

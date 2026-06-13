@@ -3592,28 +3592,28 @@ return {
                 zone_max_distance = 40,
                 onmob_target = "bibiki-bay-2-warmachine",
                 visual_zones = {
-                   { zone_name = "Bibiki Bay", type = 'square', center = { x = 484.6, y = -3.0, z = 729.7 }, size = 1, floor_id = 1, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 489.7, y = -3.0, z = 719.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                   { zone_name = "Bibiki Bay", type = 'square', center = { x = 484.6, y = -3.0, z = 729.7 }, size = 1, floor_id = 1, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 489.7, y = -3.0, z = 719.8 }, size = 4, direction = "down", floor_id = 1, colour = "magenta" },
 
-                   -- Purgonorgo Isle
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -398.1, y = -3.0, z = -420.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -404.4, y = -3.4, z = -476.2 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -428.6, y = -2.4, z = -509.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -472.2, y = -3.4, z = -512.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -486.4, y = -3.3, z = -522.7 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.2, y = -3.4, z = -563.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.1, y = -2.6, z = -619.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -518.0, y = -3.3, z = -646.8 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -487.9, y = -3.1, z = -674.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -489.4, y = -3.1, z = -718.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -514.0, y = -3.3, z = -767.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -512.0, y = -3.2, z = -801.7 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -481.2, y = -3.4, z = -838.0 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -432.9, y = -3.2, z = -840.6 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -395.8, y = -3.4, z = -841.2 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -365.8, y = -3.0, z = -872.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -368.2, y = -1.4, z = -900.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
-                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -370.3, y = -2.5, z = -948.2 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                   -- Purgonorgo magenta
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -398.1, y = -3.0, z = -420.5 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -404.4, y = -3.4, z = -476.2 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -428.6, y = -2.4, z = -509.6 }, size = 4, direction = "left", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -472.2, y = -3.4, z = -512.9 }, size = 4, direction = "left", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -486.4, y = -3.3, z = -522.7 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.2, y = -3.4, z = -563.6 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.1, y = -2.6, z = -619.9 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -518.0, y = -3.3, z = -646.8 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -487.9, y = -3.1, z = -674.8 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -489.4, y = -3.1, z = -718.5 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -514.0, y = -3.3, z = -767.4 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -512.0, y = -3.2, z = -801.7 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -481.2, y = -3.4, z = -838.0 }, size = 4, direction = "right", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -432.9, y = -3.2, z = -840.6 }, size = 4, direction = "right", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -395.8, y = -3.4, z = -841.2 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -365.8, y = -3.0, z = -872.7 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -368.2, y = -1.4, z = -900.7 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -370.3, y = -2.5, z = -948.2 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
                 },
             },
             {
@@ -5712,6 +5712,242 @@ return {
         },
         reward = {
             text = "1000 EXP (once per day on repeat)\nTitle: Warrior of the Crystal\nNext: Dawn (CoP 8-4)",
+        }
+    },
+
+    -- CoP 8-4: Dawn
+    ----------------------------
+    ["CoP 8-4: Dawn"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "ChainsOfPromathia", name = "CoP 8-3: When Angels Fall"},
+        },
+        steps = {
+            {
+                text = "Step 1: Travel to Empyreal Paradox and check the Transcendental Radiance for the opening cutscene.\n \n" ..
+                       "Route: Use Home Point #1 in The Garden of Ru'Hmet, then take the main central elevator DOWN(Descend) to Empyreal Paradox.\n \n" ..
+                       "Check the Transcendental Radiance for a cutscene, then check it a second time to enter the battlefield.\n",
+                --route_to = "The Garden of Ru'Hmet",
+                zone_max_distance = 40,
+                onmob_target = {"altaieu-crystalline-field",
+                                "grand-palace-of-hu-xzoi-gate-of-the-gods-north",
+                                "the-garden-of-ru-hmet-cermet-portal-h9"},
+                visual_zones = {
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.1, y = 0.0, z = 244.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.3, y = 0.0, z = 251.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.1, y = 0.0, z = 286.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.3, y = 0.0, z = 315.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = 338.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = 350.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                },
+                zone_trigger = "Empyreal Paradox",
+                images = {
+                    {
+                        width = 512, height = 512, state = 8,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 1,
+                    },
+                },
+            },
+            {
+                text = "Step 2: Enter the Dawn battlefield and defeat Promathia (30 min, buffs and TP stripped on entry).\n \n" ..
+                       "Prishe and Selh'teus fight alongside you. Prishe can be healed and Raised (she returns at full HP). Selh'teus cannot be healed - if he falls, the fight ends immediately.\n \n" ..
+                       "At least one party member must remain conscious at all times - KO'd players are ejected from the battlefield immediately, no 3-minute wait.\n \n" ..
+                       "First form (~8,000 HP):\n" ..
+                       "  - Chains of [Race]: Long AoE terror targeting one race. Immune if you collected your Light key item in 8-3.\n" ..
+                       "  - Empty Salvation: AoE damage + Dispel (3 effects)\n" ..
+                       "  - Pestilent Penance: Cone damage + Plague\n" ..
+                       "  - Malevolent Blessing: Cone damage + Curse\n" ..
+                       "  - Infernal Deliverance: AoE damage + Stun (ignores Utsusemi)\n" ..
+                       "  - Comet: Single-target magic damage (600-900), absorbed by Utsusemi\n \n" ..
+                       "Second form (~12,000 HP, all of the above plus):\n" ..
+                       "  - Seal of Quiescence: AoE Mute (~75 sec, removable with Echo Drops)\n" ..
+                       "  - Winds of Oblivion: AoE Amnesia (~75 sec, cannot be removed)\n" ..
+                       "  - Meteor: AoE magic damage (300-600), 10-sec cast - run out of range!\n" ..
+                       "  - Bastion of Twilight (magic shield) / Wheel of Impregnability (physical shield): Prishe's Nullifying Dropkick breaks both.\n \n" ..
+                       "Promathia is immune to Stun and Dark elemental magic. He has low evasion.\n",
+                --route_to = "Empyreal Paradox",
+                onmob_target = {"empyreal-paradox-transcendental-radiance"},
+                onmob_enemy = "Promathia",
+                onmob_enemy_size = 5,
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Promathia"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                visual_zones = {
+                    { zone_name = "Empyreal Paradox", type = 'arrow', center = { x = 540.0, y = 0.0, z = -513.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Empyreal Paradox", type = 'arrow', center = { x = 540.0, y = 0.0, z = -526.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Empyreal Paradox", type = 'arrow', center = { x = 540.3, y = 0.0, z = -546.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Empyreal Paradox", type = 'arrow', center = { x = 540.2, y = 0.0, z = -555.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Empyreal Paradox", type = 'arrow', center = { x = 540.1, y = 0.0, z = -574.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
+                trigger_on_event_id = {32001},
+            },
+            {
+                text = "Step 3: Watch the post-battle cutscenes.\n \n" ..
+                       "After the win, you will need to re-enter Empyreal Paradox twice for two auto-cutscenes.\n \n" ..
+                       "The final cutscene awards you the Key Item: Tear of Altana and deposits you in Al'Taieu.\n",
+                --route_to = "Empyreal Paradox",
+                zone_trigger = "Al'Taieu",
+                --trigger_on_event_id = {3},
+            },
+            -- Louverance epilogue (3 steps)
+            {
+                text = "Step 4: Epilogue [1/3 - Louverance] Speak to Hinaree in Southern San d'Oria.\n \n" ..
+                       "Note: These epilogue sequences may be time-gated on some servers (available after midnight JST following the win). If a cutscene doesn't fire, wait and try again.\n",
+                route_to = "Southern San d'Oria",
+                destination_highlight = {position = "B-6", offsetX = 16, offsetY = 16},
+                onmob_target = "Hinaree",
+                trigger_on_event_id = {757},
+            },
+            {
+                text = "Step 5: Epilogue [2/3 - Louverance] Zone into Uleguerand Range - a cutscene fires automatically on entry.\n",
+                route_to = "Uleguerand Range",
+                zone_trigger = "Uleguerand Range",
+                trigger_on_event_id = {17},
+            },
+            {
+                text = "Step 6: Epilogue [3/3 - Louverance] Zone back into Southern San d'Oria - a cutscene fires when approaching Count Caffaule's Manor!\n",
+                route_to = "Southern San d'Oria",
+                destination_highlight = {position = "B-6", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {758},
+            },
+            -- Chebukkis epilogue (2 steps)
+            {
+                text = "Step 7: Epilogue [1/2 - Chebukkis] Speak to Chipmy-Popmy in Port Windurst.\n",
+                route_to = "Port Windurst",
+                destination_highlight = {position = "C-8", offsetX = 16, offsetY = 16},
+                onmob_target = "Chipmy-Popmy",
+                trigger_on_event_id = {619},
+            },
+            {
+                text = "Step 8: Epilogue [2/2 - Chebukkis] Travel to Bibiki Bay and speak to Warmachine to receive your Colored Drop reward.\n \n" ..
+                       "Note: If your inventory is full, Warmachine holds the drop - speak to him again later to collect.\n",
+                route_to = "Bibiki Bay 2",
+                onmob_target = "bibiki-bay-2-warmachine",
+                trigger_on_event_id = {43},
+                zone_max_distance = 40,
+                visual_zones = {
+                   { zone_name = "Bibiki Bay", type = 'square', center = { x = 484.6, y = -3.0, z = 729.7 }, size = 1, floor_id = 1, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = 489.7, y = -3.0, z = 719.8 }, size = 4, direction = "down", floor_id = 1, colour = "magenta" },
+
+                   -- Purgonorgo magenta
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -398.1, y = -3.0, z = -420.5 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -404.4, y = -3.4, z = -476.2 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -428.6, y = -2.4, z = -509.6 }, size = 4, direction = "left", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -472.2, y = -3.4, z = -512.9 }, size = 4, direction = "left", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -486.4, y = -3.3, z = -522.7 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.2, y = -3.4, z = -563.6 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -516.1, y = -2.6, z = -619.9 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -518.0, y = -3.3, z = -646.8 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -487.9, y = -3.1, z = -674.8 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -489.4, y = -3.1, z = -718.5 }, size = 4, direction = "sw", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -514.0, y = -3.3, z = -767.4 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -512.0, y = -3.2, z = -801.7 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -481.2, y = -3.4, z = -838.0 }, size = 4, direction = "right", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -432.9, y = -3.2, z = -840.6 }, size = 4, direction = "right", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -395.8, y = -3.4, z = -841.2 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -365.8, y = -3.0, z = -872.7 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -368.2, y = -1.4, z = -900.7 }, size = 4, direction = "down", floor_id = 2, colour = "magenta" },
+                   { zone_name = "Bibiki Bay", type = 'arrow', center = { x = -370.3, y = -2.5, z = -948.2 }, size = 4, direction = "se", floor_id = 2, colour = "magenta" },
+                },
+            },
+            -- Single-zone epilogues
+            {
+                text = "Step 9: Epilogue [Shikarees] Zone into Mhaura - a cutscene fires automatically on entry.\n",
+                route_to = "Mhaura",
+                zone_trigger = "Mhaura",
+                trigger_on_event_id = {322},
+            },
+            {
+                text = "Step 10: Epilogue [Jabbos] Zone into Oldton Movalpolos - a cutscene fires automatically on entry.\n",
+                route_to = "Oldton Movalpolos",
+                zone_trigger = "Oldton Movalpolos",
+                trigger_on_event_id = {57},
+            },
+            {
+                text = "Step 11: Epilogue [Tenzen] Travel to Metalworks and speak to Cid.\n",
+                route_to = "Metalworks",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                onmob_target = "Cid",
+                trigger_on_event_id = {897},
+            },
+            -- Post-epilogue steps
+            {
+                text = "Step 12: Travel to Ru'Lude Gardens - a cutscene fires automatically when approaching Grand Duke Palace. \n \n" ..
+                       "That is all 5 epilogue sequences complete!\n",
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {122},
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'square', center = { x = -0.0, y = 2.0, z = 31.0 }, size = 6, floor_id = 0, colour = "cyan" },
+                },
+            },
+            {
+                text = "Step 13: Head to Upper Jeuno and speak to the Door: Marble Bridge for a cutscene, and click again to select your ring reward.\n \n" ..
+                       "Note: If you ever lose your ring, return to this door for a free replacement.\n",
+                route_to = "Upper Jeuno",
+                onmob_target = {"Door: Marble Bridge"},
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {84},
+            },
+            {
+                text = "Step 14: Travel to Tavnazian Safehold and click on the Walnut Door(K-7) on the lower level for a cutscene.\n",
+                route_to = "Tavnazian Safehold 1",
+                onmob_target = "tavnazian-safehold-walnut-door",
+                destination_highlight = {position = "K-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {543},
+            },
+            {
+                text = "Step 15: Zone into Lufaise Meadows - approach Blueblade Fell(J-6) - enjoy the song!!\n \n" ..
+                       "You will receive the title: Banisher of Emptiness.\n \n" ..
+                       "You have finish the Chains of Promathia story line, whew! \n \n",
+                route_to = "Lufaise Meadows",
+                destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = 195.6, y = 0.5, z = -87.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = 360.6, y = -7.7, z = 129.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Lufaise Meadows", type = 'arrow', center = { x = 275.9, y = -8.5, z = 202.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                },
+                --zone_trigger = "Lufaise Meadows",
+                trigger_on_event_id = {116},
+            },
+        },
+        reward = {
+            text = "2000 EXP (once per day on repeat)\nKey Item: Tear of Altana\nTitle: Averter of the Apocalypse + Banisher of Emptiness\nTrust: Prishe, Trust: Ulmia\nUnlocks: Atma of the Banisher (for purchase)\nMission complete - Chains of Promathia finished!",
+            items = {
+                {
+                    name = "Rajas Ring",
+                    type = "Ring",
+                    races = "All Races",
+                    stats = { "STR+2~5", "DEX+2~5", "Store TP+5", "Subtle Blow+5" },
+                    level = "30",
+                    jobs = "All Jobs",
+                    note = "Choose this or Sattva/Tamas Ring",
+                },
+                {
+                    name = "Sattva Ring",
+                    type = "Ring",
+                    races = "All Races",
+                    stats = { "HP+15~30", "VIT+2~5", "AGI+2~5", "Enmity+3" },
+                    level = "30",
+                    jobs = "All Jobs",
+                    note = "Choose this or Rajas/Tamas Ring",
+                },
+                {
+                    name = "Tamas Ring",
+                    type = "Ring",
+                    races = "All Races",
+                    stats = { "MP+15~30", "INT+2~5", "MND+2~5", "Enmity-3" },
+                    level = "30",
+                    jobs = "All Jobs",
+                    note = "Choose this or Rajas/Sattva Ring",
+                },
+            },
         }
     },
 }
