@@ -1503,6 +1503,13 @@ return {
         floor_id = 1,
         max_distance = 40
     },
+    ["grand-palace-of-hu-xzoi-particle-gate-west"] = {
+        target_pos = { x = -45.0, y = -1.5, z = -320.0 },
+        visual_mode = "arc",
+        zone = "Grand Palace of Hu'Xzoi",
+        floor_id = 1,
+        max_distance = 35
+    },
     -- escort cermet alcove
     ["grand-palace-of-hu-xzoi-cermet-alcove-j8"] = {
         target_pos = { x = -260.0, y = -1.0, z = 422.5 },
@@ -1589,5 +1596,51 @@ return {
         zone = "The Garden of Ru'Hmet",
         floor_id = 4,
         max_distance = 35
+    },
+    ["the-garden-of-ru-hmet-ebon-panel-mithra"] = {
+        target_pos = { x = 100.0, y = -5.2, z = -337.7 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 4,
+        max_distance = 35
+    },
+    ["the-garden-of-ru-hmet-ebon-panel-elvaan"] = {
+        target_pos = { x = 740.0, y = -5.2, z = -342.4 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 4,
+        max_distance = 35
+    },
+    --Brand of Dawn
+    ["the-garden-of-ru-hmet-particle-gate-h7"] = {
+        target_pos = { x = -420.0, y = -1.9, z = -280.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 2,
+        max_distance = 30
+    },
+    --Brand of Twilight
+    ["the-garden-of-ru-hmet-particle-gate-h10"] = {
+        target_pos = { x = -420.0, y = -1.9, z = -560.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 2,
+        max_distance = 30
+    },
+    --BCNM POIS
+    ["the-garden-of-ru-hmet-particle-gate-h8"] = {
+        target_pos = { x = 420.0, y = -2.0, z = 400.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 3,
+        max_distance = 35,
+        draw_in_combat = false
+    },
+    ["the-garden-of-ru-hmet-luminous-convergence"] = {
+        target_pos = { x = 420.0, y = -2.7, z = 520.0 },
+        visual_mode = "arc",
+        zone = "The Garden of Ru'Hmet",
+        floor_id = 3,
+        max_distance = 30
     },
 }

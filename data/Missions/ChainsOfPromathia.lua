@@ -5064,11 +5064,11 @@ return {
             {
                 text = "Step 2: [Part I] Climb your race-specific tower in The Garden of Ru'Hmet and obtain your Light key item.\n \n" ..
                        "Each race has one of the five outer towers:\n" ..
-                       "  Hume     - Light of Vahzl    (North tower, H-4)\n" ..
-                       "  Elvaan   - Light of Mea      (East tower,  K-10)\n" ..
-                       "  Mithra   - Light of Dem      (West tower,  D-10)\n" ..
-                       "  Tarutaru - Light of Holla    (SW tower,    F-14)\n" ..
-                       "  Galka    - Light of Al'Taieu (SE tower,    I-14)\n \n" ..
+                       "  Hume     - Light of Vahzl    (North tower)\n" ..
+                       "  Elvaan   - Light of Mea      (East tower)\n" ..
+                       "  Mithra   - Light of Dem      (West tower)\n" ..
+                       "  Tarutaru - Light of Holla    (SW tower)\n" ..
+                       "  Galka    - Light of Al'Taieu (SE tower)\n \n" ..
                        "Any race can check the Ebon Panel for the first cutscene, but only the matching race gets the key item on the 2nd check.\n \n" ..
                        "Towers have 4 floors with enemies (elevators alternate east/west sides). The 4th floor is safe - check the Ebon Panel TWICE to receive your Light and the title: Warrior of the Crystal.\n" ..
                        "Note the guide will track which race you are , so just follow the arrows and it will take you to the correct tower from the entrance!",
@@ -5076,9 +5076,12 @@ return {
                 zone_max_distance = 40,
                 trigger_on_event_id = {120, 121, 122, 123, 124},
                 --trigger_on_event_id = {202},
-                onmob_target = {"the-garden-of-ru-hmet-ebon-panel-taru",
+                onmob_target = {"grand-palace-of-hu-xzoi-gate-of-the-gods-north",
+                                "the-garden-of-ru-hmet-ebon-panel-taru",
                                 "the-garden-of-ru-hmet-ebon-panel-galka",
-                                "the-garden-of-ru-hmet-ebon-panel-hume"},
+                                "the-garden-of-ru-hmet-ebon-panel-hume",
+                                "the-garden-of-ru-hmet-ebon-panel-mithra",
+                                "the-garden-of-ru-hmet-ebon-panel-elvaan"},
                 visual_zones = {
                         --Tarutaru navigation to tower
                         --1st floor
@@ -5238,7 +5241,118 @@ return {
                         { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 418.1, y = 0.0, z = -127.1 }, size = 4, direction = "up", floor_id = 4, colour = "yellow",race = "Hume" },
                         { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 419.4, y = -2.8, z = -114.8 }, size = 4, direction = "up", floor_id = 4, colour = "yellow",race = "Hume" },
 
-                        --todo mithra and elvaan
+                        --Mithra
+                        --1st floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = 241.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.2, y = 0.0, z = 260.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.3, y = 0.0, z = 300.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.9, y = 0.0, z = 300.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -485.3, y = 0.0, z = 300.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -499.5, y = -3.0, z = 306.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -500.4, y = -3.0, z = 293.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -517.8, y = 0.0, z = 300.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -539.8, y = 0.0, z = 302.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -539.9, y = 0.0, z = 339.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -539.9, y = 0.0, z = 380.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -538.9, y = 0.0, z = 419.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -569.5, y = -0.0, z = 419.5 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -578.9, y = 0.0, z = 412.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -584.2, y = 4.0, z = 424.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -618.9, y = 4.0, z = 426.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -620.2, y = 4.0, z = 454.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -625.0, y = 0.0, z = 466.4 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -652.1, y = 0.0, z = 460.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -699.7, y = 0.0, z = 460.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -700.5, y = 0.0, z = 420.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -730.2, y = 0.0, z = 418.9 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -740.0, y = 0.0, z = 394.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow",race = "Mithra" },
+
+                        --2nd floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -740.1, y = 0.0, z = -409.4 }, size = 4, direction = "up", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -739.8, y = 0.0, z = -392.0 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -723.2, y = 0.0, z = -380.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -699.6, y = 0.0, z = -376.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -703.3, y = 0.0, z = -351.7 }, size = 4, direction = "up", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -706.4, y = 0.0, z = -300.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -727.3, y = 0.0, z = -297.9 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow",race = "Mithra"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -740.1, y = 0.0, z = -273.5 }, size = 4, direction = "up", floor_id = 2, colour = "yellow",race = "Mithra"  },
+
+                        --3rd floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 99.8, y = 0.0, z = 529.5 }, size = 4, direction = "down", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 102.0, y = 0.0, z = 500.0 }, size = 4, direction = "right", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 140.5, y = 0.0, z = 498.6 }, size = 4, direction = "down", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 143.0, y = 0.0, z = 472.0 }, size = 4, direction = "se", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 149.6, y = 0.0, z = 455.7 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 140.2, y = 0.0, z = 438.3 }, size = 4, direction = "down", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 138.8, y = 0.0, z = 419.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 99.8, y = 0.0, z = 417.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow",race = "Mithra" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 100.2, y = 0.0, z = 393.7 }, size = 4, direction = "down", floor_id = 3, colour = "yellow",race = "Mithra" },
+
+                        --4th floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 99.9, y = 0.0, z = -408.0 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" ,race = "Mithra"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 103.5, y = 0.0, z = -368.9 }, size = 4, direction = "right", floor_id = 4, colour = "yellow" ,race = "Mithra"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 128.6, y = 0.0, z = -364.6 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" ,race = "Mithra"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 127.7, y = 0.0, z = -341.0 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" ,race = "Mithra"},
+
+
+                        --Elvaan
+                        --1st Floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -419.8, y = 0.0, z = 241.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.1, y = 0.0, z = 270.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -419.5, y = 0.0, z = 300.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.2, y = 0.0, z = 300.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -355.0, y = 0.0, z = 298.5 }, size = 4, direction = "se", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -339.2, y = -3.0, z = 294.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -338.8, y = -3.0, z = 306.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -327.7, y = 0.0, z = 305.5 }, size = 4, direction = "se", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -314.1, y = 0.0, z = 300.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" , race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -299.9, y = 0.0, z = 304.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" , race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -299.9, y = 0.0, z = 341.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -299.7, y = 0.0, z = 379.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -300.5, y = 0.0, z = 420.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -271.6, y = -0.0, z = 419.3 }, size = 4, direction = "se", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -260.4, y = 0.0, z = 412.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -258.4, y = 4.0, z = 425.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" , race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -221.0, y = 4.0, z = 424.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -220.4, y = 4.0, z = 454.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" , race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -217.1, y = 0.0, z = 468.3 }, size = 4, direction = "se", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -191.5, y = 0.0, z = 459.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -139.3, y = 0.0, z = 460.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -138.1, y = 0.0, z = 499.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -111.3, y = 0.0, z = 501.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -99.8, y = 0.0, z = 527.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" , race = "Elvaan"},
+
+                        --2nd floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -100.2, y = 0.0, z = -272.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -102.3, y = 0.0, z = -291.0 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -139.8, y = 0.0, z = -301.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -139.4, y = 0.0, z = -329.7 }, size = 4, direction = "se", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -128.1, y = 0.0, z = -339.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -113.1, y = 0.0, z = -339.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -109.1, y = 0.0, z = -353.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -85.9, y = 0.0, z = -350.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -83.5, y = 0.0, z = -340.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -60.2, y = 0.0, z = -342.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -63.1, y = 0.0, z = -379.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -88.4, y = 0.0, z = -381.6 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow", race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -100.5, y = 0.0, z = -392.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", race = "Elvaan" },
+
+                        --3rd floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 740.0, y = 0.0, z = 393.0 }, size = 4, direction = "up", floor_id = 3, colour = "yellow",race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 739.3, y = 0.0, z = 419.5 }, size = 4, direction = "left", floor_id = 3, colour = "yellow",race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 699.4, y = 0.0, z = 421.9 }, size = 4, direction = "up", floor_id = 3, colour = "yellow",race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 698.9, y = 0.0, z = 446.6 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow",race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 687.6, y = 0.0, z = 463.1 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" ,race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 701.5, y = 0.0, z = 500.1 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" ,race = "Elvaan"},
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 739.9, y = 0.0, z = 503.2 }, size = 4, direction = "up", floor_id = 3, colour = "yellow",race = "Elvaan" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 739.9, y = 0.0, z = 527.4 }, size = 4, direction = "up", floor_id = 3, colour = "yellow",race = "Elvaan" },
+
+                        --4th floor
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 739.9, y = 0.0, z = -274.2 }, size = 4, direction = "down", floor_id = 4, colour = "yellow",race = "Elvaan"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 736.7, y = 0.0, z = -311.4 }, size = 4, direction = "left", floor_id = 4, colour = "yellow",race = "Elvaan"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 711.1, y = 0.0, z = -314.9 }, size = 4, direction = "down", floor_id = 4, colour = "yellow",race = "Elvaan"  },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 710.8, y = 0.0, z = -340.1 }, size = 4, direction = "right", floor_id = 4, colour = "yellow",race = "Elvaan"  },
+
                     -- Ebon Panel position (4th floor of each tower) - only shows for matching race
                     -- { zone_name = "The Garden of Ru'Hmet", type = 'square', center = { x = 422.4, y = -5.2, z = -100.0 }, size = 3, colour = "cyan", race = {"Hume"} },
                     -- { zone_name = "The Garden of Ru'Hmet", type = 'square', center = { x = 740.0, y = -5.2, z = -342.4 }, size = 3, colour = "cyan", race = {"Elvaan"} },
@@ -5251,8 +5365,8 @@ return {
                         width = 512, height = 512, state = 2,
                         highlights = {
                             { position = "G-5",  offsetX = 16, offsetY = 16, label = "H" },
-                            { position = "K-10", offsetX = 16, offsetY = 16, label = "E" },
-                            { position = "D-10", offsetX = 16, offsetY = 16, label = "M" },
+                            { position = "L-6", offsetX = 16, offsetY = 16, label = "E" },
+                            { position = "D-9", offsetX = 16, offsetY = 16, label = "M" },
                             { position = "G-12", offsetX = 16, offsetY = 16, label = "T" },
                             { position = "K-12", offsetX = 16, offsetY = 16, label = "G" },
                         },
@@ -5263,8 +5377,8 @@ return {
                         width = 512, height = 512, state = 2,
                         highlights = {
                             { position = "I-4",  offsetX = 16, offsetY = 16, label = "H" },
-                            { position = "K-10", offsetX = 16, offsetY = 16, label = "E" },
-                            { position = "D-10", offsetX = 16, offsetY = 16, label = "M" },
+                            { position = "L-9", offsetX = 16, offsetY = 16, label = "E" },
+                            { position = "D-6", offsetX = 16, offsetY = 16, label = "M" },
                             { position = "E-12", offsetX = 16, offsetY = 16, label = "T" },
                             { position = "I-12", offsetX = 16, offsetY = 16, label = "G" },
                         },
@@ -5275,8 +5389,8 @@ return {
                         width = 512, height = 512, state = 2,
                         highlights = {
                             { position = "G-4",  offsetX = 16, offsetY = 16, label = "H" },
-                            { position = "K-10", offsetX = 16, offsetY = 16, label = "E" },
-                            { position = "D-10", offsetX = 16, offsetY = 16, label = "M" },
+                            { position = "L-6", offsetX = 16, offsetY = 16, label = "E" },
+                            { position = "D-9", offsetX = 16, offsetY = 16, label = "M" },
                             { position = "G-12", offsetX = 16, offsetY = 16, label = "T" },
                             { position = "K-12", offsetX = 16, offsetY = 16, label = "G" },
                         },
@@ -5287,8 +5401,8 @@ return {
                         width = 512, height = 512, state = 2,
                         highlights = {
                             { position = "H-4",  offsetX = 16, offsetY = 16, label = "H" },
-                            { position = "K-10", offsetX = 16, offsetY = 16, label = "E" },
-                            { position = "D-10", offsetX = 16, offsetY = 16, label = "M" },
+                            { position = "L-8", offsetX = 16, offsetY = 16, label = "E" },
+                            { position = "D-7", offsetX = 16, offsetY = 16, label = "M" },
                             { position = "F-12", offsetX = 16, offsetY = 16, label = "T" },
                             { position = "J-12", offsetX = 16, offsetY = 16, label = "G" },
                         },
@@ -5298,23 +5412,59 @@ return {
                 },
             },
             {
-                text = "Step 3: [Part II + III] Reach the central elevator (H-8/9), ascend, collect both Brands, then check the Particle Gate on Map 3.\n \n" ..
+                text = "Step 3: [Part II] Reach the central elevator (H-8/9), ascend, collect both Brands, then check the Particle Gate on Map 3.\n \n" ..
+                       "If your group is coming from the previous step, it's easiest to Warp/Escape out and regroup at the entrance (Home Point #1).\n \n" ..
                        "You cannot reach the elevator directly - use the North, East, or West hallway. The North route is safest.\n \n" ..
-                       "WARNING: Each hallway has 4 spinning Qn'zdei. If they aggro you, the far door seals until they reset (~5 min). They are immune to Sleep but can be Reposed.\n \n" ..
-                       "Once in the elevator room, ascend. Then collect:\n" ..
-                       "  Brand of Dawn    → North route from elevator area\n" ..
-                       "  Brand of Twilight → South route from elevator area\n \n" ..
-                       "Return to the central elevator and ascend twice to Map 3. Check the Particle Gate (H-8, Map 3) for a cutscene.\n",
-                route_to = "The Garden of Ru'Hmet",
-                trigger_on_event_id = {203},
+                       "WARNING: Each hallway has 4 spinning Qn'zdei. If they spot you, the far door seals until they reset (~5 min). Run past when their large eye is NOT facing you. They are immune to Sleep but can be Reposed.\n \n" ..
+                       "Known tactics:\n" ..
+                       "  - Have a pet job outside of the party sacrifice their pet to open the way , then raise them at the sealed door (ensure they are within Raise range first).\n" ..
+                       "  - Alternatively, kill all 4 of the Qn'zdei, then wait at the sealed door for them to respawn and dash through.\n \n" ..
+                       "Once through, ascend the elevator. \n \n",
+                --route_to = "The Garden of Ru'Hmet",
+                trigger_on_event_id = {155},
+                onmob_target = {"altaieu-crystalline-field",
+                                "grand-palace-of-hu-xzoi-gate-of-the-gods-north"},
+                --onmob_enemy_show_facing = true,
+                zone_max_distance = 40,
+                line_arrow_end = true,
+                line_arrow_head_size = 0.4,
+
                 visual_zones = {
-                    { zone_name = "The Garden of Ru'Hmet", type = 'square', center = { x = 420.0, y = -2.1, z = 400.0 }, size = 3, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -419.8, y = 0.0, z = 245.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.2, y = 0.0, z = 263.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.2, y = 0.0, z = 300.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -379.8, y = 0.0, z = 300.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.2, y = 0.0, z = 328.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.3, y = 0.0, z = 339.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -356.0, y = 0.0, z = 340.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -323.3, y = 0.0, z = 340.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -300.0, y = 0.0, z = 341.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -299.8, y = 0.0, z = 380.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -299.6, y = 0.0, z = 420.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -324.0, y = 0.0, z = 422.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -340.0, y = -3.0, z = 426.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -340.3, y = -3.0, z = 413.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -364.9, y = 0.0, z = 419.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.1, y = 0.0, z = 420.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.5, y = 0.0, z = 459.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -402.1, y = 0.0, z = 459.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.1, y = 0.0, z = 460.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                        --Room of death
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = 407.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'square', center = { x = -420.0, y = 0.0, z = 400.0 }, size = 3, floor_id = 1, colour = "magenta" },
+
+                        -- To first lift
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -419.7, y = 0.0, z = 394.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -406.6, y = 0.0, z = 381.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -409.4, y = 0.0, z = 366.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.3, y = 0.0, z = 367.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
                 },
                 images = {
                     {
                         width = 512, height = 512, state = 3,
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16, label = "Lift" },
+                            { position = "H-8", offsetX = 16, offsetY = 16, label = "L1" },
                         },
                         zone_name = "The Garden of Ru'Hmet",
                         floor_id = 1,
@@ -5322,7 +5472,187 @@ return {
                 },
             },
             {
-                text = "Step 4: Enter the battlefield through the Particle Gate and defeat all four Ix'zdei (30 min, buffs and TP stripped on entry).\n \n" ..
+                text = "Step 4: Collect Brand of Dawn Key Item.\n \n" ..
+                       "-  Brand of Dawn: North route from the elevator area\n \n" ..
+                       "Note: Follow the arrows if you need a route! \n \n",
+                --route_to = "The Garden of Ru'Hmet",
+                onmob_target = "the-garden-of-ru-hmet-particle-gate-h7",
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -419.7, y = -0.1, z = -430.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -421.7, y = 0.0, z = -444.2 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -424.9, y = -3.0, z = -459.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -413.3, y = -3.0, z = -461.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.2, y = 0.0, z = -477.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -418.6, y = 0.0, z = -484.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -410.3, y = 0.0, z = -500.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.2, y = 0.0, z = -499.4 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.5, y = 0.0, z = -488.6 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.3, y = -0.1, z = -480.8 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.9, y = 0.0, z = -435.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -460.1, y = 0.0, z = -418.3 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.9, y = 0.0, z = -383.5 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -460.0, y = -5.7, z = -366.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -460.5, y = 0.0, z = -339.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.2, y = 0.0, z = -339.9 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.3, y = 0.0, z = -318.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.7, y = 0.0, z = -289.3 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512, height = 512, state = 4,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16, label = "L1" },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 2,
+                    },
+                },
+                trigger_on_keyitem_obtain = {710},
+            },
+            {
+                text = "Step 5: Collect Brand of Twilight Key Item.\n \n" ..
+                       "  Brand of Twilight - South route from the elevator area\n \n" ..
+                       "Note: Follow the arrows if you need a route! \n \n",
+                --route_to = "The Garden of Ru'Hmet",
+                onmob_target = "the-garden-of-ru-hmet-particle-gate-h10",
+                zone_max_distance = 40,
+                visual_zones = {
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -424.5, y = 0.0, z = -283.9 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.7, y = 0.0, z = -300.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.4, y = 0.0, z = -319.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -430.1, y = 0.0, z = -339.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -460.2, y = 0.0, z = -340.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.8, y = -6.0, z = -361.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -460.1, y = -2.8, z = -371.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.9, y = 0.0, z = -419.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -459.9, y = 0.0, z = -442.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.1, y = 0.0, z = -477.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -380.9, y = 0.0, z = -499.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -410.6, y = 0.0, z = -499.8 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.2, y = -0.1, z = -479.7 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -417.3, y = 0.0, z = -473.5 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -412.6, y = -3.0, z = -459.7 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -408.1, y = -6.0, z = -448.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -406.4, y = -6.0, z = -459.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -381.3, y = -6.0, z = -459.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -353.0, y = -6.0, z = -458.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -346.6, y = -6.0, z = -472.5 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -344.4, y = -3.0, z = -460.0 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -333.7, y = -3.0, z = -461.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -335.8, y = 0.0, z = -471.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -339.7, y = 0.0, z = -484.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -347.5, y = 0.0, z = -498.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -331.1, y = 4.0, z = -501.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -308.4, y = 4.0, z = -500.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -293.4, y = 0.0, z = -494.9 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -296.4, y = 0.0, z = -473.8 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -288.9, y = 0.0, z = -454.9 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -296.4, y = 0.0, z = -433.5 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -287.9, y = 0.0, z = -414.0 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -293.5, y = 0.0, z = -380.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -330.5, y = 4.0, z = -378.3 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -339.9, y = 4.0, z = -373.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -345.5, y = 0.0, z = -385.4 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -501.2, y = 0.0, z = -333.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -504.4, y = 4.0, z = -375.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -532.9, y = 4.0, z = -379.8 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -540.8, y = -0.0, z = -389.9 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -544.1, y = 0.0, z = -408.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -549.7, y = 0.0, z = -425.6 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -543.9, y = 0.0, z = -447.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -549.4, y = 0.0, z = -466.9 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -540.1, y = -0.0, z = -488.0 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -545.7, y = 0.0, z = -501.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -501.3, y = 4.0, z = -506.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -500.5, y = 4.0, z = -532.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -489.8, y = 0.0, z = -539.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -475.4, y = 0.0, z = -542.0 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -451.2, y = 0.0, z = -549.1 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.9, y = 0.0, z = -539.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = -553.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512, height = 512, state = 5,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 2,
+                    },
+                },
+                trigger_on_keyitem_obtain = {711},
+            },
+            {
+                text = "Step 6: Return to the central elevator and ascend to Map 3.\n \n" ..
+                       "Shortcut: Teleport to The Garden of Ru'Hmet (Home Point #1) to skip the walk back.\n \n",
+                --route_to = "The Garden of Ru'Hmet",
+                zone_max_distance = 40,
+                trigger_on_event_id = {156},
+                visual_zones = {
+
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.0, y = 0.0, z = -553.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -429.9, y = 0.0, z = -539.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -451.2, y = 0.0, z = -549.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -475.4, y = 0.0, z = -542.0 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -489.8, y = 0.0, z = -539.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -500.5, y = 4.0, z = -532.7 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -501.3, y = 4.0, z = -506.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -545.7, y = 0.0, z = -501.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -540.1, y = -0.0, z = -488.0 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -549.4, y = 0.0, z = -466.9 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -543.9, y = 0.0, z = -447.1 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -549.7, y = 0.0, z = -425.6 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -544.1, y = 0.0, z = -408.3 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -540.8, y = -0.0, z = -389.9 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -532.9, y = 4.0, z = -379.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -504.4, y = 4.0, z = -375.9 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -498.7, y = 0.0, z = -331.6 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -345.5, y = 0.0, z = -385.4 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -339.9, y = 4.0, z = -373.1 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -330.5, y = 4.0, z = -378.3 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -291.7, y = 0.0, z = -382.6 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -296.9, y = 0.0, z = -406.6 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -296.4, y = 0.0, z = -433.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -288.9, y = 0.0, z = -454.9 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -296.4, y = 0.0, z = -473.8 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -293.4, y = 0.0, z = -494.9 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -308.4, y = 4.0, z = -500.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -331.1, y = 4.0, z = -501.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -347.8, y = 0.0, z = -496.5 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -339.7, y = 0.0, z = -484.5 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -335.8, y = 0.0, z = -471.3 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -344.4, y = -3.0, z = -460.0 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -350.6, y = -6.0, z = -471.8 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -381.3, y = -6.0, z = -459.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -408.1, y = -6.0, z = -448.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -412.6, y = -3.0, z = -459.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -427.2, y = -3.0, z = -459.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = -420.1, y = 0.0, z = -439.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512, height = 512, state = 6,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 2,
+                    },
+                    {
+                        width = 512, height = 512, state = 6,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 3,
+                    },
+                },
+            },
+            {
+                text = "Step 7: Enter the battlefield through the Particle Gate and defeat all four Ix'zdei (30 min, buffs and TP stripped on entry).\n \n" ..
+                       "Note: There will be a cutscene before it, click again to start the battle! \n \n" ..
                        "Enemy composition:\n" ..
                        "  - 2x Ix'zdei (Red Mage, ~7000 HP) - the closer pair at the front\n" ..
                        "  - 2x Ix'zdei (Black Mage, ~6250 HP) - the back pair\n \n" ..
@@ -5330,22 +5660,51 @@ return {
                        "WARNING: If an Ix'zdei reaches its pedestal at low HP it will fully regenerate. Stun or Weapon Skills can prevent this.\n \n" ..
                        "BLM pots may not close to melee range while HP is high - you may need to approach them.\n" ..
                        "They are weak to standard elements except Lightning.\n",
-                route_to = "The Garden of Ru'Hmet",
+                --route_to = "The Garden of Ru'Hmet",
+                onmob_target = "the-garden-of-ru-hmet-particle-gate-h8",
                 kill_requirement = {
                     count = 4,
                     enemies = {"Ix'zdei"},
                     count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
                 },
                 onmob_enemy = {"Ix'zdei"},
+                trigger_on_event_id = {32001},
+                images = {
+                    {
+                        width = 512, height = 512, state = 7,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 3,
+                    },
+                },
             },
             {
-                text = "Step 5: After defeating all four Ix'zdei, walk down the hallway and check the Luminous Convergence for a cutscene.\n",
-                route_to = "The Garden of Ru'Hmet",
+                text = "Step 8: After defeating all four Ix'zdei, walk down the hallway and check the Luminous Convergence for a cutscene.\n",
+                visual_zones = {
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 420.1, y = 0.0, z = 454.2 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 419.8, y = 0.0, z = 481.2 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "The Garden of Ru'Hmet", type = 'arrow', center = { x = 420.0, y = 0.0, z = 495.3 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                },
+                onmob_target = "the-garden-of-ru-hmet-luminous-convergence",
+                images = {
+                    {
+                        width = 512, height = 512, state = 8,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                        zone_name = "The Garden of Ru'Hmet",
+                        floor_id = 3,
+                    },
+                },
                 trigger_on_event_id = {204},
             },
             {
-                text = "Step 6: Zone into Al'Taieu for the mission completion cutscene.\n \n" ..
-                       "Mission complete! Your log updates upon zoning in. Next mission: Dawn (CoP 8-4).\n",
+                text = "Step 9: Zone into Al'Taieu for the mission completion cutscene.\n \n" ..
+                       "Warp/Escape out and Mission complete! Your log updates upon zoning in. Next mission: Dawn (CoP 8-4).\n",
                 route_to = "Al'Taieu",
                 trigger_on_event_id = {165},
                 zone_trigger = "Al'Taieu",
