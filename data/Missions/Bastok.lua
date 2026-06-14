@@ -5,7 +5,7 @@ return {
             text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
 
             onmob_target = {"Rashid", "Cleades", "Argus"},
-            trigger_on_event_id = 1001,
+            --trigger_on_event_id = 1001,
             trigger_on_talk = {"You have accepted the mission"},
             images = {
                 {
@@ -77,7 +77,7 @@ return {
             {
               text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
               onmob_target = {"Rashid", "Cleades", "Argus"},
-              trigger_on_event_id = 1001,
+              --trigger_on_event_id = 1001,
               trigger_on_talk = {"You have accepted the mission"},
               images = {
                     {
@@ -161,7 +161,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
@@ -262,7 +262,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n \n",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
@@ -354,7 +354,7 @@ return {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n" ..
                        "This Mission can be skipped if you trade Crystals to the gate guards to boost your Rank Points, see 'Status -> 'Profile' \n \n",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
@@ -420,7 +420,7 @@ return {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n" ..
                        "This mission has a fight capped originally at 25, non-era versions will be uncapped - check with your respective server!' \n \n",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                       {
@@ -881,7 +881,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -984,7 +984,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city. \n \n",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -1106,7 +1106,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. They can be found at the entrance gates to the city.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -1986,7 +1986,7 @@ return {
                 text = "Step 1: Complete repeatable missions or trade 2 crystals to a Conquest Overseer to build Rank Bar. \n \n" ..
                        "Talk to any Bastok Gate Guard and select 'Xarcabard, Land of Truths' to accept the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2215,7 +2215,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Bastok Gate Guard. This mission requires a certain level of Rank Bar. Trade 4 crystals to a Conquest Overseer.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2356,7 +2356,7 @@ return {
                 text = "Step 1: This mission requires a certain level of Rank Bar. Trade 4 crystals to a Conquest Overseer, then speak to any Gate Guard and select the mission from the list. \n \n" ..
                        "NOTE: You must have sufficient rank points built up to receive this mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2589,7 +2589,7 @@ return {
                        "Talk to a Bastok Gate Guard to receive the mission. \n \n" ..
                        "NOTE: You must have sufficient rank points built up to receive this mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2725,7 +2725,7 @@ return {
                 text = "Step 1: If you traded 4 crystals to a Bastok Gate Guard for the prior mission, trade another 5 crystals to get this mission. \n \n" ..
                        "Talk to a Bastok Gate Guard to receive the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2823,7 +2823,7 @@ return {
             {
                 text = "Step 1: This mission requires a certain level of Rank Bar. Trade 6 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 keyitems_needed = {2051},
                 images = {
@@ -3036,7 +3036,7 @@ return {
             {
                 text = "Step 1: This mission requires a certain level of Rank Bar to become available. Trade 6 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -3197,7 +3197,7 @@ return {
             {
                 text = "Step 1: This mission requires a certain level of Rank Bar. Repeat missions or trade 10 crystals to a Conquest Overseer, then talk to a Bastok Gate Guard to receive the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -3332,7 +3332,7 @@ return {
             {
                 text = "Step 1: Talk to a Bastok Gate Guard to receive the mission.",
                 onmob_target = {"Rashid", "Cleades", "Argus"},
-                trigger_on_event_id = 1001,
+                --trigger_on_event_id = 1001,
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
