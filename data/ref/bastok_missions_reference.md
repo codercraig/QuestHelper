@@ -1,4 +1,4 @@
-# Bastok missions - eventid added but not 100% tested, can correct these after v1.
+# Bastok missions
 [1-1] The Zeruhn Report - DONE /ro
 [1-2] A Geological Survey - DONE /ro
 [1-3] Fetchism - DONE /ro

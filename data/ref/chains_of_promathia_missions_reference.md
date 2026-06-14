@@ -30,4 +30,5 @@
 [CoP 8-1] Garden of Antiquity - DONE
 [CoP 8-2] A Fate Decided - DONE(also fkin hell)
 [CoP 8-3] When Angels Fall - DONE(FUCKING HELL)
-[CoP 8-4] Dawn
+[CoP 8-4] Dawn - DONE
+--CoP Complete(v1)

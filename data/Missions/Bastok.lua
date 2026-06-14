@@ -456,7 +456,7 @@ return {
                 text = "Step 2: Talk to Naji in Metalworks (J-8), just outside the Presidents Office. \n" ..
                        "After the cutscene you will have to travel to San d'Oria and Windhurst \n" ..
                        "Please note you can choose San d'Oria -> Windurst or Windurst -> San d'Oria. Questhelper will split this into two missions. \n" ..
-                       "Which order will affect the tasks, titles and cutscenes so this section will be split into two so follow the one you prefer! \n \n",
+                       "Which order will affect the tasks, titles and cutscenes so this section will be split into two so follow the one you prefer - Don't complete both! \n \n",
                 onmob_target = {"Naji"},
                 trigger_on_event_id = { 714 },
                 route_to = "Metalworks",
