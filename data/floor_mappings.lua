@@ -138,6 +138,14 @@ return {
     [191] = {
         [1] = 1,
     },
+    -- Inner Hurutoto Ruins
+    [192] = {
+        [1] = 1,
+    },
+    -- Outer Hurutoto Ruins
+    [194] = {
+        [3] = 1,
+    },
     [196] = {
         [1] = 1,
         [14] = 2,

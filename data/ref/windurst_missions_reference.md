@@ -1,7 +1,7 @@
 # Windurst missions
-[1-1] The Horutoto Ruins Experiment - DRAFT
-[1-2] The Heart of the Matter - DRAFT
-[1-3] The Price of Peace - DRAFT
+[1-1] The Horutoto Ruins Experiment - DONE
+[1-2] The Heart of the Matter - DONE
+[1-3] The Price of Peace - STARTED
 [2-1] Lost for Words - DRAFT
 [2-2] Testing Time - DRAFT
 [2-3] The Three Kingdoms (Introduction) - DRAFT

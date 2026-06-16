@@ -203,7 +203,15 @@ return {
     ["East Sarutabaruta"] = {
         {zone = "Windurst Woods", exit = "G-11"},
         {zone = "West Sarutabaruta", exit = "E-4"},
-        {zone = "Tahrongi Canyon", exit = "J-4"}
+        {zone = "Tahrongi Canyon", exit = "J-4"},
+        {zone = "Inner Horutoto Ruins", exit = "J-7", floor_id = 1},
+        {zone = "Outer Horutoto Ruins", exit = "J-11", floor_id = 3},
+    },
+    ["Inner Horutoto Ruins"] = {
+         {zone = "East Sarutabaruta", exit = "I-7"},
+    },
+    ["Outer Horutoto Ruins"] = {
+         {zone = "East Sarutabaruta", exit = "I-7"},
     },
     ["Tahrongi Canyon"] = {
         {zone = "East Sarutabaruta", exit = "H-13"},

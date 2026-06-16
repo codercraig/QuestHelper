@@ -70,17 +70,38 @@ local function drawLine(start_pos, end_pos, color)
     d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
 end
 
-function drawingModule.drawSquare(center, size, color)
+function drawingModule.drawSquare(center, size, color, options)
     local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
     local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
 
     local h = size / 2
-    local corners = {
-        {x = center.x - h, y = center.y, z = center.z - h},
-        {x = center.x + h, y = center.y, z = center.z - h},
-        {x = center.x + h, y = center.y, z = center.z + h},
-        {x = center.x - h, y = center.y, z = center.z + h},
-    }
+    local corners
+    if options and options.vertical then
+        if options.vertical_axis == 'z' then
+            -- Upright square facing E/W: varies Z and Y (elevation), X fixed.
+            corners = {
+                {x = center.x, y = center.y - h, z = center.z - h},
+                {x = center.x, y = center.y - h, z = center.z + h},
+                {x = center.x, y = center.y + h, z = center.z + h},
+                {x = center.x, y = center.y + h, z = center.z - h},
+            }
+        else
+            -- Upright square facing N/S: varies X and Y (elevation), Z fixed.
+            corners = {
+                {x = center.x - h, y = center.y - h, z = center.z},
+                {x = center.x + h, y = center.y - h, z = center.z},
+                {x = center.x + h, y = center.y + h, z = center.z},
+                {x = center.x - h, y = center.y + h, z = center.z},
+            }
+        end
+    else
+        corners = {
+            {x = center.x - h, y = center.y, z = center.z - h},
+            {x = center.x + h, y = center.y, z = center.z - h},
+            {x = center.x + h, y = center.y, z = center.z + h},
+            {x = center.x - h, y = center.y, z = center.z + h},
+        }
+    end
 
     local sx, sy, sz = {}, {}, {}
     for i, c in ipairs(corners) do

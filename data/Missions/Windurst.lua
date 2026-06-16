@@ -3,11 +3,11 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        zone_name = "Windurst Waters",
+                        zone_name = "Windurst Waters North",
                         floor_id  = 1,
                         width     = 512,
                         height    = 512,
@@ -54,39 +54,54 @@ return {
             },
             {
                 text = "Step 3: Travel to East Sarutabaruta (J-7) and enter the Inner Horutoto Ruins (Lily Tower). \n" ..
-                       "There is a Survival Guide teleport if you have unlocked it. \n" ..
-                       "(Optional): Speak to Sama Gohjima at the tower entrance for extra dialogue. \n \n" ..
-                       "Inside, go down the stairs to the main room and circle South to find the cracked South wall at (H-9). \n" ..
-                       "Pass through and head East to click the Gate: Magical Gizmo at (I-10) for a cutscene with the Minister. \n \n",
-                onmob_target = {"_5c5"},
+                       "There is a Survival Guide teleport if you have unlocked it. \n \n" ..
+                       "Inside, go down the stairs to the main room and circle South to find the cracked South wall at (H-9) - marked 'W' on map. \n \n" ..
+                       "Pass through and head East to click the Gate: Magical Gizmo at (I-10) for a cutscene with the Minister - marked 'G' on map. \n \n",
+                onmob_target = {"inner-horutoto-ruins-gate-magical-gizmo"},
                 trigger_on_event_id = {42},
-                images = {
-                    {
-                        zone_name = "East Sarutabaruta",
-                        width     = 512,
-                        height    = 512,
-                        state     = 3,
-                        highlights = {
-                            { position = "J-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Inner Horutoto Ruins",
-                        floor_id  = 1,
-                        width     = 512,
-                        height    = 512,
-                        state     = 3,
-                        highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                route_to = "Inner Horutoto Ruins",
+                destination_highlight = {
+                    {position = "H-9", offsetX = 16, offsetY = 16,label = "W"},
+                    {position = "I-10", offsetX = 16, offsetY = 16, label = "G"}
+                },
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 348.9, y = -13.5, z = 98.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 379.0, y = -13.3, z = 100.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --survival guide
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 453.0, y = -8.0, z = 182.3 }, size = 1, floor_id = 1, colour = "green" },
+
+                    --Inner Horutoto Ruins
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 380.0, y = -2.08, z = 15.8 }, size = 4, floor_id = 1, colour = "cyan", vertical = true },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 379.8, y = 0.5, z = 21.9 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 381.3, y = 0.0, z = -19.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
                 },
             },
             {
                 text = "Step 4: Search the six Ancient Magical Gizmos at (G-8), (G-9), (H-8), (H-9), (I-8) and (I-9). \n" ..
                        "One will give you the KI:Cracked Mana Orb - the correct Gizmo is randomly assigned per party member. \n \n",
-                onmob_target = {"_5cp", "_5cq", "_5cr", "_5cs", "_5ct", "_5cu"},
+                onmob_target = {"inner-horutoto-ruins-ancient-magical-gizmo-1",
+                                "inner-horutoto-ruins-ancient-magical-gizmo-2",
+                                "inner-horutoto-ruins-ancient-magical-gizmo-3",
+                                "inner-horutoto-ruins-ancient-magical-gizmo-4",
+                                "inner-horutoto-ruins-ancient-magical-gizmo-5",
+                                "inner-horutoto-ruins-ancient-magical-gizmo-6"},
                 trigger_on_event_id = {48, 50, 52, 54, 56, 58},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 415.5, y = 0.0, z = -19.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 379.6, y = -0.0, z = -16.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 380.0, y = -2.08, z = 15.8 }, size = 4, floor_id = 1, colour = "cyan", vertical = true },
+
+                    --Gizmos
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 340.2, y = 0.4, z = 59.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 344.9, y = 0.5, z = 25.5 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 414.9, y = 0.5, z = 25.1 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 418.3, y = 0.5, z = 60.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 415.0, y = 0.5, z = 94.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 346.6, y = 0.5, z = 93.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                },
                 images = {
                     {
                         zone_name = "Inner Horutoto Ruins",
@@ -123,7 +138,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: There is aggro in this mission. Bring Sneak/Invisible or be around level 15-18. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -172,25 +187,45 @@ return {
                 trigger_on_event_id = {137},
                 route_to = "Windurst Woods",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                   { zone_name = "Windurst Woods", type = 'arrow', center = { x = -40.6, y = -1.5, z = -9.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                },
             },
             {
                 text = "Step 3: Travel to East Sarutabaruta and talk to Pore-Ohre (J-11) at the Marguerite Tower. \n" ..
-                       "He will give you the KI:Southeastern Star Charm. \n" ..
-                       "Head down the tower and zone into the Outer Horutoto Ruins. \n \n",
+                       "He will give you the KI:Southeastern Star Charm. \n",
                 onmob_target = {"Pore-Ohre"},
                 trigger_on_event_id = {46},
-                route_to = "East Sarutabaruta",
-                destination_highlight = {position = "J-11", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                route_to = "Outer Horutoto Ruins",
+                --destination_highlight = {position = "J-11", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 259.6, y = -17.2, z = -440.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                },
             },
             {
-                text = "Step 4: Inside the Outer Horutoto Ruins, go South then West to the main square room. \n" ..
+                text = "Step 4: Head inside the Outer Horutoto Ruins, go South then West to the main square room. \n" ..
                        "Place all 6 KI:Dark Mana Orbs into the Ancient Magical Gizmos: \n" ..
                        "- 4 Gizmos are in the corners of the room. \n" ..
                        "- 2 Gizmos are in secret rooms on the North and South walls - click their targetable doors to open them. \n" ..
-                       "Note: There is a Bomb in the room, kill it or it will aggro unless you are high level. \n \n" ..
-                       "Once all orbs are placed, head East to the crack in the outer wall and examine the Gate: Magical Gizmo for a cutscene. \n \n",
-                onmob_target = {"_5ee", "_5ef", "_5eg", "_5eh", "_5ei", "_5ej", "_5e9"},
-                trigger_on_event_id = {44},
+                       "Note: There is a Bomb in the room, kill it or it will aggro unless you are high level. \n \n",
+                onmob_target = {"outer-horutoto-ruins-ancient-magical-gizmo-1",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-2",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-3",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-4",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-5",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-6"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- East Sarutabaruta
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 260.0, y = -17.3, z = -457.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Cracked Walls
+                    { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 500.0, y = -1.9, z = -708.2 }, size = 4, floor_id = 3, colour = "cyan", vertical = true },
+                    { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 500.0, y = -1.8, z = -611.8 }, size = 4, floor_id = 3, colour = "cyan", vertical = true },
+                },
+                trigger_on_talk = {"You have set all of the dark Mana Orbs in place"},
                 images = {
                     {
                         zone_name = "Outer Horutoto Ruins",
@@ -202,10 +237,14 @@ return {
                 },
             },
             {
-                text = "Step 5: Recollect all 6 KI:Glowing Mana Orbs from the Gizmos - click each one again. \n \n" ..
-                       "(Optional): Zone back into East Sarutabaruta for an extra cutscene with the Ace Cardians. \n" ..
-                       "Note: The Cardians will steal the orbs if you zone out but the mission can still be completed via a different cutscene with Apururu. \n \n",
-                onmob_target = {"_5ee", "_5ef", "_5eg", "_5eh", "_5ei", "_5ej"},
+                text = "Step 5: Once all orbs are placed, head East to the crack in the outer wall and examine the Gate: Magical Gizmo for a cutscene. \n \n",
+                onmob_target = {"outer-horutoto-ruins-gate-magical-gizmo"},
+                trigger_on_event_id = {44},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Outer Horutoto Ruins", type = 'arrow', center = { x = 537.3, y = -0.0, z = -660.2 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 548.3, y = -1.9, z = -660.0 }, size = 4, floor_id = 3, colour = "cyan", vertical = true, vertical_axis = 'z' },
+                },
                 images = {
                     {
                         zone_name = "Outer Horutoto Ruins",
@@ -217,8 +256,43 @@ return {
                 },
             },
             {
-                text = "Step 6: Return to Apururu (H-9) in the Manustery, Windurst Woods to complete the mission! \n \n",
+                text = "Step 6: Recollect all 6 KI:Glowing Mana Orbs from the Gizmos - click each one again. \n \n" ..
+                       "(Optional): Zone back into East Sarutabaruta for an extra cutscene with the Ace Cardians. \n" ..
+                       "Note: The Cardians will steal the orbs if you zone out but the mission can still be completed via a different cutscene with Apururu. \n \n",
+                onmob_target = {"outer-horutoto-ruins-ancient-magical-gizmo-1",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-2",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-3",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-4",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-5",
+                                "outer-horutoto-ruins-ancient-magical-gizmo-6"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Outer Horutoto Ruins", type = 'arrow', center = { x = 557.4, y = -0.0, z = -660.2 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                   -- { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 548.3, y = -1.9, z = -660.0 }, size = 4, floor_id = 3, colour = "cyan", vertical = true, vertical_axis = 'z' },
+                   --North Wall
+                    { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 500.0, y = -1.8, z = -611.8 }, size = 4, floor_id = 3, colour = "cyan", vertical = true },
+                    { zone_name = "Outer Horutoto Ruins", type = 'square', center = { x = 500.0, y = -1.9, z = -708.2 }, size = 4, floor_id = 3, colour = "cyan", vertical = true },
+                },
+                keyitems_needed = {59, 60, 61, 62, 63, 64},
+                trigger_on_keyitem_obtain = {59, 60, 61, 62, 63, 64},
+                require_all_keyitems = true,
+                images = {
+                    {
+                        zone_name = "Outer Horutoto Ruins",
+                        floor_id  = 3,
+                        width     = 512,
+                        height    = 512,
+                        state     = 5,
+                    },
+                },
+            },
+            {
+                text = "Step 7: Return to Apururu (H-9) in the Manustery, Windurst Woods to complete the mission! \n \n",
                 onmob_target = {"Apururu"},
+                zone_max_distance = 40,
+                visual_zones = {
+                   { zone_name = "Windurst Woods", type = 'arrow', center = { x = -40.6, y = -1.5, z = -9.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {143, 145},
                 route_to = "Windurst Woods",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
@@ -233,7 +307,7 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -316,7 +390,7 @@ return {
             {
                 text = "Step 5: Talk to any Windurstian Gate Guard to complete the mission. \n" ..
                        "Note: Any gate guard will work, not just the one you started with. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_event_id = {114, 116, 148, 154},
                 images = {
                     {
@@ -369,7 +443,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: Trade at least 1 crystal to any War Warlock (W.W.) at the city gates to unlock this mission. Trading 7 caps your rank points for Rank 2. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -527,7 +601,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: This mission is skippable! Trade 1 crystal to any War Warlock (W.W.) at the city gates to unlock it, or 3 crystals to skip it entirely. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -605,7 +679,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: Trade 1 crystal to any War Warlock (W.W.) at the city gates to unlock this mission. Trading 3 crystals after 'Lost for Words' also works. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -992,7 +1066,7 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -1097,7 +1171,7 @@ return {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -1215,7 +1289,7 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n" ..
                        "You will immediately receive the KI:Star Crested Summons upon accepting. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2098,7 +2172,7 @@ return {
                 text = "Step 1: Trade 3 crystals to a Conquest Overseer to build Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission. \n \n" ..
                        "You will receive KI:Star Crested Summons.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2316,7 +2390,7 @@ return {
                 text = "Step 1: Trade 4 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission. \n \n" ..
                        "WARNING: Get Trust: Ajido-Marujido BEFORE starting this mission or you will lose access to him until Rank 10!",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2438,7 +2512,7 @@ return {
             {
                 text = "Step 1: Trade 4 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2556,7 +2630,7 @@ return {
             {
                 text = "Step 1: Trade 4 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2672,7 +2746,7 @@ return {
             {
                 text = "Step 1: Trade 6 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2787,7 +2861,7 @@ return {
             {
                 text = "Step 1: Trade 6 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -2901,7 +2975,7 @@ return {
             {
                 text = "Step 1: Fill at least 80% of your Rank Points bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -3079,7 +3153,7 @@ return {
             {
                 text = "Step 1: Fill approximately 1/3 of your Rank Points bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -3189,7 +3263,7 @@ return {
             { -- Step 1
                 text = "Step 1: Fill approximately 90% of your Rank Points bar (trade 9 regular crystals or 4 light/dark crystals to any gate guard). \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh_Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {

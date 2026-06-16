@@ -550,7 +550,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                     if dist_ok then
                                         local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
                                         if zone.type == 'square' and zone.center and zone.size then
-                                            drawingModule.drawSquare(zone.center, zone.size, color)
+                                            drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then
@@ -575,7 +575,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                             if step_data.draw_type == 'line' and step_data.start_pos and step_data.end_pos then
                                 drawingModule.drawLine(step_data.start_pos, step_data.end_pos, color)
                             elseif step_data.draw_type == 'square' and step_data.center and step_data.size then
-                                drawingModule.drawSquare(step_data.center, step_data.size, color)
+                                drawingModule.drawSquare(step_data.center, step_data.size, color, { vertical = step_data.vertical, vertical_axis = step_data.vertical_axis })
                             elseif step_data.draw_type == 'arrow' and step_data.center and step_data.size and step_data.direction then
                                 drawingModule.drawArrow(step_data.center, step_data.size, step_data.direction, color, step_data.outline)
                             end
@@ -667,7 +667,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                     if dist_ok then
                                         local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
                                         if zone.type == 'square' and zone.center and zone.size then
-                                            drawingModule.drawSquare(zone.center, zone.size, color)
+                                            drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then

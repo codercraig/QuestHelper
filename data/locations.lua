@@ -186,6 +186,20 @@ return {
         floor_id = 0,
         max_distance = 40
     },
+    ["Rakoh-Buuma"] = {
+        target_pos = { x = 110.5, y = -7, z = -24.0 },
+        visual_mode = "arc",
+        zone = "Windurst Woods",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["Apururu"] = {
+        target_pos = { x = -12.1, y = -3.5, z = 15.9 },
+        visual_mode = "arc",
+        zone = "Windurst Woods",
+        floor_id = 0,
+        max_distance = 40
+    },
     --Port Windurst
     ["Melek"] = {
         target_pos = { x = -78, y= -7, z=156},
@@ -213,6 +227,20 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Janshura-Rashura"] = {
+        target_pos = { x = -230.6, y = -9.2, z = 184.1 },
+        visual_mode = "arc",
+        zone = "Port Windurst",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["Hakkuru-Rinkuru"] = {
+        target_pos = { x = -111.1, y = -5.2, z = 102.1 },
+        visual_mode = "arc",
+        zone = "Port Windurst",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Windurst Waters North
     ["Kyume-Romeh"] = {
         target_pos = { x = -54.5, y = -5.3, z = 23.2 },
@@ -227,6 +255,13 @@ return {
         zone = "Windurst Waters North",
         floor_id = 1,
         max_distance = 40
+    },
+    ["Mokyokyo"] = {
+        target_pos = { x = -56.0, y = -6.3, z = 230.4 },
+        visual_mode = "arc",
+        zone = "Windurst Waters North",
+        floor_id = 1,
+        max_distance = 35
     },
     -- Windurst Waters South
     ["Ohbiru-Dohbiru"] = {
@@ -258,12 +293,127 @@ return {
         floor_id = 0,
         max_distance = 45
     },
+    ["Zokima-Rokima"] = {
+        target_pos = { x = 0.0, y = -17.8, z = 127.0 },
+        visual_mode = "arc",
+        zone = "Windurst Walls",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Heavens Tower
     ["Kupipi"] = {
         target_pos = { x = 2, y= -1, z=32.1},
         trigger_npc = "Kupipi",
         visual_mode = "arc",
         zone = "Heavens Tower"
+    },
+    -- East Sarutabaruta
+    ["Pore-Ohre"] = {
+        target_pos = { x = 262.3, y = -18, z = -459.6 },
+        visual_mode = "arc",
+        zone = "East Sarutabaruta",
+        floor_id = 0,
+        max_distance = 35
+    },
+    -- Inner Horutoto Ruins
+    ["inner-horutoto-ruins-gate-magical-gizmo"] = {
+        target_pos = { x = 420.0, y = -1.7, z = -30.4 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 35
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-1"] = {
+        target_pos = { x = 406.5, y = -3.0, z = 60.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-2"] = {
+        target_pos = { x = 353.5, y = -3.0, z = 60.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-3"] = {
+        target_pos = { x = 295.5, y = -3.5, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-4"] = {
+        target_pos = { x = 464.5, y = -3.5, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-5"] = {
+        target_pos = { x = 464.5, y = -3.5, z = 100.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-ancient-magical-gizmo-6"] = {
+        target_pos = { x = 295.5, y = -3.5, z = 100.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 1,
+        max_distance = 30
+    },
+    -- Outer Horutoto Ruins
+    ["outer-horutoto-ruins-ancient-magical-gizmo-1"] = {
+        target_pos = { x = 458.0, y = -3.3, z = -702.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 15
+        },
+    ["outer-horutoto-ruins-ancient-magical-gizmo-2"] = {
+        target_pos = { x = 542.0, y = -3.3, z = -702.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 15
+    },
+    ["outer-horutoto-ruins-ancient-magical-gizmo-3"] = {
+        target_pos = { x = 542.0, y = -3.3, z = -618.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 15
+    },
+    ["outer-horutoto-ruins-ancient-magical-gizmo-4"] = {
+        target_pos = { x = 458.0, y = -3.3, z = -618.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 15
+    },
+    ["outer-horutoto-ruins-ancient-magical-gizmo-5"] = {
+        target_pos = { x = 500.0, y = -3.3, z = -747.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 25
+    },
+    ["outer-horutoto-ruins-ancient-magical-gizmo-6"] = {
+        target_pos = { x = 500.0, y = -3.3, z = -573.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 25
+    },
+    ["outer-horutoto-ruins-gate-magical-gizmo"] = {
+        target_pos = { x = 590.4, y = -1.6, z = -660.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 3,
+        max_distance = 35
     },
     -- Giddeus
     ["Uu Zhoumo"] = {

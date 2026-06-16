@@ -36,6 +36,8 @@ local viz = {
     size        = 4,
     floor_id    = 0,
     use_target  = false,   -- true = NPC target pos, false = player pos
+    vertical    = false,   -- square only: upright panel using NPC elevation
+    vertical_z  = false,   -- square+vertical only: rotate 90° to face E/W instead of N/S
     entries     = {},
 }
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
@@ -158,8 +160,12 @@ local function render_position_tab()
     if toggle_btn("NPC Target##vsrc",      viz.use_target) then viz.use_target = true  end
     local src_x, src_y, src_z
     if viz.use_target and t.valid then
-        src_x, src_y, src_z = t.x, p.y, t.z   -- NPC X/Z, player Y (elevation)
-        imgui.Text(string.format("  Using:  %s  X=%.2f  Y=%.2f (player elev)  Z=%.2f", t.name, src_x, src_y, src_z))
+        local use_npc_y = viz.vertical and viz.entry_type == 'square'
+        src_x = t.x
+        src_y = use_npc_y and t.y or p.y
+        src_z = t.z
+        local y_label = use_npc_y and "NPC elev" or "player elev"
+        imgui.Text(string.format("  Using:  %s  X=%.2f  Y=%.2f (%s)  Z=%.2f", t.name, src_x, src_y, y_label, src_z))
     else
         src_x, src_y, src_z = p.x, p.y, p.z
         imgui.Text(string.format("  Using:  Player  X=%.2f  Y=%.2f  Z=%.2f", src_x, src_y, src_z))
@@ -172,6 +178,17 @@ local function render_position_tab()
     if toggle_btn("Square##vt", viz.entry_type == 'square') then viz.entry_type = 'square' end
     imgui.SameLine()
     if toggle_btn("Line##vt",   viz.entry_type == 'line')   then viz.entry_type = 'line'   end
+    if viz.entry_type == 'square' then
+        imgui.SameLine()
+        if toggle_btn("Vertical##vt", viz.vertical) then
+            viz.vertical = not viz.vertical
+            if not viz.vertical then viz.vertical_z = false end
+        end
+        if viz.vertical then
+            imgui.SameLine()
+            if toggle_btn("Rotated##vt", viz.vertical_z) then viz.vertical_z = not viz.vertical_z end
+        end
+    end
 
     if viz.entry_type ~= 'line' then
         -- Colour (split into 2 lines for readability)
@@ -260,9 +277,11 @@ local function render_position_tab()
     if imgui.Button(add_lbl) then
         local entry
         if viz.entry_type == 'square' then
+            local vert_str = viz.vertical and ", vertical = true" or ""
+            local rot_str  = (viz.vertical and viz.vertical_z) and ", vertical_axis = 'z'" or ""
             entry = string.format(
-                "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, floor_id = %d, colour = %q },",
-                p.zone_name, src_x, src_y, src_z, viz.size, viz.floor_id, viz.colour)
+                "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, floor_id = %d, colour = %q%s%s },",
+                p.zone_name, src_x, src_y, src_z, viz.size, viz.floor_id, viz.colour, vert_str, rot_str)
         elseif viz.entry_type == 'line' then
             if lin.start_pos and lin.stop_pos then
                 entry = string.format(

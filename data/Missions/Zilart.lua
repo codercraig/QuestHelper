@@ -1295,6 +1295,7 @@ return {
                     reset_on_zone_entry = false,
                 },
                 trigger_on_keyitem_obtain = {455, 456, 457, 458, 459},
+                require_all_keyitems = true,
                 onmob_target = {"zm14-la-loff-ark-tt-shimmering-circle",
                                 "zm14-la-loff-ark-mr-shimmering-circle",
                                 "zm14-la-loff-ark-hm-shimmering-circle",
