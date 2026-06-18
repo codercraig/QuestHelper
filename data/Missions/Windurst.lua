@@ -309,6 +309,7 @@ return {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
+                keyitems_needed = {17,18},
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -355,40 +356,66 @@ return {
                        "(Optional): Talk to Ohbiru-Dohbiru inside the Rhinostery. \n \n",
                 onmob_target = {"Leepe-Hoppe"},
                 trigger_on_event_id = {140},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters South",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 3.9, y = -4.0, z = -207.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                },
             },
             {
-                text = "Step 3: Travel through West Sarutabaruta (F-8) and enter Giddeus. \n" ..
-                       "Note: The Outpost in West Sarutabaruta (H-6) is near the entrance. \n \n" ..
-                       "Inside Giddeus, at all intersections take the left-hand choice. \n" ..
-                       "Talk to Laa Mozi (H-7) to give the KI:Food Offering. \n" ..
-                       "Continue taking the left-hand choice to (G-7) and talk to Ghoo Pakya to give the KI:Drink Offering. \n \n",
-                onmob_target = {"Laa_Mozi", "Ghoo_Pakya"},
-                trigger_on_event_id = {45, 49},
+                text = "Step 3: Travel through West Sarutabaruta and enter Giddeus via (F-8). \n" ..
+                       "Note: The Outpost in West Sarutabaruta (H-6) is near the entrance. \n \n",
+                zone_trigger = "Giddeus",
                 route_to = "Giddeus",
+            },
+            {
+                text = "Step 4: Inside Giddeus, at all intersections take the left-hand choice. \n" ..
+                       "Talk to Laa Mozi (H-7) to give the KI:Food Offering. \n \n",
+                onmob_target = {"Laa Mozi"},
+                trigger_on_event_id = {45},
                 images = {
                     {
                         zone_name = "Giddeus",
-                        floor_id  = 1,
                         width     = 512,
                         height    = 512,
-                        state     = 3,
+                        state     = 4,
+                        floor_id  = 1,
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 5: Head back to (G-7) and talk to Ghoo Pakya to give the KI:Drink Offering. \n \n",
+                onmob_target = {"Ghoo Pakya"},
+                trigger_on_event_id = {49},
+                images = {
+                    {
+                        zone_name = "Giddeus",
+                        width     = 512,
+                        height    = 512,
+                        state     = 5,
+                        floor_id  = 1,
+                        highlights = {
                             { position = "G-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 4: Return to the roof of the Rhinostery in Windurst Waters (South) for another cutscene. \n \n",
+                text = "Step 6: Return to the roof of the Rhinostery in Windurst Waters (South) for another cutscene. \n \n",
                 trigger_on_event_id = {146},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters South",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -5.0, y = -4.0, z = -183.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 8.4, y = -4.0, z = -207.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Windurst Waters South", type = 'square', center = { x = 21.7, y = -9.8, z = -198.6 }, size = 4, floor_id = 2, colour = "cyan" },
+                },
             },
             {
-                text = "Step 5: Talk to any Windurstian Gate Guard to complete the mission. \n" ..
+                text = "Step 7: Talk to any Windurstian Gate Guard to complete the mission. \n" ..
                        "Note: Any gate guard will work, not just the one you started with. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_event_id = {114, 116, 148, 154},
@@ -398,7 +425,7 @@ return {
                         floor_id  = 1,
                         width     = 512,
                         height    = 512,
-                        state     = 5,
+                        state     = 7,
                         highlights = {
                             { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
@@ -407,7 +434,7 @@ return {
                         zone_name = "Port Windurst",
                         width     = 512,
                         height    = 512,
-                        state     = 5,
+                        state     = 7,
                         highlights = {
                             { position = "B-5", offsetX = 16, offsetY = 16 },
                         },
@@ -416,7 +443,7 @@ return {
                         zone_name = "Windurst Woods",
                         width     = 512,
                         height    = 512,
-                        state     = 5,
+                        state     = 7,
                         highlights = {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
@@ -425,7 +452,7 @@ return {
                         zone_name = "Windurst Walls",
                         width     = 512,
                         height    = 512,
-                        state     = 5,
+                        state     = 7,
                         highlights = {
                             { position = "H-7", offsetX = 16, offsetY = 16 },
                         },

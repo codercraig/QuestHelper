@@ -2,9 +2,9 @@
 -- Defines which zones connect to each other and the exit coordinates
 -- Format: ["Zone Name"] = { {zone = "Connected Zone", exit = "Grid Coordinate", floor_id = 1}, ... }
 --
--- Optional floor_id parameter:
---   - If specified: Only show that specific floor with those specific exits (accurate for multi-floor zones)
---   - If omitted: Show all floors with all exits (default behavior, works for most zones)
+-- Optional floor_id parameter (which floor of the CURRENT zone this exit is on):
+--   - If specified: Only show that floor's map with these exits (use for multi-floor dungeons)
+--   - If omitted: Show all floors with all exits (default, fine for single-floor zones)
 --
 -- Example for multi-floor zone:
 -- ["Windurst Waters"] = {
@@ -433,7 +433,12 @@ return {
     },
     ["Giddeus"] = {
         {zone = "West Sarutabaruta", exit = "H-3", floor_id = 1},
-        {zone = "Balga's Dais", exit = "F-12", floor_id = 1}
+        {zone = "Balga's Dais", exit = "F-12", floor_id = 1},
+        {zone = "Giddeus 2", exit = "F-8", floor_id = 15},
+    },
+    ["Giddeus 2"] = {
+        {zone = "Giddeus", exit = "F-8", floor_id = 1},
+        {zone = "Giddeus", exit = "J-8", floor_id = 1},
     },
     ["Balga's Dais"] = {
         --{zone = "Giddeus", exit = "J-8"}

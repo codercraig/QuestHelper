@@ -1468,6 +1468,62 @@ ashita.events.register('command', 'command_callback', function(e)
         return true
     end
 
+    if command_base == 'qh_validate' then
+        local mission_errors = {}
+        local passing        = {}
+        local checked        = 0
+
+        local connections = require('data.zone_connections')
+        local function chk_zone(zn, ctx, errs)
+            if not zn then return end
+            if not zone_data[zn] and not connections[zn] then
+                table.insert(errs, ctx .. ': unknown zone "' .. zn .. '"')
+            end
+        end
+
+        for category, subfiles in pairs(quest_data) do
+            for subfile, missions in pairs(subfiles) do
+                for mission_name, mission in pairs(missions) do
+                    local label = category .. '/' .. subfile .. ' > "' .. mission_name .. '"'
+                    local merrs = {}
+                    for step_idx, step in ipairs(mission.steps or {}) do
+                        local ctx = 'step ' .. step_idx
+                        checked = checked + 1
+                        if step.route_to   then chk_zone(step.route_to,   ctx .. ' route_to',    merrs) end
+                        if step.zone_trigger then chk_zone(step.zone_trigger, ctx .. ' zone_trigger', merrs) end
+                        for _, img in ipairs(step.images or {}) do
+                            chk_zone(img.zone_name or img.zone, ctx .. ' image', merrs)
+                        end
+                        if step.kill_requirement and step.kill_requirement.zone then
+                            chk_zone(step.kill_requirement.zone, ctx .. ' kill_requirement', merrs)
+                        end
+                    end
+                    if #merrs > 0 then
+                        table.insert(mission_errors, { label = label, issues = merrs })
+                    else
+                        table.insert(passing, label)
+                    end
+                end
+            end
+        end
+
+        print(string.format("[%s] ===== /qh_validate (%d steps, %d missions with errors, %d OK) =====",
+            addon.name, checked, #mission_errors, #passing))
+        if #mission_errors == 0 then
+            print(string.format("\30\106[%s] All missions OK.\30\01", addon.name))
+        else
+            for _, entry in ipairs(mission_errors) do
+                print(string.format("\30\68[%s] %s\30\01", addon.name, entry.label))
+                for _, issue in ipairs(entry.issues) do
+                    print(string.format("[%s]   %s", addon.name, issue))
+                end
+            end
+        end
+        print(string.format("[%s] ==========================================", addon.name))
+        e.blocked = true
+        return true
+    end
+
     return false
 end)
 
@@ -1492,6 +1548,10 @@ ashita.events.register('load', 'load_callback', function()
     else
         print(string.format("[%s] Warning: Could not load floor_mappings.lua", addon.name))
     end
+
+    -- Pass data needed by the Validate tab in the debug UI
+    local connections_ok, connections = pcall(require, 'data.zone_connections')
+    ui_debug.setValidateData(quest_data, connections_ok and connections or {}, floor_mappings, zone_data)
 
     -- Load quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')

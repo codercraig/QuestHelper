@@ -285,6 +285,13 @@ return {
         floor_id = 2,
         max_distance = 35
     },
+    ["Leepe-Hoppe"] = {
+        target_pos = { x = 11.4, y = -10.7, z = -197.5 },
+        visual_mode = "arc",
+        zone = "Windurst Waters South",
+        floor_id = 2,
+        max_distance = 30
+    },
     -- Windurst Walls
     ["Yoran-Oran"] = {
         target_pos = { x = -110.0, y = -13.8, z = 203.3 },
@@ -422,7 +429,20 @@ return {
         visual_mode = "arc",
         zone = "Giddeus"
     },
-
+    ["Laa Mozi"] = {
+        target_pos = { x = -21.6, y = -1.8, z = 145.3 },
+        visual_mode = "arc",
+        zone = "Giddeus",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["Ghoo Pakya"] = {
+        target_pos = { x = -139.0, y = -2.1, z = 144.3 },
+        visual_mode = "arc",
+        zone = "Giddeus",
+        floor_id = 1,
+        max_distance = 30
+    },
     --San d'Oria
     --Southern San d'Oria
     ["Hinaree"] = {

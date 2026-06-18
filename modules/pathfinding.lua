@@ -22,6 +22,7 @@ local zone_name_to_floor = {
     ['Tavnazian Safehold 1'] = 1,
     ['Tavnazian Safehold 2'] = 2,
     ['Tavnazian Safehold 3'] = 3,
+    ['Giddeus 2'] = 15,
 }
 
 -- Map sub-zone names to base zone names (for map/image loading)
@@ -42,6 +43,7 @@ local subzone_to_base = {
     ['Tavnazian Safehold 1'] = "Tavnazian Safehold",
     ['Tavnazian Safehold 2'] = "Tavnazian Safehold",
     ['Tavnazian Safehold 3'] = "Tavnazian Safehold",
+    ['Giddeus 2'] = "Giddeus",
 }
 
 -- Get base zone name for map loading (converts sub-zone names to base names)
@@ -83,6 +85,9 @@ local zone_floor_to_name = {
     [4] = {  -- Bibiki Bay
         [1] = "Bibiki Bay 1",
         [2] = "Bibiki Bay 2",  -- Purgonorgo Isle (boat from I-6)
+    },
+    [145] = {  -- Giddeus
+        [2] = "Giddeus 2",  -- logical floor 2 (raw floor_id 15)
     },
 }
 
@@ -446,19 +451,15 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
             end
         end
 
-        -- Second pass: collect exits that have minimum distance
-        -- NOTE: floor_id in connections refers to the DESTINATION floor, not current zone floor
-        -- So we DON'T group by floor_id here - we just collect all exits
-        local all_exits = {}
+        -- Second pass: collect exits that have minimum distance, grouped by floor_id
+        -- floor_id in connections = which floor of the CURRENT zone this exit is on
+        -- Omitting floor_id (-> 0) means show all floors (backward-compatible default)
         for _, conn in ipairs(connections) do
             if conn.zone and zone_distances[conn.zone] == min_distance and conn.exit then
-                table.insert(all_exits, {position = conn.exit, offsetX = 16, offsetY = 16, label = conn.label})
+                local fid = conn.floor_id or 0
+                if not exits_by_floor[fid] then exits_by_floor[fid] = {} end
+                table.insert(exits_by_floor[fid], {position = conn.exit, offsetX = 16, offsetY = 16, label = conn.label})
             end
-        end
-
-        -- Return as floor_id=0 (no specific floor) since floor_id in connections is for destination
-        if #all_exits > 0 then
-            exits_by_floor[0] = all_exits
         end
 
         return exits_by_floor

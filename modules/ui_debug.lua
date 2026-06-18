@@ -43,6 +43,78 @@ local viz = {
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
 local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue', 'magenta', 'purple', 'pink' }
 
+-- ── Validate tab state ───────────────────────────────────────────────────────
+local val = {
+    quest_data    = nil,
+    zone_data_ref = nil,
+    ran           = false,
+    checked       = 0,
+    errors        = {},
+    passing       = {},
+    show_errors   = true,
+    show_ok       = true,
+}
+
+function ui_debug.setValidateData(quest_data, connections, _floor_maps, zd)
+    val.quest_data    = quest_data
+    val.connections   = connections
+    val.zone_data_ref = zd
+end
+
+local function run_validate()
+    val.errors  = {}
+    val.passing = {}
+    val.checked = 0
+    val.ran     = true
+
+    if not val.quest_data then
+        table.insert(val.errors, "Validate data not initialised — reload the addon.")
+        return
+    end
+
+    local function chk_zone(zn, ctx, errs)
+        if not zn then return end
+        local in_zones = val.zone_data_ref and val.zone_data_ref[zn]
+        local in_conns = val.connections and val.connections[zn]
+        if not in_zones and not in_conns then
+            table.insert(errs, 'unknown zone "' .. zn .. '" (' .. ctx .. ')')
+        end
+    end
+
+    for category, subfiles in pairs(val.quest_data) do
+        for subfile, missions in pairs(subfiles) do
+            for mission_name, mission in pairs(missions) do
+                local mission_errors = {}
+                local label = category .. '/' .. subfile .. ' > "' .. mission_name .. '"'
+
+                for si, step in ipairs(mission.steps or {}) do
+                    val.checked = val.checked + 1
+                    local ctx = 'step ' .. si
+
+                    if step.route_to then
+                        chk_zone(step.route_to, ctx .. ' route_to', mission_errors)
+                    end
+                    if step.zone_trigger then
+                        chk_zone(step.zone_trigger, ctx .. ' zone_trigger', mission_errors)
+                    end
+                    for _, img in ipairs(step.images or {}) do
+                        chk_zone(img.zone_name or img.zone, ctx .. ' image zone_name', mission_errors)
+                    end
+                    if step.kill_requirement and step.kill_requirement.zone then
+                        chk_zone(step.kill_requirement.zone, ctx .. ' kill_requirement', mission_errors)
+                    end
+                end
+
+                if #mission_errors > 0 then
+                    table.insert(val.errors, { label = label, issues = mission_errors })
+                else
+                    table.insert(val.passing, label)
+                end
+            end
+        end
+    end
+end
+
 -- ── Line builder (Position tab) ───────────────────────────────────────────────
 local lin = {
     start_pos = nil,   -- { x, y, z } once set
@@ -320,6 +392,54 @@ local function render_position_tab()
     end
 end
 
+-- ── Tab 4: Validate ──────────────────────────────────────────────────────────
+local function render_validate_tab()
+    if imgui.Button("Run Validation") then run_validate() end
+
+    if val.ran then
+        imgui.SameLine()
+        imgui.Text(string.format("%d steps   %d mission(s) with errors   %d OK",
+            val.checked, #val.errors, #val.passing))
+
+        imgui.Separator()
+
+        -- Filter toggles
+        if toggle_btn(string.format("Errors (%d)##vfe",  #val.errors),  val.show_errors) then
+            val.show_errors = not val.show_errors
+        end
+        imgui.SameLine()
+        if toggle_btn(string.format("OK (%d)##vfo", #val.passing), val.show_ok) then
+            val.show_ok = not val.show_ok
+        end
+    end
+
+    imgui.Separator()
+    imgui.BeginChild("QHValidate", { 0, 0 }, false, 0)
+
+    if not val.ran then
+        imgui.Text("Click 'Run Validation' to check data integrity.")
+    elseif #val.errors == 0 then
+        imgui.TextColored({ 0.2, 0.9, 0.2, 1.0 }, "All missions OK — no issues found.")
+    else
+        if val.show_errors then
+            for _, entry in ipairs(val.errors) do
+                imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, entry.label)
+                for _, issue in ipairs(entry.issues) do
+                    imgui.Text("    " .. issue)
+                end
+                imgui.Separator()
+            end
+        end
+        if val.show_ok then
+            for _, label in ipairs(val.passing) do
+                imgui.TextColored({ 0.3, 0.85, 0.3, 1.0 }, "OK  " .. label)
+            end
+        end
+    end
+
+    imgui.EndChild()
+end
+
 -- ── Tab 3: Target + locations.lua builder ────────────────────────────────────
 local function render_target_tab()
     local t = cache.target
@@ -484,6 +604,10 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
             end
             if imgui.BeginTabItem("Target") then
                 render_target_tab()
+                imgui.EndTabItem()
+            end
+            if imgui.BeginTabItem("Validate") then
+                render_validate_tab()
                 imgui.EndTabItem()
             end
             imgui.EndTabBar()

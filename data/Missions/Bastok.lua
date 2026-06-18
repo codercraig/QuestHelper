@@ -204,7 +204,7 @@ return {
                 },
 
                 require_all_items = true,
-                route_to = "Palborough Mines",
+                route_to = "Palborough Mines 1",
                 -- images = {
                 --       {
                 --           width    = 512,
@@ -735,6 +735,19 @@ return {
                 onmob_target = {"Uu Zhoumo"},
                 trigger_on_event_id = { 41 },
                 images = {
+                    {
+                          width    = 512,
+                          height   = 512,
+                          state    = 5,
+                          zone_name = "Giddeus",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                              { position = "G-8", offsetX = 16, offsetY = 16 },
+                              { position = "I-8", offsetX = 16, offsetY = 16 },
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
                       {
                           width    = 512,
                           height   = 512,
@@ -1026,7 +1039,7 @@ return {
                     "Hare Meat"
                 },
                 trigger_on_item_obtain = {"Hare Meat"},
-                route_to = "Palborough Mines",
+                route_to = "Palborough Mines 1",
             },
             {
                 text = "Step 3: Travel to Gusgen Mines via Konschtat Highlands (L-7). You can also use a Survival Guide or assisted images for directions from Bastok! \n" ..
@@ -2296,7 +2309,7 @@ return {
                 kill_requirement = {
                     count = 2,
                     enemies = {"Eastern Sphinx", "Western Sphinx"},
-                    zone = "West Altepa Desert",
+                    zone = "Western Altepa Desert",
                     count_party_kills = true  -- Count kills from party members and trusts
                 },
                 images = {

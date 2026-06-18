@@ -90,7 +90,7 @@ return {
                         highlights = {
                             { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
-                        zone_name = "Temple of Ugg`alepih",
+                        zone_name = "Temple of Uggalepih",
                         floor_id = 1,
                     },
                     {
