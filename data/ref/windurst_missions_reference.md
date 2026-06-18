@@ -2,8 +2,8 @@
 [1-1] The Horutoto Ruins Experiment - DONE
 [1-2] The Heart of the Matter - DONE
 [1-3] The Price of Peace - DONE
-[2-1] Lost for Words - STARTED
-[2-2] Testing Time - DRAFT
+[2-1] Lost for Words - DONE
+[2-2] Testing Time - STARTED
 [2-3] The Three Kingdoms (Introduction) - DRAFT
 [2-3] The Three Kingdoms (San d'Oria -> Bastok) - DRAFT
 [2-3] The Three Kingdoms (Bastok -> San d'Oria) - DRAFT

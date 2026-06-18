@@ -517,47 +517,76 @@ return {
                        "Note: You may need to talk to him twice if you have started the quest 'Past Reflections'. \n \n",
                 onmob_target = {"Tosuka-Porika"},
                 trigger_on_event_id = {160},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: Travel to Windurst Woods and talk to Nanaa Mihgo (J-3) at the very north. \n" ..
                        "You will obtain the KI:Lapis Monocle. \n \n",
-                onmob_target = {"Nanaa_Mihgo"},
+                onmob_target = {"Nanaa Mihgo"},
                 trigger_on_event_id = {165},
                 route_to = "Windurst Woods",
                 destination_highlight = {position = "J-3", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Travel to Maze of Shakhrami. \n" ..
-                       "East Sarutabaruta (J-4) -> Tahrongi Canyon (K-5) -> Maze of Shakhrami. \n" ..
-                       "Note: Survival Guide, Teleport-Mea, or Unity Warp to Tahrongi Canyon are quicker routes. \n" ..
                        "Players under level 35 need Sneak and Invisible - Goblins sight-aggro, Scorpions and Ghouls sound-aggro. \n \n" ..
-                       "Inside, go to (G-6) on the upper map and take the right tunnel down to the lower map. \n" ..
-                       "Examine Fossil Rocks at (H-5) and (I-8) until you obtain the KI:Lapis Coral - it is randomly assigned. \n" ..
+                       "[1] Inside, go to (G-6) and follow the yellow arrows - there is 3 Fossil Rocks, but a chance none will contain the Lapis Coral Keyitem. \n \n" ..
+                       "[2] If those 3 do NOT contain the keyitem, head back and follow the blue arrows to the 2nd location where there is 2 more Fossil Rocks. \n \n" ..
                        "Note: Cancel Invisible to examine rocks but keep Sneak active. Warp out once obtained. \n \n",
-                onmob_target = {"Fossil_Rock"},
-                route_to = "Maze of Shakhrami",
+                --dismiss_on_approach = 6,
+                onmob_target = {"maze-of-shakhrami-fossil-rock-h5-1",
+                                "maze-of-shakhrami-fossil-rock-h5-2",
+                                "maze-of-shakhrami-fossil-rock-h5-3",
+                                "maze-of-shakhrami-fossil-rock-i8-1",
+                                "maze-of-shakhrami-fossil-rock-i8-2"},
+                keyitems_needed = {68},
+                zone_max_distance = 40,
+                trigger_on_keyitem_obtain = {68},
+                visual_zones = {
+                    --survival guide
+                    { zone_name = "Maze of Shakhrami", type = 'square', center = { x = -338.0, y = -12.2, z = -179.0 }, size = 1, floor_id = 15, colour = "green" },
+
+                    --map 1
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -266.8, y = 0.7, z = -111.3 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -156.1, y = 0.0, z = 0.4 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -120.6, y = 0.0, z = -1.8 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -80.7, y = 0.0, z = 2.4 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -48.5, y = -3.4, z = 14.7 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -34.7, y = 0.1, z = 44.1 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = 18.7, y = 20.2, z = 146.9 }, size = 4, direction = "up", floor_id = 16, colour = "yellow" },
+
+                    --reverse back
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -34.1, y = 0.0, z = 37.3 }, size = 4, direction = "down", floor_id = 15, colour = "cyan" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -56.9, y = -3.9, z = 7.1 }, size = 4, direction = "left", floor_id = 15, colour = "cyan" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = 21.3, y = 20.5, z = 150.0 }, size = 4, direction = "down", floor_id = 16, colour = "cyan" },
+
+                    -- to 2nd location
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -82.2, y = 0.0, z = 0.4 }, size = 4, direction = "right", floor_id = 15, colour = "cyan" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = -21.0, y = -0.2, z = -5.4 }, size = 4, direction = "right", floor_id = 15, colour = "cyan" },
+                    { zone_name = "Maze of Shakhrami", type = 'arrow', center = { x = 78.8, y = 20.4, z = -110.7 }, size = 4, direction = "right", floor_id = 16, colour = "cyan" },
+                },
                 images = {
                     {
                         zone_name = "Maze of Shakhrami",
-                        floor_id  = 1,
+                        floor_id  = 15,
                         width     = 512,
                         height    = 512,
                         state     = 4,
                         highlights = {
-                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                            { position = "G-6", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "H-8", offsetX = 16, offsetY = 16, label = "2" },
                         },
                     },
                     {
                         zone_name = "Maze of Shakhrami",
-                        floor_id  = 2,
+                        floor_id  = 16,
                         width     = 512,
                         height    = 512,
                         state     = 4,
                         highlights = {
-                            { position = "H-5", offsetX = 16, offsetY = 16 },
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                            { position = "H-5", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "I-8", offsetX = 16, offsetY = 16, label = "2" },
                         },
                     },
                 },
@@ -565,7 +594,7 @@ return {
             {
                 text = "Step 5: Return to Nanaa Mihgo (J-3) in Windurst Woods. \n" ..
                        "She will take the KI:Lapis Coral and KI:Lapis Monocle and give you the KI:Hideout Key. \n \n",
-                onmob_target = {"Nanaa_Mihgo"},
+                onmob_target = {"Nanaa Mihgo"},
                 trigger_on_event_id = {169},
                 route_to = "Windurst Woods",
                 destination_highlight = {position = "J-3", offsetX = 16, offsetY = 16},
@@ -576,9 +605,31 @@ return {
                        "Inside, go to (G-9) in the lower-left of the main ring room and pass through the Cracked Wall into Beetle's Burrow. \n" ..
                        "Navigate west then north along the western wall to reach the Mahogany Door at (G-8) and click it for a cutscene. \n" ..
                        "Note: Beetles and bats here do not aggro. Hug the western wall near the end to avoid any Goblins or Skeletons. \n \n",
-                onmob_target = {"_5ca"},
+                onmob_target = {"inner-horutoto-ruins-mahogany-door-g8"},
                 trigger_on_event_id = {46},
-                route_to = "Inner Horutoto Ruins",
+                zone_max_distance = 40,
+                visual_zones = {
+                    --arrow into the Inner Horutoto Ruins
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 356.2, y = -13.3, z = 100.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --survival guide
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 453.0, y = -8.0, z = 182.3 }, size = 1, floor_id = 1, colour = "green" },
+
+                    --nav to cracked wall
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 348.2, y = 0.5, z = 26.6 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 299.8, y = -0.0, z = 15.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 300.0, y = -2.0, z = 9.7 }, size = 4, floor_id = 1, colour = "cyan", vertical = true },
+
+                    --beyond tha wall!
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 259.0, y = -0.2, z = -25.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 216.6, y = -0.2, z = 20.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 181.8, y = -0.2, z = 5.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 134.7, y = 0.1, z = -21.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 100.0, y = 1.3, z = 2.3 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 59.2, y = -0.4, z = 49.5 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 32.9, y = -0.0, z = 71.0 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 4.9, y = 0.9, z = 21.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                },
                 images = {
                     {
                         zone_name = "Inner Horutoto Ruins",
@@ -605,7 +656,7 @@ return {
             {
                 text = "Step 7: (Home Point #1) Warp back and head to Windurst Walls. \n" ..
                        "Go to the very north (G-3) to find the House of the Hero and click on the front door for a cutscene. \n \n",
-                onmob_target = {"_6n2"},
+                onmob_target = {"Door: House-of-the-Hero"},
                 trigger_on_event_id = {337},
                 route_to = "Windurst Walls",
                 destination_highlight = {position = "G-3", offsetX = 16, offsetY = 16},
@@ -614,7 +665,7 @@ return {
                 text = "Step 8: (Home Point #1) Return to Tosuka-Porika (G-8) at the Optistery in Windurst Waters (North) to complete the mission! \n \n",
                 onmob_target = {"Tosuka-Porika"},
                 trigger_on_event_id = {168},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
             },
         },
@@ -676,7 +727,7 @@ return {
                        "Note: You may need to speak to him twice to trigger the cutscene. \n \n",
                 onmob_target = {"Moreno-Toeno"},
                 trigger_on_event_id = {182, 687},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
             },
             {

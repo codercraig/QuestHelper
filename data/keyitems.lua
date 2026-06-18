@@ -40,6 +40,7 @@ local id_to_name = {
     [62] = "Fourth Glowing Mana Orb",
     [63] = "Fifth Glowing Mana Orb",
     [64] = "Sixth Glowing Mana Orb",
+    [68] = "Lapis Coral",
     [74] = "Shadow Fragment",
     [75] = "Ronfaure Supplies",
     [78] = "Gustaberg Supplies",

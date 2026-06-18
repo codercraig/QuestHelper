@@ -237,9 +237,11 @@ function beam_drawing.drawBeamsToTargets(targetsToDraw, playerPosX, playerPosZ_d
 
             beam_drawing.calculateDynamicColor()
 
-            drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height,
-                         visualEndX, visualEndZ_depth, visualEndY_height,
-                         beam_drawing.ARGB_BEAM_COLOR, beam_drawing.beamAppearProgress, true)
+            if not targetData.suppress_beam then
+                drawArcModule(visualStartX, visualStartZ_depth, visualStartY_height,
+                             visualEndX, visualEndZ_depth, visualEndY_height,
+                             beam_drawing.ARGB_BEAM_COLOR, beam_drawing.beamAppearProgress, true)
+            end
 
             -- Draw quest icon
             if questIconTexture then

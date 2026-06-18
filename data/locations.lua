@@ -200,6 +200,13 @@ return {
         floor_id = 0,
         max_distance = 40
     },
+    ["Nanaa Mihgo"] = {
+        target_pos = { x = 65.0, y = -6.2, z = 239.6 },
+        visual_mode = "arc",
+        zone = "Windurst Woods",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Port Windurst
     ["Melek"] = {
         target_pos = { x = -78, y= -7, z=156},
@@ -307,6 +314,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Door: House-of-the-Hero"] = {
+        target_pos = { x = -26.0, y = -14.5, z = 263.0 },
+        visual_mode = "arc",
+        zone = "Windurst Walls",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Heavens Tower
     ["Kupipi"] = {
         target_pos = { x = 2, y= -1, z=32.1},
@@ -370,6 +384,13 @@ return {
         visual_mode = "arc",
         zone = "Inner Horutoto Ruins",
         floor_id = 1,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-mahogany-door-g8"] = {
+        target_pos = { x = -15.9, y = -2.2, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 2,
         max_distance = 30
     },
     -- Outer Horutoto Ruins
@@ -442,6 +463,42 @@ return {
         zone = "Giddeus",
         floor_id = 1,
         max_distance = 30
+    },
+    -- Maze of Shakhrami
+    ["maze-of-shakhrami-fossil-rock-h5-1"] = {
+        target_pos = { x = 49.1, y = 18.9, z = 152.5 },
+        visual_mode = "arc",
+        zone = "Maze of Shakhrami",
+        floor_id = 16,
+        max_distance = 35
+    },
+    ["maze-of-shakhrami-fossil-rock-h5-2"] = {
+        target_pos = { x = -11.2, y = 19.2, z = 159.8 },
+        visual_mode = "arc",
+        zone = "Maze of Shakhrami",
+        floor_id = 16,
+        max_distance = 38
+    },
+    ["maze-of-shakhrami-fossil-rock-h5-3"] = {
+        target_pos = { x = 17.4, y = 18.3, z = 184.7 },
+        visual_mode = "arc",
+        zone = "Maze of Shakhrami",
+        floor_id = 16,
+        max_distance = 38
+    },
+    ["maze-of-shakhrami-fossil-rock-i8-1"] = {
+        target_pos = { x = 133.6, y = 18.2, z = -67.3 },
+        visual_mode = "arc",
+        zone = "Maze of Shakhrami",
+        floor_id = 16,
+        max_distance = 50
+    },
+    ["maze-of-shakhrami-fossil-rock-i8-2"] = {
+        target_pos = { x = 127.6, y = 18.6, z = -127.8 },
+        visual_mode = "arc",
+        zone = "Maze of Shakhrami",
+        floor_id = 16,
+        max_distance = 50
     },
     --San d'Oria
     --Southern San d'Oria

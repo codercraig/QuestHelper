@@ -90,6 +90,8 @@ local INVENTORY_TRIGGER_CHECK_INTERVAL = 3.0 -- Check every 3 seconds
 local lastZoneId = 0 -- Track zone changes to reset map
 local lastCombatTime = 0
 local COMBAT_DEBOUNCE = 6.0
+local dismissed_targets = {}
+local lastDismissStepKey = nil
 local lastFloorCheck = 0
 local FLOOR_CHECK_INTERVAL = 5.0 -- Check floor every 5 seconds
 local lastKnownFloor = 0 -- Track floor changes
@@ -418,6 +420,15 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 if type(step_data) == 'table' then
                     local target_ref = step_data.onmob_target
 
+                    -- Reset dismissed targets when the step changes
+                    local stepKey = (currentTopCategory or "") .. "|" .. (currentSubfile or "") .. "|" .. (current_mission or "") .. "|" .. tostring(step_idx)
+                    if stepKey ~= lastDismissStepKey then
+                        dismissed_targets = {}
+                        lastDismissStepKey = stepKey
+                    end
+                    local dismissDist = step_data.dismiss_on_approach
+                    if dismissDist == true then dismissDist = 6 end
+
                     local potential_targets = {}
                     if type(target_ref) == 'string' then
                         table.insert(potential_targets, target_ref)
@@ -431,7 +442,24 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
                     for _, name in ipairs(potential_targets) do
                         if location_data[name] then
-                            table.insert(targetsToDraw, location_data[name])
+                            local td = location_data[name]
+                            if dismissDist and td.target_pos then
+                                local dx = player_module.posX - td.target_pos.x
+                                local dz = player_module.posY_height - td.target_pos.z
+                                if (dx * dx + dz * dz) <= (dismissDist * dismissDist) then
+                                    dismissed_targets[name] = true
+                                end
+                                if dismissed_targets[name] then
+                                    local td_nobeam = {}
+                                    for k, v in pairs(td) do td_nobeam[k] = v end
+                                    td_nobeam.suppress_beam = true
+                                    table.insert(targetsToDraw, td_nobeam)
+                                else
+                                    table.insert(targetsToDraw, td)
+                                end
+                            else
+                                table.insert(targetsToDraw, td)
+                            end
                         else
                             if shouldPrintDebugNow then
                                 ui_debug.addLine(string.format("[%s Debug] Error: Step references location key '%s', but it's not in locations.lua.", addon.name, name))
