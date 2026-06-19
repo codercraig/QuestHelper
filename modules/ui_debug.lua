@@ -17,9 +17,7 @@ local log_lines   = {}
 local auto_scroll = true
 
 -- ── Position/floor cache ──────────────────────────────────────────────────────
-local POS_INTERVAL   = 2.0
 local FLOOR_INTERVAL = 5.0
-local lastPosTime    = 0
 local lastFloorTime  = 0
 
 local cache = {
@@ -30,14 +28,17 @@ local cache = {
 
 -- ── Visual-zone builder (Position tab) ───────────────────────────────────────
 local viz = {
-    entry_type  = 'arrow',
+    entry_type  = 'none',
     direction   = 'up',
     colour      = 'cyan',
     size        = 4,
     floor_id    = 0,
     use_target  = false,   -- true = NPC target pos, false = player pos
-    vertical    = false,   -- square only: upright panel using NPC elevation
-    vertical_z  = false,   -- square+vertical only: rotate 90° to face E/W instead of N/S
+    vertical      = false,  -- square only: upright panel using NPC elevation
+    vertical_axis = nil,    -- square+vertical only: nil=N/S, 'z'=E/W, 'ne'=NE/SW, 'nw'=NW/SE
+    rect_w         = 4.0,   -- rect only: horizontal width
+    rect_h         = 4.0,   -- rect only: vertical height
+    preview_shapes = {},    -- shapes locked in for on-screen preview when Add is clicked
     entries     = {},
 }
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
@@ -123,14 +124,18 @@ local lin = {
 
 -- ── locations.lua builder (Target tab) ───────────────────────────────────────
 local loc = {
-    visual_mode  = 'arc',
-    floor_id     = 0,
-    max_distance = 35,
-    use_target   = true,   -- true = NPC pos, false = player pos
-    entries      = {},
-    key_buf      = { "" },
+    visual_mode    = 'arc',
+    floor_id       = 0,
+    max_distance   = 35,
+    use_target     = true,   -- true = NPC pos, false = player pos
+    y_offset       = 0.0,    -- vertical nudge baked into target_pos.y on export
+    entries        = {},
+    preview_arcs   = {},     -- locked arcs kept on screen after Add Entry
+    key_buf        = { "" },
     last_target_name = "",
 }
+
+local active_tab = 'position'  -- tracks which debug tab is visible, gates live drawing
 local VISUAL_MODES = { 'arc', 'beacon' }
 
 -- ── Helpers ───────────────────────────────────────────────────────────────────
@@ -232,7 +237,7 @@ local function render_position_tab()
     if toggle_btn("NPC Target##vsrc",      viz.use_target) then viz.use_target = true  end
     local src_x, src_y, src_z
     if viz.use_target and t.valid then
-        local use_npc_y = viz.vertical and viz.entry_type == 'square'
+        local use_npc_y = viz.vertical and (viz.entry_type == 'square' or viz.entry_type == 'rect')
         src_x = t.x
         src_y = use_npc_y and t.y or p.y
         src_z = t.z
@@ -245,20 +250,33 @@ local function render_position_tab()
 
     -- Type
     imgui.Text("Type:"); imgui.SameLine()
+    if toggle_btn("None##vt",   viz.entry_type == 'none')   then viz.entry_type = 'none'   end
+    imgui.SameLine()
     if toggle_btn("Arrow##vt",  viz.entry_type == 'arrow')  then viz.entry_type = 'arrow'  end
     imgui.SameLine()
     if toggle_btn("Square##vt", viz.entry_type == 'square') then viz.entry_type = 'square' end
     imgui.SameLine()
     if toggle_btn("Line##vt",   viz.entry_type == 'line')   then viz.entry_type = 'line'   end
-    if viz.entry_type == 'square' then
-        imgui.SameLine()
+    imgui.SameLine()
+    if toggle_btn("Rect##vt",   viz.entry_type == 'rect')   then viz.entry_type = 'rect'   end
+    if viz.entry_type == 'square' or viz.entry_type == 'rect' then
         if toggle_btn("Vertical##vt", viz.vertical) then
             viz.vertical = not viz.vertical
-            if not viz.vertical then viz.vertical_z = false end
+            if viz.vertical then
+                viz.vertical_axis = viz.vertical_axis or 'ns'
+            else
+                viz.vertical_axis = nil
+            end
         end
         if viz.vertical then
             imgui.SameLine()
-            if toggle_btn("Rotated##vt", viz.vertical_z) then viz.vertical_z = not viz.vertical_z end
+            if toggle_btn("N/S##vaxis",   viz.vertical_axis == 'ns') then viz.vertical_axis = 'ns' end
+            imgui.SameLine()
+            if toggle_btn("E/W##vaxis",   viz.vertical_axis == 'z')  then viz.vertical_axis = 'z'  end
+            imgui.SameLine()
+            if toggle_btn("NE/SW##vaxis", viz.vertical_axis == 'ne') then viz.vertical_axis = 'ne' end
+            imgui.SameLine()
+            if toggle_btn("NW/SE##vaxis", viz.vertical_axis == 'nw') then viz.vertical_axis = 'nw' end
         end
     end
 
@@ -294,10 +312,21 @@ local function render_position_tab()
         end
 
         -- Size / Floor ID
-        imgui.Text("Size:"); imgui.SameLine()
-        if imgui.Button(" - ##vs") then viz.size = math.max(1, viz.size - 1) end
-        imgui.SameLine(); imgui.Text(string.format("%d", viz.size)); imgui.SameLine()
-        if imgui.Button(" + ##vs") then viz.size = viz.size + 1 end
+        if viz.entry_type == 'rect' then
+            imgui.Text("Width:"); imgui.SameLine()
+            if imgui.Button(" - ##vrw") then viz.rect_w = math.max(0.25, viz.rect_w - 0.25) end
+            imgui.SameLine(); imgui.Text(string.format("%.2f", viz.rect_w)); imgui.SameLine()
+            if imgui.Button(" + ##vrw") then viz.rect_w = viz.rect_w + 0.25 end
+            imgui.SameLine(); imgui.Text("   Height:"); imgui.SameLine()
+            if imgui.Button(" - ##vrh") then viz.rect_h = math.max(0.25, viz.rect_h - 0.25) end
+            imgui.SameLine(); imgui.Text(string.format("%.2f", viz.rect_h)); imgui.SameLine()
+            if imgui.Button(" + ##vrh") then viz.rect_h = viz.rect_h + 0.25 end
+        else
+            imgui.Text("Size:"); imgui.SameLine()
+            if imgui.Button(" - ##vs") then viz.size = math.max(1, viz.size - 1) end
+            imgui.SameLine(); imgui.Text(string.format("%d", viz.size)); imgui.SameLine()
+            if imgui.Button(" + ##vs") then viz.size = viz.size + 1 end
+        end
 
         imgui.SameLine(); imgui.Text("   Floor ID:"); imgui.SameLine()
         if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
@@ -343,14 +372,21 @@ local function render_position_tab()
 
     -- Actions
     imgui.Separator()
-    local add_lbl = viz.entry_type == 'arrow' and "+ Add Arrow##v"
-                 or viz.entry_type == 'line'  and "+ Add Line##v"
-                 or "+ Add Square##v"
-    if imgui.Button(add_lbl) then
+    local add_lbl = viz.entry_type == 'arrow'  and "+ Add Arrow##v"
+                 or viz.entry_type == 'line'   and "+ Add Line##v"
+                 or viz.entry_type == 'rect'   and "+ Add Rect##v"
+                 or viz.entry_type == 'square' and "+ Add Square##v"
+                 or nil
+    if add_lbl and imgui.Button(add_lbl) then
         local entry
-        if viz.entry_type == 'square' then
+        if viz.entry_type == 'rect' then
+            local axis_str = (viz.vertical and viz.vertical_axis) and string.format(", vertical_axis = '%s'", viz.vertical_axis) or ""
+            entry = string.format(
+                "    { zone_name = %q, type = 'rect', center = { x = %.1f, y = %.1f, z = %.1f }, width = %.2f, height = %.2f, floor_id = %d, colour = %q%s },",
+                p.zone_name, src_x, src_y, src_z, viz.rect_w, viz.rect_h, viz.floor_id, viz.colour, axis_str)
+        elseif viz.entry_type == 'square' then
             local vert_str = viz.vertical and ", vertical = true" or ""
-            local rot_str  = (viz.vertical and viz.vertical_z) and ", vertical_axis = 'z'" or ""
+            local rot_str  = (viz.vertical and viz.vertical_axis) and string.format(", vertical_axis = '%s'", viz.vertical_axis) or ""
             entry = string.format(
                 "    { zone_name = %q, type = 'square', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, floor_id = %d, colour = %q%s%s },",
                 p.zone_name, src_x, src_y, src_z, viz.size, viz.floor_id, viz.colour, vert_str, rot_str)
@@ -361,34 +397,58 @@ local function render_position_tab()
                     p.zone_name,
                     lin.start_pos.x, lin.start_pos.y, lin.start_pos.z,
                     lin.stop_pos.x,  lin.stop_pos.y,  lin.stop_pos.z, viz.floor_id, viz.colour)
+                -- capture before clearing so preview_shapes push below can use them
+                local saved_start = { x = lin.start_pos.x, y = lin.start_pos.y, z = lin.start_pos.z }
+                local saved_stop  = { x = lin.stop_pos.x,  y = lin.stop_pos.y,  z = lin.stop_pos.z  }
                 lin.start_pos = nil
                 lin.stop_pos  = nil
+                if entry then
+                    table.insert(viz.entries, entry)
+                    table.insert(viz.preview_shapes, { type = 'line', start_pos = saved_start, stop_pos = saved_stop, colour = viz.colour })
+                end
+                entry = nil  -- already inserted above
             end
         else
             entry = string.format(
                 "    { zone_name = %q, type = 'arrow', center = { x = %.1f, y = %.1f, z = %.1f }, size = %d, direction = %q, floor_id = %d, colour = %q },",
                 p.zone_name, src_x, src_y, src_z, viz.size, viz.direction, viz.floor_id, viz.colour)
         end
-        if entry then table.insert(viz.entries, entry) end
+        if entry then
+            table.insert(viz.entries, entry)
+            if viz.entry_type == 'rect' then
+                table.insert(viz.preview_shapes, { type = 'rect', center = { x = src_x, y = src_y, z = src_z }, width = viz.rect_w, height = viz.rect_h, colour = viz.colour, vertical_axis = viz.vertical and viz.vertical_axis or nil })
+            elseif viz.entry_type == 'square' then
+                table.insert(viz.preview_shapes, { type = 'square', center = { x = src_x, y = src_y, z = src_z }, size = viz.size, colour = viz.colour, vertical = viz.vertical, vertical_axis = viz.vertical_axis })
+            elseif viz.entry_type == 'arrow' then
+                table.insert(viz.preview_shapes, { type = 'arrow', center = { x = src_x, y = src_y, z = src_z }, size = viz.size, direction = viz.direction, colour = viz.colour })
+            end
+        end
     end
-    imgui.SameLine()
+    if add_lbl then imgui.SameLine() end
     if imgui.Button(string.format("Copy All (%d)##vc", #viz.entries)) then
         if #viz.entries > 0 then
             imgui.SetClipboardText(table.concat(viz.entries, "\n"))
         end
     end
     imgui.SameLine()
-    if imgui.Button("Clear##vc") then viz.entries = {} end
+    if imgui.Button("Clear##vc") then viz.entries = {} viz.preview_shapes = {} end
 
     -- Preview
     if #viz.entries > 0 then
         imgui.Separator()
         imgui.Text(string.format("%d entries — hit 'Copy All' to grab:", #viz.entries))
         imgui.BeginChild("QHViz", { 0, 0 }, true, 0)
-        for _, line in ipairs(viz.entries) do
+        local to_remove = nil
+        for i, line in ipairs(viz.entries) do
+            if imgui.SmallButton(string.format("X##vr%d", i)) then to_remove = i end
+            imgui.SameLine()
             imgui.TextWrapped(line)
         end
         imgui.EndChild()
+        if to_remove then
+            table.remove(viz.entries, to_remove)
+            table.remove(viz.preview_shapes, to_remove)
+        end
     end
 end
 
@@ -489,6 +549,12 @@ local function render_target_tab()
     -- Zone (auto)
     imgui.Text(string.format("Zone:     %s  (auto from current zone)", p.zone_name))
 
+    -- Y offset (arc tip height tuning, baked into target_pos.y on export)
+    imgui.Text("Y offset:"); imgui.SameLine()
+    if imgui.Button(" - ##lyo") then loc.y_offset = loc.y_offset - 0.1 end
+    imgui.SameLine(); imgui.Text(string.format("%.1f", loc.y_offset)); imgui.SameLine()
+    if imgui.Button(" + ##lyo") then loc.y_offset = loc.y_offset + 0.1 end
+
     -- Floor ID
     imgui.Text("Floor ID:"); imgui.SameLine()
     if imgui.Button(" - ##lf") then loc.floor_id = math.max(0, loc.floor_id - 1) end
@@ -512,9 +578,12 @@ local function render_target_tab()
         local key = loc.key_buf[1] ~= "" and loc.key_buf[1] or "my-location"
         local entry = string.format(
             "[%q] = {\n    target_pos = { x = %.1f, y = %.1f, z = %.1f },\n    visual_mode = %q,\n    zone = %q,\n    floor_id = %d,\n    max_distance = %d\n},",
-            key, src_x, src_y, src_z,
+            key, src_x, src_y + loc.y_offset, src_z,
             loc.visual_mode, p.zone_name, loc.floor_id, loc.max_distance)
         table.insert(loc.entries, entry)
+        if t.valid then
+            table.insert(loc.preview_arcs, { end_x = t.x, end_ye = t.y + loc.y_offset, end_zh = t.z })
+        end
     end
     imgui.SameLine()
     if imgui.Button(string.format("Copy All (%d)##lc", #loc.entries)) then
@@ -523,18 +592,25 @@ local function render_target_tab()
         end
     end
     imgui.SameLine()
-    if imgui.Button("Clear##lc") then loc.entries = {} end
+    if imgui.Button("Clear##lc") then loc.entries = {} loc.preview_arcs = {} end
 
     -- Preview
     if #loc.entries > 0 then
         imgui.Separator()
         imgui.Text(string.format("%d entries — hit 'Copy All' to grab:", #loc.entries))
         imgui.BeginChild("QHLoc", { 0, 0 }, true, 0)
-        for _, entry in ipairs(loc.entries) do
+        local to_remove = nil
+        for i, entry in ipairs(loc.entries) do
+            if imgui.SmallButton(string.format("X##lr%d", i)) then to_remove = i end
+            imgui.SameLine()
             imgui.TextWrapped(entry)
             imgui.Separator()
         end
         imgui.EndChild()
+        if to_remove then
+            table.remove(loc.entries, to_remove)
+            table.remove(loc.preview_arcs, to_remove)
+        end
     end
 end
 
@@ -549,9 +625,8 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
 
     local now = os.clock()
 
-    -- Refresh player position (data format: y=elev, z=horiz)
-    if player_mod and (now - lastPosTime) >= POS_INTERVAL then
-        lastPosTime         = now
+    -- Refresh player position every frame (player_mod values are already updated each frame in questhelper.lua)
+    if player_mod then
         cache.pos.x         = player_mod.posX or 0
         cache.pos.y         = player_mod.posZ_depth or 0   -- elevation  → data Y
         cache.pos.z         = player_mod.posY_height or 0  -- horizontal → data Z
@@ -595,18 +670,22 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
     if win_open then
         if imgui.BeginTabBar("QHTabs") then
             if imgui.BeginTabItem("Log") then
+                active_tab = 'log'
                 render_log_tab()
                 imgui.EndTabItem()
             end
             if imgui.BeginTabItem("Position") then
+                active_tab = 'position'
                 render_position_tab()
                 imgui.EndTabItem()
             end
             if imgui.BeginTabItem("Target") then
+                active_tab = 'target'
                 render_target_tab()
                 imgui.EndTabItem()
             end
             if imgui.BeginTabItem("Validate") then
+                active_tab = 'validate'
                 render_validate_tab()
                 imgui.EndTabItem()
             end
@@ -614,6 +693,83 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
         end
     end
     imgui.End()
+
+    -- Locked shapes — always visible regardless of active tab
+    if #viz.preview_shapes > 0 then
+        local beam_drawing = require('modules.beam_drawing')
+        local drawing      = require('util.drawing')
+        for _, s in ipairs(viz.preview_shapes) do
+            local color = beam_drawing.colorNameToARGB(s.colour, 0.85)
+            if s.type == 'rect' then
+                drawing.drawRectangle(s.center, s.width, s.height, color, { vertical_axis = s.vertical_axis })
+            elseif s.type == 'square' then
+                drawing.drawSquare(s.center, s.size, color, { vertical = s.vertical, vertical_axis = s.vertical_axis })
+            elseif s.type == 'arrow' then
+                drawing.drawArrow(s.center, s.size, s.direction, color)
+            elseif s.type == 'line' then
+                drawing.drawLine(s.start_pos, s.stop_pos, color)
+            end
+        end
+    end
+
+    -- Live in-progress shape — only on Position tab
+    if active_tab == 'position' then
+        local beam_drawing = require('modules.beam_drawing')
+        local drawing      = require('util.drawing')
+        local p = cache.pos
+        local t = cache.target
+        local cx, cy, cz
+        local use_npc_y = viz.vertical and (viz.entry_type == 'square' or viz.entry_type == 'rect')
+        if viz.use_target and t.valid then
+            cx = t.x; cy = use_npc_y and t.y or p.y; cz = t.z
+        else
+            cx, cy, cz = p.x, p.y, p.z
+        end
+        local color = beam_drawing.colorNameToARGB(viz.colour, 0.85)
+        if viz.entry_type == 'rect' then
+            drawing.drawRectangle({ x = cx, y = cy, z = cz }, viz.rect_w, viz.rect_h, color, { vertical_axis = viz.vertical and viz.vertical_axis or nil })
+        elseif viz.entry_type == 'square' then
+            drawing.drawSquare({ x = cx, y = cy, z = cz }, viz.size, color, { vertical = viz.vertical, vertical_axis = viz.vertical_axis })
+        elseif viz.entry_type == 'arrow' then
+            drawing.drawArrow({ x = cx, y = cy, z = cz }, viz.size, viz.direction, color)
+        end
+    end
+
+    -- Locked arcs (from Target tab Add Entry) — always visible regardless of active tab
+    if #loc.preview_arcs > 0 then
+        local beam_drawing = require('modules.beam_drawing')
+        local drawArcModule = require('util.drawArc')
+        local p = cache.pos
+        local heightOffset = beam_drawing.getPlayerHeightOffset(false)
+        local startX  = p.x + beam_drawing.PLAYER_ARC_START_X_OFFSET
+        local startYe = p.y + heightOffset
+        local startZh = p.z + beam_drawing.PLAYER_ARC_START_Z_OFFSET
+        beam_drawing.calculateDynamicColor()
+        for _, arc in ipairs(loc.preview_arcs) do
+            drawArcModule(startX, startZh, startYe, arc.end_x, arc.end_zh, arc.end_ye,
+                beam_drawing.ARGB_BEAM_COLOR, beam_drawing.beamAppearProgress, true)
+        end
+    end
+
+    -- Target tab: live arc from player to NPC target with y_offset applied
+    if active_tab == 'target' then
+        local t = cache.target
+        local p = cache.pos
+        if t.valid then
+            local beam_drawing = require('modules.beam_drawing')
+            local drawArcModule = require('util.drawArc')
+            local heightOffset = beam_drawing.getPlayerHeightOffset(false)
+            local startX  = p.x  + beam_drawing.PLAYER_ARC_START_X_OFFSET
+            local startYe = p.y  + heightOffset
+            local startZh = p.z  + beam_drawing.PLAYER_ARC_START_Z_OFFSET
+            local endX    = t.x
+            local endYe   = t.y + loc.y_offset
+            local endZh   = t.z
+            beam_drawing.calculateDynamicColor()
+            drawArcModule(startX, startZh, startYe, endX, endZh, endYe,
+                beam_drawing.ARGB_BEAM_COLOR, beam_drawing.beamAppearProgress, true)
+        end
+    end
 end
 
 return ui_debug

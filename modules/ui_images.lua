@@ -383,7 +383,6 @@ function ui_images.render(lastMainX, lastMainY, lastMainW, lastMainH, currentTop
                             else
                                 -- Can't determine floor, default to not drawing to avoid duplicates
                                 should_draw_arrow = false
-                                print("\30\68[QH-ARROW]\30\01 ✗ Can't determine player floor")
                             end
                         end
                         -- For single-floor images, should_draw_arrow stays true

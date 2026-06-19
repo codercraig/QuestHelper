@@ -579,6 +579,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
                                         if zone.type == 'square' and zone.center and zone.size then
                                             drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
+                                        elseif zone.type == 'rect' and zone.center and zone.width and zone.height then
+                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then
@@ -696,6 +698,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         local color = zone.colour and beam_drawing.colorNameToARGB(zone.colour) or beam_drawing.ARGB_BEAM_COLOR
                                         if zone.type == 'square' and zone.center and zone.size then
                                             drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
+                                        elseif zone.type == 'rect' and zone.center and zone.width and zone.height then
+                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then
@@ -715,6 +719,13 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
                     -- Draw squares around enemies matching onmob_enemy (name scan, within range)
                     if step_data.onmob_enemy and player_module.zoneId ~= 0 then
+                        local zone_ok = true
+                        if step_data.onmob_enemy_zone then
+                            local zones = require('data.zones')
+                            local req_id = zones[step_data.onmob_enemy_zone]
+                            zone_ok = req_id ~= nil and player_module.zoneId == req_id
+                        end
+                        if zone_ok then
                         local enemy_list = type(step_data.onmob_enemy) == 'string'
                             and { step_data.onmob_enemy }
                             or step_data.onmob_enemy
@@ -723,8 +734,9 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         local ecolor      = beam_drawing.colorNameToARGB(ecolour, 0.85)
                         local max_dist_sq = (step_data.onmob_enemy_max_range or 45) ^ 2
 
-                        -- Build lookup set for O(1) name matching
+                        -- Build lookup set for O(1) name matching; empty list = match all
                         local name_set = {}
+                        local match_all = (#enemy_list == 0)
                         for _, n in ipairs(enemy_list) do name_set[n] = true end
 
                         local px = player_module.posX
@@ -732,7 +744,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
                         for i = 0, 1023 do
                             local ent = GetEntity(i)
-                            if ent and ent.Name and name_set[ent.Name] and ent.Status ~= 2 and ent.Status ~= 3 then
+                            if ent and ent.Name and (match_all or name_set[ent.Name]) and ent.Status ~= 2 and ent.Status ~= 3 then
                                 local lp = ent.Movement and ent.Movement.LocalPosition
                                 if lp then
                                     -- Horizontal-only distance check (X and LocalPosition.Y axes)
@@ -747,6 +759,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 end
                             end
                         end
+                        end -- if zone_ok
                     end
                 end
             end

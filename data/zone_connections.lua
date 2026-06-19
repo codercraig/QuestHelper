@@ -411,7 +411,11 @@ return {
     },
     ["Palborough Mines 3"] = {
         {zone = "Palborough Mines 1", exit = "I-8"},
+        {zone = "Palborough Mines 2", exit = "I-7"},
         {zone = "Waughroon Shrine", exit = "H-10"}
+    },
+    ["Palborough Mines 2"] = {
+        {zone = "Palborough Mines 3", exit = "I-7"},
     },
     ["Oldton Movalpolos"] = {
         {zone = "North Gustaberg", exit = "E-11"},

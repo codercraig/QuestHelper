@@ -18,6 +18,7 @@ local zone_name_to_floor = {
     ['Kuftal Tunnel 2'] = 2,
     ['Yughott Grotto 1'] = 1,
     ['Palborough Mines 1'] = 1,
+    ['Palborough Mines 2'] = 2,
     ['Palborough Mines 3'] = 3,
     ['Tavnazian Safehold 1'] = 1,
     ['Tavnazian Safehold 2'] = 2,
@@ -39,6 +40,7 @@ local subzone_to_base = {
     ['Kuftal Tunnel 2'] = "Kuftal Tunnel",
     ['Yughott Grotto 1'] = "Yughott Grotto",
     ['Palborough Mines 1'] = "Palborough Mines",
+    ['Palborough Mines 2'] = "Palborough Mines",
     ['Palborough Mines 3'] = "Palborough Mines",
     ['Tavnazian Safehold 1'] = "Tavnazian Safehold",
     ['Tavnazian Safehold 2'] = "Tavnazian Safehold",
@@ -59,6 +61,7 @@ local zone_floor_to_name = {
     },
     [143] = {
         [1] = "Palborough Mines 1",
+        [2] = "Palborough Mines 2",
         [3] = "Palborough Mines 3"
     },
     [173] = {

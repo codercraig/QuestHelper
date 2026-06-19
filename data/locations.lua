@@ -61,7 +61,7 @@ return {
         zone = "Port Bastok",
     },
     -- Metalworks
-        ["Cid"] = {
+    ["Cid"] = {
         target_pos = { x = -12.6, y = -13.0, z = 2.5 },
         trigger_npc = "Cid",
         visual_mode = "arc",
@@ -121,6 +121,27 @@ return {
         visual_mode = "arc",
         zone = "Metalworks",
     },
+    ["Patt-Pott"] = {
+        target_pos = { x = 24.0, y = -17.6, z = 42.6 },
+        visual_mode = "arc",
+        zone = "Metalworks",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["Pius"] = {
+        target_pos = { x = 99.9, y = -22, z = -12.5 },
+        visual_mode = "arc",
+        zone = "Metalworks",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["Grohm"] = {
+        target_pos = { x = -18.1, y = -12.2, z = -27.6 },
+        visual_mode = "arc",
+        zone = "Metalworks",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Zeruhn Mines
     ["Makarim"] = {
         target_pos = { x = -61, y = 7 ,z = -333.3 },
@@ -133,6 +154,42 @@ return {
         trigger_npc = "Drake Fang",
         visual_mode = "arc",
         zone = "Zeruhn Mines",
+    },
+    --Palborough Mines
+    ["palborough-mines-mythril-seam"] = {
+        target_pos = { x = 164.8, y = -3.0, z = 97.6 },
+        visual_mode = "arc",
+        zone = "Palborough Mines",
+        floor_id = 1,
+        max_distance = 30
+    },
+    ["palborough-mines-elevator-lever-i8"] = {
+        target_pos = { x = 182.4, y = 0.9, z = 64.4 },
+        visual_mode = "arc",
+        zone = "Palborough Mines",
+        floor_id = 1,
+        max_distance = 15
+    },
+    ["palborough-mines-refiner-lid"] = {
+        target_pos = { x = 180.0, y = -33.9, z = 169.7 },
+        visual_mode = "arc",
+        zone = "Palborough Mines",
+        floor_id = 2,
+        max_distance = 20
+    },
+    ["palborough-mines-refiner-lever"] = {
+        target_pos = { x = 182.4, y = -33.1, z = 169.7 },
+        visual_mode = "arc",
+        zone = "Palborough Mines",
+        floor_id = 2,
+        max_distance = 20
+    },
+    ["palborough-mines-refiner-lever-2"] = {
+        target_pos = { x = 175.7, y = -17.1, z = 175.9 },
+        visual_mode = "arc",
+        zone = "Palborough Mines",
+        floor_id = 2,
+        max_distance = 5
     },
     --Dangruf Wadi
     ["Geyser1"] = {
@@ -298,6 +355,13 @@ return {
         zone = "Windurst Waters South",
         floor_id = 2,
         max_distance = 30
+    },
+    ["Moreno-Toeno"] = {
+        target_pos = { x = 168.5, y = -2.1, z = 156.9 },
+        visual_mode = "arc",
+        zone = "Windurst Waters South",
+        floor_id = 1,
+        max_distance = 35
     },
     -- Windurst Walls
     ["Yoran-Oran"] = {

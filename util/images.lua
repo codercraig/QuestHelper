@@ -54,22 +54,21 @@ function images.GetTexture(filename, zone_id, floor_id, force_png)
         floor_id = floor_id or 0
         local cache_key = string.format("dat_%d_%d", zone_id, floor_id)
 
-        -- Return cached DAT texture if exists
-        if dat_cache[cache_key] then
-            return dat_cache[cache_key]
+        -- Return cached result (false = known failure, skip retry and re-log)
+        if dat_cache[cache_key] ~= nil then
+            return dat_cache[cache_key] or nil
         end
 
         -- Try loading from DAT
         local texture, err = dat_loader.load_map_texture(zone_id, floor_id)
         if texture then
             dat_cache[cache_key] = texture
-            -- Only log success in dev mode
             if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
                 print(string.format('[QuestHelper] Loaded map from DAT: Zone %d, Floor %d', zone_id, floor_id))
             end
             return texture
         else
-            -- DAT loading failed, only log in dev mode
+            dat_cache[cache_key] = false
             if quest_state.settings and quest_state.settings.ui_settings and quest_state.settings.ui_settings.dev_mode then
                 print(string.format('[QuestHelper] DAT load failed (%s), falling back to PNG: %s', err or 'unknown error', filename or 'none'))
             end

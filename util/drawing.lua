@@ -85,6 +85,24 @@ function drawingModule.drawSquare(center, size, color, options)
                 {x = center.x, y = center.y + h, z = center.z + h},
                 {x = center.x, y = center.y + h, z = center.z - h},
             }
+        elseif options.vertical_axis == 'ne' then
+            -- Upright square facing NE/SW: spans NW/SE direction and Y.
+            local d = h / math.sqrt(2)
+            corners = {
+                {x = center.x - d, y = center.y - h, z = center.z + d},
+                {x = center.x + d, y = center.y - h, z = center.z - d},
+                {x = center.x + d, y = center.y + h, z = center.z - d},
+                {x = center.x - d, y = center.y + h, z = center.z + d},
+            }
+        elseif options.vertical_axis == 'nw' then
+            -- Upright square facing NW/SE: spans NE/SW direction and Y.
+            local d = h / math.sqrt(2)
+            corners = {
+                {x = center.x - d, y = center.y - h, z = center.z - d},
+                {x = center.x + d, y = center.y - h, z = center.z + d},
+                {x = center.x + d, y = center.y + h, z = center.z + d},
+                {x = center.x - d, y = center.y + h, z = center.z - d},
+            }
         else
             -- Upright square facing N/S: varies X and Y (elevation), Z fixed.
             corners = {
@@ -126,6 +144,98 @@ function drawingModule.drawSquare(center, size, color, options)
     local lineWidth = 2
     local sides = {{1,2},{2,3},{3,4},{4,1}}
     for _, s in ipairs(sides) do
+        local a, b = s[1], s[2]
+        if sz[a] >= 0 and sz[a] <= 1 and sz[b] >= 0 and sz[b] <= 1 then
+            local dx = sx[b] - sx[a]
+            local dy = sy[b] - sy[a]
+            local qlen = math.sqrt(dx*dx + dy*dy)
+            if qlen >= 0.001 then
+                local nx = (-dy / qlen) * lineWidth
+                local ny = ( dx / qlen) * lineWidth
+                local verts = ffi.new('struct ArrowVertFormat[4]', {
+                    { sx[a] + nx, sy[a] + ny, 0.5, 1.0, color, 0, 0   },
+                    { sx[a] - nx, sy[a] - ny, 0.5, 1.0, color, 0, 0.5 },
+                    { sx[b] + nx, sy[b] + ny, 0.5, 1.0, color, 1, 0   },
+                    { sx[b] - nx, sy[b] - ny, 0.5, 1.0, color, 1, 0.5 },
+                })
+                d3d8dev:DrawPrimitiveUP(C.D3DPT_TRIANGLESTRIP, 2, verts, arrowVertSize)
+            end
+        end
+    end
+end
+
+-- Rectangle: flat on floor by default; pass vertical_axis to stand it upright.
+-- Flat: width spans X, height spans Z. Vertical: width spans horizontal, height spans elevation.
+function drawingModule.drawRectangle(center, width, height, color, options)
+    local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
+    local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
+
+    local hw = width  / 2
+    local hh = height / 2
+    local axis = options and options.vertical_axis
+    local corners
+    if axis == 'ns' then
+        -- Upright wall facing N/S: spans X and elevation Y, Z fixed
+        corners = {
+            {x = center.x - hw, y = center.y - hh, z = center.z},
+            {x = center.x + hw, y = center.y - hh, z = center.z},
+            {x = center.x + hw, y = center.y + hh, z = center.z},
+            {x = center.x - hw, y = center.y + hh, z = center.z},
+        }
+    elseif axis == 'z' then
+        corners = {
+            {x = center.x,      y = center.y - hh, z = center.z - hw},
+            {x = center.x,      y = center.y - hh, z = center.z + hw},
+            {x = center.x,      y = center.y + hh, z = center.z + hw},
+            {x = center.x,      y = center.y + hh, z = center.z - hw},
+        }
+    elseif axis == 'ne' then
+        local d = hw / math.sqrt(2)
+        corners = {
+            {x = center.x - d,  y = center.y - hh, z = center.z + d},
+            {x = center.x + d,  y = center.y - hh, z = center.z - d},
+            {x = center.x + d,  y = center.y + hh, z = center.z - d},
+            {x = center.x - d,  y = center.y + hh, z = center.z + d},
+        }
+    elseif axis == 'nw' then
+        local d = hw / math.sqrt(2)
+        corners = {
+            {x = center.x - d,  y = center.y - hh, z = center.z - d},
+            {x = center.x + d,  y = center.y - hh, z = center.z + d},
+            {x = center.x + d,  y = center.y + hh, z = center.z + d},
+            {x = center.x - d,  y = center.y + hh, z = center.z - d},
+        }
+    else
+        -- Flat on floor: width spans X, height spans Z
+        corners = {
+            {x = center.x - hw, y = center.y, z = center.z - hh},
+            {x = center.x + hw, y = center.y, z = center.z - hh},
+            {x = center.x + hw, y = center.y, z = center.z + hh},
+            {x = center.x - hw, y = center.y, z = center.z + hh},
+        }
+    end
+
+    local sx, sy, sz = {}, {}, {}
+    for i, c in ipairs(corners) do
+        sx[i], sy[i], sz[i] = helpers.worldToScreen(c.x, c.y, c.z, view, projection)
+    end
+
+    squareBeamTex = squareBeamTex or helpers.getTexture(addon.path .. 'assets/beam.png')
+    d3d8dev:SetStreamSource(0, nil, 0)
+    d3d8dev:SetVertexShader(ARROW_VERTEX_FORMAT)
+    d3d8dev:SetRenderState(C.D3DRS_ZENABLE, 0)
+    d3d8dev:SetRenderState(C.D3DRS_ALPHABLENDENABLE, 1)
+    d3d8dev:SetRenderState(C.D3DRS_SRCBLEND, C.D3DBLEND_SRCALPHA)
+    d3d8dev:SetRenderState(C.D3DRS_DESTBLEND, C.D3DBLEND_INVSRCALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLOROP,   C.D3DTOP_BLENDTEXTUREALPHA)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_COLORARG2, C.D3DTA_DIFFUSE)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAOP,   C.D3DTOP_SELECTARG1)
+    d3d8dev:SetTextureStageState(0, C.D3DTSS_ALPHAARG1, C.D3DTA_TEXTURE)
+    d3d8dev:SetTexture(0, squareBeamTex)
+
+    local lineWidth = 2
+    for _, s in ipairs({{1,2},{2,3},{3,4},{4,1}}) do
         local a, b = s[1], s[2]
         if sz[a] >= 0 and sz[a] <= 1 and sz[b] >= 0 and sz[b] <= 1 then
             local dx = sx[b] - sx[a]

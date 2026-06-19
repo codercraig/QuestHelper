@@ -4,6 +4,15 @@ return {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -140,6 +149,15 @@ return {
                        "Note: There is aggro in this mission. Bring Sneak/Invisible or be around level 15-18. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -167,15 +185,6 @@ return {
                         state     = 1,
                         highlights = {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -471,6 +480,15 @@ return {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: Trade at least 1 crystal to any War Warlock (W.W.) at the city gates to unlock this mission. Trading 7 caps your rank points for Rank 2. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -501,15 +519,15 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -680,6 +698,15 @@ return {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
                        "Note: This mission is skippable! Trade 1 crystal to any War Warlock (W.W.) at the city gates to unlock it, or 3 crystals to skip it entirely. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
@@ -710,15 +737,15 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -731,20 +758,32 @@ return {
                 destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 3: Head to Tahrongi Canyon (first time) or Buburimu Peninsula (repeat) and kill at least 30 monsters. \n" ..
-                       "East Sarutabaruta (J-4) -> Tahrongi Canyon. For repeat runs, continue east to Buburimu Peninsula (K-8). \n \n" ..
-                       "Note: You have 1 game day (first time) or 2 game days (repeat) to kill the mobs and return. \n" ..
-                       "Trust kills DO count. Pet kills do NOT count. Party kills count toward the shared total. \n" ..
-                       "Aim for 30-35 kills - going over ~60 will cause a mission fail. \n" ..
-                       "Tip: Set your Home Point in Windurst and bring a Warp Scroll before heading out! \n \n",
+                text = "Step 3: Kill 30-35 monsters in Tahrongi Canyon (first run) or Buburimu Peninsula (repeat). \n" ..
+                       "Route: East Sarutabaruta (J-4) -> Tahrongi Canyon; repeat runs continue east to Buburimu (K-8). \n" ..
+                       "You have 1 game day (first) or 2 game days (repeat) to kill and return to Moreno-Toeno. \n" ..
+                       "Trust kills count. Pet kills don't. Don't exceed ~60 kills or the mission fails. \n \n",
                 route_to = "Tahrongi Canyon",
+                onmob_enemy = {
+                    "Canyon Rarab", "Strolling Sapling", "Pygmaioi",
+                    "Yagudo Acolyte", "Yagudo Initiate", "Yagudo Scribe", "Yagudo Mendicant", "Yagudo Persecutor", "Yagudo Piper",
+                    "Goblin Thug", "Goblin Weaver", "Goblin Ambusher", "Goblin Butcher", "Goblin Digger", "Goblin Tinkerer",
+                    "Killer Bee", "Akbaba", "Canyon Crawler", "Wild Dhalmel", "Barghest",
+                    "Skeleton Sorcerer", "Skeleton Warrior", "Ghost", "Grenade", "Poltergeist",
+                    "Air Elemental", "Earth Elemental",
+                },
+                onmob_enemy_zone = "Tahrongi Canyon",
+                kill_requirement = {
+                    count = 35,
+                    zone = "Tahrongi Canyon",
+                    count_party_kills = true,
+                },
             },
             {
                 text = "Step 4: Return to Moreno-Toeno (L-6) at the Aurastery in Windurst Waters (North) to complete the mission! \n" ..
                        "Note: He will only assess you in the final game hour before your deadline. \n \n",
                 onmob_target = {"Moreno-Toeno"},
                 trigger_on_event_id = {200, 201, 206, 209},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "L-6", offsetX = 16, offsetY = 16},
             },
         },
@@ -752,13 +791,22 @@ return {
             text = "Rank Points!",
         }
     },
-    ["2-3: The Three Kingdoms - Introduction"] = {
+    ["2-3a: The Three Kingdoms - Introduction"] = {
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
-                       "Note: Trade 1 crystal to any War Warlock (W.W.) at the city gates to unlock this mission. Trading 3 crystals after 'Lost for Words' also works. \n \n",
+                       "Note: Trade 1 crystal to any War Warlock (W.W.) at the city gates to unlock this mission. Trading 6 crystals after 'Lost for Words' also works. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
                 trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -788,26 +836,24 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
-                text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and enter the Door: Clerical Chamber. \n" ..
-                       "Talk to Kupipi behind the counter - she will hand you the KI:Letter to the Consuls. \n" ..
-                       "Note: You will also receive Cipher:Semih if you have the KI:Rhapsody in White. \n \n" ..
-                       "You must now visit both San d'Oria and Bastok. Choose which nation to visit first, then follow \n" ..
-                       "either the 'San d'Oria -> Bastok' guide OR the 'Bastok -> San d'Oria' guide. Do NOT do both! \n \n",
+                text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and enter the Door: Clerical Chamber. \n \n" ..
+                       "Talk to Kupipi behind the counter - she will hand you the KI:Letter to the Consuls. \n \n" ..
+                       "You can now go to either the 'San d'Oria -> Bastok' guide OR the 'Bastok -> San d'Oria' guide. Do NOT do both! \n \n",
                 onmob_target = {"Kupipi"},
-                trigger_on_event_id = {95},
-                route_to = "Heavens Tower",
+                trigger_on_event_id = {95,97},
+                route_to = "Heavens Tower"
             },
         },
         reward = {
@@ -815,7 +861,7 @@ return {
         }
     },
 
-    ["2-3: The Three Kingdoms - San d'Oria -> Bastok"] = {
+    ["2-3b: The Three Kingdoms - San d'Oria -> Bastok"] = {
         steps = {
             {
                 text = "Step 1: Travel to Northern San d'Oria and talk to Heruze-Moruze (H-9) in the Consulate of Windurst. \n \n",
@@ -957,11 +1003,10 @@ return {
         }
     },
 
-    ["2-3: The Three Kingdoms - Bastok -> San d'Oria"] = {
+    ["2-3b: The Three Kingdoms - Bastok -> San d'Oria"] = {
         steps = {
             {
-                text = "Step 1: Travel to Bastok and talk to Patt-Pott (I-7) at the Consulate of Windurst in Metalworks. \n" ..
-                       "Tip: Unity Warp to South Gustaberg then head to Bastok Markets (J-7) to reach Metalworks. \n \n",
+                text = "Step 1: Travel to Bastok and talk to Patt-Pott (I-7) at the Consulate of Windurst in Metalworks. \n",
                 onmob_target = {"Patt-Pott"},
                 trigger_on_event_id = {254},
                 route_to = "Metalworks",
@@ -975,59 +1020,93 @@ return {
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 3: Talk to Grohm (H-9) in the Craftsmen's Eatery in Metalworks. \n" ..
-                       "He will give you Pickaxes and direct you to mine in Palborough Mines. \n" ..
+                text = "Step 3: Talk to Grohm (H-9) in the Craftsmen's Eatery in Metalworks. \n \n" ..
+                       "He will give you Pickaxes and direct you to mine in Palborough Mines. \n \n" ..
                        "Tip: Buy extra Pickaxes as they can break. Pick up the Map of Palborough Mines if you need it. \n \n",
                 onmob_target = {"Grohm"},
                 trigger_on_event_id = {423},
                 route_to = "Metalworks",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                         { zone_name = "Metalworks", type = 'rect', center = { x = -29.7, y = -11.6, z = -18.3 }, width = 2.50, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                         { zone_name = "Metalworks", type = 'arrow', center = { x = -32.9, y = -10.0, z = -15.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                }
             },
             {
-                text = "Step 4: Head to Palborough Mines and mine from Mythril Seams until you obtain Mine Gravel. \n" ..
-                       "Mythril Seam locations: (I-8) floor 1 west of river, (I-8) floor 2 south room, (I-9) floor 3. \n" ..
-                       "Note: Sneak recommended - Quadavs aggro by sight. \n \n" ..
-                       "Once you have Mine Gravel, head to floor 3 (I-6) and trade it to the Refiner Lid. \n" ..
-                       "Pull the Refiner Lever, then drop off the ledge below and pull the second lever. \n" ..
-                       "You will receive an Onze of Mythril Sand. \n" ..
-                       "(Optional): Mine Gravel and Mythril Sand can alternatively be purchased from the Auction House. \n \n",
-                route_to = "Palborough Mines",
-                images = {
-                    {
-                        zone_name = "Palborough Mines",
-                        floor_id  = 1,
-                        width     = 512,
-                        height    = 512,
-                        state     = 4,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Palborough Mines",
-                        floor_id  = 2,
-                        width     = 512,
-                        height    = 512,
-                        state     = 4,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Palborough Mines",
-                        floor_id  = 3,
-                        width     = 512,
-                        height    = 512,
-                        state     = 4,
-                        highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                text = "Step 4: Head to Palborough Mines and mine Mythril Seams until you obtain Mine Gravel. \n \n" ..
+                       "Seam locations: (I-8) floor 1 west of river, (I-8) floor 2 south room, (I-9) floor 3. \n \n" ..
+                       "Note: Sneak recommended — Quadavs aggro by sight. \n" ..
+                       "(Optional): Mine Gravel can be purchased from the Auction House [ Others -> Misc.]. \n \n",
+                route_to = "Palborough Mines 1",
+                destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
+                onmob_target = {"palborough-mines-mythril-seam"},
+                items_needed = {"Mine Gravel"},
+                trigger_on_item_obtain = {"Mine Gravel"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 59.7, y = 0.2, z = 69.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.1, y = 0.2, z = 99.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 62.1, y = 0.9, z = 139.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.3, y = -0.1, z = 133.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 101.5, y = 0.1, z = 60.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 167.6, y = -0.1, z = 66.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
                 },
             },
             {
-                text = "Step 5: Return to Patt-Pott (I-7) in Metalworks and trade him the Onze of Mythril Sand. \n" ..
+                text = "Step 5: On floor 3 of Palborough Mines, go to (I-6) and trade Mine Gravel to the Refiner Lid. \n \n",
+                zone_max_distance = 30,
+                onmob_target = {"palborough-mines-elevator-lever-i8",
+                                "palborough-mines-refiner-lid"},
+                route_to = "Palborough Mines 2",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                --Put in the refiner machine lid
+                trigger_on_event_id = {19},
+                visual_zones = {
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 169.2, y = -1.2, z = 92.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 163.1, y = 0.2, z = 59.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = 0.1, z = 55.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.3, y = -6.1, z = 9.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 139.0, y = -8.1, z = -7.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 179.3, y = -14.5, z = 20.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 220.9, y = -7.9, z = 39.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 200.5, y = 0.2, z = 59.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --3rd floor
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 187.0, y = -32.0, z = 61.1 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.3, y = -32.0, z = 66.2 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.4, y = -32.0, z = 99.6 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 218.5, y = -32.0, z = 139.7 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 179.5, y = -32.0, z = 141.5 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                }
+            },
+            {
+                text = "Step 6: Pull the Refiner Lever! \n \n",
+                zone_max_distance = 30,
+                onmob_target = {"palborough-mines-refiner-lever"},
+                route_to = "Palborough Mines 2",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = {17},
+            },
+            {
+                text = "Step 7: Drop down and pull the second lever. \n \n" ..
+                       "You will receive an Onze of Mythril Sand. \n \n",
+                zone_max_distance = 30,
+                onmob_target = {"palborough-mines-refiner-lever-2"},
+                route_to = "Palborough Mines 2",
+                destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                trigger_on_item_obtain = {"Mythril Sand"},
+                visual_zones = {
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 180.9, y = -32.3, z = 167.6 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 175.3, y = -31.8, z = 176.7 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'line', start = { x = 175.4, y = -31.8, z = 177.9 }, stop = { x = 175.6, y = -23.5, z = 179.2 }, floor_id = 2, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'line', start = { x = 175.6, y = -23.5, z = 179.2 }, stop = { x = 175.4, y = -23.5, z = 184.1 }, floor_id = 2, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'line', start = { x = 175.4, y = -23.5, z = 184.1 }, stop = { x = 175.3, y = -15.7, z = 185.3 }, floor_id = 2, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 174.1, y = -15.8, z = 182.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                }
+            },
+            {
+                text = "Step 8: Warp out and go to Patt-Pott (I-7) in Metalworks and trade him the Onze of Mythril Sand. \n \n" ..
                        "The Bastok portion is now complete! \n \n",
                 onmob_target = {"Patt-Pott"},
                 trigger_on_event_id = {255},
@@ -1035,7 +1114,7 @@ return {
                 destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 6: Travel to Northern San d'Oria and talk to Kasaroro (H-9) in the Consulate of Windurst. \n" ..
+                text = "Step 9: Travel to Northern San d'Oria and talk to Kasaroro (H-9) in the Consulate of Windurst. \n" ..
                        "Tip: Teleport-Holla from Crag of Holla, or Unity Warp to East Ronfaure. \n \n",
                 onmob_target = {"Kasaroro"},
                 trigger_on_event_id = {547},
@@ -1043,7 +1122,7 @@ return {
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 7: Go to Chateau d'Oraguille and talk to Halver (I-9). \n" ..
+                text = "Step 10: Go to Chateau d'Oraguille and talk to Halver (I-9). \n" ..
                        "Note: You will receive Cipher:Halver if you have the KI:Rhapsody in White. \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {504},
@@ -1051,7 +1130,7 @@ return {
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 8: Travel to Horlais Peak for the BCNM battle. \n" ..
+                text = "Step 11: Travel to Horlais Peak for the BCNM battle. \n" ..
                        "Note: Orcs sight-aggro, Bats sound-aggro. Sneak and Invisible recommended for lower levels. \n \n" ..
                        "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
                        "Ghelsba Outpost: Go to (H-11) -> Yughott Grotto (exit 1). \n" ..
@@ -1112,7 +1191,7 @@ return {
                 },
             },
             {
-                text = "Step 9: Click the Burning Circle and enter the battlefield. You will face Dread Dragon and Spotter. \n" ..
+                text = "Step 12: Click the Burning Circle and enter the battlefield. You will face Dread Dragon and Spotter. \n" ..
                        "Recommended: Level 35+ solo. Alter Egos may be summoned inside. \n \n" ..
                        "===== Dread Dragon ===== \n" ..
                        "Family: Dragon | Level: 27 \n \n" ..
@@ -1123,14 +1202,14 @@ return {
                 trigger_on_event_id = {32001},
             },
             {
-                text = "Step 10: Return to Kasaroro (H-9) in the Consulate of Windurst in Northern San d'Oria. \n" ..
+                text = "Step 13: Return to Kasaroro (H-9) in the Consulate of Windurst in Northern San d'Oria. \n" ..
                        "You will receive the KI:Kindred Report. \n \n",
                 onmob_target = {"Kasaroro"},
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 11: Return to Kupipi in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n",
+                text = "Step 14: Return to Kupipi in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n",
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = {101},
                 route_to = "Heavens Tower",
