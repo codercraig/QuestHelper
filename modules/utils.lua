@@ -74,7 +74,7 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
     if not mdata or not mdata.steps then return {} end
     local step_data = mdata.steps[stepIndex]
 
-    -- If step has manually-defined images, check if player is in any image's zone first
+    -- If step has manually-defined images, return them or route to nearest image zone
     if type(step_data) == 'table' and step_data.images then
         local matched = {}
         for _, image_info in ipairs(step_data.images) do
@@ -83,7 +83,6 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
             end
         end
 
-        -- Collect all unique zone_names from matched images
         if #matched > 0 then
             local image_zones = {}
             local seen = {}
@@ -94,7 +93,6 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                 end
             end
 
-            -- If images specify zones and player isn't in any of them, route to nearest
             if #image_zones > 0 then
                 local pathfinding_ok, pathfinding = pcall(require, 'modules.pathfinding')
                 if pathfinding_ok then
@@ -105,9 +103,14 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                             local zones_db = require('data.zones')
                             local current_zone = pathfinding.getCurrentZone(player_zone_id, zones_db)
                             if current_zone then
+                                -- Also compare base zone name so sub-zones like "Giddeus 2" match "Giddeus"
+                                local base_current = pathfinding.getBaseZoneName(current_zone)
                                 local in_valid_zone = false
                                 for _, z in ipairs(image_zones) do
-                                    if current_zone == z then in_valid_zone = true; break end
+                                    if current_zone == z or base_current == z then
+                                        in_valid_zone = true
+                                        break
+                                    end
                                 end
                                 if not in_valid_zone then
                                     local best_path, best_len, best_dest = nil, math.huge, nil
@@ -120,7 +123,6 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                                         end
                                     end
                                     if best_path then
-                                        -- Extract highlights from images in the destination zone
                                         local dest_highlights = {}
                                         for _, img in ipairs(matched) do
                                             if img.zone_name == best_dest and img.highlights then

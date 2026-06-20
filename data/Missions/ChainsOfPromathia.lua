@@ -5048,7 +5048,7 @@ return {
                        "Easiest route: use the Home Point near the Gate of the Gods in Grand Palace of Hu'Xzoi (H-8) then interact with the Gate of the Gods to zone in.\n \n" ..
                        "Otherwise, Escape/Warp out! \n \n" ..
                        "The cutscene fires automatically on entering The Garden of Ru'Hmet.\n",
-                route_to = "Grand Palace of Hu'Xzoi",
+                --route_to = "Grand Palace of Hu'Xzoi",
                 trigger_on_event_id = {201},
                 onmob_target = "grand-palace-of-hu-xzoi-gate-of-the-gods-north",
                 zone_trigger = "The Garden of Ru'Hmet",
@@ -5072,7 +5072,7 @@ return {
                        "Any race can check the Ebon Panel for the first cutscene, but only the matching race gets the key item on the 2nd check.\n \n" ..
                        "Towers have 4 floors with enemies (elevators alternate east/west sides). The 4th floor is safe - check the Ebon Panel TWICE to receive your Light and the title: Warrior of the Crystal.\n" ..
                        "Note the guide will track which race you are , so just follow the arrows and it will take you to the correct tower from the entrance!",
-                route_to = "The Garden of Ru'Hmet",
+                --route_to = "The Garden of Ru'Hmet",
                 zone_max_distance = 40,
                 trigger_on_event_id = {120, 121, 122, 123, 124},
                 --trigger_on_event_id = {202},

@@ -5,8 +5,8 @@
 [2-1] Lost for Words - DONE
 [2-2] Testing Time - DONE
 [2-3] The Three Kingdoms (Introduction) - DONE
-[2-3] The Three Kingdoms (San d'Oria -> Bastok) - DRAFT
-[2-3] The Three Kingdoms (Bastok -> San d'Oria) - STARTED (1/2)
+[2-3] The Three Kingdoms (San d'Oria -> Bastok) - STARTED
+[2-3] The Three Kingdoms (Bastok -> San d'Oria) - DONE
 [3-1] To Each His Own Right - DRAFT
 [3-2] Written in the Stars - DRAFT
 [3-3] A New Journey - DRAFT

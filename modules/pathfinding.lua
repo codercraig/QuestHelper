@@ -52,6 +52,7 @@ local subzone_to_base = {
 local function getBaseZoneName(zone_name)
     return subzone_to_base[zone_name] or zone_name
 end
+pathfinding.getBaseZoneName = getBaseZoneName
 
 -- Map zone_id + floor_id to specific zone names (inverse of zone_name_to_floor)
 -- Used for detecting which "sub-zone" the player is in based on their floor

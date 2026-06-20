@@ -600,12 +600,27 @@ return {
         floor_id = 0,
         max_distance = 45
     },
+    ["Kasaroro"] = {
+        target_pos = { x = -72.3, y = -3.5, z = 34.4 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 40
+    },
     -- Chateau d'Oraguille
     ["Halver"] = {
         target_pos = { x = 2.4, y= -2, z=1.9},
         trigger_npc = "Halver",
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
+    },
+    -- Horlias Peak
+    ["horlais-peak-burning-circle"] = {
+        target_pos = { x = -503.0, y = 158.3, z = -212.6 },
+        visual_mode = "arc",
+        zone = "Horlais Peak",
+        floor_id = 0,
+        max_distance = 20
     },
     -- Oldton Movalpolo
     ["oldton-movalpolos-tarnotik"] = {

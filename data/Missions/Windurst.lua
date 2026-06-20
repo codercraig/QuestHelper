@@ -1118,8 +1118,13 @@ return {
                        "Tip: Teleport-Holla from Crag of Holla, or Unity Warp to East Ronfaure. \n \n",
                 onmob_target = {"Kasaroro"},
                 trigger_on_event_id = {547},
+                zone_max_distance = 40,
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -29.4, y = 0.0, z = 36.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'rect', center = { x = -45.1, y = -3.5, z = 36.0 }, width = 3.00, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                }
             },
             {
                 text = "Step 10: Go to Chateau d'Oraguille and talk to Halver (I-9). \n" ..
@@ -1136,59 +1141,106 @@ return {
                        "Ghelsba Outpost: Go to (H-11) -> Yughott Grotto (exit 1). \n" ..
                        "Yughott Grotto : Go to (K-5) -> Fort Ghelsba (exit 3). \n" ..
                        "Fort Ghelsba   : Go to (J-8) -> Yughott Grotto (exit 4). \n" ..
-                       "Yughott Grotto : Enter Horlais Peak (J-6). \n" ..
+                       "Yughott Grotto : Enter Horlais Peak (J-6). \n \n" ..
                        "Shortcut: Yughott Grotto Home Point #1 if unlocked. \n \n",
+                zone_max_distance = 35,
                 zone_trigger = "Horlais Peak",
-                images = {
-                    {
-                        zone_name = "West Ronfaure",
-                        width     = 512,
-                        height    = 512,
-                        state     = 8,
-                        highlights = {
-                            { position = "E-4", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Ghelsba Outpost",
-                        floor_id  = 1,
-                        width     = 512,
-                        height    = 512,
-                        state     = 8,
-                        highlights = {
-                            { position = "H-11", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Yughott Grotto",
-                        floor_id  = 1,
-                        width     = 512,
-                        height    = 512,
-                        state     = 8,
-                        highlights = {
-                            { position = "K-5", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Fort Ghelsba",
-                        width     = 512,
-                        height    = 512,
-                        state     = 8,
-                        highlights = {
-                            { position = "J-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Yughott Grotto",
-                        floor_id  = 2,
-                        width     = 512,
-                        height    = 512,
-                        state     = 8,
-                        highlights = {
-                            { position = "J-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                visual_zones = {
+                        --Ghelsba Outpost
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 28.1, y = 0.1, z = 62.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -4.4, y = 0.0, z = 26.6 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 19.9, y = 0.1, z = -4.8 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 45.9, y = 0.0, z = -58.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        -- Yughotto Grott 1 to K-4
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -225.1, y = -0.2, z = -91.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -191.8, y = -1.0, z = -87.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -141.4, y = -0.2, z = -60.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -103.5, y = -0.0, z = -56.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -92.0, y = -0.6, z = -38.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -78.9, y = 0.0, z = -9.7 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -21.5, y = -0.2, z = -25.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 18.8, y = -0.2, z = 2.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 56.4, y = -0.2, z = 32.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 137.1, y = -12.9, z = 61.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 139.8, y = -12.4, z = 113.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 203.8, y = -12.0, z = 121.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 236.9, y = -12.2, z = 125.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 292.9, y = -23.7, z = 171.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 317.5, y = -24.2, z = 180.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 329.4, y = -24.4, z = 215.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 335.4, y = -24.1, z = 239.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 322.3, y = -24.1, z = 251.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        -- Fort Ghelsba 2
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 207.9, y = -45.8, z = 100.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 151.4, y = -44.0, z = 116.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 93.8, y = -52.0, z = 116.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 96.9, y = -59.8, z = 66.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 101.0, y = -60.0, z = 1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 109.9, y = -63.6, z = -51.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 146.6, y = -68.5, z = -62.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 184.1, y = -75.7, z = -49.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 177.5, y = -83.9, z = -3.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 166.4, y = -84.6, z = 20.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 176.7, y = -86.4, z = 20.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 185.2, y = -86.4, z = 24.3 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 198.8, y = -86.2, z = 19.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                        --Yughott Grotto 2
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 283.4, y = -39.7, z = 148.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 320.8, y = -40.3, z = 135.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 315.1, y = -40.1, z = 105.0 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 330.6, y = -42.1, z = 109.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 374.5, y = -40.3, z = 105.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 400.5, y = -40.2, z = 118.6 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 405.5, y = -40.1, z = 148.4 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 436.7, y = -40.1, z = 169.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+
+                        --Home point
+                        { zone_name = "Yughott Grotto", type = 'square', center = { x = 434.0, y = -40.0, z = 171.0 }, size = 1, floor_id = 2, colour = "green" },
                 },
+                images = {
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Ghelsba Outpost",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "H-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Yughott Grotto",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "K-5", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Fort Ghelsba",
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 11,
+                          zone_name = "Yughott Grotto",
+                          floor_id = 2,
+                          highlights = {
+                              { position = "J-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
             },
             {
                 text = "Step 12: Click the Burning Circle and enter the battlefield. You will face Dread Dragon and Spotter. \n" ..
@@ -1199,14 +1251,29 @@ return {
                        "Family: Bigeye | Level: 25 \n \n" ..
                        "Sleep/Bind the Dragon and kill the Spotter first! \n" ..
                        "After winning, you will receive the KI:Kindred Crest. \n \n",
+                onmob_target = "horlais-peak-burning-circle",
+                -- onmob_enemy = {"Dread Dragon","Spotter"},
+                -- onmob_enemy_zone = "Horlais Peak",
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Dread Dragon","Spotter"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
                 trigger_on_event_id = {32001},
             },
             {
                 text = "Step 13: Return to Kasaroro (H-9) in the Consulate of Windurst in Northern San d'Oria. \n" ..
                        "You will receive the KI:Kindred Report. \n \n",
                 onmob_target = {"Kasaroro"},
+                trigger_on_event_id = {551},
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -29.4, y = 0.0, z = 36.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'rect', center = { x = -45.1, y = -3.5, z = 36.0 }, width = 3.00, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                }
             },
             {
                 text = "Step 14: Return to Kupipi in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n",
