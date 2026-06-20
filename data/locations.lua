@@ -392,6 +392,20 @@ return {
         visual_mode = "arc",
         zone = "Heavens Tower"
     },
+    ["Door: Starway-Stairway"] = {
+        target_pos = { x = -13.7, y = -1.5, z = 28.9 },
+        visual_mode = "arc",
+        zone = "Heavens Tower",
+        floor_id = 0,
+        max_distance = 30
+    },
+    ["Rhy Epocan"] = {
+        target_pos = { x = 2.3, y = -48.8, z = 14.0 },
+        visual_mode = "arc",
+        zone = "Heavens Tower",
+        floor_id = 0,
+        max_distance = 22
+    },
     -- East Sarutabaruta
     ["Pore-Ohre"] = {
         target_pos = { x = 262.3, y = -18, z = -459.6 },
@@ -528,6 +542,21 @@ return {
         floor_id = 1,
         max_distance = 30
     },
+    --Castle Oztroja
+    ["castle-oztroja-handle-1-i8"] = {
+        target_pos = { x = 17.7, y = -1.1, z = -14.3 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 1,
+        max_distance = 25
+    },
+    ["castle-oztroja-handle-2-i8"] = {
+        target_pos = { x = 22.3, y = -1.1, z = -14.3 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 1,
+        max_distance = 25
+    },
     -- Maze of Shakhrami
     ["maze-of-shakhrami-fossil-rock-h5-1"] = {
         target_pos = { x = 49.1, y = 18.9, z = 152.5 },
@@ -607,6 +636,13 @@ return {
         floor_id = 0,
         max_distance = 40
     },
+    ["Heruze-Moruze"] = {
+        target_pos = { x = -56.3, y = -3.5, z = 36.5 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Chateau d'Oraguille
     ["Halver"] = {
         target_pos = { x = 2.4, y= -2, z=1.9},
@@ -621,6 +657,14 @@ return {
         zone = "Horlais Peak",
         floor_id = 0,
         max_distance = 20
+    },
+    -- Waughroon Shrine
+    ["waughroon-shrine-burning-circle"] = {
+        target_pos = { x = -339.6, y = 104.3, z = -260.3 },
+        visual_mode = "arc",
+        zone = "Waughroon Shrine",
+        floor_id = 0,
+        max_distance = 35
     },
     -- Oldton Movalpolo
     ["oldton-movalpolos-tarnotik"] = {

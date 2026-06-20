@@ -852,7 +852,7 @@ return {
                        "Talk to Kupipi behind the counter - she will hand you the KI:Letter to the Consuls. \n \n" ..
                        "You can now go to either the 'San d'Oria -> Bastok' guide OR the 'Bastok -> San d'Oria' guide. Do NOT do both! \n \n",
                 onmob_target = {"Kupipi"},
-                trigger_on_event_id = {95,97},
+                trigger_on_event_id = {95},
                 route_to = "Heavens Tower"
             },
         },
@@ -869,6 +869,10 @@ return {
                 trigger_on_event_id = {582},
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -32.6, y = 0.0, z = 36.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'rect', center = { x = -45.1, y = -3.5, z = 36.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                }
             },
             {
                 text = "Step 2: Talk to Kasaroro (H-9) in the back room of the Consulate of Windurst in Northern San d'Oria. \n \n",
@@ -887,19 +891,44 @@ return {
             },
             {
                 text = "Step 4: Defeat the NM Warchief Vatgit in Ghelsba Outpost (H-7). \n" ..
-                       "From Northern San d'Oria Home Point #1: West Ronfaure (E-4) -> Ghelsba Outpost. \n" ..
                        "Tip: Fort Ghelsba Survival Guide drops you right next to the NM area. \n \n" ..
-                       "===== Warchief Vatgit ===== \n" ..
                        "Family: Orc | Level: 16 | Job: Warrior \n" ..
                        "Sometimes followed by Bloody Vrukwuk (Orc Paladin 14) or Fogweaver Mozzfuzz (Orc BLM 14). \n" ..
                        "Recommended: Soloable at level 20+. You must speak to Halver first for the kill to count! \n \n",
                 kill_requirement = {
                     count = 1,
-                    enemies = {"Warchief_Vatgit"},
+                    enemies = {"Warchief Vatgit"},
                     zone = "Ghelsba Outpost",
                     count_party_kills = true,
                 },
-                route_to = "Ghelsba Outpost",
+                onmob_enemy = {"Warchief Vatgit"},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 23.8, y = -0.5, z = 62.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -12.6, y = 0.0, z = 83.4 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -46.6, y = -0.8, z = 99.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -74.3, y = -9.4, z = 100.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -103.2, y = -10.2, z = 111.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -101.5, y = -10.0, z = 158.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -137.6, y = 0.1, z = 207.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -150.1, y = -1.0, z = 227.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -131.8, y = -6.1, z = 233.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -158.2, y = -10.0, z = 249.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -111.9, y = -10.0, z = 257.8 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -98.9, y = -12.3, z = 292.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -100.3, y = -19.0, z = 312.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -108.4, y = -19.5, z = 343.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -98.5, y = -20.5, z = 374.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -63.1, y = -19.8, z = 406.3 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -29.0, y = -21.8, z = 421.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 16.6, y = -30.1, z = 420.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 50.6, y = -29.8, z = 414.9 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 58.9, y = -30.0, z = 394.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 60.5, y = -32.3, z = 339.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 34.6, y = -29.4, z = 307.8 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 13.0, y = -32.9, z = 282.4 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -17.3, y = -32.8, z = 263.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                },
                 images = {
                     {
                         zone_name = "Ghelsba Outpost",
@@ -920,6 +949,10 @@ return {
                 trigger_on_event_id = {550},
                 route_to = "Northern San d'Oria",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -32.6, y = 0.0, z = 36.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'rect', center = { x = -45.1, y = -3.5, z = 36.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                }
             },
             {
                 text = "Step 6: Travel to Bastok and talk to Patt-Pott (I-7) at the Consulate of Windurst in Metalworks. \n" ..
@@ -928,6 +961,11 @@ return {
                 trigger_on_event_id = {256},
                 route_to = "Metalworks",
                 destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 23.6, y = -14.0, z = 13.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = 23.0 }, width = 3.75, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 7: Talk to Pius (J-8) in the Department of Industry (President's Office) in Metalworks. \n \n",
@@ -935,6 +973,11 @@ return {
                 trigger_on_event_id = {355},
                 route_to = "Metalworks",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 88.9, y = -19.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 88.8, y = -21.7, z = -6.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 8: Talk to Grohm (H-9) in the Craftsmen's Eatery in Metalworks. \n" ..
@@ -943,35 +986,64 @@ return {
                 trigger_on_event_id = {426},
                 route_to = "Metalworks",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = -35.2, y = -10.0, z = -12.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = -29.7, y = -11.6, z = -18.3 }, width = 2.50, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                }
             },
             {
                 text = "Step 9: Navigate to floor 3 of Palborough Mines and enter Waughroon Shrine at (H-10). \n" ..
                        "Take the elevator at (I-8) on floor 1 or navigate up through the mine. \n" ..
-                       "Note: Sneak recommended - Quadavs aggro by sight. \n \n",
+                       "Note: Sneak recommended! \n \n",
                 zone_trigger = "Waughroon Shrine",
-                route_to = "Palborough Mines",
-                images = {
-                    {
-                        zone_name = "Palborough Mines",
-                        floor_id  = 1,
-                        width     = 512,
-                        height    = 512,
-                        state     = 9,
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        zone_name = "Palborough Mines",
-                        floor_id  = 3,
-                        width     = 512,
-                        height    = 512,
-                        state     = 9,
-                        highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Palborough Mines 3",
+                onmob_target = {"palborough-mines-elevator-lever-i8"},
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    --to elevator
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 59.0, y = 0.4, z = 66.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.0, y = 0.2, z = 99.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 19.2, y = 0.1, z = 118.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 62.0, y = 0.9, z = 140.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = -0.1, z = 135.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.5, y = -0.1, z = 87.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = 0.2, z = 58.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = -7.8, z = -2.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 130.7, y = -8.0, z = -20.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 140.4, y = -9.5, z = 10.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 180.1, y = -14.5, z = 19.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 220.3, y = -9.3, z = 33.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 206.9, y = -1.2, z = 59.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 186.7, y = 0.3, z = 63.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --floor 3
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 186.4, y = -32.0, z = 61.4 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.7, y = -32.0, z = 64.9 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.4, y = -32.0, z = 99.4 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 216.7, y = -32.0, z = 140.3 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 180.6, y = -32.0, z = 139.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 139.9, y = -32.0, z = 139.8 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 111.5, y = -32.0, z = 141.1 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 89.9, y = -32.1, z = 143.0 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.3, y = -32.1, z = 127.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 59.5, y = -31.3, z = 96.7 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 67.8, y = -31.6, z = 59.6 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.4, y = -32.0, z = 59.1 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.4, y = -31.7, z = 36.6 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.8, y = -31.7, z = 3.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 90.3, y = -32.0, z = -19.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.3, y = -32.0, z = -30.7 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 66.0, y = -32.0, z = -60.0 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.8, y = -32.0, z = -62.3 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.3, y = -32.2, z = -89.8 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 101.0, y = -32.8, z = -124.5 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 104.8, y = -38.4, z = -146.9 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+
+                    --home point
+                    { zone_name = "Palborough Mines", type = 'square', center = { x = 109.0, y = -38.4, z = -147.0 }, size = 1, floor_id = 3, colour = "green" },
+                }
             },
             {
                 text = "Step 10: Click the Burning Circle and enter the battlefield. You will face Dark Dragon and Seeker. \n" ..
@@ -982,6 +1054,16 @@ return {
                        "Family: Bigeye | Level: 25 \n \n" ..
                        "Sleep/Bind the Dragon and kill the Seeker first! \n" ..
                        "After winning, you will receive the KI:Kindred Crest. \n \n",
+                onmob_target = {"waughroon-shrine-burning-circle"},
+                --onmob_enemy = {"Dark Dragon","Seeker"},
+                --onmob_enemy_size = 3,
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Dark Dragon","Seeker"},
+                    count_party_kills = true,
+                    reset_on_zone_entry = true,
+                    display_only = true,
+                },
                 trigger_on_event_id = {32001},
             },
             {
@@ -990,6 +1072,11 @@ return {
                 trigger_on_event_id = {257},
                 route_to = "Metalworks",
                 destination_highlight = {position = "I-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 23.6, y = -14.0, z = 13.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = 23.0 }, width = 3.75, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 12: Return to Kupipi in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n",
@@ -1289,9 +1376,19 @@ return {
     ["3-1: To Each His Own Right"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city \n \n" ..
+                       "Note: Trade 6 crystals to unlock the next mission at the W.W(Marked with green sqaures)! \n \n",
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
                 trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -1321,15 +1418,6 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
                 },
             },
             {
@@ -1340,10 +1428,32 @@ return {
                 route_to = "Heavens Tower",
             },
             {
-                text = "Step 3: While still in Heavens Tower, go through the glowing doorway to the left of Kupipi. \n" ..
-                       "Climb the Starway Stairway to the highest floor and talk to Rhy Epocan for a cutscene. \n" ..
+                text = "Step 3: While still in Heavens Tower, go through the glowing doorway to the left of Kupipi. \n \n" ..
+                       "Climb the Starway Stairway to the highest floor and talk to Rhy Epocan for a cutscene. \n \n" ..
                        "Note: After the cutscene, use the blue Transporter near Foo Beibo to warp back to the first floor. \n \n",
-                onmob_target = {"Rhy_Epocan"},
+                onmob_target = {"Rhy Epocan"},
+                zone_max_distance = 17,
+                visual_zones = {
+                    --To the Starway Stairway
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -1.7, y = 0.5, z = 29.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+
+                    --Up the 2 flights of stairs to Rhy Eopcan
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.2, y = -1.0, z = 23.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.8, y = -6.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.3, y = -11.5, z = -22.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.8, y = -16.0, z = -31.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 23.0, y = -21.2, z = -21.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.7, y = -25.2, z = -4.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 13.9, y = -26.0, z = 5.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 3.2, y = -26.0, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 2.4, y = -26.0, z = 30.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.7, y = -31.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.9, y = -36.5, z = -1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.0, y = -41.5, z = -23.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.5, y = -45.0, z = -30.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.1, y = -47.0, z = -9.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {107},
             },
             {
@@ -1353,19 +1463,35 @@ return {
                 trigger_on_event_id = {147},
                 route_to = "Port Windurst",
                 destination_highlight = {position = "E-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Port Windurst", type = 'arrow', center = { x = -93.0, y = -3.0, z = 119.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Port Windurst", type = 'rect', center = { x = -99.2, y = -4.7, z = 119.1 }, width = 2.00, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                }
             },
             {
                 text = "Step 5: Travel to Castle Oztroja. \n" ..
-                       "Meriphataud Mountains (L-8) -> Castle Oztroja. \n" ..
                        "Tip: Use the Castle Oztroja or Meriphataud Mountains Survival Guide for a faster route. \n \n" ..
-                       "Inside, go to Map 1 and find the Brass Door at (I-8). \n" ..
+                       "Inside, go to Map 1 and find the Brass Door at (I-8). \n \n" ..
                        "Stand between the two levers flanking the door and pull one - you will drop through a trap door for a cutscene. \n" ..
-                       "Note: The mission holder must pull the lever. Sneak and Invisible recommended for the area. \n \n" ..
+                       "If the door opens, simply click the other one! \n \n" ..
                        "After the cutscene, click the round trap door in the floor to receive the KI:Old Ring (for quest: Onion Rings). \n" ..
                        "Click the trap door a second time to fall through and exit. \n \n",
-                onmob_target = {"_47b", "_47c"},
+                onmob_target = {"castle-oztroja-handle-1-i8","castle-oztroja-handle-2-i8"},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -180.5, y = 0.3, z = -13.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -169.7, y = 0.3, z = 20.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -122.6, y = 0.3, z = 19.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -61.1, y = 0.2, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -28.5, y = 0.3, z = 18.1 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -21.0, y = 0.3, z = -16.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 5.4, y = 0.3, z = -16.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+
+                    -- Onion ring Keyitem
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = 19.7, y = 24.1, z = -25.4 }, size = 2, floor_id = 7, colour = "green" },
+                },
                 trigger_on_event_id = {43},
-                route_to = "Castle Oztroja",
                 images = {
                     {
                         zone_name = "Castle Oztroja",
@@ -1380,10 +1506,37 @@ return {
                 },
             },
             {
-                text = "Step 6: Return to Rhy Epocan in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n",
-                onmob_target = {"Rhy_Epocan"},
+                text = "Step 6: Return to Rhy Epocan in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n" ..
+                       "Before you Warp - remember to Grab the KI:Old Ring (for quest: Onion Rings) - Marked a sqaure on the ground. \n \n",
+                onmob_target = {"Rhy Epocan"},
                 trigger_on_event_id = {114},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+                    -- Old Ring before you leave the trap door.
+                     { zone_name = "Castle Oztroja", type = 'square', center = { x = 19.7, y = 24.1, z = -25.4 }, size = 2, floor_id = 7, colour = "green" },
+
+                     --Starway again
+                      --To the Starway Stairway
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -1.7, y = 0.5, z = 29.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+
+                    --Up the 2 flights of stairs to Rhy Eopcan
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.2, y = -1.0, z = 23.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.8, y = -6.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.3, y = -11.5, z = -22.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.8, y = -16.0, z = -31.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 23.0, y = -21.2, z = -21.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.7, y = -25.2, z = -4.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 13.9, y = -26.0, z = 5.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 3.2, y = -26.0, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 2.4, y = -26.0, z = 30.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.7, y = -31.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.9, y = -36.5, z = -1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.0, y = -41.5, z = -23.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.5, y = -45.0, z = -30.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.1, y = -47.0, z = -9.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                }
             },
         },
         reward = {
@@ -1394,9 +1547,19 @@ return {
     ["3-2: Written in the Stars"] = {
         steps = {
             {
-                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
+                      "W.W marked with a green sqaure, trade 6 crystals to unlock this mission. \n \n",
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
                 trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -1426,23 +1589,11 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
                 },
             },
             {
                 text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and talk to Zubaba on the second floor. \n" ..
-                       "She will give you the KI:Charm of Light. \n \n" ..
-                       "Note (REPEAT RUN): Zubaba will instead ask you to bring 3 Rusty Daggers. \n" ..
-                       "Get 3 Rusty Daggers from club-wielding Wendigos in Inner Horutoto Ruins (Rose Tower Map 2), \n" ..
-                       "or buy them from the Auction House. Trade all 3 to Zubaba to complete the mission. \n \n",
+                       "She will give you the KI:Charm of Light. \n \n",
                 onmob_target = {"Zubaba"},
                 trigger_on_event_id = {121, 257},
                 route_to = "Heavens Tower",
@@ -1458,16 +1609,11 @@ return {
                        "BLM stands on the dark circle, WHM on the light circle, RDM on the red circle to open it. \n" ..
                        "If someone has KI:Portal Charm they can open it solo by clicking the portal. \n" ..
                        "Everyone must pass through quickly - the door cannot be reopened from inside! \n \n" ..
-                       "=== Route B: Via Toraimarai Canal (requires Toraimarai Turmoil quest started) === \n" ..
-                       "Enter Toraimarai Canal from Windurst Walls Priming Gate (H-3). \n" ..
-                       "Take the west fork at (H-7), go down stairs into water, continue west. \n" ..
-                       "Follow the path through Map 1 and exit into Inner Horutoto Ruins at (F-6). \n" ..
-                       "Note: Sneak required throughout Toraimarai Canal. Activate the Survival Guide at (F-5)! \n \n" ..
                        "Once in Rose Tower Map 2, find the Gate of Light in the small room at (G-7). Click it for a cutscene. \n" ..
                        "Note (REPEAT RUN): If you are repeating, skip this step - return 3 Rusty Daggers to Zubaba instead. \n \n",
                 onmob_target = {"_5ci"},
                 trigger_on_event_id = {41},
-                route_to = "Inner Horutoto Ruins",
+                --route_to = "Inner Horutoto Ruins",
                 images = {
                     {
                         zone_name = "Inner Horutoto Ruins",

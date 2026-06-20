@@ -790,9 +790,10 @@ ashita.events.register('d3d_present', 'present_callback', function()
                 floorOk = targetData.floor_id == filter_floor
             end
             if targetData.max_distance and targetData.target_pos then
-                local dx = player_module.posX - targetData.target_pos.x
+                local dx = player_module.posX       - targetData.target_pos.x
+                local dy = player_module.posZ_depth - targetData.target_pos.y
                 local dz = player_module.posY_height - targetData.target_pos.z
-                distOk = (dx * dx + dz * dz) <= (targetData.max_distance * targetData.max_distance)
+                distOk = (dx * dx + dy * dy + dz * dz) <= (targetData.max_distance * targetData.max_distance)
             end
             if targetData.draw_in_combat == false then
                 combatOk = not combatSuppressed

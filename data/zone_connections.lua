@@ -257,7 +257,7 @@ return {
         {zone = "The Sanctuary of Zi'Tah", exit = "L-4"}
     },
     ["Castle Oztroja"] = {
-        {zone = "Meriphataud Mountains", exit = "K-8"}
+        {zone = "Meriphataud Mountains", exit = "F-8"}
     },
     ["The Sanctuary of Zi'Tah"] = {
         {zone = "Meriphataud Mountains", exit = "E-12"},
