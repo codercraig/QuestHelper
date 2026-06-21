@@ -143,6 +143,9 @@ return {
     },
 
     ["1-2: The Heart of the Matter"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "1-1: The Horutoto Ruins Experiment"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
@@ -313,6 +316,9 @@ return {
     },
 
     ["1-3: The Price of Peace"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "1-2: The Heart of the Matter"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
@@ -475,6 +481,9 @@ return {
     },
 
     ["2-1: Lost for Words"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "1-3: The Price of Peace"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
@@ -693,6 +702,9 @@ return {
     },
 
     ["2-2: Testing Time"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "2-1: Lost for Words"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
@@ -792,6 +804,9 @@ return {
         }
     },
     ["2-3a: The Three Kingdoms - Introduction"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "2-1: Lost for Words"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
@@ -862,6 +877,9 @@ return {
     },
 
     ["2-3b: The Three Kingdoms - San d'Oria -> Bastok"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "2-3a: The Three Kingdoms - Introduction"},
+        },
         steps = {
             {
                 text = "Step 1: Travel to Northern San d'Oria and talk to Heruze-Moruze (H-9) in the Consulate of Windurst. \n \n",
@@ -1091,6 +1109,9 @@ return {
     },
 
     ["2-3b: The Three Kingdoms - Bastok -> San d'Oria"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "2-3a: The Three Kingdoms - Introduction"},
+        },
         steps = {
             {
                 text = "Step 1: Travel to Bastok and talk to Patt-Pott (I-7) at the Consulate of Windurst in Metalworks. \n",
@@ -1374,6 +1395,10 @@ return {
         }
     },
     ["3-1: To Each His Own Right"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - San d'Oria -> Bastok"},
+            {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - Bastok -> San d'Oria"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city \n \n" ..
@@ -1545,10 +1570,15 @@ return {
     },
 
     ["3-2: Written in the Stars"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "3-1: To Each His Own Right"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
-                      "W.W marked with a green sqaure, trade 6 crystals to unlock this mission. \n \n",
+                      "W.W marked with a green sqaure, trade 6 crystals to unlock this mission. \n \n" ..
+                      "Note: Buy a Rolanberry off the Auction House: [Food -> Ingredients] \n \n" ..
+                      "Otherwise,Rolanberries can be purchased for ~120g at Duty Free in Port Jeuno or M&P's Market in Upper Jeuno at your convenience. \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
                 trigger_on_talk = {"You have accepted the mission"},
                 zone_max_distance = 40,
@@ -1592,27 +1622,115 @@ return {
                 },
             },
             {
-                text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and talk to Zubaba on the second floor. \n" ..
+                text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and talk to Zubaba on the second floor. \n \n" ..
                        "She will give you the KI:Charm of Light. \n \n",
                 onmob_target = {"Zubaba"},
                 trigger_on_event_id = {121, 257},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.0, y = 0.8, z = 15.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -3.6, y = 0.2, z = 29.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -23.2, y = -1.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.3, y = -6.5, z = -1.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.9, y = -11.2, z = -22.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -4.0, y = -15.5, z = -32.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 20.3, y = -20.5, z = -24.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.4, y = -25.0, z = -6.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 24.4, y = -26.0, z = 4.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 7.2, y = -25.5, z = 8.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                }
             },
             {
-                text = "Step 3: Travel to Inner Horutoto Ruins and click the Gate of Light (_5ci) at (G-7) in Rose Tower Map 2. \n \n" ..
-                       "=== Route A: Via Three Mage Gate (requires BLM + WHM + RDM, or KI:Portal Charm) === \n" ..
-                       "Enter Lily Tower via East Sarutabaruta (J-7). \n" ..
-                       "Navigate to (G-8), pass through the Cracked Wall at (G-9) into the west section. \n" ..
-                       "Head to (E-10) and click the Magical Gate of Horutoto. \n" ..
-                       "Continue west to the Cracked Door at (D-10) and go through. \n" ..
-                       "Follow the path to the large room at (H-9) and find the Sealed Portal (Three Mage Gate). \n" ..
-                       "BLM stands on the dark circle, WHM on the light circle, RDM on the red circle to open it. \n" ..
+                text = "Step 3: Travel to Inner Horutoto Ruins and click the Gate of Light (G-7). \n \n" ..
+                       "Note (REPEAT RUN): If you are repeating, skip this step - return 3 Rusty Daggers to Zubaba instead. \n \n" ..
+                       "Enter Lily Tower via East Sarutabaruta (J-7).\n \n" ..
+                       "Route A: Via Three Mage Gate (requires BLM + WHM + RDM, or KI:Portal Charm)\n \n " ..
+                       "Navigate to (G-8), pass through the Cracked Wall at (G-9) into the west section. \n \n" ..
+                       "Head to (E-10) and click the Magical Gate of Horutoto. \n \n" ..
+                       "Continue west to the Cracked Door at (D-10) and go through. \n \n" ..
+                       "Follow the path to the large room at (H-9) and find the Sealed Portal (Three Mage Gate). \n \n" ..
+                       "BLM stands on the dark circle, WHM on the light circle, RDM on the red circle to open it. \n \n" ..
                        "If someone has KI:Portal Charm they can open it solo by clicking the portal. \n" ..
                        "Everyone must pass through quickly - the door cannot be reopened from inside! \n \n" ..
-                       "Once in Rose Tower Map 2, find the Gate of Light in the small room at (G-7). Click it for a cutscene. \n" ..
-                       "Note (REPEAT RUN): If you are repeating, skip this step - return 3 Rusty Daggers to Zubaba instead. \n \n",
-                onmob_target = {"_5ci"},
+                       "Once in Rose Tower Map 2, find the Gate of Light in the small room at (G-7). Click it for a cutscene. \n \n",
+                onmob_target = {"inner-horutoto-ruins-gate-of-light"},
                 trigger_on_event_id = {41},
+                zone_max_distance = 35,
+                visual_zones = {
+                    --Arrow into the Ruins (J-7)
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 357.7, y = -13.3, z = 100.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --survival guide
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 453.0, y = -8.0, z = 182.3 }, size = 1, floor_id = 1, colour = "green" },
+
+                    -- route
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 380.3, y = 0.0, z = 137.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 379.4, y = 0.5, z = 84.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 342.5, y = 0.5, z = 82.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 347.9, y = 0.5, z = 21.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 323.0, y = -0.0, z = 20.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 305.8, y = -0.1, z = 16.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = 300.0, y = -2.0, z = 9.7 }, width = 4.00, height = 4.00, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 301.9, y = -0.1, z = -17.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 281.0, y = 0.4, z = -29.8 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 259.6, y = -0.1, z = -23.3 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 256.8, y = 0.2, z = 19.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 215.6, y = -0.2, z = 21.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 181.2, y = 0.1, z = 18.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 174.0, y = 0.2, z = -19.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 139.8, y = -0.1, z = -27.3 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 121.2, y = 0.0, z = -60.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 86.2, y = 6.9, z = -59.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 60.9, y = 8.1, z = -66.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 45.8, y = 8.1, z = -114.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -9.3, y = 8.0, z = -125.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -30.9, y = 8.0, z = -139.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -48.1, y = 6.6, z = -144.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -60.8, y = 8.0, z = -162.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -76.1, y = 8.0, z = -180.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -98.5, y = 8.5, z = -176.3 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -106.0, y = 8.0, z = -140.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -142.8, y = 3.0, z = -140.5 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -157.6, y = 0.0, z = -140.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                    --Magic Gate of Horutoto
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -175.7, y = -2.3, z = -140.0 }, width = 4.00, height = 3.75, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -183.4, y = 0.5, z = -139.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -214.5, y = 0.5, z = -139.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -236.9, y = 0.5, z = -139.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                    --Cracked wall
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -264.3, y = -2.0, z = -140.0 }, width = 4.00, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+
+                    -- to the door
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -270.4, y = 0.0, z = -139.9 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -299.5, y = 0.0, z = -139.1 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -300.0, y = -0.0, z = -99.7 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -293.8, y = 0.5, z = -53.0 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -277.5, y = 0.5, z = -47.6 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = -260.0, y = 0.5, z = -29.6 }, size = 4, floor_id = 3, colour = "red" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = -263.3, y = 0.5, z = -24.1 }, size = 4, floor_id = 3, colour = "white" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = -256.9, y = 0.5, z = -24.0 }, size = 4, floor_id = 3, colour = "black" },
+
+                    --Sealed Portal
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -260.1, y = -2.3, z = -15.6 }, width = 4.50, height = 4.25, floor_id = 3, colour = "cyan", vertical_axis = 'ns' },
+
+                    -- beyond
+                        { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -260.4, y = 0.0, z = -6.1 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -259.8, y = -0.0, z = 18.8 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -269.0, y = 0.0, z = 28.4 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -293.2, y = 0.0, z = 36.3 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -300.1, y = -0.0, z = 77.5 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+
+                    --to gate of light
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -300.0, y = 0.0, z = 89.2 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -301.2, y = 0.5, z = 116.9 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -304.6, y = 0.5, z = 140.1 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                },
                 --route_to = "Inner Horutoto Ruins",
                 images = {
                     {
@@ -1623,13 +1741,31 @@ return {
                         state     = 3,
                         highlights = {
                             { position = "G-9", offsetX = 16, offsetY = 16 },
-                            { position = "E-10", offsetX = 16, offsetY = 16 },
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         zone_name = "Inner Horutoto Ruins",
                         floor_id  = 2,
+                        width     = 512,
+                        height    = 512,
+                        state     = 3,
+                        highlights = {
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id  = 3,
+                        width     = 512,
+                        height    = 512,
+                        state     = 3,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id  = 4,
                         width     = 512,
                         height    = 512,
                         state     = 3,
@@ -1640,13 +1776,29 @@ return {
                 },
             },
             {
-                text = "Step 4: Return to Zubaba in Heavens Tower in Windurst Walls (H-6/H-7) to complete the mission! \n \n" ..
-                       "Note: To receive KI:Portal Charm (lets you open the Three Mage Gate solo in future), \n" ..
-                       "trade a Rolanberry to Kupipi in the same room. \n" ..
-                       "Rolanberries can be purchased for ~120g at Duty Free in Port Jeuno or M&P's Market in Upper Jeuno. \n \n",
+                text = "Step 4: Warp out, and return to Zubaba in Heavens Tower to complete the mission! \n \n" ..
+                       "Note: To receive KI:Portal Charm (lets you open the Three Mage Gate solo in future) trade a Rolanberry to Kupipi in the same room. \n \n",
                 onmob_target = {"Zubaba"},
+                items_needed = {
+                    { item = "Rolanberry", quantity = 1, optional = true },
+                },
                 trigger_on_event_id = {135, 151},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.0, y = 0.8, z = 15.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -3.6, y = 0.2, z = 29.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -23.2, y = -1.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.3, y = -6.5, z = -1.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.9, y = -11.2, z = -22.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -4.0, y = -15.5, z = -32.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 20.3, y = -20.5, z = -24.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.4, y = -25.0, z = -6.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 24.4, y = -26.0, z = 4.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 7.2, y = -25.5, z = 8.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                }
             },
         },
         reward = {
@@ -1655,12 +1807,25 @@ return {
     },
 
     ["3-3: A New Journey"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "3-2: Written in the Stars"},
+        },
         steps = {
             {
                 text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n" ..
-                       "You will immediately receive the KI:Star Crested Summons upon accepting. \n \n",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                       "You will immediately receive the KI:Star Crested Summons upon accepting. \n \n" ..
+                       "Note: Trade 6 more crystals to the W.W to be eligible for this mission! \n \n",
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
                 trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 images = {
                     {
                         zone_name = "Windurst Waters",
@@ -1690,32 +1855,58 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        zone_name = "Windurst Walls",
-                        width     = 512,
-                        height    = 512,
-                        state     = 1,
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
                 },
             },
             {
                 text = "Step 2: Head to Heavens Tower in Windurst Walls (H-6/H-7) and climb to the top floor. \n" ..
                        "Click on the Vestal Chamber Door for a cutscene with the Star Sibyl. \n" ..
                        "You will receive the KI:Letter to the Ambassador. \n \n",
-                onmob_target = {"_6q2"},
+                onmob_target = {"Door: Vestal-chamber"},
                 trigger_on_event_id = {153},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+
+                    --enter Clerical Chamber
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.3, y = 0.8, z = 13.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+
+                    --To the Starway Stairway
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -1.7, y = 0.5, z = 29.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+
+                    --Up the 2 flights of stairs to Rhy Eopcan
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.2, y = -1.0, z = 23.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.8, y = -6.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.3, y = -11.5, z = -22.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.8, y = -16.0, z = -31.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 23.0, y = -21.2, z = -21.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.7, y = -25.2, z = -4.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 13.9, y = -26.0, z = 5.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 3.2, y = -26.0, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 2.4, y = -26.0, z = 30.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.7, y = -31.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.9, y = -36.5, z = -1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.0, y = -41.5, z = -23.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.5, y = -45.0, z = -30.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.1, y = -47.0, z = -9.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.1, y = -47.0, z = 13.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.2, y = -49.0, z = 28.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             {
                 text = "Step 3: Travel to Ru'Lude Gardens in Jeuno and speak with Pakh Jatalfih (I-9) at the Embassy of Windurst. \n" ..
                        "Tip: Unity Warp to Batallia Downs (Level 125 category) drops you right outside Upper Jeuno. \n \n",
-                onmob_target = {"Pakh_Jatalfih"},
+                onmob_target = {"Pakh Jatalfih"},
                 trigger_on_event_id = {43},
                 route_to = "Ru'Lude Gardens",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 25,
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = 0.1, y = 3.0, z = -4.5 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -0.4, y = 9.0, z = -36.1 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = 25.4, y = 7.4, z = -36.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                },
             },
             {
                 text = "Step 4: Travel to Qufim Island and enter Lower Delkfutt's Tower (F-6). \n" ..
@@ -1740,6 +1931,84 @@ return {
                        "8th Floor : (2nd pass) (F-9/G-10) -> 9th Floor. \n" ..
                        "9th Floor : (2nd pass) (F-6) -> 10th Floor Teleport. \n \n",
                 zone_trigger = "Upper Delkfutt's Tower",
+                zone_max_distance = 35,
+                visual_zones = {
+                    --Survival Guide
+                    { zone_name = "Lower Delkfutt's Tower", type = 'square', center = { x = 464.0, y = 0.0, z = -51.0 }, size = 1, floor_id = 1, colour = "green" },
+                    --1st floor
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 460.7, y = 0.0, z = -59.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 529.3, y = 0.1, z = -76.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 542.3, y = 0.0, z = -51.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 569.9, y = 0.1, z = -36.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.5, y = 0.0, z = -8.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.3, y = 0.0, z = 20.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 577.5, y = 0.0, z = 67.0 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 548.1, y = -0.0, z = 95.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 515.4, y = 0.0, z = 130.1 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 460.2, y = 0.0, z = 139.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 412.8, y = 0.0, z = 139.3 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 396.1, y = 0.6, z = 118.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 394.4, y = 0.6, z = 92.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 391.1, y = 0.5, z = 74.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 378.5, y = 0.4, z = 73.1 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 350.8, y = -7.7, z = 82.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+
+                    --2nd floor
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 377.1, y = -15.9, z = 95.4 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 405.5, y = -15.5, z = 100.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 459.3, y = -16.0, z = 109.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 474.1, y = -16.0, z = 140.4 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 514.6, y = -16.0, z = 131.3 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 538.5, y = -16.0, z = 107.3 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 558.3, y = -16.0, z = 99.6 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 578.9, y = -16.0, z = 94.0 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.7, y = -16.0, z = 61.3 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 580.6, y = -16.0, z = 18.3 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 569.8, y = -16.0, z = -58.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 528.4, y = -16.0, z = -50.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 516.1, y = -27.0, z = -50.3 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+
+                    --1st teleporter
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 529.5, y = -32.0, z = -36.5 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 539.0, y = -32.0, z = -11.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 540.1, y = -31.6, z = 20.9 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 530.5, y = -32.0, z = 71.9 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 472.9, y = -31.6, z = 69.8 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 440.6, y = -31.5, z = 44.6 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 409.9, y = -31.4, z = 59.7 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 395.1, y = -31.5, z = 75.1 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 403.0, y = -33.8, z = 82.5 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+
+                    --middle delkfutts tower
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -41.6, y = -47.9, z = 70.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -59.1, y = -48.0, z = 55.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -48.5, y = -48.0, z = 21.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -19.8, y = -48.0, z = 20.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -32.5, y = -47.7, z = -37.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -21.9, y = -48.0, z = -59.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 20.5, y = -47.6, z = -59.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 73.4, y = -48.0, z = -60.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 99.3, y = -48.0, z = -51.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 94.8, y = -48.0, z = -19.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 59.0, y = -48.0, z = -19.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 64.3, y = -48.0, z = 20.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 99.3, y = -47.6, z = 27.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 96.0, y = -48.0, z = 70.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 80.6, y = -56.2, z = 88.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+
+                    -- middle delkfutts 2nd floor
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 71.7, y = -63.7, z = 62.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 19.2, y = -64.0, z = 60.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -25.7, y = -64.0, z = 60.4 }, size = 4, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -48.5, y = -63.8, z = 76.5 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -60.0, y = -64.0, z = 41.0 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -59.7, y = -64.0, z = 13.7 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -29.4, y = -64.0, z = -6.0 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -20.3, y = -64.0, z = -28.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = -8.1, y = -70.0, z = -60.1 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 19.9, y = -72.0, z = -61.3 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Middle Delkfutt's Tower", type = 'arrow', center = { x = 19.9, y = -76.6, z = -38.1 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                },
                 images = {
                     {
                         width     = 512,

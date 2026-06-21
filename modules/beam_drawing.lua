@@ -105,6 +105,7 @@ function beam_drawing.colorNameToARGB(color_name, alpha)
         orange = {1.0, 0.5, 0.0},
         purple = {0.5, 0.0, 1.0},
         pink = {1.0, 0.5, 0.5},
+        black = {0.0, 0.0, 0.0},
     }
 
     local color = colors[string.lower(color_name or "")] or colors.yellow

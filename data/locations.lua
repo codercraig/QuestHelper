@@ -399,12 +399,26 @@ return {
         floor_id = 0,
         max_distance = 30
     },
+    ["Zubaba"] = {
+        target_pos = { x = 15.6, y = -27.0, z = 18.2 },
+        visual_mode = "arc",
+        zone = "Heavens Tower",
+        floor_id = 0,
+        max_distance = 20
+    },
     ["Rhy Epocan"] = {
         target_pos = { x = 2.3, y = -48.8, z = 14.0 },
         visual_mode = "arc",
         zone = "Heavens Tower",
         floor_id = 0,
         max_distance = 22
+    },
+    ["Door: Vestal-chamber"] = {
+        target_pos = { x = 0.0, y = -51.5, z = 40.3 },
+        visual_mode = "arc",
+        zone = "Heavens Tower",
+        floor_id = 0,
+        max_distance = 25
     },
     -- East Sarutabaruta
     ["Pore-Ohre"] = {
@@ -470,6 +484,20 @@ return {
         zone = "Inner Horutoto Ruins",
         floor_id = 2,
         max_distance = 30
+    },
+    ["inner-horutoto-ruins-magic-gate-of-horutoto"] = {
+        target_pos = { x = -175.7, y = -2.3, z = -140.0 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 2,
+        max_distance = 30
+    },
+    ["inner-horutoto-ruins-gate-of-light"] = {
+        target_pos = { x = -332.0, y = -1.9, z = 144.5 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 4,
+        max_distance = 20
     },
     -- Outer Horutoto Ruins
     ["outer-horutoto-ruins-ancient-magical-gizmo-1"] = {
@@ -1249,6 +1277,13 @@ return {
         target_pos = { x = 0.1, y= -7, z=70.3},
         visual_mode = "arc",
         zone = "Ru'Lude Gardens"
+    },
+    ["Pakh Jatalfih"] = {
+        target_pos = { x = 36.5, y = 7.4, z = -36.8 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 8
     },
     -- Qufum Island
     --Lower Delkfutts Tower

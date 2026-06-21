@@ -42,7 +42,7 @@ local viz = {
     entries     = {},
 }
 local DIRECTIONS = { 'up', 'down', 'left', 'right', 'ne', 'nw', 'se', 'sw' }
-local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue', 'magenta', 'purple', 'pink' }
+local COLOURS    = { 'cyan', 'yellow', 'white', 'orange', 'red', 'green', 'blue', 'magenta', 'purple', 'pink', 'black' }
 
 -- ── Validate tab state ───────────────────────────────────────────────────────
 local val = {
