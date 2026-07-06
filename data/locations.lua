@@ -1254,7 +1254,9 @@ return {
         target_pos = { x = 3, y= 6.7, z=-79.4},
         trigger_npc = "Goggehn",
         visual_mode = "arc",
-        zone = "Ru'Lude Gardens"
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 35
     },
     ["Pherimociel"] = {
         target_pos = { x = -31.6, y = 0, z = 68.0 },
@@ -1271,7 +1273,16 @@ return {
     ["Door:Bastokan Embassy"] = {
         target_pos = { x = 18.6, y= 7.3, z=-75.4},
         visual_mode = "arc",
-        zone = "Ru'Lude Gardens"
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 35
+    },
+    ["Door: Windurstian Embassy"] = {
+        target_pos = { x = 32.1, y = 7.5, z = -20.9 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 35
     },
     ["Door: Audience Chamber"] = {
         target_pos = { x = 0.1, y= -7, z=70.3},
@@ -1290,7 +1301,9 @@ return {
     ["Cermet Door"] = {
         target_pos = { x = 601, y= 13.7, z=-19.7},
         visual_mode = "arc",
-        zone = "Lower Delkfutt's Tower"
+        zone = "Lower Delkfutt's Tower",
+        floor_id = 15,
+        max_distance = 35
     },
     ["lower-delkfutt-tower-cermet-door-h5"] = {
         target_pos = { x = 460.0, y = -2.5, z = 125.8 },
@@ -1298,6 +1311,14 @@ return {
         zone = "Lower Delkfutt's Tower",
         floor_id = 1,
         max_distance = 15
+    },
+    --windy mission
+    ["lower-delkfutt-tower-cermet-door-l7"] = {
+        target_pos = { x = 640.5, y = 13.3, z = 60.0 },
+        visual_mode = "arc",
+        zone = "Lower Delkfutt's Tower",
+        floor_id = 15,
+        max_distance = 35
     },
     -- Upper Delkfutts Tower
     ["Elevator"] = {

@@ -9,8 +9,8 @@
 [2-3] The Three Kingdoms (Bastok -> San d'Oria) - DONE
 [3-1] To Each His Own Right - DONE
 [3-2] Written in the Stars - DONE
-[3-3] A New Journey - STARTED
-[4-1] Magicite - DRAFT
+[3-3] A New Journey - DONE
+[4-1] Magicite - STARTED
 [5-1] The Final Seal - DRAFT
 [5-2] The Shadow Awaits - DRAFT
 [6-1] Full Moon Fountain - DRAFT

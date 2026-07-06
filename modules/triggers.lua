@@ -204,7 +204,7 @@ function triggers.checkTriggerZones(step_data, playerPosX, playerPosZ_depth, que
 end
 
 -- Handles packet_in events (0x034 or 0x032 - Event/Interaction packets)
-function triggers.handlePacketIn(e, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, step_trigger_flags)
+function triggers.handlePacketIn(e, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state, step_trigger_flags, playerZoneId)
     if e.id ~= 0x034 and e.id ~= 0x032 then return end
 
     local event_id = read_uint16(e.data, 0x2C)
@@ -239,10 +239,19 @@ function triggers.handlePacketIn(e, currentTopCategory, currentSubfile, current_
             return false
         end
 
-        -- Handle Single Number vs List of Numbers
+        -- Handle Single Number vs List of Numbers (optional string = zone name filter)
         if type(trigger) == 'table' then
-            for _, id in ipairs(trigger) do
-                if check_id(id) then event_match = true; break end
+            local zone_filter = nil
+            for _, v in ipairs(trigger) do
+                if type(v) == 'string' then
+                    zone_filter = v
+                elseif not event_match and check_id(v) then
+                    event_match = true
+                end
+            end
+            if event_match and zone_filter then
+                local zone_data = require('data.zones')
+                event_match = (zone_data[zone_filter] == playerZoneId)
             end
         else
             event_match = check_id(trigger)

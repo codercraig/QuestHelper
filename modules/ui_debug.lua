@@ -33,7 +33,11 @@ local viz = {
     colour      = 'cyan',
     size        = 4,
     floor_id    = 0,
-    use_target  = false,   -- true = NPC target pos, false = player pos
+    pos_source    = 'player',  -- 'player', 'target', or 'custom'
+    custom_x      = 0.0,
+    custom_y      = 0.0,
+    custom_z      = 0.0,
+    custom_step   = 0.5,
     vertical      = false,  -- square only: upright panel using NPC elevation
     vertical_axis = nil,    -- square+vertical only: nil=N/S, 'z'=E/W, 'ne'=NE/SW, 'nw'=NW/SE
     rect_w         = 4.0,   -- rect only: horizontal width
@@ -232,17 +236,49 @@ local function render_position_tab()
     -- Pos source
     local t = cache.target
     imgui.Text("Pos source:"); imgui.SameLine()
-    if toggle_btn("My Position##vsrc", not viz.use_target) then viz.use_target = false end
+    if toggle_btn("My Position##vsrc", viz.pos_source == 'player') then viz.pos_source = 'player' end
     imgui.SameLine()
-    if toggle_btn("NPC Target##vsrc",      viz.use_target) then viz.use_target = true  end
+    if toggle_btn("NPC Target##vsrc", viz.pos_source == 'target') then viz.pos_source = 'target' end
+    imgui.SameLine()
+    if toggle_btn("Custom##vsrc", viz.pos_source == 'custom') then
+        if viz.pos_source ~= 'custom' then
+            viz.custom_x, viz.custom_y, viz.custom_z = p.x, p.y, p.z
+        end
+        viz.pos_source = 'custom'
+    end
+
     local src_x, src_y, src_z
-    if viz.use_target and t.valid then
+    if viz.pos_source == 'target' and t.valid then
         local use_npc_y = viz.vertical and (viz.entry_type == 'square' or viz.entry_type == 'rect')
         src_x = t.x
         src_y = use_npc_y and t.y or p.y
         src_z = t.z
         local y_label = use_npc_y and "NPC elev" or "player elev"
         imgui.Text(string.format("  Using:  %s  X=%.2f  Y=%.2f (%s)  Z=%.2f", t.name, src_x, src_y, y_label, src_z))
+    elseif viz.pos_source == 'custom' then
+        src_x, src_y, src_z = viz.custom_x, viz.custom_y, viz.custom_z
+        imgui.Text("  X:"); imgui.SameLine()
+        if imgui.Button(" - ##vcx") then viz.custom_x = viz.custom_x - viz.custom_step end
+        imgui.SameLine(); imgui.Text(string.format("%.2f", viz.custom_x)); imgui.SameLine()
+        if imgui.Button(" + ##vcx") then viz.custom_x = viz.custom_x + viz.custom_step end
+        imgui.SameLine(); imgui.Text("  Y:"); imgui.SameLine()
+        if imgui.Button(" - ##vcy") then viz.custom_y = viz.custom_y - viz.custom_step end
+        imgui.SameLine(); imgui.Text(string.format("%.2f", viz.custom_y)); imgui.SameLine()
+        if imgui.Button(" + ##vcy") then viz.custom_y = viz.custom_y + viz.custom_step end
+        imgui.SameLine(); imgui.Text("  Z:"); imgui.SameLine()
+        if imgui.Button(" - ##vcz") then viz.custom_z = viz.custom_z - viz.custom_step end
+        imgui.SameLine(); imgui.Text(string.format("%.2f", viz.custom_z)); imgui.SameLine()
+        if imgui.Button(" + ##vcz") then viz.custom_z = viz.custom_z + viz.custom_step end
+        imgui.Text("  Step:"); imgui.SameLine()
+        for _, s in ipairs({ 0.1, 0.5, 1.0, 5.0 }) do
+            if toggle_btn(string.format("%.1f##vcs", s), viz.custom_step == s) then viz.custom_step = s end
+            imgui.SameLine()
+        end
+        if imgui.Button("Snap Player##vcp") then viz.custom_x, viz.custom_y, viz.custom_z = p.x, p.y, p.z end
+        if t.valid then
+            imgui.SameLine()
+            if imgui.Button("Snap NPC##vcp") then viz.custom_x, viz.custom_y, viz.custom_z = t.x, t.y, t.z end
+        end
     else
         src_x, src_y, src_z = p.x, p.y, p.z
         imgui.Text(string.format("  Using:  Player  X=%.2f  Y=%.2f  Z=%.2f", src_x, src_y, src_z))
@@ -720,8 +756,10 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
         local t = cache.target
         local cx, cy, cz
         local use_npc_y = viz.vertical and (viz.entry_type == 'square' or viz.entry_type == 'rect')
-        if viz.use_target and t.valid then
+        if viz.pos_source == 'target' and t.valid then
             cx = t.x; cy = use_npc_y and t.y or p.y; cz = t.z
+        elseif viz.pos_source == 'custom' then
+            cx = viz.custom_x; cy = viz.custom_y; cz = viz.custom_z
         else
             cx, cy, cz = p.x, p.y, p.z
         end
