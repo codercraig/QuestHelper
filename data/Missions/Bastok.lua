@@ -2404,15 +2404,113 @@ return {
                        "Unity Concord warp \n" ..
                        "Warp to Qu'Bia Arena via Domenic (J-7) in Lower Jeuno (if completed Beyond Infinity), then walk out \n \n" ..
                        "Note: If cutscene doesn't trigger, zone out to Beaucedine Glacier and back in. \n \n",
-                --zone_trigger = "Fei'Yin",
-                trigger_on_event_id = {1},
+                zone_trigger = "Fei'Yin",
+                --trigger_on_event_id = {1},
                 route_to = "Fei'Yin 1",
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Route to Fei'Yin in Beaucedine Glacier from Xarca good to help players navigate complicated map.
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -136.4, y = -79.8, z = 220.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -119.9, y = -79.5, z = 173.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -101.2, y = -80.0, z = 133.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -96.4, y = -76.2, z = 102.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -32.0, y = -63.2, z = 101.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 0.5, y = -59.1, z = 98.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 2.6, y = -59.0, z = 60.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 3.0, y = -59.6, z = 12.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.7, y = -59.7, z = -27.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 2.7, y = -59.1, z = -58.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -5.6, y = -59.9, z = -81.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -29.7, y = -59.7, z = -105.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                    --Survival guide
+                    { zone_name = "Beaucedine Glacier", type = 'square', center = { x = -28.0, y = -59.8, z = -125.0 }, size = 1, floor_id = 0, colour = "green" },
+
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.1, y = -58.2, z = -95.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.6, y = -47.5, z = -142.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -58.7, y = -39.6, z = -189.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -27.6, y = -39.7, z = -205.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 10.6, y = -40.1, z = -193.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 23.3, y = -40.1, z = -151.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 54.1, y = -40.9, z = -128.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 85.5, y = -40.0, z = -101.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 120.5, y = -40.0, z = -87.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 141.8, y = -40.4, z = -50.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 133.9, y = -40.5, z = -4.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 93.1, y = -39.5, z = 0.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 61.2, y = -39.2, z = 5.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 64.2, y = -36.0, z = 20.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 126.2, y = -23.1, z = 20.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 153.0, y = -19.3, z = 20.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 175.3, y = -19.9, z = 17.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 170.4, y = -20.4, z = -30.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 167.1, y = -19.8, z = -83.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 158.6, y = -19.9, z = -114.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 128.2, y = -19.7, z = -142.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 80.9, y = -19.6, z = -148.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 59.2, y = -17.4, z = -182.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 121.1, y = -3.7, z = -180.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 186.5, y = 0.4, z = -193.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --Intersection
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 229.4, y = 0.3, z = -198.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 269.5, y = 0.3, z = -200.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 317.1, y = 0.0, z = -196.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 323.4, y = 0.8, z = -136.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 313.5, y = 0.2, z = -88.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 300.7, y = 0.6, z = -27.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 299.3, y = 0.1, z = 21.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 292.0, y = 0.4, z = 57.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 237.4, y = 0.2, z = 88.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 194.3, y = 0.1, z = 115.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 181.1, y = 0.1, z = 144.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 195.4, y = 0.0, z = 180.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 237.2, y = 0.0, z = 196.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 282.7, y = 0.9, z = 217.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 335.7, y = -0.2, z = 226.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 357.0, y = 0.0, z = 277.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 382.8, y = 1.9, z = 296.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 380.4, y = 16.4, z = 361.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 379.2, y = 21.0, z = 403.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 370.2, y = 20.1, z = 429.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 357.5, y = 20.0, z = 475.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 324.6, y = 20.5, z = 506.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 296.7, y = 20.7, z = 524.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 280.7, y = 20.0, z = 535.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             {
                 text = "Step 3: Travel to Qu'Bia Arena entrance at (K-8) in Fei'Yin. \n \n" ..
                        "Accept the mission to receive KI:New Fei'Yin Seal. \n \n" ..
                        "If you postpone the mission, you will be able to change allegiances.",
                 zone_trigger = "Qu'Bia Arena",
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -176.1, y = -24.0, z = -171.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -152.5, y = -24.0, z = -148.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -133.5, y = -24.0, z = -140.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -100.2, y = -19.0, z = -133.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -97.7, y = -16.0, z = -96.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -74.6, y = -16.0, z = -69.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -60.4, y = -16.0, z = -61.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -20.7, y = -16.0, z = -61.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 32.3, y = -16.0, z = -54.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 27.8, y = -16.0, z = -21.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -20.3, y = -16.0, z = -16.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -16.7, y = -16.0, z = 22.6 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 13.8, y = -16.0, z = 49.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 24.9, y = -16.0, z = 58.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 63.1, y = -16.6, z = 59.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 99.6, y = -24.0, z = 56.4 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 124.8, y = -24.0, z = 28.4 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 162.6, y = -23.7, z = 7.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 182.3, y = -24.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 209.5, y = -24.0, z = 23.7 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 221.8, y = -24.0, z = 37.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 218.2, y = -24.0, z = 60.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'rect', center = { x = 231.5, y = -29.6, z = 60.0 }, width = 4.75, height = 10.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 237.3, y = -24.3, z = 59.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                },
                 images = {
                     {
                         width = 512,
@@ -2441,6 +2539,14 @@ return {
                        "- Skeletons can be Slept but easier with Bard Lullaby light based spells! \n \n" ..
                        "Victory: Title 'Archmage Assassin', KI:Burnt Seal",
                 trigger_on_event_id = {32001},
+                onmob_target = "qu-bia-arena-burning-circle",
+                onmob_enemy = {"Ancient Sorcerer", "Ancient Warrior", "Archlich Taber'quoan"},
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Archlich Taber'quoan"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
             },
             {
                 text = "Step 5: Return to Naji at (J-8) in Metalworks to complete the mission.",
@@ -2502,11 +2608,65 @@ return {
             },
             {
                 text = "Step 3: Travel to Castle Zvahl Baileys! \n \n" ..
-                       "Outpost: Fauregandi/Valdeaunia if possible. \n \n" ..
+                       "Outpost/Survival Guides: Fauregandi/Valdeaunia if possible. \n \n" ..
                        "If walking a good route is from San d'Oria: \n",
                 zone_trigger = "Castle Zvahl Baileys",
                 route_to = "Xarcabard",
                 destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                        --Route from Range to Xarca
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -59.0, y = -39.4, z = -193.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.9, y = -47.7, z = -142.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -51.4, y = -58.6, z = -102.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -20.4, y = -60.0, z = -104.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.5, y = -59.1, z = -59.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 12.0, y = -60.0, z = -28.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 9.4, y = -59.6, z = 13.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 7.2, y = -59.6, z = 53.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.6, y = -60.0, z = 79.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -7.5, y = -59.4, z = 101.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -47.9, y = -64.6, z = 100.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -77.5, y = -71.9, z = 105.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -104.7, y = -78.9, z = 109.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -118.4, y = -79.5, z = 147.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -130.1, y = -79.7, z = 179.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -138.2, y = -79.6, z = 211.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+
+                        --Xarca to Castle
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 448.9, y = 0.4, z = -183.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 401.1, y = 0.3, z = -189.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 357.7, y = 8.2, z = -191.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 318.4, y = 6.8, z = -191.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 265.0, y = -7.2, z = -184.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 238.3, y = -16.1, z = -192.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 195.6, y = -23.0, z = -189.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 141.1, y = -23.1, z = -163.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 98.1, y = -23.8, z = -139.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 44.5, y = -23.8, z = -110.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 15.5, y = -23.3, z = -84.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -0.8, y = -24.1, z = -73.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -31.3, y = -23.9, z = -73.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -66.5, y = -24.1, z = -63.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -105.8, y = -24.3, z = -37.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -129.2, y = -19.3, z = -14.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -159.4, y = -15.2, z = 23.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -161.0, y = -10.8, z = 66.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -176.7, y = -2.5, z = 100.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -189.6, y = -3.4, z = 71.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -204.5, y = -3.9, z = 49.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -218.4, y = -8.6, z = 26.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -244.9, y = -12.3, z = -2.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -257.9, y = -16.5, z = 13.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -282.6, y = -20.0, z = 35.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -303.0, y = -25.0, z = 56.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -318.6, y = -27.0, z = 60.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -322.8, y = -28.0, z = 36.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -331.6, y = -29.7, z = 10.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -364.6, y = -35.8, z = 20.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -418.9, y = -44.0, z = 19.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -390.5, y = -41.7, z = 20.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
             },
             {
                 text = "Step 4: Route through Castle Zvahl Baileys -> Castle Zvahl Keep! \n \n" ..
@@ -2516,38 +2676,27 @@ return {
                        "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
                        "Map 2: Follow the arrows end goal is (F-8) to Castle Zvhal Keep. \n \n" ..
                        "Aggro: Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70. \n \n",
+                zone_max_distance = 40,
                 visual_zones = {
+                    --Survival Guide
+                    { zone_name = "Castle Zvahl Baileys", type = 'square', center = { x = 372.0, y = -12.0, z = -25.0 }, size = 1, floor_id = 1, colour = "green" },
                     -- Floor 1
-                    --1
-                    { type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up',floor_id = 1 },
-                    --2
-                    { type = 'arrow', center = { x = 87.9, y = -20.1, z = 100.6 }, size = 4, direction = 'down',floor_id = 1  },
-                    --3
-                    { type = 'arrow', center = { x = 99.8, y = -20.1, z = 72.7 }, size = 4, direction = 'left',floor_id = 1  },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 87.9, y = -20.1, z = 100.6 }, size = 4, direction = 'down', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 99.8, y = -20.1, z = 72.7 }, size = 4, direction = 'left', floor_id = 1 },
                     -- Floor 2
-                    --1
-                    { type = 'arrow', center = { x = 31.2, y = -20, z = 59.7 }, size = 4, direction = 'up',floor_id = 2 },
-                    --2
-                    { type = 'arrow', center = { x = 20.8, y = -20, z = 150.2 }, size = 4, direction = 'down',floor_id = 2  },
-                    --3
-                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw',floor_id = 2  },
-                    --4
-                    { type = 'arrow', center = { x = -61, y = -20, z = 110.2 }, size = 4, direction = 'down',floor_id = 2  },
-                    --5
-                    { type = 'arrow', center = { x = -92, y = -20, z = 89.4 }, size = 4, direction = 'down',floor_id = 2  },
-                    --6
-                    { type = 'arrow', center = { x = -91.8, y = -19.5, z = 51.5 }, size = 4, direction = 'right',floor_id = 2  },
-                    --7
-                    { type = 'arrow', center = { x = -76.1, y = -19.5, z = 52.1 }, size = 4, direction = 'down',floor_id = 2  },
-                    --8
-                    { type = 'arrow', center = { x = -77.4, y = -24, z = 20.2 }, size = 4, direction = 'left',floor_id = 2  },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 31.2, y = -20, z = 59.7 }, size = 4, direction = 'up', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 20.8, y = -20, z = 150.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -61, y = -20, z = 110.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -92, y = -20, z = 89.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -91.8, y = -19.5, z = 51.5 }, size = 4, direction = 'right', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -76.1, y = -19.5, z = 52.1 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -77.4, y = -24, z = 20.2 }, size = 4, direction = 'left', floor_id = 2 },
                     -- Floor 15
-                    --1
-                    { type = 'arrow', center = { x = -6.5, y = 4, z = 126.5 }, size = 4, direction = 'nw',floor_id = 15 },
-                    --2
-                    { type = 'arrow', center = { x = -59.7, y = 4, z = 179.2 }, size = 4, direction = 'down',floor_id = 15  },
-                    --3
-                    { type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw',floor_id = 15  },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -6.5, y = 4, z = 126.5 }, size = 4, direction = 'nw', floor_id = 15 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -59.7, y = 4, z = 179.2 }, size = 4, direction = 'down', floor_id = 15 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 15 },
                 },
                 zone_name = "Castle Zvahl Baileys",
                 zone_trigger = "Castle Zvahl Keep",
@@ -2592,24 +2741,59 @@ return {
                        "Map 3 -> Run on the teleporters when a glowing image appears \n" ..
                        "Keep doing this until you reach Map 4!! \n" ..
                        "Map 4 -> (G-7) to Throne Room and grab the Home Point! \n \n",
+                zone_max_distance = 30,
                 visual_zones = {
                     -- Floor 1
-                    --1
-                    { type = 'arrow', center = { x = -30, y = 0, z = -22.3 }, size = 4, direction = 'up',floor_id = 1 },
-                    { type = 'arrow', center = { x = -32.4, y = 0.6, z = 48.7 }, size = 4, direction = 'right',floor_id = 1 },
-                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 69.4 }, size = 4, direction = 'up',floor_id = 1 },
-                    { type = 'arrow', center = { x = -10.1, y = 0.6, z = 90.2 }, size = 4, direction = 'left',floor_id = 1 },
-                    { type = 'arrow', center = { x = -69, y = 0.6, z = 107.8 }, size = 4, direction = 'up',floor_id = 1 },
-                    --2
-                    { type = 'arrow', center = { x = -69.7, y = -15.4, z = 86.4 }, size = 4, direction = 'down',floor_id = 2 },
-                    { type = 'arrow', center = { x = -60.4, y = -15.4, z = 48.5 }, size = 4, direction = 'down',floor_id = 2 },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -30, y = 0, z = -22.3 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -30.0, y = -2.9, z = 41.3 }, width = 5.75, height = 5.50, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -32.4, y = 0.6, z = 48.7 }, size = 4, direction = 'right', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -10.1, y = 0.6, z = 69.4 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -10.0, y = -2.9, z = 78.8 }, width = 5.75, height = 5.50, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -10.1, y = 0.6, z = 90.2 }, size = 4, direction = 'left', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -18.8, y = -3.0, z = 90.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -38.7, y = -3.1, z = 90.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -50.0, y = -3.0, z = 98.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -58.8, y = -3.0, z = 110.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -69, y = 0.6, z = 107.8 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -70.0, y = -3.0, z = 118.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -50.0, y = -19.0, z = 118.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    -- Floor 2
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -61.3, y = -19.0, z = 110.0 }, width = 6.00, height = 6.00, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -48.7, y = -15.4, z = 112.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -69.7, y = -15.4, z = 86.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -70.0, y = -19.4, z = 78.8 }, width = 5.75, height = 6.75, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -60.4, y = -15.4, z = 48.5 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -60.0, y = -19.4, z = 41.3 }, width = 5.75, height = 6.75, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -58.7, y = -16.0, z = 14.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -93.4, y = -16.0, z = 12.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -96.3, y = -16.0, z = -20.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -206.7, y = -48.0, z = -19.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    -- Floor 3 (teleporters)
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -300, y = -49.1, z = -20 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -272.6, y = -53.2, z = 4.9 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -272.9, y = -53.2, z = -44.6 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -326.5, y = -53.2, z = -45 }, size = 4, floor_id = 3 },
 
-                    --3
-                    { type = 'square', center = { x = -300, y = -49.1, z = -20 }, size = 4,floor_id = 3 },
-                    { type = 'square', center = { x = -272.6, y = -53.2, z = 4.9 }, size = 4,floor_id = 3 },
-                    { type = 'square', center = { x = -272.9, y = -53.2, z = -44.6 }, size = 4,floor_id = 3 },
-                    { type = 'square', center = { x = -326.5, y = -53.2, z = -45 }, size = 4,floor_id = 3 },
+                    --arrows to each teleporter
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -290.6, y = -48.0, z = -20.2 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -241.7, y = -52.0, z = 75.0 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -260.1, y = -52.0, z = 47.4 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -272.5, y = -52.0, z = 14.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -202.0, y = -52.0, z = -81.8 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -225.2, y = -52.0, z = -60.3 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -273.5, y = -52.0, z = -53.6 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -359.1, y = -52.0, z = -115.9 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -339.5, y = -52.0, z = -93.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -326.4, y = -52.0, z = -54.5 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
 
+
+                    -- Floor 4
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -419.7, y = -67.3, z = 61.2 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -419.9, y = -68.0, z = 99.9 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -465.8, y = -68.0, z = 99.8 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -500.0, y = -68.0, z = 96.3 }, size = 4, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -507.5, y = -68.0, z = 60.8 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -550.1, y = -70.0, z = 60.5 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
                 },
                 zone_name = "Castle Zvahl Keep",
                 zone_trigger = "Throne Room",
@@ -2669,8 +2853,9 @@ return {
                        "- Lower-level parties should zerg him so save your 2hours for this phase! \n \n",
                 trigger_on_event_id = {7},
                 -- Key items needed (displayed in UI, not required for step completion)
-                keyitems_needed = {74},
-                trigger_on_keyitem_obtain = {74},
+                onmob_target = {"throne-room"},
+                onmob_enemy = "Shadow Lord",
+                onmob_enemy_size = 4,
             },
             {
                 text = "Step 7: Return to President Karst at (K-8) in Metalworks to complete the mission.",

@@ -10,10 +10,10 @@
 [3-1] To Each His Own Right - DONE
 [3-2] Written in the Stars - DONE
 [3-3] A New Journey - DONE
-[4-1] Magicite - STARTED
-[5-1] The Final Seal - DRAFT
-[5-2] The Shadow Awaits - DRAFT
-[6-1] Full Moon Fountain - DRAFT
+[4-1] Magicite - DONE
+[5-1] The Final Seal - DONE
+[5-2] The Shadow Awaits - DONE
+[6-1] Full Moon Fountain - STARTED
 [6-2] Saintly Invitation - DRAFT
 [7-1] The Sixth Ministry - DRAFT
 [7-2] Awakening of the Gods - DRAFT

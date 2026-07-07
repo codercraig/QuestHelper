@@ -1359,11 +1359,26 @@ return {
         visual_mode = "arc",
         zone = "Upper Delkfutt's Tower"
     },
+    --Throne Room
+    ["throne-room"] = {
+        target_pos = { x = -115.8, y = -8.7, z = 0.0 },
+        visual_mode = "arc",
+        zone = "Throne Room",
+        floor_id = 0,
+        max_distance = 200
+    },
     -- QuiBia Arena
     ["Qubia-BCNM"] = {
         target_pos = { x = -214, y= -24.6, z=-20.1},
         visual_mode = "arc",
         zone = "Qu'Bia Arena"
+    },
+    ["qu-bia-arena-burning-circle"] = {
+        target_pos = { x = -213.7, y = -24.6, z = 20.1 },
+        visual_mode = "arc",
+        zone = "Qu'Bia Arena",
+        floor_id = 0,
+        max_distance = 35
     },
     -- Western Altepa Desert
     ["6-1-???"] = {
