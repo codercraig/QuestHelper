@@ -18,6 +18,10 @@ return {
                 onmob_target = "Jabbar",
                 route_to = "Port Bastok",
                 destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                trigger_on_item_obtain = "Tenshodo Invite",
+                items_needed = {
+                    { item = "Tenshodo Invite", quantity = 1 }
+                },
                 keyitems_needed = {121},
                 trigger_on_keyitem_obtain = {121},
             },

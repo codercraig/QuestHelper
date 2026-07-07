@@ -69,11 +69,26 @@ function map_renderer.drawPlayerArrow(imageX, imageY, w, h, playerPosX, playerPo
     end
 end
 
+-- Named color presets for highlights (ImGui U32 ABGR format).
+-- Each entry: fill (semi-transparent) + outline (opaque).
+local HIGHLIGHT_COLORS = {
+    green   = { fill = 0x5500FF00, outline = 0xFF00FF00 },
+    yellow  = { fill = 0x5500FFFF, outline = 0xFF00FFFF },
+    cyan    = { fill = 0x55FFFF00, outline = 0xFFFFFF00 },
+    red     = { fill = 0x550000FF, outline = 0xFF0000FF },
+    blue    = { fill = 0x55FF0000, outline = 0xFFFF0000 },
+    magenta = { fill = 0x55FF00FF, outline = 0xFFFF00FF },
+    orange  = { fill = 0x5500A5FF, outline = 0xFF00A5FF },
+    white   = { fill = 0x55FFFFFF, outline = 0xFFFFFFFF },
+}
+
 -- Draws highlights on the map (grid-based positioning)
 -- Parameters:
 --   imageX, imageY: Top-left corner of the map image
 --   w, h: Width and height of the map image (already scaled)
---   highlights: Array of highlight data {position, offsetX, offsetY}
+--   highlights: Array of highlight data {position, offsetX, offsetY, color}
+--     color (optional): preset name ("yellow", "cyan", ...) or raw ABGR number.
+--     Defaults to green when omitted.
 function map_renderer.drawHighlights(imageX, imageY, w, h, highlights)
     if not highlights then return end
 
@@ -97,7 +112,16 @@ function map_renderer.drawHighlights(imageX, imageY, w, h, highlights)
             local halfBox = 16 * map_scale
             local x1, y1 = centerX - halfBox, centerY - halfBox
             local x2, y2 = centerX + halfBox, centerY + halfBox
+            -- Resolve color: preset name, raw ABGR number, or default green.
             local colorFill, colorOutline = 0x5500FF00, 0xFFFFFFFF
+            if type(highlight.color) == "string" then
+                local preset = HIGHLIGHT_COLORS[highlight.color:lower()]
+                if preset then
+                    colorFill, colorOutline = preset.fill, preset.outline
+                end
+            elseif type(highlight.color) == "number" then
+                colorFill = highlight.color
+            end
             drawList:AddRectFilled({x1, y1}, {x2, y2}, colorFill)
             drawList:AddRect({x1, y1}, {x2, y2}, colorOutline)
 

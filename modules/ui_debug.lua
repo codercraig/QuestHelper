@@ -42,6 +42,7 @@ local viz = {
     vertical_axis = nil,    -- square+vertical only: nil=N/S, 'z'=E/W, 'ne'=NE/SW, 'nw'=NW/SE
     rect_w         = 4.0,   -- rect only: horizontal width
     rect_h         = 4.0,   -- rect only: vertical height
+    rect_rot       = 0,     -- rect+vertical only: extra rotation in degrees, nudges the axis preset
     preview_shapes = {},    -- shapes locked in for on-screen preview when Add is clicked
     entries     = {},
 }
@@ -368,6 +369,16 @@ local function render_position_tab()
         if imgui.Button(" - ##vf") then viz.floor_id = math.max(0, viz.floor_id - 1) end
         imgui.SameLine(); imgui.Text(string.format("%d", viz.floor_id)); imgui.SameLine()
         if imgui.Button(" + ##vf") then viz.floor_id = viz.floor_id + 1 end
+
+        -- Rotate (rect + vertical only): nudge the axis preset to fit angled doors
+        if viz.entry_type == 'rect' and viz.vertical then
+            imgui.Text("Rotate:"); imgui.SameLine()
+            if imgui.Button(" - ##vrr") then viz.rect_rot = viz.rect_rot - 5 end
+            imgui.SameLine(); imgui.Text(string.format("%d deg", viz.rect_rot)); imgui.SameLine()
+            if imgui.Button(" + ##vrr") then viz.rect_rot = viz.rect_rot + 5 end
+            imgui.SameLine()
+            if imgui.Button("0##vrr") then viz.rect_rot = 0 end
+        end
     else
         -- Colour (line shares same colour picker)
         imgui.Text("Colour:")
@@ -417,9 +428,10 @@ local function render_position_tab()
         local entry
         if viz.entry_type == 'rect' then
             local axis_str = (viz.vertical and viz.vertical_axis) and string.format(", vertical_axis = '%s'", viz.vertical_axis) or ""
+            local rot_str  = (viz.vertical and viz.rect_rot ~= 0) and string.format(", rotation = %d", viz.rect_rot) or ""
             entry = string.format(
-                "    { zone_name = %q, type = 'rect', center = { x = %.1f, y = %.1f, z = %.1f }, width = %.2f, height = %.2f, floor_id = %d, colour = %q%s },",
-                p.zone_name, src_x, src_y, src_z, viz.rect_w, viz.rect_h, viz.floor_id, viz.colour, axis_str)
+                "    { zone_name = %q, type = 'rect', center = { x = %.1f, y = %.1f, z = %.1f }, width = %.2f, height = %.2f, floor_id = %d, colour = %q%s%s },",
+                p.zone_name, src_x, src_y, src_z, viz.rect_w, viz.rect_h, viz.floor_id, viz.colour, axis_str, rot_str)
         elseif viz.entry_type == 'square' then
             local vert_str = viz.vertical and ", vertical = true" or ""
             local rot_str  = (viz.vertical and viz.vertical_axis) and string.format(", vertical_axis = '%s'", viz.vertical_axis) or ""
@@ -452,7 +464,7 @@ local function render_position_tab()
         if entry then
             table.insert(viz.entries, entry)
             if viz.entry_type == 'rect' then
-                table.insert(viz.preview_shapes, { type = 'rect', center = { x = src_x, y = src_y, z = src_z }, width = viz.rect_w, height = viz.rect_h, colour = viz.colour, vertical_axis = viz.vertical and viz.vertical_axis or nil })
+                table.insert(viz.preview_shapes, { type = 'rect', center = { x = src_x, y = src_y, z = src_z }, width = viz.rect_w, height = viz.rect_h, colour = viz.colour, vertical_axis = viz.vertical and viz.vertical_axis or nil, rotation = (viz.vertical and viz.rect_rot ~= 0) and viz.rect_rot or nil })
             elseif viz.entry_type == 'square' then
                 table.insert(viz.preview_shapes, { type = 'square', center = { x = src_x, y = src_y, z = src_z }, size = viz.size, colour = viz.colour, vertical = viz.vertical, vertical_axis = viz.vertical_axis })
             elseif viz.entry_type == 'arrow' then
@@ -737,7 +749,7 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
         for _, s in ipairs(viz.preview_shapes) do
             local color = beam_drawing.colorNameToARGB(s.colour, 0.85)
             if s.type == 'rect' then
-                drawing.drawRectangle(s.center, s.width, s.height, color, { vertical_axis = s.vertical_axis })
+                drawing.drawRectangle(s.center, s.width, s.height, color, { vertical_axis = s.vertical_axis, rotation = s.rotation })
             elseif s.type == 'square' then
                 drawing.drawSquare(s.center, s.size, color, { vertical = s.vertical, vertical_axis = s.vertical_axis })
             elseif s.type == 'arrow' then
@@ -765,7 +777,7 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
         end
         local color = beam_drawing.colorNameToARGB(viz.colour, 0.85)
         if viz.entry_type == 'rect' then
-            drawing.drawRectangle({ x = cx, y = cy, z = cz }, viz.rect_w, viz.rect_h, color, { vertical_axis = viz.vertical and viz.vertical_axis or nil })
+            drawing.drawRectangle({ x = cx, y = cy, z = cz }, viz.rect_w, viz.rect_h, color, { vertical_axis = viz.vertical and viz.vertical_axis or nil, rotation = viz.vertical and viz.rect_rot or nil })
         elseif viz.entry_type == 'square' then
             drawing.drawSquare({ x = cx, y = cy, z = cz }, viz.size, color, { vertical = viz.vertical, vertical_axis = viz.vertical_axis })
         elseif viz.entry_type == 'arrow' then

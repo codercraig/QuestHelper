@@ -205,6 +205,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Melyon"] = {
+        target_pos = { x = 25.6, y = -8.2, z = 4.3 },
+        visual_mode = "arc",
+        zone = "Selbina",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Gusgen Mines
     ["Blind Moby"] = {
         target_pos = { x = 210.1, y= -59.2, z=-101.8},
@@ -216,18 +223,24 @@ return {
         target_pos = { x = -100, y= 21.9, z=102.9},
         trigger_npc = "The Mute",
         visual_mode = "arc",
-        zone = "Beadeaux"
+        zone = "Beadeaux",
+        floor_id = 2,
+        max_distance = 35
     },
     ["Ramp 1"] = {
         target_pos = { x = -259.9, y = 1, z = -137},
         visual_mode = "arc",
-        zone = "Beadeaux"
+        zone = "Beadeaux",
+        floor_id = 1,
+        max_distance = 45
     },
     --Qulun Dome
     ["Qulun Door 1"] = {
         target_pos = { x = 59.9, y= 22, z=-6.7},
         visual_mode = "arc",
-        zone = "Qulun Dome"
+        zone = "Qulun Dome",
+        floor_id = 0,
+        max_distance = 45,
     },
     ["Magicite-Qulun"] = {
         target_pos = { x = 9.5, y= 23, z=-84},
@@ -584,6 +597,13 @@ return {
         zone = "Castle Oztroja",
         floor_id = 1,
         max_distance = 25
+    },
+    ["castle-oztroja-brass-door-g10"] = {
+        target_pos = { x = -155.2, y = 21.5, z = -140.0 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 7,
+        max_distance = 35
     },
     -- Maze of Shakhrami
     ["maze-of-shakhrami-fossil-rock-h5-1"] = {
@@ -1124,19 +1144,25 @@ return {
     ["Wall of Dark Arts"] = {
         target_pos = { x = -23.2, y= -0.6, z=-69.1},
         visual_mode = "arc",
-        zone = "Davoi"
+        zone = "Davoi",
+        floor_id = 0,
+        max_distance = 40
     },
     -- Monastic Cavern
     ["Magicite-Monastic"] = {
         target_pos = { x = -160.8, y= -9.5, z=7.8},
         visual_mode = "arc",
-        zone = "Monastic Cavern"
+        zone = "Monastic Cavern",
+        floor_id = 0,
+        max_distance = 40,
     },
     -- Altar Room
     ["Magicite-Altar"] = {
         target_pos = { x = -347, y= 22.2, z=46.3},
         visual_mode = "arc",
-        zone = "Altar Room"
+        zone = "Altar Room",
+        floor_id = 0,
+        max_distance = 40,
     },
     -- Jueno
     -- Port Jeuno
@@ -1167,22 +1193,27 @@ return {
         zone = "Lower Jeuno"
     },
     ["Aldo"] = {
-        target_pos = { x = 21, y= 1.9, z=-61.7},
-        trigger_npc = "Aldo",
+        target_pos = { x = 21.0, y = 2.1, z = -61.5 },
         visual_mode = "arc",
-        zone = "Lower Jeuno"
+        zone = "Lower Jeuno",
+        floor_id = 0,
+        max_distance = 35
     },
     ["Muckvix"] = {
         target_pos = { x = -26.8, y= 3.5, z=-137.3},
         trigger_npc = "Muckvix",
         visual_mode = "arc",
-        zone = "Lower Jeuno"
+        zone = "Lower Jeuno",
+        floor_id = 0,
+        max_distance = 35
     },
     ["Sattal-Mansal"] = {
         target_pos = { x = 41.3, y= 3.1, z=-54},
         trigger_npc = "Sattal-Mansal",
         visual_mode = "arc",
-        zone = "Lower Jeuno"
+        zone = "Lower Jeuno",
+        floor_id = 0,
+        max_distance = 50
     },
     ["Door: Jeuno Bazaar"] = {
         target_pos = { x = -1.3, y= 0, z=-64.2},
@@ -1287,7 +1318,9 @@ return {
     ["Door: Audience Chamber"] = {
         target_pos = { x = 0.1, y= -7, z=70.3},
         visual_mode = "arc",
-        zone = "Ru'Lude Gardens"
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 35
     },
     ["Pakh Jatalfih"] = {
         target_pos = { x = 36.5, y = 7.4, z = -36.8 },

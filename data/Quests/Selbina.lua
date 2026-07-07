@@ -14,10 +14,21 @@ return {
                 require_all_items = true,
             },
             {
-                text = "Step 2: Trade Melyon (I-9) Selbina your corn!\n" ..
+                text = "Step 2: Talk to Melyon (I-9) Selbina to start the quest!\n" ..
                        "This is a repeatable quest so get ready to trade a lot of corn! Mark it complete once you are done!",
+                onmob_target = "Melyon",
                 route_to = "Selbina",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = 60,
+
+            },
+            {
+                text = "Step 3: Trade Melyon (I-9) Selbina your corn!\n" ..
+                       "This is a repeatable quest so get ready to trade a lot of corn! It will complete after trading once!",
+                onmob_target = "Melyon",
+                route_to = "Selbina",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                trigger_on_event_id = 63,
             },
         },
         reward = {

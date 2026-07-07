@@ -426,7 +426,7 @@ return {
         {zone = "Konschtat Highlands", exit = "D-6"}
     },
     ["Beadeaux"] = {
-        {zone = "Pashhow Marshlands", exit = "F-7"}
+        {zone = "Pashhow Marshlands", exit = "E-7"}
     },
     ["Ghelsba Outpost"] = {
         {zone = "West Ronfaure", exit = "J-11"},

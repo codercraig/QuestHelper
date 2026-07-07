@@ -580,7 +580,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         if zone.type == 'square' and zone.center and zone.size then
                                             drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'rect' and zone.center and zone.width and zone.height then
-                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis })
+                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis, rotation = zone.rotation })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then
@@ -699,7 +699,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                         if zone.type == 'square' and zone.center and zone.size then
                                             drawingModule.drawSquare(zone.center, zone.size, color, { vertical = zone.vertical, vertical_axis = zone.vertical_axis })
                                         elseif zone.type == 'rect' and zone.center and zone.width and zone.height then
-                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis })
+                                            drawingModule.drawRectangle(zone.center, zone.width, zone.height, color, { vertical_axis = zone.vertical_axis, rotation = zone.rotation })
                                         elseif zone.type == 'line' and zone.start and zone.stop then
                                             local arrow_end = zone.arrow_end or step_data.line_arrow_end
                                             if arrow_end then

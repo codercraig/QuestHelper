@@ -164,8 +164,15 @@ function drawingModule.drawSquare(center, size, color, options)
     end
 end
 
+-- Base facing angle (degrees) for each vertical_axis preset. The wall's width
+-- spans a horizontal direction (cos/sin of the angle in the X/Z plane); an
+-- optional `rotation` (degrees) is added on top to fine-tune the fit.
+local RECT_AXIS_ANGLE = { ns = 0, z = 90, ne = -45, nw = 45 }
+
 -- Rectangle: flat on floor by default; pass vertical_axis to stand it upright.
 -- Flat: width spans X, height spans Z. Vertical: width spans horizontal, height spans elevation.
+-- options.rotation (optional, degrees): rotates a vertical wall around the Y axis,
+--   added to the vertical_axis preset. Ignored for flat rectangles.
 function drawingModule.drawRectangle(center, width, height, color, options)
     local _, view = d3d8dev:GetTransform(C.D3DTS_VIEW)
     local _, projection = d3d8dev:GetTransform(C.D3DTS_PROJECTION)
@@ -174,36 +181,17 @@ function drawingModule.drawRectangle(center, width, height, color, options)
     local hh = height / 2
     local axis = options and options.vertical_axis
     local corners
-    if axis == 'ns' then
-        -- Upright wall facing N/S: spans X and elevation Y, Z fixed
+    if axis then
+        -- Upright wall: width spans a horizontal direction, height spans elevation Y.
+        local angle = (RECT_AXIS_ANGLE[axis] or 0) + (options.rotation or 0)
+        local rad = math.rad(angle)
+        local ox = hw * math.cos(rad)
+        local oz = hw * math.sin(rad)
         corners = {
-            {x = center.x - hw, y = center.y - hh, z = center.z},
-            {x = center.x + hw, y = center.y - hh, z = center.z},
-            {x = center.x + hw, y = center.y + hh, z = center.z},
-            {x = center.x - hw, y = center.y + hh, z = center.z},
-        }
-    elseif axis == 'z' then
-        corners = {
-            {x = center.x,      y = center.y - hh, z = center.z - hw},
-            {x = center.x,      y = center.y - hh, z = center.z + hw},
-            {x = center.x,      y = center.y + hh, z = center.z + hw},
-            {x = center.x,      y = center.y + hh, z = center.z - hw},
-        }
-    elseif axis == 'ne' then
-        local d = hw / math.sqrt(2)
-        corners = {
-            {x = center.x - d,  y = center.y - hh, z = center.z + d},
-            {x = center.x + d,  y = center.y - hh, z = center.z - d},
-            {x = center.x + d,  y = center.y + hh, z = center.z - d},
-            {x = center.x - d,  y = center.y + hh, z = center.z + d},
-        }
-    elseif axis == 'nw' then
-        local d = hw / math.sqrt(2)
-        corners = {
-            {x = center.x - d,  y = center.y - hh, z = center.z - d},
-            {x = center.x + d,  y = center.y - hh, z = center.z + d},
-            {x = center.x + d,  y = center.y + hh, z = center.z + d},
-            {x = center.x - d,  y = center.y + hh, z = center.z - d},
+            {x = center.x - ox, y = center.y - hh, z = center.z - oz},
+            {x = center.x + ox, y = center.y - hh, z = center.z + oz},
+            {x = center.x + ox, y = center.y + hh, z = center.z + oz},
+            {x = center.x - ox, y = center.y + hh, z = center.z - oz},
         }
     else
         -- Flat on floor: width spans X, height spans Z
