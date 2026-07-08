@@ -5905,7 +5905,7 @@ return {
             {
                 text = "Step 15: Zone into Lufaise Meadows - approach Blueblade Fell(J-6) - enjoy the song!!\n \n" ..
                        "You will receive the title: Banisher of Emptiness.\n \n" ..
-                       "You have finish the Chains of Promathia story line, whew! \n \n",
+                       "You have finished the Chains of Promathia story line, whew! \n \n",
                 route_to = "Lufaise Meadows",
                 destination_highlight = {position = "J-6", offsetX = 16, offsetY = 16},
                 visual_zones = {

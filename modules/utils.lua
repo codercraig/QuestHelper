@@ -113,9 +113,10 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                                     end
                                 end
                                 if not in_valid_zone then
+                                    local backtrack_floor_id = step_data.backtrack_floor_id
                                     local best_path, best_len, best_dest = nil, math.huge, nil
                                     for _, z in ipairs(image_zones) do
-                                        local path = pathfinding.findPath(current_zone, z)
+                                        local path = pathfinding.findPath(current_zone, z, backtrack_floor_id)
                                         if path and #path >= 1 and #path < best_len then
                                             best_path = path
                                             best_len = #path
@@ -135,7 +136,7 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
                                             end
                                         end
                                         local dh = #dest_highlights > 0 and dest_highlights or nil
-                                        return pathfinding.generateRouteImages(best_path, current_zone, dh)
+                                        return pathfinding.generateRouteImages(best_path, current_zone, dh, backtrack_floor_id)
                                     end
                                 end
                             end
@@ -163,13 +164,14 @@ function utils.get_images_for_step(topCat, subfile, mission, stepIndex, quest_da
 
                     if current_zone then
                         local destination = step_data.route_to
-                        local path = pathfinding.findPath(current_zone, destination)
+                        local backtrack_floor_id = step_data.backtrack_floor_id
+                        local path = pathfinding.findPath(current_zone, destination, backtrack_floor_id)
 
                         if path then
                             -- Generate route images with exit highlights
                             -- Optional: destination_highlight for marking NPCs/targets at final destination
                             local dest_highlight = step_data.destination_highlight
-                            local route_images = pathfinding.generateRouteImages(path, current_zone, dest_highlight)
+                            local route_images = pathfinding.generateRouteImages(path, current_zone, dest_highlight, backtrack_floor_id)
                             return route_images
                         end
                     end

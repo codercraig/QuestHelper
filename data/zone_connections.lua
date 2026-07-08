@@ -198,7 +198,8 @@ return {
         {zone = "Port Windurst", exit = "I-10"},
         {zone = "East Sarutabaruta", exit = "K-4"},
         {zone = "East Sarutabaruta", exit = "L-8"},
-        {zone = "Giddeus", exit = "F-7"}
+        {zone = "Giddeus", exit = "F-7"},
+        {zone = "Outer Horutoto Ruins", exit = "F-11", floor_id = 4},
     },
     ["East Sarutabaruta"] = {
         {zone = "Windurst Woods", exit = "G-11"},
@@ -211,7 +212,8 @@ return {
          {zone = "East Sarutabaruta", exit = "I-7"},
     },
     ["Outer Horutoto Ruins"] = {
-         {zone = "East Sarutabaruta", exit = "I-7"},
+         {zone = "East Sarutabaruta", exit = "I-7", floor_id = 3},
+         {zone = "West Sarutabaruta", exit = "G-7", floor_id = 4},
     },
     ["Tahrongi Canyon"] = {
         {zone = "East Sarutabaruta", exit = "H-13"},

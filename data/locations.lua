@@ -562,6 +562,14 @@ return {
         floor_id = 3,
         max_distance = 35
     },
+    ["outer-horutoto-ruins-gate-magical-gizmo-j8"] = {
+        target_pos = { x = -289.6, y = -1.6, z = -660.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 4,
+        max_distance = 35,
+        draw_in_combat = false
+    },
     -- Giddeus
     ["Uu Zhoumo"] = {
         target_pos = { x = -180, y= 15, z=157.4},
@@ -1171,6 +1179,13 @@ return {
         trigger_npc = "Guddal",
         visual_mode = "arc",
         zone = "Port Jeuno"
+    },
+    ["Gekko"] = {
+        target_pos = { x = -66.8, y = 6.2, z = -5.4 },
+        visual_mode = "arc",
+        zone = "Port Jeuno",
+        floor_id = 0,
+        max_distance = 15
     },
     --Kazham
     ["Tielleque"] = {

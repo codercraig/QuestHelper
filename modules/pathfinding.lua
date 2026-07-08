@@ -174,8 +174,12 @@ local function getAllFloorIds(zone_id)
 end
 
 -- BFS (Breadth-First Search) to find shortest path between zones
+-- dest_floor_id (optional): only accept arrival at end_zone via an entrance edge
+--   whose floor_id matches. Used to disambiguate zones with multiple entrances
+--   that lead to disconnected floor-segments (e.g. Outer Horutoto Ruins).
+--   When nil, behaves exactly as before (any entrance is accepted).
 -- Returns: path table with {zone, exit} entries, or nil if no path found
-function pathfinding.findPath(start_zone, end_zone)
+function pathfinding.findPath(start_zone, end_zone, dest_floor_id)
     -- Edge cases
     if not start_zone or not end_zone then
         return nil
@@ -205,8 +209,8 @@ function pathfinding.findPath(start_zone, end_zone)
             for _, neighbor in ipairs(neighbors) do
                 local next_zone = neighbor.zone
 
-                -- Found the destination?
-                if next_zone == end_zone then
+                -- Found the destination? (optionally require a specific entrance floor)
+                if next_zone == end_zone and (not dest_floor_id or neighbor.floor_id == dest_floor_id) then
                     -- Build final path
                     local final_path = {}
                     for _, step in ipairs(current_path) do
@@ -338,7 +342,7 @@ end
 --       {position = "H-8", floor_id = 1, label = "1"},
 --       {position = "G-10", floor_id = 2, label = "2"}
 --     }
-function pathfinding.generateRouteImages(path, current_zone, destination_highlight)
+function pathfinding.generateRouteImages(path, current_zone, destination_highlight, dest_floor_id)
     if not path or type(path) ~= "table" or #path == 0 then
         return {}
     end
@@ -442,7 +446,7 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
         -- First pass: calculate minimum distance
         for _, conn in ipairs(connections) do
             if conn.zone then
-                local path_to_dest = pathfinding.findPath(conn.zone, destination)
+                local path_to_dest = pathfinding.findPath(conn.zone, destination, dest_floor_id)
                 if path_to_dest then
                     local distance = pathfinding.getRouteDistance(path_to_dest)
                     if not zone_distances[conn.zone] or distance < zone_distances[conn.zone] then
