@@ -591,7 +591,97 @@ return {
         floor_id = 1,
         max_distance = 30
     },
+    --Balga Dais
+    ["balga-dais-burning-circle"] = {
+        target_pos = { x = 298.9, y = -124.1, z = 341.3 },
+        visual_mode = "arc",
+        zone = "Balga's Dais",
+        floor_id = 0,
+        max_distance = 35
+    },
     --Castle Oztroja
+    --1st password
+    ["castle-oztroja-brass-statue-1-h9"] = {
+        target_pos = { x = -60.1, y = -2.1, z = -61.5 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 1,
+        max_distance = 30
+    },
+    --2nd password
+    ["castle-oztroja-brass-statue-15-h9"] = {
+        target_pos = { x = -60.0, y = 21.8, z = -102.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 7,
+        max_distance = 30
+    },
+    --3rd password
+    ["castle-oztroja-brass-statue-2-i8"] = {
+        target_pos = { x = -18.6, y = -18.0, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 2,
+        max_distance = 30
+    },
+    -- levers
+    ["castle-oztroja-handle-1-g8"] = {
+        target_pos = { x = -183.6, y = -16.9, z = -12.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 2,
+        max_distance = 10
+    },
+    ["castle-oztroja-handle-2-g8"] = {
+        target_pos = { x = -183.2, y = -16.9, z = -12.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 2,
+        max_distance = 10
+    },
+    ["castle-oztroja-handle-3-g8"] = {
+        target_pos = { x = -182.7, y = -16.9, z = -12.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 2,
+        max_distance = 10
+    },
+    ["castle-oztroja-handle-4-g8"] = {
+        target_pos = { x = -182.3, y = -16.9, z = -12.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 2,
+        max_distance = 10
+    },
+    --torch stand top floor
+    ["castle-oztroja-torch-stand-4-h7"] = {
+        target_pos = { x = -59.7, y = -74.8, z = -59.5 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["castle-oztroja-brass-statue-4-h7"] = {
+        target_pos = { x = -100.1, y = -73.9, z = -16.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["castle-oztroja-brass-door-4-h6"] = {
+        target_pos = { x = -100.0, y = -61.8, z = 85.8 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["castle-oztroja-kaa-toru-the-just"] = {
+        target_pos = { x = -100.2, y = -63.4, z = 145.4 },
+        visual_mode = "arc",
+        zone = "Castle Oztroja",
+        floor_id = 4,
+        max_distance = 30
+    },
     ["castle-oztroja-handle-1-i8"] = {
         target_pos = { x = 17.7, y = -1.1, z = -14.3 },
         visual_mode = "arc",

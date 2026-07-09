@@ -15,6 +15,17 @@ function utils.getVanaDay()
     return VANA_DAYS[idx + 1], idx
 end
 
+-- Returns a monotonic Vana'diel day counter (total days since the Vana'diel epoch).
+-- Increments once every Vana'diel midnight (~57.6 real minutes). Use as a stamp to
+-- detect day rollovers for daily-reset content (e.g. Castle Oztroja passwords).
+-- Returns nil if the clock pointer is unavailable.
+function utils.getVanaDayStamp()
+    if not vanatime_ptr or vanatime_ptr == 0 then return nil end
+    local ptr = ashita.memory.read_uint32(vanatime_ptr)
+    local ts  = (ashita.memory.read_uint32(ptr + 0x0C) + 92514960) * 25
+    return math.floor(ts / 86400)
+end
+
 -- Memory pattern from Ashita v3 weather.lua (atom0s, CC BY-NC-ND 4.0) — adapted for v4
 local weather_ptr = ashita.memory.find('FFXiMain.dll', 0, '66A1????????663D????72', 0x02, 0)
 

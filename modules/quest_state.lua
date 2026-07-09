@@ -17,6 +17,7 @@ local default_settings = T{
     step_states = T{},
     partial_progress = T{},
     kill_counts = T{},
+    daily_progress = T{},  -- Day-stamped scratch state (e.g. Castle Oztroja passwords); resets each Vana'diel day
     current_map = T{},  -- Tracks active map number per zone ID
     keyitem_cache = T{},  -- Cached list of owned key item IDs (array of numbers)
     ui_settings = T{
@@ -113,6 +114,48 @@ end
 function quest_state.setKillCount(cat, sub, mis, step, count)
     local path = ensure_key_path(quest_state.settings.kill_counts, cat, sub, mis)
     path[step] = count
+    settings.save(QUESTHELPER_ALIAS, quest_state.settings)
+end
+
+-- Daily password cache (day-stamped scratch state that resets each Vana'diel day).
+-- Used by steps with a `daily_passwords` block (e.g. Castle Oztroja).
+local function currentVanaDay()
+    local ok, utils = pcall(require, 'modules.utils')
+    if ok and utils.getVanaDayStamp then
+        return utils.getVanaDayStamp()
+    end
+    return nil
+end
+
+-- Returns the entry table {day=, words=} for a step, resetting it if the Vana'diel day changed.
+local function getDailyEntry(cat, sub, mis, step, save_on_reset)
+    if not quest_state.settings.daily_progress then
+        quest_state.settings.daily_progress = T{}
+    end
+    local today = currentVanaDay()
+    local path = ensure_key_path(quest_state.settings.daily_progress, cat, sub, mis)
+    local entry = path[step]
+    if type(entry) ~= 'table' or entry.day ~= today then
+        entry = T{ day = today, words = T{} }
+        path[step] = entry
+        if save_on_reset then
+            settings.save(QUESTHELPER_ALIAS, quest_state.settings)
+        end
+    end
+    return entry
+end
+
+-- Returns the captured-password table for a step, keyed by slot number (may be empty).
+-- Auto-resets on Vana'diel day change.
+function quest_state.getDailyPasswords(cat, sub, mis, step)
+    return getDailyEntry(cat, sub, mis, step, true).words
+end
+
+-- Stores a captured password into a slot (1-based), stamped with the current Vana'diel day.
+function quest_state.setDailyPassword(cat, sub, mis, step, slot, word)
+    local entry = getDailyEntry(cat, sub, mis, step, false)
+    entry.words[slot] = word
+    debug_print(string.format("[QuestHelper] Password slot %d = %s", slot, tostring(word)))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 

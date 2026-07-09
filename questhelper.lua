@@ -624,6 +624,11 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                 playerRaceId = pe.Race or (pe.GetRace and pe:GetRace()) or pe.race
                             end
                         end
+                        -- Daily password cache for show_if_password / hide_if_password filters
+                        local pw_words
+                        if step_data.daily_passwords then
+                            pw_words = quest_state.getDailyPasswords(currentTopCategory, currentSubfile, current_mission, step_idx)
+                        end
                         for _, zone in ipairs(step_data.visual_zones) do
                             local shape_should_draw
                             if zone.zone_name then
@@ -670,6 +675,33 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                             end
                                             if should_draw_zone then break end
                                         end
+                                    end
+                                end
+
+                                -- Password-slot filters (accept a number or a list of numbers):
+                                --   show_if_password = N or {a,b}  -> draw only once ALL listed slots are captured
+                                --   hide_if_password = N or {a,b}  -> draw only until ANY listed slot is captured
+                                if should_draw_zone and (zone.show_if_password or zone.hide_if_password) then
+                                    local words = pw_words or {}
+                                    local function anyCaptured(spec)
+                                        if type(spec) == 'table' then
+                                            for _, n in ipairs(spec) do if words[n] ~= nil then return true end end
+                                            return false
+                                        end
+                                        return words[spec] ~= nil
+                                    end
+                                    local function allCaptured(spec)
+                                        if type(spec) == 'table' then
+                                            for _, n in ipairs(spec) do if words[n] == nil then return false end end
+                                            return true
+                                        end
+                                        return words[spec] ~= nil
+                                    end
+                                    if zone.show_if_password then
+                                        should_draw_zone = allCaptured(zone.show_if_password)
+                                    end
+                                    if should_draw_zone and zone.hide_if_password then
+                                        should_draw_zone = not anyCaptured(zone.hide_if_password)
                                     end
                                 end
 
@@ -1668,5 +1700,9 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
 
         triggers_module.handleKillText(e, incoming_text, player_module.name, currentTopCategory, currentSubfile, current_mission,
                                       quest_data, quest_state, player_module.zoneId)
+
+        -- Daily password capture (e.g. Castle Oztroja statues)
+        triggers_module.handleDailyPasswordText(e, incoming_text, currentTopCategory, currentSubfile, current_mission,
+                                               quest_data, quest_state)
     end
 end)

@@ -1101,6 +1101,26 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         imgui.Unindent(20)
                     end
 
+                    -- DAILY PASSWORD CACHE UI DISPLAY (e.g. Castle Oztroja)
+                    if not st and type(step_data) == 'table' and step_data.daily_passwords then
+                        local dp = step_data.daily_passwords
+                        local words = quest_state.getDailyPasswords(currentTopCategory, currentSubfile, current_mission, i) or {}
+                        imgui.Indent(20)
+                        imgui.TextColored({0.6,0.8,1,1}, "Passwords (reset each Vana'diel day):")
+                        if dp.slots then
+                            for _, slot in ipairs(dp.slots) do
+                                local w = words[slot.slot]
+                                local lbl = slot.label or ("#" .. tostring(slot.slot))
+                                if w then
+                                    imgui.TextColored({0,1,0,1}, string.format("  %s = %s", lbl, w))
+                                else
+                                    imgui.TextColored({1,1,0,1}, string.format("  %s = ____", lbl))
+                                end
+                            end
+                        end
+                        imgui.Unindent(20)
+                    end
+
                     -- Red separator between steps in expanded mode
                     if ui_settings.show_all_steps and i < #steps then
                         imgui.PushStyleColor(3, {0.6, 0.1, 0.1, 1.0})  -- ImGuiCol_Separator = 3
@@ -1109,11 +1129,13 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
-                -- Rewards (hide when collapsed to save space)
-                if reward and ui_settings.show_all_steps then
+                -- Rewards (shown in both expanded and collapsed modes)
+                if reward then
                     local hasItems = type(reward.items) == 'table' and #reward.items > 0
                     local hasText  = type(reward.text) == 'string' and reward.text ~= ""
                     if hasItems or hasText then
+                        imgui.Spacing()
+                        imgui.Spacing()
                         imgui.TextColored({0.8,0.8,0,1}, "Rewards:")
                     end
                     if hasItems then

@@ -2359,6 +2359,7 @@ return {
 
     ["4-1: Magicite"] = {
         prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "3-3: A New Journey"},
             {category = "Quests", subfile = "Lower Jeuno", name = "Tenshodo Membership"},
         },
         steps = {
@@ -3115,6 +3116,9 @@ return {
     },
 
     ["5-1: The Final Seal"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "4-1: Magicite"},
+        },
         steps = {
             {
                 text = "Step 1: Proceed to Heavens Tower in Windurst Walls and climb to the top floor (Vestal Chamber). \n \n" ..
@@ -3353,6 +3357,9 @@ return {
     },
 
     ["5-2: The Shadow Awaits"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "5-1: The Final Seal"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to build Rank Bar. \n \n" ..
@@ -3734,6 +3741,9 @@ return {
     },
 
     ["6-1: Full Moon Fountain"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "5-2: The Shadow Awaits"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
@@ -4038,9 +4048,13 @@ return {
     },
 
     ["6-2: Saintly Invitation"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "6-1: Full Moon Fountain"},
+        },
         steps = {
              {
-                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n",
+                text = "Step 1: Receive the mission from any Windurstian Gate Guard. They can be found at the entrance gates to the city. \n \n" ..
+                       "Notes: Trade 2 stacks of crystals if the option doesn't appear! \n \n",
                 onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
                 zone_max_distance = 40,
                 visual_zones = {
@@ -4093,10 +4107,39 @@ return {
                 },
             },
             {
-                text = "Step 2: Go to the top of Heavens Tower and examine the Vestal Chamber door (_6q2). \n \n" ..
+                text = "Step 2: Go to the top of Heavens Tower and examine the Vestal Chamber door. \n \n" ..
                        "You will receive KI:Holy One's Invitation and title: 'Hero on Behalf of Windurst'. \n \n" ..
                        "Optional: Sibyl Guards, Kupipi, Zubaba, and the Orastery NPCs have additional dialogue.",
-                onmob_target = {"_6q2"},
+                onmob_target = {"Door: Vestal-chamber"},
+                zone_max_distance = 17,
+                visual_zones = {
+
+                    --enter Clerical Chamber
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.3, y = 0.8, z = 13.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+
+                    --To the Starway Stairway
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -1.7, y = 0.5, z = 29.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.75, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z', rotation = 30 },
+
+                    --Up the 2 flights of stairs to Rhy Eopcan
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.2, y = -1.0, z = 23.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.8, y = -6.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.3, y = -11.5, z = -22.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.8, y = -16.0, z = -31.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 23.0, y = -21.2, z = -21.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.7, y = -25.2, z = -4.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 13.9, y = -26.0, z = 5.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 3.2, y = -26.0, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 2.4, y = -26.0, z = 30.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.7, y = -31.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.9, y = -36.5, z = -1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.0, y = -41.5, z = -23.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.5, y = -45.0, z = -30.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.1, y = -47.0, z = -9.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.1, y = -47.0, z = 13.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.2, y = -49.0, z = 28.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {310},
                 route_to = "Heavens Tower",
             },
@@ -4107,6 +4150,40 @@ return {
                 zone_trigger = "Balga's Dais",
                 route_to = "Giddeus",
                 destination_highlight = {position = "F-12", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -100.7, y = -0.3, z = 404.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -101.4, y = -0.2, z = 382.8 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -140.1, y = 0.4, z = 376.9 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -136.4, y = 3.9, z = 341.4 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -159.8, y = 4.0, z = 319.3 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -182.6, y = 4.0, z = 298.7 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -180.8, y = -0.1, z = 274.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -172.4, y = 0.0, z = 259.0 }, size = 4, direction = "right", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -140.2, y = -0.5, z = 256.1 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -139.9, y = -4.0, z = 200.3 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -138.6, y = -0.2, z = 154.5 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -137.4, y = -0.8, z = 100.7 }, size = 4, direction = "right", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -100.0, y = -0.7, z = 94.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -99.6, y = -1.2, z = 71.6 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -108.8, y = -2.7, z = 60.2 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -138.3, y = -0.9, z = 51.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -140.7, y = -1.2, z = -1.9 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -138.4, y = -1.2, z = -44.0 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -133.4, y = 1.1, z = -65.2 }, size = 4, direction = "se", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -112.6, y = 1.0, z = -80.1 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -112.3, y = 0.9, z = -105.7 }, size = 4, direction = "se", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -86.0, y = 1.0, z = -134.6 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -77.5, y = 1.0, z = -160.9 }, size = 4, direction = "se", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -57.6, y = -0.2, z = -186.9 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -66.8, y = -2.8, z = -220.1 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -108.4, y = 0.6, z = -222.8 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -121.9, y = 1.0, z = -241.0 }, size = 4, direction = "se", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -99.1, y = -0.9, z = -258.0 }, size = 4, direction = "se", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -98.2, y = -3.1, z = -278.0 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -113.6, y = -3.4, z = -300.6 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                        { zone_name = "Giddeus", type = 'arrow', center = { x = -130.7, y = -2.5, z = -299.5 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                },
             },
             {
                 text = "Step 4: Defeat the 4 Yagudo (all level 64, ~3100 HP each): \n \n" ..
@@ -4115,20 +4192,214 @@ return {
                        "All can be slept. \n \n" ..
                        "Victory: KI:Balga Champion Certificate + title 'Victor of the Balga Contest'.",
                 trigger_on_event_id = {32001},
+                onmob_enemy = {"Chaa Paqa the Profound", "Juu Zeni the Poisonmist", "Buu Xolo the Bloodfaced", "Nuu Kofu the Gentle"},
+                onmob_target = "balga-dais-burning-circle",
             },
             {
-                text = "Step 5: Travel to Castle Oztroja and navigate to Kaa_Toru_the_Just. \n \n" ..
-                       "You need a Judgment Key: farmed from Yagudo Flagellants on Floor 4. \n \n" ..
-                       "Route: Navigate up to Map 7 (H-9/10, same as mission 3-1 torch run). \n \n" ..
-                       "Touch a torch at G-7, G-8, H-7, or H-8 to open the Brass Door, then enter 3 passwords on the wooden platform behind it to open the trapdoor. \n \n" ..
-                       "Password locations: #1 Floor 1 (H-9), #2 Basement 1 (H-9), #3 Floor 2 (I-8) \n" ..
-                       "All possible passwords: Buxu, Deggi, Domi, Duxo, Duzu, Gadu, Haqa, Misu, Mjuu, Mong, Ouzi, Ovzi, Puqu, Quu, Xalmo, Xicu, Zhuu \n \n" ..
-                       "Fall through trapdoor -> proceed to Brass Door at H-5/H-6 -> trade Judgment Key to open it -> talk to Kaa_Toru_the_Just. \n \n" ..
-                       "NOTE: Yagudo High Priest and Yagudo Templar have True Sight — Invisible will NOT protect you! \n \n" ..
-                       "You will receive KI:Holy One's Oath and Ashura Necklace.",
-                onmob_target = {"Kaa_Toru_the_Just"},
-                trigger_on_event_id = {45},
+                text = "Step 5: Enter Castle Oztroja and follow the arrows! \n \n" ..
+                       "- BLUE arrows lead to the 3 password statues and the lamps/torches for the final door. \n" ..
+                       "- YELLOW arrows are the main path - follow them to stay on track. \n \n" ..
+                       "Judgment Key: farm from Yagudo Flagellants (Floor 4) - needed for the final Brass Door(if running out of time there is some after you input the passwords) \n \n" ..
+                       "Read all 3 statues (they reset every Vana'diel day; you enter them IN THIS ORDER later): \n" ..
+                       "  #1 - Floor 1 (H-9)    #2 - Basement 1 (H-9)    #3 - Floor 2 (I-8) \n \n" ..
+                       "At Map 7 (H-9/10): touch a torch (G-7, G-8, H-7, or H-8) to open the Brass Door, then enter the 3 passwords in order on the wooden platform to open the trapdoor. \n \n" ..
+                       "Fall through the trapdoor -> Brass Door at H-5/H-6 -> trade Judgment Key -> talk to Kaa_Toru_the_Just. \n \n" ..
+                       "Possible passwords: Buxu, Deggi, Domi, Duxo, Duzu, Gadu, Haqa, Misu, Mjuu, Mong, Ouzi, Ovzi, Puqu, Quu, Xalmo, Xicu, Zhuu \n \n" ..
+                       "NOTE: Yagudo High Priest & Yagudo Templar have True Sight - Invisible will NOT protect you! \n \n" ..
+                       "Reward: KI:Holy One's Oath and Ashura Necklace.",
+                onmob_target = {"castle-oztroja-brass-statue-1-h9",
+                                "castle-oztroja-handle-1-i8",
+                                "castle-oztroja-handle-2-i8",
+                                "castle-oztroja-brass-statue-15-h9",
+                                "castle-oztroja-brass-statue-2-i8",
+                                "castle-oztroja-handle-1-g8",
+                                "castle-oztroja-handle-2-g8",
+                                "castle-oztroja-handle-3-g8",
+                                "castle-oztroja-handle-4-g8",
+                                "castle-oztroja-torch-stand-4-h7",
+                                "castle-oztroja-brass-statue-4-h7",
+                                "castle-oztroja-kaa-toru-the-just"},
+                --trigger_on_event_id = {45},
+                trigger_on_keyitem_obtain = {200},
+                keyitems_needed = {200},
                 route_to = "Castle Oztroja",
+                items_needed = {"Judgment Key"},
+                onmob_enemy = "Yagudo Flagellant",
+                daily_passwords = {
+                    wordlist = { "Buxu","Deggi","Domi","Duxo","Duzu","Gadu","Haqa","Misu",
+                                 "Mjuu","Mong","Ouzi","Ovzi","Puqu","Quu","Xalmo","Xicu","Zhuu" },
+                    slots = {
+                        { slot = 1, floor_id = 1,  label = "#1 Floor 1 (H-9)"    },
+                        { slot = 2, floor_id = 15, label = "#2 Basement 1 (H-9)" },
+                        { slot = 3, floor_id = 2,  label = "#3 Floor 2 (I-8)"    },
+                    },
+                },
+                zone_max_distance = 35,
+                visual_zones = {
+                    -- Survival Guide
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -221.0, y = 0.3, z = -13.0 }, size = 1, floor_id = 1, colour = "green" },
+
+                    -- To 1st password. (hidden once password #1 is captured)
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -221.0, y = 0.3, z = -13.0 }, size = 1, floor_id = 1, colour = "green", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -215.8, y = 0.3, z = -18.6 }, size = 4, direction = "right", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -179.1, y = 0.3, z = -16.4 }, size = 4, direction = "up", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -176.9, y = 0.3, z = 20.4 }, size = 4, direction = "right", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -138.8, y = 0.3, z = 21.1 }, size = 4, direction = "right", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -101.0, y = 0.1, z = 18.8 }, size = 4, direction = "se", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -74.9, y = 0.3, z = -12.6 }, size = 4, direction = "se", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -65.6, y = 0.3, z = -26.3 }, size = 4, direction = "se", floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -62.5, y = 0.3, z = -30.6 }, size = 1, floor_id = 1, colour = "cyan", hide_if_password = 1 },
+                    -- To first door levers (shown once password #1 is captured)
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -62.6, y = 0.3, z = -34.6 }, size = 1, floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -56.8, y = 0.2, z = -25.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -55.4, y = 0.3, z = 1.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -55.0, y = 0.3, z = 19.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", show_if_password = 1 },
+
+
+                    -- To 2nd password
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -21.0, y = 0.3, z = 6.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -19.6, y = 0.3, z = -17.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 12.6, y = 0.3, z = -20.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 20.6, y = 0.3, z = 1.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 28.4, y = 0.3, z = 20.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 56.9, y = -3.5, z = 20.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow", show_if_password = 1 },
+
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 100.6, y = -12.0, z = 19.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 1 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 99.5, y = -15.8, z = -20.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", show_if_password = 1 },
+                    --{ zone_name = "Castle Oztroja", type = 'arrow', center = { x = 20.0, y = -15.8, z = -25.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 1 },
+
+
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 20.0, y = -15.8, z = -17.5 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 17.8, y = -15.8, z = 21.7 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 11.7, y = -15.8, z = 56.8 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -63.0, y = -15.7, z = 59.4 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.5, y = -15.8, z = 47.1 }, size = 4, direction = "down", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -101.5, y = -16.0, z = 28.3 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -153.1, y = -15.7, z = 18.9 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -178.6, y = -15.8, z = 24.8 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -173.9, y = -15.8, z = 60.0 }, size = 4, direction = "right", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -135.5, y = -15.8, z = 64.6 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -139.2, y = -15.8, z = 101.2 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -174.3, y = -16.2, z = 103.9 }, size = 4, direction = "up", floor_id = 6, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -176.6, y = -16.0, z = 169.2 }, size = 4, direction = "up", floor_id = 6, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -164.5, y = -15.8, z = 219.0 }, size = 4, direction = "right", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.8, y = -12.0, z = 219.9 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -101.4, y = 4.0, z = 138.6 }, size = 4, direction = "right", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.6, y = 12.0, z = 140.2 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.5, y = 22.5, z = 89.5 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.9, y = 24.3, z = 48.5 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -63.4, y = 24.3, z = 18.5 }, size = 4, direction = "left", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -113.2, y = 24.3, z = 18.4 }, size = 4, direction = "left", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -157.2, y = 24.3, z = 17.7 }, size = 4, direction = "left", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -177.1, y = 24.3, z = 14.2 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -178.6, y = 24.3, z = -30.5 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -178.1, y = 24.3, z = -58.6 }, size = 4, direction = "right", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -140.4, y = 24.3, z = -59.1 }, size = 4, direction = "up", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -135.4, y = 24.3, z = -20.2 }, size = 4, direction = "right", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -101.5, y = 24.3, z = -18.7 }, size = 4, direction = "down", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -91.0, y = 24.4, z = -55.2 }, size = 4, direction = "se", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -66.5, y = 24.3, z = -64.4 }, size = 4, direction = "se", floor_id = 15, colour = "cyan", hide_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -62.5, y = 24.3, z = -69.6 }, size = 1, floor_id = 15, colour = "cyan", hide_if_password = 2 },
+
+                    -- to 3rd password
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -63.3, y = 24.3, z = -75.0 }, size = 1, floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -66.7, y = 24.3, z = -67.0 }, size = 5, direction = "nw", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -95.4, y = 24.2, z = -39.2 }, size = 5, direction = "nw", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -110.1, y = 24.2, z = -20.2 }, size = 5, direction = "left", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -139.7, y = 24.3, z = -22.8 }, size = 5, direction = "down", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -141.3, y = 24.3, z = -59.7 }, size = 5, direction = "left", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -180.4, y = 24.3, z = -62.5 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -178.1, y = 24.3, z = -17.2 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -173.9, y = 24.3, z = 14.9 }, size = 5, direction = "right", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -138.7, y = 24.2, z = 20.7 }, size = 5, direction = "right", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -96.3, y = 24.3, z = 17.9 }, size = 5, direction = "right", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.1, y = 24.3, z = 26.2 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.7, y = 24.3, z = 73.1 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -59.9, y = 16.3, z = 116.6 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.7, y = 12.0, z = 139.1 }, size = 5, direction = "left", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.6, y = 4.0, z = 139.8 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.0, y = -7.8, z = 197.2 }, size = 5, direction = "up", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.2, y = -12.0, z = 221.2 }, size = 5, direction = "left", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -146.9, y = -15.8, z = 219.8 }, size = 5, direction = "left", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -181.8, y = -15.8, z = 207.6 }, size = 5, direction = "down", floor_id = 15, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -175.7, y = -16.2, z = 180.5 }, size = 4, direction = "down", floor_id = 6, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -174.5, y = -16.0, z = 140.5 }, size = 4, direction = "down", floor_id = 6, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -172.3, y = -16.0, z = 101.1 }, size = 4, direction = "right", floor_id = 6, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -138.2, y = -15.8, z = 100.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -142.7, y = -15.8, z = 61.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -177.6, y = -15.8, z = 52.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -179.1, y = -15.7, z = 20.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -143.8, y = -16.0, z = 26.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.3, y = -16.0, z = 27.4 }, size = 4, direction = "up", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -86.9, y = -15.8, z = 58.6 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -19.6, y = -15.7, z = 59.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 18.2, y = -15.8, z = 54.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 2 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 20.5, y = -15.8, z = -17.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 2 },
+
+                    --
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 20.4, y = -15.8, z = -38.5 }, size = 4, direction = "down", floor_id = 2, colour = "cyan",show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = 8.0, y = -15.8, z = -59.9 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -19.6, y = -15.8, z = -61.9 }, size = 4, direction = "down", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -19.9, y = -15.8, z = -98.7 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.6, y = -15.8, z = -109.6 }, size = 4, direction = "down", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.7, y = -15.7, z = -139.4 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.9, y = -15.8, z = -133.6 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.6, y = -15.7, z = -99.3 }, size = 4, direction = "left", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -139.0, y = -15.8, z = -90.1 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -139.3, y = -15.9, z = -68.9 }, size = 4, direction = "right", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -92.4, y = -16.0, z = -60.1 }, size = 4, direction = "right", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.9, y = -15.8, z = -55.1 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -52.9, y = -16.0, z = -25.0 }, size = 4, direction = "up", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -49.3, y = -15.8, z = 14.0 }, size = 4, direction = "ne", floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -45.2, y = -15.7, z = 17.7 }, size = 1, floor_id = 2, colour = "cyan", show_if_password = 2, hide_if_password = 3 },
+
+                    { zone_name = "Castle Oztroja", type = 'square', center = { x = -41.4, y = -15.8, z = 17.0 }, size = 1, floor_id = 2, colour = "yellow", show_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -50.9, y = -15.9, z = 18.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -53.6, y = -16.0, z = -12.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow", show_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -59.1, y = -16.0, z = -27.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", show_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -97.9, y = -15.9, z = -21.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", show_if_password = 3 },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -140.3, y = -16.0, z = -20.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow", show_if_password = 3 },
+
+                    --passed levers
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -201.4, y = -15.8, z = -19.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -259.5, y = -15.8, z = -25.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -258.9, y = -20.0, z = -60.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -201.6, y = -31.8, z = -59.1 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -141.8, y = -39.8, z = -57.5 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -137.7, y = -39.8, z = -23.6 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.1, y = -39.8, z = -23.4 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.4, y = -39.7, z = -70.1 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -91.8, y = -39.7, z = -99.3 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.9, y = -39.8, z = -100.4 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.2, y = -39.7, z = -140.9 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -19.3, y = -39.8, z = -146.6 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -22.0, y = -39.8, z = -179.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -61.3, y = -44.0, z = -180.6 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.6, y = -52.0, z = -219.5 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+
+                    -- to torch run quick
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.5, y = -60.0, z = -218.9 }, size = 4, direction = "up", floor_id = 4, colour = "cyan" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.7, y = -71.8, z = -163.2 }, size = 4, direction = "up", floor_id = 4, colour = "cyan" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -97.2, y = -71.8, z = -120.2 }, size = 4, direction = "up", floor_id = 4, colour = "cyan" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -95.1, y = -71.7, z = -101.2 }, size = 4, direction = "right", floor_id = 4, colour = "cyan" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -60.4, y = -71.7, z = -99.2 }, size = 4, direction = "up", floor_id = 4, colour = "cyan" },
+
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -61.6, y = -71.8, z = -68.1 }, size = 4, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -64.5, y = -71.8, z = -95.9 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -102.8, y = -71.8, z = -92.6 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.0, y = -71.8, z = -50.6 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.9, y = -55.8, z = -17.7 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.8, y = -56.0, z = 21.5 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.7, y = -59.5, z = 39.3 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -99.8, y = -60.6, z = 78.9 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+
+                    { zone_name = "Castle Oztroja", type = 'rect', center = { x = -100.0, y = -61.3, z = 85.8 }, width = 4.50, height = 4.00, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.2, y = -58.4, z = 95.4 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Oztroja", type = 'arrow', center = { x = -100.7, y = -55.8, z = 115.3 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+s
+                },
                 images = {
                     {
                         width = 512,
@@ -4136,6 +4407,58 @@ return {
                         state = 5,
                         zone_name = "Castle Oztroja",
                         floor_id = 1,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16, label = "P1", color = "Cyan" },
+                            { position = "J-8", offsetX = 16, offsetY = 16, color = "Yellow" },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16, label = "P3", color = "Cyan" },
+                            { position = "G-7", offsetX = 16, offsetY = 16, label = "P2", color = "Cyan" },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 3,
+                        highlights = {
+                            { position = "H-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 5,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Oztroja",
+                        floor_id = 6,
                         highlights = {
                             { position = "I-8", offsetX = 16, offsetY = 16 },
                         },
@@ -4147,21 +4470,60 @@ return {
                         zone_name = "Castle Oztroja",
                         floor_id = 15,
                         highlights = {
-                            { position = "H-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "H-9", offsetX = 16, offsetY = 16, label = "P2", color = "Cyan" },
+                            { position = "G-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             {
-                text = "Step 6: Return to Heavens Tower and examine the Vestal Chamber door (_6q2) to complete the mission.",
-                onmob_target = {"_6q2"},
+                text = "Step 6: Return to Heavens Tower and examine the Vestal Chamber door to complete the mission.",
+                 onmob_target = {"Door: Vestal-chamber"},
+                zone_max_distance = 17,
+                visual_zones = {
+
+                    --enter Clerical Chamber
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.3, y = 0.8, z = 13.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+
+                    --To the Starway Stairway
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -1.7, y = 0.5, z = 29.3 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'rect', center = { x = -13.7, y = -1.5, z = 28.9 }, width = 2.75, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'z', rotation = 30 },
+
+                    --Up the 2 flights of stairs to Rhy Eopcan
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.2, y = -1.0, z = 23.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.8, y = -6.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -21.3, y = -11.5, z = -22.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.8, y = -16.0, z = -31.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 23.0, y = -21.2, z = -21.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 31.7, y = -25.2, z = -4.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 13.9, y = -26.0, z = 5.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 3.2, y = -26.0, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 2.4, y = -26.0, z = 30.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.7, y = -31.5, z = 21.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -30.9, y = -36.5, z = -1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -22.0, y = -41.5, z = -23.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.5, y = -45.0, z = -30.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.1, y = -47.0, z = -9.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.1, y = -47.0, z = 13.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.2, y = -49.0, z = 28.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
                 trigger_on_event_id = {312},
                 route_to = "Heavens Tower",
             },
         },
         reward = {
-            text = "Rank 7, 40,000 gil, Ashura Necklace"
+            text = "Rank 7, 40,000 gil, Ashura Necklace",
+            items = {
+                {
+                    name = "Ashura Necklace",
+                    type = "Neck",
+                    races = "All Races",
+                    stats = { "DEF+1", "STR+1", "DEX+1", "VIT+1", "AGI+1" },
+                    level = "54",
+                    jobs = "All Jobs",
+                },
+            },
         }
     },
     ["7-1: The Sixth Ministry"] = {

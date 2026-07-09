@@ -542,6 +542,51 @@ function triggers.handleKillText(e, incoming_text, playerName, currentTopCategor
     end
 end
 
+-- HANDLE: daily_passwords (e.g. Castle Oztroja statues).
+-- Watches incoming text for any token in the step's fixed wordlist, then slots the
+-- captured word by the player's current floor_id (so collection ORDER doesn't matter).
+-- State is day-stamped in quest_state and resets each Vana'diel day.
+function triggers.handleDailyPasswordText(e, incoming_text, currentTopCategory, currentSubfile, current_mission, quest_data, quest_state)
+    if not currentTopCategory or not currentSubfile or not current_mission then return end
+    if ignored_chat_modes[e.mode] then return end  -- ignore player chat
+    if not incoming_text then return end
+
+    local missionData = quest_data[currentTopCategory] and quest_data[currentTopCategory][currentSubfile]
+        and quest_data[currentTopCategory][currentSubfile][current_mission]
+    if not missionData or not missionData.steps then return end
+
+    local step_idx = quest_state.getCurrentStep(currentTopCategory, currentSubfile, current_mission, quest_data)
+    local step_data = missionData.steps[step_idx]
+    if type(step_data) ~= 'table' or not step_data.daily_passwords then return end
+
+    local dp = step_data.daily_passwords
+    if not dp.wordlist or not dp.slots then return end
+
+    -- Find a wordlist token in the message (case-insensitive, whole word)
+    local lower = incoming_text:lower()
+    local found
+    for _, w in ipairs(dp.wordlist) do
+        if lower:find('%f[%a]' .. w:lower() .. '%f[%A]') then
+            found = w
+            break
+        end
+    end
+    if not found then return end
+
+    -- Determine which slot this statue is, from the player's current floor
+    local player_module = require('modules.player')
+    local floor = player_module.getFloorIdRaw and player_module.getFloorIdRaw()
+    if not floor then return end
+
+    for _, slot in ipairs(dp.slots) do
+        if slot.floor_id == floor then
+            quest_state.setDailyPassword(currentTopCategory, currentSubfile, current_mission, step_idx, slot.slot, found)
+            print(string.format("\30\106[QH]\30\01 Password #%d captured: %s", slot.slot, found))
+            return
+        end
+    end
+end
+
 -- Tracks last attack cmd_no per actor from 0x028 packets.
 -- The actual kill (defeat) arrives in 0x029, so we store state here for correlation.
 local actor_last_cmd = {}  -- [actor_server_id] = cmd_no
