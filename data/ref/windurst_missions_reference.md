@@ -15,9 +15,9 @@
 [5-2] The Shadow Awaits - DONE
 [6-1] Full Moon Fountain - DONE
 [6-2] Saintly Invitation - DONE
-[7-1] The Sixth Ministry - STARTED
-[7-2] Awakening of the Gods - DRAFT
-[8-1] Vain - DRAFT
+[7-1] The Sixth Ministry - DONE
+[7-2] Awakening of the Gods - DONE
+[8-1] Vain - STARTED
 [8-2] The Jester Who'd Be King - DRAFT
 [9-1] Doll of the Dead - DRAFT
 [9-2] Moon Reading - DRAFT

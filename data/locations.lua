@@ -570,6 +570,21 @@ return {
         max_distance = 35,
         draw_in_combat = false
     },
+    -- Toraimarai Canal
+    ["toraimarai-canal-tome-of-magic"] = {
+        target_pos = { x = 142.9, y = 12.7, z = -13.0 },
+        visual_mode = "arc",
+        zone = "Toraimarai Canal",
+        floor_id = 2,
+        max_distance = 10
+    },
+    ["toraimarai-canal-transporter"] = {
+        target_pos = { x = 183.0, y = 11.5, z = -60.0 },
+        visual_mode = "arc",
+        zone = "Toraimarai Canal",
+        floor_id = 2,
+        max_distance = 25
+    },
     -- Giddeus
     ["Uu Zhoumo"] = {
         target_pos = { x = -180, y= 15, z=157.4},
@@ -1290,6 +1305,20 @@ return {
         visual_mode = "arc",
         zone = "Kazham"
     },
+    ["Romaa Mihgo"] = {
+        target_pos = { x = 29.0, y = -13.6, z = -176.5 },
+        visual_mode = "arc",
+        zone = "Kazham",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["Vanono"] = {
+        target_pos = { x = -23.1, y = -4.9, z = -23.1 },
+        visual_mode = "arc",
+        zone = "Kazham",
+        floor_id = 0,
+        max_distance = 35
+    },
     -- Lower Jeuno
     ["Ghebi Damomohe"] = {
         target_pos = { x = 15.6, y= -1.7, z=-7.6},
@@ -1559,6 +1588,13 @@ return {
         zone = "Gustav Tunnel"
     },
     -- Temple of Uggalepih
+    ["temple-of-uggalepih-granite-door-win-7-2"] = {
+        target_pos = { x = 340.0, y = -1.9, z = 331.7 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 3,
+        max_distance = 25
+    },
     ["templeugg1-zm4-granitedoor"] = {
         target_pos = { x = 60.1, y = -2, z = 11.2},
         visual_mode = "arc",

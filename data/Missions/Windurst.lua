@@ -4529,47 +4529,57 @@ s
     ["7-1: The Sixth Ministry"] = {
         steps = {
             {
-                text = "Step 1: Trade 4 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -4578,25 +4588,84 @@ s
                        "Optional: NPCs inside both Optistery buildings have additional dialogue.",
                 onmob_target = {"Tosuka-Porika"},
                 trigger_on_event_id = {715},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Waters North", type = 'arrow', center = { x = -22.9, y = -5.0, z = 87.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Windurst Waters North", type = 'rect', center = { x = -23.0, y = -6.8, z = 92.1 }, width = 2.50, height = 3.25, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             {
                 text = "Step 3: Travel to Toraimarai Canal and navigate to Map 2. \n \n" ..
                        "Fastest routes: \n" ..
-                       "- Home Point: Toraimarai Canal HP#1 -> make your way east to exit C at J-9 to reach Map 2 \n" ..
-                       "- Priming Gate (H-3) in Windurst Walls -> zone into Toraimarai Canal \n \n" ..
+                       "1. Home Point: Toraimarai Canal HP#1 -> head east to exit C at J-9 to reach Map 2 \n \n" ..
+                       "2. Survival Guide: Toraimarai Canal (Inner Horutoto entrance) -> head east to exit C at J-9 \n \n" ..
+                       "3. Portal Charm / 3-Mage Gate (long run, no Home Point or Survival Guide): East Sarutabaruta J-7 tower -> Inner Horutoto Ruins -> cracked wall G-8 -> Magic Gate E-10 -> cracked wall D-10 -> Three Mage Gate H-9 -> false wall H-8 -> Toraimarai Canal door at H-6 (left tunnel) \n \n" ..
                        "On Map 2 find the large room (G-8) containing 4 Hinge Oils. \n \n" ..
                        "Defeat all 4 Hinge Oils. \n \n" ..
-                       "WARNING: Oils are immune to Sleep but susceptible to Bind/Gravity. They have a short-range AoE Fluid Spread. They respawn in ~16 minutes — all 4 must be dead simultaneously for the Marble Door to open.",
+                       "WARNING: Oils are immune to Sleep but susceptible to Bind/Gravity. They have a short-range AoE Fluid Spread. They respawn in ~16 minutes - all 4 must be dead simultaneously for the Marble Door to open.",
                 kill_requirement = {
-                    enemies = {"Hinge_Oil"},
+                    enemies = {"Hinge Oil"},
                     zone = "Toraimarai Canal",
                     count = 4,
                     count_party_kills = true,
                 },
-                route_to = "Toraimarai Canal",
+                onmob_enemy = {"Hinge Oil"},
+                keyitems_needed = {195},
+                --route_to = "Toraimarai Canal",
+                zone_max_distance = 35,
                 images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "G-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id = 3,
+                        highlights = {
+                            { position = "H-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Inner Horutoto Ruins",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Toraimarai Canal",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                     {
                         width = 512,
                         height = 512,
@@ -4608,12 +4677,121 @@ s
                         },
                     },
                 },
+                visual_zones = {
+                    -- Fallback overland route: East Sarutabaruta -> Inner Horutoto Ruins tower
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 351.4, y = -13.5, z = 100.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Sarutabaruta", type = 'arrow', center = { x = 378.2, y = -13.3, z = 100.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    -- Survival Guide
+                    { zone_name = "Inner Horutoto Ruins", type = 'square', center = { x = 453.0, y = -8.0, z = 182.3 }, size = 1, floor_id = 1, colour = "green" },
+                    -- to cracked wall G-8
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 380.8, y = -0.0, z = 136.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 380.5, y = 0.5, z = 85.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 350.3, y = 0.5, z = 90.0 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 325.3, y = -0.0, z = 99.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 306.2, y = -0.0, z = 102.8 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = 300.0, y = -1.8, z = 110.3 }, width = 4.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
+                    -- to magic gate of horutoto
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 291.8, y = 0.1, z = 139.5 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 259.4, y = 0.1, z = 129.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 252.9, y = -0.4, z = 93.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 218.9, y = -0.2, z = 51.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 218.8, y = -0.1, z = 20.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 179.7, y = 0.0, z = 17.3 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 175.1, y = 0.3, z = -18.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 140.3, y = -0.2, z = -25.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 133.7, y = 0.2, z = -59.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 95.7, y = 3.7, z = -58.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 58.9, y = 8.1, z = -70.6 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 51.7, y = 8.0, z = -102.7 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = 12.8, y = 8.2, z = -127.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -10.4, y = 7.7, z = -127.3 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -48.2, y = 8.0, z = -139.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -60.9, y = 8.0, z = -157.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -69.7, y = 8.0, z = -179.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -97.6, y = 8.5, z = -177.0 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -99.5, y = 8.4, z = -139.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -139.8, y = 3.8, z = -139.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -163.0, y = -0.0, z = -139.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -175.7, y = -2.3, z = -140.0 }, width = 4.00, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+
+                    -- to 2nd cracked wall
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -182.5, y = 0.5, z = -139.8 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -211.8, y = 0.5, z = -139.9 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -246.7, y = 0.5, z = -140.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -264.3, y = -2.0, z = -140.0 }, width = 4.00, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -271.1, y = 0.0, z = -140.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+
+                    -- sealed portal 3 mage gate
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -299.0, y = -0.0, z = -131.7 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -299.5, y = -0.0, z = -96.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -283.1, y = 0.5, z = -53.8 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -259.7, y = 0.5, z = -20.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -260.1, y = -2.3, z = -15.6 }, width = 4.00, height = 4.00, floor_id = 3, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -259.8, y = -0.0, z = 3.7 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -267.5, y = -0.0, z = 41.2 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -260.1, y = -0.0, z = 76.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+
+                    -- to Toraimarai Canal door
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -264.9, y = 0.6, z = 94.6 }, size = 4, direction = "nw", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -283.2, y = 0.5, z = 111.0 }, size = 4, direction = "nw", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -299.3, y = 0.5, z = 142.3 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -299.7, y = 0.0, z = 185.6 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Inner Horutoto Ruins", type = 'rect', center = { x = -300.0, y = -1.9, z = 190.3 }, width = 3.75, height = 3.75, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Inner Horutoto Ruins", type = 'arrow', center = { x = -300.0, y = -0.0, z = 196.8 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+
+                    -- Survival Guide (Toraimarai Canal, Inner Horutoto entrance)
+                    { zone_name = "Toraimarai Canal", type = 'square', center = { x = -308.2, y = 16.0, z = 262.0 }, size = 1, floor_id = 1, colour = "green" },
+
+                    -- to map 2
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -223.7, y = 16.0, z = 224.2 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -175.0, y = 16.0, z = 221.0 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -176.4, y = 16.0, z = 179.9 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -184.8, y = 16.0, z = 178.3 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -185.1, y = 16.0, z = 148.6 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -182.9, y = 16.0, z = 114.6 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -180.0, y = 21.5, z = 85.4 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -181.6, y = 21.5, z = 59.6 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -219.8, y = 21.5, z = 49.6 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -217.0, y = 20.5, z = 18.0 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -215.8, y = 16.0, z = 4.0 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -206.3, y = 16.0, z = -15.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -175.8, y = 16.0, z = -18.0 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -173.1, y = 16.0, z = -55.7 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -139.7, y = 16.0, z = -54.6 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -136.8, y = 16.0, z = -20.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -104.5, y = 16.0, z = -15.3 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -64.3, y = 16.0, z = -9.6 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -63.0, y = 16.0, z = 19.6 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -54.9, y = 16.0, z = 20.4 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -44.8, y = 16.0, z = -15.8 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -19.4, y = 16.0, z = -3.3 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = -17.5, y = 20.5, z = -19.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+
+                    -- To Hinge Oils
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 11.2, y = 21.5, z = -20.5 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 19.8, y = 21.5, z = -19.5 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 20.9, y = 20.5, z = -60.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 37.5, y = 16.0, z = -62.7 }, size = 3, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 24.2, y = 16.0, z = -75.4 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 26.1, y = 16.0, z = -100.9 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 61.5, y = 16.0, z = -98.7 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 61.2, y = 20.0, z = -58.7 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                },
             },
             {
-                text = "Step 4: With all Hinge Oils dead, examine the Marble Door (_4pc) on the far side of the room up the staircase at H-8 to enter. \n \n" ..
+                text = "Step 4: With all Hinge Oils dead, examine the Marble Door on the far side of the room up the staircase at H-8 to enter. \n \n" ..
                        "Inside, examine the 'Tome of Magic' on the floor to the LEFT of the door you entered through for a cutscene. \n \n" ..
-                       "NOTE: The other Tomes on the walls do not trigger the mission cutscene — only the one on the floor.",
-                onmob_target = {"_4pc", "Tome_of_Magic"},
+                       "NOTE: The other Tomes on the walls do not trigger the mission cutscene - only the one on the floor.",
+                onmob_target = {"toraimarai-canal-tome-of-magic"},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 79.3, y = 20.4, z = -40.0 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 99.9, y = 20.1, z = -20.3 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 124.1, y = 15.7, z = -20.2 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'rect', center = { x = 138.7, y = 11.4, z = -20.0 }, width = 2.50, height = 3.25, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                },
                 trigger_on_event_id = {69},
                 images = {
                     {
@@ -4630,11 +4808,28 @@ s
             },
             {
                 text = "Step 5: Return to Tosuka-Porika at the Optistery (G-8) in Windurst Waters to complete the mission. \n \n" ..
-                       "You will receive KI:Blank Book of the Gods.",
-                onmob_target = {"Tosuka-Porika"},
+                       "You will receive KI:Blank Book of the Gods. \n \n" ..
+                       "Notes: You can go through the Marble Door to the south of the room and it will teleport you back to Heavens Tower! \n \n",
+                onmob_target = {"toraimarai-canal-transporter","Tosuka-Porika"},
                 trigger_on_event_id = {724},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters North",
                 destination_highlight = {position = "G-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        -- To Transporter
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 143.2, y = 13.0, z = -24.1 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'rect', center = { x = 143.0, y = 11.1, z = -28.6 }, width = 3.25, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 142.7, y = 13.0, z = -43.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 145.3, y = 13.0, z = -59.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Toraimarai Canal", type = 'arrow', center = { x = 167.9, y = 13.0, z = -59.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+
+                        --out of heavens tower
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = 0.1, y = 0.0, z = -25.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                        -- TO TOSUKKAAA
+                        { zone_name = "Windurst Waters North", type = 'arrow', center = { x = -22.9, y = -5.0, z = 87.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Windurst Waters North", type = 'rect', center = { x = -23.0, y = -6.8, z = 92.1 }, width = 2.50, height = 3.25, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
         },
         reward = {
@@ -4645,97 +4840,267 @@ s
     ["7-2: Awakening of the Gods"] = {
         steps = {
             {
-                text = "Step 1: Trade 6 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
                 text = "Step 2: Go to the Rhinostery in southern Windurst Waters (J-9). \n \n" ..
-                       "First: speak with Leepe-Hoppe on the roof (second floor). \n \n" ..
-                       "Then: speak with Kerutoto inside. \n \n" ..
-                       "Make sure you get the MISSION cutscene from Kerutoto — the correct one begins: 'The truth of it is, Minister Rukususu made an importantaru discovery in Fei'Yen...' \n \n" ..
-                       "NOTE: If you have quest 'Tuning In' started, Kerutoto may not give the correct cutscene. Accept that quest first, then talk to her twice to activate this mission's cutscene.",
-                onmob_target = {"Leepe-Hoppe", "Kerutoto"},
-                trigger_on_event_id = {736},
-                route_to = "Windurst Waters",
+                       "Speak with Leepe-Hoppe on the roof (second floor) for a cutscene.",
+                onmob_target = {"Leepe-Hoppe"},
+                trigger_on_event_id = {734},
+                route_to = "Windurst Waters South",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 4.2, y = -4.0, z = -206.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 25.8, y = -9.8, z = -198.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                },
             },
             {
-                text = "Step 3: Travel to Kazham and speak with Romaa Mihgo (H-11) at Mihgo's Residence.",
-                onmob_target = {"Romaa_Mihgo"},
+                text = "Step 3: Speak with Kerutoto inside the Rhinostery (J-9). \n \n" ..
+                       "NOTE: Kerutoto has other cutscenes (e.g. quest 'Tuning In'). Keep talking to her until this step ticks over. \n \n",
+                onmob_target = {"Kerutoto"},
+                trigger_on_event_id = {736},
+                route_to = "Windurst Waters South",
+                destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Waters South", type = 'arrow', center = { x = -3.8, y = -4.0, z = -163.0 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Windurst Waters South", type = 'rect', center = { x = 3.2, y = -5.8, z = -163.0 }, width = 2.50, height = 3.25, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                }
+            },
+            {
+                text = "Step 4: Travel to Kazham and speak with Romaa Mihgo (H-11) at Mihgo's Residence. \n \n",
+                onmob_target = {"Romaa Mihgo"},
                 trigger_on_event_id = {266},
                 route_to = "Kazham",
                 destination_highlight = {position = "H-11", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Kazham", type = 'arrow', center = { x = 30.8, y = -11.0, z = -151.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Kazham", type = 'rect', center = { x = 31.0, y = -12.9, z = -159.3 }, width = 3.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             {
-                text = "Step 4: Speak with Vanono (G-7) near the airship dock boarding counter in Kazham.",
+                text = "Step 5: Speak with Vanono (G-7) near the airship dock boarding counter in Kazham.",
                 onmob_target = {"Vanono"},
                 trigger_on_event_id = {264},
+                route_to = "Kazham",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 5: Travel to Temple of Uggalepih and obtain a Cursed Key from Bonze Marberry (level 66 Tonberry NM). \n \n" ..
-                       "Fastest route: Unity warp to Yhoator Jungle (Level 122) -> Den of Rancor at J-7 -> follow right wall into Temple -> Bonze Marberry at J-9 on that map. \n \n" ..
-                       "Alternate: Temple of Uggalepih entrance in Yhoator Jungle (J-11) -> navigate to the NM room. \n \n" ..
+                text = "Step 6: Travel to Temple of Uggalepih and obtain a Cursed Key from Bonze Marberry (level 66 Tonberry NM). \n \n" ..
                        "IMPORTANT: Bonze Marberry uses Everyone's Rancor (10x normal grudge damage) below 25% HP. Burst him from over 25% to 0 to avoid it. \n \n" ..
-                       "Don't kill Tonberries on the way — use Call for Help to avoid rancor buildup! \n \n" ..
                        "Bonze Marberry drops 2 Cursed Keys — every Windurstian on the mission needs one.",
                 trigger_on_item_obtain = {"Cursed Key"},
                 items_needed = {"Cursed Key"},
-                route_to = "Yhoator Jungle",
-            },
-            {
-                text = "Step 6: With your Cursed Key, head to the Granite Door (_4fx) at J-6 on Map 3 of Temple of Uggalepih. \n \n" ..
-                       "Trade the Cursed Key to the door for a cutscene with Rukususu. \n \n" ..
-                       "Your KI:Blank Book of the Gods is consumed and you receive KI:Book of the Gods. \n \n" ..
-                       "NOTE: Yagudo High Priest and Yagudo Templar have True Sight — Invisible will NOT protect you. \n \n" ..
-                       "Optional: Read the three extra Tomes of Magic in this room for lore.",
-                onmob_target = {"_4fx"},
-                trigger_on_event_id = {23},
+                onmob_enemy = "Bonze Marberry",
+                --route_to = "Yhoator Jungle",
+                --destination_highlight = {position = "J-11", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+
+                    -- From Kazham to Yhoator Jungle
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -234.1, y = 0.4, z = 490.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -207.7, y = 0.3, z = 451.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -206.1, y = 0.4, z = 407.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -221.1, y = 0.4, z = 370.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -247.3, y = 0.0, z = 317.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -262.0, y = 9.2, z = 268.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -271.6, y = 7.6, z = 219.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -301.9, y = 0.3, z = 201.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -302.6, y = 0.2, z = 163.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -272.6, y = 7.9, z = 140.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -259.5, y = 8.3, z = 81.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -259.5, y = 4.6, z = 61.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -221.6, y = 0.5, z = 73.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -205.8, y = 8.2, z = 98.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -178.2, y = 8.4, z = 123.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -162.7, y = 0.0, z = 194.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -116.6, y = 0.0, z = 192.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -61.5, y = 8.1, z = 164.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -61.1, y = 8.3, z = 118.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -33.4, y = 7.2, z = 99.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -19.5, y = 4.0, z = 95.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -1.9, y = 8.3, z = 60.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 40.6, y = 8.3, z = 18.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 109.2, y = 8.2, z = 21.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    -- Yhoator Jungle to Temple of Ugg
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -476.0, y = 8.4, z = 58.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -431.9, y = 8.7, z = 58.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -401.8, y = 8.3, z = 61.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -373.8, y = 3.1, z = 59.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -370.6, y = 1.3, z = 19.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -337.4, y = 4.4, z = 19.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -294.2, y = 1.3, z = 59.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -260.4, y = 4.7, z = 58.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -250.0, y = 7.5, z = 20.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -219.6, y = 4.3, z = 18.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -212.2, y = 7.1, z = -22.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -165.8, y = 8.5, z = -19.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -142.2, y = 0.4, z = 8.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -123.0, y = 0.1, z = 24.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -96.1, y = 0.0, z = 29.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -69.5, y = 1.0, z = 19.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -59.8, y = 0.4, z = -4.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -45.9, y = 8.2, z = -20.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -12.9, y = 0.7, z = -29.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -22.6, y = 2.0, z = -63.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -21.0, y = 8.5, z = -103.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -20.9, y = 0.4, z = -152.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -16.6, y = 6.0, z = -182.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 19.4, y = 8.3, z = -200.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 20.8, y = 8.1, z = -230.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 2.9, y = 8.3, z = -258.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -38.5, y = 0.0, z = -275.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -35.5, y = 0.3, z = -326.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -32.6, y = 0.3, z = -360.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -3.3, y = 0.6, z = -384.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 45.6, y = 0.3, z = -391.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 94.9, y = 0.6, z = -400.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 125.1, y = 0.1, z = -408.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 155.3, y = 8.2, z = -419.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 179.3, y = 7.8, z = -433.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 196.1, y = 0.0, z = -476.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 232.1, y = 0.4, z = -498.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 272.5, y = -0.0, z = -487.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 298.1, y = -0.2, z = -486.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 299.5, y = -4.0, z = -540.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 310.5, y = -4.0, z = -571.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 300.0, y = -4.0, z = -586.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 299.5, y = -4.0, z = -614.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    -- Inside Temple of Ugg to Yhotar and go up the stairs
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 201.3, y = -0.1, z = 20.9 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 219.7, y = -0.1, z = 22.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = 220.0, y = -1.9, z = 31.0 }, width = 3.75, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 220.3, y = 0.0, z = 37.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 221.5, y = 0.0, z = 62.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = -0.0, z = 63.6 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.4, y = 0.0, z = 97.7 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = 0.0, z = 129.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 274.4, y = 0.0, z = 131.9 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 260.5, y = 0.0, z = 151.0 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 243.1, y = -8.0, z = 180.7 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --Back into Temple of Ugg to get the Cursed Key.
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 343.0, y = -10.0, z = -224.5 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 328.9, y = -10.0, z = -223.3 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 326.6, y = -10.0, z = -192.0 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 294.3, y = -10.0, z = -190.5 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 296.7, y = -10.0, z = -167.8 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 345.9, y = -10.0, z = -167.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+
+                },
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 6,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "K-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 3,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            {
+                text = "Step 7: With your Cursed Key, head to the Granite Door at J-6 on Map 3 of Temple of Uggalepih. \n \n" ..
+                       "Trade the Cursed Key to the door for a cutscene with Rukususu. \n \n" ..
+                       "Your KI:Blank Book of the Gods is consumed and you receive KI:Book of the Gods. \n \n",
+                onmob_target = {"temple-of-uggalepih-granite-door-win-7-2"},
+                zone_max_distance = 35,
+                visual_zones = {
+                        -- Cursed Key trade to the Granite Door.
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = 323.5, y = -1.9, z = 220.0 }, width = 3.50, height = 4.00, floor_id = 3, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 315.7, y = 0.0, z = 220.3 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 280.6, y = 0.0, z = 220.4 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 260.5, y = -5.3, z = 225.0 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 260.5, y = -8.1, z = 260.1 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 266.5, y = -2.5, z = 299.6 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 285.4, y = 0.0, z = 296.2 }, size = 4, direction = "se", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 305.0, y = -0.0, z = 286.6 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 315.9, y = -0.0, z = 299.8 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 340.3, y = -0.1, z = 301.1 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 340.1, y = 0.0, z = 328.6 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                },
+                trigger_on_event_id = {23},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "K-3", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
                         zone_name = "Temple of Uggalepih",
                         floor_id = 3,
                         highlights = {
@@ -4745,11 +5110,16 @@ s
                 },
             },
             {
-                text = "Step 7: Return to Leepe-Hoppe at the Rhinostery roof (J-9) in southern Windurst Waters to complete the mission.",
+                text = "Step 8: Return to Leepe-Hoppe at the Rhinostery roof (J-9) in southern Windurst Waters to complete the mission.",
                 onmob_target = {"Leepe-Hoppe"},
                 trigger_on_event_id = {742},
-                route_to = "Windurst Waters",
+                route_to = "Windurst Waters South",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 4.2, y = -4.0, z = -206.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Windurst Waters South", type = 'arrow', center = { x = 25.8, y = -9.8, z = -198.6 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                },
             },
         },
         reward = {
@@ -4762,45 +5132,55 @@ s
             {
                 text = "Step 1: Trade 6 crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "L-6", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
                         highlights = {
-                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = {
-                            { position = "G-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -4876,37 +5256,55 @@ s
             {
                 text = "Step 1: Fill at least 80% of your Rank Points bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
-                        highlights = { { position = "L-6", offsetX = 16, offsetY = 16 } },
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
-                        highlights = { { position = "E-7", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
-                        highlights = { { position = "I-6", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = { { position = "G-8", offsetX = 16, offsetY = 16 } },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -5054,37 +5452,55 @@ s
             {
                 text = "Step 1: Fill approximately 1/3 of your Rank Points bar. \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
-                        highlights = { { position = "L-6", offsetX = 16, offsetY = 16 } },
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
-                        highlights = { { position = "E-7", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
-                        highlights = { { position = "I-6", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = { { position = "G-8", offsetX = 16, offsetY = 16 } },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             {
@@ -5164,37 +5580,55 @@ s
             { -- Step 1
                 text = "Step 1: Fill approximately 90% of your Rank Points bar (trade 9 regular crystals or 4 light/dark crystals to any gate guard). \n \n" ..
                        "Talk to any Windurst Gate Guard to accept the mission.",
-                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma", "Zokima-Rokima"},
+                onmob_target = {"Mokyokyo", "Janshura-Rashura", "Rakoh-Buuma"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Windurst Woods
+                    { zone_name = "Windurst Woods", type = 'square', center = { x = 107.0, y = -5.0, z = -49.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Port Windurst
+                    { zone_name = "Port Windurst", type = 'square', center = { x = -227.2, y = -8.0, z = 209.3 }, size = 1, floor_id = 0, colour = "green" },
+                    --Windurst Waters
+                    { zone_name = "Windurst Waters North", type = 'square', center = { x = -30.7, y = -4.9, z = 226.5 }, size = 1, floor_id = 1, colour = "green" },
+                },
                 trigger_on_talk = {"You have accepted the mission"},
                 images = {
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Waters",
-                        highlights = { { position = "L-6", offsetX = 16, offsetY = 16 } },
+                        zone_name = "Windurst Waters North",
+                        floor_id  = 1,
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Port Windurst",
-                        highlights = { { position = "E-7", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "B-5", offsetX = 16, offsetY = 16 },
+                        },
                     },
                     {
-                        width = 512,
-                        height = 512,
-                        state = 1,
                         zone_name = "Windurst Woods",
-                        highlights = { { position = "I-6", offsetX = 16, offsetY = 16 } },
+                        width     = 512,
+                        height    = 512,
+                        state     = 1,
+                        highlights = {
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Windurst Walls",
-                        highlights = { { position = "G-8", offsetX = 16, offsetY = 16 } },
-                    },
+                    -- {
+                    --     zone_name = "Windurst Walls",
+                    --     width     = 512,
+                    --     height    = 512,
+                    --     state     = 1,
+                    --     highlights = {
+                    --         { position = "H-7", offsetX = 16, offsetY = 16 },
+                    --     },
+                    -- },
                 },
             },
             { -- Step 2
