@@ -92,6 +92,10 @@ return {
         [6] = 6,  -- Lower floor
         [15] = 7,  -- Lower floor
     },
+    -- The Boyahda Tree
+    [153] = {
+        [1] = 1,
+    },
     -- Middle Delkfutt's Tower
     [157] = {
         [4] = 1,   -- Upper floor

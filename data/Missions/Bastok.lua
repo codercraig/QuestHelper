@@ -582,6 +582,11 @@ return {
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = {242},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.0, y = 0.8, z = 15.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 11: Travel to Giddeus with your party! \n",
@@ -699,6 +704,11 @@ return {
                 trigger_on_event_id = { 239 },
                 route_to = "Windurst Walls",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 17,
+                visual_zones = {
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.0, y = 0.8, z = 15.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 3: Talk to Gold Skull in the Consulate of Bastok in Port Windurst (F-6) to receive a Dull Sword.",

@@ -398,6 +398,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Shantotto"] = {
+        target_pos = { x = 122.6, y = -3.9, z = 113.6 },
+        visual_mode = "arc",
+        zone = "Windurst Walls",
+        floor_id = 0,
+        max_distance = 25
+    },
     --Heavens Tower
     ["Kupipi"] = {
         target_pos = { x = 2, y= -1, z=32.1},
@@ -512,6 +519,13 @@ return {
         floor_id = 4,
         max_distance = 20
     },
+    ["inner-horutoto-ruins-gate-of-darkness-4-i7"] = {
+        target_pos = { x = -228.0, y = -1.9, z = 95.5 },
+        visual_mode = "arc",
+        zone = "Inner Horutoto Ruins",
+        floor_id = 4,
+        max_distance = 20
+    },
     -- Outer Horutoto Ruins
     ["outer-horutoto-ruins-ancient-magical-gizmo-1"] = {
         target_pos = { x = 458.0, y = -3.3, z = -702.0 },
@@ -570,6 +584,14 @@ return {
         max_distance = 35,
         draw_in_combat = false
     },
+    ["outer-horutoto-ruins-cracked-wall-5-g8"] = {
+        target_pos = { x = -424.3, y = -1.9, z = 620.0 },
+        visual_mode = "arc",
+        zone = "Outer Horutoto Ruins",
+        floor_id = 5,
+        max_distance = 15,
+        draw_in_combat = false,
+    },
     -- Toraimarai Canal
     ["toraimarai-canal-tome-of-magic"] = {
         target_pos = { x = 142.9, y = 12.7, z = -13.0 },
@@ -584,6 +606,14 @@ return {
         zone = "Toraimarai Canal",
         floor_id = 2,
         max_distance = 25
+    },
+    -- Full Moon Fountain
+    ["full-moon-fountain-moon-spiral"] = {
+        target_pos = { x = -303.3, y = 9.5, z = -260.1 },
+        visual_mode = "arc",
+        zone = "Full Moon Fountain",
+        floor_id = 0,
+        max_distance = 35
     },
     -- Giddeus
     ["Uu Zhoumo"] = {
@@ -1261,6 +1291,13 @@ return {
         floor_id = 0,
         max_distance = 40
     },
+    ["Sedal-Godjal"] = {
+        target_pos = { x = 187.4, y = -4.3, z = -117.3 },
+        visual_mode = "arc",
+        zone = "Davoi",
+        floor_id = 0,
+        max_distance = 8
+    },
     -- Monastic Cavern
     ["Magicite-Monastic"] = {
         target_pos = { x = -160.8, y= -9.5, z=7.8},
@@ -1625,6 +1662,13 @@ return {
         visual_mode = "arc",
         zone = "Temple of Uggalepih"
     },
+    ["temple-of-uggalepih-win92-???"] = {
+        target_pos = { x = -239.4, y = -2.2, z = -18.9 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 2,
+        max_distance = 20
+    },
     -- Cloister of Frost
     ["cloister-of-frost-zm5-cermet-headstone"] = {
         target_pos = { x = 567.9, y = -1.2, z = 608},
@@ -1671,6 +1715,14 @@ return {
         zone = "Beaucedine Glacier",
         floor_id = 0,
         max_distance = 35
+    },
+    -- Fei'Yin
+    ["fei-yin-cermet-door-2-f6"] = {
+        target_pos = { x = -184.5, y = -2.0, z = 190.0 },
+        visual_mode = "arc",
+        zone = "Fei'Yin",
+        floor_id = 2,
+        max_distance = 20
     },
     -- Uleguerand Range
     ["uleguerand-range-buffalostalker-dodzbraz"] = {
@@ -1927,6 +1979,22 @@ return {
         visual_mode = "arc",
         zone = "Quicksand Caves",
         floor_id = 7
+    },
+    -- Ro'Maeve
+    ["ro-maeve-qu-hau-spring"] = {
+        target_pos = { x = 0.2, y = -27.4, z = 67.8 },
+        visual_mode = "arc",
+        zone = "Ro'Maeve",
+        floor_id = 0,
+        max_distance = 25
+    },
+    -- The Boyahda Tree
+    ["the-boyahda-tree-mandragora-warden"] = {
+        target_pos = { x = 82.0, y = 7.8, z = 139.6 },
+        visual_mode = "arc",
+        zone = "The Boyahda Tree",
+        floor_id = 1,
+        max_distance = 15
     },
     --The Shrine of Ru'Avitau
     ["zm14-ark-angel-cs-locale"] = {

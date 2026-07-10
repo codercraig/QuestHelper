@@ -200,6 +200,7 @@ return {
         {zone = "East Sarutabaruta", exit = "L-8"},
         {zone = "Giddeus", exit = "F-7"},
         {zone = "Outer Horutoto Ruins", exit = "F-11", floor_id = 4},
+        {zone = "Outer Horutoto Ruins", exit = "F-4", floor_id = 1},
     },
     ["East Sarutabaruta"] = {
         {zone = "Windurst Woods", exit = "G-11"},
@@ -263,7 +264,11 @@ return {
     },
     ["The Sanctuary of Zi'Tah"] = {
         {zone = "Meriphataud Mountains", exit = "E-12"},
-        {zone = "Ro'Maeve", exit = "F-5"}
+        {zone = "Ro'Maeve", exit = "F-5"},
+        {zone = "The Boyahda Tree", exit = "K-12"}
+    },
+    ["The Boyahda Tree"] = {
+        {zone = "The Sanctuary of Zi'Tah", exit = "M-9"}
     },
     ["Ro'Maeve"] = {
         {zone = "The Sanctuary of Zi'Tah", exit = "H-11"},
@@ -362,7 +367,7 @@ return {
     },
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "D-11"},
-        {zone = "Batallia Downs", exit = "I-11"},
+        {zone = "Batallia Downs", exit = "L-4"},
         {zone = "Davoi", exit = "G-12"},
         {zone = "Carpenters' Landing", exit = "E-6"},
         {zone = "Carpenters' Landing", exit = "J-8"}

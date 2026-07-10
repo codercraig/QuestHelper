@@ -459,14 +459,28 @@ function pathfinding.generateRouteImages(path, current_zone, destination_highlig
             end
         end
 
+        -- conn.floor_id is overloaded: normally it is a floor of the CURRENT zone, but on an
+        -- edge entering the destination it names the destination floor (see findPath). Only
+        -- read it the latter way when from_zone is single-floor, so it cannot mean anything else.
+        local from_norm = getBaseZoneName(normalizeZoneName(from_zone))
+        local from_zone_id = from_norm and zones_db[from_norm]
+        local from_is_single_floor = true
+        if not zone_name_to_floor[from_zone] and from_zone_id then
+            from_is_single_floor = #getAllFloorIds(from_zone_id) <= 1
+        end
+
         -- Second pass: collect exits that have minimum distance, grouped by floor_id
         -- floor_id in connections = which floor of the CURRENT zone this exit is on
         -- Omitting floor_id (-> 0) means show all floors (backward-compatible default)
         for _, conn in ipairs(connections) do
             if conn.zone and zone_distances[conn.zone] == min_distance and conn.exit then
-                local fid = conn.floor_id or 0
-                if not exits_by_floor[fid] then exits_by_floor[fid] = {} end
-                table.insert(exits_by_floor[fid], {position = conn.exit, offsetX = 16, offsetY = 16, label = conn.label})
+                local is_entrance = from_is_single_floor and dest_floor_id
+                    and conn.zone == destination and conn.floor_id ~= nil
+                if not is_entrance or conn.floor_id == dest_floor_id then
+                    local fid = is_entrance and 0 or (conn.floor_id or 0)
+                    if not exits_by_floor[fid] then exits_by_floor[fid] = {} end
+                    table.insert(exits_by_floor[fid], {position = conn.exit, offsetX = 16, offsetY = 16, label = conn.label})
+                end
             end
         end
 
