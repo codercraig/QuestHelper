@@ -4547,6 +4547,9 @@ s
         }
     },
     ["7-1: The Sixth Ministry"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "6-2: Saintly Invitation"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
@@ -4858,6 +4861,9 @@ s
     },
 
     ["7-2: Awakening of the Gods"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "7-1: The Sixth Ministry"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 2 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
@@ -5148,6 +5154,9 @@ s
     },
 
     ["8-1: Vain"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "7-2: Awakening of the Gods"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 3 stacks of crystals to a Conquest Overseer to fill Rank Bar. \n \n" ..
@@ -5418,6 +5427,9 @@ s
     },
 
     ["8-2: The Jester Who'd Be King"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "8-1: Vain"},
+        },
         steps = {
             {
                 text = "Step 1: Trade another stack of crystals to the Gate Guards(Green Square). \n \n" ..
@@ -5887,6 +5899,9 @@ s
     },
 
     ["9-1: Doll of the Dead"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "8-2: The Jester Who'd Be King"},
+        },
         steps = {
             {
                 text = "Step 1: Trade 4 stacks of crystals to fill your Rank Points bar. \n \n" ..
@@ -6232,6 +6247,9 @@ s
     },
 
     ["9-2: Moon Reading"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "Windurst", name = "9-1: Doll of the Dead"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Trade 2 more stacks of crystal to a Gate Guard to unlock the next mission - Moon Reading. \n \n" ..

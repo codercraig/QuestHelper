@@ -596,6 +596,7 @@ return {
             {
                 text = "Step 12: Navigate to Balga's Dais  \n",
                 zone_max_distance = 35,
+                zone_trigger = "Balga's Dais",
                 visual_zones = {
                         { zone_name = "Giddeus", type = 'arrow', center = { x = -100.7, y = -0.3, z = 404.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
                         { zone_name = "Giddeus", type = 'arrow', center = { x = -101.4, y = -0.2, z = 382.8 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
