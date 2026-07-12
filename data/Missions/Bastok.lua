@@ -1705,7 +1705,7 @@ return {
                        "Note: Unlike most missions, this is NOT offered by Gate Guards.",
                 onmob_target = {"Goggehn"},
                 trigger_on_talk = {" pronto!"},
-                trigger_on_event_id = 0,
+                --trigger_on_event_id = 0,
                 route_to = "Ru'Lude Gardens",
                 destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
             },

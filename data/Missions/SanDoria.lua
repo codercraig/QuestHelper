@@ -3,11 +3,20 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n",
+                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / F-9). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {"You accept the mission."},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -15,8 +24,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -25,7 +34,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -80,12 +89,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 8 recommended.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = {" but do not go in over your head!"},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -93,8 +111,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -103,7 +121,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -180,12 +198,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 10 recommended.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = {" and ask what this boy looks like."},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -193,8 +220,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -203,7 +230,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -287,12 +314,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "NOTE: You must have enough rank points to be offered this mission - if your rank bar is empty, trade a crystal to a Gate Guard first. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -300,8 +336,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -310,7 +346,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -424,12 +460,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 20 in a party, 25 solo. This mission can be skipped by trading 3 crystals to a Gate Guard.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -437,8 +482,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -447,7 +492,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -504,12 +549,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Requires Mission 2-1 and a 3/4-full Rank Bar. If short on rank points, trade a crystal to a Temple Knight or repeat Bat Hunt.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -517,8 +571,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -527,7 +581,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -876,12 +930,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 35+. Trade 1 crystal or repeat Bat Hunt once if you need the rank points to unlock it.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -889,8 +952,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -899,7 +962,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -943,12 +1006,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 35. Trade 1 crystal or repeat a previous mission once if you need the rank points to unlock it.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -956,8 +1028,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -966,7 +1038,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -1033,12 +1105,21 @@ return {
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Level 40. Requires Mission 3-1. Trade 1 crystal or repeat a mission once if short on rank points.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1009, 2009},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
@@ -1046,8 +1127,8 @@ return {
                         state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -1056,7 +1137,7 @@ return {
                         state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -2250,29 +2331,38 @@ return {
             },
             { -- Step 2
                 text = "Step 2: Go to a San d'Orian Gate Guard and accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (I-9 / H-7). \n" ..
-                       "Northern San d'Oria: Grilau (D-6). \n \n",
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_talk = {"You have accepted the mission"},
                 zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 2,
+                        state = 1,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 2,
+                        state = 1,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -2440,6 +2530,1921 @@ return {
         },
         reward = {
             text = "Rank Points, Title: Archmage Assassin"
+        }
+    },
+
+    ["5-2: The Shadow Lord"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "5-1: The Ruins of Fei'Yin"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 3 crystals to a Temple Knight Gate Guard (or repeat Bat Hunt) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission - you should see the option available. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n" ..
+                       "NOTE: If you have accepted the quest 'Under Oath', you must complete the Southern San d'Oria portion of it or Trion will not talk to you. \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to Chateau d'Oraguille and speak to Halver for a cutscene. \n \n" ..
+                       "He will send you to Prince Trion. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {546},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 3
+                text = "Step 3: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille for a cutscene with Trion. \n \n",
+                onmob_target = {"_6h0"},
+                trigger_on_event_id = {547},
+                zone_max_distance = 20,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Chateau d'Oraguille",
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 4
+                text = "Step 4: Travel to Castle Zvahl Baileys! \n \n" ..
+                       "Outpost/Survival Guides: Fauregandi/Valdeaunia if possible. \n \n" ..
+                       "If walking, a good route from San d'Oria is via Ranguemont Pass > Beaucedine Glacier > Xarcabard.",
+                zone_trigger = "Castle Zvahl Baileys",
+                route_to = "Xarcabard",
+                destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                        --Route from Range to Xarca
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -59.0, y = -39.4, z = -193.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.9, y = -47.7, z = -142.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -51.4, y = -58.6, z = -102.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -20.4, y = -60.0, z = -104.3 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.5, y = -59.1, z = -59.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 12.0, y = -60.0, z = -28.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 9.4, y = -59.6, z = 13.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 7.2, y = -59.6, z = 53.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.6, y = -60.0, z = 79.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -7.5, y = -59.4, z = 101.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -47.9, y = -64.6, z = 100.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -77.5, y = -71.9, z = 105.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -104.7, y = -78.9, z = 109.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -118.4, y = -79.5, z = 147.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -130.1, y = -79.7, z = 179.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -138.2, y = -79.6, z = 211.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+
+                        --Xarca to Castle
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 448.9, y = 0.4, z = -183.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 401.1, y = 0.3, z = -189.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 357.7, y = 8.2, z = -191.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 318.4, y = 6.8, z = -191.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 265.0, y = -7.2, z = -184.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 238.3, y = -16.1, z = -192.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 195.6, y = -23.0, z = -189.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 141.1, y = -23.1, z = -163.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 98.1, y = -23.8, z = -139.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 44.5, y = -23.8, z = -110.8 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = 15.5, y = -23.3, z = -84.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -0.8, y = -24.1, z = -73.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -31.3, y = -23.9, z = -73.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -66.5, y = -24.1, z = -63.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -105.8, y = -24.3, z = -37.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -129.2, y = -19.3, z = -14.4 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -159.4, y = -15.2, z = 23.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -161.0, y = -10.8, z = 66.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -176.7, y = -2.5, z = 100.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -189.6, y = -3.4, z = 71.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -204.5, y = -3.9, z = 49.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -218.4, y = -8.6, z = 26.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -244.9, y = -12.3, z = -2.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -257.9, y = -16.5, z = 13.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -282.6, y = -20.0, z = 35.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -303.0, y = -25.0, z = 56.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -318.6, y = -27.0, z = 60.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -322.8, y = -28.0, z = 36.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -331.6, y = -29.7, z = 10.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -364.6, y = -35.8, z = 20.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -390.5, y = -41.7, z = 20.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Xarcabard", type = 'arrow', center = { x = -418.9, y = -44.0, z = 19.6 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: Route through Castle Zvahl Baileys -> Castle Zvahl Keep! \n \n" ..
+                       "Map 1: Go to (G-8) staying on the lower level and take a first Right!(North)\n \n" ..
+                       "Follow the arrows on the ground will lead you to (F-8) - Map 2! \n \n" ..
+                       "Map 2: Jump down the Goblin Pitt, there will be an arrow to indicate where to go. \n \n" ..
+                       "Map 3: Run down the hall and run up the stairs back to Map 2. \n \n" ..
+                       "Map 2: Follow the arrows end goal is (F-8) to Castle Zvhal Keep. \n \n" ..
+                       "Aggro: Demons/Beastmen (sight), Ahriman (sight+sound), up to Lv53. Use Sneak/Invis if below Lv70. \n \n",
+                zone_max_distance = 40,
+                visual_zones = {
+                    --Survival Guide
+                    { zone_name = "Castle Zvahl Baileys", type = 'square', center = { x = 372.0, y = -12.0, z = -25.0 }, size = 1, floor_id = 1, colour = "green" },
+                    -- Floor 1
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 179.9, y = -24.1, z = 19.5 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 87.9, y = -20.1, z = 100.6 }, size = 4, direction = 'down', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 99.8, y = -20.1, z = 72.7 }, size = 4, direction = 'left', floor_id = 1 },
+                    -- Floor 2
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 31.2, y = -20, z = 59.7 }, size = 4, direction = 'up', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 20.8, y = -20, z = 150.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -61, y = -20, z = 110.2 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -92, y = -20, z = 89.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -91.8, y = -19.5, z = 51.5 }, size = 4, direction = 'right', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -76.1, y = -19.5, z = 52.1 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -77.4, y = -24, z = 20.2 }, size = 4, direction = 'left', floor_id = 2 },
+                    -- Floor 15
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -6.5, y = 4, z = 126.5 }, size = 4, direction = 'nw', floor_id = 15 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = -59.7, y = 4, z = 179.2 }, size = 4, direction = 'down', floor_id = 15 },
+                    { zone_name = "Castle Zvahl Baileys", type = 'arrow', center = { x = 12.8, y = -24, z = 133.4 }, size = 4, direction = 'sw', floor_id = 15 },
+                },
+                zone_name = "Castle Zvahl Baileys",
+                zone_trigger = "Castle Zvahl Keep",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "F-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Castle Zvahl Baileys",
+                        floor_id = 15,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Castle Zvahl Keep -> Throne Room of the Shadow Lord! \n \n" ..
+                       "Follow the arrows, there is a lot of door opening here! \n" ..
+                       "Map 1 -> (H-6) \n" ..
+                       "Map 2 -> (E-8) \n" ..
+                       "Map 3 -> Run on the teleporters when a glowing image appears \n" ..
+                       "Keep doing this until you reach Map 4!! \n" ..
+                       "Map 4 -> (G-7) to Throne Room and grab the Home Point! \n \n",
+                zone_max_distance = 30,
+                visual_zones = {
+                    -- Floor 1
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -30, y = 0, z = -22.3 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -30.0, y = -2.9, z = 41.3 }, width = 5.75, height = 5.50, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -32.4, y = 0.6, z = 48.7 }, size = 4, direction = 'right', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -10.1, y = 0.6, z = 69.4 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -10.0, y = -2.9, z = 78.8 }, width = 5.75, height = 5.50, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -10.1, y = 0.6, z = 90.2 }, size = 4, direction = 'left', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -18.8, y = -3.0, z = 90.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -38.7, y = -3.1, z = 90.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -50.0, y = -3.0, z = 98.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -58.8, y = -3.0, z = 110.0 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -69, y = 0.6, z = 107.8 }, size = 4, direction = 'up', floor_id = 1 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -70.0, y = -3.0, z = 118.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -50.0, y = -19.0, z = 118.8 }, width = 6.00, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    -- Floor 2
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -61.3, y = -19.0, z = 110.0 }, width = 6.00, height = 6.00, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -48.7, y = -15.4, z = 112.2 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -69.7, y = -15.4, z = 86.4 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -70.0, y = -19.4, z = 78.8 }, width = 5.75, height = 6.75, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -60.4, y = -15.4, z = 48.5 }, size = 4, direction = 'down', floor_id = 2 },
+                    { zone_name = "Castle Zvahl Keep", type = 'rect', center = { x = -60.0, y = -19.4, z = 41.3 }, width = 5.75, height = 6.75, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -58.7, y = -16.0, z = 14.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -93.4, y = -16.0, z = 12.7 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -96.3, y = -16.0, z = -20.0 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -206.7, y = -48.0, z = -19.1 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    -- Floor 3 (teleporters)
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -300, y = -49.1, z = -20 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -272.6, y = -53.2, z = 4.9 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -272.9, y = -53.2, z = -44.6 }, size = 4, floor_id = 3 },
+                    { zone_name = "Castle Zvahl Keep", type = 'square', center = { x = -326.5, y = -53.2, z = -45 }, size = 4, floor_id = 3 },
+
+                    --arrows to each teleporter
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -290.6, y = -48.0, z = -20.2 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -241.7, y = -52.0, z = 75.0 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -260.1, y = -52.0, z = 47.4 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -272.5, y = -52.0, z = 14.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -202.0, y = -52.0, z = -81.8 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -225.2, y = -52.0, z = -60.3 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -273.5, y = -52.0, z = -53.6 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -359.1, y = -52.0, z = -115.9 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -339.5, y = -52.0, z = -93.8 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -326.4, y = -52.0, z = -54.5 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    -- Floor 4
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -419.7, y = -67.3, z = 61.2 }, size = 4, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -419.9, y = -68.0, z = 99.9 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -465.8, y = -68.0, z = 99.8 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -500.0, y = -68.0, z = 96.3 }, size = 4, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -507.5, y = -68.0, z = 60.8 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Castle Zvahl Keep", type = 'arrow', center = { x = -550.1, y = -70.0, z = 60.5 }, size = 4, direction = "left", floor_id = 4, colour = "yellow" },
+                },
+                zone_name = "Castle Zvahl Keep",
+                zone_trigger = "Throne Room",
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 3,
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Castle Zvahl Keep",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Examine the Ore Door in the Throne Room (next to Home Point #1) for a cutscene, then examine it again and select 'The Shadow Lord Battle'. \n \n" ..
+                       "Shadow Lord (2 phases): \n" ..
+                       "Phase 1: \n" ..
+                       "- Alternates between Magic Stance (physical immunity) and Melee Stance (magic immunity) \n" ..
+                       "- Switches every 5 minutes or after 1000 damage \n" ..
+                       "- Magic Stance: Tier 2 elementals, debuffs, Dark Nova weaponskill before switching \n" ..
+                       "- Melee Stance: Giga Slash, Kick Back, Umbra Smash weaponskills \n" ..
+                       "- Monks: Use Formless Strikes to bypass physical immunity \n" ..
+                       "Phase 2 (after cutscene): Spams Implosion \n" ..
+                       "- Lower-level parties should zerg him so save your 2hours for this phase! \n \n" ..
+                       "NOTE: Helpers must be on 5-2 or higher in their own nation. Buffs wear on entry, 30 minute limit. \n \n" ..
+                       "Victory: KI:Shadow Fragment. You will be warped back to Baileys entrance.",
+                onmob_target = {"throne-room"},
+                trigger_on_event_id = {7},
+                onmob_enemy = "Shadow Lord",
+                onmob_enemy_size = 4,
+            },
+            { -- Step 8
+                text = "Step 8: Return to Halver in Chateau d'Oraguille to be promoted to Rank 6. \n \n" ..
+                       "Afterwards, examine the Great Hall door for a cutscene. \n \n" ..
+                       "(Optional: talk to Rahal, Milchupain, Aramaviont and Curilla for additional dialogue.) \n \n" ..
+                       "This unlocks the Zilart missions - take Lion's offer and visit Norg. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {548},
+                keyitems_needed = {74},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+        },
+        reward = {
+            text = "Rank 6, 20,000 gil, Title: Shadow Banisher, Zilart Mission 1 'The New Frontier' unlocked"
+        }
+    },
+
+    ["6-1: Leaute's Last Wishes"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "5-2: The Shadow Lord"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 4 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to Chateau d'Oraguille and speak to Halver for a cutscene. He will tell you the King wishes to see you. \n \n" ..
+                       "NOTE: Make sure you get the MISSION cutscene, not the quest 'Fit for a Prince'. If Halver just says 'The king is waiting.' you are being offered a quest instead - the mission cutscene is much longer. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {25},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 3
+                text = "Step 3: Examine the Door: Great Hall behind Halver for a cutscene with the King. \n \n" ..
+                       "He will ask you to retrieve a Dreamrose. \n \n" ..
+                       "(Optional: Arsha and Chupaile have extra dialogue at this point.) \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {87},
+                zone_max_distance = 20,
+            },
+            { -- Step 4
+                text = "Step 4: Travel to Western Altepa Desert (G-7) - the small lake on the west side of Revelation Rock. \n \n" ..
+                       "Closest warps: Kuftal Tunnel Survival Guide, then the Western Altepa Desert Survival Guide. \n \n" ..
+                       "Aggro: Cactuars in the area are Lv48-53. They do NOT link with the NM. \n \n",
+                route_to = "Western Altepa Desert",
+                zone_trigger = "Western Altepa Desert",
+                destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
+                visual_zones = {
+                    { zone_name = "Western Altepa Desert", type = 'square', center = { x = -262.4, y = -10.2, z = 49.2 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Western Altepa Desert",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: Examine the Dreamrose to spawn Sabotender Enamorado, then defeat it. \n \n" ..
+                       "Sabotender Enamorado (Lv75, ~15,000 HP): \n" ..
+                       "- Uses all normal Cactuar abilities including 1000 Needles \n" ..
+                       "- Bring a pet (SMN/BST/PUP) or your Adventuring Fellow to soak 1000 Needles \n" ..
+                       "- Earth Staff / physical damage reduction gear helps a lot \n \n",
+                onmob_target = {"Dreamrose"},
+                onmob_enemy = "Sabotender Enamorado",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Sabotender Enamorado"},
+                    zone = "Western Altepa Desert",
+                    count_party_kills = true,
+                },
+                visual_zones = {
+                    { zone_name = "Western Altepa Desert", type = 'square', center = { x = -262.4, y = -10.2, z = 49.2 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Examine the Dreamrose again to receive KI:Dreamrose. \n \n" ..
+                       "EVERYONE in the alliance on this mission must examine it individually. \n \n",
+                onmob_target = {"Dreamrose"},
+                trigger_on_talk = {"Dreamrose"},
+                visual_zones = {
+                    { zone_name = "Western Altepa Desert", type = 'square', center = { x = -262.4, y = -10.2, z = 49.2 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Return to Halver in Chateau d'Oraguille. He will ask you to bring the Dreamrose to Chalvatot. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {22},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 8
+                text = "Step 8: Walk into the garden at (F-7) in Chateau d'Oraguille for the final cutscene. \n \n" ..
+                       "The cutscene triggers on entering the garden area - you do not need to talk to Chalvatot. \n \n" ..
+                       "You will receive KI:Piece of Paper. \n \n",
+                trigger_on_event_id = {111},
+                zone_max_distance = 20,
+                visual_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'square', center = { x = -105.0, y = 0.1, z = 72.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        zone_name = "Chateau d'Oraguille",
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Rank Points (600), KI: Piece of Paper"
+        }
+    },
+
+    ["6-2: Ranperre's Final Rest"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "6-1: Leaute's Last Wishes"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 4 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. He will tell you to speak to Prince Trion. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille for a cutscene with Prince Trion. \n \n",
+                onmob_target = {"_6h0"},
+                trigger_on_event_id = {81},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+            { -- Step 3
+                text = "Step 3: Travel through East Ronfaure to King Ranperre's Tomb and go to the Heavy Stone Door at (H-8) - Map 1. \n \n" ..
+                       "Examine the Heavy Stone Door to spawn 3 skeleton NMs: \n" ..
+                       "- Corrupted Yorgos (WAR) \n" ..
+                       "- Corrupted Soffeil (BLM) \n" ..
+                       "- Corrupted Ulbrig (BLM) \n \n" ..
+                       "WARNING: Have SNEAK up BEFORE examining the door or all 3 will aggro at once! \n \n" ..
+                       "They do NOT link - pull and kill them one at a time. Most Lv85 jobs can solo this. \n \n",
+                onmob_target = {"_5a0"},
+                route_to = "King Ranperre's Tomb",
+                onmob_enemy = {"Corrupted Yorgos", "Corrupted Soffeil", "Corrupted Ulbrig"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Corrupted Yorgos", "Corrupted Soffeil", "Corrupted Ulbrig"},
+                    zone = "King Ranperre's Tomb",
+                    count_party_kills = true,
+                },
+                visual_zones = {
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "King Ranperre's Tomb",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 4
+                text = "Step 4: Examine the Heavy Stone Door again and select YES to enter. \n \n" ..
+                       "NOTE: You may have to wait up to 1 minute from the NM spawn time before the door will let you in, even if they are already dead. \n \n" ..
+                       "Once you have won, you can re-enter freely even after zoning or logging out. \n \n",
+                onmob_target = {"_5a0"},
+                trigger_on_event_id = {6},
+                visual_zones = {
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: Examine the Tombstone inside the chamber for a cutscene. \n \n" ..
+                       "You will receive KI:Ancient San d'Orian book. \n \n",
+                onmob_target = {"Tombstone_Lower"},
+                trigger_on_event_id = {8},
+                visual_zones = {
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -73.6, y = 7.6, z = 20.1 }, size = 2, floor_id = 1, colour = "green" },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Return to a San d'Orian Gate Guard and hand over the book. \n \n" ..
+                       "Talk to him REPEATEDLY (up to 3 times) until he tells you to return to Prince Trion. \n" ..
+                       "1st talk: he takes the KI:Ancient San d'Orian book. \n" ..
+                       "2nd talk: he says deciphering it will take a while. \n" ..
+                       "3rd talk: he sends you back to Prince Trion. \n \n" ..
+                       "(Optional: Perfaumand, stationed by Prince Trion's door, has extra dialogue while you hold the book.) \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_event_id = {1039, 1040},
+                route_to = "Southern San d'Oria",
+                zone_max_distance = 40,
+            },
+            { -- Step 7
+                text = "Step 7: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille again for a cutscene. \n \n",
+                onmob_target = {"_6h0"},
+                trigger_on_event_id = {21},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+            { -- Step 8
+                text = "Step 8: Return to the Heavy Stone Door at (H-8) in King Ranperre's Tomb and examine it for another cutscene. \n \n" ..
+                       "The NMs do NOT respawn - you can walk straight up to the door. \n \n",
+                onmob_target = {"_5a0"},
+                trigger_on_event_id = {5},
+                route_to = "King Ranperre's Tomb",
+                visual_zones = {
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        zone_name = "King Ranperre's Tomb",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 9
+                text = "Step 9: Return to a San d'Orian Gate Guard and talk to him to complete the mission. \n \n" ..
+                       "(Optional: Perfaumand by Prince Trion's door has one more short cutscene.) \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_event_id = {1033, 1034},
+                route_to = "Southern San d'Oria",
+                zone_max_distance = 40,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Rank 7, 40,000 gil"
+        }
+    },
+
+    ["7-1: Prestige of the Papsque"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "6-2: Ranperre's Final Rest"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 4-5 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to the Cathedral (M-6) in Northern San d'Oria and examine the Door: Papal Chambers on the THIRD floor for a cutscene. \n \n" ..
+                       "You must view this before heading to the Bostaunieux Oubliette. \n \n",
+                onmob_target = {"_6fc"},
+                trigger_on_event_id = {7},
+                route_to = "Northern San d'Oria",
+                zone_max_distance = 20,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 3
+                text = "Step 3: Get to the ??? in West Ronfaure (E-8) - it is reached from INSIDE the Bostaunieux Oubliette, not from West Ronfaure itself. \n \n" ..
+                       "Recommended: full alliance of Lv60+, or a party of Lv70+. \n \n" ..
+                       "===== Route 1: Walk (Bostaunieux Oubliette) ===== \n" ..
+                       "Enter the Oubliette and drop down the sewer hatch at (E-7)/(E-8) on Map 1 - talk to Couchatorage to drop down. \n" ..
+                       "Use Sneak/Silent Oil BEFORE moving - Haunts and Garm will aggro even at Lv90. \n" ..
+                       "Hug the RIGHT wall and follow the path until you zone into West Ronfaure at (E-8). \n" ..
+                       "WARNING: Do not go over the edge - if you fall there is no way back up, you must run it all again. \n \n" ..
+                       "===== Route 2: Unity Warp (100 Accolades) ===== \n" ..
+                       "Any Unity Concord NPC > 'Bring Me to a Wanted encounter area' > Content level 122 > Bostaunieux Oubliette. \n" ..
+                       "This warps you straight to the West Ronfaure exit. \n \n" ..
+                       "===== Route 3: Geomagnetic Fount ===== \n" ..
+                       "The fount from the quest 'Middle Lands Investigation' lands next to the ???. \n \n",
+                zone_trigger = "West Ronfaure",
+                route_to = "Bostaunieux Oubliette",
+                destination_highlight = {position = "E-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Bostaunieux Oubliette",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "E-7", offsetX = 16, offsetY = 16 },
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "West Ronfaure",
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 4
+                text = "Step 4: Examine the ??? at West Ronfaure (E-8) to spawn Marauder Dvogzog, then defeat him. \n \n" ..
+                       "Marauder Dvogzog (Lv67 Orc Monk, ~16,000 HP): \n" ..
+                       "- Uses Hundred Fists at around 50% HP - BIND him and back off while it is up \n \n" ..
+                       "NOTE: If you wipe and zone, you must wait 5-10 minutes before the ??? will pop him again. \n \n",
+                onmob_target = {"qm4"},
+                onmob_enemy = "Marauder Dvogzog",
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Marauder Dvogzog"},
+                    zone = "West Ronfaure",
+                    count_party_kills = true,
+                },
+                visual_zones = {
+                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: Examine the ??? again to receive KI:Ancient San d'Orian tablet. \n \n" ..
+                       "EVERYONE on the mission must examine it individually. \n \n" ..
+                       "WARNING: If you zone before examining the ???, you have to kill Marauder Dvogzog all over again. \n \n",
+                onmob_target = {"qm4"},
+                trigger_on_talk = {"Ancient San d'Orian tablet"},
+                visual_zones = {
+                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Return to the Cathedral (M-6) in Northern San d'Oria and examine the Door: Papal Chambers for the final cutscene. \n \n" ..
+                       "The mission completes after this cutscene. \n \n",
+                onmob_target = {"_6fc"},
+                trigger_on_event_id = {8},
+                route_to = "Northern San d'Oria",
+                zone_max_distance = 20,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Rank Points (1000)"
+        }
+    },
+
+    ["7-2: The Secret Weapon"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "7-1: Prestige of the Papsque"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 4-5 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard. He will NOT offer you the mission list - instead he says: \n" ..
+                       "'Go to the garden for further instructions.' \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_event_id = {1041, 1042},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to Queen Leaute's Garden (F-7) in Chateau d'Oraguille for a cutscene. \n \n" ..
+                       "The cutscene triggers on entering the garden area - there is no NPC to talk to. \n \n",
+                trigger_on_event_id = {0},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+                visual_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'square', center = { x = -105.0, y = 0.1, z = 72.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "Chateau d'Oraguille",
+                        highlights = {
+                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 3
+                text = "Step 3: Return to a San d'Orian Gate Guard to actually ACCEPT the mission. \n \n" ..
+                       "The mission list will now be offered to you. \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+            },
+            { -- Step 4
+                text = "Step 4: Travel to Horlais Peak with your party. \n \n" ..
+                       "Notes: Orcs sight-aggro, Bats aggro by sound. Use Sneak/Invis if low level. \n \n" ..
+                       "Shortcut: Yughott Grotto Home Point #1 (J-6), or Domenic for 750g if Beyond Infinity is complete. \n \n" ..
+                       "Hard coded route - this will take off from Sandy! \n" ..
+                       "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
+                       "Ghelsba Outpost: Go to (H-11)-> Yughott Grotto  - exit 1. \n" ..
+                       "Yughott Grotto : Go to (K-5) -> Fort Ghelsba    - exit 3. \n" ..
+                       "Fort Ghelsba   : Go to (J-8) -> Yughott Grotto  - exit 4. \n" ..
+                       "Yughott Grotto : Enter Horlais Peak (J-6). \n \n",
+                zone_trigger = "Horlais Peak",
+                visual_zones = {
+                        --Ghelsba Outpost
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 28.1, y = 0.1, z = 62.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -4.4, y = 0.0, z = 26.6 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 19.9, y = 0.1, z = -4.8 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 45.9, y = 0.0, z = -58.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        -- Yughott Grotto 1 to K-4
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -225.1, y = -0.2, z = -91.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -191.8, y = -1.0, z = -87.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -141.4, y = -0.2, z = -60.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -103.5, y = -0.0, z = -56.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -92.0, y = -0.6, z = -38.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -78.9, y = 0.0, z = -9.7 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = -21.5, y = -0.2, z = -25.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 18.8, y = -0.2, z = 2.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 56.4, y = -0.2, z = 32.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 137.1, y = -12.9, z = 61.9 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 139.8, y = -12.4, z = 113.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 203.8, y = -12.0, z = 121.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 236.9, y = -12.2, z = 125.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 292.9, y = -23.7, z = 171.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 317.5, y = -24.2, z = 180.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 329.4, y = -24.4, z = 215.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 335.4, y = -24.1, z = 239.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 322.3, y = -24.1, z = 251.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                        -- Fort Ghelsba 2
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 207.9, y = -45.8, z = 100.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 151.4, y = -44.0, z = 116.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 93.8, y = -52.0, z = 116.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 96.9, y = -59.8, z = 66.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 101.0, y = -60.0, z = 1.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 109.9, y = -63.6, z = -51.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 146.6, y = -68.5, z = -62.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 184.1, y = -75.7, z = -49.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 177.5, y = -83.9, z = -3.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 166.4, y = -84.6, z = 20.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 176.7, y = -86.4, z = 20.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 185.2, y = -86.4, z = 24.3 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Fort Ghelsba", type = 'arrow', center = { x = 198.8, y = -86.2, z = 19.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                        --Yughott Grotto 2
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 283.4, y = -39.7, z = 148.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 320.8, y = -40.3, z = 135.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 315.1, y = -40.1, z = 105.0 }, size = 4, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 330.6, y = -42.1, z = 109.8 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 374.5, y = -40.3, z = 105.9 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 400.5, y = -40.2, z = 118.6 }, size = 4, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 405.5, y = -40.1, z = 148.4 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Yughott Grotto", type = 'arrow', center = { x = 436.7, y = -40.1, z = 169.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+
+                        --Home point
+                        { zone_name = "Yughott Grotto", type = 'square', center = { x = 434.0, y = -40.0, z = 171.0 }, size = 1, floor_id = 2, colour = "green" },
+                },
+                images = {
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Ghelsba Outpost",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "H-11", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Yughott Grotto",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "K-5", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Fort Ghelsba",
+                          highlights = {
+                              { position = "J-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Yughott Grotto",
+                          floor_id = 2,
+                          highlights = {
+                              { position = "J-6", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
+            },
+            { -- Step 5
+                text = "Step 5: Examine the Burning Circle to enter BCNM 'The Secret Weapon'. \n \n" ..
+                       "Requirements: \n" ..
+                       "- Max 6 players, all must be on (or have completed) this mission \n" ..
+                       "- Buffs wear on entry \n" ..
+                       "- NO EXP loss on defeat \n \n" ..
+                       "Enemies (all Lv68) - attacking ONE aggros them ALL: \n" ..
+                       "- Darokbok of Clan Reaper (PLD, ~4000 HP) \n" ..
+                       "- Derakbak of Clan Wolf (DRG, ~4000 HP + ~1000 HP Wyvern) \n" ..
+                       "- Jagidbod of Clan Reaper (RNG, ~4000 HP) \n" ..
+                       "- Reaper Clan Warmachine (~1800 HP) \n" ..
+                       "- Wolf Clan Warmachine (~1800 HP) \n \n" ..
+                       "Tips: \n" ..
+                       "- All are vulnerable to Sleep and Lullaby - Darokbok resists (use Elemental Seal + Sleepga, or Horde Lullaby) \n" ..
+                       "- The Orcs use their 1hrs below 50% HP \n" ..
+                       "- You do NOT need to kill the Wyvern - leave it slept \n" ..
+                       "- Soloable on many jobs, especially with /SCH \n \n" ..
+                       "Victory: KI:Crystal dowser",
+                onmob_target = "horlais-peak-burning-circle",
+                trigger_on_event_id = {32001},
+                onmob_enemy = {"Darokbok of Clan Reaper", "Derakbak of Clan Wolf", "Jagidbod of Clan Reaper", "Reaper Clan Warmachine", "Wolf Clan Warmachine"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+            },
+            { -- Step 6
+                text = "Step 6: Report back to any San d'Orian Gate Guard to complete the mission. \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_event_id = {1043, 1044},
+                route_to = "Southern San d'Oria",
+                zone_max_distance = 40,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+        },
+        reward = {
+            text = "Rank 8, 60,000 gil"
+        }
+    },
+
+    ["8-1: Coming of Age"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "7-2: The Secret Weapon"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 6 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Zone into Chateau d'Oraguille for a cutscene of Princess Claidie speaking to her Mother about her coming-of-age ceremony. \n \n" ..
+                       "This fires on ZONING IN - there is no NPC to talk to. \n \n",
+                trigger_on_event_id = {116},
+                zone_trigger = "Chateau d'Oraguille",
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 3
+                text = "Step 3: Speak to Halver in Chateau d'Oraguille. \n \n" ..
+                       "He will send you to the Quicksand Caves to collect KI:Drops of Amnio. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {58},
+                zone_max_distance = 20,
+            },
+            { -- Step 4
+                text = "Step 4: Travel to the Fountain of Kings in the Quicksand Caves. \n \n" ..
+                       "Party of Lv65+ recommended. Anyone under Lv67 needs SNEAK (Antica + Sabotenders aggro). \n \n" ..
+                       "===== Getting there ===== \n" ..
+                       "Enter Quicksand Caves from Eastern Altepa Desert at (H-10). \n" ..
+                       "The Survival Guide or outpost warp will drop you nearby. \n \n" ..
+                       "===== Route inside ===== \n" ..
+                       "Head WEST to (D-9) on Map 2. \n" ..
+                       "Take the LAST left turn and head south. \n" ..
+                       "Drop down the hole at the end of the room. \n" ..
+                       "Once you land, hug the LEFT wall - this leads you to the Fountain of Kings. \n \n" ..
+                       "If anyone is under Lv67, clear the room and the connecting hallway first. \n \n",
+                route_to = "Quicksand Caves",
+                zone_trigger = "Quicksand Caves",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Eastern Altepa Desert",
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Quicksand Caves",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "D-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: SNEAK UP, then inspect the Fountain of Kings to spawn Honor and Valor, then defeat them. \n \n" ..
+                       "You only need to KILL ONE - but the other must be dead or despawned before the kill counts. \n \n" ..
+                       "Honor (Lv70, ~6000 HP): casts Paralyga and Silencega. \n" ..
+                       "Valor: uses Hundred Fists. Easier for a magic-heavy party. \n \n" ..
+                       "- Both are vulnerable to Gravity and Bind, but IMMUNE to all Sleep \n" ..
+                       "- They spawn underwater in the pool and do NOT link \n" ..
+                       "- To pull one: go to the left/right wall, cancel Sneak, and creep in so only one aggros \n" ..
+                       "- They despawn exactly 3 minutes after spawning \n" ..
+                       "- After a despawn it takes ~10 minutes before you can pop them again \n \n" ..
+                       "COURTESY: They aggro anyone nearby, including fishers camping Cave Cherax - warn them before you pop. \n \n",
+                onmob_target = {"Fountain_of_Kings"},
+                onmob_enemy = {"Honor", "Valor"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Honor", "Valor"},
+                    zone = "Quicksand Caves",
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                visual_zones = {
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Once BOTH are gone (dead or despawned), inspect the Fountain of Kings again to receive KI:Drops of Amnio. \n \n",
+                onmob_target = {"Fountain_of_Kings"},
+                trigger_on_talk = {"Drops of Amnio"},
+                visual_zones = {
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Return to Halver in Chateau d'Oraguille. \n \n" ..
+                       "NOTE: Your mission log will now say COMPLETE, but you CANNOT start 8-2 yet - see the next step. \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {102},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 8
+                text = "Step 8: Wait 1 MINUTE, then zone into Northern San d'Oria for the final cutscene. \n \n" ..
+                       "The cutscene fires on zoning in (not from your Mog House). \n \n" ..
+                       "Until you view it, the Gate Guards will refuse to give you any new mission - so do not skip this. \n \n",
+                trigger_on_event_id = {16},
+                zone_trigger = "Northern San d'Oria",
+                route_to = "Northern San d'Oria",
+            },
+        },
+        reward = {
+            text = "Rank Points (800)"
+        }
+    },
+
+    ["8-2: Lightbringer"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "8-1: Coming of Age"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade 6 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "NOTE: If the guards refuse you, you have not viewed the final cutscene from Mission 8-1 - zone into Northern San d'Oria first. \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with the King. \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {100},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+            { -- Step 3
+                text = "Step 3: Speak to Rahal in the Royal Knights' Quarters. \n \n" ..
+                       "He gives you KI:Crystal dowser. \n \n" ..
+                       "BEFORE YOU LEAVE: Check your inventory/storage for a Prelate Key. It is Ex/Rare so you can only hold one - bring it, it opens a door later. \n \n" ..
+                       "(Optional: Curilla has extra dialogue at this point.) \n \n",
+                onmob_target = {"Rahal"},
+                trigger_on_event_id = {106},
+                zone_max_distance = 20,
+            },
+            { -- Step 4
+                text = "Step 4: Travel to the Temple of Uggalepih - you need to reach MAP 2. \n \n" ..
+                       "Lv72+ is safe from aggro on the first floor. Mobs past the Granite Doors on Map 2 will aggro even a Lv99. \n \n" ..
+                       "===== Fastest ===== \n" ..
+                       "Unity warp to Temple of Uggalepih (content level 125) - this drops you straight onto Map 2. \n \n" ..
+                       "===== Otherwise ===== \n" ..
+                       "Survival Guide to Temple of Uggalepih, turn around and head north into Yhoator Jungle. \n" ..
+                       "Or reach Yhoator Jungle by Teleport-Yhoat / outpost / walking, and go to the main temple entrance at (J-12). \n \n" ..
+                       "===== Map 1 -> Map 2 ===== \n" ..
+                       "Zone into the Temple (Map 1) and follow the RIGHT wall until you zone back out into the jungle at (F-5). \n" ..
+                       "In the jungle you will see stairs leading down. DO NOT take them. \n" ..
+                       "Turn LEFT, then instantly LEFT again to zone into the other part of the Temple (Map 2). \n \n",
+                route_to = "Temple of Uggalepih",
+                zone_max_distance = 35,
+                visual_zones = {
+                    -- Yhoator Jungle to Temple of Ugg
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -476.0, y = 8.4, z = 58.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -431.9, y = 8.7, z = 58.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -401.8, y = 8.3, z = 61.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -373.8, y = 3.1, z = 59.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -370.6, y = 1.3, z = 19.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -337.4, y = 4.4, z = 19.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -294.2, y = 1.3, z = 59.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -260.4, y = 4.7, z = 58.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -250.0, y = 7.5, z = 20.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -219.6, y = 4.3, z = 18.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -212.2, y = 7.1, z = -22.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -165.8, y = 8.5, z = -19.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -142.2, y = 0.4, z = 8.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -123.0, y = 0.1, z = 24.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -96.1, y = 0.0, z = 29.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -69.5, y = 1.0, z = 19.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -59.8, y = 0.4, z = -4.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -45.9, y = 8.2, z = -20.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -12.9, y = 0.7, z = -29.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -22.6, y = 2.0, z = -63.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -21.0, y = 8.5, z = -103.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -20.9, y = 0.4, z = -152.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -16.6, y = 6.0, z = -182.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 19.4, y = 8.3, z = -200.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 20.8, y = 8.1, z = -230.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 2.9, y = 8.3, z = -258.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -38.5, y = 0.0, z = -275.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -35.5, y = 0.3, z = -326.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -32.6, y = 0.3, z = -360.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -3.3, y = 0.6, z = -384.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 45.6, y = 0.3, z = -391.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 94.9, y = 0.6, z = -400.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 125.1, y = 0.1, z = -408.6 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 155.3, y = 8.2, z = -419.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 179.3, y = 7.8, z = -433.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 196.1, y = 0.0, z = -476.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 232.1, y = 0.4, z = -498.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 272.5, y = -0.0, z = -487.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 298.1, y = -0.2, z = -486.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 299.5, y = -4.0, z = -540.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 310.5, y = -4.0, z = -571.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 300.0, y = -4.0, z = -586.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 299.5, y = -4.0, z = -614.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    -- Inside Temple of Ugg Map 1, follow right wall back out to the jungle
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 201.3, y = -0.1, z = 20.9 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 219.7, y = -0.1, z = 22.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = 220.0, y = -1.9, z = 31.0 }, width = 3.75, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 220.3, y = 0.0, z = 37.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 221.5, y = 0.0, z = 62.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = -0.0, z = 63.6 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.4, y = 0.0, z = 97.7 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = 0.0, z = 129.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 274.4, y = 0.0, z = 131.9 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 260.5, y = 0.0, z = 151.0 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 243.1, y = -8.0, z = 180.7 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    -- Back into the Temple (Map 2) from the jungle - do NOT take the stairs down
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 343.0, y = -10.0, z = -224.5 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 328.9, y = -10.0, z = -223.3 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 326.6, y = -10.0, z = -192.0 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 294.3, y = -10.0, z = -190.5 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 296.7, y = -10.0, z = -167.8 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 345.9, y = -10.0, z = -167.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Yhoator Jungle",
+                        highlights = {
+                            { position = "J-12", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: Map 2 - fight your way to the Granite Door and open it. \n \n" ..
+                       "Follow the RIGHT wall until you find a wooden gate. Pass through it and head SOUTH. \n" ..
+                       "The path splits - take either side, both go south. \n" ..
+                       "At the 'T' intersection in (H-10), go EAST to the Granite Door guarded by a Temple Guardian. \n \n" ..
+                       "Defeat the Temple Guardian to OPEN the Granite Door. \n \n" ..
+                       "Go through, then up either of the two stairways (west or east side of the room). \n" ..
+                       "WATCH OUT: a Manipulator patrols the stairs. \n \n",
+                onmob_enemy = "Temple Guardian",
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Temple Guardian"},
+                    zone = "Temple of Uggalepih",
+                    count_party_kills = true,
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Get through the upper Granite Door onto Map 4. \n \n" ..
+                       "===== With a Prelate Key ===== \n" ..
+                       "Trade the Prelate Key to the Granite Door at the top of either stairway. \n" ..
+                       "(Prelate Key drops from Tonberry Stabber / Chopper / Slasher.) \n \n" ..
+                       "===== Without a Prelate Key ===== \n" ..
+                       "Aggro a mob through the door and it will open when the mob reaches it: \n" ..
+                       "- Cast any magic to magic-aggro a Hover Tank through the door, OR \n" ..
+                       "- Scroll targets until you lock onto a tonberry/Hover Tank behind the door, wait for it to line up, and pull it \n \n" ..
+                       "IMPORTANT: This ONLY works on the EASTERN door. A mob pulled to the western door walks through without opening it. \n" ..
+                       "Beware tonberry links. \n \n",
+                zone_max_distance = 30,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                    },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Map 4 - head south to the hall with 4 doors on its south side. \n \n" ..
+                       "Counting from the WEST end: Doors 1, 2, 3, 4 (they all check as 'Granite Door' in game). \n \n" ..
+                       "Clear the hallway of tonberries and magic jugs first. \n \n" ..
+                       "Enter Door 1 and inspect the ??? for the 1st KI:Piece of a Broken Key. \n \n",
+                onmob_target = {"qm_key1"},
+                trigger_on_talk = {"Piece of a Broken Key"},
+                visual_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -13.0, y = -17.0, z = -151.0 }, size = 2, floor_id = 4, colour = "green" },
+                },
+            },
+            { -- Step 8
+                text = "Step 8: Enter Door 3 and inspect the ??? for the 2nd KI:Piece of a Broken Key. \n \n" ..
+                       "(Door 2 does nothing until you hold all 3 pieces.) \n \n",
+                onmob_target = {"qm_key2"},
+                trigger_on_talk = {"Piece of a Broken Key"},
+                visual_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -32.0, y = -17.0, z = -153.0 }, size = 2, floor_id = 4, colour = "green" },
+                },
+            },
+            { -- Step 9
+                text = "Step 9: Enter Door 4 and inspect the ??? for the 3rd KI:Piece of a Broken Key. \n \n" ..
+                       "WARNING: Room 4 has TWO ???. The correct one is on the SHELVES TO THE RIGHT as you enter. \n \n" ..
+                       "EVERYONE on the mission needs all 3 pieces before continuing. \n \n",
+                onmob_target = {"qm_key3"},
+                trigger_on_talk = {"Piece of a Broken Key"},
+                visual_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -68.0, y = -17.0, z = -153.0 }, size = 2, floor_id = 4, colour = "green" },
+                },
+            },
+            { -- Step 10
+                text = "Step 10: Inspect Door 2 to spawn the Doll NMs Nio-Hum and Nio-A, then defeat them. \n \n" ..
+                       "You only need to KILL ONE - but the other must be dead or despawned before the kill counts. \n \n" ..
+                       "Nio-A / Nio-Hum (Warriors): \n" ..
+                       "- Both use Mighty Strikes \n" ..
+                       "- IMMUNE to Sleep and Stun. Break DOES land \n" ..
+                       "- Extremely high magic damage reduction - melee them down \n" ..
+                       "- Keep Barfira up in case they use Meltdown \n" ..
+                       "- They do NOT link: Sneak up, then pull ONE with a ranged attack (the hall is narrow, so JAs are hard to land) \n" ..
+                       "- Two tanks: one holds Nio-A while the party kills Nio-Hum \n \n" ..
+                       "If you wipe, you keep the broken key pieces - just go back to Door 2 for a rematch. \n \n",
+                onmob_target = {"_4fv"},
+                onmob_enemy = {"Nio-A", "Nio-Hum"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 1,
+                    enemies = {"Nio-A", "Nio-Hum"},
+                    zone = "Temple of Uggalepih",
+                    count_party_kills = true,
+                    display_only = true,
+                },
+                visual_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -50.0, y = -17.0, z = -154.0 }, size = 2, floor_id = 4, colour = "green" },
+                },
+            },
+            { -- Step 11
+                text = "Step 11: Inspect Door 2 again for a cutscene. \n \n" ..
+                       "You are done when you see: 'You could not find Lightbringer here. Your investigation is over.' \n \n" ..
+                       "The dolls do NOT respawn - anyone who was missing key pieces can collect them now and re-inspect the door. \n \n",
+                onmob_target = {"_4fv"},
+                trigger_on_event_id = {65},
+                visual_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -50.0, y = -17.0, z = -154.0 }, size = 2, floor_id = 4, colour = "green" },
+                },
+            },
+            { -- Step 12
+                text = "Step 12: Return to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with King Destin and your reward. \n \n" ..
+                       "(Optional: Rahal, Aramaviont, Milchupain, Halver and Curilla all have extra dialogue before you hand in.) \n" ..
+                       "(Optional afterwards: Trion and Pieuje's doors have one-time cutscenes.) \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {104},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+        },
+        reward = {
+            text = "Rank 9, 80,000 gil"
+        }
+    },
+
+    ["9-1: Breaking Barriers"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "8-2: Lightbringer"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade up to 10 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Go to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with Trion, Pieuje, the papsque Shamonde and Princess Claidie. \n \n" ..
+                       "(Optional: Halver has extra dialogue.) \n \n" ..
+                       "===== READ THIS BEFORE YOU LEAVE ===== \n" ..
+                       "You must now collect 3 key items STRICTLY IN ORDER: \n" ..
+                       "1. Figure of Titan   - Valley of Sorrows (I-8) \n" ..
+                       "2. Figure of Garuda  - Xarcabard (H-7) \n" ..
+                       "3. Figure of Leviathan - Batallia Downs (J-11) \n \n" ..
+                       "The ??? will NOT respond out of order, and nobody can skip a key item by having someone else pop the NMs. \n \n" ..
+                       "Bring Sneak/Invisible or a Mount for the first two. \n" ..
+                       "TIP: Touching a ??? plays a short cutscene which makes any mobs chasing you lose aggro. \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {32},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+            { -- Step 3
+                text = "Step 3: KEY ITEM 1 of 3 - Figure of Titan, Valley of Sorrows (I-8). \n \n" ..
+                       "From Cape Teriggan, take the NORTH entrance at (J-8) into the Valley of Sorrows. \n \n" ..
+                       "Use Sneak + Invisible (or stay mounted) and go to the ??? at (I-8). \n \n" ..
+                       "The zone is full of Adamantoise - do not get greedy, just touch the ???. \n \n",
+                onmob_target = {"qm2"},
+                trigger_on_talk = {"Figure of Titan"},
+                route_to = "Valley of Sorrows",
+                destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Valley of Sorrows", type = 'square', center = { x = 91.0, y = -3.0, z = -16.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Valley of Sorrows",
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 4
+                text = "Step 4: KEY ITEM 2 of 3 - Figure of Garuda, Xarcabard (H-7). \n \n" ..
+                       "The ??? is on the UPPER level, among some trees on your LEFT as you go up the slope. \n \n" ..
+                       "Sneak + Invisible recommended. \n \n",
+                onmob_target = {"qm5"},
+                trigger_on_talk = {"Figure of Garuda"},
+                route_to = "Xarcabard",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Xarcabard", type = 'square', center = { x = 179.0, y = -33.0, z = 82.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Xarcabard",
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 5
+                text = "Step 5: KEY ITEM 3 of 3 - get to the island at Batallia Downs (J-11). \n \n" ..
+                       "This spot is ONLY reachable by going through Eldieme Necropolis - you cannot walk to it in Batallia. \n \n" ..
+                       "===== You need a 2nd person, OR a Magicked Astrolabe ===== \n" ..
+                       "The gates need two people on levers. Solo players can buy a Magicked Astrolabe to open them - see Churano-Shurano in Windurst Waters. \n \n" ..
+                       "===== Route ===== \n" ..
+                       "Enter Eldieme Necropolis from the SOUTHERN entrance at Batallia Downs (J-10), or use the Survival Guide. \n" ..
+                       "Person 1 uses the Lever at (H-8) and works the Gates while Person 2 moves to the southern room at (G-9). \n" ..
+                       "Person 2 then uses the matching Lever in the north part of that room to work the Gates for Person 1. \n \n" ..
+                       "SNEAK UP, then drop down the hole in the CENTRE of the room at (G-9). You WILL get aggro below, even at Lv99. \n \n" ..
+                       "Follow the path EAST onto a new map. Work south: RIGHT at the first intersection, LEFT at the second. \n" ..
+                       "Follow it until you zone back out into Batallia Downs. \n \n" ..
+                       "After zoning, take a RIGHT and head SOUTH. The ??? is on the cliff's edge just EAST of the Stone Monument. \n \n" ..
+                       "WARNING: The NM Ahtu spawns on this island. \n \n",
+                zone_trigger = "Batallia Downs",
+                route_to = "Eldieme Necropolis",
+                destination_highlight = {position = "J-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Eldieme Necropolis",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "G-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Batallia Downs",
+                        highlights = {
+                            { position = "J-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Inspect the ??? to spawn the Roc NMs Suparna and Suparna Fledgling, then defeat them. \n \n" ..
+                       "Suparna (WAR/BRD): Horde Lullaby, Massacre Elegy, Magic Finale, Giga Scream, Dread Dive, Mighty Strikes. \n" ..
+                       "Suparna Fledgling (WHM/BRD): same song kit, plus BENEDICTION. \n \n" ..
+                       "- Bring Silence/Finale to shut down the songs - Horde Lullaby will sleep your whole party \n" ..
+                       "- Soloable/duoable by most jobs around Lv90 \n \n",
+                onmob_target = {"qm3"},
+                onmob_enemy = {"Suparna", "Suparna Fledgling"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Suparna", "Suparna Fledgling"},
+                    zone = "Batallia Downs",
+                    count_party_kills = true,
+                },
+                visual_zones = {
+                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Inspect the ??? again for a cutscene and KI:Figure of Leviathan. \n \n",
+                onmob_target = {"qm3"},
+                trigger_on_event_id = {904},
+                visual_zones = {
+                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
+                },
+            },
+            { -- Step 8
+                text = "Step 8: Return to Chateau d'Oraguille and examine the Door: Great Hall to report to the King and complete the mission. \n \n" ..
+                       "You must be holding all 3 figures (Titan, Garuda, Leviathan). \n \n" ..
+                       "(Optional: Rahal and Curilla have extra dialogue afterwards.) \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {76},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+        },
+        reward = {
+            text = "Rank Points (900)"
+        }
+    },
+
+    ["9-2: The Heir to the Light"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "9-1: Breaking Barriers"},
+        },
+        steps = {
+            { -- Step 1
+                text = "Step 1: Trade up to 9 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
+                       "Northern San d'Oria: Grilau (D-8). \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
+                trigger_on_talk = {"You have accepted the mission"},
+                zone_max_distance = 40,
+                visual_zones = {
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Southern San d'Oria",
+                        highlights = {
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 1,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 2
+                text = "Step 2: Zone into Northern San d'Oria for a VERY long cutscene (~5 minutes). \n \n" ..
+                       "This fires on zoning in - there is no NPC to talk to. Get comfortable. \n \n",
+                trigger_on_event_id = {1},
+                zone_trigger = "Northern San d'Oria",
+                route_to = "Northern San d'Oria",
+            },
+            { -- Step 3
+                text = "Step 3: Zone into Chateau d'Oraguille for another cutscene. \n \n" ..
+                       "You will be ordered to head to Qu'Bia Arena. \n \n" ..
+                       "(Optional: Rahal, Aramaviont, Milchupain, Curilla, Halver, Nachou and Perfaumand all have extra dialogue now.) \n \n",
+                trigger_on_event_id = {10},
+                zone_trigger = "Chateau d'Oraguille",
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 4
+                text = "Step 4: Zone into Fei'Yin for a cutscene. \n \n" ..
+                       "===== Party requirements ===== \n" ..
+                       "Full party of Lv70+. ONLY players currently on this mission - or who have already completed it - can enter the BC. \n" ..
+                       "(A friend who changed allegiance but finished San d'Oria's storyline CAN help.) \n" ..
+                       "A mage with Sleepga is very useful. Trusts CAN be summoned once inside Qu'Bia Arena. \n \n" ..
+                       "===== Getting there ===== \n" ..
+                       "Home Point #1 inside Fei'Yin drops you at the Qu'Bia Arena entrance. \n" ..
+                       "Or, if Beyond Infinity is done, Domenic in Lower Jeuno (J-7) teleports you to Qu'Bia Arena. \n" ..
+                       "Bring Sneak - there are Lv95+ mobs in the area (or grab Circumspection from a Grounds of Valor book for 5 tabs). \n \n",
+                trigger_on_event_id = {23},
+                zone_trigger = "Fei'Yin",
+                route_to = "Fei'Yin 1",
+                zone_max_distance = 40,
+            },
+            { -- Step 5
+                text = "Step 5: Travel to the Qu'Bia Arena entrance at (K-8) in Fei'Yin. \n \n",
+                zone_trigger = "Qu'Bia Arena",
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -176.1, y = -24.0, z = -171.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -152.5, y = -24.0, z = -148.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -133.5, y = -24.0, z = -140.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -100.2, y = -19.0, z = -133.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -97.7, y = -16.0, z = -96.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -74.6, y = -16.0, z = -69.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -60.4, y = -16.0, z = -61.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -20.7, y = -16.0, z = -61.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 32.3, y = -16.0, z = -54.0 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 27.8, y = -16.0, z = -21.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -20.3, y = -16.0, z = -16.8 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = -16.7, y = -16.0, z = 22.6 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 13.8, y = -16.0, z = 49.1 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 24.9, y = -16.0, z = 58.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 63.1, y = -16.6, z = 59.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 99.6, y = -24.0, z = 56.4 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 124.8, y = -24.0, z = 28.4 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 162.6, y = -23.7, z = 7.4 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 182.3, y = -24.0, z = 19.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 209.5, y = -24.0, z = 23.7 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 221.8, y = -24.0, z = 37.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 218.2, y = -24.0, z = 60.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Fei'Yin", type = 'rect', center = { x = 231.5, y = -29.6, z = 60.0 }, width = 4.75, height = 10.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Fei'Yin", type = 'arrow', center = { x = 237.3, y = -24.3, z = 59.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Fei'Yin",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "K-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Examine the Burning Circle to enter BCNM 'The Heir to the Light'. \n \n" ..
+                       "Level cap 99, but you are still Level Restricted - BUFFS WEAR ON ENTRY. Rebuff after the opening event. \n" ..
+                       "No EXP loss on death. Trusts can be summoned. \n \n" ..
+                       "===== PART 1 ===== \n" ..
+                       "- Death Clan Destroyer (Warmachine, WHM - will NOT sleep) \n" ..
+                       "- Yukvok of Clan Death (Orc RNG - highly sleep resistant, uses Eagle Eye Shot) \n" ..
+                       "- 3x Worgbut, 3x Rallbrog, 3x Vangknok of Clan Death (sleepable) \n \n" ..
+                       "Tank rounds up the Orcs, then Sleepga/Horde Lullaby the pile. \n" ..
+                       "SILENCE THE WARMACHINE - it is a White Mage and its Curaga will wake the whole horde. Kill it FIRST. \n" ..
+                       "Then the Ranger, then mop up the rest (they are weak - Predator Claws shreds them). \n" ..
+                       "Keep one weak orc slept and rest to full - killing the LAST orc triggers the event. \n \n" ..
+                       "===== PART 2 ===== \n" ..
+                       "Prince Trion joins you. IF TRION DIES, YOUR PARTY IS EJECTED - mages must keep him alive. \n" ..
+                       "- Rojgnoj's Left Hand (BLM) \n" ..
+                       "- Warlord Rojgnoj (PLD) \n" ..
+                       "- Rojgnoj's Right Hand (DRK) \n \n" ..
+                       "Kill order: BLM > PLD > DRK. Kill the BLM at all costs - it will wipe you. \n" ..
+                       "Trion randomly picks a target, so DDs should Provoke onto whatever he engages. \n" ..
+                       "Tank takes the PLD (very sleep resistant, but Bind holds him ~60s). Sleep whatever is not being fought. \n" ..
+                       "SCH note: Accession buffs will land on Trion even though you cannot target him directly. \n \n" ..
+                       "All 3 dead = post-battle cutscene.",
+                onmob_target = "qu-bia-arena-burning-circle",
+                trigger_on_event_id = {32001},
+                onmob_enemy = {"Death Clan Destroyer", "Yukvok of Clan Death", "Worgbut of Clan Death", "Rallbrog of Clan Death", "Vangknok of Clan Death", "Warlord Rojgnoj", "Rojgnoj's Left Hand", "Rojgnoj's Right Hand"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 4,
+            },
+            { -- Step 7
+                text = "Step 7: Zone into Northern San d'Oria for a short cutscene. \n \n",
+                trigger_on_event_id = {0},
+                zone_trigger = "Northern San d'Oria",
+                route_to = "Northern San d'Oria",
+            },
+            { -- Step 8
+                text = "Step 8: Go to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene. \n \n" ..
+                       "(Optional: Halver, Rahal, Curilla, Aramaviont and Milchupain have extra dialogue.) \n" ..
+                       "(Optional: Pieuje's door and Trion's door each have a cutscene. The Door: Papal Chambers at the top of the Cathedral has another.) \n" ..
+                       "(Optional: Talking to Trion with a San d'Oria Trust Permit unlocks Trust: Trion, if you already have Excenmille and Curilla.) \n \n",
+                onmob_target = {"_6h4"},
+                trigger_on_event_id = {8},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+            { -- Step 9
+                text = "Step 9: Go to the Heavy Stone Door in King Ranperre's Tomb at (H-8) - Map 1 - for a cutscene. \n \n",
+                onmob_target = {"_5a0"},
+                trigger_on_event_id = {14},
+                route_to = "King Ranperre's Tomb",
+                visual_zones = {
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "King Ranperre's Tomb",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 10
+                text = "Step 10: Report back to Halver in Chateau d'Oraguille for the final cutscene and your reward. \n \n" ..
+                       "MAKE SURE YOU HAVE A FREE INVENTORY SLOT for the San d'Orian Flag. \n" ..
+                       "(If your inventory is full, talk to Halver again afterwards and he will hand it over.) \n \n" ..
+                       "Rank 10, 100,000 gil, Title: San d'Orian Royal Heir, San d'Orian Flag. \n" ..
+                       "You can now purchase the KI:Atma of the Heir. \n \n" ..
+                       "(Optional afterwards: Pieuje's and Trion's doors have two more Rank 10 only cutscenes; Rahal, Aramaviont and Curilla have dialogue; and there is an epilogue cutscene when you zone into Southern San d'Oria.) \n \n",
+                onmob_target = {"Halver"},
+                trigger_on_event_id = {9},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+            },
+        },
+        reward = {
+            text = "Rank 10, 100,000 gil, Title: San d'Orian Royal Heir, San d'Orian Flag, can purchase Atma of the Heir"
         }
     },
 }

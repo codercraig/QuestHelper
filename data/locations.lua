@@ -786,6 +786,27 @@ return {
     },
     --San d'Oria
     --Southern San d'Oria
+    ["Endracion"] = {
+        target_pos = { x = -112.8, y = -1.1, z = -37.2 },
+        visual_mode = "arc",
+        zone = "Southern San d'Oria",
+        floor_id = 0,
+        max_distance = 30
+    },
+    ["Ambrotien"] = {
+        target_pos = { x = 93.4, y = -1.1, z = -57.3 },
+        visual_mode = "arc",
+        zone = "Southern San d'Oria",
+        floor_id = 0,
+        max_distance = 30
+    },
+    ["Grilau"] = {
+        target_pos = { x = -242.0, y = 6.0, z = 57.9 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 30
+    },
     ["Hinaree"] = {
         target_pos = { x = -301.5, y = -11, z = 97.7 },
         visual_mode = "arc",
