@@ -162,7 +162,7 @@ return {
         {zone = "West Ronfaure", exit = "E-3"},
         {zone = "Valkurm Dunes", exit = "I-13"},
         {zone = "Jugner Forest", exit = "M-8"},
-        {zone = "Ordelle's Caves", exit = "H-7"}
+        {zone = "Ordelle's Caves", exit = "F-7"}
     },
 
     -- Windurst Area
@@ -455,7 +455,7 @@ return {
         --{zone = "Giddeus", exit = "J-8"}
     },
     ["Ordelle's Caves"] = {
-        {zone = "La Theine Plateau", exit = "F-5"}
+        {zone = "La Theine Plateau", exit = "H-2"}
     },
     ["Crawlers' Nest"] = {
         {zone = "Rolanberry Fields", exit = "H-7"}

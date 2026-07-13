@@ -878,6 +878,58 @@ return {
         floor_id = 1,
         max_distance = 18
     },
+    -- La Theine Plateau
+    -- Patrollers
+    ["Galaihaurat"] = {
+        target_pos = { x = -481.2, y = -9.1, z = 220.5 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 50
+    },
+    ["Equesobillot"] = {
+        target_pos = { x = -286.5, y = 7.3, z = 287.8 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["Deaufrain"] = {
+        target_pos = { x = -307.0, y = 25.6, z = 341.5 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 20
+    },
+    ["Vicorpasse"] = {
+        target_pos = { x = -345.0, y = 35.2, z = 265.0 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["Laurisse"] = {
+        target_pos = { x = -291.8, y = 26.2, z = 141.2 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 25
+    },
+    ["Narvecaint"] = {
+        target_pos = { x = -261.9, y = 21.1, z = 127.6 },
+        visual_mode = "arc",
+        zone = "La Theine Plateau",
+        floor_id = 0,
+        max_distance = 20
+    },
+    -- Ordelle's Caves
+    ["Ruillont"] = {
+        target_pos = { x = -69.8, y = -0.6, z = 610.8 },
+        visual_mode = "arc",
+        zone = "Ordelle's Caves",
+        floor_id = 1,
+        max_distance = 25
+    },
     -- Horlias Peak
     ["horlais-peak-burning-circle"] = {
         target_pos = { x = -503.0, y = 158.3, z = -212.6 },

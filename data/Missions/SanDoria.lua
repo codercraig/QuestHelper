@@ -472,9 +472,7 @@ return {
             },
             { -- Step 2
                 text = "Step 2: Travel to La Theine Plateau and talk to Galaihaurat at (E-6), on the road west of the canyon. \n \n" ..
-                       "This is the first Temple Knight - you will talk to the rest in order as you head toward Ordelle's Caves. \n \n" ..
-                       "WARNING: Funguars in the canyon are Lv18+ and aggro to sound - bring Silent Oils if low level. \n" ..
-                       "If you have the quest 'A Timely Visit' active, you may need to finish it first to get the right dialogue. \n \n",
+                       "This is the first Temple Knight - you will talk to the rest in order as you head toward Ordelle's Caves. \n \n",
                 onmob_target = {"Galaihaurat"},
                 trigger_on_event_id = {110},
                 route_to = "La Theine Plateau",
@@ -486,6 +484,23 @@ return {
                 trigger_on_event_id = {101},
                 route_to = "La Theine Plateau",
                 destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        -- To the Ramp
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -477.3, y = -7.1, z = 221.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -454.5, y = -0.6, z = 221.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -435.9, y = 6.4, z = 221.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -404.1, y = 8.5, z = 221.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -400.4, y = 8.6, z = 254.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -396.4, y = 8.0, z = 277.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -387.9, y = 10.0, z = 305.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -357.9, y = 8.4, z = 332.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -324.8, y = 8.1, z = 365.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -284.6, y = 8.4, z = 393.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.3, y = 8.2, z = 351.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.2, y = 8.0, z = 318.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.3, y = 8.7, z = 294.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 4
                 text = "Step 4: Talk to Deaufrain (F-6), on the ramp into the canyon. \n \n",
@@ -493,12 +508,26 @@ return {
                 trigger_on_event_id = {102},
                 route_to = "La Theine Plateau",
                 destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        -- To the Ramp
+                            { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -290.7, y = 12.0, z = 294.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                            { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -294.1, y = 17.0, z = 314.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                            { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -291.5, y = 23.4, z = 342.1 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 5
                 text = "Step 5: Talk to Vicorpasse (the captain) at the beginning of the canyon. \n \n",
                 onmob_target = {"Vicorpasse"},
                 trigger_on_event_id = {108},
                 route_to = "La Theine Plateau",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -306.0, y = 28.9, z = 336.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -311.0, y = 31.7, z = 312.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -322.2, y = 38.8, z = 284.0 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 6
                 text = "Step 6: Head down into the canyon and talk to Laurisse. \n \n" ..
@@ -506,12 +535,27 @@ return {
                 onmob_target = {"Laurisse", "Augevinne", "Yaucevouchat"},
                 trigger_on_event_id = {106},
                 route_to = "La Theine Plateau",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -347.7, y = 37.8, z = 259.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -360.8, y = 38.8, z = 235.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -357.5, y = 38.8, z = 205.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -335.2, y = 37.5, z = 181.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -315.9, y = 38.4, z = 154.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 7
                 text = "Step 7: Talk to Narvecaint - the last knight - near (F-7), the entrance to Ordelle's Caves. \n \n",
                 onmob_target = {"Narvecaint"},
                 trigger_on_event_id = {107},
                 route_to = "La Theine Plateau",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -289.0, y = 27.3, z = 141.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -275.8, y = 24.1, z = 142.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 8
                 text = "Step 8: Enter Ordelle's Caves (La Theine F-7) and talk to Ruillont. \n \n" ..
@@ -519,20 +563,111 @@ return {
                 onmob_target = {"Ruillont"},
                 trigger_on_event_id = {1},
                 route_to = "Ordelle's Caves",
+                destination_highlight = {position = "H-3", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -261.7, y = 23.9, z = 117.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    -- Ordelles to find the Knight
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -81.2, y = 0.5, z = 660.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -99.5, y = 0.5, z = 648.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    --Survival Guide
+                    { zone_name = "Ordelle's Caves", type = 'square', center = { x = -104.0, y = -0.1, z = 633.0 }, size = 1, floor_id = 1, colour = "green" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -100.4, y = 0.6, z = 619.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -95.1, y = 0.5, z = 602.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+
+
+                },
             },
             { -- Step 9
                 text = "Step 9: Return to La Theine Plateau and talk to the knight holding Ruillont's Bronze Sword. \n \n" ..
-                       "The knight is RANDOM - one of Galaihaurat (E-6), Equesobillot (F-6), or Deaufrain (F-6). \n" ..
+                       "The knight is RANDOM - one of Galaihaurat(Purple) (E-6), Equesobillot(Blue) (F-6), or Deaufrain(Purple) (F-6). \n" ..
                        "You will receive an actual Bronze Sword, so make sure you have an inventory slot free. \n \n",
                 onmob_target = {"Galaihaurat", "Equesobillot", "Deaufrain"},
                 trigger_on_event_id = {112, 113, 114},
                 route_to = "La Theine Plateau",
+                destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -77.0, y = 1.5, z = 607.1 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -88.2, y = 1.5, z = 602.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -100.4, y = 0.1, z = 615.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -90.1, y = 0.4, z = 660.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+
+                    -- random 3 knights go all the way to e-6 just incase
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -272.1, y = 23.3, z = 99.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -261.8, y = 23.4, z = 116.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -289.8, y = 27.9, z = 143.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -318.8, y = 38.9, z = 167.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -346.0, y = 39.3, z = 197.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -358.0, y = 38.9, z = 229.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -354.7, y = 39.4, z = 259.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -318.8, y = 38.8, z = 280.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -309.9, y = 33.5, z = 306.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -306.6, y = 29.5, z = 319.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -303.5, y = 27.2, z = 342.6 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -294.6, y = 24.1, z = 343.1 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -292.7, y = 17.1, z = 316.2 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -282.0, y = 8.8, z = 295.0 }, size = 4, direction = "up", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.7, y = 8.2, z = 327.5 }, size = 4, direction = "up", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -282.1, y = 8.0, z = 360.4 }, size = 4, direction = "up", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -289.5, y = 8.3, z = 401.1 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -316.1, y = 8.9, z = 381.6 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -346.1, y = 8.7, z = 355.4 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -374.2, y = 8.5, z = 328.3 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -398.1, y = 8.9, z = 302.5 }, size = 4, direction = "down", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -401.7, y = 7.9, z = 276.8 }, size = 4, direction = "down", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -407.0, y = 8.1, z = 239.7 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -418.7, y = 8.4, z = 224.1 }, size = 4, direction = "sw", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -435.2, y = 8.3, z = 209.5 }, size = 4, direction = "up", floor_id = 0, colour = "magenta" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -452.1, y = 0.8, z = 216.7 }, size = 4, direction = "left", floor_id = 0, colour = "magenta" },
+                },
             },
             { -- Step 10
                 text = "Step 10: Return to Ordelle's Caves and trade the Bronze Sword to Ruillont. \n \n",
                 onmob_target = {"Ruillont"},
                 trigger_on_event_id = {2},
                 route_to = "Ordelle's Caves",
+                items_needed = {
+                    { item = "Bronze Sword", quantity = 1, on_the_way = true },
+                },
+                destination_highlight = {position = "H-3", offsetX = 16, offsetY = 16},
+                zone_max_distance = 25,
+                visual_zones = {
+                        -- To the Ramp
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -477.3, y = -7.1, z = 221.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -454.5, y = -0.6, z = 221.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -435.9, y = 6.4, z = 221.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -404.1, y = 8.5, z = 221.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -400.4, y = 8.6, z = 254.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -396.4, y = 8.0, z = 277.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -387.9, y = 10.0, z = 305.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -357.9, y = 8.4, z = 332.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -324.8, y = 8.1, z = 365.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -284.6, y = 8.4, z = 393.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.3, y = 8.2, z = 351.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.2, y = 8.0, z = 318.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -280.3, y = 8.7, z = 294.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -290.0, y = 11.6, z = 291.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -292.7, y = 18.5, z = 320.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -296.6, y = 25.2, z = 346.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -309.4, y = 36.9, z = 293.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -357.2, y = 39.6, z = 262.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -360.8, y = 39.2, z = 227.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -355.5, y = 38.8, z = 203.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -327.3, y = 38.8, z = 170.9 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -299.5, y = 31.6, z = 142.5 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -270.3, y = 22.7, z = 138.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -260.8, y = 22.8, z = 114.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                        -- Ordelles to Rulluiont
+                        { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -81.2, y = 0.5, z = 660.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -99.5, y = 0.5, z = 648.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        --Survival Guide
+                        { zone_name = "Ordelle's Caves", type = 'square', center = { x = -104.0, y = -0.1, z = 633.0 }, size = 1, floor_id = 1, colour = "green" },
+                        { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -100.4, y = 0.6, z = 619.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -95.1, y = 0.5, z = 602.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                },
             },
             { -- Step 11
                 text = "Step 11: Return to La Theine Plateau and talk to Vicorpasse (F-6) at the beginning of the canyon. \n \n" ..
@@ -541,11 +676,27 @@ return {
                 trigger_on_event_id = {115},
                 route_to = "La Theine Plateau",
                 destination_highlight = {position = "F-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -77.0, y = 1.5, z = 607.1 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -88.2, y = 1.5, z = 602.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -100.4, y = 0.1, z = 615.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ordelle's Caves", type = 'arrow', center = { x = -90.1, y = 0.4, z = 660.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+
+                    -- random 3 knights go all the way to e-6 just incase
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -272.1, y = 23.3, z = 99.6 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -261.8, y = 23.4, z = 116.4 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -289.8, y = 27.9, z = 143.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -318.8, y = 38.9, z = 167.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -346.0, y = 39.3, z = 197.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -358.0, y = 38.9, z = 229.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "La Theine Plateau", type = 'arrow', center = { x = -354.7, y = 39.4, z = 259.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 12
                 text = "Step 12: Return to San d'Oria and talk to a Gate Guard to complete the mission. \n \n" ..
-                       "Ambrotien or Endracion (Southern, I-9 / H-7), or Grilau (Northern, D-6). \n \n" ..
-                       "TIP: There is a Survival Guide just inside Ordelle's Caves for a quick return trip. \n \n",
+                       "Ambrotien or Endracion (Southern, F-9 / K-10), or Grilau (Northern, D-8). \n \n" ..
+                       "TIP: There is a Survival Guide just inside Ordelle's Caves for a quick return trip/warp home! \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1005, 2005},
                 images = {
@@ -555,8 +706,8 @@ return {
                         state = 12,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -565,7 +716,7 @@ return {
                         state = 12,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },

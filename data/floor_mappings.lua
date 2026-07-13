@@ -150,6 +150,10 @@ return {
     [192] = {
         [1] = 1,
     },
+    -- Ordelle's Cave
+    [193] = {
+        [1] = 1,
+    },
     -- Outer Hurutoto Ruins
     [194] = {
         [3] = 1,
