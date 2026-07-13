@@ -862,6 +862,22 @@ return {
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
     },
+    -- Ghelsba Outpost
+    ["ghelsba-outpost-hut-door-f10"] = {
+        target_pos = { x = -165.4, y = -12.7, z = 77.8 },
+        visual_mode = "arc",
+        zone = "Ghelsba Outpost",
+        floor_id = 1,
+        max_distance = 15
+    },
+    -- King Ranperre's Tomb
+    ["king-ranperres-tomb-tombstone-i10"] = {
+        target_pos = { x = 1.0, y = -1.2, z = -103.6 },
+        visual_mode = "arc",
+        zone = "King Ranperre's Tomb",
+        floor_id = 1,
+        max_distance = 18
+    },
     -- Horlias Peak
     ["horlais-peak-burning-circle"] = {
         target_pos = { x = -503.0, y = 158.3, z = -212.6 },

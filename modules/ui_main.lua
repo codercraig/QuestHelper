@@ -24,6 +24,7 @@ local search_results = T{}
 
 -- Hardcoded progression guide
 local progression_guide = require('data.progression_guide')
+local player_module = require('modules.player')
 
 -- Inventory checking (periodic, not every frame)
 local inventory_results = {} -- Cached results
@@ -135,24 +136,142 @@ local function getAllItemsNeeded(missionData)
     return allItems
 end
 
--- Collects all prerequisites for a quest/mission
--- Returns: { {category = "Missions", subfile = "Bastok", name = "7-1: The Final Image"}, ... }
-local function getAllPrerequisites(missionData)
-    if not missionData or not missionData.prerequisites then
+-- Missions sharing a choice_group are alternate routes through the same point in
+-- the chain - the player only ever completes one of them. A group is "settled"
+-- once any of its members is complete; the others are then routes not taken, and
+-- are shown greyed out and skipped when advancing through the chain.
+local function getSettledChoiceGroups(topCat, subfile, subData, quest_state, quest_data)
+    local settled = {}
+    for mname, mdata in pairs(subData) do
+        if mdata.choice_group and quest_state.isMissionComplete(topCat, subfile, mname, quest_data) then
+            settled[mdata.choice_group] = true
+        end
+    end
+    return settled
+end
+
+-- True when this mission is the alternate route the player passed over.
+local function isRouteNotTaken(settled, subData, mname, topCat, subfile, quest_state, quest_data)
+    local group = subData[mname] and subData[mname].choice_group
+    return group ~= nil
+        and settled[group] == true
+        and not quest_state.isMissionComplete(topCat, subfile, mname, quest_data)
+end
+
+-- Builds the display rows for a quest/mission's prerequisites.
+--
+-- A prerequisites entry is either a single prerequisite:
+--   {category = "Missions", subfile = "Bastok", name = "7-1: The Final Image"}
+-- or an OR group, satisfied by any one of its members:
+--   {any = { {category = ..., subfile = ..., name = ...}, ... }}
+--
+-- An OR group with at least one member complete shows only the complete
+-- member(s), so the section reads as done. With none complete it shows a
+-- "Choose one:" caption above every member, since the player picks which to do.
+--
+-- Returns a flat list of rows, each either {caption = "..."} or a prerequisite.
+-- Rows are one UI line apiece, so #rows drives the section height.
+local function getAllPrerequisites(missionData, quest_state, quest_data)
+    if not missionData or type(missionData.prerequisites) ~= 'table' then
         return {}
     end
 
-    -- Prerequisites should be an array of tables with category, subfile, and name
-    local prerequisites = {}
-    if type(missionData.prerequisites) == 'table' then
-        for _, prereq in ipairs(missionData.prerequisites) do
-            if type(prereq) == 'table' and prereq.category and prereq.subfile and prereq.name then
-                table.insert(prerequisites, prereq)
+    local function isValid(prereq)
+        return type(prereq) == 'table' and prereq.category and prereq.subfile and prereq.name
+    end
+
+    local rows = {}
+    for _, entry in ipairs(missionData.prerequisites) do
+        if type(entry) == 'table' and type(entry.any) == 'table' then
+            local complete = {}
+            for _, prereq in ipairs(entry.any) do
+                if isValid(prereq) and
+                   quest_state.isMissionComplete(prereq.category, prereq.subfile, prereq.name, quest_data)
+                then
+                    table.insert(complete, prereq)
+                end
+            end
+
+            if #complete > 0 then
+                for _, prereq in ipairs(complete) do
+                    table.insert(rows, prereq)
+                end
+            else
+                table.insert(rows, {caption = "Choose one:"})
+                for _, prereq in ipairs(entry.any) do
+                    if isValid(prereq) then
+                        local choice = {}
+                        for k, v in pairs(prereq) do choice[k] = v end
+                        choice.or_choice = true
+                        table.insert(rows, choice)
+                    end
+                end
+            end
+        elseif isValid(entry) then
+            table.insert(rows, entry)
+        end
+    end
+
+    return rows
+end
+
+-- Builds the display rows for a quest/mission's requirements - the things a player
+-- needs to *be*, rather than things they need to have done (those are prerequisites).
+--
+--   requirements = {
+--       level = 30,                                 -- recommended main job level
+--       fame  = {area = "Windurst", level = 3},     -- or a list of these
+--   }
+--
+-- Each row is {text = "...", status = 'ok'|'fail'|'unknown'}. Level is read live
+-- from the player. Fame is 'unknown' by design: the client is never sent a numeric
+-- fame value, so it can only ever be shown as a reminder, never verified.
+local function getRequirementRows(missionData)
+    if not missionData or type(missionData.requirements) ~= 'table' then
+        return {}
+    end
+
+    local reqs = missionData.requirements
+    local rows = {}
+
+    if type(reqs.level) == 'number' then
+        local level = player_module.getMainJobLevel()
+        if not level then
+            table.insert(rows, {
+                text = string.format("Recommended Level: %d (your level is unavailable)", reqs.level),
+                status = 'unknown',
+            })
+        else
+            table.insert(rows, {
+                text = string.format("Recommended Level: %d (you are %d)", reqs.level, level),
+                status = level >= reqs.level and 'ok' or 'fail',
+            })
+        end
+    end
+
+    -- fame accepts a single {area = ..., level = ...} or a list of them
+    local fameEntries = {}
+    if type(reqs.fame) == 'table' then
+        if reqs.fame.area then
+            table.insert(fameEntries, reqs.fame)
+        else
+            for _, entry in ipairs(reqs.fame) do
+                if type(entry) == 'table' and entry.area then
+                    table.insert(fameEntries, entry)
+                end
             end
         end
     end
 
-    return prerequisites
+    for _, entry in ipairs(fameEntries) do
+        table.insert(rows, {
+            text = string.format("Fame: %s %d+ (cannot be checked - ask an NPC in town)",
+                entry.area, entry.level or 1),
+            status = 'unknown',
+        })
+    end
+
+    return rows
 end
 
 -- Renders the main QuestHelper window
@@ -247,10 +366,19 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
-                local prerequisites = getAllPrerequisites(missionData)
+                local prerequisites = getAllPrerequisites(missionData, quest_state, quest_data)
                 if #prerequisites > 0 then
                     if ui_settings.prerequisites_section_expanded then
                         items_height = items_height + (#prerequisites * 25) + 30
+                    else
+                        items_height = items_height + 30  -- Collapsed header + extra breathing room
+                    end
+                end
+
+                local requirements = getRequirementRows(missionData)
+                if #requirements > 0 then
+                    if ui_settings.requirements_section_expanded then
+                        items_height = items_height + (#requirements * 25) + 30
                     else
                         items_height = items_height + 30  -- Collapsed header + extra breathing room
                     end
@@ -421,10 +549,24 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     for i, k in ipairs(keys_nav) do
                         if k == current_mission then cur_idx = i break end
                     end
-                    if cur_idx and cur_idx < #keys_nav then
+
+                    -- Advance past any route the player didn't take, so finishing one
+                    -- alternate route steps to the next real mission in the chain.
+                    local settled_nav = getSettledChoiceGroups(currentTopCategory, currentSubfile, subData_nav, quest_state, quest_data)
+                    local next_idx = nil
+                    if cur_idx then
+                        for i = cur_idx + 1, #keys_nav do
+                            if not isRouteNotTaken(settled_nav, subData_nav, keys_nav[i], currentTopCategory, currentSubfile, quest_state, quest_data) then
+                                next_idx = i
+                                break
+                            end
+                        end
+                    end
+
+                    if next_idx then
                         imgui.SameLine()
                         if imgui.SmallButton("Next >##NextMission") then
-                            new_current_mission = keys_nav[cur_idx + 1]
+                            new_current_mission = keys_nav[next_idx]
                             collapsed_viewed_step = 1
                         end
                     end
@@ -571,13 +713,41 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 else
                     imgui.Text('Select a mission:')
                     local missionKeys = utils.get_sorted_keys(subData)
+
+                    local groupSettled = getSettledChoiceGroups(currentTopCategory, currentSubfile, subData, quest_state, quest_data)
+                    local groupCaptioned = {}
                     for _, mname in ipairs(missionKeys) do
+                        local group = subData[mname].choice_group
                         local complete = quest_state.isMissionComplete(currentTopCategory, currentSubfile, mname, quest_data)
-                        if complete then imgui.PushStyleColor(ImGuiCol_Button, {0,1,0,0.5}) end
                         local label = mname
-                        if complete then label = label .. " (Complete!)" end
+                        local pushedColors = 0
+
+                        if group and not groupSettled[group] then
+                            -- Undecided: caption the group once, then offer each route.
+                            if not groupCaptioned[group] then
+                                imgui.TextColored({0.4, 0.7, 1, 1}, group .. ' - choose one:')
+                                groupCaptioned[group] = true
+                            end
+                            imgui.PushStyleColor(ImGuiCol_Button, {0, 0.35, 0.6, 0.6})
+                            pushedColors = 1
+                            label = '  ' .. label
+                        elseif group and not complete then
+                            -- The route not taken: greyed out, but still readable.
+                            imgui.PushStyleColor(ImGuiCol_Button, {0.25, 0.25, 0.25, 0.5})
+                            imgui.PushStyleColor(ImGuiCol_Text,   {0.5, 0.5, 0.5, 1})
+                            pushedColors = 2
+                            label = label .. ' (route not taken)'
+                        elseif complete then
+                            imgui.PushStyleColor(ImGuiCol_Button, {0, 1, 0, 0.5})
+                            pushedColors = 1
+                            label = label .. ' (Complete!)'
+                        end
+
                         if imgui.Button(label) then new_current_mission = mname end
-                        if complete then imgui.PopStyleColor() end
+
+                        if pushedColors > 0 then
+                            imgui.PopStyleColor(pushedColors)
+                        end
                     end
                 end
 
@@ -863,8 +1033,33 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     imgui.Separator()
                 end
 
+                -- Requirements Section (collapsible, open by default)
+                local requirements = getRequirementRows(missionData)
+                if #requirements > 0 then
+                    local req_header_expanded = imgui.CollapsingHeader("Requirements:", ui_settings.requirements_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
+
+                    if req_header_expanded ~= ui_settings.requirements_section_expanded then
+                        ui_settings.requirements_section_expanded = req_header_expanded
+                        settings.save('QuestHelper_settings', quest_state.settings)
+                    end
+
+                    if req_header_expanded then
+                        for _, req in ipairs(requirements) do
+                            if req.status == 'ok' then
+                                imgui.TextColored({0, 1, 0, 1}, "  [x] " .. req.text)
+                            elseif req.status == 'fail' then
+                                imgui.TextColored({1, 0.3, 0.3, 1}, "  [!] " .. req.text)
+                            else
+                                -- Can't be verified from the client - show as a reminder
+                                imgui.TextColored({1, 0.65, 0, 1}, "  [?] " .. req.text)
+                            end
+                        end
+                        imgui.Separator()
+                    end
+                end
+
                 -- Prerequisites Section (collapsible, open by default)
-                local prerequisites = getAllPrerequisites(missionData)
+                local prerequisites = getAllPrerequisites(missionData, quest_state, quest_data)
                 if #prerequisites > 0 then
                     -- Track the expanded state for dynamic height calculation
                     local prereq_header_expanded = imgui.CollapsingHeader("Prerequisites:", ui_settings.prerequisites_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
@@ -877,43 +1072,61 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                     if prereq_header_expanded then
                         for idx, prereq in ipairs(prerequisites) do
-                            local isComplete = quest_state.isMissionComplete(prereq.category, prereq.subfile, prereq.name, quest_data)
-                            local isRecommended = prereq.recommended == true
-
-                            if isComplete then
-                                imgui.PushStyleColor(ImGuiCol_Button,        {0, 0.5, 0, 0.5})
-                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 0.7, 0, 0.7})
-                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 0.9, 0, 0.9})
-                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
-                            elseif isRecommended then
-                                -- AMBER - Recommended, not completed
-                                imgui.PushStyleColor(ImGuiCol_Button,        {0.6, 0.4, 0,   0.6})
-                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.8, 0.55, 0,  0.8})
-                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {1.0, 0.65, 0,  1.0})
-                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                            if prereq.caption then
+                                -- OR group header, e.g. "Choose one:"
+                                imgui.TextColored({0.4, 0.7, 1, 1}, prereq.caption)
                             else
-                                imgui.PushStyleColor(ImGuiCol_Button,        {0.5, 0, 0, 0.5})
-                                imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.7, 0, 0, 0.7})
-                                imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.9, 0, 0, 0.9})
-                                imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                                local isComplete = quest_state.isMissionComplete(prereq.category, prereq.subfile, prereq.name, quest_data)
+                                local isRecommended = prereq.recommended == true
+                                local isChoice = prereq.or_choice == true
+
+                                if isComplete then
+                                    imgui.PushStyleColor(ImGuiCol_Button,        {0, 0.5, 0, 0.5})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0, 0.7, 0, 0.7})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0, 0.9, 0, 0.9})
+                                    imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                                elseif isChoice then
+                                    -- BLUE - One of several alternatives, none done yet
+                                    imgui.PushStyleColor(ImGuiCol_Button,        {0,   0.35, 0.6, 0.6})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0,   0.5,  0.8, 0.8})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0,   0.65, 1.0, 1.0})
+                                    imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                                elseif isRecommended then
+                                    -- AMBER - Recommended, not completed
+                                    imgui.PushStyleColor(ImGuiCol_Button,        {0.6, 0.4,  0,   0.6})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.8, 0.55, 0,   0.8})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonActive,  {1.0, 0.65, 0,   1.0})
+                                    imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                                else
+                                    imgui.PushStyleColor(ImGuiCol_Button,        {0.5, 0, 0, 0.5})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonHovered, {0.7, 0, 0, 0.7})
+                                    imgui.PushStyleColor(ImGuiCol_ButtonActive,  {0.9, 0, 0, 0.9})
+                                    imgui.PushStyleColor(ImGuiCol_Text,          {1, 1, 1, 1})
+                                end
+
+                                -- Choice rows sit under a "Choose one:" caption, so they drop
+                                -- the category prefix to stay inside the window width.
+                                local buttonLabel
+                                if isChoice then
+                                    buttonLabel = string.format("  [ ] %s##prereq_%d", prereq.name, idx)
+                                else
+                                    buttonLabel = string.format("%s %s: %s%s##prereq_%d",
+                                        isComplete and "[x]" or "[ ]",
+                                        prereq.category,
+                                        prereq.name,
+                                        isRecommended and " (recommended)" or "",
+                                        idx)
+                                end
+
+                                if imgui.Button(buttonLabel) then
+                                    -- Navigate to the prerequisite quest/mission
+                                    new_currentTopCategory = prereq.category
+                                    new_currentSubfile = prereq.subfile
+                                    new_current_mission = prereq.name
+                                end
+
+                                imgui.PopStyleColor(4)
                             end
-
-                            local suffix = isRecommended and " (recommended)" or ""
-                            local buttonLabel = string.format("%s %s: %s%s##prereq_%d",
-                                isComplete and "[x]" or "[ ]",
-                                prereq.category,
-                                prereq.name,
-                                suffix,
-                                idx)
-
-                            if imgui.Button(buttonLabel) then
-                                -- Navigate to the prerequisite quest/mission
-                                new_currentTopCategory = prereq.category
-                                new_currentSubfile = prereq.subfile
-                                new_current_mission = prereq.name
-                            end
-
-                            imgui.PopStyleColor(4)
                         end
                         imgui.Separator()
                     end

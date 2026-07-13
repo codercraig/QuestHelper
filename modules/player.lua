@@ -148,6 +148,21 @@ function player.hasBuff(buffId)
     return false
 end
 
+-- Gets the player's current main job level
+-- Returns: level (number), or nil if unavailable
+function player.getMainJobLevel()
+    local mem = AshitaCore:GetMemoryManager()
+    if not mem then return nil end
+
+    local playerObj = mem:GetPlayer()
+    if not playerObj then return nil end
+
+    local level = playerObj:GetMainJobLevel()
+    if not level or level == 0 then return nil end
+
+    return level
+end
+
 -- Initialize floor detection (finds memory signatures)
 -- Returns: true if successful, false otherwise
 local function initializeFloorDetection()

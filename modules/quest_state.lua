@@ -31,6 +31,7 @@ local default_settings = T{
         items_section_expanded = true,     -- Items Needed section expanded state
         keyitems_section_expanded = true,  -- Key Items Needed section expanded state
         prerequisites_section_expanded = true, -- Prerequisites section expanded state
+        requirements_section_expanded = true,  -- Requirements section (level/fame) expanded state
         route_section_expanded = true,     -- Route section expanded state
         dev_mode = false            -- Developer mode - enables debug output
     }
@@ -185,18 +186,37 @@ function quest_state.getCurrentStep(topCat, subfile, mission, quest_data)
     return #mdata.steps + 1
 end
 
--- Checks if an entire subfile is complete
+-- Checks if an entire subfile is complete.
+-- Missions sharing a choice_group are alternate routes the player picks between,
+-- so the group counts as done once any one of its members is done - requiring all
+-- of them would make such a subfile impossible to complete.
 function quest_state.isSubfileComplete(topCat, subfile, quest_data)
     local fileData = quest_data[topCat] and quest_data[topCat][subfile]
     if not fileData then return false end
+
+    local groupSeen = {}
+    local groupDone = {}
+
     for mission_name, mission_data in pairs(fileData) do
-        local steps = mission_data.steps or {}
-        for i = 1, #steps do
-            if not quest_state.getStepState(topCat, subfile, mission_name, i) then
-                return false
+        local complete = quest_state.isMissionComplete(topCat, subfile, mission_name, quest_data)
+        local group = mission_data.choice_group
+
+        if group then
+            groupSeen[group] = true
+            if complete then
+                groupDone[group] = true
             end
+        elseif not complete then
+            return false
         end
     end
+
+    for group in pairs(groupSeen) do
+        if not groupDone[group] then
+            return false
+        end
+    end
+
     return true
 end
 

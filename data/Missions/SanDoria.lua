@@ -43,7 +43,7 @@ return {
                 text = "Step 2: Defeat Orcish Fodder to obtain an Orcish Axe. \n \n" ..
                        "===== Obtaining the Orcish Axe ===== \n" ..
                        "Orcish Fodder spawn in West Ronfaure, Ghelsba Outpost, or La Theine Plateau. \n" ..
-                       "Nearest: West Ronfaure, just outside the San d'Oria gates - highlighted on radar. \n" ..
+                       "Nearest: West Ronfaure, just outside the San d'Oria gates - highlighted on map some areas but look around the zones. \n" ..
                        "The Orcish Axe is a common drop; kill until one drops. \n \n",
                 items_needed = {
                     "Orcish Axe"
@@ -52,6 +52,18 @@ return {
                 onmob_enemy = {"Orcish Fodder"},
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 2,
+                        zone_name = "West Ronfaure",
+                        highlights = {
+                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-5", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
             },
             { -- Step 3
                 text = "Step 3: Return to San d'Oria and trade the Orcish Axe to a Gate Guard to complete the mission. \n \n" ..
@@ -65,8 +77,8 @@ return {
                         state = 3,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -75,7 +87,7 @@ return {
                         state = 3,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -86,6 +98,9 @@ return {
         }
     },
     ["1-2: Bat Hunt"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "1-1: Smash the Orcish Scouts"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
@@ -132,22 +147,96 @@ return {
                        "From San d'Oria, cross into East Ronfaure, then enter King Ranperre's Tomb at (H-11). \n" ..
                        "Zone in and follow the right wall until you come out into an open area. \n \n" ..
                        "===== Obtaining Orcish Mail Scales ===== \n" ..
-                       "Kill Ding Bats in the open area until you receive Orcish Mail Scales - highlighted on radar. \n" ..
+                       "Kill Ding Bats in the open area until you receive Orcish Mail Scales - highlighted! \n" ..
                        "WARNING: Ding Bats only spawn at NIGHT (Vana'diel 18:00 - 6:00). \n \n",
                 route_to = "King Ranperre's Tomb",
                 items_needed = {
                     "Orcish Mail Scales"
                 },
                 trigger_on_item_obtain = {"Orcish Mail Scales"},
-                onmob_enemy = {"Ding Bat"},
+                onmob_enemy = {"Ding Bats"},
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
+                zone_max_distance = 20,
+                visual_zones = {
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 212.8, y = 2.5, z = -491.0 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 200.2, y = 0.3, z = -533.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Survival Guide
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -119.0, y = 0.0, z = 248.5 }, size = 1, floor_id = 1, colour = "green" },
+
+                    --Running to next area.
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.9, y = -0.1, z = 247.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.0, y = 0.0, z = 222.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -164.2, y = -0.1, z = 218.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -158.1, y = 0.0, z = 185.6 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.9, y = -1.0, z = 207.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.9, y = 7.5, z = 161.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.0, y = 7.5, z = 140.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -181.4, y = 6.7, z = 90.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -182.9, y = 7.2, z = 60.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -242.9, y = 8.8, z = 60.7 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -248.5, y = 7.4, z = 21.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -173.0, y = 6.7, z = 18.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -121.1, y = 8.8, z = 17.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -100.1, y = 8.5, z = 8.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -101.4, y = 4.5, z = -26.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -115.9, y = 3.0, z = -28.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    --To tombstone
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -116.1, y = 0.0, z = -63.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -114.5, y = 0.0, z = -134.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -70.3, y = -0.0, z = -134.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -38.3, y = 0.0, z = -127.8 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -19.9, y = -0.0, z = -135.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 21.1, y = -0.0, z = -134.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 18.3, y = 0.0, z = -124.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -23.7, y = -0.0, z = -121.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -22.7, y = 0.0, z = -74.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 0.6, y = 0.0, z = -74.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                },
             },
             { -- Step 3
                 text = "Step 3: Make your way through the maze to the King's Tomb at (H-10 / I-10). \n \n" ..
                        "Examine the Headstone for a cutscene. \n \n",
-                onmob_target = {"Tombstone_Upper"},
+                onmob_target = {"king-ranperres-tomb-tombstone-i10"},
                 trigger_on_event_id = {4},
+                zone_max_distance = 20,
+                visual_zones = {
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 212.8, y = 2.5, z = -491.0 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 200.2, y = 0.3, z = -533.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Survival Guide
+                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -119.0, y = 0.0, z = 248.5 }, size = 1, floor_id = 1, colour = "green" },
+
+                    --Running to next area.
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.9, y = -0.1, z = 247.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.0, y = 0.0, z = 222.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -164.2, y = -0.1, z = 218.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -158.1, y = 0.0, z = 185.6 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.9, y = -1.0, z = 207.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.9, y = 7.5, z = 161.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.0, y = 7.5, z = 140.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -181.4, y = 6.7, z = 90.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -182.9, y = 7.2, z = 60.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -242.9, y = 8.8, z = 60.7 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -248.5, y = 7.4, z = 21.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -173.0, y = 6.7, z = 18.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -121.1, y = 8.8, z = 17.5 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -100.1, y = 8.5, z = 8.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -101.4, y = 4.5, z = -26.2 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -115.9, y = 3.0, z = -28.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                     --To tombstone
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -116.1, y = 0.0, z = -63.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -114.5, y = 0.0, z = -134.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -70.3, y = -0.0, z = -134.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -38.3, y = 0.0, z = -127.8 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -19.9, y = -0.0, z = -135.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 21.1, y = -0.0, z = -134.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 18.3, y = 0.0, z = -124.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -23.7, y = -0.0, z = -121.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -22.7, y = 0.0, z = -74.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 0.6, y = 0.0, z = -74.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                },
                 images = {
                     {
                         width = 512,
@@ -155,9 +244,9 @@ return {
                         state = 3,
                         zone_name = "King Ranperre's Tomb",
                         highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
-                            { position = "I-10", offsetX = 16, offsetY = 16 },
+                            { position = "I-10", offsetX = 16, offsetY = 16, label = "T" },
                         },
+                        floor_id  = 1,
                     },
                 },
             },
@@ -174,8 +263,8 @@ return {
                         state = 4,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -184,7 +273,7 @@ return {
                         state = 4,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -195,6 +284,12 @@ return {
         }
     },
     ["1-3: Save the Children"] = {
+        requirements = {
+            level = 10,
+        },
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "1-2: Bat Hunt"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
@@ -260,11 +355,28 @@ return {
                        "  Strongarm Zodvad (Ranger) \n" ..
                        "  Sureshot Snatgat (Ranger) \n \n" ..
                        "Time limit: 10 minutes. Buffs wear off on entry. Level is restricted to 99. \n" ..
-                       "Trusts are allowed, but cast them AFTER entering - alter egos summoned beforehand despawn. \n \n" ..
-                       "Winning grants the Key Item: Orcish Hut Key and the title Fodderchief Flayer. \n \n",
+                       "Trusts are allowed, but cast them AFTER entering - alter egos summoned beforehand despawn. \n \n",
                 route_to = "Ghelsba Outpost",
                 destination_highlight = {position = "G-10", offsetX = 16, offsetY = 16},
+                onmob_target = "ghelsba-outpost-hut-door-f10",
                 onmob_enemy = {"Fodderchief Vokdek", "Strongarm Zodvad", "Sureshot Snatgat"},
+                zone_max_distance = 25,
+                visual_zones = {
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 35.2, y = 0.0, z = 60.7 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 4.0, y = 0.0, z = 68.2 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -34.3, y = -0.2, z = 99.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -83.7, y = -10.0, z = 99.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -101.5, y = -10.4, z = 99.1 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -122.0, y = -10.0, z = 80.3 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -145.0, y = -10.2, z = 69.4 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = -155.9, y = -10.0, z = 79.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                },
+                kill_requirement = {
+                    count = 3,
+                    enemies = {"Fodderchief Vokdek", "Strongarm Zodvad", "Sureshot Snatgat"},
+                    count_party_kills = true,
+                    display_only = true,
+                },
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
                 trigger_on_event_id = {32001},
@@ -272,14 +384,14 @@ return {
             { -- Step 4
                 text = "Step 4: After you are teleported out, check the Hut Door at (G-10) again for a cutscene. \n \n" ..
                        "TIP: Click the Hut Door again afterwards until it stops responding - this saves you a return trip. \n \n",
-                onmob_target = {"Hut_Door"},
+                onmob_target = "ghelsba-outpost-hut-door-f10",
                 trigger_on_event_id = {3, 55},
                 route_to = "Ghelsba Outpost",
                 destination_highlight = {position = "G-10", offsetX = 16, offsetY = 16},
             },
             { -- Step 5
                 text = "Step 5: Return to San d'Oria and speak to a Gate Guard to complete the mission. \n \n" ..
-                       "Ambrotien or Endracion (Southern, I-9 / H-7), or Grilau (Northern, D-6). \n \n" ..
+                       "Ambrotien or Endracion (Southern, F-9 / K-10), or Grilau (Northern, D-8). \n \n" ..
                        "Optional: return to the Cathedral and speak to Arnau afterwards for an additional cutscene. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1004, 1024, 2004, 2024},
@@ -290,8 +402,8 @@ return {
                         state = 5,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -300,7 +412,7 @@ return {
                         state = 5,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -311,6 +423,12 @@ return {
         }
     },
     ["2-1: The Rescue Drill"] = {
+        requirements = {
+            level = 15,
+        },
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "1-3: Save the Children"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
@@ -318,7 +436,8 @@ return {
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "NOTE: You must have enough rank points to be offered this mission - if your rank bar is empty, trade a crystal to a Gate Guard first. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                --trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " Just follow orders and you'll be fine.",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -457,6 +576,9 @@ return {
         }
     },
     ["2-2: The Davoi Report"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "2-1: The Rescue Drill"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
@@ -603,6 +725,7 @@ return {
         }
     },
     ["2-3b: Journey Abroad - Bastok -> Windurst"] = {
+        choice_group = "2-3b: Journey Abroad",
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-3a: Journey Abroad - Introduction"},
         },
@@ -832,6 +955,7 @@ return {
         }
     },
     ["2-3b: Journey Abroad - Windurst -> Bastok"] = {
+        choice_group = "2-3b: Journey Abroad",
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-3a: Journey Abroad - Introduction"},
         },
@@ -927,6 +1051,12 @@ return {
         }
     },
     ["3-1: Infiltrate Davoi"] = {
+        prerequisites = {
+            {any = {
+                {category = "Missions", subfile = "SanDoria", name = "2-3b: Journey Abroad - Bastok -> Windurst"},
+                {category = "Missions", subfile = "SanDoria", name = "2-3b: Journey Abroad - Windurst -> Bastok"},
+            }},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
@@ -1003,6 +1133,9 @@ return {
         }
     },
     ["3-2: The Crystal Spring"] = {
+        prerequisites = {
+            {category = "Missions", subfile = "SanDoria", name = "3-1: Infiltrate Davoi"},
+        },
         steps = {
             { -- Step 1
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..

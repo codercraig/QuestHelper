@@ -1,9 +1,11 @@
 return {
     ["ZM01: The New Frontier"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Bastok", name = "5-2: Xarcabard, Land of Truths"},
-            {category = "Missions", subfile = "SanDoria", name = "5-2: The Shadow Lord"},
-            {category = "Missions", subfile = "Windurst", name = "5-2: The Shadow Awaits"},
+            {any = {
+                {category = "Missions", subfile = "Bastok", name = "5-2: Xarcabard, Land of Truths"},
+                {category = "Missions", subfile = "SanDoria", name = "5-2: The Shadow Lord"},
+                {category = "Missions", subfile = "Windurst", name = "5-2: The Shadow Awaits"},
+            }},
         },
         steps = {
             {

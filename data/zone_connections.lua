@@ -469,7 +469,7 @@ return {
         {zone = "Chateau d'Oraguille", exit = "I-9"}
     },
     ["King Ranperre's Tomb"] = {
-        {zone = "East Ronfaure", exit = "I-9"}
+        {zone = "East Ronfaure", exit = "G-5"}
     },
     ["Ranguemont Pass"] = {
         {zone = "East Ronfaure", exit = "G-12"},

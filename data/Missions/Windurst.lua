@@ -885,6 +885,7 @@ return {
     },
 
     ["2-3b: The Three Kingdoms - San d'Oria -> Bastok"] = {
+        choice_group = "2-3b: The Three Kingdoms",
         prerequisites = {
             {category = "Missions", subfile = "Windurst", name = "2-3a: The Three Kingdoms - Introduction"},
         },
@@ -1122,6 +1123,7 @@ return {
     },
 
     ["2-3b: The Three Kingdoms - Bastok -> San d'Oria"] = {
+        choice_group = "2-3b: The Three Kingdoms",
         prerequisites = {
             {category = "Missions", subfile = "Windurst", name = "2-3a: The Three Kingdoms - Introduction"},
         },
@@ -1414,8 +1416,10 @@ return {
     },
     ["3-1: To Each His Own Right"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - San d'Oria -> Bastok"},
-            {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - Bastok -> San d'Oria"},
+            {any = {
+                {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - San d'Oria -> Bastok"},
+                {category = "Missions", subfile = "Windurst", name = "2-3b: The Three Kingdoms - Bastok -> San d'Oria"},
+            }},
         },
         steps = {
             {

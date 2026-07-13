@@ -1,8 +1,8 @@
 # San d'Oria missions
-[1-1] Smash the Orcish Scouts - STARTED
-[1-2] Bat Hunt - DRAFT
-[1-3] Save the Children - DRAFT
-[2-1] The Rescue Drill - DRAFT
+[1-1] Smash the Orcish Scouts - DONE
+[1-2] Bat Hunt - DONE
+[1-3] Save the Children - DONE
+[2-1] The Rescue Drill - STARTED
 [2-2] The Davoi Report - DRAFT
 [2-3a] Journey Abroad (Introduction) - DRAFT
 [2-3b] Journey Abroad (Bastok -> Windurst) - DRAFT

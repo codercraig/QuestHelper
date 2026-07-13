@@ -468,6 +468,7 @@ return {
         }
     },
     ["2-3: The Emissary - San d'Oria -> Windurst"] = {
+        choice_group = "2-3: The Emissary",
         steps = {
             {
                 text = "Step 1: Talk to Baraka (K-10) in the Consulate of Bastok in Northern San d'Oria. \n",
@@ -690,6 +691,7 @@ return {
     },
 
     ["2-3: The Emissary - Windurst -> San d'Oria"] = {
+        choice_group = "2-3: The Emissary",
         steps = {
             {
                 text = "Step 1: Talk to Melek in the Consulate of Bastok in Port Windurst (F-6). \n",
