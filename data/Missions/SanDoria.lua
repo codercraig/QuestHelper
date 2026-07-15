@@ -1564,9 +1564,10 @@ return {
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
-                       "(Level 35. Trade 1 crystal or repeat a previous mission once if you need the rank points to unlock it.) \n \n",
+                       "(Level 35. Trade 1 stack of crystals to skip this quest!) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                --trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " should you need help finding and choosing your gear.",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -1600,17 +1601,72 @@ return {
                 },
             },
             { -- Step 2
-                text = "Step 2: Obtain a Crystal Bass. \n \n" ..
-                       "Fish one at the Crystwater Spring in Jugner Forest (J-9), on the zone's eastern edge. \n" ..
-                       "(Alternatively, buy a Crystal Bass from the Auction House. Extra fish can be used for repeats.) \n \n",
-                items_needed = {"Crystal Bass"},
+                text = "Step 2: Grab A Fishing Rod and Bait! \n \n" ..
+                       "Fish one at the Crystwater Spring in Jugner Forest (J-9), on the zone's eastern edge - using a Halycon/Carbon/Hume Rod and Minnow. \n" ..
+                       "(Alternatively, buy a Crystal Bass from the Auction House [Food -> Fish]. Extra fish can be used for repeats.) \n \n",
+                items_needed = { "TaruTaru Fishing Rod", "Minnow" },
+                onmob_target = "Babubu",
+                trigger_on_item_obtain = {"Tarutaru Fishing Rod","Minnow"},
+                --trigger_on_item_obtain = {"Crystal Bass"},
+                skip_if_have = { item = "Crystal Bass" },
+                require_all_items = true,
+                route_to = "Port Windurst",
+                destination_highlight = {position = "C-8", offsetX = 16, offsetY = 16},
+            },
+            { -- Step 3
+                text = "Step 3: Obtain a Crystal Bass. \n \n" ..
+                       "Fish one at the Crystwater Spring in Jugner Forest (J-9), on the zone's eastern edge - using a Tarutaru Fishing Rod and Minnow. \n" ..
+                       "(Alternatively, buy a Crystal Bass from the Auction House [Food -> Fish]. Extra fish can be used for repeats.) \n \n",
+                items_needed = {
+                    "Crystal Bass",
+                },
+                zone_max_distance = 50,
+                visual_zones = {
+
+                    -- Route through Jugner Forest
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -565.7, y = -0.2, z = -441.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -522.0, y = 0.2, z = -432.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -463.7, y = 0.8, z = -431.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -418.8, y = 0.5, z = -430.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -378.1, y = -0.7, z = -425.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -377.6, y = 4.4, z = -386.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -370.2, y = 6.9, z = -342.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -339.9, y = 6.9, z = -330.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -335.2, y = 2.6, z = -268.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -298.4, y = 2.3, z = -228.5 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -255.9, y = 0.3, z = -192.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -233.9, y = 0.0, z = -166.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -183.5, y = 0.8, z = -160.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -142.9, y = 0.6, z = -161.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -101.7, y = 0.0, z = -168.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -73.6, y = 0.3, z = -176.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -41.6, y = 0.0, z = -194.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = -10.4, y = 0.2, z = -205.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 22.3, y = 0.7, z = -202.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 61.0, y = 0.9, z = -201.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 76.6, y = 0.0, z = -198.1 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 100.5, y = -0.4, z = -171.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 119.3, y = 0.0, z = -161.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 129.2, y = 1.5, z = -164.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 124.7, y = 0.1, z = -201.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 143.6, y = 0.3, z = -230.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 161.6, y = 0.3, z = -190.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 162.8, y = 0.1, z = -153.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 171.7, y = -0.8, z = -128.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 215.3, y = -0.0, z = -126.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 247.5, y = 0.2, z = -156.7 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Jugner Forest", type = 'arrow', center = { x = 269.5, y = -1.1, z = -176.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                -- Lake for fishies
+                    { zone_name = "Jugner Forest", type = 'square', center = { x = 302.5, y = 1.9, z = -179.9 }, size = 22, floor_id = 0, colour = "magenta" },
+
+                },
                 trigger_on_item_obtain = {"Crystal Bass"},
                 route_to = "Jugner Forest",
                 destination_highlight = {position = "J-9", offsetX = 16, offsetY = 16},
             },
-            { -- Step 3
-                text = "Step 3: Return to San d'Oria and trade the Crystal Bass to a Gate Guard. \n \n" ..
-                       "Ambrotien or Endracion (Southern, I-9 / H-7), or Grilau (Northern, D-6). \n \n" ..
+            { -- Step 4
+                text = "Step 4: Return to San d'Oria and trade the Crystal Bass to a Gate Guard. \n \n" ..
+                       "Ambrotien or Endracion (Southern, F-9 / K-10), or Grilau (Northern, D-8). \n \n" ..
                        "NOTE: On a repeat run, trading the Crystal Bass to a guard completes the mission immediately - skip the rest. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1030, 2030},
@@ -1618,36 +1674,49 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 3,
+                        state = 4,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 3,
+                        state = 4,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { -- Step 4
-                text = "Step 4: Enter Chateau d'Oraguille (Northern San d'Oria, I-7). \n \n" ..
+            { -- Step 5
+                text = "Step 5: Enter Chateau d'Oraguille (Northern San d'Oria, I-7). \n \n" ..
                        "A cutscene plays automatically on entry, between Halver, Curilla, and the Papsque. \n \n",
                 trigger_on_event_id = {555},
                 route_to = "Chateau d'Oraguille",
+                zone_trigger = "Chateau d'Oraguille",
             },
-            { -- Step 5
+            { -- Step 6
                 text = "Step 5: Talk to the royal gardener Chalvatot (F-7) in Chateau d'Oraguille to complete the mission. \n \n",
                 onmob_target = {"Chalvatot"},
                 trigger_on_event_id = {556},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -5.9, y = 0.0, z = -4.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.4, y = 0.0, z = -6.0 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.8, y = -3.0, z = 35.9 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.3, y = -3.0, z = 35.8 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.6, y = -3.0, z = 35.5 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.7, y = -3.0, z = 52.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -69.6, y = -3.0, z = 51.6 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -84.1, y = -1.1, z = 57.8 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -85.2, y = 0.4, z = 77.9 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                },
             },
         },
         reward = {
@@ -1655,6 +1724,9 @@ return {
         }
     },
     ["3-3: Appointment to Jeuno"] = {
+        requirements = {
+            level = 40,
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "3-1: Infiltrate Davoi"},
         },
@@ -1663,9 +1735,9 @@ return {
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
-                       "(Level 40. Requires Mission 3-1. Trade 1 crystal or repeat a mission once if short on rank points.) \n \n",
+                       "(Level 40. Requires Mission 3-1. Trade 1 stack of crystals or repeat a mission once if short on rank points.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " Monarlais Halver will tell you all you need to know.",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around

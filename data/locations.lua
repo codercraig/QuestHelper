@@ -332,6 +332,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Babubu"] = {
+        target_pos = { x = -175.2, y = -4.2, z = 70.4 },
+        visual_mode = "arc",
+        zone = "Port Windurst",
+        floor_id = 0,
+        max_distance = 30
+    },
     -- Windurst Waters North
     ["Kyume-Romeh"] = {
         target_pos = { x = -54.5, y = -5.3, z = 23.2 },
@@ -891,6 +898,13 @@ return {
         zone = "Chateau d'Oraguille",
         floor_id = 0,
         max_distance = 15
+    },
+    ["Chalvatot"] = {
+        target_pos = { x = -106.0, y = -1.7, z = 72.2 },
+        visual_mode = "arc",
+        zone = "Chateau d'Oraguille",
+        floor_id = 0,
+        max_distance = 20
     },
     -- Ghelsba Outpost
     ["ghelsba-outpost-hut-door-f10"] = {

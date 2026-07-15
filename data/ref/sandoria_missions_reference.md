@@ -4,10 +4,10 @@
 [1-3] Save the Children - DONE
 [2-1] The Rescue Drill - DONE
 [2-2] The Davoi Report - DONE
-[2-3a] Journey Abroad (Introduction) - STARTED
-[2-3b] Journey Abroad (Bastok -> Windurst) - DRAFT
-[2-3b] Journey Abroad (Windurst -> Bastok) - DRAFT
-[3-1] Infiltrate Davoi - DRAFT
+[2-3a] Journey Abroad (Introduction) - DONE
+[2-3b] Journey Abroad (Bastok -> Windurst) - DONE
+[2-3b] Journey Abroad (Windurst -> Bastok) - DONE
+[3-1] Infiltrate Davoi - DONE
 [3-2] The Crystal Spring - DRAFT
 [3-3] Appointment to Jeuno - DRAFT
 [4-1] Magicite - DRAFT

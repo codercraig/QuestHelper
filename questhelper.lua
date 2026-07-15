@@ -281,6 +281,44 @@ ashita.events.register('d3d_present', 'present_callback', function()
                         end
                     end
 
+                    -- Periodic skip check for skip_if_have
+                    -- Completes (skips) the current step if the player already owns the listed item(s).
+                    -- Used for optional shortcuts, e.g. buying the quest fish from the AH to bypass the
+                    -- gather steps. Because completion cascades to the next step on the following frame,
+                    -- a single owned item skips through every consecutive step that carries this flag.
+                    -- Any one owned item triggers the skip (OR semantics).
+                    if type(step_data) == 'table' and step_data.skip_if_have then
+                        local inventory_module = require('modules.inventory')
+                        local skip_items = {}
+                        local raw = step_data.skip_if_have
+
+                        -- Normalize to list with quantities
+                        -- Supports: "Crystal Bass", {item="Crystal Bass", quantity=1}, {"Crystal Bass", "Other"}
+                        if type(raw) == 'string' then
+                            table.insert(skip_items, {name = raw, quantity = 1})
+                        elseif type(raw) == 'table' then
+                            if raw.item then
+                                table.insert(skip_items, {name = raw.item, quantity = raw.quantity or 1})
+                            else
+                                for _, entry in ipairs(raw) do
+                                    if type(entry) == 'string' then
+                                        table.insert(skip_items, {name = entry, quantity = 1})
+                                    elseif type(entry) == 'table' and entry.item then
+                                        table.insert(skip_items, {name = entry.item, quantity = entry.quantity or 1})
+                                    end
+                                end
+                            end
+                        end
+
+                        for _, itemInfo in ipairs(skip_items) do
+                            local hasItem, count = inventory_module.hasItem(itemInfo.name, true)
+                            if hasItem and count >= itemInfo.quantity then
+                                quest_state.setStepState(currentTopCategory, currentSubfile, current_mission, step_idx, true, step_trigger_flags)
+                                break
+                            end
+                        end
+                    end
+
                     -- Periodic key item check for trigger_on_keyitem_obtain
                     if type(step_data) == 'table' and step_data.trigger_on_keyitem_obtain then
                         local keyitems_to_check = {}

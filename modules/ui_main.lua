@@ -994,6 +994,18 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                         imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] %s x%d", itemName, qtyNeeded))
                                     end
                                 end
+                                -- List the acceptable options beneath a grouped (alternatives) item
+                                if itemData.alternatives then
+                                    local altNames = {}
+                                    for _, alt in ipairs(itemData.alternatives) do
+                                        if type(alt) == 'string' then
+                                            table.insert(altNames, alt)
+                                        elseif type(alt) == 'table' then
+                                            table.insert(altNames, alt.item or alt[1])
+                                        end
+                                    end
+                                    imgui.TextColored({0.6, 0.6, 0.6, 1}, "        any of: " .. table.concat(altNames, ", "))
+                                end
                             end
                         end
                     end
