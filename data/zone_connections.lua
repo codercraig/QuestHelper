@@ -134,7 +134,7 @@ return {
         {zone = "Port San d'Oria", exit = "F-3"},
         {zone = "Chateau d'Oraguille", exit = "J-6"},
         {zone = "West Ronfaure", exit = "C-8"},
-        {zone = "Carpenters' Landing", exit = "F-5"}
+        --{zone = "Carpenters' Landing", exit = "F-5"}
     },
     ["Port San d'Oria"] = {
         {zone = "Northern San d'Oria", exit = "F-10"}

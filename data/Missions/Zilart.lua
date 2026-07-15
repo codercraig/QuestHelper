@@ -10,7 +10,7 @@ return {
         steps = {
             {
                 text = "Step 1: Enter Norg to receive a cutscene and a Key Item: Map of Norg.",
-                --zone_trigger = "Norg",
+                zone_trigger = "Norg",
                 trigger_on_event_id = {1},
                 route_to = "Norg",
             },

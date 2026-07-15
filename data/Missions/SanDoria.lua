@@ -727,6 +727,9 @@ return {
         }
     },
     ["2-2: The Davoi Report"] = {
+        requirements = {
+            level = 25,
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-1: The Rescue Drill"},
         },
@@ -735,9 +738,10 @@ return {
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
-                       "(Level 20 in a party, 25 solo. This mission can be skipped by trading 3 crystals to a Gate Guard.) \n \n",
+                       "(Level 20 in a party, 25 solo. This mission can be skipped by 2 stacks of crystals to a Gate Guard.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                --trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " Those lands are no place to wander",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -777,26 +781,62 @@ return {
                 onmob_target = {"Zantaviat"},
                 trigger_on_event_id = {100},
                 route_to = "Davoi",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        --Survival Guide
+                        { zone_name = "Davoi", type = 'square', center = { x = 223.0, y = -0.0, z = -10.0 }, size = 1, floor_id = 0, colour = "green" },
+                },
             },
             { -- Step 3
                 text = "Step 3: Walk south to the pond. At the pond's south end, check the ! point to receive the Key Item: Lost Document. \n \n",
-                -- TODO: replace 0 with the Lost Document key item ID (server: xi.ki.LOST_DOCUMENT)
-                keyitems_needed = {0},
-                trigger_on_keyitem_obtain = {0},
+                keyitems_needed = {103},
+                trigger_on_keyitem_obtain = {103},
+                onmob_target = "davoi-!",
                 route_to = "Davoi",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        --Survival Guide
+                        { zone_name = "Davoi", type = 'square', center = { x = 223.0, y = -0.0, z = -10.0 }, size = 1, floor_id = 0, colour = "green" },
+                        --Route to "!" near the pond.
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 215.9, y = -0.1, z = -17.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 219.4, y = 2.1, z = -55.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 220.8, y = 4.0, z = -81.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 239.5, y = 4.0, z = -105.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 218.7, y = 3.9, z = -117.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 4
                 text = "Step 4: Return the Lost Document to Zantaviat to receive the Key Item: Temple Knights' Davoi Report. \n \n",
                 onmob_target = {"Zantaviat"},
                 trigger_on_event_id = {104},
                 route_to = "Davoi",
+                destination_highlight = {position = "J-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        --Survival Guide
+                        { zone_name = "Davoi", type = 'square', center = { x = 223.0, y = -0.0, z = -10.0 }, size = 1, floor_id = 0, colour = "green" },
+                        -- Back to Zantaviat
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 212.8, y = 3.3, z = -114.2 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 230.9, y = 3.7, z = -115.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 242.1, y = 4.0, z = -95.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 220.2, y = 3.0, z = -64.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 218.5, y = -0.0, z = -43.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                }
             },
             { -- Step 5
                 text = "Step 5: Deliver the report in Northern San d'Oria. \n \n" ..
-                       "Go to the Cathedral (M-6) and enter the Papal Chambers on the third floor, then speak to Prince Pieuje. \n \n" ..
-                       "NOTE: Gate Guards will refuse the report the first time and tell you to deliver it to the prince personally. \n" ..
-                       "(On repeat runs you can instead hand the report to a Gate Guard.) \n \n",
-                onmob_target = {"_6fc", "Ambrotien", "Endracion", "Grilau"},
+                       "Go to the Cathedral (M-6) and enter the Papal Chambers on the third floor, then speak to Prince Pieuje. \n \n",
+                onmob_target = {"Door: Papal Chambers"},
+                zone_max_distance = 15,
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 109.0, y = 0.0, z = 101.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 125.2, y = 0.0, z = 112.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 134.3, y = -6.5, z = 93.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 122.3, y = -6.5, z = 106.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 132.1, y = -11.0, z = 124.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" }
+                },
                 trigger_on_event_id = {695, 1006, 2006},
                 images = {
                     {
@@ -816,6 +856,9 @@ return {
         }
     },
     ["2-3a: Journey Abroad - Introduction"] = {
+        requirements = {
+            level = 25,
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-1: The Rescue Drill"},
         },
@@ -826,7 +869,7 @@ return {
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "(Requires Mission 2-1 and a 3/4-full Rank Bar. If short on rank points, trade a crystal to a Temple Knight or repeat Bat Hunt.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " he'll explain in person.",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -877,6 +920,9 @@ return {
     },
     ["2-3b: Journey Abroad - Bastok -> Windurst"] = {
         choice_group = "2-3b: Journey Abroad",
+        requirements = {
+            level = 25,
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-3a: Journey Abroad - Introduction"},
         },
@@ -885,10 +931,15 @@ return {
                 text = "Step 1: Travel to Bastok. In the Metalworks, take a lift to the 2nd floor and enter the Consulate of San d'Oria. \n \n" ..
                        "Speak to Savae E Paleade for a cutscene. \n \n" ..
                        "(If you have never been: Unity warp to South Gustaberg, then Bastok Markets H-7 -> Metalworks I-9.) \n \n",
-                onmob_target = {"Savae_E_Paleade"},
+                onmob_target = {"Savae E Paleade"},
                 trigger_on_event_id = {204},
                 route_to = "Metalworks",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Metalworks", type = 'arrow', center = { x = 23.8, y = -14.0, z = -14.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = -23.0 }, width = 4.00, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             {
                 text = "Step 2: Talk to Pius (J-8) in the Department of Industry (President's Office) in Metalworks. \n \n",
@@ -896,6 +947,11 @@ return {
                 trigger_on_event_id = {355},
                 route_to = "Metalworks",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 88.9, y = -19.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 88.8, y = -21.7, z = -6.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 3: Talk to Grohm (H-9) in the Craftsmen's Eatery in Metalworks. \n \n" ..
@@ -905,6 +961,7 @@ return {
                 trigger_on_event_id = {423},
                 route_to = "Metalworks",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
                 visual_zones = {
                          { zone_name = "Metalworks", type = 'rect', center = { x = -29.7, y = -11.6, z = -18.3 }, width = 2.50, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
                          { zone_name = "Metalworks", type = 'arrow', center = { x = -32.9, y = -10.0, z = -15.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
@@ -984,21 +1041,33 @@ return {
                 text = "Step 8: Return to Savae E Paleade in the Metalworks (2nd floor Consulate) and trade her the Mythril Sand. \n \n" ..
                        "This completes the Bastok leg. \n \n" ..
                        "(Shortcut back: Palborough Mines 3rd floor H-8 boat -> Zeruhn Mines -> Bastok Mines.) \n \n",
-                onmob_target = {"Savae_E_Paleade"},
+                onmob_target = {"Savae E Paleade"},
                 trigger_on_event_id = {205},
                 route_to = "Metalworks",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Metalworks", type = 'arrow', center = { x = 23.8, y = -14.0, z = -14.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = -23.0 }, width = 4.00, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             { -- Step 9
                 text = "Step 9: Travel to Windurst. Talk to Mourices at the Consulate of San d'Oria in Windurst Woods (F-10). \n \n",
                 onmob_target = {"Mourices"},
                 trigger_on_event_id = {462},
                 route_to = "Windurst Woods",
+                destination_highlight = {position = "F-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Woods", type = 'arrow', center = { x = -46.6, y = 1.2, z = -49.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -55.5, y = -1.0, z = -40.5 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -52.7, y = -1.0, z = -34.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ne' },
+                },
             },
             {
                 text = "Step 10: Talk to Kupipi in Heavens Tower on the first floor north side, she will give you a KI:Dark Key. \n" ..
                        "All party members need one Dark Key! \n" ..
-                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n",
+                       "If you have KI:Rhapsody in White you will obtain a new trust - Cipher:Semih. \n \n",
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = {242},
                 route_to = "Heavens Tower",
@@ -1082,15 +1151,22 @@ return {
                        "===== Black Dragon ===== \n" ..
                        "Family: Dragon \n" ..
                        "Level: 27 \n" ..
-                       "Notes: Sleep/Bind the Dragon and kill the Spotter! \n \n" ..
-                       "After winning, you will receive the KI:Kindred Crest and title 'Black Dragon Slayer'.",
+                       "Notes: Sleep/Bind the Dragon and kill the Spotter! \n \n",
                 trigger_on_event_id = { 32001 },
+                onmob_target = "balga-dais-burning-circle",
             },
             { -- Step 12
                 text = "Step 14: Return to Mourices in Windurst Woods (F-10) to receive the Key Item: Kindred Report. \n \n",
                 onmob_target = {"Mourices"},
                 trigger_on_event_id = {467},
                 route_to = "Windurst Woods",
+                destination_highlight = {position = "F-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Woods", type = 'arrow', center = { x = -46.6, y = 1.2, z = -49.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -55.5, y = -1.0, z = -40.5 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -52.7, y = -1.0, z = -34.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ne' },
+                },
             },
             { -- Step 13
                 text = "Step 15: Return to Chateau d'Oraguille in Northern San d'Oria and report to Halver to complete the mission. \n \n" ..
@@ -1107,6 +1183,9 @@ return {
     },
     ["2-3b: Journey Abroad - Windurst -> Bastok"] = {
         choice_group = "2-3b: Journey Abroad",
+        requirements = {
+            level = 25,
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "2-3a: Journey Abroad - Introduction"},
         },
@@ -1116,6 +1195,13 @@ return {
                 onmob_target = {"Mourices"},
                 trigger_on_event_id = {448},
                 route_to = "Windurst Woods",
+                destination_highlight = {position = "F-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Woods", type = 'arrow', center = { x = -46.6, y = 1.2, z = -49.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -55.5, y = -1.0, z = -40.5 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -52.7, y = -1.0, z = -34.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ne' },
+                },
             },
             { -- Step 2
                 text = "Step 2: Enter Heavens Tower (Windurst Walls H-7) for a cutscene, then talk to Kupipi in the Clerical Chamber. \n \n" ..
@@ -1123,13 +1209,63 @@ return {
                 onmob_target = {"Kupipi"},
                 trigger_on_event_id = {238},
                 route_to = "Heavens Tower",
+                zone_max_distance = 17,
+                visual_zones = {
+                        { zone_name = "Heavens Tower", type = 'arrow', center = { x = -0.0, y = 0.8, z = 15.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Heavens Tower", type = 'rect', center = { x = 0.0, y = -1.8, z = 22.3 }, width = 3.75, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             { -- Step 3
                 text = "Step 3: Go to Giddeus (West Sarutabaruta F-8). Make your way to Uu Zhoumo on Map 2 (F-7) and give the Shield Offering. \n \n" ..
                        "Only Invisible is needed in Giddeus. \n \n",
-                onmob_target = {"Uu_Zhoumo"},
+                onmob_target = {"Uu Zhoumo"},
                 trigger_on_event_id = {42},
-                route_to = "Giddeus",
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -100.0, y = -0.4, z = 406.0 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -101.7, y = -0.2, z = 382.9 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -139.4, y = 0.4, z = 374.9 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -147.9, y = 3.9, z = 331.2 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -182.4, y = 3.1, z = 292.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -169.8, y = 0.2, z = 260.3 }, size = 4, direction = "right", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -139.7, y = -2.8, z = 246.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -140.2, y = -4.0, z = 201.0 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -143.1, y = 0.6, z = 147.2 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -130.7, y = -1.0, z = 100.3 }, size = 4, direction = "right", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -99.7, y = -1.1, z = 73.1 }, size = 4, direction = "sw", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -141.1, y = -1.0, z = 51.4 }, size = 4, direction = "down", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -146.3, y = -1.2, z = 21.2 }, size = 4, direction = "left", floor_id = 1, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -220.0, y = 8.1, z = 28.5 }, size = 4, direction = "up", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -207.2, y = 8.0, z = 59.2 }, size = 4, direction = "right", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -161.5, y = 17.0, z = 60.0 }, size = 4, direction = "right", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -140.1, y = 17.0, z = 62.3 }, size = 4, direction = "up", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -136.4, y = 17.3, z = 97.9 }, size = 4, direction = "right", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -103.0, y = 16.6, z = 102.2 }, size = 4, direction = "up", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -108.9, y = 16.2, z = 139.3 }, size = 4, direction = "left", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -160.0, y = 17.0, z = 140.1 }, size = 4, direction = "left", floor_id = 2, colour = "cyan" },
+                },
+                images = {
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 3,
+                          zone_name = "Giddeus",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 3,
+                          zone_name = "Giddeus",
+                          floor_id = 15,
+                          highlights = {
+                              { position = "F-7", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
             },
             { -- Step 4
                 text = "Step 4: Defeat Zhuu Buxu the Silent twice to obtain 2 Parana Shields. \n \n" ..
@@ -1141,52 +1277,159 @@ return {
                     enemies = {"Zhuu Buxu the Silent"},
                     zone = "Giddeus",
                     count_party_kills = true,
+                    display_only = true,
                 },
+                items_needed = {
+                    { item = "Parana Shield", quantity = 2, on_the_way = true },
+                },
+                trigger_on_item_obtain = { { item = "Parana Shield", quantity = 2 } },
                 onmob_enemy = {"Zhuu Buxu the Silent"},
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -180.4, y = 17.0, z = 142.0 }, size = 4, direction = "right", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -99.8, y = 16.1, z = 141.0 }, size = 4, direction = "right", floor_id = 2, colour = "cyan" },
+                    { zone_name = "Giddeus", type = 'arrow', center = { x = -33.8, y = 17.3, z = 140.2 }, size = 4, direction = "se", floor_id = 2, colour = "cyan" },
+                },
+                images = {
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Giddeus",
+                          floor_id = 1,
+                          highlights = {
+                              { position = "F-8", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                      {
+                          width    = 512,
+                          height   = 512,
+                          state    = 4,
+                          zone_name = "Giddeus",
+                          floor_id = 15,
+                          highlights = {
+                              { position = "H-7", offsetX = 16, offsetY = 16 },
+                          },
+                      },
+                  },
             },
             { -- Step 5
                 text = "Step 5: Return to Mourices in Windurst Woods and trade him both Parana Shields to complete the Windurst leg. \n \n",
                 onmob_target = {"Mourices"},
                 trigger_on_event_id = {457},
                 route_to = "Windurst Woods",
+                destination_highlight = {position = "F-10", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Windurst Woods", type = 'arrow', center = { x = -46.6, y = 1.2, z = -49.1 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -55.5, y = -1.0, z = -40.5 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                        { zone_name = "Windurst Woods", type = 'rect', center = { x = -52.7, y = -1.0, z = -34.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ne' },
+                },
             },
             { -- Step 6
                 text = "Step 6: Travel to Bastok. In the Metalworks (2nd floor Consulate of San d'Oria) speak to Savae E Paleade for a cutscene. \n \n" ..
                        "(Reach it via Bastok Markets H-7 -> Metalworks.) \n \n",
-                onmob_target = {"Savae_E_Paleade"},
+                onmob_target = {"Savae E Paleade"},
                 trigger_on_event_id = {206},
                 route_to = "Metalworks",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Metalworks", type = 'arrow', center = { x = 23.8, y = -14.0, z = -14.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = -23.0 }, width = 4.00, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             { -- Step 7
                 text = "Step 7: Enter the Department of Industry (adjacent to the President's Office) and speak to Pius. \n \n",
                 onmob_target = {"Pius"},
                 trigger_on_event_id = {355},
                 route_to = "Metalworks",
+                destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 88.9, y = -19.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 88.8, y = -21.7, z = -6.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             { -- Step 8
                 text = "Step 8: Walk to the Craftsmen's Eatery (Metalworks G-9) and speak to Grohm. \n \n",
                 onmob_target = {"Grohm"},
                 trigger_on_event_id = {426},
                 route_to = "Metalworks",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                         { zone_name = "Metalworks", type = 'rect', center = { x = -29.7, y = -11.6, z = -18.3 }, width = 2.50, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'nw' },
+                         { zone_name = "Metalworks", type = 'arrow', center = { x = -32.9, y = -10.0, z = -15.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                }
             },
             { -- Step 9
                 text = "Step 9: Go to Palborough Mines (North Gustaberg K-3) and make your way to the 3rd floor Waughroon Shrine (H-10). \n \n" ..
                        "Enter the Burning Circle for a cutscene and to fight the BCNM: Seeker + Dark Dragon. \n \n" ..
                        "Buffs are removed on entry; Trusts are allowed. (Low level: bring Silent Oils for the Lv21-23 Quadav.) \n" ..
-                       "Winning grants the Key Item: Kindred Crest and the title Dark Dragon Slayer. \n \n",
-                onmob_enemy = {"Seeker", "Dark Dragon"},
-                onmob_enemy_colour = "red",
-                onmob_enemy_size = 3,
+                       "Notes: If you have the Home Point #1 you can teleport right outside the BCNM! \n \n",
+                onmob_target = {"palborough-mines-elevator-lever-i8","waughroon-shrine-burning-circle"},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 59.0, y = 0.4, z = 66.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.0, y = 0.2, z = 99.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 19.2, y = 0.1, z = 118.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 62.0, y = 0.9, z = 140.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = -0.1, z = 135.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.5, y = -0.1, z = 87.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = 0.2, z = 58.2 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.9, y = -7.8, z = -2.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 130.7, y = -8.0, z = -20.2 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 140.4, y = -9.5, z = 10.0 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 180.1, y = -14.5, z = 19.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 220.3, y = -9.3, z = 33.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 206.9, y = -1.2, z = 59.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 186.7, y = 0.3, z = 63.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --floor 3
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 186.4, y = -32.0, z = 61.4 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.7, y = -32.0, z = 64.9 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 219.4, y = -32.0, z = 99.4 }, size = 4, direction = "up", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 216.7, y = -32.0, z = 140.3 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 180.6, y = -32.0, z = 139.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 139.9, y = -32.0, z = 139.8 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 111.5, y = -32.0, z = 141.1 }, size = 4, direction = "nw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 89.9, y = -32.1, z = 143.0 }, size = 4, direction = "sw", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.3, y = -32.1, z = 127.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 59.5, y = -31.3, z = 96.7 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 67.8, y = -31.6, z = 59.6 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.4, y = -32.0, z = 59.1 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.4, y = -31.7, z = 36.6 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.8, y = -31.7, z = 3.2 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 90.3, y = -32.0, z = -19.6 }, size = 4, direction = "left", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 60.3, y = -32.0, z = -30.7 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 66.0, y = -32.0, z = -60.0 }, size = 4, direction = "right", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 99.8, y = -32.0, z = -62.3 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 100.3, y = -32.2, z = -89.8 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 101.0, y = -32.8, z = -124.5 }, size = 4, direction = "down", floor_id = 3, colour = "yellow" },
+                    { zone_name = "Palborough Mines", type = 'arrow', center = { x = 104.8, y = -38.4, z = -146.9 }, size = 4, direction = "ne", floor_id = 3, colour = "yellow" },
+
+                    --home point
+                    { zone_name = "Palborough Mines", type = 'square', center = { x = 109.0, y = -38.4, z = -147.0 }, size = 1, floor_id = 3, colour = "green" },
+                },
                 trigger_on_event_id = {32001},
-                route_to = "Palborough Mines",
+                route_to = "Palborough Mines 3",
+                destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
+
             },
             { -- Step 10
                 text = "Step 10: Return to Savae E Paleade in the Metalworks to receive the Key Item: Kindred Report. \n \n",
-                onmob_target = {"Savae_E_Paleade"},
+                onmob_target = {"Savae E Paleade"},
                 trigger_on_event_id = {207},
                 route_to = "Metalworks",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Metalworks", type = 'arrow', center = { x = 23.8, y = -14.0, z = -14.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Metalworks", type = 'rect', center = { x = 24.0, y = -17.4, z = -23.0 }, width = 4.00, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
             { -- Step 11
                 text = "Step 11: Return to Chateau d'Oraguille in Northern San d'Oria and report to Halver to complete the mission. \n \n" ..
@@ -1202,6 +1445,9 @@ return {
         }
     },
     ["3-1: Infiltrate Davoi"] = {
+        requirements = {
+            level = 35,
+        },
         prerequisites = {
             {any = {
                 {category = "Missions", subfile = "SanDoria", name = "2-3b: Journey Abroad - Bastok -> Windurst"},
@@ -1213,9 +1459,10 @@ return {
                 text = "Step 1: Talk to a San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
-                       "(Level 35+. Trade 1 crystal or repeat Bat Hunt once if you need the rank points to unlock it.) \n \n",
+                       "(Level 35+. Trade 1 stack of crystals if you need the rank points to unlock it.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1009, 2009},
+                --trigger_on_event_id = {1009, 2009},
+                trigger_on_talk = " as soon as you're presentable!",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -1250,33 +1497,58 @@ return {
             },
             { -- Step 2
                 text = "Step 2: Enter Chateau d'Oraguille (Northern San d'Oria, I-7) and examine the Door: Prince Royal's Rm (H-7) to speak with Prince Trion. \n \n",
-                onmob_target = {"_6h0"},
+                onmob_target = {"Door: Prince Royals Rm"},
                 trigger_on_event_id = {553},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -8.2, y = 0.0, z = -3.7 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.4, y = 0.0, z = -3.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.9, y = -3.0, z = 68.1 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.7, y = -3.0, z = 67.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 3
                 text = "Step 3: Travel to Davoi (enter from Jugner Forest at G-12). A cutscene plays automatically when you zone in. \n \n" ..
                        "WARNING: Orcs in Davoi detect by sight - keep Invisible up. \n \n",
                 trigger_on_event_id = {116},
                 route_to = "Davoi",
+                zone_trigger = "Davoi",
             },
             { -- Step 4
-                text = "Step 4: Find Quemaricond near the bridge (H-7) and talk to him for the Key Item: Royal Knights' Davoi Report. \n \n" ..
-                       "Hug the right wall until the path turns north to a three-way intersection, then go left to the bridge. \n" ..
-                       "Stay on the bridge and remain Invisible - Quemaricond walks toward you. \n" ..
-                       "When the orcs on the west side look away, drop Invisible and talk to him. \n \n",
+                text = "Step 4: Find Quemaricond(hes patrols!) near the bridge (H-7) and talk to him for the Key Item: Royal Knights' Davoi Report. \n \n",
                 onmob_target = {"Quemaricond"},
                 trigger_on_event_id = {117},
                 route_to = "Davoi",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 217.1, y = -0.6, z = -12.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 215.8, y = 4.0, z = -76.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 164.1, y = 3.9, z = -82.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 139.7, y = 1.3, z = -50.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 137.1, y = -0.1, z = -19.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 88.8, y = -0.4, z = -18.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Davoi", type = 'arrow', center = { x = 74.5, y = -0.8, z = -18.8 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 5
                 text = "Step 5: Return to San d'Oria and deliver the report to Prince Trion. \n \n" ..
                        "Chateau d'Oraguille - examine the Door: Prince Royal's Rm (H-7) again to complete the mission. \n \n",
-                onmob_target = {"_6h0"},
+                onmob_target = {"Door: Prince Royals Rm"},
                 trigger_on_event_id = {554},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -8.2, y = 0.0, z = -3.7 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.4, y = 0.0, z = -3.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.9, y = -3.0, z = 68.1 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.7, y = -3.0, z = 67.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
         },
         reward = {

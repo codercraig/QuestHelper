@@ -142,6 +142,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Savae E Paleade"] = {
+        target_pos = { x = 23.7, y = -18.4, z = -43.4 },
+        visual_mode = "arc",
+        zone = "Metalworks",
+        floor_id = 0,
+        max_distance = 20
+    },
     --Zeruhn Mines
     ["Makarim"] = {
         target_pos = { x = -61, y = 7 ,z = -333.3 },
@@ -276,6 +283,13 @@ return {
         zone = "Windurst Woods",
         floor_id = 0,
         max_distance = 35
+    },
+    ["Mourices"] = {
+        target_pos = { x = -50.6, y = -1.6, z = -27.6 },
+        visual_mode = "arc",
+        zone = "Windurst Woods",
+        floor_id = 0,
+        max_distance = 20
     },
     --Port Windurst
     ["Melek"] = {
@@ -620,7 +634,9 @@ return {
         target_pos = { x = -180, y= 15, z=157.4},
         trigger_npc = "Uu Zhoumo",
         visual_mode = "arc",
-        zone = "Giddeus"
+        zone = "Giddeus",
+        floor_id = 2,
+        max_distance = 20
     },
     ["Laa Mozi"] = {
         target_pos = { x = -21.6, y = -1.8, z = 145.3 },
@@ -800,13 +816,6 @@ return {
         floor_id = 0,
         max_distance = 30
     },
-    ["Grilau"] = {
-        target_pos = { x = -242.0, y = 6.0, z = 57.9 },
-        visual_mode = "arc",
-        zone = "Northern San d'Oria",
-        floor_id = 0,
-        max_distance = 30
-    },
     ["Hinaree"] = {
         target_pos = { x = -301.5, y = -11, z = 97.7 },
         visual_mode = "arc",
@@ -855,12 +864,33 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Grilau"] = {
+        target_pos = { x = -242.0, y = 6.0, z = 57.9 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 30
+    },
+    ["Door: Papal Chambers"] = {
+        target_pos = { x = 130.3, y = -13.0, z = 122.3 },
+        visual_mode = "arc",
+        zone = "Northern San d'Oria",
+        floor_id = 0,
+        max_distance = 10
+    },
     -- Chateau d'Oraguille
     ["Halver"] = {
         target_pos = { x = 2.4, y= -2, z=1.9},
         trigger_npc = "Halver",
         visual_mode = "arc",
         zone = "Chateau d'Oraguille"
+    },
+    ["Door: Prince Royals Rm"] = {
+        target_pos = { x = -38.0, y = -5.0, z = 75.4 },
+        visual_mode = "arc",
+        zone = "Chateau d'Oraguille",
+        floor_id = 0,
+        max_distance = 15
     },
     -- Ghelsba Outpost
     ["ghelsba-outpost-hut-door-f10"] = {
@@ -1386,6 +1416,32 @@ return {
         zone = "Davoi",
         floor_id = 0,
         max_distance = 8
+    },
+    --Sandy 3-3
+    ["Quemaricond"] = {
+        target_pos = { x = 16, y = 0.12, z = -25.36 },
+        dynamic_pos = true,
+        y_offset = -1.9,
+        visual_mode = "arc",
+        trigger_npc = "Quemaricond",
+        zone = "Davoi",
+        floor_id = 0,
+        max_distance = 40
+    },
+    --Sandy 2-2
+    ["Zantaviat"] = {
+        target_pos = { x = 211.9, y = -2.6, z = -9.2 },
+        visual_mode = "arc",
+        zone = "Davoi",
+        floor_id = 0,
+        max_distance = 30
+    },
+    ["davoi-!"] = {
+        target_pos = { x = 211.2, y = 2.2, z = -104.4 },
+        visual_mode = "arc",
+        zone = "Davoi",
+        floor_id = 0,
+        max_distance = 15
     },
     -- Monastic Cavern
     ["Magicite-Monastic"] = {

@@ -1141,6 +1141,11 @@ return {
                 trigger_on_event_id = {355},
                 route_to = "Metalworks",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Metalworks", type = 'arrow', center = { x = 88.9, y = -19.5, z = -0.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Metalworks", type = 'rect', center = { x = 88.8, y = -21.7, z = -6.9 }, width = 2.25, height = 2.75, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                }
             },
             {
                 text = "Step 3: Talk to Grohm (H-9) in the Craftsmen's Eatery in Metalworks. \n \n" ..
