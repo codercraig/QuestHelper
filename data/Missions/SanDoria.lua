@@ -3711,12 +3711,12 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 4 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2 stacks of crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission. He will tell you to speak to Prince Trion. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" The prince is waiting in his chambers."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -3751,11 +3751,18 @@ return {
             },
             { -- Step 2
                 text = "Step 2: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille for a cutscene with Prince Trion. \n \n",
-                onmob_target = {"_6h0"},
+                onmob_target = {"Door: Prince Royals Rm"},
                 trigger_on_event_id = {81},
                 route_to = "Chateau d'Oraguille",
-                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
                 zone_max_distance = 20,
+                visual_zones = {
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -8.2, y = 0.0, z = -3.7 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.4, y = 0.0, z = -3.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.9, y = -3.0, z = 68.1 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.7, y = -3.0, z = 67.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 3
                 text = "Step 3: Travel through East Ronfaure to King Ranperre's Tomb and go to the Heavy Stone Door at (H-8) - Map 1. \n \n" ..
@@ -3765,119 +3772,270 @@ return {
                        "- Corrupted Ulbrig (BLM) \n \n" ..
                        "WARNING: Have SNEAK up BEFORE examining the door or all 3 will aggro at once! \n \n" ..
                        "They do NOT link - pull and kill them one at a time. Most Lv85 jobs can solo this. \n \n",
-                onmob_target = {"_5a0"},
+                onmob_target = {"king-ranperre-tomb-heavy-stone-door-h8"},
                 route_to = "King Ranperre's Tomb",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
                 onmob_enemy = {"Corrupted Yorgos", "Corrupted Soffeil", "Corrupted Ulbrig"},
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
                 kill_requirement = {
                     count = 3,
                     enemies = {"Corrupted Yorgos", "Corrupted Soffeil", "Corrupted Ulbrig"},
                     zone = "King Ranperre's Tomb",
                     count_party_kills = true,
                 },
+                zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
-                },
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "King Ranperre's Tomb",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- Entrance
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 213.8, y = 2.9, z = -489.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 200.6, y = 0.0, z = -503.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 199.7, y = 0.3, z = -533.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Kings Tomb
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -0.1, z = 247.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.8, y = 0.0, z = 220.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -163.3, y = 0.0, z = 219.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -160.3, y = 0.0, z = 184.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -1.1, z = 207.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.4, y = 7.5, z = 159.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -145.4, y = 7.2, z = 141.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -169.6, y = 7.5, z = 137.3 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.1, y = 7.5, z = 120.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.8, y = 7.5, z = 81.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -183.2, y = 7.3, z = 60.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -220.1, y = 6.5, z = 58.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -250.9, y = 6.8, z = 53.9 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -260.7, y = 7.3, z = 31.7 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -234.6, y = 7.5, z = 20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -181.7, y = 7.0, z = 17.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -147.3, y = 7.1, z = 16.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -99.7, y = 8.3, z = 15.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -100.8, y = 4.5, z = -27.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -116.3, y = 3.0, z = -27.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.0, y = 0.0, z = -62.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.2, y = 0.1, z = -105.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -115.3, y = 0.0, z = -134.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -75.2, y = 0.0, z = -134.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -44.1, y = 0.0, z = -130.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -23.5, y = -0.0, z = -135.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 37.5, y = 0.0, z = -135.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.2, y = 0.0, z = -84.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.1, y = 0.0, z = -62.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.0, y = 3.0, z = -26.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 20.0, y = 4.5, z = -26.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 21.1, y = 8.7, z = 19.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 72.1, y = 7.2, z = 19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 124.1, y = 7.5, z = 18.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 140.8, y = 7.2, z = 62.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 136.9, y = 7.3, z = 84.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 138.2, y = 8.5, z = 117.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 113.9, y = 8.2, z = 141.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 80.1, y = 7.5, z = 180.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 29.5, y = 6.8, z = 179.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 10.1, y = 7.6, z = 178.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -21.0, y = 7.3, z = 173.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -7.1, y = 7.5, z = 129.1 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 23.7, y = 8.0, z = 106.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 55.5, y = 6.5, z = 105.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 59.2, y = 7.5, z = 75.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 56.7, y = 7.2, z = 61.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 18.0, y = 7.3, z = 60.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -10.7, y = 6.9, z = 54.5 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -20.5, y = 8.8, z = 31.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -31.6, y = 7.5, z = 20.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
                 },
             },
             { -- Step 4
                 text = "Step 4: Examine the Heavy Stone Door again and select YES to enter. \n \n" ..
                        "NOTE: You may have to wait up to 1 minute from the NM spawn time before the door will let you in, even if they are already dead. \n \n" ..
                        "Once you have won, you can re-enter freely even after zoning or logging out. \n \n",
-                onmob_target = {"_5a0"},
+                onmob_target = {"king-ranperre-tomb-heavy-stone-door-h8"},
                 trigger_on_event_id = {6},
-                visual_zones = {
-                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
-                },
+                route_to = "King Ranperre's Tomb",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
             { -- Step 5
                 text = "Step 5: Examine the Tombstone inside the chamber for a cutscene. \n \n" ..
                        "You will receive KI:Ancient San d'Orian book. \n \n",
-                onmob_target = {"Tombstone_Lower"},
+                onmob_target = {"king-ranperre-tomb-tombstone-h8"},
                 trigger_on_event_id = {8},
-                visual_zones = {
-                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -73.6, y = 7.6, z = 20.1 }, size = 2, floor_id = 1, colour = "green" },
-                },
+                route_to = "King Ranperre's Tomb",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
             },
+            -- Steps 6-8: the guard will not send you to Prince Trion until you have
+            -- ZONED since handing the book over (server sets a zone-scoped flag when it
+            -- takes the book, and only a zone change clears it). Waiting does nothing.
+            -- Pinned to Grilau in Northern San d'Oria because the West Ronfaure gate is
+            -- right next to him, which makes the zone trip trivial and gives step 7 a
+            -- single zone to trigger on.
             { -- Step 6
-                text = "Step 6: Return to a San d'Orian Gate Guard and hand over the book. \n \n" ..
-                       "Talk to him REPEATEDLY (up to 3 times) until he tells you to return to Prince Trion. \n" ..
-                       "1st talk: he takes the KI:Ancient San d'Orian book. \n" ..
-                       "2nd talk: he says deciphering it will take a while. \n" ..
-                       "3rd talk: he sends you back to Prince Trion. \n \n" ..
-                       "(Optional: Perfaumand, stationed by Prince Trion's door, has extra dialogue while you hold the book.) \n \n",
-                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_event_id = {1039, 1040},
-                route_to = "Southern San d'Oria",
-                zone_max_distance = 40,
+                text = "Step 6: Take the book to Grilau (D-8) at the Northern San d'Oria gate. \n \n" ..
+                       "She takes the KI:Ancient San d'Orian Book. \n \n" ..
+                       "(Optional: Perfaumand, by Prince Trion's door, has extra dialogue while you still hold the book.) \n \n",
+                onmob_target = {"Grilau"},
+                trigger_on_event_id = {1035,1037},
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
             },
             { -- Step 7
-                text = "Step 7: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille again for a cutscene. \n \n",
-                onmob_target = {"_6h0"},
-                trigger_on_event_id = {21},
-                route_to = "Chateau d'Oraguille",
-                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
-                zone_max_distance = 20,
+                text = "Step 7: Step outside to West Ronfaure through the gate beside Grilau. \n \n" ..
+                       "This is REQUIRED - the guard only sends you back to Prince Trion once you have zoned. \n \n" ..
+                       "Talking to her again without zoning just gives a 'deciphering will take a while' dialogue over and over. \n \n",
+                zone_trigger = "West Ronfaure",
+                route_to = "West Ronfaure",
+                destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -241.9, y = 8.0, z = 53.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = -243.6, y = 8.0, z = 43.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 8
-                text = "Step 8: Return to the Heavy Stone Door at (H-8) in King Ranperre's Tomb and examine it for another cutscene. \n \n" ..
-                       "The NMs do NOT respawn - you can walk straight up to the door. \n \n",
-                onmob_target = {"_5a0"},
-                trigger_on_event_id = {5},
-                route_to = "King Ranperre's Tomb",
-                visual_zones = {
-                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
-                },
+                text = "Step 8: Go back in and talk to Grilau again. \n \n" ..
+                       "Grilau now sends you back to Prince Trion. \n \n",
+                onmob_target = {"Grilau"},
+                trigger_on_event_id = {1039, 1040},
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "D-8", offsetX = 16, offsetY = 16},
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 8,
-                        zone_name = "King Ranperre's Tomb",
-                        floor_id = 1,
+                        zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             { -- Step 9
-                text = "Step 9: Return to a San d'Orian Gate Guard and talk to him to complete the mission. \n \n" ..
+                text = "Step 9: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille again for a cutscene. \n \n",
+                onmob_target = {"Door: Prince Royals Rm"},
+                trigger_on_event_id = {21},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
+                visual_zones = {
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -8.2, y = 0.0, z = -3.7 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.4, y = 0.0, z = -3.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.9, y = -3.0, z = 68.1 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.7, y = -3.0, z = 67.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+            },
+            { -- Step 10
+                text = "Step 10: Return to the Heavy Stone Door at (H-8) in King Ranperre's Tomb and examine it for another cutscene. \n \n" ..
+                       "The NMs do NOT respawn - you can walk straight up to the door. \n \n",
+                onmob_target = {"king-ranperre-tomb-heavy-stone-door-h8"},
+                trigger_on_event_id = {5},
+                route_to = "King Ranperre's Tomb",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 25,
+                visual_zones = {
+                    -- Entrance
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 213.8, y = 2.9, z = -489.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 200.6, y = 0.0, z = -503.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 199.7, y = 0.3, z = -533.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Kings Tomb
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -0.1, z = 247.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.8, y = 0.0, z = 220.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -163.3, y = 0.0, z = 219.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -160.3, y = 0.0, z = 184.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -1.1, z = 207.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.4, y = 7.5, z = 159.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -145.4, y = 7.2, z = 141.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -169.6, y = 7.5, z = 137.3 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.1, y = 7.5, z = 120.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.8, y = 7.5, z = 81.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -183.2, y = 7.3, z = 60.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -220.1, y = 6.5, z = 58.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -250.9, y = 6.8, z = 53.9 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -260.7, y = 7.3, z = 31.7 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -234.6, y = 7.5, z = 20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -181.7, y = 7.0, z = 17.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -147.3, y = 7.1, z = 16.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -99.7, y = 8.3, z = 15.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -100.8, y = 4.5, z = -27.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -116.3, y = 3.0, z = -27.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.0, y = 0.0, z = -62.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.2, y = 0.1, z = -105.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -115.3, y = 0.0, z = -134.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -75.2, y = 0.0, z = -134.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -44.1, y = 0.0, z = -130.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -23.5, y = -0.0, z = -135.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 37.5, y = 0.0, z = -135.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.2, y = 0.0, z = -84.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.1, y = 0.0, z = -62.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.0, y = 3.0, z = -26.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 20.0, y = 4.5, z = -26.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 21.1, y = 8.7, z = 19.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 72.1, y = 7.2, z = 19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 124.1, y = 7.5, z = 18.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 140.8, y = 7.2, z = 62.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 136.9, y = 7.3, z = 84.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 138.2, y = 8.5, z = 117.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 113.9, y = 8.2, z = 141.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 80.1, y = 7.5, z = 180.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 29.5, y = 6.8, z = 179.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 10.1, y = 7.6, z = 178.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -21.0, y = 7.3, z = 173.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -7.1, y = 7.5, z = 129.1 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 23.7, y = 8.0, z = 106.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 55.5, y = 6.5, z = 105.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 59.2, y = 7.5, z = 75.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 56.7, y = 7.2, z = 61.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 18.0, y = 7.3, z = 60.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -10.7, y = 6.9, z = 54.5 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -20.5, y = 8.8, z = 31.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -31.6, y = 7.5, z = 20.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --Door non fight
+                    --{ zone_name = "King Ranperre's Tomb", type = 'rect', center = { x = -39.0, y = 4.8, z = 20.0 }, width = 4.25, height = 5.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+                },
+            },
+            { -- Step 11
+                text = "Step 11: Return to a San d'Orian Gate Guard and talk to him to complete the mission. \n \n" ..
                        "(Optional: Perfaumand by Prince Trion's door has one more short cutscene.) \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1033, 1034},
                 route_to = "Southern San d'Oria",
-                zone_max_distance = 40,
+                zone_max_distance = 35,
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 9,
+                        state = 11,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 9,
+                        state = 11,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -4002,7 +4160,7 @@ return {
                 onmob_target = {"qm4"},
                 onmob_enemy = "Marauder Dvogzog",
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
                 kill_requirement = {
                     count = 1,
                     enemies = {"Marauder Dvogzog"},
@@ -4252,7 +4410,7 @@ return {
                 trigger_on_event_id = {32001},
                 onmob_enemy = {"Darokbok of Clan Reaper", "Derakbak of Clan Wolf", "Jagidbod of Clan Reaper", "Reaper Clan Warmachine", "Wolf Clan Warmachine"},
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
             },
             { -- Step 6
                 text = "Step 6: Report back to any San d'Orian Gate Guard to complete the mission. \n \n",

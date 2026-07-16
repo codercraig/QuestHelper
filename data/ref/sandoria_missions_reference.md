@@ -14,8 +14,8 @@
 [5-1] The Ruins of Fei'Yin - DONE
 [5-2] The Shadow Lord - DONE
 [6-1] Leaute's Last Wishes - DONE
-[6-2] Ranperre's Final Rest - STARTED
-[7-1] Prestige of the Papsque - DRAFT
+[6-2] Ranperre's Final Rest - DONE
+[7-1] Prestige of the Papsque - STARTED
 [7-2] The Secret Weapon - DRAFT
 [8-1] Coming of Age - DRAFT
 [8-2] Lightbringer - DRAFT

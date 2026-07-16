@@ -929,6 +929,21 @@ return {
         floor_id = 1,
         max_distance = 18
     },
+    ["king-ranperre-tomb-heavy-stone-door-h8"] = {
+        target_pos = { x = -39.0, y = 4.8, z = 20.0 },
+        visual_mode = "arc",
+        zone = "King Ranperre's Tomb",
+        floor_id = 1,
+        max_distance = 25,
+        draw_in_combat = false,
+    },
+    ["king-ranperre-tomb-tombstone-h8"] = {
+        target_pos = { x = -73.6, y = 7.8, z = 20.1 },
+        visual_mode = "arc",
+        zone = "King Ranperre's Tomb",
+        floor_id = 1,
+        max_distance = 30
+    },
     -- La Theine Plateau
     -- Patrollers
     ["Galaihaurat"] = {
