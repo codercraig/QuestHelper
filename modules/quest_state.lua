@@ -20,6 +20,7 @@ local default_settings = T{
     daily_progress = T{},  -- Day-stamped scratch state (e.g. Castle Oztroja passwords); resets each Vana'diel day
     current_map = T{},  -- Tracks active map number per zone ID
     keyitem_cache = T{},  -- Cached list of owned key item IDs (array of numbers)
+    fame_cache = T{},     -- [area] = {level = n, day = vana_day_stamp}; last value seen from a reputation NPC
     ui_settings = T{
         map_opacity = 1.0,         -- Map image opacity (0.0 - 1.0)
         map_scale = 1.0,           -- Map size scale (1.0 = 512x512, 0.5 = 256x256)
@@ -157,6 +158,32 @@ function quest_state.setDailyPassword(cat, sub, mis, step, slot, word)
     local entry = getDailyEntry(cat, sub, mis, step, false)
     entry.words[slot] = word
     debug_print(string.format("[QuestHelper] Password slot %d = %s", slot, tostring(word)))
+    settings.save(QUESTHELPER_ALIAS, quest_state.settings)
+end
+
+-- Returns the last fame level seen for an area, plus how many Vana'diel days ago it
+-- was seen (nil age if the clock was unavailable at capture). Returns nil if never
+-- checked. NOTE: fame rises silently on any quest turn-in, so this is a historical
+-- observation, never the player's current fame - present it as "last checked".
+function quest_state.getFame(area)
+    local entry = quest_state.settings.fame_cache and quest_state.settings.fame_cache[area]
+    if type(entry) ~= 'table' or type(entry.level) ~= 'number' then return nil end
+
+    local age
+    local today = currentVanaDay()
+    if today and entry.day then
+        age = today - entry.day
+    end
+    return entry.level, age
+end
+
+-- Records a fame level observed from a reputation NPC's dialogue.
+function quest_state.setFame(area, level)
+    if not quest_state.settings.fame_cache then
+        quest_state.settings.fame_cache = T{}
+    end
+    quest_state.settings.fame_cache[area] = T{ level = level, day = currentVanaDay() }
+    debug_print(string.format("[QuestHelper] Fame: %s = %d", area, level))
     settings.save(QUESTHELPER_ALIAS, quest_state.settings)
 end
 

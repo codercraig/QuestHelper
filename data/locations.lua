@@ -906,6 +906,13 @@ return {
         floor_id = 0,
         max_distance = 20
     },
+    ["Door: Great Hall"] = {
+        target_pos = { x = 0.0, y = -3.2, z = 17.0 },
+        visual_mode = "arc",
+        zone = "Chateau d'Oraguille",
+        floor_id = 0,
+        max_distance = 20
+    },
     -- Ghelsba Outpost
     ["ghelsba-outpost-hut-door-f10"] = {
         target_pos = { x = -165.4, y = -12.7, z = 77.8 },
@@ -1527,7 +1534,7 @@ return {
         visual_mode = "arc",
         zone = "Lower Jeuno",
         floor_id = 0,
-        max_distance = 35
+        max_distance = 20
     },
     ["Muckvix"] = {
         target_pos = { x = -26.8, y= 3.5, z=-137.3},
@@ -1645,6 +1652,13 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["Door: San dOrian Embassy"] = {
+        target_pos = { x = -31.1, y = 7.5, z = -65.1 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 10
+    },
     ["Door: Audience Chamber"] = {
         target_pos = { x = 0.1, y= -7, z=70.3},
         visual_mode = "arc",
@@ -1658,6 +1672,13 @@ return {
         zone = "Ru'Lude Gardens",
         floor_id = 0,
         max_distance = 8
+    },
+    ["Nelcabrit"] = {
+        target_pos = { x = -35.6, y = 6.9, z = -49.7 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 20
     },
     -- Qufum Island
     --Lower Delkfutts Tower
@@ -1682,6 +1703,13 @@ return {
         zone = "Lower Delkfutt's Tower",
         floor_id = 15,
         max_distance = 35
+    },
+    ["lower-delkfutt-tower-cermet-door-m8"] = {
+        target_pos = { x = 640.5, y = 13.3, z = 20.0 },
+        visual_mode = "arc",
+        zone = "Lower Delkfutt's Tower",
+        floor_id = 15,
+        max_distance = 20
     },
     -- Upper Delkfutts Tower
     ["Elevator"] = {
@@ -1716,6 +1744,14 @@ return {
         visual_mode = "arc",
 
         zone = "Western Altepa Desert"
+    },
+    ["western-altepa-desert-dreamrose"] = {
+        target_pos = { x = -262.4, y = -9.4, z = 49.2 },
+        visual_mode = "arc",
+        zone = "Western Altepa Desert",
+        floor_id = 0,
+        max_distance = 60,
+        draw_in_combat = false,
     },
     -- Eastern Altepa Desert
     ["Lokpix"] = {

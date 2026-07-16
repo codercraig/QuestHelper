@@ -1742,5 +1742,8 @@ ashita.events.register('text_in', 'text_in_callback', function(e)
         -- Daily password capture (e.g. Castle Oztroja statues)
         triggers_module.handleDailyPasswordText(e, incoming_text, currentTopCategory, currentSubfile, current_mission,
                                                quest_data, quest_state)
+
+        -- Fame capture from reputation NPC dialogue (global - not tied to a mission/step)
+        triggers_module.handleFameText(e, incoming_text, quest_state, player_module.zoneId)
     end
 end)

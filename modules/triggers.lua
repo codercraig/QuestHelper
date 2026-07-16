@@ -587,6 +587,34 @@ function triggers.handleDailyPasswordText(e, incoming_text, currentTopCategory, 
     end
 end
 
+-- HANDLE: fame (reputation) checker dialogue.
+-- The client is never sent a numeric fame value, so we recover it by fingerprinting
+-- the checker NPC's reply (see modules/fame.lua). Unlike the other text handlers this
+-- is NOT step-scoped: the player can check fame at any time, on any mission or none,
+-- so it listens globally and stores per-area.
+--
+-- playerZoneId is required - some replies are shared verbatim between areas at
+-- different levels, and only the zone disambiguates them.
+function triggers.handleFameText(e, incoming_text, quest_state, playerZoneId)
+    if ignored_chat_modes[e.mode] then return end  -- ignore player chat
+    if not incoming_text then return end
+
+    local ok, fame = pcall(require, 'modules.fame')
+    if not ok then return end
+
+    local area, level = fame.matchDialogue(incoming_text, playerZoneId)
+    if not area then return end
+
+    local prev = quest_state.getFame(area)
+    quest_state.setFame(area, level)
+
+    if prev and prev ~= level then
+        print(string.format("\30\106[QH]\30\01 Fame: %s is now %d (was %d)", area, level, prev))
+    else
+        print(string.format("\30\106[QH]\30\01 Fame: %s is %d/9", area, level))
+    end
+end
+
 -- Tracks last attack cmd_no per actor from 0x028 packets.
 -- The actual kill (defeat) arrives in 0x029, so we store state here for correlation.
 local actor_last_cmd = {}  -- [actor_server_id] = cmd_no

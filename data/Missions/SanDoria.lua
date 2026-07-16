@@ -1779,9 +1779,14 @@ return {
             },
             { -- Step 3
                 text = "Step 3: Examine the Door: Great Hall behind Halver for a cutscene with His Majesty Destin, and to receive the Key Item: Letter to the Ambassador. \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {537},
                 route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -0.2, y = 0.0, z = 3.1 }, size = 2, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 4
                 text = "Step 4: Travel to Ru'Lude Gardens in Jeuno and talk to Nelcabrit (G-9) at the San d'Oria embassy for a cutscene. \n \n",
@@ -1789,6 +1794,13 @@ return {
                 trigger_on_event_id = {42},
                 route_to = "Ru'Lude Gardens",
                 destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -0.3, y = 3.0, z = -6.3 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -2.1, y = 9.0, z = -31.7 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -8.3, y = 9.0, z = -49.9 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -24.4, y = 7.4, z = -50.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                },
             },
             { -- Step 5
                 text = "Step 5: Travel to Qufim Island and enter Lower Delkfutt's Tower (F-6). \n" ..
@@ -2078,11 +2090,29 @@ return {
                     },
                 },
             },
-            { -- Step 8
-                text = "Step 8: Descend to the Lower Delkfutt's Tower basement and enter through the Cermet Door. \n" ..
-                       "At Floor 10, use the Elevator platform (H-8) to drop to the blind staircase, then spiral down through Middle and Lower Delkfutt's Tower to the basement. \n" ..
-                       "Cross the large basement room and trade (or use) your Delkfutt Key on the Cermet Door at (L-7) for a cutscene. \n \n",
-                onmob_target = {"lower-delkfutt-tower-cermet-door-l7"},
+            {
+                text = "Step 8: Trade the Delkfutt Key to the circular Elevator at (H-8) in the same room. \n" ..
+                       "This will take you down a winding stairwell to the basement. \n \n",
+                trigger_on_event_id = {1, 6},
+                onmob_target = {"Elevator"},
+                images = {
+                    {
+                        width     = 512,
+                        height    = 512,
+                        state     = 8,
+                        zone_name = "Upper Delkfutt's Tower",
+                        floor_id  = 1,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 9
+                text = "Step 9: Descend to the Lower Delkfutt's Tower basement and enter through the Cermet Door. \n" ..
+                       "At Floor 10, use the Elevator platform (H-8) to drop to the blind staircase, then spiral down through Middle and Lower Delkfutt's Tower to the basement. \n \n" ..
+                       "Cross the large basement room and trade (or use) your Delkfutt Key on the Cermet Door at (M-8) for a cutscene. \n \n",
+                onmob_target = {"lower-delkfutt-tower-cermet-door-m8"},
                 trigger_on_event_id = {0, "Lower Delkfutt's Tower"},
                 zone_max_distance = 20,
                 visual_zones = {
@@ -2108,18 +2138,17 @@ return {
 
                     -- final door for mission
                     { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 525.8, y = 16.0, z = 20.0 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 541.1, y = 16.0, z = 19.1 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 558.8, y = 16.6, z = 33.3 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 605.4, y = 16.0, z = 50.1 }, size = 4, direction = "ne", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 619.3, y = 16.0, z = 60.5 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 637.3, y = 16.0, z = 60.2 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
-                    { zone_name = "Lower Delkfutt's Tower", type = 'rect', center = { x = 640.5, y = 13.5, z = 60.0 }, width = 5.25, height = 5.00, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 541.8, y = 16.0, z = 20.3 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 579.6, y = 16.5, z = 26.9 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 604.6, y = 16.1, z = 30.1 }, size = 4, direction = "se", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Lower Delkfutt's Tower", type = 'arrow', center = { x = 627.4, y = 16.0, z = 20.2 }, size = 4, direction = "right", floor_id = 15, colour = "yellow" },
+
                 },
                 images = {
                     {
                         width     = 512,
                         height    = 512,
-                        state     = 8,
+                        state     = 9,
                         zone_name = "Upper Delkfutt's Tower",
                         floor_id  = 4,
                         highlights = {
@@ -2129,7 +2158,7 @@ return {
                     {
                         width     = 512,
                         height    = 512,
-                        state     = 8,
+                        state     = 9,
                         zone_name = "Upper Delkfutt's Tower",
                         floor_id  = 5,
                         highlights = {
@@ -2139,7 +2168,7 @@ return {
                     {
                         width     = 512,
                         height    = 512,
-                        state     = 8,
+                        state     = 9,
                         zone_name = "Upper Delkfutt's Tower",
                         floor_id  = 6,
                         highlights = {
@@ -2149,7 +2178,7 @@ return {
                     {
                         width     = 512,
                         height    = 512,
-                        state     = 8,
+                        state     = 9,
                         zone_name = "Lower Delkfutt's Tower",
                         floor_id  = 1,
                         highlights = {
@@ -2159,28 +2188,40 @@ return {
                     {
                         width     = 512,
                         height    = 512,
-                        state     = 8,
+                        state     = 9,
                         zone_name = "Lower Delkfutt's Tower",
                         floor_id  = 15,
                         highlights = {
-                            { position = "L-7", offsetX = 16, offsetY = 16 },
+                            { position = "M-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { -- Step 9
-                text = "Step 9: Return to the San d'Oria embassy in Ru'Lude Gardens (G-9) and speak to Nelcabrit, the receptionist, for a cutscene. \n \n",
+            { -- Step 10
+                text = "Step 10: Return to the San d'Oria embassy in Ru'Lude Gardens (G-9) and speak to Nelcabrit, the receptionist, for a cutscene. \n \n",
                 onmob_target = {"Nelcabrit"},
                 trigger_on_event_id = {140},
                 route_to = "Ru'Lude Gardens",
                 destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -0.3, y = 3.0, z = -6.3 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -2.1, y = 9.0, z = -31.7 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -8.3, y = 9.0, z = -49.9 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -24.4, y = 7.4, z = -50.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                },
             },
-            { -- Step 10
-                text = "Step 10: Examine the ambassador's office door next to Nelcabrit to receive your reward and complete the mission. \n \n",
-                onmob_target = {"_6r5"},
+            { -- Step 11
+                text = "Step 11: Examine the ambassador's office door next to Nelcabrit to receive your reward and complete the mission. \n \n",
+                onmob_target = {"Door: San dOrian Embassy"},
                 trigger_on_event_id = {39},
                 route_to = "Ru'Lude Gardens",
                 destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -35.3, y = 9.0, z = -56.5 }, size = 3, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -35.1, y = 7.5, z = -59.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                },
             },
         },
         reward = {
@@ -2188,6 +2229,10 @@ return {
         }
     },
     ["4-1: Magicite"] = {
+        requirements = {
+            level = 40,
+            fame  = {area = "Jeuno", level = 3},
+        },
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "3-3: Appointment to Jeuno"},
             {category = "Quests", subfile = "Lower Jeuno", name = "Tenshodo Membership"},
@@ -2195,15 +2240,18 @@ return {
         steps = {
             -- PREREQUISITES
             {
-                text = "Step 1: This mission requires Rank 4. Ensure your Rank Points are high (nearly or completely full) by completing repeatable missions or trading 4 crystals to a Conquest Overseer. \n \n" ..
+                text = "Step 1: This mission requires Rank 4. Ensure your Rank Points are high (nearly or completely full) by completing repeatable missions or trading 2 stacks of crystals to a Conquest Overseer. \n \n" ..
                        "Morlepiche (H-10) in upper Ru'Lude Gardens accepts crystals. \n \n" ..
                        "Go to the San d'Oria Embassy and speak with Nelcabrit (G-9) to start the mission. \n \n" ..
                        "Note: Unlike most missions, this is NOT offered by Gate Guards.",
                 onmob_target = {"Nelcabrit"},
+                zone_max_distance = 35,
                 visual_zones = {
                     { zone_name = "Ru'Lude Gardens", type = 'square', center = { x = -4.9, y = 0.0, z = -79.3 }, size = 1, floor_id = 0, colour = "green" },
-                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = 2.7, y = 9.0, z = -36.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
-                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = 25.4, y = 7.4, z = -36.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -0.3, y = 3.0, z = -6.3 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -2.1, y = 9.0, z = -31.7 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -8.3, y = 9.0, z = -49.9 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -24.4, y = 7.4, z = -50.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
                 },
                 trigger_on_event_id = {45},
                 route_to = "Ru'Lude Gardens",
@@ -2214,44 +2262,28 @@ return {
             {
                 text = "Step 2: Next check the San d'Oria Embassy door at (G-9). \n \n" ..
                        "You will receive KI:Archducal Audience Permit.",
-                onmob_target = {"_6r5"},
+                onmob_target = {"Door: San dOrian Embassy"},
+                zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = 36.1, y = 7.5, z = -26.1 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -35.3, y = 9.0, z = -56.5 }, size = 3, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -35.1, y = 7.5, z = -59.9 }, width = 2.50, height = 3.00, floor_id = 0, colour = "cyan", vertical_axis = 'ns' },
                 },
                 trigger_on_event_id = {130},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Ru'Lude Gardens",
-                        highlights = {
-                            { position = "G-9", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "G-9", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 3: In Ru'Lude Gardens, check the Audience Chamber door at (H-6). \n \n" ..
                        "You will receive KI:Letter to Aldo.",
                 onmob_target = {"Door: Audience Chamber"},
                 trigger_on_event_id = {128},
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Ru'Lude Gardens",
-                        highlights = {
-                            { position = "H-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                },
+                route_to = "Ru'Lude Gardens",
+                destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
             },
             {
                 text = "Step 4: Travel to Lower Jeuno and talk to Aldo (J-8) inside Neptune's Spire Inn. \n \n" ..
                        "You will receive KI:Silver Bell. \n \n" ..
-                       "NOTE: To access Tenshodo HQ, you need KI:Tenshodo Member's Card from the quest 'Tenshodo Membership' OR trade a Tenshodo Invite to Ghebi Damomohe (I-7). \n \n" ..
+                       "NOTE: To access Tenshodo HQ, you need KI:Tenshodo Member's Card from the quests 'Tenshodo Membership'/'Only the Best' OR trade a Tenshodo Invite to Ghebi Damomohe (I-7) with Jeuno Fame 3+. \n \n" ..
                        "You can buy a Tenshodo Invite off the Auction House in the Others > Misc.1 section \n \n" ..
                        "Once you have a Tenshodo Invite simply trade it to Ghebi Damomohe (I-7) - she is behind the counter at the entrance! \n" ..
                        "If on CoP mission 'A Vessel Without a Captain', that scene appears first - talk to Aldo twice. \n \n",
@@ -2276,6 +2308,7 @@ return {
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {80},
+                trigger_on_keyitem_obtain = {20},
                 keyitems_needed = {20,21,46,47},
             },
             {
@@ -2290,6 +2323,7 @@ return {
                 },
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {184},
+                trigger_on_keyitem_obtain = {20},
             },
 
             -- CREST OF DAVOI
@@ -2299,6 +2333,7 @@ return {
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {174},
+                trigger_on_keyitem_obtain = {21},
             },
             {
                 text = "Step 8: Obtain Coeurl Meat by: \n \n" ..
@@ -2308,6 +2343,7 @@ return {
                     "Coeurl Meat"
                 },
                 trigger_on_item_obtain = {"Coeurl Meat"},
+                trigger_on_keyitem_obtain = {21},
                 route_to = "Sauromugue Champaign",
                 onmob_enemy = {"Champaign Coeurl"},
                 destination_highlight = {
@@ -2320,6 +2356,7 @@ return {
                        "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi') \n \n",
                 onmob_target = {"Baudin"},
                 trigger_on_event_id = {171},
+                trigger_on_keyitem_obtain = {21},
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
@@ -2339,6 +2376,7 @@ return {
                 },
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {89},
+                trigger_on_keyitem_obtain = {46},
             },
             {
                 text = "Step 11: Travel to Beadeaux. \n \n" ..
@@ -2346,6 +2384,7 @@ return {
                 zone_trigger = "Beadeaux",
                 route_to = "Pashhow Marshlands",
                 destination_highlight = {position = "K-11", offsetX = 16, offsetY = 16},
+                trigger_on_keyitem_obtain = {46},
             },
             {
                 text = "Step 12: In Beadeaux Map 1, head to ramp at (H-7) to enter Map 2. \n \n" ..
@@ -2355,6 +2394,7 @@ return {
                 zone_name = "Beadeaux",
                 onmob_target = {"The Mute1"},
                 zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                         -- survival guide
                         { zone_name = "Beadeaux", type = 'square', center = { x = -264.0, y = 1.6, z = 107.0 }, size = 1, floor_id = 1, colour = "green" },
@@ -2405,6 +2445,7 @@ return {
                     { type = 'square', center = {  x = -259.9, y = 1, z = -137 }, size = 3  }
                 },
                 zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                     -- to ramp 1
                     { zone_name = "Beadeaux", type = 'arrow', center = { x = -100.8, y = 24.2, z = 95.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
@@ -2455,6 +2496,7 @@ return {
                        "Notes: Stay on the 2nd level and run around to the shown coordinates - follow the arrows to each boss! \n \n",
                 require_all_items = true,
                 zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                         --up ramp to 1st boss
                         { zone_name = "Beadeaux", type = 'arrow', center = { x = -262.8, y = -0.4, z = -134.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
@@ -2527,6 +2569,7 @@ return {
                        "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {91},
+                trigger_on_keyitem_obtain = {46},
                 route_to = "Lower Jeuno",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 zone_max_distance = 35,
@@ -2541,6 +2584,7 @@ return {
                         "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {92},
+                trigger_on_keyitem_obtain = {47},
                 route_to = "Lower Jeuno",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 zone_max_distance = 35,
@@ -2551,6 +2595,16 @@ return {
                 },
             },
             -- DAVOI - OPTISTONE
+            --
+            -- From here on, steps carry NO trigger_on_keyitem_obtain skip. That is
+            -- deliberate: the magicite (KI 14/15/16) are taken back when the mission
+            -- completes, so a repeat runner never holds them and this stretch must be
+            -- walked every time. The skips on steps 5-16 work only because the Yagudo
+            -- Torch / Crest of Davoi / Coruscant Rosary / Black Matinee Necklace are
+            -- kept for good - they are the entry passes to the strongholds.
+            -- Rule: skip on key items that SURVIVE completion, never on ones consumed
+            -- by it. (KI 14/15/16 do appear on steps 20/24/28, but as ordinary "just
+            -- picked it up" triggers within a run, not as skips.)
             {
                 text = "Step 17: Travel to Davoi! \n \n" ..
                        "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Outpost to Norvallen > Davoi. \n \n",
@@ -2926,14 +2980,14 @@ return {
                 destination_highlight = {position = "H-6", offsetX = 16, offsetY = 16},
             },
             {
-                text = "Step 30: Talk to Nelcabrit (G-9) at the San d'Oria Embassy in Ru'Lude Gardens to complete the mission. \n \n" ..
-                       "Rewards: Rank 5, KI:Message to Jeuno, 10,000 gil. \n \n",
+                text = "Step 30: Talk to Nelcabrit (G-9) at the San d'Oria Embassy in Ru'Lude Gardens to complete the mission. \n \n",
                 onmob_target = {"Nelcabrit"},
                 zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "Ru'Lude Gardens", type = 'square', center = { x = -4.9, y = 0.0, z = -79.3 }, size = 1, floor_id = 0, colour = "green" },
-                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = 2.7, y = 9.0, z = -36.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
-                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = 25.4, y = 7.4, z = -36.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -0.3, y = 3.0, z = -6.3 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -2.1, y = 9.0, z = -31.7 }, size = 4, direction = "sw", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'arrow', center = { x = -8.3, y = 9.0, z = -49.9 }, size = 4, direction = "left", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Ru'Lude Gardens", type = 'rect', center = { x = -24.4, y = 7.4, z = -50.0 }, width = 3.00, height = 3.25, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
                 },
                 trigger_on_event_id = {36},
                 route_to = "Ru'Lude Gardens",
@@ -2955,6 +3009,7 @@ return {
                        "NOTE: You must view this cutscene before you can accept the mission (or change allegiance at an Immigration NPC). \n \n",
                 trigger_on_event_id = {509},
                 route_to = "Chateau d'Oraguille",
+                zone_trigger = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             { -- Step 2
@@ -2962,7 +3017,7 @@ return {
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {"You accept the mission."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -2977,7 +3032,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 1,
+                        state = 2,
                         zone_name = "Southern San d'Oria",
                         highlights = {
                             { position = "F-9", offsetX = 16, offsetY = 16 },
@@ -2987,7 +3042,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 1,
+                        state = 2,
                         zone_name = "Northern San d'Oria",
                         highlights = {
                             { position = "D-8", offsetX = 16, offsetY = 16 },
@@ -3167,13 +3222,13 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 3 crystals to a Temple Knight Gate Guard (or repeat Bat Hunt) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 3 stacks of crystals to a Temple Knight Gate Guard (or repeat Bat Hunt) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission - you should see the option available. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n" ..
                        "NOTE: If you have accepted the quest 'Under Oath', you must complete the Southern San d'Oria portion of it or Trion will not talk to you. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" but he was in a hurry. You'd best be off to Chateau d'Oraguille!"},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -3216,19 +3271,18 @@ return {
             },
             { -- Step 3
                 text = "Step 3: Examine the Door: Prince Royal's Rm at (H-7) in Chateau d'Oraguille for a cutscene with Trion. \n \n",
-                onmob_target = {"_6h0"},
+                onmob_target = {"Door: Prince Royals Rm"},
                 trigger_on_event_id = {547},
-                zone_max_distance = 20,
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Chateau d'Oraguille",
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
+                visual_zones = {
+                        -- Prince Trion room
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -8.2, y = 0.0, z = -3.7 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.4, y = 0.0, z = -3.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.2 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.9, y = -3.0, z = 68.1 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.7, y = -3.0, z = 67.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
                 },
             },
             { -- Step 4
@@ -3489,6 +3543,13 @@ return {
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
+            { -- Step 8
+                text = "Step 9: Click on door to the Great Hall for a cutscene. \n \n",
+                onmob_target = {"Door: Great Hall"},
+                trigger_on_event_id = {61},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
+            },
         },
         reward = {
             text = "Rank 6, 20,000 gil, Title: Shadow Banisher, Zilart Mission 1 'The New Frontier' unlocked"
@@ -3501,12 +3562,13 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 4 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2stacks off crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                --trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = " on the mission from Monarlais Halver.",
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -3540,8 +3602,7 @@ return {
                 },
             },
             { -- Step 2
-                text = "Step 2: Go to Chateau d'Oraguille and speak to Halver for a cutscene. He will tell you the King wishes to see you. \n \n" ..
-                       "NOTE: Make sure you get the MISSION cutscene, not the quest 'Fit for a Prince'. If Halver just says 'The king is waiting.' you are being offered a quest instead - the mission cutscene is much longer. \n \n",
+                text = "Step 2: Go to Chateau d'Oraguille and speak to Halver for a cutscene. He will tell you the King wishes to see you. \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {25},
                 route_to = "Chateau d'Oraguille",
@@ -3551,7 +3612,7 @@ return {
                 text = "Step 3: Examine the Door: Great Hall behind Halver for a cutscene with the King. \n \n" ..
                        "He will ask you to retrieve a Dreamrose. \n \n" ..
                        "(Optional: Arsha and Chupaile have extra dialogue at this point.) \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {87},
                 zone_max_distance = 20,
             },
@@ -3583,27 +3644,33 @@ return {
                        "- Uses all normal Cactuar abilities including 1000 Needles \n" ..
                        "- Bring a pet (SMN/BST/PUP) or your Adventuring Fellow to soak 1000 Needles \n" ..
                        "- Earth Staff / physical damage reduction gear helps a lot \n \n",
-                onmob_target = {"Dreamrose"},
+                onmob_target = {"western-altepa-desert-dreamrose"},
                 onmob_enemy = "Sabotender Enamorado",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
                 kill_requirement = {
                     count = 1,
                     enemies = {"Sabotender Enamorado"},
                     zone = "Western Altepa Desert",
                     count_party_kills = true,
                 },
-                visual_zones = {
-                    { zone_name = "Western Altepa Desert", type = 'square', center = { x = -262.4, y = -10.2, z = 49.2 }, size = 2, floor_id = 0, colour = "green" },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Western Altepa Desert",
+                        highlights = {
+                            { position = "G-7", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 6
                 text = "Step 6: Examine the Dreamrose again to receive KI:Dreamrose. \n \n" ..
                        "EVERYONE in the alliance on this mission must examine it individually. \n \n",
-                onmob_target = {"Dreamrose"},
-                trigger_on_talk = {"Dreamrose"},
-                visual_zones = {
-                    { zone_name = "Western Altepa Desert", type = 'square', center = { x = -262.4, y = -10.2, z = 49.2 }, size = 2, floor_id = 0, colour = "green" },
-                },
+                onmob_target = {"western-altepa-desert-dreamrose"},
+                keyitems_needed = {268},
+                trigger_on_keyitem_obtain = {268},
             },
             { -- Step 7
                 text = "Step 7: Return to Halver in Chateau d'Oraguille. He will ask you to bring the Dreamrose to Chalvatot. \n \n",
@@ -3617,20 +3684,19 @@ return {
                        "The cutscene triggers on entering the garden area - you do not need to talk to Chalvatot. \n \n" ..
                        "You will receive KI:Piece of Paper. \n \n",
                 trigger_on_event_id = {111},
-                zone_max_distance = 20,
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "Chateau d'Oraguille", type = 'square', center = { x = -105.0, y = 0.1, z = 72.0 }, size = 2, floor_id = 0, colour = "green" },
-                },
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 8,
-                        zone_name = "Chateau d'Oraguille",
-                        highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -5.9, y = 0.0, z = -4.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.4, y = 0.0, z = -6.0 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.8, y = -3.0, z = 35.9 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.3, y = -3.0, z = 35.8 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.6, y = -3.0, z = 35.5 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.7, y = -3.0, z = 52.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -69.6, y = -3.0, z = 51.6 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -84.1, y = -1.1, z = 57.8 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -85.2, y = 0.4, z = 77.9 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
                 },
             },
         },

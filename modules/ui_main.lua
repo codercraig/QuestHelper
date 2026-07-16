@@ -224,9 +224,16 @@ end
 --   }
 --
 -- Each row is {text = "...", status = 'ok'|'fail'|'unknown'}. Level is read live
--- from the player. Fame is 'unknown' by design: the client is never sent a numeric
--- fame value, so it can only ever be shown as a reminder, never verified.
-local function getRequirementRows(missionData)
+-- from the player.
+--
+-- Fame has no live source - the client is never sent a numeric value - so it relies on
+-- a value captured from a reputation NPC's dialogue (see modules/fame.lua), which may
+-- be old. That is safe to pass/fail on because fame only ever rises: no known mechanic
+-- reduces it. A captured value is therefore a LOWER BOUND on current fame, so
+--   captured >= required  -> 'ok', and cannot later become wrong
+--   captured <  required  -> 'unknown' (they may have gained since), never 'fail'
+-- If fame decay is ever discovered, the 'ok' case is what breaks.
+local function getRequirementRows(missionData, quest_state)
     if not missionData or type(missionData.requirements) ~= 'table' then
         return {}
     end
@@ -263,15 +270,93 @@ local function getRequirementRows(missionData)
         end
     end
 
+    local fame_ok, fame_db = pcall(require, 'modules.fame')
+
     for _, entry in ipairs(fameEntries) do
-        table.insert(rows, {
-            text = string.format("Fame: %s %d+ (cannot be checked - ask an NPC in town)",
-                entry.area, entry.level or 1),
-            status = 'unknown',
-        })
+        local needed = entry.level or 1
+        local area_info = fame_ok and fame_db.AREAS[entry.area] or nil
+        local where = (area_info and area_info.checker) or "the reputation NPC in town"
+
+        local seen, age = quest_state.getFame(entry.area)
+
+        if seen and seen >= needed then
+            -- Fame never drops, so a past sighting at or above the bar still holds.
+            table.insert(rows, {
+                text = string.format("Fame: %s %d+ (you were %d/9 when last checked)",
+                    entry.area, needed, seen),
+                status = 'ok',
+            })
+        elseif seen then
+            local when = "previously"
+            if age == 0 then
+                when = "today"
+            elseif age and age > 0 then
+                when = string.format("%d Vana'diel day%s ago", age, age == 1 and "" or "s")
+            end
+            table.insert(rows, {
+                text = string.format("Fame: %s %d+ (was %d/9 %s - recheck with %s)",
+                    entry.area, needed, seen, when, where),
+                status = 'unknown',
+            })
+        else
+            table.insert(rows, {
+                text = string.format("Fame: %s %d+ (check with %s)",
+                    entry.area, needed, where),
+                status = 'unknown',
+            })
+        end
     end
 
     return rows
+end
+
+-- Estimates how many rendered lines a string occupies, counting explicit newlines and
+-- soft wraps at wrap_chars. Used to size the collapsed window to its content.
+local function countWrappedLines(text, wrap_chars)
+    if type(text) ~= 'string' or text == '' then return 0 end
+
+    local lines = 1
+    local current_line_length = 0
+    for i = 1, #text do
+        if text:sub(i, i) == '\n' then
+            lines = lines + 1
+            current_line_length = 0
+        else
+            current_line_length = current_line_length + 1
+            if current_line_length >= wrap_chars then
+                lines = lines + 1
+                current_line_length = 0
+            end
+        end
+    end
+    return lines
+end
+
+-- Height the Rewards block needs in collapsed mode. Rewards render at close to the full
+-- window width (wider than the step text, which sits in a narrower scrolling child), so
+-- they wrap later - ~60 chars. Erring low on wrap width overestimates the height, which
+-- costs a little empty space rather than clipping the last line.
+local REWARD_WRAP_CHARS = 60
+
+local function getRewardHeight(reward)
+    if type(reward) ~= 'table' then return 0 end
+
+    local hasItems = type(reward.items) == 'table' and #reward.items > 0
+    local hasText  = type(reward.text) == 'string' and reward.text ~= ""
+    if not hasItems and not hasText then return 0 end
+
+    local height = 30  -- "Rewards:" header + the two Spacing() calls above it
+
+    if hasItems then
+        -- Each item is a Separator + a TreeNode; assume collapsed, as expanded state
+        -- lives inside imgui and is not readable from here.
+        height = height + (#reward.items * 25) + 5
+    end
+    if hasText then
+        height = height + (countWrappedLines(reward.text, REWARD_WRAP_CHARS) * 20)
+    end
+
+    return height
 end
 
 -- Renders the main QuestHelper window
@@ -316,27 +401,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
 
                 -- Estimate text height: Count newlines + account for line wrapping
                 -- Each line wraps at ~55 chars (to account for scrollbar), each line is ~20px tall
-                local lines = 1  -- Start with 1 line minimum
-                local current_line_length = 0
-                local wrap_chars = 55  -- Use 55 to match scrollable text rendering
-
-                for i = 1, #text do
-                    local char = text:sub(i, i)
-                    if char == '\n' then
-                        -- Hit a newline, start a new line
-                        lines = lines + 1
-                        current_line_length = 0
-                    else
-                        current_line_length = current_line_length + 1
-                        -- Check if current line exceeds wrap width
-                        if current_line_length >= wrap_chars then
-                            lines = lines + 1
-                            current_line_length = 0
-                        end
-                    end
-                end
-
-                local text_height = lines * 20
+                local text_height = countWrappedLines(text, 55) * 20
 
                 -- Cap text height to scroll limit (350px) if it exceeds that
                 -- Scale the scroll limit with UI scale
@@ -375,7 +440,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                     end
                 end
 
-                local requirements = getRequirementRows(missionData)
+                local requirements = getRequirementRows(missionData, quest_state)
                 if #requirements > 0 then
                     if ui_settings.requirements_section_expanded then
                         items_height = items_height + (#requirements * 25) + 30
@@ -430,6 +495,10 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                         items_height = items_height + (#kill_enemies * 20)
                     end
                 end
+
+                -- Rewards render below everything else in collapsed mode, so their height
+                -- must be reserved or the last line falls outside the window.
+                items_height = items_height + getRewardHeight(missionData.reward)
 
                 -- Calculate total height
                 window_height = base_height + text_height + items_height
@@ -1046,7 +1115,7 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                 end
 
                 -- Requirements Section (collapsible, open by default)
-                local requirements = getRequirementRows(missionData)
+                local requirements = getRequirementRows(missionData, quest_state)
                 if #requirements > 0 then
                     local req_header_expanded = imgui.CollapsingHeader("Requirements:", ui_settings.requirements_section_expanded and ImGuiTreeNodeFlags_DefaultOpen or 0)
 

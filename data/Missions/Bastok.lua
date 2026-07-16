@@ -1695,6 +1695,10 @@ return {
     },
 
     ["4-1: Magicite"] = {
+        requirements = {
+            level = 40,
+            fame  = {area = "Jeuno", level = 3},
+        },
         prerequisites = {
                       {category = "Quests", subfile = "Lower Jeuno", name = "Tenshodo Membership"},
                 },
@@ -1750,7 +1754,7 @@ return {
             {
                 text = "Step 4: Travel to Lower Jeuno and talk to Aldo (J-8) inside Neptune's Spire Inn. \n \n" ..
                        "You will receive KI:Silver Bell. \n \n" ..
-                       "NOTE: To access Tenshodo HQ, you need KI:Tenshodo Member's Card from the quest 'Tenshodo Membership' OR trade a Tenshodo Invite to Ghebi Damomohe (I-7). \n \n" ..
+                        "NOTE: To access Tenshodo HQ, you need KI:Tenshodo Member's Card from the quests 'Tenshodo Membership'/'Only the Best' OR trade a Tenshodo Invite to Ghebi Damomohe (I-7) with Jeuno Fame 3+. \n \n" ..
                        "You can buy a Tenshodo Invite off the Auction House in the Others > Misc.1 section \n \n" ..
                        "Once you have a Tenshodo Invite simply trade it to Ghebi Damomohe (I-7) - she is behind the counter at the entrance! \n" ..
                        "If on CoP mission 'A Vessel Without a Captain', that scene appears first - talk to Aldo twice. \n \n",
@@ -1775,6 +1779,7 @@ return {
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {80},
+                trigger_on_keyitem_obtain = {20},
                 keyitems_needed = {20,21,46,47},
             },
             {
@@ -1784,6 +1789,7 @@ return {
                 route_to = "Lower Jeuno",
                 destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {184},
+                trigger_on_keyitem_obtain = {20},
             },
 
             -- CREST OF DAVOI
@@ -1793,6 +1799,7 @@ return {
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {174},
+                trigger_on_keyitem_obtain = {21},
             },
             {
                 text = "Step 8: Obtain Coeurl Meat by: \n \n" ..
@@ -1802,6 +1809,7 @@ return {
                     "Coeurl Meat"
                 },
                 trigger_on_item_obtain = {"Coeurl Meat"},
+                trigger_on_keyitem_obtain = {21},
                 route_to = "Sauromugue Champaign",
                 onmob_enemy = {"Champaign Coeurl"},
                 destination_highlight = {
@@ -1814,6 +1822,7 @@ return {
                        "You will receive KI:Crest of Davoi. (Completes quest 'Crest of Davoi') \n \n",
                 onmob_target = {"Baudin"},
                 trigger_on_event_id = {171},
+                trigger_on_keyitem_obtain = {21},
                 route_to = "Upper Jeuno",
                 destination_highlight = {position = "G-7", offsetX = 16, offsetY = 16},
             },
@@ -1833,6 +1842,7 @@ return {
                 },
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {89},
+                trigger_on_keyitem_obtain = {46},
             },
             {
                 text = "Step 11: Travel to Beadeaux. \n \n" ..
@@ -1840,6 +1850,7 @@ return {
                 zone_trigger = "Beadeaux",
                 route_to = "Pashhow Marshlands",
                 destination_highlight = {position = "K-11", offsetX = 16, offsetY = 16},
+                trigger_on_keyitem_obtain = {46},
             },
             {
                 text = "Step 12: In Beadeaux Map 1, head to ramp at (H-7) to enter Map 2. \n \n" ..
@@ -1848,7 +1859,8 @@ return {
                 trigger_on_buff = 6,  -- Silence status effect (ID: 6 when server is using LSB)
                 zone_name = "Beadeaux",
                 onmob_target = {"The Mute1"},
-                 zone_max_distance = 35,
+                zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                         -- survival guide
                         { zone_name = "Beadeaux", type = 'square', center = { x = -264.0, y = 1.6, z = 107.0 }, size = 1, floor_id = 1, colour = "green" },
@@ -1899,6 +1911,7 @@ return {
                     { type = 'square', center = {  x = -259.9, y = 1, z = -137 }, size = 3  }
                 },
                 zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                     -- to ramp 1
                     { zone_name = "Beadeaux", type = 'arrow', center = { x = -100.8, y = 24.2, z = 95.4 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
@@ -1957,6 +1970,7 @@ return {
                     "Quadav Augury Shell"
                 },
                 zone_max_distance = 35,
+                trigger_on_keyitem_obtain = {46},
                 visual_zones = {
                         --up ramp to 1st boss
                         { zone_name = "Beadeaux", type = 'arrow', center = { x = -262.8, y = -0.4, z = -134.6 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
@@ -2020,6 +2034,7 @@ return {
                        "Trade Quadav Charm -> receive KI:Coruscant Rosary (completes 'Mysteries of Beadeaux I'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {91},
+                trigger_on_keyitem_obtain = {46},
                 route_to = "Lower Jeuno",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 zone_max_distance = 35,
@@ -2034,6 +2049,7 @@ return {
                         "Trade Quadav Augury Shell -> receive KI:Black Matinee Necklace (completes 'Mysteries of Beadeaux II'). \n \n",
                 onmob_target = {"Sattal-Mansal"},
                 trigger_on_event_id = {92},
+                trigger_on_keyitem_obtain = {47},
                 route_to = "Lower Jeuno",
                 destination_highlight = {position = "J-8", offsetX = 16, offsetY = 16},
                 zone_max_distance = 35,
@@ -2044,6 +2060,16 @@ return {
                 },
             },
             -- DAVOI - OPTISTONE
+            --
+            -- From here on, steps carry NO trigger_on_keyitem_obtain skip. That is
+            -- deliberate: the magicite (KI 14/15/16) are taken back when the mission
+            -- completes, so a repeat runner never holds them and this stretch must be
+            -- walked every time. The skips on steps 5-16 work only because the Yagudo
+            -- Torch / Crest of Davoi / Coruscant Rosary / Black Matinee Necklace are
+            -- kept for good - they are the entry passes to the strongholds.
+            -- Rule: skip on key items that SURVIVE completion, never on ones consumed
+            -- by it. (KI 14/15/16 do appear on steps 20/24/28, but as ordinary "just
+            -- picked it up" triggers within a run, not as skips.)
             {
                 text = "Step 17: Travel to Davoi! \n \n" ..
                        "Fastest route: Unity Warp to Jugner Forest, go to (G-12). OR Outpost to Norvallen > Davoi. \n \n",

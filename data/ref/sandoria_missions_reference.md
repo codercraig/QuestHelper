@@ -8,13 +8,13 @@
 [2-3b] Journey Abroad (Bastok -> Windurst) - DONE
 [2-3b] Journey Abroad (Windurst -> Bastok) - DONE
 [3-1] Infiltrate Davoi - DONE
-[3-2] The Crystal Spring - DRAFT
-[3-3] Appointment to Jeuno - DRAFT
-[4-1] Magicite - DRAFT
-[5-1] The Ruins of Fei'Yin - DRAFT
-[5-2] The Shadow Lord - DRAFT
-[6-1] Leaute's Last Wishes - DRAFT
-[6-2] Ranperre's Final Rest - DRAFT
+[3-2] The Crystal Spring - DONE
+[3-3] Appointment to Jeuno - DONE
+[4-1] Magicite - DONE
+[5-1] The Ruins of Fei'Yin - DONE
+[5-2] The Shadow Lord - DONE
+[6-1] Leaute's Last Wishes - DONE
+[6-2] Ranperre's Final Rest - STARTED
 [7-1] Prestige of the Papsque - DRAFT
 [7-2] The Secret Weapon - DRAFT
 [8-1] Coming of Age - DRAFT
