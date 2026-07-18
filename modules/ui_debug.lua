@@ -57,24 +57,42 @@ local val = {
     checked       = 0,
     errors        = {},
     passing       = {},
+    -- these are length-checked every frame to label the sub-tabs, so they must
+    -- exist before Run Validation is ever pressed
+    zone_issues   = {},
+    state_issues  = {},
+    target_issues = {},
+    trigger_issues = {},
     show_errors   = true,
     show_ok       = true,
 }
 
-function ui_debug.setValidateData(quest_data, connections, _floor_maps, zd)
-    val.quest_data    = quest_data
-    val.connections   = connections
-    val.zone_data_ref = zd
+function ui_debug.setValidateData(quest_data, connections, floor_maps, zd, locations)
+    val.quest_data     = quest_data
+    val.connections    = connections
+    val.zone_data_ref  = zd
+    val.floor_maps     = floor_maps
+    val.location_data  = locations
 end
 
+-- Runs every static check. Results are split by kind so each gets its own sub-tab:
+--   zone_issues   - a zone name that is in neither zones.lua nor zone_connections
+--   state_issues  - an image whose "state" does not equal its step's position, which
+--                   silently hides that map (see the state check in modules/utils.lua)
+--   target_issues - an onmob_target / vday_targets key with no locations.lua entry,
+--                   which silently draws no beam
 local function run_validate()
-    val.errors  = {}
-    val.passing = {}
-    val.checked = 0
-    val.ran     = true
+    val.errors        = {}
+    val.passing       = {}
+    val.zone_issues   = {}
+    val.state_issues  = {}
+    val.target_issues = {}
+    val.trigger_issues = {}
+    val.checked       = 0
+    val.ran           = true
 
     if not val.quest_data then
-        table.insert(val.errors, "Validate data not initialised — reload the addon.")
+        table.insert(val.zone_issues, { where = "-", detail = "Validate data not initialised - reload the addon." })
         return
     end
 
@@ -87,6 +105,16 @@ local function run_validate()
         end
     end
 
+    local function chk_target(name, where, ctx)
+        if not val.location_data then return end
+        if not val.location_data[name] then
+            table.insert(val.target_issues, {
+                where  = where,
+                detail = string.format('%s "%s" has no entry in locations.lua - no beam will draw', ctx, name),
+            })
+        end
+    end
+
     for category, subfiles in pairs(val.quest_data) do
         for subfile, missions in pairs(subfiles) do
             for mission_name, mission in pairs(missions) do
@@ -95,7 +123,8 @@ local function run_validate()
 
                 for si, step in ipairs(mission.steps or {}) do
                     val.checked = val.checked + 1
-                    local ctx = 'step ' .. si
+                    local ctx   = 'step ' .. si
+                    local where = label .. ' ' .. ctx
 
                     if step.route_to then
                         chk_zone(step.route_to, ctx .. ' route_to', mission_errors)
@@ -103,11 +132,46 @@ local function run_validate()
                     if step.zone_trigger then
                         chk_zone(step.zone_trigger, ctx .. ' zone_trigger', mission_errors)
                     end
-                    for _, img in ipairs(step.images or {}) do
-                        chk_zone(img.zone_name or img.zone, ctx .. ' image zone_name', mission_errors)
-                    end
                     if step.kill_requirement and step.kill_requirement.zone then
                         chk_zone(step.kill_requirement.zone, ctx .. ' kill_requirement', mission_errors)
+                    end
+
+                    for _, img in ipairs(step.images or {}) do
+                        chk_zone(img.zone_name or img.zone, ctx .. ' image zone_name', mission_errors)
+                        -- state must match the step position or the image never shows
+                        if img.state ~= nil and img.state ~= si then
+                            table.insert(val.state_issues, {
+                                where  = where,
+                                detail = string.format('image state=%d but this is step %d - map will not show (set state=%d or remove it)',
+                                                       img.state, si, si),
+                            })
+                        end
+                    end
+
+                    -- talk + event are AND-ed in modules/triggers.lua: both flags must
+                    -- fire before the step advances. If the server never sends one of
+                    -- them the step can never complete, and nothing reports why.
+                    if step.trigger_on_talk and step.trigger_on_event_id then
+                        table.insert(val.trigger_issues, {
+                            where  = where,
+                            detail = "has BOTH trigger_on_talk and trigger_on_event_id - these are AND-ed, so the step needs both to fire",
+                        })
+                    end
+
+                    local tr = step.onmob_target
+                    if type(tr) == 'string' then
+                        chk_target(tr, where, 'onmob_target')
+                    elseif type(tr) == 'table' and type(tr[1]) == 'string' then
+                        for _, n in ipairs(tr) do chk_target(n, where, 'onmob_target') end
+                    end
+                    if type(step.vday_targets) == 'table' then
+                        for day, names in pairs(step.vday_targets) do
+                            if type(names) == 'table' then
+                                for _, n in ipairs(names) do
+                                    chk_target(n, where, 'vday_targets[' .. tostring(day) .. ']')
+                                end
+                            end
+                        end
                     end
                 end
 
@@ -118,6 +182,75 @@ local function run_validate()
                 end
             end
         end
+    end
+end
+
+-- Live view of every locations.lua entry in the zone you are standing in, showing
+-- the same three tests the beam filter applies (zone / raw floor / distance) so a
+-- beam that is not drawing says why instead of just being absent.
+local function render_zone_beams()
+    local zn  = cache.pos.zone_name
+    local raw = cache.floor.raw
+
+    imgui.Text(string.format("Zone: %s      your RAW floor: %s",
+        tostring(zn), raw and tostring(raw) or "unknown"))
+    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+        "An entry draws only if its floor_id equals your raw floor AND you are within max_distance.")
+    imgui.Separator()
+
+    if not val.location_data then
+        imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, "locations data not passed to the debug UI - reload the addon.")
+        return
+    end
+
+    local rows, drawing = {}, 0
+    for name, l in pairs(val.location_data) do
+        if l.zone == zn then
+            local fid  = l.floor_id
+            local fok  = (fid == nil) or (raw == nil) or (fid == raw)
+            local dist, dok = nil, true
+            if l.max_distance and l.target_pos then
+                local dx = cache.pos.x - l.target_pos.x
+                local dy = cache.pos.y - l.target_pos.y
+                local dz = cache.pos.z - l.target_pos.z
+                dist = math.sqrt(dx * dx + dy * dy + dz * dz)
+                dok  = dist <= l.max_distance
+            end
+            if fok and dok then drawing = drawing + 1 end
+            table.insert(rows, { name = name, fid = fid, fok = fok, dist = dist,
+                                 maxd = l.max_distance, dok = dok })
+        end
+    end
+
+    if #rows == 0 then
+        imgui.Text("No locations entries for this zone.")
+        return
+    end
+
+    table.sort(rows, function(a, b)
+        if a.fok ~= b.fok then return a.fok end
+        return (a.dist or 1e9) < (b.dist or 1e9)
+    end)
+
+    imgui.Text(string.format("%d entr(ies) here, %d currently drawable", #rows, drawing))
+    imgui.Separator()
+
+    for _, r in ipairs(rows) do
+        local fid_s  = r.fid and tostring(r.fid) or "-"
+        local dist_s = r.dist and string.format("%.1f/%s", r.dist, tostring(r.maxd)) or "-"
+        local verdict, col
+        if not r.fok then
+            verdict = string.format("FLOOR MISMATCH (entry %s, you are on %s)", fid_s, tostring(raw))
+            col = { 1.0, 0.45, 0.45, 1.0 }
+        elseif not r.dok then
+            verdict = "in range? no - move closer"
+            col = { 0.55, 0.55, 0.55, 1.0 }
+        else
+            verdict = "DRAWING"
+            col = { 0.3, 0.9, 0.3, 1.0 }
+        end
+        imgui.TextColored(col, string.format("  %-42s floor %-4s dist %-12s %s",
+            r.name, fid_s, dist_s, verdict))
     end
 end
 
@@ -501,51 +634,126 @@ local function render_position_tab()
 end
 
 -- ── Tab 4: Validate ──────────────────────────────────────────────────────────
+-- Renders one flat list of {where, detail} findings, or a green all-clear.
+local function render_findings(list, empty_msg, hints)
+    for _, line in ipairs(hints or {}) do
+        imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 }, line)
+    end
+    if not val.ran then
+        imgui.Text("Click 'Run Validation' above.")
+        return
+    end
+    if #list == 0 then
+        imgui.TextColored({ 0.2, 0.9, 0.2, 1.0 }, empty_msg)
+        return
+    end
+    imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, string.format("%d issue(s):", #list))
+    imgui.Separator()
+    for _, e in ipairs(list) do
+        imgui.TextColored({ 1.0, 0.75, 0.4, 1.0 }, "  " .. e.where)
+        imgui.Text("      " .. e.detail)
+    end
+end
+
 local function render_validate_tab()
     if imgui.Button("Run Validation") then run_validate() end
-
+    imgui.SameLine()
+    if imgui.Button("Clear##vclr") then
+        val.ran = false
+        val.errors, val.passing = {}, {}
+        val.zone_issues, val.state_issues, val.target_issues = {}, {}, {}
+        val.trigger_issues = {}
+        val.checked = 0
+    end
     if val.ran then
         imgui.SameLine()
-        imgui.Text(string.format("%d steps   %d mission(s) with errors   %d OK",
-            val.checked, #val.errors, #val.passing))
-
-        imgui.Separator()
-
-        -- Filter toggles
-        if toggle_btn(string.format("Errors (%d)##vfe",  #val.errors),  val.show_errors) then
-            val.show_errors = not val.show_errors
-        end
-        imgui.SameLine()
-        if toggle_btn(string.format("OK (%d)##vfo", #val.passing), val.show_ok) then
-            val.show_ok = not val.show_ok
-        end
+        imgui.Text(string.format("%d steps checked   %d zone   %d state   %d target",
+            val.checked, #val.errors, #val.state_issues, #val.target_issues))
     end
 
     imgui.Separator()
-    imgui.BeginChild("QHValidate", { 0, 0 }, false, 0)
 
-    if not val.ran then
-        imgui.Text("Click 'Run Validation' to check data integrity.")
-    elseif #val.errors == 0 then
-        imgui.TextColored({ 0.2, 0.9, 0.2, 1.0 }, "All missions OK — no issues found.")
-    else
-        if val.show_errors then
-            for _, entry in ipairs(val.errors) do
-                imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, entry.label)
-                for _, issue in ipairs(entry.issues) do
-                    imgui.Text("    " .. issue)
+    if imgui.BeginTabBar("QHValidateTabs") then
+        -- 1: zone names
+        if imgui.BeginTabItem(string.format("Zones (%d)##vz", #val.errors)) then
+            imgui.BeginChild("QHVZones", { 0, 0 }, false, 0)
+            imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+                "route_to / zone_trigger / image zone_name / kill_requirement must exist in zones.lua.")
+            if not val.ran then
+                imgui.Text("Click 'Run Validation' above.")
+            elseif #val.errors == 0 then
+                imgui.TextColored({ 0.2, 0.9, 0.2, 1.0 }, "All zone names resolve.")
+            else
+                if toggle_btn(string.format("Errors (%d)##vfe", #val.errors), val.show_errors) then
+                    val.show_errors = not val.show_errors
+                end
+                imgui.SameLine()
+                if toggle_btn(string.format("OK (%d)##vfo", #val.passing), val.show_ok) then
+                    val.show_ok = not val.show_ok
                 end
                 imgui.Separator()
+                if val.show_errors then
+                    for _, entry in ipairs(val.errors) do
+                        imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, entry.label)
+                        for _, issue in ipairs(entry.issues) do
+                            imgui.Text("    " .. issue)
+                        end
+                        imgui.Separator()
+                    end
+                end
+                if val.show_ok then
+                    for _, label in ipairs(val.passing) do
+                        imgui.TextColored({ 0.3, 0.85, 0.3, 1.0 }, "OK  " .. label)
+                    end
+                end
             end
+            imgui.EndChild()
+            imgui.EndTabItem()
         end
-        if val.show_ok then
-            for _, label in ipairs(val.passing) do
-                imgui.TextColored({ 0.3, 0.85, 0.3, 1.0 }, "OK  " .. label)
-            end
-        end
-    end
 
-    imgui.EndChild()
+        -- 2: live drawing
+        if imgui.BeginTabItem("Drawing##vd") then
+            imgui.BeginChild("QHVDraw", { 0, 0 }, false, 0)
+            render_zone_beams()
+            imgui.EndChild()
+            imgui.EndTabItem()
+        end
+
+        -- 3: image state vs step position
+        if imgui.BeginTabItem(string.format("Step Images (%d)##vs", #val.state_issues)) then
+            imgui.BeginChild("QHVState", { 0, 0 }, false, 0)
+            render_findings(val.state_issues, "Every image state matches its step position.", {
+                "An image only shows when its 'state' equals the step number (or is absent).",
+                "Inserting a step without renumbering silently hides the maps after it.",
+            })
+            imgui.EndChild()
+            imgui.EndTabItem()
+        end
+
+        -- 4: onmob_target keys
+        if imgui.BeginTabItem(string.format("Beam Targets (%d)##vt", #val.target_issues)) then
+            imgui.BeginChild("QHVTarget", { 0, 0 }, false, 0)
+            render_findings(val.target_issues, "Every onmob_target key exists in locations.lua.", {
+                "onmob_target and vday_targets names must be keys in locations.lua.",
+                "A name with no entry draws no beam and reports nothing in game.",
+            })
+            imgui.EndChild()
+            imgui.EndTabItem()
+        end
+
+        -- 5: trigger combinations
+        if imgui.BeginTabItem(string.format("Triggers (%d)##vg", #val.trigger_issues)) then
+            imgui.BeginChild("QHVTrig", { 0, 0 }, false, 0)
+            render_findings(val.trigger_issues, "No steps pair talk and event triggers.", {
+                "trigger_on_talk and trigger_on_event_id are AND-ed - a step with both waits for BOTH.",
+                "If the server never sends one, the step can never complete. Usually you want just one.",
+            })
+            imgui.EndChild()
+            imgui.EndTabItem()
+        end
+
+        imgui.EndTabBar()
+    end
 end
 
 -- ── Tab 3: Target + locations.lua builder ────────────────────────────────────

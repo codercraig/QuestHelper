@@ -775,7 +775,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 16,
+                        state = 17,
                         highlights = {
                             { position = "H-5", offsetX = 16, offsetY = 16},
                         },
@@ -1320,7 +1320,7 @@ return {
     },
      ["ZM13: The Gate of the Gods"] = {
         prerequisites = {
-            {category = "Missions", subfile = "Zilart", name = "ZM12: The Hall of the Gods"},
+            {category = "Missions", subfile = "Zilart", name = "ZM12: The Mithra and the Crystal"},
         },
         steps = {
             {

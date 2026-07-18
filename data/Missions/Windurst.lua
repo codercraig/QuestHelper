@@ -296,7 +296,7 @@ return {
                         floor_id  = 3,
                         width     = 512,
                         height    = 512,
-                        state     = 5,
+                        state     = 6,
                     },
                 },
             },
@@ -2723,16 +2723,6 @@ return {
                         highlights = {
                              { position = "I-9", offsetX = 16, offsetY = 16, label = "D", color = "yellow" },
                              { position = "F-6", offsetX = 16, offsetY = 16, label = "G", color = "cyan" },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 13,
-                        zone_name = "Beadeaux",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "F-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
@@ -5414,7 +5404,7 @@ s
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 6,
                         zone_name = "Davoi",
                         highlights = {
                             { position = "H-8", offsetX = 16, offsetY = 16 },

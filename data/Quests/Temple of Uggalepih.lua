@@ -147,7 +147,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 5,
                         zone_name = "Temple of Uggalepih",
                         floor_id = 1,
                         highlights = {

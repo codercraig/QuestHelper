@@ -33,6 +33,8 @@ return {
         trigger_npc = "Gumbah",
         visual_mode = "arc",
         zone = "Bastok Mines",
+        floor_id = 0,
+        max_distance = 35,
     },
     -- Bastok Markets
     ["Cleades"] = {
@@ -231,7 +233,7 @@ return {
         trigger_npc = "The Mute",
         visual_mode = "arc",
         zone = "Beadeaux",
-        floor_id = 2,
+        floor_id = 15,
         max_distance = 35
     },
     ["Ramp 1"] = {
@@ -361,6 +363,13 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+    ["Moreno-Toeno"] = {
+        target_pos = { x = 168.5, y = -2.1, z = 156.9 },
+        visual_mode = "arc",
+        zone = "Windurst Waters North",
+        floor_id = 1,
+        max_distance = 35
+    },
     -- Windurst Waters South
     ["Ohbiru-Dohbiru"] = {
         target_pos = { x = 22.7, y = -6.2, z = -195.0 },
@@ -389,13 +398,6 @@ return {
         zone = "Windurst Waters South",
         floor_id = 2,
         max_distance = 30
-    },
-    ["Moreno-Toeno"] = {
-        target_pos = { x = 168.5, y = -2.1, z = 156.9 },
-        visual_mode = "arc",
-        zone = "Windurst Waters South",
-        floor_id = 1,
-        max_distance = 35
     },
     -- Windurst Walls
     ["Yoran-Oran"] = {
@@ -642,7 +644,7 @@ return {
         trigger_npc = "Uu Zhoumo",
         visual_mode = "arc",
         zone = "Giddeus",
-        floor_id = 2,
+        floor_id = 15,
         max_distance = 20
     },
     ["Laa Mozi"] = {
@@ -681,7 +683,7 @@ return {
         target_pos = { x = -60.0, y = 21.8, z = -102.8 },
         visual_mode = "arc",
         zone = "Castle Oztroja",
-        floor_id = 7,
+        floor_id = 15,
         max_distance = 30
     },
     --3rd password
@@ -768,7 +770,7 @@ return {
         target_pos = { x = -155.2, y = 21.5, z = -140.0 },
         visual_mode = "arc",
         zone = "Castle Oztroja",
-        floor_id = 7,
+        floor_id = 15,
         max_distance = 35
     },
     -- Maze of Shakhrami
@@ -885,7 +887,16 @@ return {
         floor_id = 0,
         max_distance = 10
     },
-    -- Chateau d'Oraguille
+    -- West Ronfaure
+    ["west-ronfaure-???-e8"] = {
+        target_pos = { x = -695.7, y = -39.4, z = 21.4 },
+        visual_mode = "arc",
+        zone = "West Ronfaure",
+        floor_id = 0,
+        max_distance = 15,
+        draw_in_combat = false,
+    },
+        -- Chateau d'Oraguille
     ["Halver"] = {
         target_pos = { x = 2.4, y= -2, z=1.9},
         trigger_npc = "Halver",
@@ -912,6 +923,24 @@ return {
         zone = "Chateau d'Oraguille",
         floor_id = 0,
         max_distance = 20
+    },
+    ["Faurie"] = {
+        target_pos = { x = 1.4, y = -2.0, z = -15.3 },
+        visual_mode = "arc",
+        dynamic_pos = true,
+        y_offset = -1.9,
+        zone = "Chateau d'Oraguille",
+        floor_id = 0,
+        max_distance = 10,
+        trigger_npc = "Faurie",
+    },
+    -- Bostaunieux Oubliette
+    ["Couchatorage"] = {
+        target_pos = { x = -20.5, y = -20.1, z = 17.8 },
+        visual_mode = "arc",
+        zone = "Bostaunieux Oubliette",
+        floor_id = 15,
+        max_distance = 10
     },
     -- Ghelsba Outpost
     ["ghelsba-outpost-hut-door-f10"] = {
@@ -1370,6 +1399,8 @@ return {
         target_pos = { x = -12.6, y = 0.6, z = 308.0 },
         visual_mode = "arc",
         zone = "Riverne - Site #A01",
+        -- raw floor 1: unstable displacements sit on a different floor to the
+        -- spatial ones (floor 2), same split as Riverne - Site #B01
         floor_id = 1,
         max_distance = 35
     },
@@ -1931,7 +1962,7 @@ return {
         target_pos = { x = -184.5, y = -2.0, z = 190.0 },
         visual_mode = "arc",
         zone = "Fei'Yin",
-        floor_id = 2,
+        floor_id = 15,
         max_distance = 20
     },
     -- Uleguerand Range
@@ -1978,112 +2009,128 @@ return {
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-2"] = {
         target_pos = { x = 350.0, y = -1.9, z = -61.6 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-3"] = {
         target_pos = { x = 338.4, y = -1.9, z = -70.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-4"] = {
         target_pos = { x = 321.6, y = -1.9, z = -70.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-5"] = {
         target_pos = { x = 310.0, y = -1.9, z = -101.6 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-6"] = {
         target_pos = { x = 298.4, y = -1.9, z = -110.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-7"] = {
         target_pos = { x = 290.0, y = -1.9, z = -98.4 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-8"] = {
         target_pos = { x = 290.0, y = -1.9, z = -81.6 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-9"] = {
         target_pos = { x = 258.4, y = -1.9, z = -70.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-10"] = {
         target_pos = { x = 250.0, y = -1.9, z = -58.4 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-11"] = {
         target_pos = { x = 261.6, y = -1.9, z = -50.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-12"] = {
         target_pos = { x = 278.4, y = -1.9, z = -50.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-13"] = {
         target_pos = { x = 290.0, y = -1.9, z = -18.4 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-14"] = {
         target_pos = { x = 301.6, y = -1.9, z = -10.0 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-15"] = {
         target_pos = { x = 310.0, y = -1.9, z = -21.6 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-stone-door-16"] = {
         target_pos = { x = 310.0, y = -1.9, z = -38.4 },
         visual_mode = "arc",
         zone = "Pso'Xja",
         floor_id = 1,
-        max_distance = 2
+        max_distance = 5,
+        draw_in_combat = false
     },
     ["pso-xja-avatar-gate"] = {
         target_pos = { x = 280.0, y = 30.4, z = -60.0 },

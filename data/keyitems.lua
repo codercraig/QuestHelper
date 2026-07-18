@@ -65,6 +65,7 @@ local id_to_name = {
     [273] = "Old Rusty Key",
     [280] = "Rhinostery Ring",
     [281] = "Manustery Ring",
+    [283] = "Ancient San Dorian Tablet",
     [289] = "Reinforced Cermet",
     [290] = "Letter From Werei",
     [293] = "Old Piece of Wood",

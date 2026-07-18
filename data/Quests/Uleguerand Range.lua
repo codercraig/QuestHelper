@@ -35,7 +35,7 @@ return {
                 text = "Step 2: Obtain 2x Cluster Core and trade them to Buffalostalker Dodzbraz (F-9) to complete the quest.\n \n" ..
                        "Cluster Cores are dropped by Clusters in Uleguerand Range - you should have some from 'Riverne - Site #A01/B01. \n \n",
                 route_to = "Uleguerand Range",
-                onmob_target = "Buffalostalker Dodzbraz",
+                onmob_target = "uleguerand-range-buffalostalker-dodzbraz",
                 --onmob_enemy = {"Cluster"},
                 destination_highlight = {position = "F-9", offsetX = 16, offsetY = 16},
                 items_needed = {

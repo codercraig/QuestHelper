@@ -532,7 +532,7 @@ return {
             { -- Step 6
                 text = "Step 6: Head down into the canyon and talk to Laurisse. \n \n" ..
                        "(Augevinne and Yaucevouchat nearby have optional dialogue.) \n \n",
-                onmob_target = {"Laurisse", "Augevinne", "Yaucevouchat"},
+                onmob_target = {"Laurisse"},
                 trigger_on_event_id = {106},
                 route_to = "La Theine Plateau",
                 destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
@@ -2552,16 +2552,6 @@ return {
                              { position = "F-6", offsetX = 16, offsetY = 16, label = "G", color = "cyan" },
                         },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 13,
-                        zone_name = "Beadeaux",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "F-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
                 },
             },
             {
@@ -3383,7 +3373,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 5,
                         zone_name = "Castle Zvahl Baileys",
                         floor_id = 1,
                         highlights = {
@@ -3393,7 +3383,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 5,
                         zone_name = "Castle Zvahl Baileys",
                         floor_id = 2,
                         highlights = {
@@ -3403,7 +3393,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 4,
+                        state = 5,
                         zone_name = "Castle Zvahl Baileys",
                         floor_id = 15,
                         highlights = {
@@ -3478,7 +3468,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 6,
                         zone_name = "Castle Zvahl Keep",
                         floor_id = 1,
                         highlights = {
@@ -3488,7 +3478,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 6,
                         zone_name = "Castle Zvahl Keep",
                         floor_id = 2,
                         highlights = {
@@ -3498,14 +3488,14 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 6,
                         zone_name = "Castle Zvahl Keep",
                         floor_id = 3,
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 6,
                         zone_name = "Castle Zvahl Keep",
                         floor_id = 4,
                         highlights = {
@@ -4052,12 +4042,12 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 4-5 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2 stacks of crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" papsque's chambers on the third floor of the cathedral."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -4093,71 +4083,110 @@ return {
             { -- Step 2
                 text = "Step 2: Go to the Cathedral (M-6) in Northern San d'Oria and examine the Door: Papal Chambers on the THIRD floor for a cutscene. \n \n" ..
                        "You must view this before heading to the Bostaunieux Oubliette. \n \n",
-                onmob_target = {"_6fc"},
+                onmob_target = {"Door: Papal Chambers"},
                 trigger_on_event_id = {7},
                 route_to = "Northern San d'Oria",
-                zone_max_distance = 20,
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 2,
-                        zone_name = "Northern San d'Oria",
-                        highlights = {
-                            { position = "M-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 15,
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 109.0, y = 0.0, z = 101.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 125.2, y = 0.0, z = 112.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 134.3, y = -6.5, z = 93.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 122.3, y = -6.5, z = 106.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 132.1, y = -11.0, z = 124.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" }
                 },
             },
             { -- Step 3
-                text = "Step 3: Get to the ??? in West Ronfaure (E-8) - it is reached from INSIDE the Bostaunieux Oubliette, not from West Ronfaure itself. \n \n" ..
-                       "Recommended: full alliance of Lv60+, or a party of Lv70+. \n \n" ..
-                       "===== Route 1: Walk (Bostaunieux Oubliette) ===== \n" ..
-                       "Enter the Oubliette and drop down the sewer hatch at (E-7)/(E-8) on Map 1 - talk to Couchatorage to drop down. \n" ..
-                       "Use Sneak/Silent Oil BEFORE moving - Haunts and Garm will aggro even at Lv90. \n" ..
-                       "Hug the RIGHT wall and follow the path until you zone into West Ronfaure at (E-8). \n" ..
-                       "WARNING: Do not go over the edge - if you fall there is no way back up, you must run it all again. \n \n" ..
-                       "===== Route 2: Unity Warp (100 Accolades) ===== \n" ..
+                text = "Step 3: Enter the Bostaunieux Oubliette from Chateau d'Oraguille at (I-8). \n \n" ..
+                       "Chateau d'Oraguille is entered from Northern San d'Oria at (I-9). \n" ..
+                       "Head down to the lower level of the Chateau and zone in at (I-8). \n \n" ..
+                       "===== Alternative: Unity Warp (100 Accolades) ===== \n" ..
                        "Any Unity Concord NPC > 'Bring Me to a Wanted encounter area' > Content level 122 > Bostaunieux Oubliette. \n" ..
-                       "This warps you straight to the West Ronfaure exit. \n \n" ..
-                       "===== Route 3: Geomagnetic Fount ===== \n" ..
-                       "The fount from the quest 'Middle Lands Investigation' lands next to the ???. \n \n",
-                zone_trigger = "West Ronfaure",
+                       "This warps you straight to the West Ronfaure end of the zone - if you use this you can skip the next step. \n \n",
+                zone_trigger = "Bostaunieux Oubliette",
                 route_to = "Bostaunieux Oubliette",
-                destination_highlight = {position = "E-8", offsetX = 16, offsetY = 16},
-                zone_max_distance = 40,
+                --destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 20,
                 visual_zones = {
-                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 1.9, y = 0.0, z = -3.5 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 16.0, y = 0.0, z = -4.4 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 17.4, y = 0.0, z = 12.0 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 43.2, y = 3.0, z = 12.5 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 28.4, y = 7.5, z = 24.2 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                },
+
+            },
+            { -- Step 4
+                text = "Step 4: Cross the Bostaunieux Oubliette and zone out into West Ronfaure at (E-8). \n \n" ..
+                       "Drop down the sewer hatch at (E-7)/(E-8) on Map 1 - talk to Couchatorage to drop down. \n" ..
+                       "Use Sneak/Silent Oil BEFORE moving - Haunts and Garm will aggro even at Lv90. \n",
+                zone_trigger = "West Ronfaure",
+                zone_max_distance = 25,
+                onmob_target = "Couchatorage",
+                visual_zones = {
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = 99.1, y = -24.0, z = 70.3 }, size = 4, direction = "down", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = 98.5, y = -24.0, z = 43.3 }, size = 4, direction = "down", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = 100.8, y = -24.0, z = 19.6 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = 56.3, y = -24.1, z = 19.9 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = 20.1, y = -24.0, z = 20.1 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'rect', center = { x = 16.0, y = -25.5, z = 20.0 }, width = 2.00, height = 3.00, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -7.7, y = -19.0, z = 19.7 }, size = 4, direction = "left", floor_id = 15, colour = "yellow" },
+
+                    -- bottom floor
+                    { zone_name = "Bostaunieux Oubliette", type = 'square', center = { x = -11.7, y = 1.1, z = 25.4 }, size = 1, floor_id = 16, colour = "green" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -20.0, y = 1.1, z = 18.4 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -22.1, y = 0.0, z = -0.9 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -18.1, y = 0.0, z = -33.1 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -19.1, y = -0.1, z = -59.5 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -55.1, y = 0.1, z = -58.3 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -74.4, y = 0.0, z = -58.5 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -102.6, y = -0.1, z = -62.2 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -140.6, y = -0.1, z = -61.6 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -140.7, y = -0.1, z = -99.4 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -169.9, y = -0.0, z = -103.1 }, size = 3, direction = "nw", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -180.0, y = 0.0, z = -97.3 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -206.0, y = -0.0, z = -97.9 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -221.3, y = -0.1, z = -100.4 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -221.7, y = 0.0, z = -124.9 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -218.5, y = 0.1, z = -150.4 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -220.0, y = 0.0, z = -169.7 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -219.7, y = 0.0, z = -180.2 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -260.3, y = 0.0, z = -179.6 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -284.4, y = 0.0, z = -181.5 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -312.9, y = -0.0, z = -178.3 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -340.0, y = -0.1, z = -179.5 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -340.2, y = -0.0, z = -219.8 }, size = 3, direction = "left", floor_id = 16, colour = "yellow" },
+                    { zone_name = "Bostaunieux Oubliette", type = 'arrow', center = { x = -381.0, y = -4.0, z = -220.1 }, size = 3, direction = "down", floor_id = 16, colour = "yellow" },
                 },
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 3,
+                        state = 4,
                         zone_name = "Bostaunieux Oubliette",
-                        floor_id = 1,
+                        floor_id = 15,
                         highlights = {
                             { position = "E-7", offsetX = 16, offsetY = 16 },
-                            { position = "E-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 3,
-                        zone_name = "West Ronfaure",
+                        state = 4,
+                        zone_name = "Bostaunieux Oubliette",
+                        floor_id = 16,
                         highlights = {
-                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                            { position = "E-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { -- Step 4
-                text = "Step 4: Examine the ??? at West Ronfaure (E-8) to spawn Marauder Dvogzog, then defeat him. \n \n" ..
+            { -- Step 5
+                text = "Step 5: Examine the ??? at West Ronfaure (E-8) to spawn Marauder Dvogzog, then defeat him. \n \n" ..
                        "Marauder Dvogzog (Lv67 Orc Monk, ~16,000 HP): \n" ..
                        "- Uses Hundred Fists at around 50% HP - BIND him and back off while it is up \n \n" ..
                        "NOTE: If you wipe and zone, you must wait 5-10 minutes before the ??? will pop him again. \n \n",
-                onmob_target = {"qm4"},
+                onmob_target = {"west-ronfaure-???-e8"},
                 onmob_enemy = "Marauder Dvogzog",
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
@@ -4167,37 +4196,51 @@ return {
                     zone = "West Ronfaure",
                     count_party_kills = true,
                 },
-                visual_zones = {
-                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
-                },
-            },
-            { -- Step 5
-                text = "Step 5: Examine the ??? again to receive KI:Ancient San d'Orian tablet. \n \n" ..
-                       "EVERYONE on the mission must examine it individually. \n \n" ..
-                       "WARNING: If you zone before examining the ???, you have to kill Marauder Dvogzog all over again. \n \n",
-                onmob_target = {"qm4"},
-                trigger_on_talk = {"Ancient San d'Orian tablet"},
-                visual_zones = {
-                    { zone_name = "West Ronfaure", type = 'square', center = { x = -695.0, y = -40.0, z = 21.0 }, size = 2, floor_id = 0, colour = "green" },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "West Ronfaure",
+                        highlights = {
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 6
-                text = "Step 6: Return to the Cathedral (M-6) in Northern San d'Oria and examine the Door: Papal Chambers for the final cutscene. \n \n" ..
-                       "The mission completes after this cutscene. \n \n",
-                onmob_target = {"_6fc"},
-                trigger_on_event_id = {8},
-                route_to = "Northern San d'Oria",
-                zone_max_distance = 20,
+                text = "Step 6: Examine the ??? again to receive KI:Ancient San d'Orian tablet. \n \n" ..
+                       "EVERYONE on the mission must examine it individually. \n \n" ..
+                       "WARNING: If you zone before examining the ???, you have to kill Marauder Dvogzog all over again. \n \n",
+                onmob_target = {"west-ronfaure-???-e8"},
+                trigger_on_keyitem_obtain = {283},
+                keyitems_needed = {283},
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 6,
-                        zone_name = "Northern San d'Oria",
+                        zone_name = "West Ronfaure",
                         highlights = {
-                            { position = "M-6", offsetX = 16, offsetY = 16 },
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
                         },
                     },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Return to the Cathedral (M-6) in Northern San d'Oria and examine the Door: Papal Chambers for the final cutscene. \n \n" ..
+                       "The mission completes after this cutscene. \n \n",
+                onmob_target = {"Door: Papal Chambers"},
+                trigger_on_event_id = {8},
+                route_to = "Northern San d'Oria",
+                destination_highlight = {position = "M-6", offsetX = 16, offsetY = 16},
+                zone_max_distance = 15,
+                visual_zones = {
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 109.0, y = 0.0, z = 101.6 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 125.2, y = 0.0, z = 112.1 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 134.3, y = -6.5, z = 93.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 122.3, y = -6.5, z = 106.0 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Northern San d'Oria", type = 'arrow', center = { x = 132.1, y = -11.0, z = 124.2 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" }
                 },
             },
         },
@@ -4212,7 +4255,7 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 4-5 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 2 stacks of crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard. He will NOT offer you the mission list - instead he says: \n" ..
                        "'Go to the garden for further instructions.' \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
@@ -4254,42 +4297,78 @@ return {
             { -- Step 2
                 text = "Step 2: Go to Queen Leaute's Garden (F-7) in Chateau d'Oraguille for a cutscene. \n \n" ..
                        "The cutscene triggers on entering the garden area - there is no NPC to talk to. \n \n",
-                trigger_on_event_id = {0},
+                trigger_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'square', center = { x = -85.2, y = 0.4, z = 77.9 }, size = 8, colour = "cyan" },
+                },
                 route_to = "Chateau d'Oraguille",
-                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
-                zone_max_distance = 20,
+                destination_highlight = {position = "F-7", offsetX = 16, offsetY = 16},
+                zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "Chateau d'Oraguille", type = 'square', center = { x = -105.0, y = 0.1, z = 72.0 }, size = 2, floor_id = 0, colour = "green" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -5.9, y = 0.0, z = -4.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.4, y = 0.0, z = -6.0 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.8, y = -3.0, z = 35.9 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -37.3, y = -3.0, z = 35.8 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.6, y = -3.0, z = 35.5 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.7, y = -3.0, z = 52.0 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -69.6, y = -3.0, z = 51.6 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -84.1, y = -1.1, z = 57.8 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                },
+
+            },
+            { -- Step 3
+                text = "Step 3: Return to a San d'Orian Gate Guard to actually ACCEPT the mission. \n \n" ..
+                       "The mission list will now be offered to you. \n \n",
+                onmob_target = {"Ambrotien", "Endracion", "Grilau","Faurie"},
+                trigger_on_talk = {" would deal a great blow to all of San d'Oria."},
+                zone_max_distance = 25,
+                visual_zones = {
+
+                    -- Exit Chateau D'Oraguille
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -83.7, y = 0.4, z = 75.7 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -79.2, y = -3.0, z = 51.7 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -59.4, y = -3.0, z = 51.8 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -58.3, y = -3.0, z = 35.7 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -38.5, y = -3.0, z = 36.2 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.1, y = -3.0, z = 35.8 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.8, y = 0.0, z = 14.2 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -15.1, y = 0.0, z = -3.9 }, size = 3, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 0.3, y = 0.0, z = -6.5 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    -- Green Square around
+                    --Aravoge, T.K for crystal trades
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
+                    --Arpevion, T.K
+                    { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
+                    --Achantere, T.K
+                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
                 },
                 images = {
                     {
                         width = 512,
                         height = 512,
-                        state = 2,
-                        zone_name = "Chateau d'Oraguille",
+                        state = 3,
+                        zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "F-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 3,
+                        zone_name = "Northern San d'Oria",
+                        highlights = {
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
-            { -- Step 3
-                text = "Step 3: Return to a San d'Orian Gate Guard to actually ACCEPT the mission. \n \n" ..
-                       "The mission list will now be offered to you. \n \n",
-                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
-                zone_max_distance = 40,
-            },
             { -- Step 4
                 text = "Step 4: Travel to Horlais Peak with your party. \n \n" ..
                        "Notes: Orcs sight-aggro, Bats aggro by sound. Use Sneak/Invis if low level. \n \n" ..
-                       "Shortcut: Yughott Grotto Home Point #1 (J-6), or Domenic for 750g if Beyond Infinity is complete. \n \n" ..
-                       "Hard coded route - this will take off from Sandy! \n" ..
-                       "West Ronfaure  : Go to (E-4) -> Ghelsba Outpost. \n" ..
-                       "Ghelsba Outpost: Go to (H-11)-> Yughott Grotto  - exit 1. \n" ..
-                       "Yughott Grotto : Go to (K-5) -> Fort Ghelsba    - exit 3. \n" ..
-                       "Fort Ghelsba   : Go to (J-8) -> Yughott Grotto  - exit 4. \n" ..
-                       "Yughott Grotto : Enter Horlais Peak (J-6). \n \n",
+                       "Shortcut: Yughott Grotto Home Point #1 (J-6), or Domenic for 750g if Beyond Infinity is complete. \n \n",
+                zone_max_distance = 35,
                 zone_trigger = "Horlais Peak",
                 visual_zones = {
                         --Ghelsba Outpost
@@ -4402,7 +4481,7 @@ return {
                        "- Wolf Clan Warmachine (~1800 HP) \n \n" ..
                        "Tips: \n" ..
                        "- All are vulnerable to Sleep and Lullaby - Darokbok resists (use Elemental Seal + Sleepga, or Horde Lullaby) \n" ..
-                       "- The Orcs use their 1hrs below 50% HP \n" ..
+                       "- The Orcs use their 1hrs below 50percent HP \n" ..
                        "- You do NOT need to kill the Wyvern - leave it slept \n" ..
                        "- Soloable on many jobs, especially with /SCH \n \n" ..
                        "Victory: KI:Crystal dowser",
@@ -4411,9 +4490,16 @@ return {
                 onmob_enemy = {"Darokbok of Clan Reaper", "Derakbak of Clan Wolf", "Jagidbod of Clan Reaper", "Reaper Clan Warmachine", "Wolf Clan Warmachine"},
                 onmob_enemy_colour = "red",
                 onmob_enemy_size = 2,
+                kill_requirement = {
+                    count = 5,
+                    enemies = {"Darokbok of Clan Reaper", "Derakbak of Clan Wolf", "Jagidbod of Clan Reaper", "Reaper Clan Warmachine", "Wolf Clan Warmachine"},
+                    zone = "Horlais Peak",
+                    count_party_kills = true,
+                    display_only = true,
+                },
             },
             { -- Step 6
-                text = "Step 6: Report back to any San d'Orian Gate Guard to complete the mission. \n \n",
+                text = "Step 6: Warp out, and report back to any San d'Orian Gate Guard to complete the mission. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
                 trigger_on_event_id = {1043, 1044},
                 route_to = "Southern San d'Oria",
@@ -4425,8 +4511,8 @@ return {
                         state = 6,
                         zone_name = "Southern San d'Oria",
                         highlights = {
-                            { position = "I-9", offsetX = 16, offsetY = 16 },
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
+                            { position = "F-9", offsetX = 16, offsetY = 16 },
+                            { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -4435,7 +4521,7 @@ return {
                         state = 6,
                         zone_name = "Northern San d'Oria",
                         highlights = {
-                            { position = "D-6", offsetX = 16, offsetY = 16 },
+                            { position = "D-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },

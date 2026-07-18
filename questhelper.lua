@@ -846,7 +846,12 @@ ashita.events.register('d3d_present', 'present_callback', function()
 
     -- Filter targets by zone and optional floor_id
     local filteredTargets = {}
-    local filter_floor = player_module.getFloorId(floor_mappings)
+    -- locations.lua floor_id is the RAW floor id - the value /qh_checkfloor prints,
+    -- NOT the map number from data/floor_mappings.lua. Compared against the raw floor
+    -- deliberately: floor_mappings then has no influence on beams at all, so adding or
+    -- editing a zone mapping can never silently break entries authored before it, and
+    -- a raw id is unique per floor so an entry can only ever match one floor.
+    local filter_floor_raw = player_module.getFloorIdRaw()
     for _, targetData in ipairs(targetsToDraw) do
         if targetData then
             local zoneOk = true
@@ -856,8 +861,8 @@ ashita.events.register('d3d_present', 'present_callback', function()
             if targetData.zone then
                 zoneOk = zone_data[targetData.zone] and player_module.zoneId == zone_data[targetData.zone]
             end
-            if targetData.floor_id and filter_floor then
-                floorOk = targetData.floor_id == filter_floor
+            if targetData.floor_id and filter_floor_raw then
+                floorOk = targetData.floor_id == filter_floor_raw
             end
             if targetData.max_distance and targetData.target_pos then
                 local dx = player_module.posX       - targetData.target_pos.x
@@ -1663,7 +1668,7 @@ ashita.events.register('load', 'load_callback', function()
 
     -- Pass data needed by the Validate tab in the debug UI
     local connections_ok, connections = pcall(require, 'data.zone_connections')
-    ui_debug.setValidateData(quest_data, connections_ok and connections or {}, floor_mappings, zone_data)
+    ui_debug.setValidateData(quest_data, connections_ok and connections or {}, floor_mappings, zone_data, location_data)
 
     -- Load quest icon texture
     questIconTexture = helpers.getTexture(addon.path .. 'assets/quest_icon.png')

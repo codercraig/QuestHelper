@@ -13,6 +13,27 @@
 --     [1] = 1,   -- Raw floor ID 1 = Map 1 (upper floor)
 --     [15] = 2,  -- Raw floor ID 15 = Map 2 (lower floor)
 -- },
+--
+-- ─────────────────────────────────────────────────────────────────────────────
+-- WHAT THIS FILE IS FOR
+--
+-- It translates raw floor ids into map numbers. Map numbers are used for:
+--   1. Pathfinding sub-zones (the load-bearing one). Zones whose floors have
+--      different zone connections - Palborough Mines, Korroloka Tunnel, Kuftal
+--      Tunnel - are identified by map number in modules/pathfinding.lua, so
+--      route_to needs this to route correctly through them.
+--   2. Map images: which image auto-switches into view, and showing "Map 2"
+--      rather than "floor 15" in the UI.
+--
+-- It does NOT affect beam drawing. locations.lua floor_id is a RAW id compared
+-- against the raw floor, so adding a zone here can never break existing entries.
+--
+-- AUTHORING RULE: every floor_id you type anywhere - locations.lua, visual_zones,
+-- images, destination_highlight - is the RAW /qh_checkfloor value. Map numbers
+-- appear in exactly one place: the right-hand side of the tables below.
+-- The "Audit Floor IDs" button on the debug Validate tab flags locations entries
+-- that look like they used a map number by mistake.
+-- ─────────────────────────────────────────────────────────────────────────────
 
 return {
     --Bibiki Bay
@@ -121,6 +142,10 @@ return {
         [15] = 3,
         [16] = 4,
         [162] = 5,
+    },
+    [167] = {
+        [15] = 1,
+        [16] = 2,
     },
     [172] = {
         [0] = 1,

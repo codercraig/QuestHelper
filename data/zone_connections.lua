@@ -466,7 +466,7 @@ return {
         {zone = "Jugner Forest", exit = "H-12", floor_id = 1}
     },
     ["Bostaunieux Oubliette"] = {
-        {zone = "Chateau d'Oraguille", exit = "I-9"}
+        {zone = "Chateau d'Oraguille", exit = "I-8"}
     },
     ["King Ranperre's Tomb"] = {
         {zone = "East Ronfaure", exit = "G-5"}

@@ -2850,7 +2850,7 @@ return {
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 10,
                         highlights = {
                             { position = "M-6", offsetX = 16, offsetY = 16 },
                         },
@@ -3131,52 +3131,67 @@ return {
                 visual_zones = {
                         --1st door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 333.9, y = 0.2, z = -50.0 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 341.6, y = -0.0, z = -50.0 }, size =3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 341.6, y = -1.8, z = -50.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --2nd door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 349.7, y = 0.2, z = -48.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 350.0, y = 0.2, z = -61.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 350.0, y = -1.9, z = -61.6 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --3rd door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 351.5, y = 0.2, z = -70.3 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 338.4, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 338.4, y = -1.9, z = -70.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --4th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 332.4, y = 0.2, z = -70.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 321.6, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 321.6, y = -1.9, z = -70.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --5th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 310.0, y = 0.2, z = -88.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -101.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 310.0, y = -1.9, z = -101.6 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --6th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 312.4, y = 0.2, z = -109.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 298.4, y = 0.2, z = -110.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 298.4, y = -1.9, z = -110.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --7th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.3, y = 0.2, z = -111.6 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -98.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 290.0, y = -1.9, z = -98.4 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --8th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.1, y = 0.2, z = -91.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -81.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 290.0, y = -1.9, z = -81.6 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --9th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 273.4, y = 0.2, z = -70.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 258.4, y = 0.2, z = -70.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 258.4, y = -1.9, z = -70.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --10th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 249.4, y = 0.2, z = -70.7 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 250.0, y = 0.2, z = -58.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 250.0, y = -1.9, z = -58.4 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --11th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 246.6, y = 0.2, z = -49.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 261.6, y = 0.2, z = -50.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 261.6, y = -1.9, z = -50.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --12th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 269.4, y = 0.2, z = -50.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 278.4, y = 0.2, z = -50.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 278.4, y = -1.9, z = -50.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --13th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 290.1, y = 0.2, z = -32.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 290.0, y = 0.2, z = -18.4 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 290.0, y = -1.9, z = -18.4 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --14th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 288.4, y = 0.2, z = -10.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 301.6, y = 0.2, z = -10.0 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 301.6, y = -1.9, z = -10.0 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
                         --15th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 309.9, y = 0.2, z = -7.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -21.6 }, size = 3, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 310.0, y = -1.9, z = -21.6 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
+
                         --16th door
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 310.1, y = 0.2, z = -29.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
-                        { zone_name = "Pso'Xja", type = 'square', center = { x = 310.0, y = 0.2, z = -38.4 }, size = 4, floor_id = 1, colour = "yellow" },
+                        { zone_name = "Pso'Xja", type = 'rect', center = { x = 310.0, y = -1.9, z = -38.4 }, width = 3.00, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
 
                         --elevator
                         { zone_name = "Pso'Xja", type = 'arrow', center = { x = 300.0, y = 0.0, z = -49.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
@@ -5050,7 +5065,7 @@ return {
                        "The cutscene fires automatically on entering The Garden of Ru'Hmet.\n",
                 --route_to = "Grand Palace of Hu'Xzoi",
                 trigger_on_event_id = {201},
-                onmob_target = "grand-palace-of-hu-xzoi-gate-of-the-gods-north",
+                onmob_target = {"altaieu-crystalline-field","grand-palace-of-hu-xzoi-gate-of-the-gods-north"},
                 zone_trigger = "The Garden of Ru'Hmet",
                 images = {
                     {
@@ -5421,7 +5436,7 @@ return {
                        "  - Alternatively, kill all 4 of the Qn'zdei, then wait at the sealed door for them to respawn and dash through.\n \n" ..
                        "Once through, ascend the elevator. \n \n",
                 --route_to = "The Garden of Ru'Hmet",
-                trigger_on_event_id = {155},
+                trigger_on_event_id = {155,101},
                 onmob_target = {"altaieu-crystalline-field",
                                 "grand-palace-of-hu-xzoi-gate-of-the-gods-north"},
                 --onmob_enemy_show_facing = true,
@@ -5742,7 +5757,7 @@ return {
                 zone_trigger = "Empyreal Paradox",
                 images = {
                     {
-                        width = 512, height = 512, state = 8,
+                        width = 512, height = 512, state = 1,
                         highlights = {
                             { position = "H-9", offsetX = 16, offsetY = 16 },
                         },

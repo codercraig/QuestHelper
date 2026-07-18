@@ -666,9 +666,6 @@ return {
                        "Notes: Sleep/Bind the Dragon and kill the Spotter! \n \n" ..
                        "After winning, you will receive the KI:Kindred Crest and title 'Black Dragon Slayer'.",
                 trigger_on_event_id = { 32001 },
-                images = {
-                    --{ state = 12}
-                  },
             },
             {
                 text = "Step 14: Return to Melek in the Consulate of Bastok in Port Windurst (F-6) to receive the KI:Kindred Report.",
@@ -854,6 +851,7 @@ return {
                        "Fort Ghelsba   : Go to (J-8) -> Yughott Grotto  - exit 4. \n" ..
                        "Yughott Grotto : Enter Horlais Peak (J-6). \n \n",
                 zone_trigger = "Horlais Peak",
+                zone_max_distance = 35,
                 visual_zones = {
                         --Ghelsba Outpost
                         { zone_name = "Ghelsba Outpost", type = 'arrow', center = { x = 28.1, y = 0.1, z = 62.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
@@ -2015,16 +2013,6 @@ return {
                         highlights = {
                             { position = "I-9", offsetX = 16, offsetY = 16 },
                             { position = "F-6", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 13,
-                        zone_name = "Beadeaux",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "F-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
