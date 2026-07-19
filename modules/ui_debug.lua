@@ -192,6 +192,28 @@ end
 -- while the addon is loaded. Lets the Drawing tab answer "which mission is this NPC for?"
 local target_index = nil
 
+-- Compares strings with digit runs treated as numbers, so mission names sort the way
+-- a human reads them: 1-1, 1-2, 2-1, 3-1, 10-1 - not 1-1, 10-1, 2-1 as a plain string
+-- sort would give. Used for the mission lists under each Drawing row.
+local function natural_lt(a, b)
+    local ai, bi = 1, 1
+    while ai <= #a and bi <= #b do
+        local ad = a:match('^%d+', ai)
+        local bd = b:match('^%d+', bi)
+        if ad and bd then
+            local an, bn = tonumber(ad), tonumber(bd)
+            if an ~= bn then return an < bn end
+            ai, bi = ai + #ad, bi + #bd
+        else
+            local ac = a:sub(ai, ai):lower()
+            local bc = b:sub(bi, bi):lower()
+            if ac ~= bc then return ac < bc end
+            ai, bi = ai + 1, bi + 1
+        end
+    end
+    return (#a - ai) < (#b - bi)
+end
+
 local function build_target_index()
     target_index = {}
     for category, subfiles in pairs(val.quest_data or {}) do
@@ -222,6 +244,18 @@ local function build_target_index()
             end
         end
     end
+
+    -- pairs() gave these in hash order, which looks random on screen. Sort each list
+    -- into reading order: category, subfile, mission (numbers compared as numbers),
+    -- then step. Done once here rather than per frame.
+    for _, list in pairs(target_index) do
+        table.sort(list, function(x, y)
+            if x.cat ~= y.cat then return x.cat < y.cat end
+            if x.sub ~= y.sub then return x.sub < y.sub end
+            if x.mission ~= y.mission then return natural_lt(x.mission, y.mission) end
+            return x.step < y.step
+        end)
+    end
 end
 
 -- Defined here so it closes over target_index; safe to call from setValidateData above
@@ -236,7 +270,7 @@ local beam_expanded = {}
 -- Drawing tab zone selector. nil = follow the zone the player is standing in.
 -- When a zone is picked manually the floor/distance checks are meaningless (they
 -- compare against the player's live position), so rows are shown as "remote".
-local beam_zone = { override = nil, search = { "" } }
+local beam_zone = { override = nil, search = { "" }, npc = { "" } }
 
 -- Live view of every locations.lua entry in the zone you are standing in, showing
 -- the same three tests the beam filter applies (zone / raw floor / distance) so a
@@ -286,7 +320,20 @@ local function render_zone_beams(quest_state_mod)
         imgui.Separator()
     end
 
-    if remote then
+    -- NPC / entry search. Non-empty means search EVERY zone, not just the one being
+    -- viewed, so you can find an entry without knowing which zone it lives in.
+    imgui.Text("NPC: ")
+    imgui.SameLine()
+    imgui.InputText("##beamnpcsearch", beam_zone.npc, 64)
+    imgui.SameLine()
+    if imgui.SmallButton("clear##bnclear") then beam_zone.npc[1] = "" end
+    local npc_q = tostring(beam_zone.npc[1] or ""):lower()
+    local searching = (npc_q ~= "")
+
+    if searching then
+        imgui.TextColored({ 0.7, 0.85, 1.0, 1.0 },
+            string.format("Searching all zones for \"%s\" - clear the box to go back to zone view", npc_q))
+    elseif remote then
         imgui.TextColored({ 1.0, 0.75, 0.2, 1.0 },
             string.format("Viewing %s - you are in %s", tostring(zn), tostring(here)))
         imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
@@ -306,25 +353,33 @@ local function render_zone_beams(quest_state_mod)
 
     local rows, drawing = {}, 0
     for name, l in pairs(val.location_data) do
-        if l.zone == zn then
+        -- searching = every zone; otherwise just the zone being viewed
+        local include = searching and name:lower():find(npc_q, 1, true) or
+                        (not searching and l.zone == zn)
+        if include then
+            -- "remote" is per row now: a search can return entries from many zones,
+            -- and floor/distance only mean anything for the zone you are standing in
+            local row_remote = (l.zone ~= here)
             local fid  = l.floor_id
-            local fok  = remote or (fid == nil) or (raw == nil) or (fid == raw)
+            local fok  = row_remote or (fid == nil) or (raw == nil) or (fid == raw)
             local dist, dok = nil, true
-            if not remote and l.max_distance and l.target_pos then
+            if not row_remote and l.max_distance and l.target_pos then
                 local dx = cache.pos.x - l.target_pos.x
                 local dy = cache.pos.y - l.target_pos.y
                 local dz = cache.pos.z - l.target_pos.z
                 dist = math.sqrt(dx * dx + dy * dy + dz * dz)
                 dok  = dist <= l.max_distance
             end
-            if not remote and fok and dok then drawing = drawing + 1 end
+            if not row_remote and fok and dok then drawing = drawing + 1 end
             table.insert(rows, { name = name, fid = fid, fok = fok, dist = dist,
-                                 maxd = l.max_distance, dok = dok, pos = l.target_pos })
+                                 maxd = l.max_distance, dok = dok, pos = l.target_pos,
+                                 zone = l.zone, remote = row_remote })
         end
     end
 
     if #rows == 0 then
-        imgui.Text("No locations entries for this zone.")
+        imgui.Text(searching and "Nothing in locations.lua matches that name."
+                              or "No locations entries for this zone.")
         return
     end
 
@@ -333,7 +388,9 @@ local function render_zone_beams(quest_state_mod)
     -- checked. A fixed order is worth more here than putting the nearest first.
     table.sort(rows, function(a, b) return a.name < b.name end)
 
-    if remote then
+    if searching then
+        imgui.Text(string.format("%d match(es) across all zones", #rows))
+    elseif remote then
         imgui.Text(string.format("%d entr(ies) in %s", #rows, zn))
     else
         imgui.Text(string.format("%d entr(ies) here, %d currently drawable", #rows, drawing))
@@ -342,13 +399,13 @@ local function render_zone_beams(quest_state_mod)
         "TP sends the LSB GM command '!pos x y z zoneid' - it needs GM rights on the server.")
     imgui.Separator()
 
-    local zone_id = val.zone_data_ref and val.zone_data_ref[zn]
-
     for _, r in ipairs(rows) do
+        -- each row carries its own zone, so a search result TPs to the right place
+        local zone_id = val.zone_data_ref and val.zone_data_ref[r.zone]
         local fid_s  = r.fid and tostring(r.fid) or "-"
         local dist_s = r.dist and string.format("%.1f/%s", r.dist, tostring(r.maxd)) or "-"
         local verdict, col
-        if remote then
+        if r.remote then
             -- not in this zone, so floor/distance say nothing - do not imply it is drawing
             verdict = "not here - TP to check"
             col = { 0.7, 0.7, 0.8, 1.0 }
@@ -396,8 +453,14 @@ local function render_zone_beams(quest_state_mod)
         end
         imgui.SameLine()
 
-        imgui.TextColored(col, string.format("%-42s floor %-4s dist %-12s %s",
-            r.name, fid_s, dist_s, verdict))
+        if searching then
+            -- results span zones, so the zone matters more than the distance column
+            imgui.TextColored(col, string.format("%-42s %-26s floor %-4s %s",
+                r.name, tostring(r.zone), fid_s, verdict))
+        else
+            imgui.TextColored(col, string.format("%-42s floor %-4s dist %-12s %s",
+                r.name, fid_s, dist_s, verdict))
+        end
 
         if beam_expanded[r.name] and uses then
             for _, u in ipairs(uses) do
