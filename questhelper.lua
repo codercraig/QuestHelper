@@ -888,6 +888,21 @@ ashita.events.register('d3d_present', 'present_callback', function()
     -- Render UI
     if not is_open then return end
 
+    -- Debug UI "Jump" tab: navigation only. Selects a mission and scrolls the panel to a
+    -- step so it can be read. Writes no progress and saves nothing - beams and triggers
+    -- keep using quest_state.getCurrentStep as normal. Applied before ui_main.render so
+    -- the new selection is what gets passed in and echoed back this frame.
+    if ui_debug.pending_jump then
+        local j = ui_debug.pending_jump
+        ui_debug.pending_jump = nil
+        currentTopCategory = j.cat
+        currentSubfile     = j.sub
+        current_mission    = j.mission
+        if j.step and ui_main.setViewedStep then
+            ui_main.setViewedStep(j.step)
+        end
+    end
+
     local window_open, mainX, mainY, mainW, mainH, newShowDrawer, newTopCat, newSubfile, newMission =
         ui_main.render(is_open, currentTopCategory, currentSubfile, current_mission, showImagesDrawer,
                       quest_data, quest_state, utils, inventory_cache, keyitem_module, keyitems_db)

@@ -37,6 +37,12 @@ local show_progression_guide = false
 
 -- Collapsed mode step navigation
 local collapsed_viewed_step = nil  -- Track which step we're viewing in collapsed mode
+
+-- Debug UI "Jump" tab: scroll the panel to a step without touching progress.
+-- Purely visual - the same pointer the Prev/Next buttons move.
+function ui_main.setViewedStep(n)
+    collapsed_viewed_step = n
+end
 local prev_show_all_steps   = nil  -- Detect collapse/expand transitions
 
 local function perform_search(quest_data)

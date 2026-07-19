@@ -74,36 +74,43 @@ return {
         trigger_npc = "Conrad",
         visual_mode = "beacon",
         beacon_height = 15.0,
+        zone = "Metalworks",
     },
     ["Naji"] = {
         target_pos = { x = 67.0, y = -16.0, z = -4.60 },
         trigger_npc = "Naji",
         visual_mode = "arc",
+        zone = "Metalworks",
     },
     ["Malduc"] = {
         target_pos = { x = 66.0, y = -30.0, z = 4.50 },
         trigger_npc = "Malduc",
         visual_mode = "beacon",
+        zone = "Metalworks",
     },
     ["Iron Eater"] = {
         target_pos = { x = 92.9, y = -22.0, z = 1.8 },
         trigger_npc = "Iron Eater",
         visual_mode = "arc",
+        zone = "Metalworks",
     },
     ["Karst"] = {
         target_pos = { x = 107, y = -21.8, z = 0.18 },
         trigger_npc = "Karst",
         visual_mode = "arc",
+        zone = "Metalworks",
     },
     ["Kaela"] = {
         target_pos = { x = 40.5, y = -30.0, z = 16.1 },
         trigger_npc = "Kaela",
         visual_mode = "arc",
+        zone = "Metalworks",
     },
     ["Phara"] = {
         target_pos = { x = 75.0, y = -16.0, z = -82.0 },
         trigger_npc = "Phara",
         visual_mode = "beacon",
+        zone = "Metalworks",
     },
     ["Alois"] = {
         target_pos = { x = 97.7, y = -22.0, z = 14.6 },

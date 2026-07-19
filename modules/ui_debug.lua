@@ -73,6 +73,8 @@ function ui_debug.setValidateData(quest_data, connections, floor_maps, zd, locat
     val.zone_data_ref  = zd
     val.floor_maps     = floor_maps
     val.location_data  = locations
+    -- quest data replaced, so the onmob_target reverse index is stale
+    ui_debug.invalidateTargetIndex()
 end
 
 -- Runs every static check. Results are split by kind so each gets its own sub-tab:
@@ -185,17 +187,116 @@ local function run_validate()
     end
 end
 
+-- Reverse index: locations.lua key -> every mission step whose onmob_target (or
+-- vday_targets) references it. Built once and cached, since quest_data does not change
+-- while the addon is loaded. Lets the Drawing tab answer "which mission is this NPC for?"
+local target_index = nil
+
+local function build_target_index()
+    target_index = {}
+    for category, subfiles in pairs(val.quest_data or {}) do
+        for subfile, missions in pairs(subfiles) do
+            for mission_name, mission in pairs(missions) do
+                for si, step in ipairs(mission.steps or {}) do
+                    local function add(name)
+                        local list = target_index[name]
+                        if not list then list = {} target_index[name] = list end
+                        table.insert(list, {
+                            cat = category, sub = subfile, mission = mission_name, step = si,
+                        })
+                    end
+                    local tr = step.onmob_target
+                    if type(tr) == 'string' then
+                        add(tr)
+                    elseif type(tr) == 'table' and type(tr[1]) == 'string' then
+                        for _, n in ipairs(tr) do add(n) end
+                    end
+                    if type(step.vday_targets) == 'table' then
+                        for _, names in pairs(step.vday_targets) do
+                            if type(names) == 'table' then
+                                for _, n in ipairs(names) do add(n) end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+-- Defined here so it closes over target_index; safe to call from setValidateData above
+-- because that only runs at load time, once the whole module is in place.
+function ui_debug.invalidateTargetIndex()
+    target_index = nil
+end
+
+-- which rows are expanded in the Drawing tab
+local beam_expanded = {}
+
+-- Drawing tab zone selector. nil = follow the zone the player is standing in.
+-- When a zone is picked manually the floor/distance checks are meaningless (they
+-- compare against the player's live position), so rows are shown as "remote".
+local beam_zone = { override = nil, search = { "" } }
+
 -- Live view of every locations.lua entry in the zone you are standing in, showing
 -- the same three tests the beam filter applies (zone / raw floor / distance) so a
 -- beam that is not drawing says why instead of just being absent.
-local function render_zone_beams()
-    local zn  = cache.pos.zone_name
-    local raw = cache.floor.raw
+-- quest_state_mod is threaded in so the "go" buttons can set the active step
+local function render_zone_beams(quest_state_mod)
+    local here   = cache.pos.zone_name
+    local zn     = beam_zone.override or here
+    local remote = (zn ~= here)
+    local raw    = cache.floor.raw
 
-    imgui.Text(string.format("Zone: %s      your RAW floor: %s",
-        tostring(zn), raw and tostring(raw) or "unknown"))
-    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
-        "An entry draws only if its floor_id equals your raw floor AND you are within max_distance.")
+    -- Zone picker: type to filter, click to browse that zone without being in it
+    imgui.Text("Zone:")
+    imgui.SameLine()
+    imgui.InputText("##beamzonesearch", beam_zone.search, 64)
+    imgui.SameLine()
+    if imgui.SmallButton("follow me##bzclear") then
+        beam_zone.override = nil
+        beam_zone.search[1] = ""
+    end
+
+    local q = tostring(beam_zone.search[1] or ""):lower()
+    if q ~= "" and val.zone_data_ref then
+        local hits = {}
+        for name, id in pairs(val.zone_data_ref) do
+            if name:lower():find(q, 1, true) then
+                table.insert(hits, { name = name, id = id })
+            end
+        end
+        table.sort(hits, function(a, b) return a.name < b.name end)
+        local shown = 0
+        for _, h in ipairs(hits) do
+            if shown >= 12 then break end
+            if imgui.SmallButton(string.format("%s (%d)##bz%s", h.name, h.id, h.name)) then
+                beam_zone.override  = h.name
+                beam_zone.search[1] = ""
+            end
+            shown = shown + 1
+        end
+        if #hits > 12 then
+            imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+                string.format("...%d more, keep typing to narrow", #hits - 12))
+        end
+        if #hits == 0 then
+            imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 }, "no zone matches that")
+        end
+        imgui.Separator()
+    end
+
+    if remote then
+        imgui.TextColored({ 1.0, 0.75, 0.2, 1.0 },
+            string.format("Viewing %s - you are in %s", tostring(zn), tostring(here)))
+        imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+            "Floor and distance cannot be checked from another zone. TP still works.")
+    else
+        imgui.Text(string.format("Zone: %s      your RAW floor: %s",
+            tostring(zn), raw and tostring(raw) or "unknown"))
+        imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+            "An entry draws only if its floor_id equals your raw floor AND you are within max_distance.")
+    end
     imgui.Separator()
 
     if not val.location_data then
@@ -207,18 +308,18 @@ local function render_zone_beams()
     for name, l in pairs(val.location_data) do
         if l.zone == zn then
             local fid  = l.floor_id
-            local fok  = (fid == nil) or (raw == nil) or (fid == raw)
+            local fok  = remote or (fid == nil) or (raw == nil) or (fid == raw)
             local dist, dok = nil, true
-            if l.max_distance and l.target_pos then
+            if not remote and l.max_distance and l.target_pos then
                 local dx = cache.pos.x - l.target_pos.x
                 local dy = cache.pos.y - l.target_pos.y
                 local dz = cache.pos.z - l.target_pos.z
                 dist = math.sqrt(dx * dx + dy * dy + dz * dz)
                 dok  = dist <= l.max_distance
             end
-            if fok and dok then drawing = drawing + 1 end
+            if not remote and fok and dok then drawing = drawing + 1 end
             table.insert(rows, { name = name, fid = fid, fok = fok, dist = dist,
-                                 maxd = l.max_distance, dok = dok })
+                                 maxd = l.max_distance, dok = dok, pos = l.target_pos })
         end
     end
 
@@ -227,19 +328,31 @@ local function render_zone_beams()
         return
     end
 
-    table.sort(rows, function(a, b)
-        if a.fok ~= b.fok then return a.fok end
-        return (a.dist or 1e9) < (b.dist or 1e9)
-    end)
+    -- Alphabetical, deliberately: sorting by distance or floor state makes rows jump
+    -- around as you walk or change floor, so you lose track of which you have already
+    -- checked. A fixed order is worth more here than putting the nearest first.
+    table.sort(rows, function(a, b) return a.name < b.name end)
 
-    imgui.Text(string.format("%d entr(ies) here, %d currently drawable", #rows, drawing))
+    if remote then
+        imgui.Text(string.format("%d entr(ies) in %s", #rows, zn))
+    else
+        imgui.Text(string.format("%d entr(ies) here, %d currently drawable", #rows, drawing))
+    end
+    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+        "TP sends the LSB GM command '!pos x y z zoneid' - it needs GM rights on the server.")
     imgui.Separator()
+
+    local zone_id = val.zone_data_ref and val.zone_data_ref[zn]
 
     for _, r in ipairs(rows) do
         local fid_s  = r.fid and tostring(r.fid) or "-"
         local dist_s = r.dist and string.format("%.1f/%s", r.dist, tostring(r.maxd)) or "-"
         local verdict, col
-        if not r.fok then
+        if remote then
+            -- not in this zone, so floor/distance say nothing - do not imply it is drawing
+            verdict = "not here - TP to check"
+            col = { 0.7, 0.7, 0.8, 1.0 }
+        elseif not r.fok then
             verdict = string.format("FLOOR MISMATCH (entry %s, you are on %s)", fid_s, tostring(raw))
             col = { 1.0, 0.45, 0.45, 1.0 }
         elseif not r.dok then
@@ -249,9 +362,183 @@ local function render_zone_beams()
             verdict = "DRAWING"
             col = { 0.3, 0.9, 0.3, 1.0 }
         end
-        imgui.TextColored(col, string.format("  %-42s floor %-4s dist %-12s %s",
+
+        -- locations target_pos maps straight onto !pos: x -> x, y -> y, z -> z
+        -- (verified against the LSB script headers, e.g. Ambrotien 93.4 / -57.3)
+        if r.pos and zone_id then
+            if imgui.SmallButton("TP##tp" .. r.name) then
+                local cmd = string.format("!pos %.3f %.3f %.3f %d",
+                    r.pos.x, r.pos.y, r.pos.z, zone_id)
+                -- Logged as well as sent: if the server rejects it or the queue mode is
+                -- wrong on this Ashita build, the exact command is there to copy by hand.
+                ui_debug.addLine("[QH] " .. cmd)
+                local ok = pcall(function()
+                    AshitaCore:GetChatManager():QueueCommand(1, cmd)
+                end)
+                if not ok then
+                    ui_debug.addLine("[QH] could not send - copy the command above manually")
+                end
+            end
+            imgui.SameLine()
+        end
+
+        -- Expander: which missions/steps reference this entry via onmob_target
+        if not target_index then build_target_index() end
+        local uses = target_index and target_index[r.name]
+        local nuses = uses and #uses or 0
+        if nuses > 0 then
+            local mark = beam_expanded[r.name] and "v" or ">"
+            if imgui.SmallButton(string.format("%s %d##ex%s", mark, nuses, r.name)) then
+                beam_expanded[r.name] = not beam_expanded[r.name]
+            end
+        else
+            imgui.SmallButton("  0##ex" .. r.name)
+        end
+        imgui.SameLine()
+
+        imgui.TextColored(col, string.format("%-42s floor %-4s dist %-12s %s",
             r.name, fid_s, dist_s, verdict))
+
+        if beam_expanded[r.name] and uses then
+            for _, u in ipairs(uses) do
+                if imgui.SmallButton(string.format("go##g%s%s%s%d",
+                        r.name, u.mission, u.sub, u.step)) then
+                    -- DESTRUCTIVE, and deliberately so: this rewrites saved progress for
+                    -- this one mission so the chosen step becomes the ACTIVE step, which
+                    -- is what makes its beams and triggers live. Current step is derived
+                    -- (quest_state.getCurrentStep = first step whose state is false), so
+                    -- the only way to activate step N is to mark 1..N-1 done and N onward
+                    -- not done. Nothing on the server restores this - mission progress is
+                    -- not packet-synced, only key items are. Dev mode only.
+                    local mdata = val.quest_data
+                        and val.quest_data[u.cat]
+                        and val.quest_data[u.cat][u.sub]
+                        and val.quest_data[u.cat][u.sub][u.mission]
+                    local nsteps = (mdata and mdata.steps) and #mdata.steps or 0
+                    if quest_state_mod and nsteps > 0 then
+                        -- setStepState saves internally, so no explicit save() here
+                        for n = 1, nsteps do
+                            quest_state_mod.setStepState(u.cat, u.sub, u.mission, n, n < u.step)
+                        end
+                        ui_debug.addLine(string.format(
+                            "[QH] %s: steps 1-%d marked done, now active on step %d (progress overwritten)",
+                            u.mission, u.step - 1, u.step))
+                    end
+                    ui_debug.pending_jump = {
+                        cat = u.cat, sub = u.sub, mission = u.mission, step = u.step,
+                    }
+                end
+                imgui.SameLine()
+                imgui.TextColored({ 0.7, 0.8, 1.0, 1.0 },
+                    string.format("      %s/%s  >  %s   step %d", u.cat, u.sub, u.mission, u.step))
+            end
+        end
     end
+end
+
+-- ── Step jump (Validate tab) ─────────────────────────────────────────────────
+-- Drill down category > subfile > mission > step and force the tracker onto it.
+-- "Current step" is not stored anywhere - quest_state.getCurrentStep derives it as
+-- the first step whose state is false. So jumping to step N means marking 1..N-1
+-- complete and N onward incomplete. Selecting the mission itself has to happen in
+-- questhelper.lua, which owns currentTopCategory/Subfile/mission, so we leave the
+-- request in ui_debug.pending_jump for it to pick up on the next frame.
+local jump = { cat = nil, sub = nil, mission = nil }
+
+local function sorted_keys(t)
+    local out = {}
+    for k in pairs(t or {}) do table.insert(out, k) end
+    table.sort(out)
+    return out
+end
+
+local function render_jump_tab(quest_state_mod)
+    if not val.quest_data then
+        imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, "Quest data not loaded - reload the addon.")
+        return
+    end
+    if not quest_state_mod then
+        imgui.TextColored({ 1.0, 0.4, 0.4, 1.0 }, "Quest state not available.")
+        return
+    end
+
+    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+        "Navigation only - selects a mission and scrolls the panel to a step so you can read it.")
+    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+        "Changes NO progress and saves nothing. Beams and arrows keep following real progress,")
+    imgui.TextColored({ 0.6, 0.6, 0.6, 1.0 },
+        "so tick the steps yourself if you want a later step to become active.")
+    imgui.Separator()
+
+    -- breadcrumb + back
+    if jump.cat then
+        if imgui.SmallButton("< back##jb") then
+            if jump.mission then jump.mission = nil
+            elseif jump.sub then jump.sub = nil
+            else jump.cat = nil end
+        end
+        imgui.SameLine()
+        imgui.Text(string.format("%s%s%s",
+            jump.cat,
+            jump.sub and (" > " .. jump.sub) or "",
+            jump.mission and (" > " .. jump.mission) or ""))
+        imgui.Separator()
+    end
+
+    if not jump.cat then
+        imgui.Text("Category:")
+        for _, c in ipairs(sorted_keys(val.quest_data)) do
+            if imgui.SmallButton(c .. "##jc") then jump.cat = c end
+            imgui.SameLine()
+        end
+        imgui.Text("")
+        return
+    end
+
+    if not jump.sub then
+        imgui.Text("Subfile:")
+        for _, s in ipairs(sorted_keys(val.quest_data[jump.cat])) do
+            if imgui.SmallButton(s .. "##js") then jump.sub = s end
+            imgui.SameLine()
+        end
+        imgui.Text("")
+        return
+    end
+
+    if not jump.mission then
+        imgui.Text("Mission:")
+        for _, m in ipairs(sorted_keys(val.quest_data[jump.cat][jump.sub])) do
+            if imgui.SmallButton(m .. "##jm") then jump.mission = m end
+        end
+        return
+    end
+
+    local mdata = val.quest_data[jump.cat][jump.sub][jump.mission]
+    local steps = mdata and mdata.steps or {}
+    if #steps == 0 then
+        imgui.Text("This mission has no steps.")
+        return
+    end
+
+    local cur = quest_state_mod.getCurrentStep(jump.cat, jump.sub, jump.mission, val.quest_data)
+    imgui.Text(string.format("%d steps - real progress is on step %d", #steps, cur))
+    imgui.Text("Go to step:")
+
+    for i = 1, #steps do
+        if imgui.SmallButton(tostring(i) .. "##jstep") then
+            -- Navigation only. Nothing is written to quest_state, nothing is saved.
+            -- This selects the mission and scrolls the panel to the step so it can be
+            -- read; beams/arrows still follow real progress until you complete steps
+            -- normally.
+            ui_debug.pending_jump = {
+                cat = jump.cat, sub = jump.sub, mission = jump.mission, step = i,
+            }
+            ui_debug.addLine(string.format("[QH] viewing %s step %d (progress unchanged)",
+                jump.mission, i))
+        end
+        if i % 12 ~= 0 then imgui.SameLine() end
+    end
+    imgui.Text("")
 end
 
 -- ── Line builder (Position tab) ───────────────────────────────────────────────
@@ -655,7 +942,7 @@ local function render_findings(list, empty_msg, hints)
     end
 end
 
-local function render_validate_tab()
+local function render_validate_tab(quest_state_mod)
     if imgui.Button("Run Validation") then run_validate() end
     imgui.SameLine()
     if imgui.Button("Clear##vclr") then
@@ -714,7 +1001,7 @@ local function render_validate_tab()
         -- 2: live drawing
         if imgui.BeginTabItem("Drawing##vd") then
             imgui.BeginChild("QHVDraw", { 0, 0 }, false, 0)
-            render_zone_beams()
+            render_zone_beams(quest_state_mod)
             imgui.EndChild()
             imgui.EndTabItem()
         end
@@ -748,6 +1035,14 @@ local function render_validate_tab()
                 "trigger_on_talk and trigger_on_event_id are AND-ed - a step with both waits for BOTH.",
                 "If the server never sends one, the step can never complete. Usually you want just one.",
             })
+            imgui.EndChild()
+            imgui.EndTabItem()
+        end
+
+        -- 6: jump straight to a mission step
+        if imgui.BeginTabItem("Jump##vj") then
+            imgui.BeginChild("QHVJump", { 0, 0 }, false, 0)
+            render_jump_tab(quest_state_mod)
             imgui.EndChild()
             imgui.EndTabItem()
         end
@@ -942,7 +1237,7 @@ function ui_debug.render(player_mod, floor_mappings, quest_state_mod, zone_data)
             end
             if imgui.BeginTabItem("Validate") then
                 active_tab = 'validate'
-                render_validate_tab()
+                render_validate_tab(quest_state_mod)
                 imgui.EndTabItem()
             end
             imgui.EndTabBar()
