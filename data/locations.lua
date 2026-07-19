@@ -929,7 +929,7 @@ return {
         visual_mode = "arc",
         zone = "Chateau d'Oraguille",
         floor_id = 0,
-        max_distance = 20
+        max_distance = 30
     },
     ["Faurie"] = {
         target_pos = { x = 1.4, y = -2.0, z = -15.3 },
@@ -940,6 +940,13 @@ return {
         floor_id = 0,
         max_distance = 10,
         trigger_npc = "Faurie",
+    },
+    ["Rahal"] = {
+        target_pos = { x = -31.0, y = -2.2, z = -8.4 },
+        visual_mode = "arc",
+        zone = "Chateau d'Oraguille",
+        floor_id = 0,
+        max_distance = 15
     },
     -- Bostaunieux Oubliette
     ["Couchatorage"] = {
@@ -1849,6 +1856,14 @@ return {
         visual_mode = "arc",
         zone = "Quicksand Caves"
     },
+    ["quicksand-caves-fountain-of-kings"] = {
+        target_pos = { x = 571.3, y = 20.0, z = -938.5 },
+        visual_mode = "arc",
+        zone = "Quicksand Caves",
+        floor_id = 2,
+        max_distance = 10,
+        draw_in_combat = false,
+    },
     --Kuftal Tunnel
     ["kuftal1-8-2-???"] = {
         target_pos = { x = -29.1, y = -22.1, z = -183.8},
@@ -1916,6 +1931,49 @@ return {
         zone = "Temple of Uggalepih",
         floor_id = 2,
         max_distance = 20
+    },
+    ["temple-of-uggalepih-granite-door-j10"] = {
+        target_pos = { x = -7.5, y = -10.8, z = -100.0 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 2,
+        max_distance = 5
+    },
+    ["temple-of-uggalepih-granite-door-s82-1"] = {
+        target_pos = { x = -70.0, y = -18.8, z = -146.3 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["temple-of-uggalepih-granite-door-s82-2"] = {
+        target_pos = { x = -50.0, y = -18.8, z = -146.3 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 4,
+        max_distance = 15,
+        draw_in_combat = false,
+    },
+    ["temple-of-uggalepih-brokenkey3-???"] = {
+        target_pos = { x = -67.6, y = -17.8, z = -154.6 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["temple-of-uggalepih-brokenkey2-???"] = {
+        target_pos = { x = -32.1, y = -17.8, z = -154.7 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 4,
+        max_distance = 15
+    },
+    ["temple-of-uggalepih-brokenkey1-???"] = {
+        target_pos = { x = -14.6, y = -17.8, z = -151.0 },
+        visual_mode = "arc",
+        zone = "Temple of Uggalepih",
+        floor_id = 4,
+        max_distance = 15
     },
     -- Cloister of Frost
     ["cloister-of-frost-zm5-cermet-headstone"] = {
@@ -2180,6 +2238,14 @@ return {
         target_pos = { x = -109.2, y = -8.5, z = 453.8},
         visual_mode = "arc",
         zone = "Cape Teriggan"
+    },
+    -- Valley of Sorrows
+    ["valley-of-sorrows-i8-???"] = {
+        target_pos = { x = 91.1, y = -3.7, z = -16.4 },
+        visual_mode = "arc",
+        zone = "Valley of Sorrows",
+        floor_id = 0,
+        max_distance = 20
     },
     --behemoth's dominion
     ["behemoth's-dominion-zm5-cermet-headstone"] = {

@@ -17,7 +17,7 @@
 [6-2] Ranperre's Final Rest - DONE
 [7-1] Prestige of the Papsque - DOONE
 [7-2] The Secret Weapon - DONE
-[8-1] Coming of Age - STARTED
-[8-2] Lightbringer - DRAFT
-[9-1] Breaking Barriers - DRAFT
+[8-1] Coming of Age - DONE
+[8-2] Lightbringer - DONE
+[9-1] Breaking Barriers - STARTED
 [9-2] The Heir to the Light - DRAFT

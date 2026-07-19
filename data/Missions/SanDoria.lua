@@ -4538,12 +4538,12 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 6 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade 3 stacks of crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" your next mission from Sir Halver."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -4590,25 +4590,63 @@ return {
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {58},
                 zone_max_distance = 20,
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             { -- Step 4
                 text = "Step 4: Travel to the Fountain of Kings in the Quicksand Caves. \n \n" ..
-                       "Party of Lv65+ recommended. Anyone under Lv67 needs SNEAK (Antica + Sabotenders aggro). \n \n" ..
-                       "===== Getting there ===== \n" ..
-                       "Enter Quicksand Caves from Eastern Altepa Desert at (H-10). \n" ..
-                       "The Survival Guide or outpost warp will drop you nearby. \n \n" ..
-                       "===== Route inside ===== \n" ..
-                       "Head WEST to (D-9) on Map 2. \n" ..
-                       "Take the LAST left turn and head south. \n" ..
-                       "Drop down the hole at the end of the room. \n" ..
-                       "Once you land, hug the LEFT wall - this leads you to the Fountain of Kings. \n \n" ..
+                        "Honor (Lv70, ~6000 HP): casts Paralyga and Silencega. \n" ..
+                       "Valor: uses Hundred Fists. Easier for a magic-heavy party. \n \n" ..
+                       "- Both are vulnerable to Gravity and Bind, but IMMUNE to all Sleep \n" ..
+                       "- They spawn underwater in the pool and do NOT link \n" ..
+                       "- To pull one: go to the left/right wall, cancel Sneak, and creep in so only one aggros \n" ..
+                       "- They despawn exactly 3 minutes after spawning \n" ..
+                       "- After a despawn it takes ~10 minutes before you can pop them again \n \n" ..
+                       "COURTESY: They aggro anyone nearby, including fishers camping Cave Cherax - warn them before you pop. \n \n" ..
                        "If anyone is under Lv67, clear the room and the connecting hallway first. \n \n",
-                route_to = "Quicksand Caves",
-                zone_trigger = "Quicksand Caves",
+                --route_to = "Quicksand Caves",
+                --zone_trigger = "Quicksand Caves",
                 destination_highlight = {position = "H-10", offsetX = 16, offsetY = 16},
                 zone_max_distance = 40,
+                onmob_target = {"quicksand-caves-fountain-of-kings"},
+                onmob_enemy = {"Honor", "Valor"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 2,
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Honor", "Valor"},
+                    zone = "Quicksand Caves",
+                    count_party_kills = true,
+                },
                 visual_zones = {
-                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
+                    -- Eastern Altepa Desert path down
+                    { zone_name = "Eastern Altepa Desert", type = 'arrow', center = { x = -19.3, y = 1.5, z = -210.0 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Eastern Altepa Desert", type = 'arrow', center = { x = -18.4, y = 10.8, z = -258.8 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Eastern Altepa Desert", type = 'arrow', center = { x = 19.9, y = 10.2, z = -261.7 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                    { zone_name = "Eastern Altepa Desert", type = 'arrow', center = { x = 21.1, y = 13.3, z = -297.0 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+
+                    --drop down quicksand
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 700.0, y = -24.0, z = -696.2 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 697.6, y = -20.1, z = -740.4 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 651.3, y = -16.0, z = -740.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 622.5, y = -16.1, z = -740.8 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 579.9, y = -16.0, z = -739.5 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 542.0, y = -16.0, z = -741.3 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 482.2, y = -16.1, z = -740.8 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 458.9, y = -16.0, z = -740.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 464.0, y = -14.7, z = -783.6 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 484.2, y = -14.5, z = -805.3 }, size = 4, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 496.2, y = -9.9, z = -815.9 }, size = 3, floor_id = 2, colour = "green" },
+
+                    -- Fountian of Kings
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 498.0, y = 5.8, z = -819.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 501.7, y = 1.0, z = -849.1 }, size = 4, direction = "sw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 480.8, y = 1.0, z = -862.7 }, size = 4, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 460.7, y = 1.3, z = -864.5 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 470.7, y = 1.0, z = -901.2 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 500.8, y = 6.1, z = -906.8 }, size = 4, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 507.0, y = 14.1, z = -939.5 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Quicksand Caves", type = 'arrow', center = { x = 561.0, y = 18.3, z = -939.7 }, size = 4, direction = "right", floor_id = 2, colour = "yellow" },
                 },
                 images = {
                     {
@@ -4627,47 +4665,31 @@ return {
                         zone_name = "Quicksand Caves",
                         floor_id = 2,
                         highlights = {
-                            { position = "D-9", offsetX = 16, offsetY = 16 },
+                            { position = "E-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             { -- Step 5
-                text = "Step 5: SNEAK UP, then inspect the Fountain of Kings to spawn Honor and Valor, then defeat them. \n \n" ..
-                       "You only need to KILL ONE - but the other must be dead or despawned before the kill counts. \n \n" ..
-                       "Honor (Lv70, ~6000 HP): casts Paralyga and Silencega. \n" ..
-                       "Valor: uses Hundred Fists. Easier for a magic-heavy party. \n \n" ..
-                       "- Both are vulnerable to Gravity and Bind, but IMMUNE to all Sleep \n" ..
-                       "- They spawn underwater in the pool and do NOT link \n" ..
-                       "- To pull one: go to the left/right wall, cancel Sneak, and creep in so only one aggros \n" ..
-                       "- They despawn exactly 3 minutes after spawning \n" ..
-                       "- After a despawn it takes ~10 minutes before you can pop them again \n \n" ..
-                       "COURTESY: They aggro anyone nearby, including fishers camping Cave Cherax - warn them before you pop. \n \n",
-                onmob_target = {"Fountain_of_Kings"},
-                onmob_enemy = {"Honor", "Valor"},
-                onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
-                kill_requirement = {
-                    count = 1,
-                    enemies = {"Honor", "Valor"},
-                    zone = "Quicksand Caves",
-                    count_party_kills = true,
-                    display_only = true,
-                },
-                visual_zones = {
-                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
-                },
-            },
-            { -- Step 6
-                text = "Step 6: Once BOTH are gone (dead or despawned), inspect the Fountain of Kings again to receive KI:Drops of Amnio. \n \n",
-                onmob_target = {"Fountain_of_Kings"},
-                trigger_on_talk = {"Drops of Amnio"},
-                visual_zones = {
-                    { zone_name = "Quicksand Caves", type = 'square', center = { x = 567.0, y = 18.0, z = -939.0 }, size = 2, floor_id = 2, colour = "green" },
+                text = "Step 5: Once BOTH are gone (dead or despawned), inspect the Fountain of Kings again to receive KI:Drops of Amnio. \n \n",
+                onmob_target = {"quicksand-caves-fountain-of-kings"},
+                keyitems_needed = {288},
+                trigger_on_keyitem_obtain = {288},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Quicksand Caves",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "E-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 7
-                text = "Step 7: Return to Halver in Chateau d'Oraguille. \n \n" ..
+                text = "Step 6: Return to Halver in Chateau d'Oraguille. \n \n" ..
                        "NOTE: Your mission log will now say COMPLETE, but you CANNOT start 8-2 yet - see the next step. \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {102},
@@ -4675,7 +4697,7 @@ return {
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
             },
             { -- Step 8
-                text = "Step 8: Wait 1 MINUTE, then zone into Northern San d'Oria for the final cutscene. \n \n" ..
+                text = "Step 7: Wait 1 MINUTE, then zone into Northern San d'Oria for the final cutscene. \n \n" ..
                        "The cutscene fires on zoning in (not from your Mog House). \n \n" ..
                        "Until you view it, the Gate Guards will refuse to give you any new mission - so do not skip this. \n \n",
                 trigger_on_event_id = {16},
@@ -4694,11 +4716,10 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade 6 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
-                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
+                text = "Step 1: Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "NOTE: If the guards refuse you, you have not viewed the final cutscene from Mission 8-1 - zone into Northern San d'Oria first. \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" Do not let us down."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -4733,7 +4754,7 @@ return {
             },
             { -- Step 2
                 text = "Step 2: Go to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with the King. \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {100},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
@@ -4745,8 +4766,15 @@ return {
                        "BEFORE YOU LEAVE: Check your inventory/storage for a Prelate Key. It is Ex/Rare so you can only hold one - bring it, it opens a door later. \n \n" ..
                        "(Optional: Curilla has extra dialogue at this point.) \n \n",
                 onmob_target = {"Rahal"},
+                route_to = "Chateau d'Oraguille",
+                destination_highlight = {position = "H-9", offsetX = 16, offsetY = 16},
                 trigger_on_event_id = {106},
                 zone_max_distance = 20,
+                visual_zones = {
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = 1.0, y = 0.0, z = -3.5 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'arrow', center = { x = -16.5, y = 0.0, z = -3.8 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Chateau d'Oraguille", type = 'rect', center = { x = -19.5, y = -1.2, z = -4.0 }, width = 2.75, height = 2.50, floor_id = 0, colour = "cyan", vertical_axis = 'z' },
+                },
             },
             { -- Step 4
                 text = "Step 4: Travel to the Temple of Uggalepih - you need to reach MAP 2. \n \n" ..
@@ -4761,8 +4789,40 @@ return {
                        "In the jungle you will see stairs leading down. DO NOT take them. \n" ..
                        "Turn LEFT, then instantly LEFT again to zone into the other part of the Temple (Map 2). \n \n",
                 route_to = "Temple of Uggalepih",
+                onmob_enemy = {"Tonberry Cutter", "Tonberry Stabber","Tonberry Slasher"},
                 zone_max_distance = 35,
+                -- We are no on map 2 and ready for nmexts tep to find the key.
+                trigger_zones = {
+                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -60.0, y = -8.0, z = 76.9 }, size = 8, floor_id = 2, colour = "magenta" },
+                },
                 visual_zones = {
+
+                    -- Yutungha Jungle
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -234.1, y = 0.4, z = 490.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -207.7, y = 0.3, z = 451.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -206.1, y = 0.4, z = 407.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -221.1, y = 0.4, z = 370.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -247.3, y = 0.0, z = 317.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -262.0, y = 9.2, z = 268.2 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -271.6, y = 7.6, z = 219.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -301.9, y = 0.3, z = 201.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -302.6, y = 0.2, z = 163.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -272.6, y = 7.9, z = 140.0 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -259.5, y = 8.3, z = 81.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -259.5, y = 4.6, z = 61.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -221.6, y = 0.5, z = 73.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -205.8, y = 8.2, z = 98.9 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -178.2, y = 8.4, z = 123.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -162.7, y = 0.0, z = 194.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -116.6, y = 0.0, z = 192.4 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -61.5, y = 8.1, z = 164.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -61.1, y = 8.3, z = 118.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -33.4, y = 7.2, z = 99.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -19.5, y = 4.0, z = 95.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = -1.9, y = 8.3, z = 60.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 40.6, y = 8.3, z = 18.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yuhtunga Jungle", type = 'arrow', center = { x = 109.2, y = 8.2, z = 21.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
                     -- Yhoator Jungle to Temple of Ugg
                     { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -476.0, y = 8.4, z = 58.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
                     { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = -431.9, y = 8.7, z = 58.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
@@ -4809,25 +4869,28 @@ return {
                     { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 299.5, y = -4.0, z = -614.6 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
 
                     -- Inside Temple of Ugg Map 1, follow right wall back out to the jungle
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 201.3, y = -0.1, z = 20.9 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 219.7, y = -0.1, z = 22.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = 220.0, y = -1.9, z = 31.0 }, width = 3.75, height = 3.75, floor_id = 1, colour = "cyan", vertical_axis = 'ns' },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 220.3, y = 0.0, z = 37.1 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 221.5, y = 0.0, z = 62.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = -0.0, z = 63.6 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.4, y = 0.0, z = 97.7 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 259.7, y = 0.0, z = 129.5 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 274.4, y = 0.0, z = 131.9 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 260.5, y = 0.0, z = 151.0 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 243.1, y = -8.0, z = 180.7 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 197.9, y = 0.0, z = 20.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 220.0, y = -0.1, z = 20.3 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 220.0, y = 0.0, z = 1.3 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 219.7, y = -0.0, z = -22.3 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 180.1, y = 0.0, z = -21.9 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 177.5, y = 0.0, z = -64.4 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 139.7, y = -0.0, z = -63.4 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 139.6, y = 0.0, z = -29.5 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 139.8, y = 0.0, z = -8.7 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 139.5, y = 0.0, z = 20.3 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 98.6, y = -0.1, z = 20.8 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 97.3, y = -4.8, z = 60.4 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 76.8, y = -8.0, z = 60.1 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 60.7, y = -7.9, z = 61.4 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
 
-                    -- Back into the Temple (Map 2) from the jungle - do NOT take the stairs down
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 343.0, y = -10.0, z = -224.5 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 328.9, y = -10.0, z = -223.3 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 326.6, y = -10.0, z = -192.0 }, size = 3, direction = "left", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 294.3, y = -10.0, z = -190.5 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 296.7, y = -10.0, z = -167.8 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
-                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 345.9, y = -10.0, z = -167.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    -- -- Back into the Temple (Map 2) from the jungle - do NOT take the stairs down from (F-5) exit
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 65.6, y = -10.0, z = -488.5 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 31.8, y = -10.0, z = -488.5 }, size = 3, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 32.5, y = -10.0, z = -454.3 }, size = 3, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 7.7, y = -10.0, z = -453.8 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 7.8, y = -10.0, z = -480.2 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Yhoator Jungle", type = 'arrow', center = { x = 7.8, y = -10.0, z = -500.6 }, size = 3, direction = "down", floor_id = 0, colour = "yellow" },
                 },
                 images = {
                     {
@@ -4836,7 +4899,7 @@ return {
                         state = 4,
                         zone_name = "Yhoator Jungle",
                         highlights = {
-                            { position = "J-12", offsetX = 16, offsetY = 16 },
+                            { position = "H-11", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
@@ -4849,24 +4912,50 @@ return {
                             { position = "F-5", offsetX = 16, offsetY = 16 },
                         },
                     },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 4,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "I-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 5
-                text = "Step 5: Map 2 - fight your way to the Granite Door and open it. \n \n" ..
-                       "Follow the RIGHT wall until you find a wooden gate. Pass through it and head SOUTH. \n" ..
-                       "The path splits - take either side, both go south. \n" ..
-                       "At the 'T' intersection in (H-10), go EAST to the Granite Door guarded by a Temple Guardian. \n \n" ..
-                       "Defeat the Temple Guardian to OPEN the Granite Door. \n \n" ..
-                       "Go through, then up either of the two stairways (west or east side of the room). \n" ..
-                       "WATCH OUT: a Manipulator patrols the stairs. \n \n",
-                onmob_enemy = "Temple Guardian",
+                text = "Step 5: Get both keys on Map 2 - an Uggalepih Key, then a Prelate Key. \n \n" ..
+                       "1) Kill Tonberry Cutters until one drops an Uggalepih Key. \n \n" ..
+                       "2) Trade the Uggalepih Key to the Granite Door at (E-8) to open it and step inside (the key is consumed). \n \n" ..
+                       "3) Inside the room, kill the Tonberry Slasher until it drops a Prelate Key (Ex/Rare - you can only hold one). \n \n" ..
+                       "The Prelate Key opens the upper Granite Door in the next step. \n \n",
+                items_needed = {"Uggalepih Key", "Prelate Key"},
+                trigger_on_item_obtain = {"Prelate Key"},
+                onmob_enemy = {"Tonberry Cutter", "Tonberry Stabber","Tonberry Slasher"},
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
-                kill_requirement = {
-                    count = 1,
-                    enemies = {"Temple Guardian"},
-                    zone = "Temple of Uggalepih",
-                    count_party_kills = true,
+                onmob_enemy_size = 2,
+                zone_max_distance = 20,
+                -- TODO: map visual_zones here - trade marker on the Granite Door at (E-8), floor_id = 2
+                visual_zones = {
+                       { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -59.9, y = -8.1, z = 77.3 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -60.0, y = -8.1, z = 60.0 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -82.0, y = -8.0, z = 60.0 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -99.8, y = 0.0, z = 42.0 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -100.0, y = -1.9, z = 40.0 }, width = 8.00, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -100.1, y = -0.1, z = 19.8 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -129.9, y = 0.0, z = 20.2 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -151.3, y = 0.0, z = 20.3 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -180.0, y = -0.1, z = 18.9 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -181.5, y = -0.1, z = -19.8 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -204.0, y = -0.0, z = -20.0 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -208.0, y = -1.9, z = -20.0 }, width = 3.75, height = 3.75, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+
+                        --past ugg door
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -213.2, y = -0.0, z = -19.7 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -220.0, y = -0.0, z = -10.5 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -220.0, y = -1.9, z = -8.0 }, width = 3.75, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -220.0, y = -0.0, z = -3.5 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
                 },
                 images = {
                     {
@@ -4876,24 +4965,67 @@ return {
                         zone_name = "Temple of Uggalepih",
                         floor_id = 2,
                         highlights = {
-                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                            { position = "E-8", offsetX = 16, offsetY = 16 },
                         },
                     },
                 },
             },
             { -- Step 6
-                text = "Step 6: Get through the upper Granite Door onto Map 4. \n \n" ..
-                       "===== With a Prelate Key ===== \n" ..
-                       "Trade the Prelate Key to the Granite Door at the top of either stairway. \n" ..
-                       "(Prelate Key drops from Tonberry Stabber / Chopper / Slasher.) \n \n" ..
-                       "===== Without a Prelate Key ===== \n" ..
-                       "Aggro a mob through the door and it will open when the mob reaches it: \n" ..
-                       "- Cast any magic to magic-aggro a Hover Tank through the door, OR \n" ..
-                       "- Scroll targets until you lock onto a tonberry/Hover Tank behind the door, wait for it to line up, and pull it \n \n" ..
-                       "IMPORTANT: This ONLY works on the EASTERN door. A mob pulled to the western door walks through without opening it. \n" ..
-                       "Beware tonberry links. \n \n",
-                zone_max_distance = 30,
+                text = "Step 6: Map 2 - reach the Granite Door, then continue up to the upper Granite Door onto Map 4. \n \n" ..
+                       "Trade the Prelate Key (from the previous step) to the Granite Door at the top of either stairway. \n \n",
+                zone_max_distance = 18,
+                visual_zones = {
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -220.2, y = 0.0, z = 2.2 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -220.0, y = -1.9, z = -8.0 }, width = 3.75, height = 3.75, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -219.9, y = -0.1, z = -12.5 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -210.9, y = 0.0, z = -20.0 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -208.0, y = -1.9, z = -20.0 }, width = 3.50, height = 3.75, floor_id = 2, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -201.1, y = 0.0, z = -20.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -179.9, y = -0.1, z = -19.3 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -178.2, y = -0.1, z = 19.8 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -149.8, y = 0.0, z = 20.0 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -130.4, y = 0.0, z = 20.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -60.0, y = -8.1, z = 78.4 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -60.4, y = -8.1, z = 59.8 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -99.8, y = 0.0, z = 42.7 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -100.0, y = -1.9, z = 40.0 }, width = 8.00, height = 4.00, floor_id = 2, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -99.8, y = -0.1, z = 18.3 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -103.2, y = 0.0, z = -5.5 }, size = 3, direction = "sw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -111.9, y = 0.0, z = -19.0 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -108.9, y = 0.0, z = -28.1 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -100.3, y = 0.0, z = -38.7 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -100.0, y = -0.1, z = -59.7 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -100.0, y = 0.0, z = -80.6 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -99.1, y = -0.1, z = -100.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -74.7, y = -0.2, z = -100.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -62.8, y = -0.1, z = -100.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+
+                        -- step back
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -47.2, y = 0.5, z = -99.8 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -29.4, y = 0.5, z = -79.7 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -18.0, y = -8.5, z = -96.2 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -10.2, y = -8.7, z = -100.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                },
+                onmob_target = {"temple-of-uggalepih-granite-door-j10"},
+                onmob_enemy = {"Temple Guardian"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 2,
+                trigger_zones = {
+                        { zone_name = "Temple of Uggalepih", type = 'square', center = { x = 0.3, y = -9.0, z = -99.7 }, size = 8, floor_id = 4, colour = "magenta" },
+                        { zone_name = "Temple of Uggalepih", type = 'square', center = { x = 0.3, y = -9.0, z = -99.7 }, size = 8, floor_id = 2, colour = "magenta" },
+                },
                 images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                     {
                         width = 512,
                         height = 512,
@@ -4908,29 +5040,116 @@ return {
                        "Counting from the WEST end: Doors 1, 2, 3, 4 (they all check as 'Granite Door' in game). \n \n" ..
                        "Clear the hallway of tonberries and magic jugs first. \n \n" ..
                        "Enter Door 1 and inspect the ??? for the 1st KI:Piece of a Broken Key. \n \n",
-                onmob_target = {"qm_key1"},
-                trigger_on_talk = {"Piece of a Broken Key"},
+                onmob_target = {"temple-of-uggalepih-brokenkey3-???"},
+                keyitems_needed = {287},
+                trigger_on_keyitem_obtain = {287},
+                zone_max_distance = 20,
                 visual_zones = {
-                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -13.0, y = -17.0, z = -151.0 }, size = 2, floor_id = 4, colour = "green" },
+                    -- To first broken key
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 1.9, y = -9.0, z = -100.1 }, size = 3, direction = "right", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 7.4, y = -9.0, z = -99.4 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 8.2, y = -9.0, z = -112.1 }, size = 3, direction = "right", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 20.1, y = -9.0, z = -112.1 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = 2.4, y = -17.0, z = -139.9 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -12.6, y = -17.0, z = -140.3 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -32.1, y = -17.0, z = -139.6 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -50.0, y = -17.0, z = -139.8 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -70.1, y = -17.0, z = -139.9 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -70.0, y = -18.8, z = -146.3 }, width = 3.25, height = 3.75, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "G-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 8
                 text = "Step 8: Enter Door 3 and inspect the ??? for the 2nd KI:Piece of a Broken Key. \n \n" ..
                        "(Door 2 does nothing until you hold all 3 pieces.) \n \n",
-                onmob_target = {"qm_key2"},
-                trigger_on_talk = {"Piece of a Broken Key"},
+                onmob_target = {"temple-of-uggalepih-brokenkey2-???"},
+                keyitems_needed = {286},
+                trigger_on_keyitem_obtain = {286},
+                zone_max_distance = 20,
                 visual_zones = {
-                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -32.0, y = -17.0, z = -153.0 }, size = 2, floor_id = 4, colour = "green" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -70.1, y = -17.0, z = -141.4 }, size = 3, direction = "right", floor_id = 4, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -49.2, y = -17.0, z = -140.2 }, size = 3, direction = "right", floor_id = 4, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -29.7, y = -17.0, z = -141.3 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                        { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -30.0, y = -18.8, z = -146.3 }, width = 3.00, height = 3.50, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 9
                 text = "Step 9: Enter Door 4 and inspect the ??? for the 3rd KI:Piece of a Broken Key. \n \n" ..
                        "WARNING: Room 4 has TWO ???. The correct one is on the SHELVES TO THE RIGHT as you enter. \n \n" ..
                        "EVERYONE on the mission needs all 3 pieces before continuing. \n \n",
-                onmob_target = {"qm_key3"},
-                trigger_on_talk = {"Piece of a Broken Key"},
+                onmob_target = {"temple-of-uggalepih-brokenkey1-???"},
+                keyitems_needed = {285},
+                trigger_on_keyitem_obtain = {285},
+                zone_max_distance = 20,
                 visual_zones = {
-                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -68.0, y = -17.0, z = -153.0 }, size = 2, floor_id = 4, colour = "green" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -30.3, y = -17.0, z = -140.2 }, size = 3, direction = "right", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -10.4, y = -17.0, z = -141.8 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -10.0, y = -18.8, z = -146.3 }, width = 3.25, height = 3.50, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "I-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 10
@@ -4944,40 +5163,83 @@ return {
                        "- They do NOT link: Sneak up, then pull ONE with a ranged attack (the hall is narrow, so JAs are hard to land) \n" ..
                        "- Two tanks: one holds Nio-A while the party kills Nio-Hum \n \n" ..
                        "If you wipe, you keep the broken key pieces - just go back to Door 2 for a rematch. \n \n",
-                onmob_target = {"_4fv"},
+                onmob_target = {"temple-of-uggalepih-granite-door-s82-2"},
                 onmob_enemy = {"Nio-A", "Nio-Hum"},
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
                 kill_requirement = {
-                    count = 1,
+                    count = 2,
                     enemies = {"Nio-A", "Nio-Hum"},
                     zone = "Temple of Uggalepih",
                     count_party_kills = true,
-                    display_only = true,
                 },
+                zone_max_distance = 20,
                 visual_zones = {
-                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -50.0, y = -17.0, z = -154.0 }, size = 2, floor_id = 4, colour = "green" },
+                    -- Nio-A and Nio-Hum
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -10.1, y = -17.0, z = -148.0 }, size = 3, direction = "up", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'rect', center = { x = -10.0, y = -18.8, z = -146.3 }, width = 3.00, height = 3.50, floor_id = 4, colour = "cyan", vertical_axis = 'ns' },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -10.4, y = -17.0, z = -139.9 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -30.4, y = -17.0, z = -140.0 }, size = 3, direction = "left", floor_id = 4, colour = "yellow" },
+                    { zone_name = "Temple of Uggalepih", type = 'arrow', center = { x = -50.0, y = -17.0, z = -140.2 }, size = 3, direction = "down", floor_id = 4, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 10,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 10,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 11
                 text = "Step 11: Inspect Door 2 again for a cutscene. \n \n" ..
                        "You are done when you see: 'You could not find Lightbringer here. Your investigation is over.' \n \n" ..
                        "The dolls do NOT respawn - anyone who was missing key pieces can collect them now and re-inspect the door. \n \n",
-                onmob_target = {"_4fv"},
+                onmob_target = {"temple-of-uggalepih-granite-door-s82-2"},
                 trigger_on_event_id = {65},
-                visual_zones = {
-                    { zone_name = "Temple of Uggalepih", type = 'square', center = { x = -50.0, y = -17.0, z = -154.0 }, size = 2, floor_id = 4, colour = "green" },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 11,
+                        zone_name = "Temple of Uggalepih",
+                        floor_id = 4,
+                        highlights = {
+                            { position = "H-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
             },
             { -- Step 12
-                text = "Step 12: Return to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with King Destin and your reward. \n \n" ..
-                       "(Optional: Rahal, Aramaviont, Milchupain, Halver and Curilla all have extra dialogue before you hand in.) \n" ..
-                       "(Optional afterwards: Trion and Pieuje's doors have one-time cutscenes.) \n \n",
-                onmob_target = {"_6h4"},
+                text = "Step 12: Return to Chateau d'Oraguille and examine the Door: Great Hall for a cutscene with King Destin and your reward. \n \n",
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {104},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
-                zone_max_distance = 20,
             },
         },
         reward = {
@@ -4991,12 +5253,12 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade up to 10 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
+                text = "Step 1: Trade up to 4 stacks of crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
                        "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
                        "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
                        "Northern San d'Oria: Grilau (D-8). \n \n",
                 onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                trigger_on_talk = {" He may not be present for your briefing."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -5040,7 +5302,8 @@ return {
                        "The ??? will NOT respond out of order, and nobody can skip a key item by having someone else pop the NMs. \n \n" ..
                        "Bring Sneak/Invisible or a Mount for the first two. \n" ..
                        "TIP: Touching a ??? plays a short cutscene which makes any mobs chasing you lose aggro. \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
+                keyitems_needed = {481, 482, 483},
                 trigger_on_event_id = {32},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
@@ -5051,24 +5314,81 @@ return {
                        "From Cape Teriggan, take the NORTH entrance at (J-8) into the Valley of Sorrows. \n \n" ..
                        "Use Sneak + Invisible (or stay mounted) and go to the ??? at (I-8). \n \n" ..
                        "The zone is full of Adamantoise - do not get greedy, just touch the ???. \n \n",
-                onmob_target = {"qm2"},
-                trigger_on_talk = {"Figure of Titan"},
+                onmob_target = {"valley-of-sorrows-i8-???"},
+                trigger_on_keyitem_obtain = {483},
                 route_to = "Valley of Sorrows",
                 destination_highlight = {position = "I-8", offsetX = 16, offsetY = 16},
-                zone_max_distance = 40,
+                zone_max_distance = 35,
                 visual_zones = {
-                    { zone_name = "Valley of Sorrows", type = 'square', center = { x = 91.0, y = -3.0, z = -16.0 }, size = 2, floor_id = 0, colour = "green" },
-                },
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 3,
-                        zone_name = "Valley of Sorrows",
-                        highlights = {
-                            { position = "I-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                        -- Through Kuftal Tunnel
+                        { zone_name = "Kuftal Tunnel", type = 'square', center = { x = -16.0, y = -20.3, z = -237.0 }, size = 1, floor_id = 1, colour = "green" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = -19.9, y = -19.9, z = -235.4 }, size = 3, direction = "nw", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = -26.7, y = -20.0, z = -216.2 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = -14.5, y = -20.3, z = -209.4 }, size = 3, direction = "se", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 10.4, y = -15.8, z = -216.2 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 27.8, y = -9.9, z = -175.4 }, size = 3, direction = "up", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 26.9, y = -10.3, z = -150.5 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 51.3, y = -11.4, z = -133.1 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 60.7, y = -10.4, z = -104.9 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 73.5, y = -8.9, z = -58.6 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 112.4, y = 0.2, z = -47.6 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 116.4, y = 0.3, z = -14.3 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 115.9, y = 0.5, z = 22.7 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 113.9, y = 0.2, z = 51.2 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 99.8, y = -8.8, z = 81.0 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 100.4, y = -8.8, z = 125.1 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 99.2, y = -9.1, z = 140.7 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 56.2, y = -1.2, z = 144.0 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 38.7, y = 0.0, z = 158.7 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 59.9, y = -5.5, z = 188.9 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 55.8, y = -9.4, z = 213.3 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 51.8, y = -9.8, z = 230.9 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                        { zone_name = "Kuftal Tunnel", type = 'arrow', center = { x = 57.0, y = -9.7, z = 258.7 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+
+                        -- Cape Terrigan -> Valley of Sorrows
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -218.7, y = -0.0, z = -317.8 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -214.0, y = -1.9, z = -300.7 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -182.0, y = 2.5, z = -299.0 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -163.0, y = 8.3, z = -269.3 }, size = 4, direction = "nw", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -192.9, y = 8.5, z = -222.6 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -189.7, y = 8.5, z = -179.0 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -149.4, y = 8.1, z = -135.8 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -108.3, y = 6.5, z = -95.6 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -71.9, y = 0.1, z = -57.2 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -48.8, y = -0.3, z = -24.9 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -47.5, y = -0.1, z = 18.7 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -43.7, y = 0.5, z = 59.4 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -35.1, y = 0.0, z = 87.9 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = -14.5, y = 0.4, z = 113.7 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 9.2, y = 0.5, z = 148.1 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 33.6, y = 0.1, z = 164.5 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 57.8, y = -0.6, z = 144.6 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 78.0, y = 0.0, z = 120.7 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 83.3, y = 1.4, z = 93.5 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 107.9, y = 0.4, z = 79.2 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 151.7, y = 7.3, z = 79.8 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 179.7, y = 8.9, z = 78.2 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 205.4, y = 8.1, z = 72.1 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 233.8, y = 8.1, z = 39.2 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 236.2, y = 8.2, z = 14.3 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 242.5, y = 7.8, z = -6.4 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 262.2, y = 0.4, z = -33.9 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Cape Teriggan", type = 'arrow', center = { x = 268.0, y = -1.7, z = -60.1 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+
+                        -- Valley of Sorrows to Keyitem
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -228.4, y = -0.7, z = -19.7 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -180.8, y = -5.4, z = -8.7 }, size = 4, direction = "up", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -171.8, y = -8.9, z = 22.6 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'square', center = { x = -167.0, y = -8.0, z = 24.0 }, size = 1, floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -160.5, y = -8.0, z = 20.4 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -140.5, y = -5.1, z = 16.4 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -117.4, y = 0.9, z = -21.2 }, size = 4, direction = "se", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -89.8, y = 0.3, z = -41.9 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -55.6, y = 0.8, z = -40.0 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = -27.2, y = 0.0, z = -12.7 }, size = 4, direction = "ne", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = 1.2, y = 0.2, z = 8.2 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = 53.2, y = 0.5, z = -2.0 }, size = 4, direction = "right", floor_id = 0, colour = "cyan" },
+                        { zone_name = "Valley of Sorrows", type = 'arrow', center = { x = 91.0, y = -2.2, z = -7.0 }, size = 4, direction = "down", floor_id = 0, colour = "cyan" },
                 },
             },
             { -- Step 4
@@ -5076,7 +5396,7 @@ return {
                        "The ??? is on the UPPER level, among some trees on your LEFT as you go up the slope. \n \n" ..
                        "Sneak + Invisible recommended. \n \n",
                 onmob_target = {"qm5"},
-                trigger_on_talk = {"Figure of Garuda"},
+                trigger_on_keyitem_obtain = {482},
                 route_to = "Xarcabard",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
                 zone_max_distance = 40,
@@ -5109,7 +5429,6 @@ return {
                        "Follow it until you zone back out into Batallia Downs. \n \n" ..
                        "After zoning, take a RIGHT and head SOUTH. The ??? is on the cliff's edge just EAST of the Stone Monument. \n \n" ..
                        "WARNING: The NM Ahtu spawns on this island. \n \n",
-                zone_trigger = "Batallia Downs",
                 route_to = "Eldieme Necropolis",
                 destination_highlight = {position = "J-10", offsetX = 16, offsetY = 16},
                 zone_max_distance = 40,

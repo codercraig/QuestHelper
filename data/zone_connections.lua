@@ -395,7 +395,7 @@ return {
     ["Western Altepa Desert"] = {
         {zone = "Eastern Altepa Desert", exit = "K-7"},
         {zone = "Rabao", exit = "L-5"},
-        {zone = "Kuftal Tunnel", exit = "H-4"},
+        {zone = "Kuftal Tunnel 1", exit = "H-4"},
     },
     ["Kuftal Tunnel 1"] = {
         {zone = "Western Altepa Desert", exit = "H-10"},
@@ -408,6 +408,10 @@ return {
     },
     ["Cape Teriggan"] = {
         {zone = "Kuftal Tunnel 2", exit = "G-10"},
+        {zone = "Valley of Sorrows", exit = "J-8"},
+    },
+    ["Valley of Sorrows"] = {
+        {zone = "Cape Teriggan", exit = "E-8"},
     },
     ["Rabao"] = {
         {zone = "Western Altepa Desert", exit = "G-11"}
