@@ -1,3 +1,4 @@
+
 # QuestHelper Addon
 
 QuestHelper is an Ashita v4 addon for Final Fantasy XI that guides you through quests, missions, and other content step-by-step. It draws routes and highlights directly into the game world and onto in-game maps, and advances steps automatically as you play — talk to the right NPC, obtain a key item, zone in, or defeat a target, and the guide moves on.
@@ -5,6 +6,11 @@ QuestHelper is an Ashita v4 addon for Final Fantasy XI that guides you through q
 Guides are written in a readable Lua format, so anyone can extend or add their own.
 
 **Current release: v0.1** — first public release. Mission content is authored end-to-end and is being verified server-by-server; expect some rough edges (see [Content](#content)).
+
+<img width="426" height="240" alt="questhelper1 (1)" src="https://github.com/user-attachments/assets/dbf4d4b2-528f-4416-bd2c-4cba8982190b" />
+
+
+
 
 ---
 
