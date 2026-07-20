@@ -1,33 +1,94 @@
 # QuestHelper Addon
 
-QuestHelper is an Ashita addon designed to help players track quests, missions, and guides within Final Fantasy XI. It features an intuitive UI and support for a custom LUA-based quest configuration, enabling easy creation and customization of guides.
+QuestHelper is an Ashita v4 addon for Final Fantasy XI that guides you through quests, missions, and other content step-by-step. It draws routes and highlights directly into the game world and onto in-game maps, and advances steps automatically as you play — talk to the right NPC, obtain a key item, zone in, or defeat a target, and the guide moves on.
+
+Guides are written in a readable Lua format, so anyone can extend or add their own.
+
+**Current release: v0.1** — first public release. Mission content is authored end-to-end and is being verified server-by-server; expect some rough edges (see [Content](#content)).
 
 ---
 
 ## Features
 
-- **Quest and Mission Tracking**: Organise quests by category and missions by steps.
-- **Step Completion**: Track individual steps and mark them as completed.
-- **Multiple Steps and Images**: Add multiple steps and images for a mission.
-- **Customization**: Offset highlights for precise positioning.
+**Tracking & UI**
+- Content organised by category (Missions, Quests, Jobs, NMs) and broken into ordered steps.
+- Per-step completion with automatic detection, plus manual override when you need it.
+- Prerequisite chains between missions/quests, including "choose one" groups and optional/recommended entries.
+- A level-ordered **Progression guide** that stitches the separate chains into one "what next" list.
+- Requirement checks shown live where possible — main-job level, and Fame captured from reputation NPC dialogue.
+
+**In-world guidance**
+- Live map rendering pulled from the game's own DAT files, with per-floor maps for dungeons.
+- Routes, arrows, squares and lines drawn into the 3D world and onto the map to point you where to go.
+- Target beams to specific NPCs (via OnMob), resolved to the correct entity rather than fixed coordinates.
+- Zone-to-zone **pathfinding** with floor awareness and death/backtrack recovery across split entrances.
+
+**Automatic step triggers**
+- Dialogue text, event/cutscene IDs, item obtain, key-item obtain (single or "need all").
+- Zone entry, walk-through trigger zones (box and line), and kill requirements (with party-kill credit).
+- Buff/status checks, and time-of-day aware content (e.g. Vana'diel daily-password capture for Castle Oztroja).
+
+**Inventory & items**
+- Key items you have vs. still need, shown per mission.
+- Items needed with quantity, inventory/storage location lookup, and `optional` / pick-up-on-the-way flags.
+
+**Authoring & debugging**
+- A built-in validator that flags broken zone/map references (handy after renaming a zone).
+- A debug UI and command suite for teleport-testing, triggering steps, checking floor IDs, and inspecting maps.
+
+---
+
+## Content
+
+Included guide data (`data/`):
+
+- **Nation Missions** — San d'Oria, Bastok, and Windurst, full chains (Rank 1-1 through 9-2).
+- **Rise of the Zilart** — full chain.
+- **Chains of Promathia** — full chain.
+- **Quests** — a selection of key/enabler quests (Tenshodo membership, Kazham airship pass, and others).
+- **Custom** — sample entries and a feature-demo file for authors.
+
+Work in progress (not ready for v0.1):
+- **Jobs** (Dancer, Paladin) and **NMs** — present in the data folder but currently non-functional; they still reference old map assets and will be reworked in a later release.
+
+> v0.1 note: the mission chains are the focus of this release. They are authored end-to-end, and in-game sign-off is ongoing. The Rise of the Zilart chain was built on a live server without GM commands, so it may need the most polishing.
 
 ---
 
 ## Installation
 
-1. Place the `QuestHelper` addon in the `addons` directory of your Ashita installation.
-2. Place your JSON quest files in the `addons/QuestHelper/data/` directory.
-3. Start the addon in-game using `/load questhelper`.
+1. Place the `QuestHelper` folder in the `addons` directory of your Ashita v4 installation.
+2. Load it in-game with `/addon load questhelper` (or add it to your startup script).
+3. Toggle the window with `/questhelper`.
+
+Guide data lives in `addons/QuestHelper/data/` as `.lua` files — drop new files in the matching category folder and they are picked up automatically.
 
 ---
 
-## LUA Format for Quests
+## Commands
 
-The LUA files in the `data/` directory define quests, missions and steps. Below is the structure:
+Player commands:
 
-### General Format
+| Command | Description |
+| --- | --- |
+| `/questhelper` | Toggle the main window. |
+| `/qh_find <item>` | Locate an item across your inventory and storage. |
+| `/qh_validate` | Validate the loaded guide data for broken zone/map references. |
+| `/qh_pos [x] [y]` | Reset the map window position (defaults to 100, 100). |
+| `/qh_day` | Show the current Vana'diel day (used by password-gated steps). |
 
-Will create a player LUA format to add your own guides.
+A wider debug suite is also available (`/qh_debug`, `/qh_verbose`, `/qh_trigger`, `/qh_checkfloor`, `/qh_mapinfo`, `/qh_keyitems`, `/qh_buffs`, `onmob_*`, and more) for authoring and testing guides.
+
+---
+
+## Authoring Your Own Guides
+
+Guides are plain Lua tables describing steps and their triggers. Each step can carry text, map images, in-world `visual_zones`, an NPC target, and one or more completion triggers.
+
+See:
+- `data/ref/step_authoring_guide.md` — rules for turning a walkthrough + server Lua into steps.
+- `modules/README.md` — module architecture and the addon's internals.
+- `data/Custom/FeatureDemo.lua` — a worked example covering the common fields.
 
 ---
 

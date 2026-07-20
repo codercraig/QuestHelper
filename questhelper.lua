@@ -1,17 +1,13 @@
 -- [[
---  QuestHelper (v2.0.0 - Refactored)
 --  Original by Oxos
---  Integrated with OnMob (v2.6.6) functionality.
---  Refactored into modular architecture
---
---  v2.0.0 - Complete refactor into separate modules for maintainability
+--  v0.1.0 - Complete refactor into separate modules for maintainability
 --         - Same functionality, cleaner code organization
 -- ]]
 
 require('common')
 addon.author   = 'Oxos'
 addon.name     = 'QuestHelper'
-addon.version  = '1.0.0'
+addon.version  = '0.1'
 
 -- Core Requirements
 local imgui        = require('imgui')
