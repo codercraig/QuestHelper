@@ -363,7 +363,11 @@ return {
     ["Batallia Downs"] = {
         {zone = "Upper Jeuno", exit = "L-9"},
         {zone = "Rolanberry Fields", exit = "K-9"},
-        {zone = "Jugner Forest", exit = "F-9"}
+        {zone = "Jugner Forest", exit = "F-9"},
+        {zone = "The Eldieme Necropolis", exit = "J-10"},
+    },
+    ["The Eldieme Necropolis"] = {
+
     },
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "D-11"},

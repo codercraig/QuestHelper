@@ -3055,6 +3055,10 @@ return {
                 route_to = "Fei'Yin 1",
                 zone_max_distance = 40,
                 visual_zones = {
+                    -- Rang pass arrows
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -206.7, y = -39.9, z = -197.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -165.0, y = -40.0, z = -204.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -118.9, y = -39.8, z = -219.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
                     -- Route to Fei'Yin in Beaucedine Glacier from Xarca good to help players navigate complicated map.
                     { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -136.4, y = -79.8, z = 220.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
                     { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -119.9, y = -79.5, z = 173.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
@@ -5250,6 +5254,7 @@ return {
     ["9-1: Breaking Barriers"] = {
         prerequisites = {
             {category = "Missions", subfile = "SanDoria", name = "8-2: Lightbringer"},
+            {category = "Quests", subfile = "Windurst Waters North", name = "Magicked Astrolabe", recommended = true},
         },
         steps = {
             { -- Step 1
@@ -5395,62 +5400,294 @@ return {
                 text = "Step 4: KEY ITEM 2 of 3 - Figure of Garuda, Xarcabard (H-7). \n \n" ..
                        "The ??? is on the UPPER level, among some trees on your LEFT as you go up the slope. \n \n" ..
                        "Sneak + Invisible recommended. \n \n",
-                onmob_target = {"qm5"},
+                onmob_target = {"xarcabard-h7-???"},
                 trigger_on_keyitem_obtain = {482},
                 route_to = "Xarcabard",
                 destination_highlight = {position = "H-7", offsetX = 16, offsetY = 16},
                 zone_max_distance = 40,
                 visual_zones = {
-                    { zone_name = "Xarcabard", type = 'square', center = { x = 179.0, y = -33.0, z = 82.0 }, size = 2, floor_id = 0, colour = "green" },
-                },
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 4,
-                        zone_name = "Xarcabard",
-                        highlights = {
-                            { position = "H-7", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 521.9, y = 0.2, z = -247.3 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 500.5, y = -0.2, z = -212.9 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 481.3, y = 0.2, z = -181.0 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 428.1, y = 0.5, z = -181.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 377.3, y = 5.2, z = -185.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 325.3, y = 6.2, z = -188.4 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 273.8, y = -1.1, z = -199.2 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 217.5, y = -21.2, z = -200.0 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 185.5, y = -18.5, z = -164.3 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 160.3, y = -16.2, z = -125.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 170.8, y = -14.8, z = -87.7 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 183.5, y = -10.4, z = -47.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 190.5, y = -9.7, z = -14.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 198.1, y = -7.7, z = 30.7 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 219.5, y = -8.3, z = 58.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 218.4, y = -14.2, z = 93.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 218.0, y = -19.4, z = 124.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 205.2, y = -27.6, z = 147.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 175.3, y = -33.7, z = 111.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Xarcabard", type = 'arrow', center = { x = 164.4, y = -35.2, z = 92.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
                 },
             },
             { -- Step 5
-                text = "Step 5: KEY ITEM 3 of 3 - get to the island at Batallia Downs (J-11). \n \n" ..
+                text = "Step 5: KEY ITEM 3 of 3 - Figure of Leviathan. \n \n" ..
                        "This spot is ONLY reachable by going through Eldieme Necropolis - you cannot walk to it in Batallia. \n \n" ..
-                       "===== You need a 2nd person, OR a Magicked Astrolabe ===== \n" ..
-                       "The gates need two people on levers. Solo players can buy a Magicked Astrolabe to open them - see Churano-Shurano in Windurst Waters. \n \n" ..
-                       "===== Route ===== \n" ..
-                       "Enter Eldieme Necropolis from the SOUTHERN entrance at Batallia Downs (J-10), or use the Survival Guide. \n" ..
-                       "Person 1 uses the Lever at (H-8) and works the Gates while Person 2 moves to the southern room at (G-9). \n" ..
-                       "Person 2 then uses the matching Lever in the north part of that room to work the Gates for Person 1. \n \n" ..
-                       "SNEAK UP, then drop down the hole in the CENTRE of the room at (G-9). You WILL get aggro below, even at Lv99. \n \n" ..
-                       "Follow the path EAST onto a new map. Work south: RIGHT at the first intersection, LEFT at the second. \n" ..
-                       "Follow it until you zone back out into Batallia Downs. \n \n" ..
-                       "After zoning, take a RIGHT and head SOUTH. The ??? is on the cliff's edge just EAST of the Stone Monument. \n \n" ..
-                       "WARNING: The NM Ahtu spawns on this island. \n \n",
-                route_to = "Eldieme Necropolis",
-                destination_highlight = {position = "J-10", offsetX = 16, offsetY = 16},
+                       "Enter Eldieme Necropolis from the SOUTHERN entrance at Batallia Downs (J-10), or use the Survival Guide. \n \n",
+                zone_trigger = "The Eldieme Necropolis",
                 zone_max_distance = 40,
                 visual_zones = {
-                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
+                        --Route to J-10
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 424.2, y = 8.0, z = -142.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 388.5, y = 8.4, z = -176.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 353.5, y = 8.4, z = -207.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 322.7, y = 0.0, z = -238.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 289.5, y = 2.6, z = -268.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 246.2, y = 7.7, z = -299.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 218.3, y = 8.9, z = -323.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.3, y = 8.8, z = -342.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.9, y = 8.4, z = -372.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 198.3, y = 8.0, z = -402.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 177.9, y = 8.1, z = -417.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 138.3, y = 11.6, z = -378.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
                 },
                 images = {
                     {
                         width = 512,
                         height = 512,
                         state = 5,
-                        zone_name = "Eldieme Necropolis",
-                        floor_id = 1,
+                        zone_name = "Batallia Downs",
                         highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
+                            { position = "J-10", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 6
+                text = "Step 6: Both players split up and work the Gates. \n \n" ..
+                       "Open the Gates so both players can regroup at the hole (next step). \n \n" ..
+                       "===== Follow your colour ===== \n" ..
+                       "BOTH players first follow the YELLOW arrows to the split point. \n" ..
+                       "(Solo with Magicked Astrolabe? Take the Player 2 / BLUE route and click the blocked doors instead of using the levers.) \n \n" ..
+                       "Person 1: follow the PURPLE arrows to the Lever at (H-8) and work the Gates for Person 2. \n" ..
+                       "Person 2: follow the BLUE arrows to the southern room and use the matching Lever to work the Gates for Person 1. \n \n" ..
+                       "The guide advances automatically once you reach your plate. \n \n",
+                zone_max_distance = 20,
+                keyitems_needed = {
+                                    {id = 2578, name = "Magicked Astrolabe", optional = true},
+                },
+                -- If we have the Magicked Astrolabe skip the gate sstep and just run straight there in Step 7.
+                trigger_on_keyitem_obtain = {2578},
+                onmob_target = {"the-eldieme-necropolis-east-plate-h8",
+                                "the-eldieme-necropolis-south-plate-g8"},
+                visual_zones = {
+                        -- Route through Eldieme.
+                        -- Both players to split
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.5, y = -56.0, z = -115.6 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 418.0, y = -52.0, z = -99.5 }, size = 1, floor_id = 15, colour = "green" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.3, y = -50.8, z = -92.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.7, y = -48.0, z = -57.8 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.8, y = -42.3, z = -10.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 401.6, y = -40.0, z = 19.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 380.2, y = -40.0, z = 20.3 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 378.9, y = -36.0, z = -19.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 328.5, y = -32.0, z = -59.6 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        -- Player 1 going to H-8
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 301.0, y = -32.0, z = -51.7 }, size = 3, direction = "up", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 300.7, y = -32.0, z = -7.6 }, size = 3, direction = "up", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 305.9, y = -27.5, z = 9.0 }, size = 3, direction = "up", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 305.5, y = -27.5, z = 13.5 }, size = 3, direction = "left", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 283.9, y = -27.8, z = 13.6 }, size = 3, direction = "nw", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 281.5, y = -28.0, z = 19.3 }, size = 3, direction = "left", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 258.1, y = -32.0, z = 21.0 }, size = 3, direction = "nw", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 252.3, y = -32.0, z = 24.3 }, size = 3, direction = "sw", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 242.3, y = -32.0, z = 20.0 }, size = 3, direction = "left", floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 233.9, y = -34.0, z = 20.0 }, size = 3, direction = "left", floor_id = 15, colour = "magenta" },
+
+                        -- PLayer 2 to Drop down map 16
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 297.1, y = -32.0, z = -53.4 }, size = 3, direction = "sw", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 284.2, y = -32.2, z = -59.7 }, size = 3, direction = "left", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 269.0, y = -32.0, z = -59.8 }, size = 3, direction = "sw", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 271.0, y = -34.3, z = -60.0 }, width = 4.25, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 259.1, y = -32.0, z = -68.0 }, size = 3, direction = "down", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 260.0, y = -34.3, z = -71.0 }, width = 4.00, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'ns' },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 260.3, y = -32.0, z = -80.4 }, size = 3, direction = "down", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 245.8, y = -32.0, z = -100.7 }, size = 3, direction = "left", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 207.8, y = -32.0, z = -99.8 }, size = 3, direction = "left", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 197.7, y = -28.0, z = -101.0 }, size = 3, direction = "up", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 197.5, y = -28.0, z = -81.9 }, size = 3, direction = "left", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 180.1, y = -28.0, z = -80.3 }, size = 3, direction = "up", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 178.4, y = -32.0, z = -59.2 }, size = 3, direction = "nw", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 176.5, y = -32.0, z = -51.3 }, size = 3, direction = "ne", floor_id = 15, colour = "cyan" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 180.2, y = -34.0, z = -34.3 }, size = 3, direction = "up", floor_id = 15, colour = "cyan" },
+
+                },
+                trigger_zones = {
+                    -- Box triggers: advance when the LOCAL player reaches their plate (per-client).
+                    -- VERIFY: adjust these to the actual plate positions if they fire early/late.
+                    { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 233.9, y = -34.0, z = 20.0 }, size = 6, floor_id = 15, colour = "green" },   -- East plate  (Player 1 / PURPLE / H-8)
+                    { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 180.2, y = -34.0, z = -34.3 }, size = 6, floor_id = 15, colour = "green" },  -- South plate (Player 2 / BLUE / G-8)
+
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 6,
+                        zone_name = "The Eldieme Necropolis",
+                        floor_id = 15,
+                        highlights = {
+                            { position = "H-8", offsetX = 16, offsetY = 16,label = "1", color = "yellow" },
+                            { position = "G-9", offsetX = 16, offsetY = 16,label = "2", color = "cyan" },
+                        },
+                    },
+                },
+            },
+            { -- Step 7
+                text = "Step 7: Regroup at the hole and drop out to Batallia. \n \n" ..
+                       "Once BOTH players are through the Gates, follow the YELLOW arrows back to the hole in the CENTRE of the room (green square) at (G-9). \n \n" ..
+                       "SNEAK UP, then drop down the hole. You WILL get aggro below, even at Lv99. \n \n" ..
+                       "Follow the path EAST onto a new map. Work south: RIGHT at the first intersection, LEFT at the second. \n" ..
+                       "Follow it until you zone back out into Batallia Downs. \n \n" ..
+                       "After zoning, take a RIGHT and head SOUTH. The ??? is on the cliff's edge just EAST of the Stone Monument. \n \n" ..
+                       "WARNING: The NM Ahtu spawns on this island. \n \n",
+                --zone_trigger = "Batallia Downs",
+                -- Lets use a trigger zone as if we die and come back to Battilia downs it will complete the step.
+                trigger_zones = {
+                    { zone_name = "Batallia Downs", type = 'line', start = { x = 180.8, y = 12.4, z = -584.1 }, stop = { x = 176.0, y = 12.4, z = -580.0 }, floor_id = 0, colour = "green" },
+
+                },
+                zone_max_distance = 20,
+                onmob_target = {"the-eldieme-necropolis-east-plate-h8",
+                                "the-eldieme-necropolis-south-plate-g8"},
+                visual_zones = {
+                        -- If keyitem to open doors draw these anyway
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.5, y = -56.0, z = -115.6 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 418.0, y = -52.0, z = -99.5 }, size = 1, floor_id = 15, colour = "green" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.3, y = -50.8, z = -92.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.7, y = -48.0, z = -57.8 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.8, y = -42.3, z = -10.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 401.6, y = -40.0, z = 19.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 380.2, y = -40.0, z = 20.3 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 378.9, y = -36.0, z = -19.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 328.5, y = -32.0, z = -59.6 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        --Once done with Gate - regroup and run to the hole
+                        --player 1
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 234.8, y = -34.0, z = 20.5 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 249.4, y = -32.0, z = 21.2 }, size = 3, direction = "ne", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 255.3, y = -32.0, z = 24.3 }, size = 3, direction = "se", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 273.0, y = -32.0, z = 19.0 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 282.0, y = -28.0, z = 18.1 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 280.6, y = -28.0, z = 1.5 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 300.1, y = -28.0, z = 1.4 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 299.9, y = -32.0, z = -17.0 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        --{ zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 299.8, y = -32.0, z = -35.2 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 299.4, y = -32.0, z = -51.2 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 285.7, y = -32.2, z = -59.9 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 274.0, y = -32.0, z = -59.9 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 267.0, y = -32.0, z = -61.9 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 259.9, y = -32.0, z = -67.8 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 258.9, y = -32.0, z = -89.9 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 240.0, y = -32.0, z = -99.5 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 213.3, y = -32.0, z = -99.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 198.5, y = -28.0, z = -99.8 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 197.0, y = -28.0, z = -81.3 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        --player 2
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 181.5, y = -34.0, z = -34.0 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 180.9, y = -32.0, z = -49.8 }, size = 3, direction = "se", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 182.8, y = -32.0, z = -57.7 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 177.9, y = -28.0, z = -81.2 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 174.2, y = -27.5, z = -87.5 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 174.1, y = -27.5, z = -100.0 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+
+                        { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 179.9, y = -27.5, z = -99.8 }, size = 2, floor_id = 15, colour = "green" },
+
+                        --Doors highlighhted
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 271.0, y = -34.3, z = -60.0 }, width = 4.25, height = 4.75, floor_id = 15, colour = "yellow", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 260.0, y = -34.3, z = -71.0 }, width = 4.00, height = 4.75, floor_id = 15, colour = "yellow", vertical_axis = 'ns' },
+
+                        -- To Battalia
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 180.0, y = 0.0, z = -100.5 }, size = 3, direction = "right", floor_id = 16, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 213.9, y = -0.2, z = -104.6 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 219.8, y = 0.2, z = -120.5 }, size = 3, direction = "down", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 219.7, y = -5.1, z = -145.6 }, size = 3, direction = "down", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 222.7, y = -10.0, z = -172.1 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 240.1, y = -15.8, z = -179.8 }, size = 3, direction = "right", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 252.0, y = -16.2, z = -181.6 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 260.2, y = -15.8, z = -196.5 }, size = 3, direction = "down", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 266.0, y = -15.8, z = -222.5 }, size = 3, direction = "sw", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 261.7, y = -16.0, z = -251.5 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 288.1, y = -16.1, z = -260.3 }, size = 3, direction = "ne", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 300.9, y = -15.6, z = -252.0 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 317.7, y = -15.8, z = -260.0 }, size = 3, direction = "right", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 333.7, y = -19.0, z = -266.3 }, size = 3, direction = "se", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 339.7, y = -23.9, z = -282.3 }, size = 3, direction = "down", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 340.7, y = -31.8, z = -317.6 }, size = 3, direction = "down", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 352.9, y = -31.9, z = -340.2 }, size = 3, direction = "right", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 376.3, y = -31.9, z = -334.5 }, size = 3, direction = "up", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 400.6, y = -39.8, z = -300.2 }, size = 3, direction = "right", floor_id = 17, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 423.7, y = -44.8, z = -300.1 }, size = 3, direction = "right", floor_id = 17, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        zone_name = "The Eldieme Necropolis",
+                        floor_id = 15,
+                        highlights = {
                             { position = "G-9", offsetX = 16, offsetY = 16 },
                         },
                     },
                     {
                         width = 512,
                         height = 512,
-                        state = 5,
+                        state = 7,
+                        zone_name = "The Eldieme Necropolis",
+                        floor_id = 16,
+                        highlights = {
+                            { position = "K-12", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 7,
+                        zone_name = "The Eldieme Necropolis",
+                        floor_id = 17,
+                        highlights = {
+                            { position = "J-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+            },
+            { -- Step 8
+                text = "Step 8: Inspect the ??? to spawn the Roc NMs Suparna and Suparna Fledgling, then defeat them. \n \n" ..
+                       "Suparna (WAR/BRD): Horde Lullaby, Massacre Elegy, Magic Finale, Giga Scream, Dread Dive, Mighty Strikes. \n" ..
+                       "Suparna Fledgling (WHM/BRD): same song kit, plus BENEDICTION. \n \n" ..
+                       "- Bring Silence/Finale to shut down the songs - Horde Lullaby will sleep your whole party \n" ..
+                       "- Soloable/duoable by most jobs around Lv90 \n \n",
+                onmob_target = {"batallia-downs-???-j11"},
+                onmob_enemy = {"Suparna", "Suparna Fledgling"},
+                onmob_enemy_colour = "red",
+                onmob_enemy_size = 2,
+                kill_requirement = {
+                    count = 2,
+                    enemies = {"Suparna", "Suparna Fledgling"},
+                    zone = "Batallia Downs",
+                    count_party_kills = true,
+                },
+                -- Fallback: if the NMs were already killed (server 'Prog' var set) the KI is handed
+                -- over without a respawn, so advance the moment we're holding Figure of Leviathan.
+                trigger_on_keyitem_obtain = {481},
+                visual_zones = {
+                    { zone_name = "Batallia Downs", type = 'arrow', center = { x = 183.6, y = 12.7, z = -580.2 }, size = 3, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.7, y = 15.6, z = -601.5 }, size = 3, direction = "se", floor_id = 0, colour = "yellow" },
+                },
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 8,
                         zone_name = "Batallia Downs",
                         highlights = {
                             { position = "J-11", offsetX = 16, offsetY = 16 },
@@ -5458,39 +5695,29 @@ return {
                     },
                 },
             },
-            { -- Step 6
-                text = "Step 6: Inspect the ??? to spawn the Roc NMs Suparna and Suparna Fledgling, then defeat them. \n \n" ..
-                       "Suparna (WAR/BRD): Horde Lullaby, Massacre Elegy, Magic Finale, Giga Scream, Dread Dive, Mighty Strikes. \n" ..
-                       "Suparna Fledgling (WHM/BRD): same song kit, plus BENEDICTION. \n \n" ..
-                       "- Bring Silence/Finale to shut down the songs - Horde Lullaby will sleep your whole party \n" ..
-                       "- Soloable/duoable by most jobs around Lv90 \n \n",
-                onmob_target = {"qm3"},
-                onmob_enemy = {"Suparna", "Suparna Fledgling"},
-                onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
-                kill_requirement = {
-                    count = 2,
-                    enemies = {"Suparna", "Suparna Fledgling"},
-                    zone = "Batallia Downs",
-                    count_party_kills = true,
-                },
-                visual_zones = {
-                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
-                },
-            },
-            { -- Step 7
-                text = "Step 7: Inspect the ??? again for a cutscene and KI:Figure of Leviathan. \n \n",
-                onmob_target = {"qm3"},
+            { -- Step 9
+                text = "Step 9: Inspect the ??? again for a cutscene and KI:Figure of Leviathan. \n \n",
+                onmob_target = {"batallia-downs-???-j11"},
                 trigger_on_event_id = {904},
-                visual_zones = {
-                    { zone_name = "Batallia Downs", type = 'square', center = { x = 210.0, y = 17.0, z = -615.0 }, size = 2, floor_id = 0, colour = "green" },
+                trigger_on_keyitem_obtain = {481},
+                images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 9,
+                        zone_name = "Batallia Downs",
+                        highlights = {
+                            { position = "J-11", offsetX = 16, offsetY = 16 },
+                        },
+                    },
                 },
+
             },
-            { -- Step 8
-                text = "Step 8: Return to Chateau d'Oraguille and examine the Door: Great Hall to report to the King and complete the mission. \n \n" ..
+            { -- Step 10
+                text = "Step 10: Return to Chateau d'Oraguille and examine the Door: Great Hall to report to the King and complete the mission. \n \n" ..
                        "You must be holding all 3 figures (Titan, Garuda, Leviathan). \n \n" ..
                        "(Optional: Rahal and Curilla have extra dialogue afterwards.) \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {76},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
@@ -5508,12 +5735,10 @@ return {
         },
         steps = {
             { -- Step 1
-                text = "Step 1: Trade up to 9 crystals to a San d'Orian Gate Guard (or repeat missions) to build Rank Bar. \n \n" ..
-                       "Talk to any San d'Orian Gate Guard to accept the mission. \n \n" ..
-                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n" ..
-                       "Northern San d'Oria: Grilau (D-8). \n \n",
-                onmob_target = {"Ambrotien", "Endracion", "Grilau"},
-                trigger_on_talk = {"You have accepted the mission"},
+                text = "Step 1: Trade up to 2 stacks of crystals to Ambrotien or Endracion, avoid Grilau for this mission. \n \n" ..
+                       "Southern San d'Oria: Ambrotien or Endracion (F-9 / K-10). \n",
+                onmob_target = {"Ambrotien", "Endracion"},
+                trigger_on_talk = {" will have our heads if he finds out."},
                 zone_max_distance = 40,
                 visual_zones = {
                     -- Green Square around
@@ -5521,8 +5746,6 @@ return {
                     { zone_name = "Southern San d'Oria", type = 'square', center = { x = -104.9, y = 0.0, z = -53.1 }, size = 1, floor_id = 0, colour = "green" },
                     --Arpevion, T.K
                     { zone_name = "Southern San d'Oria", type = 'square', center = { x = 105.2, y = 0.0, z = -53.0 }, size = 1, floor_id = 0, colour = "green" },
-                    --Achantere, T.K
-                    { zone_name = "Northern San d'Oria", type = 'square', center = { x = -247.2, y = 7.0, z = 40.9 }, size = 1, floor_id = 0, colour = "green" },
                 },
                 images = {
                     {
@@ -5535,26 +5758,21 @@ return {
                             { position = "K-10", offsetX = 16, offsetY = 16 },
                         },
                     },
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 1,
-                        zone_name = "Northern San d'Oria",
-                        highlights = {
-                            { position = "D-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
                 },
             },
             { -- Step 2
                 text = "Step 2: Zone into Northern San d'Oria for a VERY long cutscene (~5 minutes). \n \n" ..
-                       "This fires on zoning in - there is no NPC to talk to. Get comfortable. \n \n",
-                trigger_on_event_id = {1},
+                       "This fires on ZONING IN - there is no NPC to talk to. Get comfortable. \n \n",
+                -- Step 1 only surfaces the two SOUTHERN guards (Ambrotien/Endracion) for 9-2, so a
+                -- player who follows the guide accepts from Southern and enters Northern as a real
+                -- zone change - which makes zone_trigger (a presence poll) fire correctly here.
+                -- (Grilau still works server-side; accepting there leaves you already in Northern and
+                --  would instant-complete this step - hence we steer players to Southern for 9-2.)
                 zone_trigger = "Northern San d'Oria",
                 route_to = "Northern San d'Oria",
             },
             { -- Step 3
-                text = "Step 3: Zone into Chateau d'Oraguille for another cutscene. \n \n" ..
+                text = "Step 3: First make sure you got the Northern San d'Oria cutscene (re-zone into Northern if you missed it). Then zone into Chateau d'Oraguille for another cutscene. \n \n" ..
                        "You will be ordered to head to Qu'Bia Arena. \n \n" ..
                        "(Optional: Rahal, Aramaviont, Milchupain, Curilla, Halver, Nachou and Perfaumand all have extra dialogue now.) \n \n",
                 trigger_on_event_id = {10},
@@ -5564,18 +5782,84 @@ return {
             },
             { -- Step 4
                 text = "Step 4: Zone into Fei'Yin for a cutscene. \n \n" ..
-                       "===== Party requirements ===== \n" ..
-                       "Full party of Lv70+. ONLY players currently on this mission - or who have already completed it - can enter the BC. \n" ..
-                       "(A friend who changed allegiance but finished San d'Oria's storyline CAN help.) \n" ..
-                       "A mage with Sleepga is very useful. Trusts CAN be summoned once inside Qu'Bia Arena. \n \n" ..
-                       "===== Getting there ===== \n" ..
-                       "Home Point #1 inside Fei'Yin drops you at the Qu'Bia Arena entrance. \n" ..
-                       "Or, if Beyond Infinity is done, Domenic in Lower Jeuno (J-7) teleports you to Qu'Bia Arena. \n" ..
-                       "Bring Sneak - there are Lv95+ mobs in the area (or grab Circumspection from a Grounds of Valor book for 5 tabs). \n \n",
+                       "Home Point #1 inside Fei'Yin drops you at the Qu'Bia Arena entrance. \n",
                 trigger_on_event_id = {23},
                 zone_trigger = "Fei'Yin",
                 route_to = "Fei'Yin 1",
                 zone_max_distance = 40,
+                visual_zones = {
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -206.7, y = -39.9, z = -197.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -165.0, y = -40.0, z = -204.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -118.9, y = -39.8, z = -219.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    -- Route to Fei'Yin in Beaucedine Glacier from Xarca good to help players navigate complicated map.
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -136.4, y = -79.8, z = 220.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -119.9, y = -79.5, z = 173.5 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -101.2, y = -80.0, z = 133.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -96.4, y = -76.2, z = 102.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -32.0, y = -63.2, z = 101.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 0.5, y = -59.1, z = 98.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 2.6, y = -59.0, z = 60.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 3.0, y = -59.6, z = 12.0 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 5.7, y = -59.7, z = -27.1 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 2.7, y = -59.1, z = -58.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -5.6, y = -59.9, z = -81.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -29.7, y = -59.7, z = -105.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                    --Survival guide
+                    { zone_name = "Beaucedine Glacier", type = 'square', center = { x = -28.0, y = -59.8, z = -125.0 }, size = 1, floor_id = 0, colour = "green" },
+
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.1, y = -58.2, z = -95.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -63.6, y = -47.5, z = -142.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -58.7, y = -39.6, z = -189.8 }, size = 4, direction = "se", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = -27.6, y = -39.7, z = -205.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 10.6, y = -40.1, z = -193.4 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 23.3, y = -40.1, z = -151.9 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 54.1, y = -40.9, z = -128.8 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 85.5, y = -40.0, z = -101.0 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 120.5, y = -40.0, z = -87.2 }, size = 4, direction = "ne", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 141.8, y = -40.4, z = -50.1 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 133.9, y = -40.5, z = -4.9 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 93.1, y = -39.5, z = 0.7 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 61.2, y = -39.2, z = 5.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 64.2, y = -36.0, z = 20.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 126.2, y = -23.1, z = 20.1 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 153.0, y = -19.3, z = 20.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 175.3, y = -19.9, z = 17.5 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 170.4, y = -20.4, z = -30.7 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 167.1, y = -19.8, z = -83.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 158.6, y = -19.9, z = -114.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 128.2, y = -19.7, z = -142.5 }, size = 4, direction = "left", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 80.9, y = -19.6, z = -148.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 59.2, y = -17.4, z = -182.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 121.1, y = -3.7, z = -180.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 186.5, y = 0.4, z = -193.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+
+                    --Intersection
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 229.4, y = 0.3, z = -198.3 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 269.5, y = 0.3, z = -200.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 317.1, y = 0.0, z = -196.8 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 323.4, y = 0.8, z = -136.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 313.5, y = 0.2, z = -88.5 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 300.7, y = 0.6, z = -27.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 299.3, y = 0.1, z = 21.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 292.0, y = 0.4, z = 57.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 237.4, y = 0.2, z = 88.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 194.3, y = 0.1, z = 115.2 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 181.1, y = 0.1, z = 144.2 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 195.4, y = 0.0, z = 180.4 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 237.2, y = 0.0, z = 196.2 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 282.7, y = 0.9, z = 217.7 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 335.7, y = -0.2, z = 226.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 357.0, y = 0.0, z = 277.8 }, size = 4, direction = "right", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 382.8, y = 1.9, z = 296.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 380.4, y = 16.4, z = 361.3 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 379.2, y = 21.0, z = 403.6 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 370.2, y = 20.1, z = 429.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 357.5, y = 20.0, z = 475.5 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 324.6, y = 20.5, z = 506.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 296.7, y = 20.7, z = 524.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "Beaucedine Glacier", type = 'arrow', center = { x = 280.7, y = 20.0, z = 535.0 }, size = 4, direction = "up", floor_id = 0, colour = "yellow" },
+                },
             },
             { -- Step 5
                 text = "Step 5: Travel to the Qu'Bia Arena entrance at (K-8) in Fei'Yin. \n \n",
@@ -5646,7 +5930,7 @@ return {
                 trigger_on_event_id = {32001},
                 onmob_enemy = {"Death Clan Destroyer", "Yukvok of Clan Death", "Worgbut of Clan Death", "Rallbrog of Clan Death", "Vangknok of Clan Death", "Warlord Rojgnoj", "Rojgnoj's Left Hand", "Rojgnoj's Right Hand"},
                 onmob_enemy_colour = "red",
-                onmob_enemy_size = 4,
+                onmob_enemy_size = 2,
             },
             { -- Step 7
                 text = "Step 7: Zone into Northern San d'Oria for a short cutscene. \n \n",
@@ -5659,39 +5943,88 @@ return {
                        "(Optional: Halver, Rahal, Curilla, Aramaviont and Milchupain have extra dialogue.) \n" ..
                        "(Optional: Pieuje's door and Trion's door each have a cutscene. The Door: Papal Chambers at the top of the Cathedral has another.) \n" ..
                        "(Optional: Talking to Trion with a San d'Oria Trust Permit unlocks Trust: Trion, if you already have Excenmille and Curilla.) \n \n",
-                onmob_target = {"_6h4"},
+                onmob_target = {"Door: Great Hall"},
                 trigger_on_event_id = {8},
                 route_to = "Chateau d'Oraguille",
                 destination_highlight = {position = "I-9", offsetX = 16, offsetY = 16},
                 zone_max_distance = 20,
             },
             { -- Step 9
-                text = "Step 9: Go to the Heavy Stone Door in King Ranperre's Tomb at (H-8) - Map 1 - for a cutscene. \n \n",
-                onmob_target = {"_5a0"},
+                text = "Step 9: Go to the Heavy Stone Door in King Ranperre's Tomb at (H-8) for a cutscene. \n \n",
                 trigger_on_event_id = {14},
+                onmob_target = {"king-ranperre-tomb-heavy-stone-door-h8"},
                 route_to = "King Ranperre's Tomb",
+                destination_highlight = {position = "H-8", offsetX = 16, offsetY = 16},
+                zone_max_distance = 25,
                 visual_zones = {
-                    { zone_name = "King Ranperre's Tomb", type = 'square', center = { x = -39.0, y = 4.8, z = 20.0 }, size = 2, floor_id = 1, colour = "green" },
-                },
-                images = {
-                    {
-                        width = 512,
-                        height = 512,
-                        state = 9,
-                        zone_name = "King Ranperre's Tomb",
-                        floor_id = 1,
-                        highlights = {
-                            { position = "H-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
+                    -- Entrance
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 213.8, y = 2.9, z = -489.4 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 200.6, y = 0.0, z = -503.4 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                    { zone_name = "East Ronfaure", type = 'arrow', center = { x = 199.7, y = 0.3, z = -533.3 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+
+                    --Kings Tomb
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -0.1, z = 247.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -139.8, y = 0.0, z = 220.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -163.3, y = 0.0, z = 219.5 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -160.3, y = 0.0, z = 184.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.6, y = -1.1, z = 207.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -140.4, y = 7.5, z = 159.8 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -145.4, y = 7.2, z = 141.9 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -169.6, y = 7.5, z = 137.3 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.1, y = 7.5, z = 120.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -180.8, y = 7.5, z = 81.4 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -183.2, y = 7.3, z = 60.5 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -220.1, y = 6.5, z = 58.8 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -250.9, y = 6.8, z = 53.9 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -260.7, y = 7.3, z = 31.7 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -234.6, y = 7.5, z = 20.4 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -181.7, y = 7.0, z = 17.1 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -147.3, y = 7.1, z = 16.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -99.7, y = 8.3, z = 15.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -100.8, y = 4.5, z = -27.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -116.3, y = 3.0, z = -27.3 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.0, y = 0.0, z = -62.7 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -117.2, y = 0.1, z = -105.9 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -115.3, y = 0.0, z = -134.9 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -75.2, y = 0.0, z = -134.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -44.1, y = 0.0, z = -130.8 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -23.5, y = -0.0, z = -135.6 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 37.5, y = 0.0, z = -135.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.2, y = 0.0, z = -84.1 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.1, y = 0.0, z = -62.3 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 36.0, y = 3.0, z = -26.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 20.0, y = 4.5, z = -26.2 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 21.1, y = 8.7, z = 19.3 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 72.1, y = 7.2, z = 19.2 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 124.1, y = 7.5, z = 18.5 }, size = 4, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 140.8, y = 7.2, z = 62.4 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 136.9, y = 7.3, z = 84.3 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 138.2, y = 8.5, z = 117.5 }, size = 4, direction = "up", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 113.9, y = 8.2, z = 141.5 }, size = 4, direction = "nw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 80.1, y = 7.5, z = 180.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 29.5, y = 6.8, z = 179.4 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 10.1, y = 7.6, z = 178.0 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -21.0, y = 7.3, z = 173.6 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -7.1, y = 7.5, z = 129.1 }, size = 4, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 23.7, y = 8.0, z = 106.7 }, size = 4, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 55.5, y = 6.5, z = 105.1 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 59.2, y = 7.5, z = 75.0 }, size = 4, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 56.7, y = 7.2, z = 61.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = 18.0, y = 7.3, z = 60.6 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -10.7, y = 6.9, z = 54.5 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -20.5, y = 8.8, z = 31.2 }, size = 4, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "King Ranperre's Tomb", type = 'arrow', center = { x = -31.6, y = 7.5, z = 20.1 }, size = 4, direction = "left", floor_id = 1, colour = "yellow" },
+
+                    --Door non fight
+                    --{ zone_name = "King Ranperre's Tomb", type = 'rect', center = { x = -39.0, y = 4.8, z = 20.0 }, width = 4.25, height = 5.75, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
                 },
             },
             { -- Step 10
                 text = "Step 10: Report back to Halver in Chateau d'Oraguille for the final cutscene and your reward. \n \n" ..
                        "MAKE SURE YOU HAVE A FREE INVENTORY SLOT for the San d'Orian Flag. \n" ..
                        "(If your inventory is full, talk to Halver again afterwards and he will hand it over.) \n \n" ..
-                       "Rank 10, 100,000 gil, Title: San d'Orian Royal Heir, San d'Orian Flag. \n" ..
-                       "You can now purchase the KI:Atma of the Heir. \n \n" ..
                        "(Optional afterwards: Pieuje's and Trion's doors have two more Rank 10 only cutscenes; Rahal, Aramaviont and Curilla have dialogue; and there is an epilogue cutscene when you zone into Southern San d'Oria.) \n \n",
                 onmob_target = {"Halver"},
                 trigger_on_event_id = {9},

@@ -1110,6 +1110,9 @@ function ui_main.render(is_open, currentTopCategory, currentSubfile, current_mis
                                 if hasKI then
                                     -- GREEN - Player has it
                                     imgui.TextColored({0, 1, 0, 1}, string.format("  [x] KI: %s", ki.name))
+                                elseif ki.optional then
+                                    -- GREY - Optional, don't have it (not required to progress)
+                                    imgui.TextColored({0.6, 0.6, 0.6, 1}, string.format("  [ ] KI: %s (optional)", ki.name))
                                 else
                                     -- RED - Don't have it
                                     imgui.TextColored({1, 0, 0, 1}, string.format("  [ ] KI: %s", ki.name))

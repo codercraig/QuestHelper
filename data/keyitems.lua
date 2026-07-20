@@ -100,7 +100,8 @@ local id_to_name = {
     [711] = "Brand of Twilight",
     [1111] = "Delkfutt Key",
     [2051] = "Loadstone",
-    [2506] = "Temple Knight Key"
+    [2506] = "Temple Knight Key",
+    [2578] = "Magicked Astrolabe",
 
     -- Add more key items as needed:
     -- [ID] = "Key Item Name",

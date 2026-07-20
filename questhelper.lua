@@ -606,7 +606,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                             ref_y = zone.center.y
                                             ref_z = zone.center.z
                                         end
-                                        if ref_x then
+                                        if ref_x and ref_y and ref_z then
                                             local dx = player_module.posX - ref_x
                                             local dy = (player_module.posZ_depth - ref_y) * 0.5
                                             local dz = player_module.posY_height - ref_z
@@ -757,7 +757,7 @@ ashita.events.register('d3d_present', 'present_callback', function()
                                             ref_y = zone.center.y
                                             ref_z = zone.center.z
                                         end
-                                        if ref_x then
+                                        if ref_x and ref_y and ref_z then
                                             local dx = player_module.posX - ref_x
                                             local dy = (player_module.posZ_depth - ref_y) * 0.5
                                             local dz = player_module.posY_height - ref_z

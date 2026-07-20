@@ -377,6 +377,13 @@ return {
         floor_id = 1,
         max_distance = 35
     },
+    ["Churano-Shurano"] = {
+        target_pos = { x = -61.6, y = -12.2, z = 99.7 },
+        visual_mode = "arc",
+        zone = "Windurst Waters North",
+        floor_id = 1,
+        max_distance = 25
+    },
     -- Windurst Waters South
     ["Ohbiru-Dohbiru"] = {
         target_pos = { x = 22.7, y = -6.2, z = -195.0 },
@@ -1677,6 +1684,29 @@ return {
         floor_id = 0,
         max_distance = 35
     },
+    ["batallia-downs-???-j11"] = {
+        target_pos = { x = 210.9, y = 17.2, z = -615.1 },
+        visual_mode = "arc",
+        zone = "Batallia Downs",
+        floor_id = 0,
+        max_distance = 15,
+        draw_in_combat = false,
+    },
+    -- The Eldieme Necropolis
+    ["the-eldieme-necropolis-east-plate-h8"] = {
+        target_pos = { x = 231.3, y = -34.8, z = 20.0 },
+        visual_mode = "arc",
+        zone = "The Eldieme Necropolis",
+        floor_id = 15,
+        max_distance = 15
+    },
+    ["the-eldieme-necropolis-south-plate-g8"] = {
+        target_pos = { x = 180.0, y = -34.8, z = -31.3 },
+        visual_mode = "arc",
+        zone = "The Eldieme Necropolis",
+        floor_id = 15,
+        max_distance = 15
+    },
     -- Ru'Lude Gardens
     ["Goggehn"] = {
         target_pos = { x = 3, y= 6.7, z=-79.4},
@@ -2029,6 +2059,14 @@ return {
         zone = "Fei'Yin",
         floor_id = 15,
         max_distance = 20
+    },
+    -- Xarcabard
+    ["xarcabard-h7-???"] = {
+        target_pos = { x = 178.1, y = -33.2, z = 82.0 },
+        visual_mode = "arc",
+        zone = "Xarcabard",
+        floor_id = 0,
+        max_distance = 25
     },
     -- Uleguerand Range
     ["uleguerand-range-buffalostalker-dodzbraz"] = {

@@ -204,6 +204,7 @@ end
 function utils.getAllKeyItemsNeeded(missionData, keyitems_db)
     local allKeyItems = {}
     local kiData = {}  -- { ki_id = name }
+    local kiOptional = {}  -- { ki_id = true } (only when explicitly optional in every sighting)
 
     if not missionData or not missionData.steps then return allKeyItems end
 
@@ -229,9 +230,15 @@ function utils.getAllKeyItemsNeeded(missionData, keyitems_db)
                             end
                         end
                     elseif type(ki) == 'table' and ki.id then
-                        -- Object format: { id = 1234, name = "Name" }
+                        -- Object format: { id = 1234, name = "Name", optional = true }
                         if not kiData[ki.id] then
                             kiData[ki.id] = ki.name
+                        end
+                        -- Required wins: only stays optional if no sighting marks it required
+                        if ki.optional then
+                            if kiOptional[ki.id] == nil then kiOptional[ki.id] = true end
+                        else
+                            kiOptional[ki.id] = false
                         end
                     end
                 end
@@ -243,7 +250,8 @@ function utils.getAllKeyItemsNeeded(missionData, keyitems_db)
     for ki_id, ki_name in pairs(kiData) do
         table.insert(allKeyItems, {
             id = ki_id,
-            name = ki_name or string.format("Key Item #%d", ki_id)
+            name = ki_name or string.format("Key Item #%d", ki_id),
+            optional = kiOptional[ki_id] == true
         })
     end
 

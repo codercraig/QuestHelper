@@ -19,5 +19,5 @@
 [7-2] The Secret Weapon - DONE
 [8-1] Coming of Age - DONE
 [8-2] Lightbringer - DONE
-[9-1] Breaking Barriers - STARTED
-[9-2] The Heir to the Light - DRAFT
+[9-1] Breaking Barriers - DONE
+[9-2] The Heir to the Light - DONE
