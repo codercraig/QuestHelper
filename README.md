@@ -7,9 +7,11 @@ Guides are written in a readable Lua format, so anyone can extend or add their o
 
 **Current release: v0.1** — first public release. Mission content is authored end-to-end and is being verified server-by-server; expect some rough edges (see [Content](#content)).
 
-
+## Showcase
 
 https://github.com/user-attachments/assets/265b56bf-0233-4322-b043-6df8b3daf903
+
+<img width="2186" height="777" alt="questhelpergit1" src="https://github.com/user-attachments/assets/b302d260-a1e5-474e-ae17-03193ce309dc" />
 
 
 
