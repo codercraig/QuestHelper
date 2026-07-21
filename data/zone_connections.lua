@@ -348,7 +348,7 @@ return {
     ["Rolanberry Fields"] = {
         {zone = "Lower Jeuno", exit = "K-4"},
         {zone = "Pashhow Marshlands", exit = "H-14"},
-        {zone = "Crawlers' Nest", exit = "I-7"},
+        {zone = "Crawlers' Nest", exit = "F-13"},
         {zone = "Sauromugue Champaign", exit = "K-5"}
     },
     ["Pashhow Marshlands"] = {
@@ -358,7 +358,11 @@ return {
     },
     ["Sauromugue Champaign"] = {
         {zone = "Meriphataud Mountains", exit = "K-11"},
-        {zone = "Rolanberry Fields", exit = "E-7"}
+        {zone = "Rolanberry Fields", exit = "E-7"},
+        {zone = "Garlaige Citadel", exit = "H-10"},
+    },
+    ["Garlaige Citadel"] = {
+        {zone = "Sauromugue Champaign", exit = "G-6"},
     },
     ["Batallia Downs"] = {
         {zone = "Upper Jeuno", exit = "L-9"},
@@ -466,7 +470,7 @@ return {
         {zone = "La Theine Plateau", exit = "H-2"}
     },
     ["Crawlers' Nest"] = {
-        {zone = "Rolanberry Fields", exit = "H-7"}
+        {zone = "Rolanberry Fields", exit = "M-8"}
     },
     ["Carpenters' Landing"] = {
         --{zone = "Northern San d'Oria", exit = "H-8"},

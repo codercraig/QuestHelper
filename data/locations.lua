@@ -1692,6 +1692,36 @@ return {
         max_distance = 15,
         draw_in_combat = false,
     },
+    -- Crawlers' Nest
+    ["crawlers-nest-g10-???"] = {
+        target_pos = { x = -83.4, y = -8.2, z = 79.1 },
+        visual_mode = "arc",
+        zone = "Crawlers' Nest",
+        floor_id = 16,
+        max_distance = 20
+    },
+    ["crawlers-nest-i10-???"] = {
+        target_pos = { x = 98.1, y = -38.5, z = -181.2 },
+        visual_mode = "arc",
+        zone = "Crawlers' Nest",
+        floor_id = 15,
+        max_distance = 20
+    },
+    ["crawlers-nest-i6-???"] = {
+        target_pos = { x = 99.3, y = -2.2, z = -188.9 },
+        visual_mode = "arc",
+        zone = "Crawlers' Nest",
+        floor_id = 17,
+        max_distance = 20
+    },
+    -- Garliage Citadel
+    ["garlaige-citadel-g8-weighted-stones"] = {
+        target_pos = { x = -354.9, y = -0.2, z = 262.3 },
+        visual_mode = "arc",
+        zone = "Garlaige Citadel",
+        floor_id = 1,
+        max_distance = 20
+    },
     -- The Eldieme Necropolis
     ["the-eldieme-necropolis-east-plate-h8"] = {
         target_pos = { x = 231.3, y = -34.8, z = 20.0 },
@@ -1769,6 +1799,13 @@ return {
         zone = "Ru'Lude Gardens",
         floor_id = 0,
         max_distance = 20
+    },
+    ["Maat"] = {
+        target_pos = { x = 10.9, y = 1.5, z = 119.5 },
+        visual_mode = "arc",
+        zone = "Ru'Lude Gardens",
+        floor_id = 0,
+        max_distance = 35
     },
     -- Qufum Island
     --Lower Delkfutts Tower

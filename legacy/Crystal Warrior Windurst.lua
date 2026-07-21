@@ -7,7 +7,7 @@ return {
                    "He will give you a 'Sickle' \n \n",
             images = {
                 {
-                    file     = "maps/toraimarai_canal_2.png",
+                    zone_name = "Toraimarai Canal", floor_id = 2 --[[VERIFY floor_id]],
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -21,25 +21,13 @@ return {
             text = "Step 2: Go to the room west, through the 'Marble Door' and use the 'Sickle'(trade it) on the 'Dangling Roots' for a 'Revival Root' item! \n \n",
             images = {
                 {
-                    file     = "maps/toraimarai_canal_2.png",
+                    zone_name = "Toraimarai Canal", floor_id = 2 --[[VERIFY floor_id]],
                     width    = 512,
                     height   = 512,
                     state    = 2,
                     highlights = {
                         { position = "G-8", offsetX = 16, offsetY = 16 },
                     },
-                },
-                {
-                    file     = "items/sickle.png",
-                    width    = 453,
-                    height   = 87,
-                    state    = 2,
-                },
-                {
-                    file     = "items/revival_root.png",
-                    width    = 453,
-                    height   = 87,
-                    state    = 2,
                 },
             },
           },
@@ -51,7 +39,7 @@ return {
 
             images = {
                 {
-                    file     = "maps/windurst_woods.png",
+                    zone_name = "Windurst Woods",
                     width    = 512,
                     height   = 512,
                     state    = 3,
@@ -65,11 +53,6 @@ return {
         reward = {
             text = "JSE Onion Weapon, Adventurer Coupon!",
             images = {
-                {
-                    file   = "items/adventurer_coupon.png",
-                    width  = 453,
-                    height = 67,
-                },
             },
         }
     },

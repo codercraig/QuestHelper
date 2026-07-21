@@ -1038,6 +1038,8 @@ return {
                        "You need to defeat 20 Copper Quadav enemies (levels 22-28) while in Beadeaux - they are around the starting area. They sound-aggro under level 42. \n" ..
                        "Party members get credit for kills. The kill counter persists if you zone or logout.",
                 trigger_on_event_id = 120,
+                onmob_enemy = "Copper Quadav",
+                onmob_enemy_size = 2,
                 kill_requirement = {
                     count = 20,
                     enemies = {"Copper Quadav"},

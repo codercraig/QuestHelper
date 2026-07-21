@@ -15,17 +15,12 @@ return {
                        "- Useful information: BSTs can use the ability 'Charm' and utilize Wide Scan.\n \n",
                 images = {
                     {
-                        file = "maps/south_gustaberg.png",
+                        zone_name = "South Gustaberg",
                         width = 512,
                         height = 512,
                         highlights = {
                             { position = "F-8", offsetX = 16, offsetY = 16 }
                         },
-                    },
-                    {
-                        file = "monsters/leaping_lizzy.png",
-                        width = 256,
-                        height = 256,
                     },
                 }
             },
@@ -81,12 +76,7 @@ return {
                        "\n \n",
                 images = {
                     {
-                        file = "items/quus.png",
-                        width = 366,
-                        height = 55,
-                    },
-                    {
-                        file = "maps/port_windurst.png",
+                        zone_name = "Port Windurst",
                         width = 512,
                         height = 512,
                         highlights = {
@@ -94,7 +84,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/selbina.png",
+                        zone_name = "Selbina",
                         width = 512,
                         height = 512,
                         highlights = {
@@ -102,7 +92,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/aht_urhgan_whitegate.png",
+                        zone_name = "Aht Urhgan Whitegate",
                         width = 512,
                         height = 512,
                         highlights = {
@@ -126,17 +116,12 @@ return {
                         "\n \n",
                 images = {
                     {
-                        file = "maps/south_gustaberg.png",
+                        zone_name = "South Gustaberg",
                         width = 512,
                         height = 512,
                         highlights = {
                             { position = "M-10", offsetX = 16, offsetY = 16 }
                         },
-                    },
-                    {
-                        file = "monsters/bubbly_bernie.png",
-                        width = 256,
-                        height = 256,
                     },
                 }
             },
@@ -146,10 +131,6 @@ return {
                 {
                     name = "Steam Clock",
                     type = "ITEM",
-                    --races = "All Races",
-                    --stats = { "DEF:+3", "DEX:+3", "AGI:+3" },
-                    --level = "7",
-                    --jobs = "WAR/RDM/THF/PLD/DRK/BST/BRD/RNG/SAM/NIN/DRG/BLU/COR/DNC",
                     note = "Drop Rate: ~100%"
                 }
                 --,
@@ -165,11 +146,7 @@ return {
             }
             -- text = "Steam Clock",
             -- images = {
-            --     {
-            --         file = "items/steam_clock.png",
-            --         width = 455,
-            --         height = 67,
-            --     },
+            --
             -- },
 
         }
@@ -191,7 +168,7 @@ return {
                        "- Katayama Ichimonji\n \n",
                 images = {
                     {
-                        file = "maps/south_gustaberg.png",
+                        zone_name = "South Gustaberg",
                         width = 512,
                         height = 512,
                         highlights = {
@@ -199,21 +176,11 @@ return {
                             { position = "J-8", offsetX = 16, offsetY = 16 }
                         },
                     },
-                    {
-                        file = "monsters/carnero.png",
-                        width = 256,
-                        height = 256,
-                    },
                 }
             },
         },
         reward = {
             images = {
-                {
-                    file = "equipment/katayama_ichimonji.png",
-                    width = 453,
-                    height = 87,
-                },
             },
         }
     },
@@ -233,7 +200,7 @@ return {
                        "- Armiger's Lace\n \n",
                 images = {
                     {
-                        file = "maps/south_gustaberg.png",
+                        zone_name = "South Gustaberg",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -242,21 +209,11 @@ return {
                             { position = "H-7", offsetX = 16, offsetY = 16 }
                         },
                     },
-                    {
-                        file = "monsters/tococo.png",
-                        width = 256,
-                        height = 256,
-                    },
                 }
             },
         },
         reward = {
             images = {
-                {
-                    file = "equipment/armigers_lace.png",
-                    width = 452,
-                    height = 107,
-                },
             },
         }
     },

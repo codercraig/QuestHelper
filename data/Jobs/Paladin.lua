@@ -13,7 +13,7 @@ return {
                        "- Once you find him, accept the quest.\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -51,7 +51,7 @@ return {
                        "  - Morjean might be locked if you are mid-quest on Dragoon's “The Holy Crest.”\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -66,7 +66,7 @@ return {
                        "- There is a Survival Guide at the entrance.\n \n",
                 images = {
                     {
-                        file = "maps/la_theine_plateau.png",
+                        zone_name = "La Theine Plateau",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -86,7 +86,7 @@ return {
                        "  - Sight/Magic: Will-o'-the-Wisp near the water\n \n",
                 images = {
                     {
-                        file = "maps/ordelles_caves_1.png",
+                        zone_name = "Ordelle's Caves", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -95,7 +95,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/ordelles_caves_2.png",
+                        zone_name = "Ordelle's Caves", floor_id = 2 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -127,7 +127,7 @@ return {
                        "- You must have finished 'A Squire's Test II' and meet the level requirement.\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -143,7 +143,7 @@ return {
                        "- Key Item 'Book of the East' (Cahaurme)\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -162,7 +162,7 @@ return {
                        "- Use Sneak/Invis to avoid Orc aggro.\n \n",
                 images = {
                     {
-                        file = "maps/davoi.png",
+                        zone_name = "Davoi",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -189,7 +189,7 @@ return {
                            "- He says his father is in armor but without a helmet.\n \n",
                     images = {
                         {
-                            file = "maps/northern_san_doria.png", -- Adjust filename as needed
+                            zone_name = "Northern San d'Oria", -- Adjust filename as needed
                             width = 512,
                             height = 512,
                             state = 1,
@@ -204,7 +204,7 @@ return {
                            "- This is Ailbeche’s father, the man in armor.\n",
                     images = {
                         {
-                            file = "maps/southern_san_doria.png", -- Adjust filename as needed
+                            zone_name = "Southern San d'Oria", -- Adjust filename as needed
                             width = 512,
                             height = 512,
                             state = 2,
@@ -243,7 +243,7 @@ return {
                        "- Speak with Sobane (D-6) in Southern San d'Oria. If you get a different cutscene for 'Signed in Blood' or 'Tea with a Tonberry?', talk again.\n \n",
                 images = {
                     {
-                        file = "maps/northern_san_doria.png",
+                        zone_name = "Northern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -252,7 +252,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -270,7 +270,7 @@ return {
                        "  - Recommended Lv.65+ or trust support.\n \n",
                 images = {
                     {
-                        file = "maps/la_theine_plateau.png",
+                        zone_name = "La Theine Plateau",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -279,7 +279,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/ordelles_caves_1.png",
+                        zone_name = "Ordelle's Caves", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 2,
@@ -297,7 +297,7 @@ return {
                        "- Return to Ailbeche in Northern San d'Oria (J-9) to complete the quest.\n \n",
                 images = {
                     {
-                        file = "maps/northern_san_doria.png",
+                        zone_name = "Northern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -312,11 +312,6 @@ return {
         reward = {
             text = "Completes Sharpening the Sword.\n \n",
             images = {
-                {
-                    file = "equipment/honor_sword.png",
-                    width = 453,
-                    height = 87,
-                },
             },
         },
     },
@@ -332,7 +327,7 @@ return {
                        "- Speak with Exoroche (K-7) in Helbort's Blades, Southern San d'Oria for more details.\n \n",
                 images = {
                     {
-                        file = "maps/northern_san_doria.png",
+                        zone_name = "Northern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -341,7 +336,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -358,7 +353,7 @@ return {
                        "- You can also purchase them from Auction House if available.\n \n",
                 images = {
                     {
-                        file = "maps/crawlers_nest_1.png",
+                        zone_name = "Crawlers' Nest", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 2,
@@ -367,7 +362,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/crawlers_nest_2.png",
+                        zone_name = "Crawlers' Nest", floor_id = 2 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 2,
@@ -384,7 +379,7 @@ return {
                        "- If you're unfamiliar with monster fishing, read about the fishing minigame or bring help.\n \n",
                 images = {
                     {
-                        file = "maps/castle_oztroja_1.png",
+                        zone_name = "Castle Oztroja", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -393,7 +388,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/castle_oztroja_2.png",
+                        zone_name = "Castle Oztroja", floor_id = 2 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -402,7 +397,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/castle_oztroja_3.png",
+                        zone_name = "Castle Oztroja", floor_id = 3 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -417,7 +412,7 @@ return {
                        "- If you haven't traded a Giant Shell Bug to Ailbeche yet, do that first or afterwards.\n \n",
                 images = {
                     {
-                        file = "maps/selbina.png",
+                        zone_name = "Selbina",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -433,7 +428,7 @@ return {
                        "- If you are on Paladin main, this will also start next quest “Under Oath.”\n \n",
                 images = {
                     {
-                        file = "maps/northern_san_doria.png",
+                        zone_name = "Northern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 5,
@@ -442,7 +437,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 5,
@@ -451,7 +446,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/chateau_doraguille.png",
+                        zone_name = "Chateau d'Oraguille",
                         width = 512,
                         height = 512,
                         state = 5,
@@ -466,11 +461,6 @@ return {
             text = "Completes A Boy's Dream.\n \n" ..
                    "Aquire Gallant Leggings!",
             images = {
-                {
-                    file = "equipment/gallant_leggings.png",
-                    width = 456,
-                    height = 127,
-                },
             },
         },
     },
@@ -486,7 +476,7 @@ return {
                        "- Note: This quest can block obtaining the Trust: Trion if you haven't triggered all door scenes yet.\n \n",
                 images = {
                     {
-                        file = "maps/chateau_doraguille.png",
+                        zone_name = "Chateau d'Oraguille",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -501,7 +491,7 @@ return {
                        "- Ullasa mentions “Mique's Paintbrush,” prompting a new objective.\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -521,7 +511,7 @@ return {
                        "- If you have an active artifact quest for that coffer, you won't get the paintbrush until AF is completed.\n \n",
                 images = {
                     {
-                        file = "maps/castle_zvahl_baileys_3.png",
+                        zone_name = "Castle Zvahl Baileys", floor_id = 3 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -540,7 +530,7 @@ return {
                        "- You’ll obtain Key Item “Strange Sheet of Paper.”\n \n",
                 images = {
                     {
-                        file = "maps/southern_san_doria.png",
+                        zone_name = "Southern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -558,7 +548,7 @@ return {
                        "- Trade the Well Weight to the Village Well to get Key Item “Knight's Confession.”\n \n",
                 images = {
                     {
-                        file = "maps/davoi.png",
+                        zone_name = "Davoi",
                         width = 512,
                         height = 512,
                         state = 5,
@@ -574,7 +564,7 @@ return {
                        "- If mounted, you do not need to dismount.\n \n",
                 images = {
                     {
-                        file = "maps/northern_san_doria.png",
+                        zone_name = "Northern San d'Oria",
                         width = 512,
                         height = 512,
                         state = 6,
@@ -583,7 +573,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/jugner_forest.png",
+                        zone_name = "Jugner Forest",
                         width = 512,
                         height = 512,
                         state = 6,
@@ -598,7 +588,7 @@ return {
                        "- You get your reward. Optionally, speak with Vemalpeau again for closure (confession letter).\n \n",
                 images = {
                     {
-                        file = "maps/chateau_doraguille.png",
+                        zone_name = "Chateau d'Oraguille",
                         width = 512,
                         height = 512,
                         state = 7,
@@ -613,11 +603,6 @@ return {
             text = "Under Oath completed\n \n" ..
                    "Aquired Gallant Surcoat!",
             images = {
-                    {
-                        file = "equipment/gallant_surcoat.png",
-                        width = 457,
-                        height = 127,
-                    },
                 },
         },
     },
@@ -632,7 +617,7 @@ return {
                        "- As a Lv.50+ Paladin, speak to Guslam (H-8) in Upper Jeuno (Durable Shields shop) to start the quest.\n \n",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
+                        zone_name = "Upper Jeuno",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -649,7 +634,7 @@ return {
                        "- Paladin must be the main job if you want to get the AF item from the coffer.\n \n",
                 images = {
                     {
-                        file = "maps/the_eldieme_necropolis_1.png",
+                        zone_name = "The Eldieme Necropolis", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 2,
@@ -660,7 +645,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/the_eldieme_necropolis_2.png",
+                        zone_name = "The Eldieme Necropolis", floor_id = 2 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 2,
@@ -690,7 +675,7 @@ return {
                        "- Back in Port Jeuno, click the ??? again to receive Gallant Gauntlets.\n \n",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
+                        zone_name = "Upper Jeuno",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -699,7 +684,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/lower_jueno.png",
+                        zone_name = "Lower Jeuno",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -708,7 +693,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/port_jueno.png",
+                        zone_name = "Port Jeuno",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -717,7 +702,7 @@ return {
                         },
                     },
                     {
-                        file = "maps/castle_zvahl_baileys_1.png",
+                        zone_name = "Castle Zvahl Baileys", floor_id = 1 --[[VERIFY floor_id]],
                         width = 512,
                         height = 512,
                         state = 3,
@@ -726,16 +711,7 @@ return {
                         },
                     },
                     {
-                        file = "monsters/dark_spark.png",
-                        width = 377,
-                        height = 465,
-                        state = 3,
-                        highlights = {
-                            { position = "F-8", offsetX = 16, offsetY = 16 },
-                        },
-                    },
-                    {
-                        file = "maps/port_jueno.png",
+                        zone_name = "Port Jeuno",
                         width = 512,
                         height = 512,
                         state = 3,

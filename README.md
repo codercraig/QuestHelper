@@ -59,7 +59,8 @@ Included guide data (`data/`):
 - **Custom** — sample entries and a feature-demo file for authors.
 
 Work in progress (not ready for v0.1):
-- **Jobs** (Dancer, Paladin) and **NMs** — present in the data folder but currently non-functional; they still reference old map assets and will be reworked in a later release.
+- **Jobs** — Dancer and Paladin unlock quests are on the current format but not yet verified; the remaining unlockable jobs are scaffolded stubs to be authored later.
+- **NMs** — sample entries (South Gustaberg) on the current format, not yet verified.
 
 > v0.1 note: the mission chains are the focus of this release. They are authored end-to-end, and in-game sign-off is ongoing. The Rise of the Zilart chain was built on a live server without GM commands, so it may need the most polishing.
 

@@ -6,7 +6,7 @@ return {
                    "- Notes: Being Level 30+ is the only requirement on ANY job. \n \n",
             images = {
                 {
-                    file     = "maps/upper_jeuno.png",
+                    zone_name = "Upper Jeuno",
                     width    = 512,
                     height   = 512,
                     state    = 1,
@@ -20,7 +20,7 @@ return {
             text = "Step 2: Speak with Rhea Myuliah (G-7) who is standing right next to Laila. \n \n",
             images = {
                 {
-                    file     = "maps/upper_jeuno.png",
+                    zone_name = "Upper Jeuno",
                     width    = 512,
                     height   = 512,
                     state    = 2,
@@ -37,7 +37,7 @@ return {
 
             images = {
                 {
-                    file     = "maps/southern_san_doria.png",
+                    zone_name = "Southern San d'Oria",
                     width    = 512,
                     height   = 512,
                     state    = 3,
@@ -52,7 +52,7 @@ return {
                    "- Notes: Mentions a pebble in Lake Mechieume in Jugner Forest(S) - which is in the past!' \n \n",
             images = {
                 {
-                    file     = "maps/upper_jeuno.png",
+                    zone_name = "Upper Jeuno",
                     width    = 512,
                     height   = 512,
                     state    = 4,
@@ -70,7 +70,7 @@ return {
                    "- Notes: You will have to go through (H-5) Cavernous Maw in Batalia Downs if you do not have spell Recall Jugner. \n \n",
             images = {
                 {
-                    file     = "maps/batallia_downs.png",
+                    zone_name = "Batallia Downs",
                     width    = 512,
                     height   = 512,
                     state    = 5,
@@ -79,7 +79,7 @@ return {
                     },
                 },
                 {
-                    file     = "maps/batallia_downs_s.png",
+                    zone_name = "Batallia Downs [S]",
                     width    = 512,
                     height   = 512,
                     state    = 5,
@@ -94,7 +94,7 @@ return {
                    "- Notes: You will obtain the KI:Stardust Pebble. \n \n",
             images = {
                 {
-                    file     = "maps/jugner_forest_s.png",
+                    zone_name = "Jugner Forest [S]",
                     width    = 512,
                     height   = 512,
                     state    = 6,
@@ -109,7 +109,7 @@ return {
                    "- Notes: Congratulations! You may now become a Dancer! \n \n",
             images = {
                 {
-                    file     = "maps/upper_jeuno.png",
+                    zone_name = "Upper Jeuno",
                     width    = 512,
                     height   = 512,
                     state    = 7,
@@ -133,7 +133,7 @@ return {
                            "- Notes: You must be level 40+ Dancer Main to start this quest.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 1,
@@ -148,7 +148,7 @@ return {
                            "- She will mention rumors of a traveling dancer and suspicious medicine.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 2,
@@ -164,7 +164,7 @@ return {
                            "- If possible, mount up to avoid Hippogryphs with true sight.\n \n",
                     images = {
                         {
-                            file = "maps/grauberg_s.png",
+                            zone_name = "Grauberg [S]",
                             width = 512,
                             height = 512,
                             state = 3,
@@ -180,7 +180,7 @@ return {
                            "- Your main job MUST be set to Dancer to receive the cutscene.\n \n",
                     images = {
                         {
-                            file = "maps/grauberg_s.png",
+                            zone_name = "Grauberg [S]",
                             width = 512,
                             height = 512,
                             state = 4,
@@ -203,7 +203,7 @@ return {
                            "- With Trusts around late 40s is safe... \n \n",
                     images = {
                         {
-                            file = "maps/grauberg_s.png",
+                            zone_name = "Grauberg [S]",
                             width = 512,
                             height = 512,
                             state = 5,
@@ -220,7 +220,7 @@ return {
                            "- If someone just defeated the NM, wait a few minutes for the ??? to respawn.\n \n",
                     images = {
                         {
-                            file = "maps/grauberg_s.png",
+                            zone_name = "Grauberg [S]",
                             width = 512,
                             height = 512,
                             state = 6,
@@ -234,18 +234,6 @@ return {
                     text = "Step 7: Open your Key Items menu (/keyitem) and read \"The Essence of Dance\" before continuing it will be in your Permanent Key Items section.\n \n" ..
                            "- Notes: This is required to trigger the final cutscene.\n \n",
                     images = {
-                        {
-                        file = "misc/key_item_the_essence_of_dance.png",
-                        width = 481,
-                        height = 87,
-                        state = 7,
-                        },
-                        {
-                        file = "misc/key_item_the_essence_of_dance_2.png",
-                        width = 481,
-                        height = 222,
-                        state = 7,
-                        },
                     },
                 },
                 {
@@ -254,7 +242,7 @@ return {
                            "- Your main job MUST still be Dancer to complete the quest.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 8,
@@ -268,11 +256,6 @@ return {
             reward = {
                 text = "War Hoop (Dancer AF Weapon).\n",
                 images = {
-                    {
-                        file = "equipment/war_hoop.png",
-                        width = 455,
-                        height = 87,
-                    },
                 },
             },
         },
@@ -285,7 +268,7 @@ return {
                            "- You must have your main job set to Dancer for the next parts of the quest.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 1,
@@ -310,7 +293,7 @@ return {
                            "- You must approach the ??? from the northeast (near Batallia Downs (S)) because of an unmarked fence on the in-game map.\n \n",
                     images = {
                         {
-                            file = "maps/jugner_forest_s.png",
+                            zone_name = "Jugner Forest [S]",
                             width = 512,
                             height = 512,
                             state = 3,
@@ -328,13 +311,7 @@ return {
                            "- Make sure to switch back to Dancer to complete the remainder of the quest.\n \n",
                     images = {
                         {
-                            file = "items/yagudo_glue.png",
-                            width = 482,
-                            height = 67,
-                            state = 4,
-                        },
-                        {
-                            file = "maps/west_sarutabaruta_s.png",
+                            zone_name = "West Sarutabaruta [S]",
                             width = 512,
                             height = 512,
                             state = 4,
@@ -344,7 +321,7 @@ return {
                             },
                         },
                         {
-                            file = "maps/castle_oztroja_1.png",
+                            zone_name = "Castle Oztroja", floor_id = 1 --[[VERIFY floor_id]],
                             width = 512,
                             height = 512,
                             state = 4,
@@ -359,7 +336,7 @@ return {
                            "- This will complete the Shrouded Piper’s request.\n \n",
                     images = {
                         {
-                            file = "maps/jugner_forest_s.png",
+                            zone_name = "Jugner Forest [S]",
                             width = 512,
                             height = 512,
                             state = 5,
@@ -374,7 +351,7 @@ return {
                            "- You must be on your Dancer main job for this final step.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 6,
@@ -389,11 +366,6 @@ return {
                 text = "Dancer's Tights.\n \n" ..
                        "- Congratulations! You now have your DNC AF Legs.\n \n",
                 images = {
-                {
-                    file = "equipment/dancers_tights.png",
-                    width = 455,
-                    height = 107,
-                },
             },
             },
         },
@@ -405,7 +377,7 @@ return {
                            "- Make sure your main job is set to Dancer.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 1,
@@ -420,7 +392,7 @@ return {
                            "- Harmodios will discuss the performance and Wyatt's Proposal.\n \n",
                     images = {
                         {
-                            file = "maps/bastok_markets.png",
+                            zone_name = "Bastok Markets",
                             width = 512,
                             height = 512,
                             state = 2,
@@ -435,7 +407,7 @@ return {
                            "- She will reference your next meeting with Rhea Myuliah.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 3,
@@ -456,7 +428,7 @@ return {
                            "- You can practice as often as you like.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 4,
@@ -476,7 +448,7 @@ return {
                            "- Tip: Rapidly alternate Waltzes and Jigs to ensure you capture enough watchers.\n \n",
                     images = {
                         {
-                            file = "maps/upper_jeuno.png",
+                            zone_name = "Upper Jeuno",
                             width = 512,
                             height = 512,
                             state = 5,
@@ -492,11 +464,6 @@ return {
                        "- You must attract at least 4 watchers to succeed.\n" ..
                        "- Congratulations on obtaining your DNC AF Body!\n \n",
                 images = {
-                {
-                    file = "equipment/dancers_casaque.png",
-                    width = 455,
-                    height = 127,
-                },
             },
         },
     },
@@ -515,7 +482,7 @@ return {
                        "- He will direct you to see a tailor in Bastok Markets named Matthias.\n \n",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
+                        zone_name = "Upper Jeuno",
                         width = 512,
                         height = 512,
                         state = 2,
@@ -535,31 +502,13 @@ return {
                        "- Once you have them, zone out and wait for the next Vana'diel day to pass before returning to Matthias.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png", -- Adjust map file if needed
+                        zone_name = "Bastok Markets", -- Adjust map file if needed
                         width = 512,
                         height = 512,
                         state = 3,
                         highlights = {
                             { position = "J-9", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                    {
-                        file = "items/karakul_cloth.png", -- Adjust map file if needed
-                        width = 455,
-                        height = 66,
-                        state = 3,
-                    },
-                    {
-                        file = "items/rainbow_cloth.png", -- Adjust map file if needed
-                        width = 455,
-                        height = 66,
-                        state = 3,
-                    },
-                    {
-                        file = "items/rainbow_velvet.png", -- Adjust map file if needed
-                        width = 455,
-                        height = 66,
-                        state = 3,
                     },
                 },
             },
@@ -570,7 +519,7 @@ return {
                        "- After obtaining this piece, you may also request Dancer's Tiara or Dancer's Shoes.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -585,11 +534,6 @@ return {
             text = "Dancer's Bangles (AF Hands).\n \n" ..
                    "- Congratulations on another piece of your DNC Artifact Armor!\n \n",
             images = {
-            {
-                file = "equipment/dancers_bangles.png",
-                width = 455,
-                height = 127,
-            },
         },
         },
     },
@@ -601,7 +545,7 @@ return {
                        "- He will mention a tailor named Matthias, if aquainted already skip this step.\n \n",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png",
+                        zone_name = "Upper Jeuno",
                         width = 512,
                         height = 512,
                         state = 1,
@@ -620,31 +564,13 @@ return {
                        "  - Square of Silver Brocade\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 2,
                         highlights = {
                             { position = "J-9", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                    {
-                        file = "items/imperial_silk_cloth.png",
-                        width = 488,
-                        height = 66,
-                        state = 2,
-                    },
-                    {
-                        file = "items/wolf_felt.png",
-                        width = 484,
-                        height = 87,
-                        state = 2,
-                    },
-                    {
-                        file = "items/silver_brocade.png",
-                        width = 482,
-                        height = 92,
-                        state = 2,
                     },
                 },
             },
@@ -656,7 +582,7 @@ return {
                        "- You can also order Dancer's Bangles or Dancer's Shoes after obtaining this part.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -671,7 +597,7 @@ return {
                        "- Return to Matthias (J-9) to receive your Dancer's Tiara.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -685,11 +611,6 @@ return {
         reward = {
             text = "Dancer's Tiara\n \n",
             images = {
-                {
-                    file = "equipment/dancers_tiara.png",
-                    width = 455,
-                    height = 107,
-                },
             },
         },
     },
@@ -701,7 +622,7 @@ return {
                        "- He will mention a tailor named Matthias, skip this step if already completed previous Matthias quest.\n \n",
                 images = {
                     {
-                        file = "maps/upper_jeuno.png", -- Adjust map if desired
+                        zone_name = "Upper Jeuno", -- Adjust map if desired
                         width = 512,
                         height = 512,
                         state = 1,
@@ -719,31 +640,13 @@ return {
                        "  - Square of Gold Brocade\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png", -- Adjust map file if needed
+                        zone_name = "Bastok Markets", -- Adjust map file if needed
                         width = 512,
                         height = 512,
                         state = 2,
                         highlights = {
                             { position = "J-9", offsetX = 16, offsetY = 16 },
                         },
-                    },
-                    {
-                        file = "items/wamoura_cloth.png", -- Adjust map file if needed
-                        width = 450,
-                        height = 71,
-                        state = 2,
-                    },
-                    {
-                        file = "items/moblinweave.png", -- Adjust map file if needed
-                        width = 448,
-                        height = 68,
-                        state = 2,
-                    },
-                    {
-                        file = "items/gold_brocade.png", -- Adjust map file if needed
-                        width = 448,
-                        height = 87,
-                        state = 2,
                     },
                 },
             },
@@ -754,7 +657,7 @@ return {
                        "- You can also order Dancer's Bangles or Dancer's Tiara after obtaining Dancer's Shoes.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 3,
@@ -769,7 +672,7 @@ return {
                        "- Return to Matthias (J-9) to receive your Dancer's Shoes.\n \n",
                 images = {
                     {
-                        file = "maps/bastok_markets.png",
+                        zone_name = "Bastok Markets",
                         width = 512,
                         height = 512,
                         state = 4,
@@ -783,11 +686,6 @@ return {
         reward = {
             text = "Dancer's Shoes\n \n",
             images = {
-                {
-                    file = "equipment/dancers_toe_shoes.png",
-                    width = 483,
-                    height = 107,
-                },
             },
         },
     },
