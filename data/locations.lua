@@ -1722,6 +1722,27 @@ return {
         floor_id = 1,
         max_distance = 20
     },
+    ["garlaige-citadel-i8-bcf-1-???"] = {
+        target_pos = { x = -13.4, y = 6.4, z = 191.7 },
+        visual_mode = "arc",
+        zone = "Garlaige Citadel",
+        floor_id = 2,
+        max_distance = 8
+    },
+    ["garlaige-citadel-h7-bcf-2-???"] = {
+        target_pos = { x = -50.2, y = 6.3, z = 251.7 },
+        visual_mode = "arc",
+        zone = "Garlaige Citadel",
+        floor_id = 2,
+        max_distance = 8
+    },
+    ["garlaige-citadel-g6-bcf-3-???"] = {
+        target_pos = { x = -137.0, y = 0.0, z = 347.5 },
+        visual_mode = "arc",
+        zone = "Garlaige Citadel",
+        floor_id = 2,
+        max_distance = 8
+    },
     -- The Eldieme Necropolis
     ["the-eldieme-necropolis-east-plate-h8"] = {
         target_pos = { x = 231.3, y = -34.8, z = 20.0 },
@@ -1736,6 +1757,27 @@ return {
         zone = "The Eldieme Necropolis",
         floor_id = 15,
         max_distance = 15
+    },
+    ["the-eldieme-necropolis-h9-aps-1-???"] = {
+        target_pos = { x = 252.8, y = -32.0, z = -64.8 },
+        visual_mode = "arc",
+        zone = "The Eldieme Necropolis",
+        floor_id = 15,
+        max_distance = 8
+    },
+    ["the-eldieme-necropolis-f9-aps-3-???"] = {
+        target_pos = { x = 92.3, y = -32.0, z = -64.7 },
+        visual_mode = "arc",
+        zone = "The Eldieme Necropolis",
+        floor_id = 15,
+        max_distance = 8
+    },
+    ["the-eldieme-necropolis-f7-aps-2-???"] = {
+        target_pos = { x = 105.3, y = -32.0, z = 92.6 },
+        visual_mode = "arc",
+        zone = "The Eldieme Necropolis",
+        floor_id = 15,
+        max_distance = 10
     },
     -- Ru'Lude Gardens
     ["Goggehn"] = {

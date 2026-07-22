@@ -371,7 +371,7 @@ return {
         {zone = "The Eldieme Necropolis", exit = "J-10"},
     },
     ["The Eldieme Necropolis"] = {
-
+        {zone = "Batallia Downs", exit = "J-10"},
     },
     ["Jugner Forest"] = {
         {zone = "La Theine Plateau", exit = "D-11"},

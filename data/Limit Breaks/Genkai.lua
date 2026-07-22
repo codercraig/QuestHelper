@@ -197,23 +197,77 @@ return {
             },
             {
                 text = "Step 4: Farm the Ancient Papyrus in The Eldieme Necropolis.\n \n" ..
-                       "- Liches on the first level (Map 1) drop Ancient Papyrus (sparse spawns).\n" ..
-                       "- WARNING: Elemental aggro nearby - pull carefully.\n \n",
+                       "- Liches on the first level (Map 1) drop Ancient Papyrus (sparse spawns) - Make a Thief friend with Treasure Hunter.\n" ..
+                       "- If the GATE is shut, follow the PURPLE line to and from the GATE - once you open go back to following yellow arrows! \n \n",
                 route_to = "The Eldieme Necropolis",
+                destination_highlight = { position = "H-9", offsetX = 16, offsetY = 16},
+                onmob_target = "the-eldieme-necropolis-east-plate-h8",
+                zone_max_distance = 20,
+                visual_zones = {
+                        --Route to J-10 The Eldieme Necrolpolios
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 424.2, y = 8.0, z = -142.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 388.5, y = 8.4, z = -176.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 353.5, y = 8.4, z = -207.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 322.7, y = 0.0, z = -238.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 289.5, y = 2.6, z = -268.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 246.2, y = 7.7, z = -299.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 218.3, y = 8.9, z = -323.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.3, y = 8.8, z = -342.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.9, y = 8.4, z = -372.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 198.3, y = 8.0, z = -402.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 177.9, y = 8.1, z = -417.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 138.3, y = 11.6, z = -378.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                        -- 1st keyitem.
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.5, y = -56.0, z = -115.6 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 418.0, y = -52.0, z = -99.5 }, size = 1, floor_id = 15, colour = "green" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.3, y = -50.8, z = -92.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.7, y = -48.0, z = -57.8 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.8, y = -42.3, z = -10.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 401.6, y = -40.0, z = 19.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 380.2, y = -40.0, z = 20.3 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 378.9, y = -36.0, z = -19.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 328.5, y = -32.0, z = -59.6 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 316.7, y = -32.0, z = -60.3 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 308.3, y = -32.0, z = -56.9 }, size = 3, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 300.9, y = -32.0, z = -49.5 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 284.1, y = -32.2, z = -59.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 273.3, y = -32.0, z = -59.9 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        --Shivas Gate
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 271.0, y = -34.3, z = -60.0 }, width = 4.25, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+
+                        -- PURPLE ARROWS TO GATE
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 301.1, y = -32.0, z = -43.4 }, stop = { x = 300.0, y = -32.0, z = -34.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 300.0, y = -32.0, z = -34.0 }, stop = { x = 299.8, y = -32.0, z = -26.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 299.8, y = -32.0, z = -26.9 }, stop = { x = 299.3, y = -32.0, z = -17.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 299.3, y = -32.0, z = -17.2 }, stop = { x = 299.5, y = -32.0, z = -4.9 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 299.5, y = -32.0, z = -4.9 }, stop = { x = 299.2, y = -28.0, z = 1.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 299.2, y = -28.0, z = 1.8 }, stop = { x = 289.4, y = -28.0, z = 1.8 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 289.4, y = -28.0, z = 1.8 }, stop = { x = 281.5, y = -28.0, z = 2.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 281.5, y = -28.0, z = 2.2 }, stop = { x = 281.7, y = -28.0, z = 11.3 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 281.7, y = -28.0, z = 11.3 }, stop = { x = 282.0, y = -28.0, z = 19.7 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 282.0, y = -28.0, z = 19.7 }, stop = { x = 272.9, y = -32.0, z = 19.5 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 272.9, y = -32.0, z = 19.5 }, stop = { x = 264.7, y = -32.0, z = 19.4 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 264.7, y = -32.0, z = 19.4 }, stop = { x = 257.4, y = -32.0, z = 19.3 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 257.4, y = -32.0, z = 19.3 }, stop = { x = 257.2, y = -32.0, z = 15.0 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 257.2, y = -32.0, z = 15.0 }, stop = { x = 250.0, y = -32.0, z = 16.1 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 250.0, y = -32.0, z = 16.1 }, stop = { x = 250.0, y = -32.0, z = 19.6 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 250.0, y = -32.0, z = 19.6 }, stop = { x = 240.2, y = -32.3, z = 20.2 }, floor_id = 15, colour = "magenta" },
+                        { zone_name = "The Eldieme Necropolis", type = 'line', start = { x = 240.2, y = -32.3, z = 20.2 }, stop = { x = 233.8, y = -34.0, z = 19.9 }, floor_id = 15, colour = "magenta" },
+
+                },
                 onmob_enemy = "Lich",
                 onmob_enemy_size = 2,
-                trigger_on_item_obtain = { "Ancient Papyrus" }, -- VERIFY display name (LSB: PIECE_OF_ANCIENT_PAPYRUS)
+                trigger_on_item_obtain = { "Ancient Papyrus" },
             },
             {
-                text = "Step 5: Return to Maat in Ru'Lude Gardens (H-5) and trade him all three items together (Exoray Mold, Bomb Coal, Ancient Papyrus) to finish.\n \n" ..
-                       "- CRITICAL: trade all three at once - the turn-in only completes with the full set.\n" ..
-                       "- Make sure you have a free inventory slot.\n \n",
+                text = "Step 5: Return to Maat in Ru'Lude Gardens (H-5) and trade him all three items together (Exoray Mold, Bomb Coal, Ancient Papyrus) to finish.\n \n",
                 route_to = "Ru'Lude Gardens",
                 onmob_target = "Maat",
                 destination_highlight = { position = "H-5", offsetX = 16, offsetY = 16 },
-                -- VERIFY the three display names (LSB: CLUMP_OF_EXORAY_MOLD / CHUNK_OF_BOMB_COAL / PIECE_OF_ANCIENT_PAPYRUS)
                 items_needed = { "Exoray Mold", "Bomb Coal", "Ancient Papyrus" },
-                require_all_items = true,
+                --require_all_items = true,
                 trigger_on_event_id = { 81 },
             },
         },
@@ -227,6 +281,10 @@ return {
         -- Same quest, newer QOL route: click all THREE ??? per dungeon to receive
         -- each finished item (fragments combine automatically).
         choice_group = "Genkai 1: In Defiant Challenge",
+        prerequisites = {
+            {category = "Quests", subfile = "Garlaige Citadel", name = "Pouch of Weighted Stones (Banishing Gate opener)", recommended = true},
+            {category = "Quests", subfile = "Windurst Waters North", name = "Magicked Astrolabe", recommended = true},
+        },
         requirements = {
             level = 50,
         },
@@ -237,7 +295,7 @@ return {
                        "- Click all THREE ??? in each item's dungeon to receive the finished item (fragments combine automatically). You MUST have started the quest with Maat first.\n",
                 route_to = "Ru'Lude Gardens",
                 onmob_target = "Maat",
-                keyitems_needed = {2578,1846,2137,2138,2139},
+                keyitems_needed = {2134,2135,2136,2137,2138,2139,2140,2141,2142},
                 destination_highlight = { position = "H-5", offsetX = 16, offsetY = 16 },
                 trigger_on_event_id = { 79 },
             },
@@ -353,7 +411,7 @@ return {
                         },
                     },
                 },
-                trigger_on_item_obtain = { "Exoray Mold" }, -- VERIFY display name (LSB: CLUMP_OF_EXORAY_MOLD)
+                trigger_on_item_obtain = { "Exoray Mold" },
                 trigger_on_keyitem_obtain = {2137},
             },
             {
@@ -488,28 +546,203 @@ return {
                        "- The ??? are at (I-8), (H-7) and (G-6) in the first room on the right from the east.\n" ..
                        "- CRITICAL: click ALL THREE ??? to receive the Bomb Coal.\n" ..
                        "- WARNING: Use Sneak + Invisible to avoid aggro throughout Map 2.\n \n",
-                route_to = "Garlaige Citadel",
-                trigger_on_item_obtain = { "Bomb Coal" }, -- VERIFY display name (LSB: CHUNK_OF_BOMB_COAL)
+                onmob_target = {"garlaige-citadel-i8-bcf-1-???",
+                                "garlaige-citadel-h7-bcf-2-???"},
+                zone_max_distance = 25,
+                visual_zones = {
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -380.1, y = -7.8, z = 375.0 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'square', center = { x = -383.0, y = -6.0, z = 363.5 }, size = 1, floor_id = 1, colour = "green" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -366.3, y = -6.0, z = 340.3 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -340.4, y = -3.3, z = 337.6 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -339.8, y = 0.0, z = 300.8 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -328.0, y = 0.0, z = 300.1 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -309.7, y = 0.0, z = 300.0 }, size = 3, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -297.8, y = 0.0, z = 292.0 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -283.8, y = 0.0, z = 300.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -259.4, y = 0.0, z = 300.4 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -248.2, y = 0.0, z = 300.2 }, size = 3, direction = "ne", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -234.8, y = 0.0, z = 299.6 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -221.1, y = 0.0, z = 298.8 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -219.8, y = 0.0, z = 288.4 }, size = 3, direction = "sw", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -222.0, y = 0.0, z = 279.1 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -227.7, y = 0.0, z = 257.4 }, size = 3, direction = "se", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -220.4, y = 0.0, z = 242.9 }, size = 3, direction = "down", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -221.6, y = 0.0, z = 220.1 }, size = 3, direction = "right", floor_id = 1, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'rect', center = { x = -201.0, y = -3.0, z = 220.0 }, width = 6.25, height = 6.00, floor_id = 1, colour = "cyan", vertical_axis = 'z' },
+
+                    -- Step on squares to open door if no KI weighted stones
+                    { zone_name = "Garlaige Citadel", type = 'rect', center = { x = -207.2, y = -0.3, z = 226.3 }, width = 1.75, height = 2.75, floor_id = 1, colour = "magenta" },
+                    { zone_name = "Garlaige Citadel", type = 'rect', center = { x = -213.0, y = -0.3, z = 226.3 }, width = 1.75, height = 2.75, floor_id = 1, colour = "magenta" },
+                    { zone_name = "Garlaige Citadel", type = 'rect', center = { x = -212.8, y = -0.3, z = 213.8 }, width = 1.75, height = 2.75, floor_id = 1, colour = "magenta" },
+                    { zone_name = "Garlaige Citadel", type = 'rect', center = { x = -207.2, y = -0.3, z = 213.8 }, width = 1.75, height = 2.75, floor_id = 1, colour = "magenta" },
+
+                    -- To 1st Bomb KI
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -197.0, y = 0.0, z = 219.9 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -179.4, y = 0.0, z = 218.9 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -177.6, y = 0.0, z = 179.2 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -141.2, y = 0.0, z = 179.1 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -114.8, y = 0.0, z = 179.2 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -100.1, y = 0.0, z = 180.1 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -99.7, y = 0.0, z = 201.1 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -98.3, y = 0.0, z = 219.9 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -70.3, y = 0.0, z = 219.5 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -60.3, y = 0.0, z = 200.5 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -60.2, y = 6.0, z = 164.2 }, size = 3, direction = "down", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -54.7, y = 6.4, z = 145.0 }, size = 3, direction = "right", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -40.0, y = 6.1, z = 143.2 }, size = 3, direction = "se", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -29.5, y = 7.6, z = 138.5 }, size = 3, direction = "ne", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -19.6, y = 6.0, z = 155.0 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -15.6, y = 6.1, z = 182.7 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+
+                    -- To 2nd/3rd
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -14.3, y = 6.5, z = 201.4 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -18.4, y = 9.0, z = 219.4 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -38.6, y = 7.0, z = 239.6 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -55.8, y = 6.1, z = 258.8 }, size = 3, direction = "nw", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -58.6, y = 5.9, z = 274.1 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -59.4, y = 5.9, z = 312.3 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -59.9, y = 2.8, z = 340.8 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -99.8, y = 0.0, z = 339.9 }, size = 3, direction = "left", floor_id = 2, colour = "yellow" },
+                    { zone_name = "Garlaige Citadel", type = 'arrow', center = { x = -129.1, y = 0.0, z = 339.6 }, size = 3, direction = "up", floor_id = 2, colour = "yellow" },
+                  },
+                  images = {
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Garlaige Citadel",
+                        floor_id = 1,
+                        highlights = {
+                            { position = "I-9", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Garlaige Citadel",
+                        floor_id = 2,
+                        highlights = {
+                            { position = "I-8", offsetX = 16, offsetY = 16, label = "1" },
+                            { position = "H-7", offsetX = 16, offsetY = 16, label = "2" },
+                            { position = "G-6", offsetX = 16, offsetY = 16, label = "3" },
+                        },
+                    },
+                    {
+                        width = 512,
+                        height = 512,
+                        state = 5,
+                        zone_name = "Garlaige Citadel",
+                        floor_id = 16,
+                        highlights = {
+                            { position = "G-6", offsetX = 16, offsetY = 16 },
+                        },
+                    },
+                },
+                onmob_enemy = "Explosure",
+                onmob_enemy_size = 2,
+                trigger_on_item_obtain = { "Bomb Coal" }, -- VERIFY display name (LSB: CHUNK_OF_BOMB_COAL) - 3 crumb KIs combine into 1 Bomb Coal, so complete on the finished item
             },
             {
                 text = "Step 6: Get the Ancient Papyrus in The Eldieme Necropolis (Key Item ??? x3).\n \n" ..
-                       "- All three are on Map 1, in the small rooms containing Braziers, at (H-9), (F-9) and (F-7).\n" ..
-                       "- A 'Magicked Astrolabe' opens any door on click. Without it, the gate switch is at (H-8) - watch for false floors that look like gravel.\n" ..
+                       "- All three are on Map 1, in the small rooms containing Braziers, at [1](H-9), [3](F-9) and [2](F-7).\n" ..
+                       "- A 'Magicked Astrolabe' opens any door on click. Without it, the gate switch is at (H-8) - watch for false floors that look like gravel.\n \n" ..
                        "- CRITICAL: click ALL THREE ??? to receive the Ancient Papyrus.\n" ..
-                       "- WARNING: If you hold the Key Item 'Ducal Guard's Lantern' (from 'Save My Sister') you CANNOT get papyrus shreds from braziers - finish that quest first.\n \n",
+                       "- Notes: The order is 1 -> 2 -> 3 from the map, but we will pick the Ancient Papyrus Shreds in order 1 -> 3 -> 2(incases there's confusion as its a nicer route!\n \n",
                 route_to = "The Eldieme Necropolis",
+                destination_highlight = {
+                    { position = "H-9", offsetX = 16, offsetY = 16, label = "1" },
+                    { position = "F-9", offsetX = 16, offsetY = 16, label = "3" },
+                    { position = "F-7", offsetX = 16, offsetY = 16, label = "2" },
+                },
+                onmob_target = {"the-eldieme-necropolis-h9-aps-1-???",
+                                "the-eldieme-necropolis-f9-aps-3-???",
+                                "the-eldieme-necropolis-f7-aps-2-???"},
+                zone_max_distance = 30,
+                visual_zones = {
+                        --Route to J-10 The Eldieme Necrolpolios
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 424.2, y = 8.0, z = -142.7 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 388.5, y = 8.4, z = -176.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 353.5, y = 8.4, z = -207.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 322.7, y = 0.0, z = -238.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 289.5, y = 2.6, z = -268.9 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 246.2, y = 7.7, z = -299.6 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 218.3, y = 8.9, z = -323.3 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.3, y = 8.8, z = -342.9 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 204.9, y = 8.4, z = -372.8 }, size = 4, direction = "down", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 198.3, y = 8.0, z = -402.1 }, size = 4, direction = "sw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 177.9, y = 8.1, z = -417.7 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+                        { zone_name = "Batallia Downs", type = 'arrow', center = { x = 138.3, y = 11.6, z = -378.6 }, size = 4, direction = "nw", floor_id = 0, colour = "yellow" },
+
+                        -- 1st keyitem.
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.5, y = -56.0, z = -115.6 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'square', center = { x = 418.0, y = -52.0, z = -99.5 }, size = 1, floor_id = 15, colour = "green" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.3, y = -50.8, z = -92.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.7, y = -48.0, z = -57.8 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 420.8, y = -42.3, z = -10.7 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 401.6, y = -40.0, z = 19.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 380.2, y = -40.0, z = 20.3 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 378.9, y = -36.0, z = -19.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 328.5, y = -32.0, z = -59.6 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 316.7, y = -32.0, z = -60.3 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 308.3, y = -32.0, z = -56.9 }, size = 3, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 300.9, y = -32.0, z = -49.5 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 284.1, y = -32.2, z = -59.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 273.3, y = -32.0, z = -59.9 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        --Shivas Gate
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 271.0, y = -34.3, z = -60.0 }, width = 4.25, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 266.1, y = -32.0, z = -58.6 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 263.6, y = -32.0, z = -66.6 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        --3rd Keyitem
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 250.4, y = -32.0, z = -60.0 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 230.3, y = -32.0, z = -59.1 }, size = 3, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 220.6, y = -32.0, z = -47.2 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 218.6, y = -32.0, z = -28.2 }, size = 3, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 205.9, y = -32.0, z = -20.0 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 185.9, y = -32.0, z = -20.2 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 160.0, y = -32.0, z = -20.1 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 147.6, y = -32.0, z = -21.5 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 140.1, y = -32.0, z = -32.4 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 138.2, y = -32.0, z = -51.7 }, size = 3, direction = "sw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 123.1, y = -32.0, z = -59.7 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 115.0, y = -32.0, z = -59.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        --Shivas Gate 2
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 111.0, y = -34.5, z = -60.0 }, width = 4.00, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 111.0, y = -34.5, z = -60.0 }, width = 4.00, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 106.3, y = -32.0, z = -58.6 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 103.1, y = -32.0, z = -66.1 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+
+                        --2nd keyitem
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 89.5, y = -32.0, z = -59.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 69.0, y = -32.0, z = -58.8 }, size = 3, direction = "nw", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 60.0, y = -32.0, z = -42.4 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 60.2, y = -32.0, z = -8.2 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 59.9, y = -28.0, z = 1.8 }, size = 3, direction = "left", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 54.2, y = -28.0, z = 2.1 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 54.6, y = -27.5, z = 21.2 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 54.9, y = -27.8, z = 37.3 }, size = 3, direction = "ne", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 60.4, y = -32.0, z = 45.5 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 59.8, y = -32.0, z = 67.2 }, size = 3, direction = "up", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 60.8, y = -32.0, z = 91.1 }, size = 3, direction = "ne", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 72.2, y = -32.0, z = 99.5 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 85.1, y = -32.0, z = 100.0 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'rect', center = { x = 89.0, y = -34.5, z = 100.0 }, width = 4.00, height = 4.75, floor_id = 15, colour = "cyan", vertical_axis = 'z' },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 93.1, y = -32.0, z = 101.4 }, size = 3, direction = "down", floor_id = 15, colour = "yellow" },
+                        { zone_name = "The Eldieme Necropolis", type = 'arrow', center = { x = 96.3, y = -32.0, z = 93.3 }, size = 3, direction = "right", floor_id = 15, colour = "yellow" },
+
+                },
                 trigger_on_item_obtain = { "Ancient Papyrus" }, -- VERIFY display name (LSB: PIECE_OF_ANCIENT_PAPYRUS)
             },
             {
-                text = "Step 7: Return to Maat in Ru'Lude Gardens (H-5) and trade him all three items together (Exoray Mold, Bomb Coal, Ancient Papyrus) to finish.\n \n" ..
-                       "- CRITICAL: trade all three at once - the turn-in only completes with the full set.\n" ..
-                       "- Make sure you have a free inventory slot.\n \n",
+                text = "Step 7: Return to Maat in Ru'Lude Gardens (H-5) and trade him all three items together (Exoray Mold, Bomb Coal, Ancient Papyrus) to finish.\n \n",
                 route_to = "Ru'Lude Gardens",
                 onmob_target = "Maat",
                 destination_highlight = { position = "H-5", offsetX = 16, offsetY = 16 },
-                -- VERIFY the three display names (LSB: CLUMP_OF_EXORAY_MOLD / CHUNK_OF_BOMB_COAL / PIECE_OF_ANCIENT_PAPYRUS)
                 items_needed = { "Exoray Mold", "Bomb Coal", "Ancient Papyrus" },
-                require_all_items = true,
+                --require_all_items = true,
                 trigger_on_event_id = { 81 },
             },
         },
